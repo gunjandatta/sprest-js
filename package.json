@@ -1,14 +1,12 @@
 {
   "name": "sprest-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "build/index.js",
   "typings": "build/index.d.ts",
   "scripts": {
     "build": "gulp",
-    "publish": "npm run build",
-    "postpublish": "npm run test",
-    "test": "webpack --config ./webpack.test.js"
+    "test": "gulp && webpack --config ./webpack.test.js"
   },
   "repository": {
     "type": "git",
