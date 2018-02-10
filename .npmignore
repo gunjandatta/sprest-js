@@ -1,0 +1,8 @@
+node_modules
+src
+test
+*.log
+*-lock.json
+gulpfile.js
+tsconfig.json
+webpack.*.js
