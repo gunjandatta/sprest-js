@@ -1,3 +1,4 @@
+import * as Components from "./components";
 import * as Fields from "./fields";
 export * from "./fabric";
-export { Fields };
+export { Components, Fields };

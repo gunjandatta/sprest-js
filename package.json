@@ -6,7 +6,7 @@
   "typings": "build/index.d.ts",
   "scripts": {
     "build": "gulp",
-    "test": "gulp && webpack --config ./webpack.test.js"
+    "test": "webpack --config ./webpack.test.js"
   },
   "repository": {
     "type": "git",

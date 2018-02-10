@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,17 +73,17 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(18));
-__export(__webpack_require__(19));
-__export(__webpack_require__(38));
-__export(__webpack_require__(39));
-__export(__webpack_require__(40));
-__export(__webpack_require__(41));
+__export(__webpack_require__(22));
+__export(__webpack_require__(23));
 __export(__webpack_require__(42));
 __export(__webpack_require__(43));
 __export(__webpack_require__(44));
 __export(__webpack_require__(45));
-var Types = __webpack_require__(46);
+__export(__webpack_require__(46));
+__export(__webpack_require__(47));
+__export(__webpack_require__(48));
+__export(__webpack_require__(49));
+var Types = __webpack_require__(50);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -97,11 +97,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(17));
-__export(__webpack_require__(47));
-__export(__webpack_require__(48));
-__export(__webpack_require__(49));
-__export(__webpack_require__(50));
+__export(__webpack_require__(21));
 __export(__webpack_require__(51));
 __export(__webpack_require__(52));
 __export(__webpack_require__(53));
@@ -109,8 +105,12 @@ __export(__webpack_require__(54));
 __export(__webpack_require__(55));
 __export(__webpack_require__(56));
 __export(__webpack_require__(57));
-__export(__webpack_require__(6));
-var Types = __webpack_require__(58);
+__export(__webpack_require__(58));
+__export(__webpack_require__(59));
+__export(__webpack_require__(60));
+__export(__webpack_require__(61));
+__export(__webpack_require__(7));
+var Types = __webpack_require__(62);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -121,11 +121,11 @@ exports.Types = Types;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Mapper = __webpack_require__(20);
+var Mapper = __webpack_require__(24);
 exports.Mapper = Mapper;
-var SPTypes = __webpack_require__(33);
+var SPTypes = __webpack_require__(37);
 exports.SPTypes = SPTypes;
-var Types = __webpack_require__(34);
+var Types = __webpack_require__(38);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -139,22 +139,22 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(16));
-__export(__webpack_require__(59));
-__export(__webpack_require__(60));
-__export(__webpack_require__(62));
+__export(__webpack_require__(20));
 __export(__webpack_require__(63));
 __export(__webpack_require__(64));
-__export(__webpack_require__(65));
-__export(__webpack_require__(8));
 __export(__webpack_require__(66));
 __export(__webpack_require__(67));
-__export(__webpack_require__(7));
-__export(__webpack_require__(9));
 __export(__webpack_require__(68));
-var SP = __webpack_require__(69);
+__export(__webpack_require__(69));
+__export(__webpack_require__(9));
+__export(__webpack_require__(70));
+__export(__webpack_require__(71));
+__export(__webpack_require__(8));
+__export(__webpack_require__(10));
+__export(__webpack_require__(72));
+var SP = __webpack_require__(73);
 exports.SP = SP;
-var Types = __webpack_require__(70);
+var Types = __webpack_require__(74);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -198,10 +198,10 @@ var Helper = __webpack_require__(3);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(2);
 exports.SPTypes = mapper_1.SPTypes;
-var Types = __webpack_require__(71);
+var Types = __webpack_require__(75);
 exports.Types = Types;
 __export(__webpack_require__(1));
-__export(__webpack_require__(72));
+__export(__webpack_require__(76));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -214,13 +214,30 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(73);
-__webpack_require__(76);
-__export(__webpack_require__(78));
+__webpack_require__(77);
+__webpack_require__(80);
+__export(__webpack_require__(82));
 
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+var Components = __webpack_require__(14);
+exports.Components = Components;
+var Fields = __webpack_require__(18);
+exports.Fields = Fields;
+__export(__webpack_require__(5));
+
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -267,7 +284,7 @@ exports.Web = _Web;
 //# sourceMappingURL=web.js.map
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -276,7 +293,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(61));
+__export(__webpack_require__(65));
 var lib_1 = __webpack_require__(1);
 var _1 = __webpack_require__(3);
 /**
@@ -1327,7 +1344,7 @@ exports.SPConfig = _SPConfig;
 //# sourceMappingURL=spCfg.js.map
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1357,7 +1374,7 @@ exports.parse = function (jsonString) {
 //# sourceMappingURL=parse.js.map
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1784,7 +1801,7 @@ exports.Taxonomy = {
 //# sourceMappingURL=taxonomy.js.map
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 /*
@@ -1866,7 +1883,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -1932,7 +1949,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(75);
+var	fixUrls = __webpack_require__(79);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -2248,52 +2265,52 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var build_1 = __webpack_require__(13);
-window.addEventListener("load", function () {
-    // Get the element
-    var el = document.querySelector("#test");
-    if (el) {
-        el.innerHTML = "<div></div><div></div>";
-        // Create a field element
-        build_1.Fields.BaseField({
-            el: el.firstElementChild,
-            fieldInfo: {
-                listName: "SPReact",
-                name: "Title"
-            }
-        });
-        // Create a field element
-        build_1.Fields.BaseField({
-            el: el.lastElementChild,
-            fieldInfo: {
-                listName: "SPReact",
-                name: "TestBoolean"
-            }
-        });
-    }
-});
-
-/***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-var Fields = __webpack_require__(14);
-exports.Fields = Fields;
-__export(__webpack_require__(5));
 
+Object.defineProperty(exports, "__esModule", { value: true });
+var build_1 = __webpack_require__(6);
+window.addEventListener("load", function () {
+    // Get the element
+    var el = document.querySelector("#test");
+    if (el) {
+        // Render elements
+        el.innerHTML = "<div></div><div></div>";
+        // Render the button
+        var button = build_1.Components.Button({
+            el: el.firstElementChild,
+            text: "Show Panel",
+            onClick: function onClick() {
+                // Show the panel
+                var content = panel_1.show("<div></div><div></div>");
+                // Create a field element
+                build_1.Fields.BaseField({
+                    el: content.firstElementChild,
+                    fieldInfo: {
+                        listName: "SPReact",
+                        name: "Title"
+                    }
+                });
+                // Create a field element
+                build_1.Fields.BaseField({
+                    el: content.lastElementChild,
+                    fieldInfo: {
+                        listName: "SPReact",
+                        name: "TestBoolean"
+                    }
+                });
+            }
+        });
+        // Render the panel
+        var panel_1 = build_1.Components.Panel({
+            el: el.lastElementChild,
+            headerText: "My List Form"
+        });
+    }
+});
 
 /***/ }),
 /* 14 */
@@ -2306,6 +2323,9 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(15));
+__export(__webpack_require__(16));
+var Types = __webpack_require__(17);
+exports.Types = Types;
 
 
 /***/ }),
@@ -2315,9 +2335,233 @@ __export(__webpack_require__(15));
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Button
+ */
+exports.Button = function (props) {
+    // Add the button html
+    props.el.innerHTML = [
+        '<button class="ms-Button ' + (props.className || "") + '">',
+        '<span class="ms-Button-label">' + (props.text || "") + '</span>',
+        '</button>'
+    ].join('\n');
+    // Get the button
+    var btn = props.el.firstElementChild;
+    // See if the button is disabled
+    if (props.disable) {
+        // Disable the button
+        btn.disabled = true;
+    }
+    // Set the button click event
+    btn.onclick = function () {
+        // Execute the click event
+        props.onClick ? props.onClick() : null;
+        // Disable postback
+        return false;
+    };
+    // Return the button
+    return btn;
+};
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var _this = this;
+Object.defineProperty(exports, "__esModule", { value: true });
+var __1 = __webpack_require__(6);
+/**
+ * Panel Types
+ */
+var PanelTypes;
+(function (PanelTypes) {
+    PanelTypes[PanelTypes["Left"] = 0] = "Left";
+    PanelTypes[PanelTypes["Medium"] = 1] = "Medium";
+    PanelTypes[PanelTypes["Large"] = 2] = "Large";
+    PanelTypes[PanelTypes["LargeFixed"] = 3] = "LargeFixed";
+    PanelTypes[PanelTypes["XLarge"] = 4] = "XLarge";
+    PanelTypes[PanelTypes["XXLarge"] = 5] = "XXLarge";
+})(PanelTypes = exports.PanelTypes || (exports.PanelTypes = {}));
+/**
+ * Panel
+ */
+exports.Panel = function (props) {
+    var _panel = null;
+    // Method to get the content element
+    var getContent = function () {
+        // Return the content
+        return query(".ms-Panel-contentInner");
+    };
+    // Method to get the panel element
+    var getPanel = function () {
+        // Return the panel
+        return _panel ? _panel._panel : (props.el).querySelector(".ms-Panel ");
+    };
+    // Method to hide the panel
+    var hide = function () {
+        // Dismiss the panel
+        _panel ? _panel["dismiss"]() : null;
+        // Clear the panel
+        _panel = null;
+    };
+    // Method to query the panel
+    var query = function (qs) {
+        if (qs === void 0) { qs = ""; }
+        var panel = getPanel();
+        if (panel) {
+            // Query the panel
+            return panel.querySelector(qs);
+        }
+        // Return nothing
+        return null;
+    };
+    // Method to query the panel
+    var queryAll = function (qs) {
+        if (qs === void 0) { qs = ""; }
+        var panel = getPanel();
+        if (panel) {
+            // Query the panel
+            return panel.querySelectorAll(qs);
+        }
+        // Return nothing
+        return [];
+    };
+    // Method to set the header text
+    var setHeaderText = function (html) {
+        var header = query(".ms-Panel-headerText");
+        if (header) {
+            header.innerHTML = html;
+        }
+        // Return the header
+        return header;
+    };
+    // Method to show the panel
+    var show = function (content) {
+        if (content === void 0) { content = ""; }
+        // Set the class name
+        var className = (props.className || "");
+        switch (props.panelType) {
+            case PanelTypes.Left:
+                className += " ms-Panel--left";
+                break;
+            case PanelTypes.Medium:
+                className += " ms-Panel--md";
+                break;
+            case PanelTypes.Large:
+                className += " ms-Panel--lg";
+                break;
+            case PanelTypes.LargeFixed:
+                className += " ms-Panel--lg ms-Panel--fixed";
+                break;
+            case PanelTypes.XLarge:
+                className += " ms-Panel--xl";
+                break;
+            case PanelTypes.XXLarge:
+                className += " ms-Panel--xxl";
+                break;
+        }
+        // Add the panel html
+        props.el.innerHTML = [
+            '<div class="ms-Panel ' + className.trim() + '">',
+            '<div class="ms-Panel-contentInner">',
+            '<p class="ms-Panel-headerText"></p>',
+            '<div class="ms-Panel-content">',
+            content,
+            '</div>',
+            '</div>',
+            '</div>',
+        ].join('\n');
+        // See if we are showing the close button
+        if (typeof (props.showCloseButton) === "undefined" || props.showCloseButton) {
+            // Show the close button
+            showCloseButton();
+        }
+        // Set the header text
+        setHeaderText(props.headerText);
+        // Show the panel
+        _panel = new __1.fabric.Panel(props.el.firstElementChild);
+        // Return the panel content
+        return getContent();
+    };
+    // Method to show the close button
+    var showCloseButton = function () {
+        // See if it exists
+        if (query(".ms-Panel-closeButton")) {
+            return;
+        }
+        // Get the panel
+        var panel = getPanel();
+        if (panel) {
+            // Add the close button
+            panel.innerHTML = [
+                '<button class="ms-Panel-closeButton ms-PanelAction-close">',
+                '<i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>',
+                '</button>',
+                panel.innerHTML
+            ].join('\n');
+            // Set the click event for the close button
+            panel.firstElementChild.onclick = function () {
+                // Hide the panel
+                hide();
+                // Disable postback
+                return false;
+            };
+        }
+    };
+    // See if we are showing the panel
+    if (props.visible) {
+        // Show the panel
+        _this.show();
+    }
+    // Return the panel
+    return {
+        getContent: getContent,
+        getPanel: getPanel,
+        hide: hide,
+        query: query,
+        queryAll: queryAll,
+        setHeaderText: setHeaderText,
+        show: show,
+        showCloseButton: showCloseButton
+    };
+};
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(19));
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(4);
 var fabric_1 = __webpack_require__(5);
-var text_1 = __webpack_require__(79);
+var text_1 = __webpack_require__(83);
 /**
  * Base Field
  */
@@ -2344,7 +2588,7 @@ exports.BaseField = function (props) {
 
 
 /***/ }),
-/* 16 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2656,7 +2900,7 @@ exports.App = {
 //# sourceMappingURL=app.js.map
 
 /***/ }),
-/* 17 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3248,7 +3492,7 @@ exports.ContextInfo = _ContextInfo;
 //# sourceMappingURL=contextInfo.js.map
 
 /***/ }),
-/* 18 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3282,7 +3526,7 @@ exports.RequestType = {
 //# sourceMappingURL=requestType.js.map
 
 /***/ }),
-/* 19 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3556,7 +3800,7 @@ exports.BaseHelper = BaseHelper;
 //# sourceMappingURL=baseHelper.js.map
 
 /***/ }),
-/* 20 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3565,10 +3809,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(21));
-__export(__webpack_require__(22));
-__export(__webpack_require__(23));
-__export(__webpack_require__(24));
 __export(__webpack_require__(25));
 __export(__webpack_require__(26));
 __export(__webpack_require__(27));
@@ -3577,10 +3817,14 @@ __export(__webpack_require__(29));
 __export(__webpack_require__(30));
 __export(__webpack_require__(31));
 __export(__webpack_require__(32));
+__export(__webpack_require__(33));
+__export(__webpack_require__(34));
+__export(__webpack_require__(35));
+__export(__webpack_require__(36));
 //# sourceMappingURL=mapper.js.map
 
 /***/ }),
-/* 21 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3600,7 +3844,7 @@ exports.audit = {
 //# sourceMappingURL=audit.js.map
 
 /***/ }),
-/* 22 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3648,7 +3892,7 @@ exports.eventreceivers = {
 //# sourceMappingURL=eventReceiver.js.map
 
 /***/ }),
-/* 23 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3970,7 +4214,7 @@ exports.limitedwebpartmanager = {
 //# sourceMappingURL=file.js.map
 
 /***/ }),
-/* 24 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4514,7 +4758,7 @@ exports.views = {
 //# sourceMappingURL=list.js.map
 
 /***/ }),
-/* 25 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4544,7 +4788,7 @@ exports.navigationservicerest = {
 //# sourceMappingURL=navigation.js.map
 
 /***/ }),
-/* 26 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4564,7 +4808,7 @@ exports.propertyvalues = {
 //# sourceMappingURL=propertyValues.js.map
 
 /***/ }),
-/* 27 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4584,7 +4828,7 @@ exports.search = {
 //# sourceMappingURL=search.js.map
 
 /***/ }),
-/* 28 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4685,7 +4929,7 @@ exports.roledefinitions = {
 //# sourceMappingURL=security.js.map
 
 /***/ }),
-/* 29 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5192,7 +5436,7 @@ exports.webs = {
 //# sourceMappingURL=site.js.map
 
 /***/ }),
-/* 30 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5367,7 +5611,7 @@ exports.userprofile = {
 //# sourceMappingURL=social.js.map
 
 /***/ }),
-/* 31 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5522,7 +5766,7 @@ exports.users = {
 //# sourceMappingURL=user.js.map
 
 /***/ }),
-/* 32 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5572,7 +5816,7 @@ exports.usercustomactions = {
 //# sourceMappingURL=userCustomAction.js.map
 
 /***/ }),
-/* 33 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6125,22 +6369,22 @@ exports.ViewType = {
 //# sourceMappingURL=sptypes.js.map
 
 /***/ }),
-/* 34 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var ComplexTypes = __webpack_require__(35);
+var ComplexTypes = __webpack_require__(39);
 exports.ComplexTypes = ComplexTypes;
-var Results = __webpack_require__(36);
+var Results = __webpack_require__(40);
 exports.Results = Results;
-var SPTypes = __webpack_require__(37);
+var SPTypes = __webpack_require__(41);
 exports.SPTypes = SPTypes;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 35 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6149,7 +6393,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=complexTypes.js.map
 
 /***/ }),
-/* 36 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6158,7 +6402,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=results.js.map
 
 /***/ }),
-/* 37 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6167,7 +6411,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=sptypes.js.map
 
 /***/ }),
-/* 38 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6465,7 +6709,7 @@ exports.BaseRequest = BaseRequest;
 //# sourceMappingURL=baseRequest.js.map
 
 /***/ }),
-/* 39 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6642,7 +6886,7 @@ exports.BaseExecution = BaseExecution;
 //# sourceMappingURL=baseExecution.js.map
 
 /***/ }),
-/* 40 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6713,7 +6957,7 @@ exports.Base = Base;
 //# sourceMappingURL=base.js.map
 
 /***/ }),
-/* 41 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6810,7 +7054,7 @@ exports.Batch = Batch;
 //# sourceMappingURL=batch.js.map
 
 /***/ }),
-/* 42 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7065,7 +7309,7 @@ exports.MethodInfo = MethodInfo;
 //# sourceMappingURL=methodInfo.js.map
 
 /***/ }),
-/* 43 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7191,7 +7435,7 @@ exports.OData = OData;
 //# sourceMappingURL=oData.js.map
 
 /***/ }),
-/* 44 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7332,7 +7576,7 @@ exports.TargetInfo = TargetInfo;
 //# sourceMappingURL=targetInfo.js.map
 
 /***/ }),
-/* 45 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7501,7 +7745,7 @@ exports.XHRRequest = XHRRequest;
 //# sourceMappingURL=xhrRequest.js.map
 
 /***/ }),
-/* 46 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7510,7 +7754,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 47 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7631,7 +7875,7 @@ exports.JSLink = _JSLink;
 //# sourceMappingURL=jslink.js.map
 
 /***/ }),
-/* 48 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7648,7 +7892,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(0);
-var web_1 = __webpack_require__(6);
+var web_1 = __webpack_require__(7);
 /**
  * List
  */
@@ -7695,7 +7939,7 @@ exports.List = _List;
 //# sourceMappingURL=list.js.map
 
 /***/ }),
-/* 49 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7742,7 +7986,7 @@ exports.Navigation = _Navigation;
 //# sourceMappingURL=navigation.js.map
 
 /***/ }),
-/* 50 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7784,7 +8028,7 @@ exports.PeopleManager = _PeopleManager;
 //# sourceMappingURL=peopleManager.js.map
 
 /***/ }),
-/* 51 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7827,7 +8071,7 @@ exports.PeoplePicker = _PeoplePicker;
 //# sourceMappingURL=peoplePicker.js.map
 
 /***/ }),
-/* 52 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7870,7 +8114,7 @@ exports.ProfileLoader = _ProfileLoader;
 //# sourceMappingURL=profileLoader.js.map
 
 /***/ }),
-/* 53 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7949,7 +8193,7 @@ exports.Search = _Search;
 //# sourceMappingURL=search.js.map
 
 /***/ }),
-/* 54 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8006,7 +8250,7 @@ exports.Site = _Site;
 //# sourceMappingURL=site.js.map
 
 /***/ }),
-/* 55 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8075,7 +8319,7 @@ exports.SocialFeed = (new _SocialFeed());
 //# sourceMappingURL=socialFeed.js.map
 
 /***/ }),
-/* 56 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8118,7 +8362,7 @@ exports.UserProfile = _UserProfile;
 //# sourceMappingURL=userProfile.js.map
 
 /***/ }),
-/* 57 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8211,7 +8455,7 @@ exports.Utility = _Utility;
 //# sourceMappingURL=utility.js.map
 
 /***/ }),
-/* 58 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8220,7 +8464,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 59 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8298,7 +8542,7 @@ exports.Dependencies = _Dependencies;
 //# sourceMappingURL=dependencies.js.map
 
 /***/ }),
-/* 60 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8306,7 +8550,7 @@ exports.Dependencies = _Dependencies;
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(1);
 var __1 = __webpack_require__(4);
-var spCfg_1 = __webpack_require__(7);
+var spCfg_1 = __webpack_require__(8);
 /**
  * Field Schema XML
  * Helper class for generating the field schema xml
@@ -8655,7 +8899,7 @@ exports.FieldSchemaXML = function (fieldInfo) {
 //# sourceMappingURL=fieldSchemaXML.js.map
 
 /***/ }),
-/* 61 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8692,7 +8936,7 @@ exports.SPCfgType = {
 //# sourceMappingURL=spCfgTypes.js.map
 
 /***/ }),
-/* 62 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9064,14 +9308,14 @@ exports.JSLink = {
 //# sourceMappingURL=jslink.js.map
 
 /***/ }),
-/* 63 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(1);
-var parse_1 = __webpack_require__(8);
+var parse_1 = __webpack_require__(9);
 /**
  * List Form
  */
@@ -9442,7 +9686,7 @@ exports.ListForm = _ListForm;
 //# sourceMappingURL=listForm.js.map
 
 /***/ }),
-/* 64 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9450,7 +9694,7 @@ exports.ListForm = _ListForm;
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(1);
 var __1 = __webpack_require__(4);
-var taxonomy_1 = __webpack_require__(9);
+var taxonomy_1 = __webpack_require__(10);
 /**
  * List Form Field
  */
@@ -9662,7 +9906,7 @@ exports.ListFormField = _ListFormField;
 //# sourceMappingURL=listFormField.js.map
 
 /***/ }),
-/* 65 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9722,7 +9966,7 @@ exports.Loader = {
 //# sourceMappingURL=loader.js.map
 
 /***/ }),
-/* 66 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9758,7 +10002,7 @@ exports.RibbonLink = function (props) {
 //# sourceMappingURL=ribbonLink.js.map
 
 /***/ }),
-/* 67 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9798,7 +10042,7 @@ exports.SuiteBarLink = function (props) {
 //# sourceMappingURL=sbLink.js.map
 
 /***/ }),
-/* 68 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10084,7 +10328,7 @@ exports.WebPart = _WebPart;
 //# sourceMappingURL=webpart.js.map
 
 /***/ }),
-/* 69 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10259,7 +10503,7 @@ exports.Status = {
 //# sourceMappingURL=sp.js.map
 
 /***/ }),
-/* 70 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10268,7 +10512,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 71 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10283,7 +10527,7 @@ exports.Util = utils_1.Types;
 //# sourceMappingURL=types.js.map
 
 /***/ }),
-/* 72 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10337,11 +10581,11 @@ if (global == null || global.__ver == null || global.__ver < exports.$REST.__ver
 //# sourceMappingURL=rest.js.map
 
 /***/ }),
-/* 73 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(74);
+var content = __webpack_require__(78);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -10355,7 +10599,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(11)(content, options);
+var update = __webpack_require__(12)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -10387,10 +10631,10 @@ if(false) {
 }
 
 /***/ }),
-/* 74 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(10)(false);
+exports = module.exports = __webpack_require__(11)(false);
 // imports
 
 
@@ -10401,7 +10645,7 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 
 
 /***/ }),
-/* 75 */
+/* 79 */
 /***/ (function(module, exports) {
 
 
@@ -10496,11 +10740,11 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 76 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(77);
+var content = __webpack_require__(81);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -10514,7 +10758,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(11)(content, options);
+var update = __webpack_require__(12)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -10546,10 +10790,10 @@ if(false) {
 }
 
 /***/ }),
-/* 77 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(10)(false);
+exports = module.exports = __webpack_require__(11)(false);
 // imports
 
 
@@ -10560,7 +10804,7 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 
 
 /***/ }),
-/* 78 */
+/* 82 */
 /***/ (function(module, exports) {
 
 //Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
@@ -10573,7 +10817,7 @@ this._createItemCollection(this._sideAreaCollection,r),this._saveCommandWidths()
 return i},n.prototype._addRemoveBtn=function(e,t){var i,n=document.createElement("i");t?(i=document.createElement("div"),i.classList.add("ms-Persona-actionIcon"),i.addEventListener("click",this._removeToken.bind(this),!0)):(i=document.createElement("button"),i.classList.add("ms-PeoplePicker-resultAction"),i.addEventListener("click",this._removeResult.bind(this),!0)),n.classList.add("ms-Icon","ms-Icon--Cancel"),i.appendChild(n),e.appendChild(i)},n.prototype._removeToken=function(e){var t=this._findElement(e.target,"ms-Persona");t.remove()},n.prototype._removeResult=function(e){var t=this._findElement(e.target,"ms-PeoplePicker-selectedPerson");t.remove(),this._updateCount()},n.prototype._removeItem=function(e){var t=this._findElement(e.target,"ms-PeoplePicker-result");t.remove()},n.prototype._updateCount=function(){if(this._selectedPeople){var e=this._selectedPeople.querySelectorAll(".ms-PeoplePicker-selectedPerson").length;this._selectedCount.textContent=e.toString(),this._selectedPlural.style.display=1===e?"none":"inline"}},n.prototype._tokenizeResult=function(e){var t=this._container.querySelector(".ms-PeoplePicker-searchBox"),n=t.querySelector(".ms-TextField");e.classList.add(i,"ms-PeoplePicker-persona"),this._addRemoveBtn(e,!0),e.classList.contains("ms-Persona--sm")&&(e.classList.remove("ms-Persona--sm"),e.classList.add("ms-Persona--xs")),t.insertBefore(e,n)},n.prototype._addResultToMembers=function(e){var t=this._container.querySelector(".ms-PeoplePicker-selectedPeople"),i=t.querySelector(".ms-PeoplePicker-selectedPerson"),n=document.createElement("li");n.classList.add("ms-PeoplePicker-selectedPerson"),n.tabIndex=1,n.appendChild(e),this._addRemoveBtn(n,!1),n.querySelector(".ms-PeoplePicker-resultAction").addEventListener("click",this._removeResult.bind(this),!0),t.insertBefore(n,i)},n.prototype._assignClicks=function(){var e=this;this._peoplePickerSearch.addEventListener("click",this._clickHandler.bind(this),!0),this._peoplePickerSearch.addEventListener("keyup",function(t){27===t.keyCode||e._isContextualMenuOpen||e._clickHandler(t)},!0)},n.prototype._assignRemoveHandler=function(){for(var e=this._selectedPeople.querySelectorAll(".ms-PeoplePicker-selectedPerson"),t=0;t<e.length;t++)e[t].querySelector(".ms-PeoplePicker-resultAction").addEventListener("click",this._removeResult.bind(this),!0)},n.prototype._contextHostCallBack=function(){this._peoplePickerSearchBox.classList.remove("is-active"),this._isContextualMenuOpen=!1},n}();e.PeoplePicker=n}(fabric||(fabric={}));var fabric;!function(e){var t=function(){function e(e){this._container=e,this._addListeners();var t=this._container.querySelector(".ms-Pivot-content");t.style.display="block"}return e.prototype.removeListeners=function(){this._container.removeEventListener("click",this._selectTab.bind(this))},e.prototype._addListeners=function(){var e=this;this._container.querySelector(".ms-Pivot-links").addEventListener("click",this._selectTabMouse.bind(this),!1),this._container.addEventListener("keyup",function(t){13===t.keyCode&&e._selectTabKeyboard(t)},!0)},e.prototype._selectTab=function(e){if(e.classList.contains("ms-Pivot-link")&&!e.querySelector(".ms-Pivot-ellipsis")){for(var t=e.parentElement.firstElementChild;t;)t.classList.remove("is-selected"),t=t.nextElementSibling;e.classList.add("is-selected");var i=this._container.querySelectorAll(".ms-Pivot-content");Array.prototype.forEach.call(i,function(e,t){e.style.display="none"});var n=e.getAttribute("data-content"),s=this._container.querySelector(".ms-Pivot-content[data-content='"+n+"']");s.style.display="block"}},e.prototype._selectTabMouse=function(e){e.preventDefault();var t=e.target;this._selectTab(t)},e.prototype._selectTabKeyboard=function(e){e.preventDefault();var t=e.target;this._selectTab(t)},e}();e.Pivot=t}(fabric||(fabric={}));var fabric;!function(e){"use strict";var t=function(){function e(e){this.container=e,this.cacheDOM()}return e.prototype.setProgressPercent=function(e){this._progressBar.style.width=Math.round(this._width*e)+"px"},e.prototype.setProgress=function(e){this._progress=e;var t=this._progress/this._total;this.setProgressPercent(t)},e.prototype.setTotal=function(e){this._total=e},e.prototype.setName=function(e){this._itemName.innerHTML=e},e.prototype.setDescription=function(e){this._itemDescription.innerHTML=e},e.prototype.cacheDOM=function(){this._itemName=this.container.querySelector(".ms-ProgressIndicator-itemName")||null,this._itemDescription=this.container.querySelector(".ms-ProgressIndicator-itemDescription")||null,this._progressBar=this.container.querySelector(".ms-ProgressIndicator-progressBar");var e=this.container.querySelector(".ms-ProgressIndicator-itemProgress");this._width=e.offsetWidth},e}();e.ProgressIndicator=t}(fabric||(fabric={}));var fabric;!function(e){var t=function(){function e(e,t){this.element=e,this.j=t}return e}(),i=function(){function e(e){this.eightSize=.2,this.animationSpeed=90,this.parentSize=20,this.fadeIncrement=0,this.circleObjects=[],this._target=e,this._init()}return e.prototype.start=function(){var e=this;this.stop(),this.interval=setInterval(function(){for(var t=e.circleObjects.length;t--;)e._fade(e.circleObjects[t])},this.animationSpeed)},e.prototype.stop=function(){clearInterval(this.interval)},e.prototype._init=function(){this._setTargetElement(),this._setPropertiesForSize(),this._createCirclesAndArrange(),this._initializeOpacities(),this.start()},e.prototype._setPropertiesForSize=function(){this.spinner.className.indexOf("large")>-1&&(this.parentSize=28,this.eightSize=.179),this.offsetSize=this.eightSize,this.numCircles=8},e.prototype._setTargetElement=function(){this._target.className.indexOf("ms-Spinner")===-1?(this.spinner=document.createElement("div"),this.spinner.className="ms-Spinner",this._target.appendChild(this.spinner)):this.spinner=this._target},e.prototype._initializeOpacities=function(){var e,t=0,i=1;for(this.fadeIncrement=1/this.numCircles,t;t<this.numCircles;t++){var n=this.circleObjects[t];e=this.fadeIncrement*i++,this._setOpacity(n.element,e)}},e.prototype._fade=function(e){var t=this._getOpacity(e.element)-this.fadeIncrement;t<=0&&(t=1),this._setOpacity(e.element,t)},e.prototype._getOpacity=function(e){return parseFloat(window.getComputedStyle(e).getPropertyValue("opacity"))},e.prototype._setOpacity=function(e,t){e.style.opacity=t.toString()},e.prototype._createCircle=function(){var e=document.createElement("div");return e.className="ms-Spinner-circle",e.style.width=e.style.height=this.parentSize*this.offsetSize+"px",e},e.prototype._createCirclesAndArrange=function(){for(var e,i=0,n=this.parentSize*this.offsetSize,s=2*Math.PI/this.numCircles,o=this.numCircles,r=.5*(this.parentSize-n);o--;){var a=this._createCircle(),c=Math.round(.5*this.parentSize+r*Math.cos(i)-.5*a.clientWidth)-.5*n,l=Math.round(.5*this.parentSize+r*Math.sin(i)-.5*a.clientHeight)-.5*n;this.spinner.appendChild(a),a.style.left=c+"px",a.style.top=l+"px",i+=s,e=new t(a,o),this.circleObjects.push(e)}},e}();e.Spinner=i}(fabric||(fabric={}));var fabric;!function(e){"use strict";var t=function(){function e(e){this.container=e,this.container.className.indexOf("ms-Table--selectable")!==-1&&this._addListeners()}return e.prototype._addListeners=function(){this.container.addEventListener("click",this._toggleRowSelection.bind(this),!1)},e.prototype._toggleRowSelection=function(e){var t=e.target.parentElement;if("TR"===t.tagName){var i="is-selected";t.className===i?t.className="":t.className=i}},e}();e.Table=t}(fabric||(fabric={}));var fabric;!function(e){var t;!function(e){!function(e){e[e.Placeholder=0]="Placeholder",e[e.Underlined=1]="Underlined"}(e.Type||(e.Type={}));e.Type}(t||(t={}));var i=function(){function e(e){this._container=e,this._type=[],this._textField=this._container.querySelector(".ms-TextField-field"),this._textFieldLabel=this._container.querySelector(".ms-Label"),this._setTextFieldType(),this._addListeners()}return e.prototype._setTextFieldType=function(){this._container.classList.contains("ms-TextField--placeholder")&&this._type.push(t.Type.Placeholder),this._container.classList.contains("ms-TextField--underlined")&&this._type.push(t.Type.Underlined)},e.prototype._addListeners=function(){var e=this;this._textFieldLabel.addEventListener("click",function(t){e._textField.focus()}),this._type.indexOf(t.Type.Placeholder)>=0&&(this._textField.addEventListener("focus",function(t){e._textFieldLabel.style.display="none"}),this._textField.addEventListener("blur",function(t){0===e._textField.value.length&&(e._textFieldLabel.style.display="block")})),this._type.indexOf(t.Type.Underlined)>=0&&(this._textField.addEventListener("focus",function(t){e._container.classList.add("is-active")}),this._textField.addEventListener("blur",function(t){e._container.classList.remove("is-active")}))},e}();e.TextField=i}(fabric||(fabric={}));var fabric;!function(e){var t=function(){function e(e){this._container=e,this._toggleField=this._container.querySelector(".ms-Toggle-field"),this._addListeners()}return e.prototype.removeListeners=function(){this._toggleField.removeEventListener("click",this._toggleHandler.bind(this))},e.prototype._addListeners=function(){var e=this;this._toggleField.addEventListener("click",this._toggleHandler.bind(this),!1),this._toggleField.addEventListener("keyup",function(t){return 32===t.keyCode?e._toggleHandler():null},!1)},e.prototype._toggleHandler=function(){this._toggleField.classList.toggle("is-selected")},e}();e.Toggle=t}(fabric||(fabric={}));exports.fabric = fabric;
 
 /***/ }),
-/* 79 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
