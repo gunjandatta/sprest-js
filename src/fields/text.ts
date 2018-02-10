@@ -1,5 +1,5 @@
 import { Helper } from "gd-sprest";
-declare var fabric;
+import { fabric } from "../fabric";
 
 export interface ITextField extends Helper.Types.IFieldInfo { }
 export const TextField = {
@@ -14,6 +14,6 @@ export const TextField = {
         ].join("");
 
         // Initialize the textfield
-        new fabric.TextField(el.firstChild)
+        new fabric.TextField(el.firstChild as any);
     }
 }

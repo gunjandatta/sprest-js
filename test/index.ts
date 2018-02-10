@@ -7,7 +7,7 @@ window.addEventListener("load", () => {
         el.innerHTML = "<div></div><div></div>";
 
         // Create a field element
-        new Fields.BaseField({
+        Fields.BaseField({
             el: el.firstElementChild,
             fieldInfo: {
                 listName: "SPReact",
@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
         });
 
         // Create a field element
-        new Fields.BaseField({
+        Fields.BaseField({
             el: el.lastElementChild,
             fieldInfo: {
                 listName: "SPReact",

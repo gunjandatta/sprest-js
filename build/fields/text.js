@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var fabric_1 = require("../fabric");
 exports.TextField = {
     // Method to render a textfield
     render: function (el, fieldInfo) {
@@ -11,7 +12,6 @@ exports.TextField = {
             "</div>"
         ].join("");
         // Initialize the textfield
-        new fabric.TextField(el.firstChild);
+        new fabric_1.fabric.TextField(el.firstChild);
     }
 };
-//# sourceMappingURL=text.js.map

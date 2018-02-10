@@ -5,8 +5,7 @@ var webpack = require("webpack");
 module.exports = {
     entry: "./test/index.ts",
     output: {
-        filename: "test.js",
-        path: path.resolve(__dirname, "test")
+        filename: "test/test.js",
     },
     module: {
         loaders: [

@@ -8,8 +8,4 @@ export interface IBaseFieldProps {
 /**
  * Base Field
  */
-export declare class BaseField {
-    private _props;
-    constructor(props: IBaseFieldProps);
-    private render;
-}
+export declare const BaseField: (props: IBaseFieldProps) => void;
