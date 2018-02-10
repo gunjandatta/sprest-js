@@ -34,7 +34,7 @@ export const Panel = (props: IPanelProps): IPanel => {
     // Method to hide the panel
     let hide = () => {
         // Dismiss the panel
-        _panel ? _panel["dismiss"]() : null;
+        _panel ? _panel.dismiss() : null;
 
         // Clear the panel
         _panel = null;
