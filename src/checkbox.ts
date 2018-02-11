@@ -1,10 +1,10 @@
-import { ICheckbox, ICheckboxProps } from "./types"
+import { ICheckBox, ICheckBoxProps } from "./types"
 import { fabric } from ".";
 
 /**
- * Checkbox
+ * CheckBox
  */
-export const Checkbox = (props: ICheckboxProps): ICheckbox => {
+export const CheckBox = (props: ICheckBoxProps): ICheckBox => {
     let _cb = null;
 
     // Method to get the checkbox element
@@ -54,5 +54,5 @@ export const Checkbox = (props: ICheckboxProps): ICheckbox => {
     return {
         get,
         getValue
-    }
+    };
 }

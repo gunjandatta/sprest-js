@@ -3,3 +3,4 @@ export * from "./checkbox";
 export * from "./common";
 export * from "./panel";
 export * from "./textfield";
+export * from "./toggle";

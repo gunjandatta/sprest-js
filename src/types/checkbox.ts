@@ -1,9 +1,9 @@
 import { IProps } from ".";
 
 /**
- * Checkbox
+ * CheckBox
  */
-export interface ICheckbox {
+export interface ICheckBox {
     /** Returns the checkbox element. */
     get(): HTMLElement;
 
@@ -12,9 +12,9 @@ export interface ICheckbox {
 }
 
 /**
- * Checkbox Properties
+ * CheckBox Properties
  */
-export interface ICheckboxProps extends IProps {
+export interface ICheckBoxProps extends IProps {
     /**
      * Set to true, to disable the checkbox.
      * @default false

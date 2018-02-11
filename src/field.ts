@@ -1,7 +1,8 @@
 import { Helper, SPTypes } from "gd-sprest";
 import {
-    fabric, Checkbox,
-    TextField, TextFieldTypes
+    fabric, CheckBox,
+    TextField, TextFieldTypes,
+    Toggle
 } from ".";
 
 /**
@@ -37,8 +38,9 @@ export const Field = (props: IFieldProps) => {
         switch (fieldInfo.type) {
             // Boolean Field
             case SPTypes.FieldType.Boolean:
-                Checkbox({
+                Toggle({
                     className: props.className,
+                    description: props.fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: props.fieldInfo.title,

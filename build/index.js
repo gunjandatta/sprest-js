@@ -10,6 +10,7 @@ __export(require("./button"));
 __export(require("./checkbox"));
 __export(require("./panel"));
 __export(require("./textfield"));
+__export(require("./toggle"));
 // SharePoint Components
 __export(require("./field"));
 // Types

@@ -6,6 +6,7 @@ export * from "./button";
 export * from "./checkbox";
 export * from "./panel";
 export * from "./textfield";
+export * from "./toggle";
 
 // SharePoint Components
 export * from "./field";
