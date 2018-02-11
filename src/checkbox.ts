@@ -13,6 +13,12 @@ export const CheckBox = (props: ICheckBoxProps): ICheckBox => {
         return props.el.querySelector(".ms-CheckBox") as HTMLInputElement;
     }
 
+    // Method to get the fabric component
+    let getFabricComponent = () => {
+        // Return the checkbox
+        return _cb;
+    }
+
     // Method to get the value
     let getValue = (): boolean => {
         // Get the checkbox value
@@ -22,7 +28,7 @@ export const CheckBox = (props: ICheckBoxProps): ICheckBox => {
     // Add the checkbox html
     props.el.innerHTML = [
         '<div class="ms-CheckBox ' + (props.className || "") + '">',
-        '<input tabindex="-1" type="checkbox" class="ms-CheckBox-input">',
+        '<input tabindex="-1" type="checkbox" class="ms-CheckBox-input"></input>',
         '<label role="checkbox" class="ms-CheckBox-field' + (props.disable ? " is-disabled" : "") + '" tabindex="0" aria-checked="" name="checkbox' + props.label + '">',
         '<span class="ms-Label">' + props.label + '</span>',
         '</label>',
@@ -47,6 +53,7 @@ export const CheckBox = (props: ICheckBoxProps): ICheckBox => {
     // Return the checkbox
     return {
         get,
+        getFabricComponent,
         getValue
     };
 }

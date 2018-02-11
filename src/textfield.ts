@@ -20,6 +20,12 @@ export const TextField = (props: ITextFieldProps): ITextField => {
         return props.el.querySelector(".ms-TextField-field") as HTMLInputElement;
     }
 
+    // Method to get the fabric component
+    let getFabricComponent = () => {
+        // Return the textfield
+        return _textfield;
+    }
+
     // Method to get the value
     let getValue = () => {
         // Get the text field
@@ -34,7 +40,7 @@ export const TextField = (props: ITextFieldProps): ITextField => {
     // Add the button html
     props.el.innerHTML = [
         '<div class="ms-TextField ' + className.trim() + '">',
-        props.label ? '<label class="ms-Label">' + props.label + "'</label>" : '',
+        '<label class="ms-Label">' + (props.label || "") + "'</label>",
         props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
         props.type == TextFieldTypes.Multi ?
             '<textarea class="ms-TextField-field"></textarea>' :
@@ -61,11 +67,12 @@ export const TextField = (props: ITextFieldProps): ITextField => {
     }
 
     // Create the textfield
-    new fabric.TextField(props.el.firstElementChild);
+    let _textfield = new fabric.TextField(props.el.firstElementChild);
 
     // Return the text field
     return {
         get,
+        getFabricComponent,
         getValue
     };
 }

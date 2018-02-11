@@ -1,8 +1,8 @@
 import { Helper, SPTypes } from "gd-sprest";
 import {
-    fabric, CheckBox,
+    fabric, CheckBox, Dropdown,
     TextField, TextFieldTypes,
-    Toggle
+    Toggle, Types
 } from ".";
 
 /**
@@ -32,6 +32,27 @@ export interface IFieldProps {
  * Field
  */
 export const Field = (props: IFieldProps) => {
+    // Method to generate the choice dropdown options
+    let getChoiceOptions = (fieldinfo: Helper.Types.IFieldInfoChoice): Array<Types.IDropdownOption> => {
+        let options: Array<Types.IDropdownOption> = [];
+
+        // Parse the options
+        for (let i = 0; i < fieldinfo.choices.length; i++) {
+            let choice = fieldinfo.choices[i];
+
+            // Add the option
+            options.push({
+                text: choice,
+                type: TextFieldTypes.Default,
+                value: choice
+            });
+        }
+
+        // Return the options
+        return options;
+    }
+
+
     // Load the field information
     Helper.ListFormField.create(props.fieldInfo).then(fieldInfo => {
         // Render the field based on the type
@@ -45,6 +66,19 @@ export const Field = (props: IFieldProps) => {
                     el: props.el,
                     label: props.fieldInfo.title,
                     onChange: props.onChange,
+                    value: props.value
+                });
+                break;
+
+            // Choice Field
+            case SPTypes.FieldType.Choice:
+                Dropdown({
+                    className: props.className,
+                    disable: props.disabled,
+                    el: props.el,
+                    label: props.fieldInfo.title,
+                    onChange: props.onChange,
+                    options: getChoiceOptions(props.fieldInfo),
                     value: props.value
                 });
                 break;

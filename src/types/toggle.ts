@@ -7,6 +7,9 @@ export interface IToggle {
     /** Returns the toggle element. */
     get(): HTMLElement;
 
+    /** Returns the fabric component. */
+    getFabricComponent(): any;
+
     /** Returns the toggle value. */
     getValue(): boolean;
 }

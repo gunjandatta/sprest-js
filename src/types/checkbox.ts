@@ -7,6 +7,9 @@ export interface ICheckBox {
     /** Returns the checkbox element. */
     get(): HTMLElement;
 
+    /** Returns the fabric component. */
+    getFabricComponent(): any;
+
     /** Returns the checkbox value. */
     getValue(): boolean;
 }

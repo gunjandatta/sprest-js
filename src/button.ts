@@ -31,7 +31,7 @@ export const Button = (props: IButtonProps): HTMLButtonElement => {
     }
 
     // Create the button
-    new fabric.Button(btn);
+    let _btn = new fabric.Button(btn);
 
     // Return the button
     return btn;

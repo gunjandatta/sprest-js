@@ -8,6 +8,7 @@ __export(require("./fabric"));
 // Common Components
 __export(require("./button"));
 __export(require("./checkbox"));
+__export(require("./dropdown"));
 __export(require("./panel"));
 __export(require("./textfield"));
 __export(require("./toggle"));

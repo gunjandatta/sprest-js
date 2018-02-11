@@ -4,6 +4,7 @@ export * from "./fabric";
 // Common Components
 export * from "./button";
 export * from "./checkbox";
+export * from "./dropdown";
 export * from "./panel";
 export * from "./textfield";
 export * from "./toggle";

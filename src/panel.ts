@@ -22,7 +22,13 @@ export const Panel = (props: IPanelProps): IPanel => {
     // Method to get the content element
     let getContent = (): HTMLElement => {
         // Return the content
-        return query(".ms-Panel-contentInner");
+        return query(".ms-Panel-content");
+    }
+
+    // Method to get the fabric component
+    let getFabricComponent = () => {
+        // Return the panel
+        return _panel;
     }
 
     // Method to get the panel element
@@ -164,6 +170,7 @@ export const Panel = (props: IPanelProps): IPanel => {
     // Return the panel
     return {
         getContent,
+        getFabricComponent,
         getPanel,
         hide,
         query,

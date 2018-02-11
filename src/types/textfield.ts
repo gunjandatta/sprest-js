@@ -7,6 +7,9 @@ export interface ITextField {
     /** Returns the textfield element. */
     get(): HTMLElement;
 
+    /** Returns the fabric component. */
+    getFabricComponent(): any;
+
     /** Returns the textfield value. */
     getValue(): string;
 }

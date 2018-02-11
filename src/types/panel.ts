@@ -5,6 +5,9 @@ export interface IPanel {
     /** Returns the panel element. */
     getContent(): HTMLElement;
 
+    /** Returns the fabric component. */
+    getFabricComponent(): any;
+
     /** Method to get the panel element */
     getPanel(): HTMLElement;
 

@@ -5,12 +5,16 @@ import { fabric } from ".";
  * Toggle
  */
 export const Toggle = (props: IToggleProps): IToggle => {
-    let _toggle = null;
-
     // Method to get the toggle element
     let get = (): HTMLInputElement => {
         // Returns the toggle element
         return props.el.querySelector(".ms-Toggle") as HTMLInputElement;
+    }
+
+    // Method to get the fabric component
+    let getFabricComponent = () => {
+        // Return the toggle
+        return _toggle;
     }
 
     // Method to get the value
@@ -27,8 +31,8 @@ export const Toggle = (props: IToggleProps): IToggle => {
     props.el.innerHTML = [
         '<div class="ms-Toggle ' + className.trim() + '">',
         props.description ? '<span class="ms-Toggle-description">' + props.description + "</span>" : '',
-        '<input type="checkbox" class="ms-Toggle-input">',
-        '<label class="ms-Toggle-field" tabindex="0">',
+        '<input type="checkbox" class="ms-Toggle-input"></input>',
+        '<label class="ms-Toggle-field' + (props.value ? ' is-selected' : '') + '" tabindex="0">',
         '<span class="ms-Label ms-Label--off">Off</span>',
         '<span class="ms-Label ms-Label--on">On</span>',
         '</label>',
@@ -45,14 +49,12 @@ export const Toggle = (props: IToggleProps): IToggle => {
     }
 
     // Create the toggle
-    _toggle = new fabric.Toggle(toggle);
-
-    // Update the value
-    props.value ? _toggle.check() : _toggle.uncheck();
+    let _toggle = new fabric.Toggle(toggle);
 
     // Return the toggle
     return {
         get,
+        getFabricComponent,
         getValue
     };
 }
