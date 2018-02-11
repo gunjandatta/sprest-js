@@ -19,9 +19,13 @@ export const Toggle = (props: IToggleProps): IToggle => {
         return _toggle ? _toggle._container.querySelector(".ms-Toggle-field").className.indexOf("is-selected") > 0 : false;
     }
 
+    // Set the class name
+    let className = props.className || "";
+    if (props.disable) { className += " is-disabled"; }
+
     // Add the toggle html
     props.el.innerHTML = [
-        '<div class="ms-Toggle ' + (props.className || "") + '">',
+        '<div class="ms-Toggle ' + className.trim() + '">',
         props.description ? '<span class="ms-Toggle-description">' + props.description + "</span>" : '',
         '<input type="checkbox" class="ms-Toggle-input">',
         '<label class="ms-Toggle-field" tabindex="0">',
@@ -33,12 +37,6 @@ export const Toggle = (props: IToggleProps): IToggle => {
 
     // Get the toggle
     let toggle = get();
-
-    // See if the toggle is disabled
-    if (props.disable) {
-        // Disable the toggle
-        toggle.disabled = true;
-    }
 
     // Set the toggle click event
     toggle.onclick = () => {

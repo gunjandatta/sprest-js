@@ -23,7 +23,7 @@ export const CheckBox = (props: ICheckBoxProps): ICheckBox => {
     props.el.innerHTML = [
         '<div class="ms-CheckBox ' + (props.className || "") + '">',
         '<input tabindex="-1" type="checkbox" class="ms-CheckBox-input">',
-        '<label role="checkbox" class="ms-CheckBox-field" tabindex="0" aria-checked="" name="checkbox' + props.label + '">',
+        '<label role="checkbox" class="ms-CheckBox-field' + (props.disable ? " is-disabled" : "") + '" tabindex="0" aria-checked="" name="checkbox' + props.label + '">',
         '<span class="ms-Label">' + props.label + '</span>',
         '</label>',
         '</div>'
@@ -31,12 +31,6 @@ export const CheckBox = (props: ICheckBoxProps): ICheckBox => {
 
     // Get the checkbox
     let cb = get();
-
-    // See if the checkbox is disabled
-    if (props.disable) {
-        // Disable the checkbox
-        cb.disabled = true;
-    }
 
     // Set the checkbox change event
     cb.onchange = () => {

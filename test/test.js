@@ -2622,18 +2622,13 @@ exports.CheckBox = function (props) {
     props.el.innerHTML = [
         '<div class="ms-CheckBox ' + (props.className || "") + '">',
         '<input tabindex="-1" type="checkbox" class="ms-CheckBox-input">',
-        '<label role="checkbox" class="ms-CheckBox-field" tabindex="0" aria-checked="" name="checkbox' + props.label + '">',
+        '<label role="checkbox" class="ms-CheckBox-field' + (props.disable ? " is-disabled" : "") + '" tabindex="0" aria-checked="" name="checkbox' + props.label + '">',
         '<span class="ms-Label">' + props.label + '</span>',
         '</label>',
         '</div>'
     ].join('\n');
     // Get the checkbox
     var cb = get();
-    // See if the checkbox is disabled
-    if (props.disable) {
-        // Disable the checkbox
-        cb.disabled = true;
-    }
     // Set the checkbox change event
     cb.onchange = function () {
         // Execute the change event
@@ -2914,9 +2909,14 @@ exports.Toggle = function (props) {
         // Get the toggle value
         return _toggle ? _toggle._container.querySelector(".ms-Toggle-field").className.indexOf("is-selected") > 0 : false;
     };
+    // Set the class name
+    var className = props.className || "";
+    if (props.disable) {
+        className += " is-disabled";
+    }
     // Add the toggle html
     props.el.innerHTML = [
-        '<div class="ms-Toggle ' + (props.className || "") + '">',
+        '<div class="ms-Toggle ' + className.trim() + '">',
         props.description ? '<span class="ms-Toggle-description">' + props.description + "</span>" : '',
         '<input type="checkbox" class="ms-Toggle-input">',
         '<label class="ms-Toggle-field" tabindex="0">',
@@ -2927,11 +2927,6 @@ exports.Toggle = function (props) {
     ].join('\n');
     // Get the toggle
     var toggle = get();
-    // See if the toggle is disabled
-    if (props.disable) {
-        // Disable the toggle
-        toggle.disabled = true;
-    }
     // Set the toggle click event
     toggle.onclick = function () {
         // Execute the change event
