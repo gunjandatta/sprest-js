@@ -2742,6 +2742,26 @@ exports.Dropdown = function (props) {
         el: props.el.querySelector(".textfield"),
         type: _1.TextFieldTypes.Underline
     });
+    // Parse the menu items
+    var items = props.el.querySelectorAll(".ms-ContextualMenu-item");
+    for (var i = 0; i < items.length; i++) {
+        // Add a click event
+        items[i].addEventListener("click", function (ev) {
+            var selectedValues = [];
+            // Get the selected items
+            var items = _menu._container.querySelectorAll(".is-selected");
+            for (var i_1 = 0; i_1 < items.length; i_1++) {
+                var item = items[i_1];
+                // Add the selected value
+                selectedValues.push(item.innerText.trim());
+            }
+            // Set the textbox value
+            var selectedValue = selectedValues.join(", ");
+            _tb.get().value = selectedValue;
+            // Call the change event
+            props.onChange ? props.onChange(selectedValue) : null;
+        });
+    }
     // Create the menu
     var _menu = new _1.fabric.ContextualMenu(get(), _tb.getFabricComponent()._container);
     // Return the dropdown

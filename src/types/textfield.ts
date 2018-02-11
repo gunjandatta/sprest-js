@@ -5,7 +5,7 @@ import { IProps } from ".";
  */
 export interface ITextField {
     /** Returns the textfield element. */
-    get(): HTMLElement;
+    get(): HTMLInputElement;
 
     /** Returns the fabric component. */
     getFabricComponent(): any;

@@ -84,6 +84,31 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         type: TextFieldTypes.Underline
     });
 
+    // Parse the menu items
+    let items = props.el.querySelectorAll(".ms-ContextualMenu-item");
+    for (let i = 0; i < items.length; i++) {
+        // Add a click event
+        items[i].addEventListener("click", (ev) => {
+            let selectedValues = [];
+
+            // Get the selected items
+            let items = _menu._container.querySelectorAll(".is-selected");
+            for (let i = 0; i < items.length; i++) {
+                let item = items[i] as HTMLLIElement;
+
+                // Add the selected value
+                selectedValues.push(item.innerText.trim());
+            }
+
+            // Set the textbox value
+            let selectedValue = selectedValues.join(", ");
+            _tb.get().value = selectedValue;
+
+            // Call the change event
+            props.onChange ? props.onChange(selectedValue) : null;
+        });
+    }
+
     // Create the menu
     let _menu = new fabric.ContextualMenu(get(), _tb.getFabricComponent()._container);
 
