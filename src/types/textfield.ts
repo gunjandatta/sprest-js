@@ -1,4 +1,4 @@
-import { IProps } from ".";
+import { IComponentProps, IProps } from ".";
 
 /**
  * Text Field
@@ -17,18 +17,9 @@ export interface ITextField {
 /**
  * Text Field Properties
  */
-export interface ITextFieldProps extends IProps {
-    /**
-     * Set to true, to disable the button.
-     * @default false
-     */
-    disable?: boolean;
-
-    /** The textfield label. */
-    label?: string;
-
-    /** The text change event. */
-    onChange?: (value?: string) => void;
+export interface ITextFieldProps extends IComponentProps {
+    /** The change event */
+    onChange?: (value: string) => void;
 
     /** The placeholder text. */
     placeholder?: string;

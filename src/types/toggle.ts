@@ -1,4 +1,4 @@
-import { IProps } from ".";
+import { IComponentProps, IProps } from ".";
 
 /**
  * Toggle
@@ -17,18 +17,9 @@ export interface IToggle {
 /**
  * Toggle Properties
  */
-export interface IToggleProps extends IProps {
+export interface IToggleProps extends IComponentProps {
     /** The toggle description. */
     description?: string;
-
-    /**
-     * Set to true, to disable the toggle.
-     * @default false
-     */
-    disable?: boolean;
-
-    /** The toggle label. */
-    label?: string;
 
     /** The change event */
     onChange?: (value: boolean) => void;

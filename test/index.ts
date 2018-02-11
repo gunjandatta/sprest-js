@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
             text: "Show Panel",
             onClick: () => {
                 // Show the panel
-                let content = panel.show("<div></div><div></div><div></div>");
+                let content = panel.show("<div></div><div></div><div></div><div></div>");
 
                 // Create a field element
                 Field({
@@ -39,6 +39,15 @@ window.addEventListener("load", () => {
                     fieldInfo: {
                         listName: "SPReact",
                         name: "TestBoolean"
+                    }
+                });
+
+                // Create a field element
+                Field({
+                    el: content.children[3],
+                    fieldInfo: {
+                        listName: "SPReact",
+                        name: "TestMultiChoice"
                     }
                 });
             }

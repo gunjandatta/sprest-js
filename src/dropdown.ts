@@ -26,9 +26,29 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     }
 
     // Method to get the value
-    let getValue = (): string => {
-        // Get the text field value
-        return _tb ? _tb.getValue() : "";
+    let getValue = (): string | Array<string> => {
+        let selectedValues = [];
+
+        // Get the selected items
+        let items = _menu._container.querySelectorAll(".is-selected");
+        for (let i = 0; i < items.length; i++) {
+            let item = items[i] as HTMLLIElement;
+
+            // Add the selected value
+            selectedValues.push(item.innerText.trim());
+        }
+
+        // Return the value
+        return props.multi ? selectedValues : selectedValues[0];
+    }
+
+    // Method to get the value as a string
+    let getValueAsString = (): string => {
+        // Set the textbox value
+        let selectedValues = getValue();
+
+        // Return the value as a string
+        return props.multi ? (selectedValues as Array<string>).join(", ") : selectedValues as string;
     }
 
     // Method to render the menu
@@ -36,14 +56,11 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         let menu: Array<string> = [];
 
         // Add the menu
-        menu.push('<ul class="ms-ContextualMenu is-hidden">');
+        menu.push('<ul class="ms-ContextualMenu is-hidden' + (props.multi ? ' ms-ContextualMenu--multiselect' : '') + '">');
 
         // Parse the options
         for (let i = 0; i < options.length; i++) {
             let option = options[i];
-
-            // Compute the "is-selected" class
-            // TO DO
 
             // See if this is a header
             if (option.type == DropdownTypes.Header) {
@@ -53,10 +70,27 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                     '<li class="ms-ContextualMenu-item ms-ContextualMenu-item--header">' + option.text + '</li>'
                 ].join('\n'));
             } else {
+                let isSelected = false;
+
+                // Ensure a value exists
+                if (props.value) {
+                    // See if we are allowing multiple values
+                    if (props.multi) {
+                        // Parse the value
+                        for (let j = 0; j < props.value.length; j++) {
+                            // Set the flag
+                            isSelected = (props.value[j] == option.text) || (props.value[j] == option.value);
+                        }
+                    } else {
+                        // Set the flag
+                        isSelected = (props.value == option.text) || (props.value == option.value);
+                    }
+                }
+
                 // Add the item
                 menu.push([
                     '<li class="ms-ContextualMenu-item">',
-                    '<a class="ms-ContextualMenu-link" tabindex="1">' + option.text + '</a>',
+                    '<a class="ms-ContextualMenu-link' + (isSelected ? ' is-selected' : '') + '" tabindex="1">' + option.text + '</a>',
                     option.options ? renderMenu(option.options) : '',
                     '</li>'
                 ].join('\n'));
@@ -81,6 +115,8 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     // Render the textfield
     let _tb = TextField({
         el: props.el.querySelector(".textfield"),
+        label: props.label,
+        required: props.required,
         type: TextFieldTypes.Underline
     });
 
@@ -89,23 +125,11 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     for (let i = 0; i < items.length; i++) {
         // Add a click event
         items[i].addEventListener("click", (ev) => {
-            let selectedValues = [];
-
-            // Get the selected items
-            let items = _menu._container.querySelectorAll(".is-selected");
-            for (let i = 0; i < items.length; i++) {
-                let item = items[i] as HTMLLIElement;
-
-                // Add the selected value
-                selectedValues.push(item.innerText.trim());
-            }
-
             // Set the textbox value
-            let selectedValue = selectedValues.join(", ");
-            _tb.get().value = selectedValue;
+            _tb.get().value = getValueAsString();
 
             // Call the change event
-            props.onChange ? props.onChange(selectedValue) : null;
+            props.onChange ? props.onChange(getValue()) : null;
         });
     }
 
@@ -116,6 +140,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     return {
         get,
         getFabricComponent,
-        getValue
+        getValue,
+        getValueAsString
     };
 }

@@ -1,4 +1,4 @@
-import { IProps } from ".";
+import { IComponentProps, IProps } from ".";
 
 /**
  * Dropdown
@@ -11,34 +11,38 @@ export interface IDropdown {
     getFabricComponent(): any;
 
     /** Returns the dropdown value. */
-    getValue(): string;
+    getValue(): string | Array<string>;
+
+    /** Returns the dropdown value as a string. */
+    getValueAsString(): string;
 }
 
 /**
  * Dropdown Option
  */
 export interface IDropdownOption {
+    /** The option children. */
     options?: Array<IDropdownOption>;
+
+    /** The option text. */
     text?: string;
+
+    /** The option value. */
     value?: string;
+
+    /** The option type. */
     type?: number;
 }
 
 /**
  * Dropdown Properties
  */
-export interface IDropdownProps extends IProps {
-    /**
-     * Set to true, to disable the dropdown.
-     * @default false
-     */
-    disable?: boolean;
+export interface IDropdownProps extends IComponentProps {
+    /** Allow multiple values. */
+    multi?: boolean;
 
-    /** The dropdown label. */
-    label?: string;
-
-    /** The change event. */
-    onChange?: (value?: string) => void;
+    /** The change event */
+    onChange?: (checked: string | Array<string>) => void;
 
     /** The dropdown options. */
     options?: Array<IDropdownOption>
@@ -46,6 +50,6 @@ export interface IDropdownProps extends IProps {
     /** The placeholder text. */
     placeholder?: string;
 
-    /** The dropdown value. */
-    value?: string;
+    /** The dropdown value(s). */
+    value?: string | Array<string>;
 }

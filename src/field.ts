@@ -1,40 +1,18 @@
 import { Helper, SPTypes } from "gd-sprest";
+import { IDropdownOption, IFieldProps } from "./types";
 import {
     fabric, CheckBox, Dropdown,
     TextField, TextFieldTypes,
-    Toggle, Types
+    Toggle
 } from ".";
-
-/**
- * Field Properties
- */
-export interface IFieldProps {
-    /** Class name */
-    className?: string;
-
-    /** Disabled */
-    disabled?: boolean;
-
-    /** The element to render the field to. */
-    el: Element | HTMLElement;
-
-    /** The field information */
-    fieldInfo: Helper.Types.IListFormFieldInfo;
-
-    /** The change event */
-    onChange?: (value: any) => void;
-
-    /** The field value */
-    value?: any;
-}
 
 /**
  * Field
  */
 export const Field = (props: IFieldProps) => {
     // Method to generate the choice dropdown options
-    let getChoiceOptions = (fieldinfo: Helper.Types.IFieldInfoChoice): Array<Types.IDropdownOption> => {
-        let options: Array<Types.IDropdownOption> = [];
+    let getChoiceOptions = (fieldinfo: Helper.Types.IFieldInfoChoice): Array<IDropdownOption> => {
+        let options: Array<IDropdownOption> = [];
 
         // Parse the options
         for (let i = 0; i < fieldinfo.choices.length; i++) {
@@ -83,6 +61,20 @@ export const Field = (props: IFieldProps) => {
                 });
                 break;
 
+            // Multi-Choice Field
+            case SPTypes.FieldType.MultiChoice:
+                Dropdown({
+                    className: props.className,
+                    disable: props.disabled,
+                    el: props.el,
+                    label: props.fieldInfo.title,
+                    multi: true,
+                    onChange: props.onChange,
+                    options: getChoiceOptions(props.fieldInfo),
+                    value: props.value ? props.value.results : props.value
+                });
+                break;
+
             // Text Field
             case SPTypes.FieldType.Text:
                 TextField({
@@ -91,6 +83,7 @@ export const Field = (props: IFieldProps) => {
                     el: props.el,
                     label: props.fieldInfo.title,
                     onChange: props.onChange,
+                    type: TextFieldTypes.Underline,
                     value: props.value || props.fieldInfo.defaultValue || ""
                 });
                 break;

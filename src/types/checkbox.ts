@@ -1,4 +1,4 @@
-import { IProps } from ".";
+import { IComponentProps, IProps } from ".";
 
 /**
  * CheckBox
@@ -17,19 +17,10 @@ export interface ICheckBox {
 /**
  * CheckBox Properties
  */
-export interface ICheckBoxProps extends IProps {
-    /**
-     * Set to true, to disable the checkbox.
-     * @default false
-     */
-    disable?: boolean;
-
-    /** The checkbox label. */
-    label?: string;
-
+export interface ICheckBoxProps extends IComponentProps {
     /** The change event */
     onChange?: (checked: boolean) => void;
-
+    
     /** The checkbox value */
     value?: boolean;
 }

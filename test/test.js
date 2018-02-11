@@ -2279,7 +2279,7 @@ window.addEventListener("load", function () {
             text: "Show Panel",
             onClick: function onClick() {
                 // Show the panel
-                var content = panel_1.show("<div></div><div></div><div></div>");
+                var content = panel_1.show("<div></div><div></div><div></div><div></div>");
                 // Create a field element
                 build_1.Field({
                     el: content.children[0],
@@ -2302,6 +2302,14 @@ window.addEventListener("load", function () {
                     fieldInfo: {
                         listName: "SPReact",
                         name: "TestBoolean"
+                    }
+                });
+                // Create a field element
+                build_1.Field({
+                    el: content.children[3],
+                    fieldInfo: {
+                        listName: "SPReact",
+                        name: "TestMultiChoice"
                     }
                 });
             }
@@ -2637,7 +2645,7 @@ exports.CheckBox = function (props) {
         '<div class="ms-CheckBox ' + (props.className || "") + '">',
         '<input tabindex="-1" type="checkbox" class="ms-CheckBox-input"></input>',
         '<label role="checkbox" class="ms-CheckBox-field' + (props.disable ? " is-disabled" : "") + '" tabindex="0" aria-checked="" name="checkbox' + props.label + '">',
-        '<span class="ms-Label">' + props.label + '</span>',
+        '<span class="ms-Label">' + props.label + (props.required ? '<span class="ms-fontColor-redDark"> *</span>' : '') + '</span>',
         '</label>',
         '</div>'
     ].join('\n');
@@ -2693,20 +2701,33 @@ exports.Dropdown = function (props) {
     };
     // Method to get the value
     var getValue = function () {
-        // Get the text field value
-        return _tb ? _tb.getValue() : "";
+        var selectedValues = [];
+        // Get the selected items
+        var items = _menu._container.querySelectorAll(".is-selected");
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            // Add the selected value
+            selectedValues.push(item.innerText.trim());
+        }
+        // Return the value
+        return props.multi ? selectedValues : selectedValues[0];
+    };
+    // Method to get the value as a string
+    var getValueAsString = function () {
+        // Set the textbox value
+        var selectedValues = getValue();
+        // Return the value as a string
+        return props.multi ? selectedValues.join(", ") : selectedValues;
     };
     // Method to render the menu
     var renderMenu = function (options) {
         if (options === void 0) { options = []; }
         var menu = [];
         // Add the menu
-        menu.push('<ul class="ms-ContextualMenu is-hidden">');
+        menu.push('<ul class="ms-ContextualMenu is-hidden' + (props.multi ? ' ms-ContextualMenu--multiselect' : '') + '">');
         // Parse the options
         for (var i = 0; i < options.length; i++) {
             var option = options[i];
-            // Compute the "is-selected" class
-            // TO DO
             // See if this is a header
             if (option.type == DropdownTypes.Header) {
                 // Add the header
@@ -2716,10 +2737,26 @@ exports.Dropdown = function (props) {
                 ].join('\n'));
             }
             else {
+                var isSelected = false;
+                // Ensure a value exists
+                if (props.value) {
+                    // See if we are allowing multiple values
+                    if (props.multi) {
+                        // Parse the value
+                        for (var j = 0; j < props.value.length; j++) {
+                            // Set the flag
+                            isSelected = (props.value[j] == option.text) || (props.value[j] == option.value);
+                        }
+                    }
+                    else {
+                        // Set the flag
+                        isSelected = (props.value == option.text) || (props.value == option.value);
+                    }
+                }
                 // Add the item
                 menu.push([
                     '<li class="ms-ContextualMenu-item">',
-                    '<a class="ms-ContextualMenu-link" tabindex="1">' + option.text + '</a>',
+                    '<a class="ms-ContextualMenu-link' + (isSelected ? ' is-selected' : '') + '" tabindex="1">' + option.text + '</a>',
                     option.options ? renderMenu(option.options) : '',
                     '</li>'
                 ].join('\n'));
@@ -2740,6 +2777,8 @@ exports.Dropdown = function (props) {
     // Render the textfield
     var _tb = _1.TextField({
         el: props.el.querySelector(".textfield"),
+        label: props.label,
+        required: props.required,
         type: _1.TextFieldTypes.Underline
     });
     // Parse the menu items
@@ -2747,19 +2786,10 @@ exports.Dropdown = function (props) {
     for (var i = 0; i < items.length; i++) {
         // Add a click event
         items[i].addEventListener("click", function (ev) {
-            var selectedValues = [];
-            // Get the selected items
-            var items = _menu._container.querySelectorAll(".is-selected");
-            for (var i_1 = 0; i_1 < items.length; i_1++) {
-                var item = items[i_1];
-                // Add the selected value
-                selectedValues.push(item.innerText.trim());
-            }
             // Set the textbox value
-            var selectedValue = selectedValues.join(", ");
-            _tb.get().value = selectedValue;
+            _tb.get().value = getValueAsString();
             // Call the change event
-            props.onChange ? props.onChange(selectedValue) : null;
+            props.onChange ? props.onChange(getValue()) : null;
         });
     }
     // Create the menu
@@ -2768,7 +2798,8 @@ exports.Dropdown = function (props) {
     return {
         get: get,
         getFabricComponent: getFabricComponent,
-        getValue: getValue
+        getValue: getValue,
+        getValueAsString: getValueAsString
     };
 };
 
@@ -2995,7 +3026,7 @@ exports.TextField = function (props) {
     // Add the button html
     props.el.innerHTML = [
         '<div class="ms-TextField ' + className.trim() + '">',
-        '<label class="ms-Label">' + (props.label || "") + '</label>',
+        '<label class="ms-Label"' + (props.type == TextFieldTypes.Underline ? 'style="display:block"' : '') + '>' + (props.label || "") + (props.required ? '<span class="ms-fontColor-redDark"> *</span>' : '') + '</label>',
         props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
         props.type == TextFieldTypes.Multi ?
             '<textarea class="ms-TextField-field"></textarea>' :
@@ -3063,6 +3094,7 @@ exports.Toggle = function (props) {
     // Add the toggle html
     props.el.innerHTML = [
         '<div class="ms-Toggle ' + className.trim() + '">',
+        props.label ? '<label class="ms-Label"><span class="ms-fontSize-m ms-fontWeight-semibold">' + props.label + '</span></label>' : '',
         props.description ? '<span class="ms-Toggle-description">' + props.description + "</span>" : '',
         '<input type="checkbox" class="ms-Toggle-input"></input>',
         '<label class="ms-Toggle-field' + (props.value ? ' is-selected' : '') + '" tabindex="0">',
@@ -3146,6 +3178,19 @@ exports.Field = function (props) {
                     value: props.value
                 });
                 break;
+            // Multi-Choice Field
+            case gd_sprest_1.SPTypes.FieldType.MultiChoice:
+                _1.Dropdown({
+                    className: props.className,
+                    disable: props.disabled,
+                    el: props.el,
+                    label: props.fieldInfo.title,
+                    multi: true,
+                    onChange: props.onChange,
+                    options: getChoiceOptions(props.fieldInfo),
+                    value: props.value ? props.value.results : props.value
+                });
+                break;
             // Text Field
             case gd_sprest_1.SPTypes.FieldType.Text:
                 _1.TextField({
@@ -3154,6 +3199,7 @@ exports.Field = function (props) {
                     el: props.el,
                     label: props.fieldInfo.title,
                     onChange: props.onChange,
+                    type: _1.TextFieldTypes.Underline,
                     value: props.value || props.fieldInfo.defaultValue || ""
                 });
                 break;
