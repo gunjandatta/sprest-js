@@ -2280,7 +2280,7 @@ window.addEventListener("load", function () {
             onClick: function onClick() {
                 var panelContent = "";
                 // Parse the fields
-                var fields = ["Title", "TestChoice", "TestBoolean", "TestMultiChoice", "TestLookup", "TestMultiLookup"];
+                var fields = ["Title", "TestChoice", "TestBoolean", "TestMultiChoice", "TestLookup", "TestMultiLookup", "TestManagedMetadata"];
                 for (var i = 0; i < fields.length; i++) {
                     // Append the div for this field
                     panelContent += "<div data-field='" + fields[i] + "'></div>";
@@ -2675,6 +2675,7 @@ var DropdownTypes;
  * Dropdown
  */
 exports.Dropdown = function (props) {
+    var _values = props.value && typeof (props.value) === "string" ? [props.value] : (props.value || []);
     // Method to get the toggle element
     var get = function () {
         // Returns the toggle element
@@ -2688,12 +2689,20 @@ exports.Dropdown = function (props) {
     // Method to get the value
     var getValue = function () {
         var selectedValues = [];
-        // Get the selected items
-        var items = _menu._container.querySelectorAll(".is-selected");
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
-            // Add the selected value
-            selectedValues.push(item.innerText.trim());
+        // Get the context menus
+        var menus = document.querySelectorAll(".ms-ContextualHost");
+        for (var i = 0; i < menus.length; i++) {
+            // Get the selected items
+            var items_1 = menus[i].querySelectorAll(".is-selected");
+            for (var i_1 = 0; i_1 < items_1.length; i_1++) {
+                var item = items_1[i_1];
+                // Ensure this item isn't a menu
+                if (item.parentElement.className.indexOf("--hasMenu") > 0) {
+                    continue;
+                }
+                // Add the selected value
+                selectedValues.push(item.innerText.trim());
+            }
         }
         // Return the value
         return props.multi ? selectedValues : selectedValues[0];
@@ -2740,10 +2749,12 @@ exports.Dropdown = function (props) {
                     }
                 }
                 // Add the item
+                var isSubMenu = option.options && option.options.length > 0;
                 menu.push([
-                    '<li class="ms-ContextualMenu-item">',
+                    '<li class="ms-ContextualMenu-item' + (isSubMenu ? ' ms-ContextualMenu-item--hasMenu' : '') + '">',
                     '<a class="ms-ContextualMenu-link' + (isSelected ? ' is-selected' : '') + '" tabindex="1">' + option.text + '</a>',
-                    option.options ? renderMenu(option.options) : '',
+                    isSubMenu ? '<i class="ms-ContextualMenu-subMenuIcon ms-Icon ms-Icon--ChevronRight"></i>' : '',
+                    isSubMenu ? renderMenu(option.options) : '',
                     '</li>'
                 ].join('\n'));
             }
@@ -2772,8 +2783,30 @@ exports.Dropdown = function (props) {
     for (var i = 0; i < items.length; i++) {
         // Add a click event
         items[i].addEventListener("click", function (ev) {
+            var link = ev.currentTarget;
+            // See if the item clicked is not a menu
+            if (link.className.indexOf("--hasMenu") < 0) {
+                var isSelected = link.firstElementChild.className.indexOf("is-selected") > 0;
+                var value = link.innerText.trim();
+                // See if we are selecting the item
+                if (isSelected) {
+                    // Add the item
+                    _values.push(value);
+                }
+                else {
+                    // Parse the values
+                    for (var i_2 = 0; i_2 < _values.length; i_2++) {
+                        // See if this is the target item
+                        if (_values[i_2] == value) {
+                            // Remove this item
+                            _values.splice(i_2, 1);
+                            break;
+                        }
+                    }
+                }
+            }
             // Set the textbox value
-            _tb.get().value = getValueAsString();
+            _tb.get().value = _values.join(", ");
             // Call the change event
             props.onChange ? props.onChange(getValue()) : null;
         });
@@ -3129,7 +3162,7 @@ exports.Field = function (props) {
             // Add the option
             options.push({
                 text: choice,
-                type: _1.TextFieldTypes.Default,
+                type: _1.DropdownTypes.Item,
                 value: choice
             });
         }
@@ -3145,8 +3178,40 @@ exports.Field = function (props) {
             // Add the option
             options.push({
                 text: item[fieldinfo.lookupField],
-                type: _1.TextFieldTypes.Default,
+                type: _1.DropdownTypes.Item,
                 value: item.Id.toString()
+            });
+        }
+        // Return the options
+        return options;
+    };
+    // Method to get the mms dropdown options
+    var getMMSOptions = function (term) {
+        var options = [];
+        // See if information exists
+        if (term.info) {
+            // Add the heading
+            options.push({
+                text: term.info.name,
+                type: _1.DropdownTypes.Header,
+                value: term.info.id
+            });
+        }
+        // Parse the terms
+        for (var termName in term) {
+            var child = term[termName];
+            // Skip the info and parent properties
+            if (termName == "info" || termName == "parent") {
+                continue;
+            }
+            // Get the child options
+            var childOptions = getMMSOptions(child);
+            // Add the option
+            options.push({
+                options: childOptions.length > 1 ? childOptions : null,
+                text: child.info.name,
+                type: _1.DropdownTypes.Item,
+                value: child.info.id
             });
         }
         // Return the options
@@ -3160,10 +3225,10 @@ exports.Field = function (props) {
             case gd_sprest_1.SPTypes.FieldType.Boolean:
                 _1.Toggle({
                     className: props.className,
-                    description: props.fieldInfo.field.Description,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
-                    label: props.fieldInfo.title,
+                    label: fieldInfo.title,
                     onChange: props.onChange,
                     value: props.value
                 });
@@ -3174,26 +3239,26 @@ exports.Field = function (props) {
                     className: props.className,
                     disable: props.disabled,
                     el: props.el,
-                    label: props.fieldInfo.title,
+                    label: fieldInfo.title,
                     onChange: props.onChange,
-                    options: getChoiceOptions(props.fieldInfo),
-                    required: props.fieldInfo.required,
+                    options: getChoiceOptions(fieldInfo),
+                    required: fieldInfo.required,
                     value: props.value
                 });
                 break;
             // Lookup Field
             case gd_sprest_1.SPTypes.FieldType.Lookup:
                 // Get the drop down information
-                gd_sprest_1.Helper.ListFormField.loadLookupData(props.fieldInfo, 500).then(function (items) {
+                gd_sprest_1.Helper.ListFormField.loadLookupData(fieldInfo, 500).then(function (items) {
                     _1.Dropdown({
                         className: props.className,
                         disable: props.disabled,
                         el: props.el,
-                        label: props.fieldInfo.title,
-                        multi: props.fieldInfo.multi,
+                        label: fieldInfo.title,
+                        multi: fieldInfo.multi,
                         onChange: props.onChange,
-                        options: getLookupOptions(props.fieldInfo, items),
-                        required: props.fieldInfo.required,
+                        options: getLookupOptions(fieldInfo, items),
+                        required: fieldInfo.required,
                         value: props.value
                     });
                 });
@@ -3204,11 +3269,11 @@ exports.Field = function (props) {
                     className: props.className,
                     disable: props.disabled,
                     el: props.el,
-                    label: props.fieldInfo.title,
+                    label: fieldInfo.title,
                     multi: true,
                     onChange: props.onChange,
-                    options: getChoiceOptions(props.fieldInfo),
-                    required: props.fieldInfo.required,
+                    options: getChoiceOptions(fieldInfo),
+                    required: fieldInfo.required,
                     value: props.value ? props.value.results : props.value
                 });
                 break;
@@ -3218,16 +3283,35 @@ exports.Field = function (props) {
                     className: props.className,
                     disable: props.disabled,
                     el: props.el,
-                    label: props.fieldInfo.title,
+                    label: fieldInfo.title,
                     onChange: props.onChange,
-                    required: props.fieldInfo.required,
+                    required: fieldInfo.required,
                     type: _1.TextFieldTypes.Underline,
-                    value: props.value || props.fieldInfo.defaultValue || ""
+                    value: props.value || fieldInfo.defaultValue || ""
                 });
                 break;
             default:
-                // Log
-                console.log("[gd-sprest] The field type '" + fieldInfo.typeAsString + "' is not supported.");
+                // See if this is a taxonomy field
+                if (fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
+                    // Load the terms
+                    gd_sprest_1.Helper.ListFormField.loadMMSData(fieldInfo).then(function (terms) {
+                        _1.Dropdown({
+                            className: props.className,
+                            disable: props.disabled,
+                            el: props.el,
+                            label: fieldInfo.title,
+                            multi: true,
+                            onChange: props.onChange,
+                            options: getMMSOptions(gd_sprest_1.Helper.Taxonomy.toObject(terms)),
+                            required: fieldInfo.required,
+                            value: props.value ? props.value.results : props.value
+                        });
+                    });
+                }
+                else {
+                    // Log
+                    console.log("[gd-sprest] The field type '" + fieldInfo.typeAsString + "' is not supported.");
+                }
                 break;
         }
     });

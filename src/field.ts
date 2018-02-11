@@ -1,7 +1,7 @@
 import { Helper, SPTypes, Types } from "gd-sprest";
 import { IDropdownOption, IFieldProps } from "./types";
 import {
-    fabric, CheckBox, Dropdown,
+    fabric, CheckBox, Dropdown, DropdownTypes,
     TextField, TextFieldTypes,
     Toggle
 } from ".";
@@ -21,7 +21,7 @@ export const Field = (props: IFieldProps) => {
             // Add the option
             options.push({
                 text: choice,
-                type: TextFieldTypes.Default,
+                type: DropdownTypes.Item,
                 value: choice
             });
         }
@@ -41,8 +41,45 @@ export const Field = (props: IFieldProps) => {
             // Add the option
             options.push({
                 text: item[fieldinfo.lookupField],
-                type: TextFieldTypes.Default,
+                type: DropdownTypes.Item,
                 value: item.Id.toString()
+            });
+        }
+
+        // Return the options
+        return options;
+    }
+
+    // Method to get the mms dropdown options
+    let getMMSOptions = (term: Helper.Types.ITerm): Array<IDropdownOption> => {
+        let options: Array<IDropdownOption> = [];
+
+        // See if information exists
+        if (term.info) {
+            // Add the heading
+            options.push({
+                text: term.info.name,
+                type: DropdownTypes.Header,
+                value: term.info.id
+            });
+        }
+
+        // Parse the terms
+        for (let termName in term) {
+            let child = term[termName];
+
+            // Skip the info and parent properties
+            if (termName == "info" || termName == "parent") { continue; }
+
+            // Get the child options
+            let childOptions = getMMSOptions(child);
+
+            // Add the option
+            options.push({
+                options: childOptions.length > 1 ? childOptions : null,
+                text: child.info.name,
+                type: DropdownTypes.Item,
+                value: child.info.id
             });
         }
 
@@ -58,10 +95,10 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.Boolean:
                 Toggle({
                     className: props.className,
-                    description: props.fieldInfo.field.Description,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
-                    label: props.fieldInfo.title,
+                    label: fieldInfo.title,
                     onChange: props.onChange,
                     value: props.value
                 });
@@ -73,10 +110,10 @@ export const Field = (props: IFieldProps) => {
                     className: props.className,
                     disable: props.disabled,
                     el: props.el,
-                    label: props.fieldInfo.title,
+                    label: fieldInfo.title,
                     onChange: props.onChange,
-                    options: getChoiceOptions(props.fieldInfo as Helper.Types.IListFormChoiceFieldInfo),
-                    required: props.fieldInfo.required,
+                    options: getChoiceOptions(fieldInfo as Helper.Types.IListFormChoiceFieldInfo),
+                    required: fieldInfo.required,
                     value: props.value
                 });
                 break;
@@ -84,16 +121,16 @@ export const Field = (props: IFieldProps) => {
             // Lookup Field
             case SPTypes.FieldType.Lookup:
                 // Get the drop down information
-                Helper.ListFormField.loadLookupData(props.fieldInfo as Helper.Types.IListFormLookupFieldInfo, 500).then(items => {
+                Helper.ListFormField.loadLookupData(fieldInfo as Helper.Types.IListFormLookupFieldInfo, 500).then(items => {
                     Dropdown({
                         className: props.className,
                         disable: props.disabled,
                         el: props.el,
-                        label: props.fieldInfo.title,
-                        multi: (props.fieldInfo as Helper.Types.IFieldInfoLookup).multi,
+                        label: fieldInfo.title,
+                        multi: (fieldInfo as Helper.Types.IFieldInfoLookup).multi,
                         onChange: props.onChange,
-                        options: getLookupOptions(props.fieldInfo as Helper.Types.IListFormLookupFieldInfo, items),
-                        required: props.fieldInfo.required,
+                        options: getLookupOptions(fieldInfo as Helper.Types.IListFormLookupFieldInfo, items),
+                        required: fieldInfo.required,
                         value: props.value
                     });
                 });
@@ -105,11 +142,11 @@ export const Field = (props: IFieldProps) => {
                     className: props.className,
                     disable: props.disabled,
                     el: props.el,
-                    label: props.fieldInfo.title,
+                    label: fieldInfo.title,
                     multi: true,
                     onChange: props.onChange,
-                    options: getChoiceOptions(props.fieldInfo as Helper.Types.IListFormChoiceFieldInfo),
-                    required: props.fieldInfo.required,
+                    options: getChoiceOptions(fieldInfo as Helper.Types.IListFormChoiceFieldInfo),
+                    required: fieldInfo.required,
                     value: props.value ? props.value.results : props.value
                 });
                 break;
@@ -120,16 +157,34 @@ export const Field = (props: IFieldProps) => {
                     className: props.className,
                     disable: props.disabled,
                     el: props.el,
-                    label: props.fieldInfo.title,
+                    label: fieldInfo.title,
                     onChange: props.onChange,
-                    required: props.fieldInfo.required,
+                    required: fieldInfo.required,
                     type: TextFieldTypes.Underline,
-                    value: props.value || props.fieldInfo.defaultValue || ""
+                    value: props.value || fieldInfo.defaultValue || ""
                 });
                 break;
             default:
-                // Log
-                console.log("[gd-sprest] The field type '" + fieldInfo.typeAsString + "' is not supported.");
+                // See if this is a taxonomy field
+                if (fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
+                    // Load the terms
+                    Helper.ListFormField.loadMMSData(fieldInfo as Helper.Types.IListFormMMSFieldInfo).then(terms => {
+                        Dropdown({
+                            className: props.className,
+                            disable: props.disabled,
+                            el: props.el,
+                            label: fieldInfo.title,
+                            multi: true,
+                            onChange: props.onChange,
+                            options: getMMSOptions(Helper.Taxonomy.toObject(terms)),
+                            required: fieldInfo.required,
+                            value: props.value ? props.value.results : props.value
+                        });
+                    });
+                } else {
+                    // Log
+                    console.log("[gd-sprest] The field type '" + fieldInfo.typeAsString + "' is not supported.");
+                }
                 break;
         }
     });

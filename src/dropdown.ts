@@ -13,6 +13,8 @@ export enum DropdownTypes {
  * Dropdown
  */
 export const Dropdown = (props: IDropdownProps): IDropdown => {
+    let _values = props.value && typeof (props.value) === "string" ? [props.value] : (props.value || []) as Array<string>
+
     // Method to get the toggle element
     let get = (): HTMLInputElement => {
         // Returns the toggle element
@@ -29,13 +31,20 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     let getValue = (): string | Array<string> => {
         let selectedValues = [];
 
-        // Get the selected items
-        let items = _menu._container.querySelectorAll(".is-selected");
-        for (let i = 0; i < items.length; i++) {
-            let item = items[i] as HTMLLIElement;
+        // Get the context menus
+        let menus = document.querySelectorAll(".ms-ContextualHost");
+        for (let i = 0; i < menus.length; i++) {
+            // Get the selected items
+            let items = menus[i].querySelectorAll(".is-selected");
+            for (let i = 0; i < items.length; i++) {
+                let item = items[i] as HTMLLIElement;
 
-            // Add the selected value
-            selectedValues.push(item.innerText.trim());
+                // Ensure this item isn't a menu
+                if (item.parentElement.className.indexOf("--hasMenu") > 0) { continue; }
+
+                // Add the selected value
+                selectedValues.push(item.innerText.trim());
+            }
         }
 
         // Return the value
@@ -88,10 +97,12 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                 }
 
                 // Add the item
+                let isSubMenu = option.options && option.options.length > 0;
                 menu.push([
-                    '<li class="ms-ContextualMenu-item">',
+                    '<li class="ms-ContextualMenu-item' + (isSubMenu ? ' ms-ContextualMenu-item--hasMenu' : '') + '">',
                     '<a class="ms-ContextualMenu-link' + (isSelected ? ' is-selected' : '') + '" tabindex="1">' + option.text + '</a>',
-                    option.options ? renderMenu(option.options) : '',
+                    isSubMenu ? '<i class="ms-ContextualMenu-subMenuIcon ms-Icon ms-Icon--ChevronRight"></i>' : '',
+                    isSubMenu ? renderMenu(option.options) : '',
                     '</li>'
                 ].join('\n'));
             }
@@ -125,8 +136,32 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     for (let i = 0; i < items.length; i++) {
         // Add a click event
         items[i].addEventListener("click", (ev) => {
+            let link = ev.currentTarget as HTMLLIElement;
+
+            // See if the item clicked is not a menu
+            if (link.className.indexOf("--hasMenu") < 0) {
+                let isSelected = link.firstElementChild.className.indexOf("is-selected") > 0;
+                let value = link.innerText.trim();
+
+                // See if we are selecting the item
+                if (isSelected) {
+                    // Add the item
+                    _values.push(value);
+                } else {
+                    // Parse the values
+                    for (let i = 0; i < _values.length; i++) {
+                        // See if this is the target item
+                        if (_values[i] == value) {
+                            // Remove this item
+                            _values.splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+            }
+
             // Set the textbox value
-            _tb.get().value = getValueAsString();
+            _tb.get().value = _values.join(", ");
 
             // Call the change event
             props.onChange ? props.onChange(getValue()) : null;
