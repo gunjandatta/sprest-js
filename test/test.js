@@ -2278,40 +2278,26 @@ window.addEventListener("load", function () {
             el: el.firstElementChild,
             text: "Show Panel",
             onClick: function onClick() {
+                var panelContent = "";
+                // Parse the fields
+                var fields = ["Title", "TestChoice", "TestBoolean", "TestMultiChoice", "TestLookup", "TestMultiLookup"];
+                for (var i = 0; i < fields.length; i++) {
+                    // Append the div for this field
+                    panelContent += "<div data-field='" + fields[i] + "'></div>";
+                }
                 // Show the panel
-                var content = panel_1.show("<div></div><div></div><div></div><div></div>");
-                // Create a field element
-                build_1.Field({
-                    el: content.children[0],
-                    fieldInfo: {
-                        listName: "SPReact",
-                        name: "Title"
-                    }
-                });
-                // Create a field element
-                build_1.Field({
-                    el: content.children[1],
-                    fieldInfo: {
-                        listName: "SPReact",
-                        name: "TestChoice"
-                    }
-                });
-                // Create a field element
-                build_1.Field({
-                    el: content.children[2],
-                    fieldInfo: {
-                        listName: "SPReact",
-                        name: "TestBoolean"
-                    }
-                });
-                // Create a field element
-                build_1.Field({
-                    el: content.children[3],
-                    fieldInfo: {
-                        listName: "SPReact",
-                        name: "TestMultiChoice"
-                    }
-                });
+                var content = panel_1.show(panelContent);
+                // Parse the fields
+                for (var i = 0; i < fields.length; i++) {
+                    // Render the field
+                    build_1.Field({
+                        el: content.children[i],
+                        fieldInfo: {
+                            listName: "SPReact",
+                            name: fields[i]
+                        }
+                    });
+                }
             }
         });
         // Render the panel
@@ -3150,6 +3136,22 @@ exports.Field = function (props) {
         // Return the options
         return options;
     };
+    // Method to generate the lookup dropdown options
+    var getLookupOptions = function (fieldinfo, items) {
+        var options = [];
+        // Parse the options
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            // Add the option
+            options.push({
+                text: item[fieldinfo.lookupField],
+                type: _1.TextFieldTypes.Default,
+                value: item.Id.toString()
+            });
+        }
+        // Return the options
+        return options;
+    };
     // Load the field information
     gd_sprest_1.Helper.ListFormField.create(props.fieldInfo).then(function (fieldInfo) {
         // Render the field based on the type
@@ -3177,6 +3179,23 @@ exports.Field = function (props) {
                     options: getChoiceOptions(props.fieldInfo),
                     required: props.fieldInfo.required,
                     value: props.value
+                });
+                break;
+            // Lookup Field
+            case gd_sprest_1.SPTypes.FieldType.Lookup:
+                // Get the drop down information
+                gd_sprest_1.Helper.ListFormField.loadLookupData(props.fieldInfo, 500).then(function (items) {
+                    _1.Dropdown({
+                        className: props.className,
+                        disable: props.disabled,
+                        el: props.el,
+                        label: props.fieldInfo.title,
+                        multi: props.fieldInfo.multi,
+                        onChange: props.onChange,
+                        options: getLookupOptions(props.fieldInfo, items),
+                        required: props.fieldInfo.required,
+                        value: props.value
+                    });
                 });
                 break;
             // Multi-Choice Field

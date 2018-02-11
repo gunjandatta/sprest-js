@@ -12,44 +12,29 @@ window.addEventListener("load", () => {
             el: el.firstElementChild,
             text: "Show Panel",
             onClick: () => {
+                let panelContent = "";
+
+                // Parse the fields
+                let fields = ["Title", "TestChoice", "TestBoolean", "TestMultiChoice", "TestLookup", "TestMultiLookup"];
+                for (let i = 0; i < fields.length; i++) {
+                    // Append the div for this field
+                    panelContent += "<div data-field='" + fields[i] + "'></div>";
+                }
+
                 // Show the panel
-                let content = panel.show("<div></div><div></div><div></div><div></div>");
+                let content = panel.show(panelContent);
 
-                // Create a field element
-                Field({
-                    el: content.children[0],
-                    fieldInfo: {
-                        listName: "SPReact",
-                        name: "Title"
-                    }
-                });
-
-                // Create a field element
-                Field({
-                    el: content.children[1],
-                    fieldInfo: {
-                        listName: "SPReact",
-                        name: "TestChoice"
-                    }
-                });
-
-                // Create a field element
-                Field({
-                    el: content.children[2],
-                    fieldInfo: {
-                        listName: "SPReact",
-                        name: "TestBoolean"
-                    }
-                });
-
-                // Create a field element
-                Field({
-                    el: content.children[3],
-                    fieldInfo: {
-                        listName: "SPReact",
-                        name: "TestMultiChoice"
-                    }
-                });
+                // Parse the fields
+                for (let i = 0; i < fields.length; i++) {
+                    // Render the field
+                    Field({
+                        el: content.children[i],
+                        fieldInfo: {
+                            listName: "SPReact",
+                            name: fields[i]
+                        }
+                    });
+                }
             }
         })
 

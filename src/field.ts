@@ -1,4 +1,4 @@
-import { Helper, SPTypes } from "gd-sprest";
+import { Helper, SPTypes, Types } from "gd-sprest";
 import { IDropdownOption, IFieldProps } from "./types";
 import {
     fabric, CheckBox, Dropdown,
@@ -11,7 +11,7 @@ import {
  */
 export const Field = (props: IFieldProps) => {
     // Method to generate the choice dropdown options
-    let getChoiceOptions = (fieldinfo: Helper.Types.IFieldInfoChoice): Array<IDropdownOption> => {
+    let getChoiceOptions = (fieldinfo: Helper.Types.IListFormChoiceFieldInfo): Array<IDropdownOption> => {
         let options: Array<IDropdownOption> = [];
 
         // Parse the options
@@ -30,6 +30,25 @@ export const Field = (props: IFieldProps) => {
         return options;
     }
 
+    // Method to generate the lookup dropdown options
+    let getLookupOptions = (fieldinfo: Helper.Types.IListFormLookupFieldInfo, items: Array<Types.SP.IListItemQueryResult>): Array<IDropdownOption> => {
+        let options: Array<IDropdownOption> = [];
+
+        // Parse the options
+        for (let i = 0; i < items.length; i++) {
+            let item = items[i];
+
+            // Add the option
+            options.push({
+                text: item[fieldinfo.lookupField],
+                type: TextFieldTypes.Default,
+                value: item.Id.toString()
+            });
+        }
+
+        // Return the options
+        return options;
+    }
 
     // Load the field information
     Helper.ListFormField.create(props.fieldInfo).then(fieldInfo => {
@@ -56,9 +75,27 @@ export const Field = (props: IFieldProps) => {
                     el: props.el,
                     label: props.fieldInfo.title,
                     onChange: props.onChange,
-                    options: getChoiceOptions(props.fieldInfo),
+                    options: getChoiceOptions(props.fieldInfo as Helper.Types.IListFormChoiceFieldInfo),
                     required: props.fieldInfo.required,
                     value: props.value
+                });
+                break;
+
+            // Lookup Field
+            case SPTypes.FieldType.Lookup:
+                // Get the drop down information
+                Helper.ListFormField.loadLookupData(props.fieldInfo as Helper.Types.IListFormLookupFieldInfo, 500).then(items => {
+                    Dropdown({
+                        className: props.className,
+                        disable: props.disabled,
+                        el: props.el,
+                        label: props.fieldInfo.title,
+                        multi: (props.fieldInfo as Helper.Types.IFieldInfoLookup).multi,
+                        onChange: props.onChange,
+                        options: getLookupOptions(props.fieldInfo as Helper.Types.IListFormLookupFieldInfo, items),
+                        required: props.fieldInfo.required,
+                        value: props.value
+                    });
                 });
                 break;
 
@@ -71,7 +108,7 @@ export const Field = (props: IFieldProps) => {
                     label: props.fieldInfo.title,
                     multi: true,
                     onChange: props.onChange,
-                    options: getChoiceOptions(props.fieldInfo),
+                    options: getChoiceOptions(props.fieldInfo as Helper.Types.IListFormChoiceFieldInfo),
                     required: props.fieldInfo.required,
                     value: props.value ? props.value.results : props.value
                 });
