@@ -36,6 +36,7 @@ export const TextField = (props: ITextFieldProps): ITextField => {
     let className = props.className || "";
     if (props.placeholder) { className += " ms-TextField--placeholder" }
     if (props.type == TextFieldTypes.Multi) { className += " ms-TextField--multiline"; }
+    if (props.type == TextFieldTypes.Underline) { className += " ms-TextField--underlined"; }
 
     // Add the button html
     props.el.innerHTML = [

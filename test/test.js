@@ -2969,6 +2969,9 @@ exports.TextField = function (props) {
     if (props.type == TextFieldTypes.Multi) {
         className += " ms-TextField--multiline";
     }
+    if (props.type == TextFieldTypes.Underline) {
+        className += " ms-TextField--underlined";
+    }
     // Add the button html
     props.el.innerHTML = [
         '<div class="ms-TextField ' + className.trim() + '">',
