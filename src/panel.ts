@@ -1,5 +1,5 @@
-import { fabric } from "..";
 import { IPanel, IPanelProps } from "./types";
+import { fabric } from ".";
 
 /**
  * Panel Types

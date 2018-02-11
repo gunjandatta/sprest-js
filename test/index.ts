@@ -1,4 +1,4 @@
-import { Components, Fields } from "../build";
+import { Button, Panel, Field } from "../build";
 
 window.addEventListener("load", () => {
     // Get the element
@@ -8,7 +8,7 @@ window.addEventListener("load", () => {
         el.innerHTML = "<div></div><div></div>";
 
         // Render the button
-        let button = Components.Button({
+        let button = Button({
             el: el.firstElementChild,
             text: "Show Panel",
             onClick: () => {
@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
                 let content = panel.show("<div></div><div></div>");
 
                 // Create a field element
-                Fields.BaseField({
+                Field({
                     el: content.firstElementChild,
                     fieldInfo: {
                         listName: "SPReact",
@@ -25,18 +25,18 @@ window.addEventListener("load", () => {
                 });
 
                 // Create a field element
-                Fields.BaseField({
+                Field({
                     el: content.lastElementChild,
                     fieldInfo: {
                         listName: "SPReact",
                         name: "TestBoolean"
                     }
                 });
-            }            
+            }
         })
 
         // Render the panel
-        let panel = Components.Panel({
+        let panel = Panel({
             el: el.lastElementChild,
             headerText: "My List Form"
         });

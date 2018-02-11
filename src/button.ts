@@ -1,4 +1,5 @@
 import { IButtonProps } from "./types"
+import { fabric } from ".";
 
 /**
  * Button
@@ -28,6 +29,9 @@ export const Button = (props: IButtonProps): HTMLButtonElement => {
         // Disable postback
         return false;
     }
+
+    // Create the button
+    new fabric.Button(btn);
 
     // Return the button
     return btn;

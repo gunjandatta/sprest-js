@@ -1,7 +1,15 @@
-import * as Components from "./components";
-import * as Fields from "./fields";
+// Office Fabric-UI JavaScript Library
 export * from "./fabric";
-export {
-    Components,
-    Fields
-}
+
+// Common Components
+export * from "./button";
+export * from "./checkbox";
+export * from "./panel";
+export * from "./textfield";
+
+// SharePoint Components
+export * from "./field";
+
+// Types
+import * as Types from "./types";
+export { Types }

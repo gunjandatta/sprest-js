@@ -1,4 +1,8 @@
-import * as Components from "./components";
-import * as Fields from "./fields";
 export * from "./fabric";
-export { Components, Fields };
+export * from "./button";
+export * from "./checkbox";
+export * from "./panel";
+export * from "./textfield";
+export * from "./field";
+import * as Types from "./types";
+export { Types };
