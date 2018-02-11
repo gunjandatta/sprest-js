@@ -30,7 +30,7 @@ export const CheckBox = (props: ICheckBoxProps): ICheckBox => {
         '<div class="ms-CheckBox ' + (props.className || "") + '">',
         '<input tabindex="-1" type="checkbox" class="ms-CheckBox-input"></input>',
         '<label role="checkbox" class="ms-CheckBox-field' + (props.disable ? " is-disabled" : "") + '" tabindex="0" aria-checked="" name="checkbox' + props.label + '">',
-        '<span class="ms-Label">' + props.label + (props.required ? '<span class="ms-fontColor-redDark"> *</span>' : '') + '</span>',
+        '<span class="ms-Label' + (props.required ? ' is-required' : '') + '">' + props.label + '</span>',
         '</label>',
         '</div>'
     ].join('\n');

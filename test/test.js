@@ -2645,7 +2645,7 @@ exports.CheckBox = function (props) {
         '<div class="ms-CheckBox ' + (props.className || "") + '">',
         '<input tabindex="-1" type="checkbox" class="ms-CheckBox-input"></input>',
         '<label role="checkbox" class="ms-CheckBox-field' + (props.disable ? " is-disabled" : "") + '" tabindex="0" aria-checked="" name="checkbox' + props.label + '">',
-        '<span class="ms-Label">' + props.label + (props.required ? '<span class="ms-fontColor-redDark"> *</span>' : '') + '</span>',
+        '<span class="ms-Label' + (props.required ? ' is-required' : '') + '">' + props.label + '</span>',
         '</label>',
         '</div>'
     ].join('\n');
@@ -3026,7 +3026,7 @@ exports.TextField = function (props) {
     // Add the button html
     props.el.innerHTML = [
         '<div class="ms-TextField ' + className.trim() + '">',
-        '<label class="ms-Label"' + (props.type == TextFieldTypes.Underline ? 'style="display:block"' : '') + '>' + (props.label || "") + (props.required ? '<span class="ms-fontColor-redDark"> *</span>' : '') + '</label>',
+        '<label class="ms-Label' + (props.required ? ' is-required' : '') + '"' + (props.type == TextFieldTypes.Underline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
         props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
         props.type == TextFieldTypes.Multi ?
             '<textarea class="ms-TextField-field"></textarea>' :
@@ -3093,8 +3093,8 @@ exports.Toggle = function (props) {
     }
     // Add the toggle html
     props.el.innerHTML = [
+        props.label ? '<label class="ms-Label" style="padding-left: 12px;"><span class="ms-fontSize-m ms-fontWeight-semibold">' + props.label + '</span></label>' : '',
         '<div class="ms-Toggle ' + className.trim() + '">',
-        props.label ? '<label class="ms-Label"><span class="ms-fontSize-m ms-fontWeight-semibold">' + props.label + '</span></label>' : '',
         props.description ? '<span class="ms-Toggle-description">' + props.description + "</span>" : '',
         '<input type="checkbox" class="ms-Toggle-input"></input>',
         '<label class="ms-Toggle-field' + (props.value ? ' is-selected' : '') + '" tabindex="0">',
@@ -3175,6 +3175,7 @@ exports.Field = function (props) {
                     label: props.fieldInfo.title,
                     onChange: props.onChange,
                     options: getChoiceOptions(props.fieldInfo),
+                    required: props.fieldInfo.required,
                     value: props.value
                 });
                 break;
@@ -3188,6 +3189,7 @@ exports.Field = function (props) {
                     multi: true,
                     onChange: props.onChange,
                     options: getChoiceOptions(props.fieldInfo),
+                    required: props.fieldInfo.required,
                     value: props.value ? props.value.results : props.value
                 });
                 break;
@@ -3199,6 +3201,7 @@ exports.Field = function (props) {
                     el: props.el,
                     label: props.fieldInfo.title,
                     onChange: props.onChange,
+                    required: props.fieldInfo.required,
                     type: _1.TextFieldTypes.Underline,
                     value: props.value || props.fieldInfo.defaultValue || ""
                 });

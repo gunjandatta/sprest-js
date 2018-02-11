@@ -57,6 +57,7 @@ export const Field = (props: IFieldProps) => {
                     label: props.fieldInfo.title,
                     onChange: props.onChange,
                     options: getChoiceOptions(props.fieldInfo),
+                    required: props.fieldInfo.required,
                     value: props.value
                 });
                 break;
@@ -71,6 +72,7 @@ export const Field = (props: IFieldProps) => {
                     multi: true,
                     onChange: props.onChange,
                     options: getChoiceOptions(props.fieldInfo),
+                    required: props.fieldInfo.required,
                     value: props.value ? props.value.results : props.value
                 });
                 break;
@@ -83,6 +85,7 @@ export const Field = (props: IFieldProps) => {
                     el: props.el,
                     label: props.fieldInfo.title,
                     onChange: props.onChange,
+                    required: props.fieldInfo.required,
                     type: TextFieldTypes.Underline,
                     value: props.value || props.fieldInfo.defaultValue || ""
                 });
