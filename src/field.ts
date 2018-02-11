@@ -167,17 +167,18 @@ export const Field = (props: IFieldProps) => {
             default:
                 // See if this is a taxonomy field
                 if (fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
+                    let mmsInfo = fieldInfo as Helper.Types.IListFormMMSFieldInfo;
                     // Load the terms
-                    Helper.ListFormField.loadMMSData(fieldInfo as Helper.Types.IListFormMMSFieldInfo).then(terms => {
+                    Helper.ListFormField.loadMMSData(mmsInfo).then(terms => {
                         Dropdown({
                             className: props.className,
                             disable: props.disabled,
                             el: props.el,
-                            label: fieldInfo.title,
-                            multi: true,
+                            label: mmsInfo.title,
+                            multi: mmsInfo.multi,
                             onChange: props.onChange,
                             options: getMMSOptions(Helper.Taxonomy.toObject(terms)),
-                            required: fieldInfo.required,
+                            required: mmsInfo.required,
                             value: props.value ? props.value.results : props.value
                         });
                     });

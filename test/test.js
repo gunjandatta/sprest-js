@@ -2688,31 +2688,15 @@ exports.Dropdown = function (props) {
     };
     // Method to get the value
     var getValue = function () {
-        var selectedValues = [];
-        // Get the context menus
-        var menus = document.querySelectorAll(".ms-ContextualHost");
-        for (var i = 0; i < menus.length; i++) {
-            // Get the selected items
-            var items_1 = menus[i].querySelectorAll(".is-selected");
-            for (var i_1 = 0; i_1 < items_1.length; i_1++) {
-                var item = items_1[i_1];
-                // Ensure this item isn't a menu
-                if (item.parentElement.className.indexOf("--hasMenu") > 0) {
-                    continue;
-                }
-                // Add the selected value
-                selectedValues.push(item.innerText.trim());
-            }
-        }
         // Return the value
-        return props.multi ? selectedValues : selectedValues[0];
+        return props.multi ? _values : _values[0];
     };
     // Method to get the value as a string
     var getValueAsString = function () {
         // Set the textbox value
         var selectedValues = getValue();
         // Return the value as a string
-        return props.multi ? selectedValues.join(", ") : selectedValues;
+        return props.multi ? _values.join(", ") : _values[0];
     };
     // Method to render the menu
     var renderMenu = function (options) {
@@ -2791,22 +2775,22 @@ exports.Dropdown = function (props) {
                 // See if we are selecting the item
                 if (isSelected) {
                     // Add the item
-                    _values.push(value);
+                    props.multi ? _values.push(value) : _values = [value];
                 }
                 else {
                     // Parse the values
-                    for (var i_2 = 0; i_2 < _values.length; i_2++) {
+                    for (var i_1 = 0; i_1 < _values.length; i_1++) {
                         // See if this is the target item
-                        if (_values[i_2] == value) {
+                        if (_values[i_1] == value) {
                             // Remove this item
-                            _values.splice(i_2, 1);
+                            _values.splice(i_1, 1);
                             break;
                         }
                     }
                 }
             }
             // Set the textbox value
-            _tb.get().value = _values.join(", ");
+            _tb.get().value = getValueAsString();
             // Call the change event
             props.onChange ? props.onChange(getValue()) : null;
         });
@@ -3293,17 +3277,18 @@ exports.Field = function (props) {
             default:
                 // See if this is a taxonomy field
                 if (fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
+                    var mmsInfo_1 = fieldInfo;
                     // Load the terms
-                    gd_sprest_1.Helper.ListFormField.loadMMSData(fieldInfo).then(function (terms) {
+                    gd_sprest_1.Helper.ListFormField.loadMMSData(mmsInfo_1).then(function (terms) {
                         _1.Dropdown({
                             className: props.className,
                             disable: props.disabled,
                             el: props.el,
-                            label: fieldInfo.title,
-                            multi: true,
+                            label: mmsInfo_1.title,
+                            multi: mmsInfo_1.multi,
                             onChange: props.onChange,
                             options: getMMSOptions(gd_sprest_1.Helper.Taxonomy.toObject(terms)),
-                            required: fieldInfo.required,
+                            required: mmsInfo_1.required,
                             value: props.value ? props.value.results : props.value
                         });
                     });

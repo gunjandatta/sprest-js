@@ -29,26 +29,8 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
     // Method to get the value
     let getValue = (): string | Array<string> => {
-        let selectedValues = [];
-
-        // Get the context menus
-        let menus = document.querySelectorAll(".ms-ContextualHost");
-        for (let i = 0; i < menus.length; i++) {
-            // Get the selected items
-            let items = menus[i].querySelectorAll(".is-selected");
-            for (let i = 0; i < items.length; i++) {
-                let item = items[i] as HTMLLIElement;
-
-                // Ensure this item isn't a menu
-                if (item.parentElement.className.indexOf("--hasMenu") > 0) { continue; }
-
-                // Add the selected value
-                selectedValues.push(item.innerText.trim());
-            }
-        }
-
         // Return the value
-        return props.multi ? selectedValues : selectedValues[0];
+        return props.multi ? _values : _values[0];
     }
 
     // Method to get the value as a string
@@ -57,7 +39,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         let selectedValues = getValue();
 
         // Return the value as a string
-        return props.multi ? (selectedValues as Array<string>).join(", ") : selectedValues as string;
+        return props.multi ? _values.join(", ") : _values[0];
     }
 
     // Method to render the menu
@@ -146,7 +128,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                 // See if we are selecting the item
                 if (isSelected) {
                     // Add the item
-                    _values.push(value);
+                    props.multi ? _values.push(value) : _values = [value];
                 } else {
                     // Parse the values
                     for (let i = 0; i < _values.length; i++) {
@@ -161,7 +143,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
             }
 
             // Set the textbox value
-            _tb.get().value = _values.join(", ");
+            _tb.get().value = getValueAsString();
 
             // Call the change event
             props.onChange ? props.onChange(getValue()) : null;
