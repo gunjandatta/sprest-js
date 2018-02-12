@@ -2361,8 +2361,8 @@ var update = __webpack_require__(8)(content, options);
 if(content.locals) module.exports = content.locals;
 
 if(false) {
-	module.hot.accept("!!../../../../../node_modules/css-loader/index.js!./fabric.min.css", function() {
-		var newContent = require("!!../../../../../node_modules/css-loader/index.js!./fabric.min.css");
+	module.hot.accept("!!../../../node_modules/css-loader/index.js!./fabric.min.css", function() {
+		var newContent = require("!!../../../node_modules/css-loader/index.js!./fabric.min.css");
 
 		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 
@@ -2520,8 +2520,8 @@ var update = __webpack_require__(8)(content, options);
 if(content.locals) module.exports = content.locals;
 
 if(false) {
-	module.hot.accept("!!../../../../../node_modules/css-loader/index.js!./fabric.components.min.css", function() {
-		var newContent = require("!!../../../../../node_modules/css-loader/index.js!./fabric.components.min.css");
+	module.hot.accept("!!../../../node_modules/css-loader/index.js!./fabric.components.min.css", function() {
+		var newContent = require("!!../../../node_modules/css-loader/index.js!./fabric.components.min.css");
 
 		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 
