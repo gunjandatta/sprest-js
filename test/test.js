@@ -2248,7 +2248,7 @@ exports.Taxonomy = {
             term.info = info;
         };
         // Ensure the terms exist
-        if (terms) {
+        if (terms && terms.length > 0) {
             // Parse the terms
             for (var i = 0; i < terms.length; i++) {
                 var term = terms[i];
@@ -2262,9 +2262,11 @@ exports.Taxonomy = {
                     addTerm(root, term, term.pathAsString.split(";"));
                 }
             }
+            // Return the root term
+            return exports.Taxonomy.findById(root, terms[0].id);
         }
-        // Return the root term
-        return root;
+        // Return nothing
+        return null;
     }
 };
 //# sourceMappingURL=taxonomy.js.map
@@ -11266,17 +11268,17 @@ exports.ModalDialog = {
     // Closes the dialog
     close: function (dialogResult) {
         // Load the library and call the method
-        exports.ModalDialog.load().then(function () { SP.UI.ModialDialog.close(dialogResult); });
+        exports.ModalDialog.load().then(function () { SP.UI.ModalDialog.close(dialogResult); });
     },
     // Close the dialog
     commonModalDialogClose: function (dialogResult, returnVal) {
         // Load the library and call the method
-        exports.ModalDialog.load().then(function () { SP.UI.ModialDialog.commonModalDialogClose(dialogResult, returnVal); });
+        exports.ModalDialog.load().then(function () { SP.UI.ModalDialog.commonModalDialogClose(dialogResult, returnVal); });
     },
     // Open a dialog
     commonModalDialogOpen: function (url, options, callback, args) {
         // Load the library and call the method
-        exports.ModalDialog.load().then(function () { SP.UI.ModialDialog.commonModalDialogOpen(url, options, callback, args); });
+        exports.ModalDialog.load().then(function () { SP.UI.ModalDialog.commonModalDialogOpen(url, options, callback, args); });
     },
     // Method to ensure the core library is loaded
     load: function () {
@@ -11298,32 +11300,32 @@ exports.ModalDialog = {
     // Opens a pop-up page
     OpenPopUpPage: function (url, callback, width, height) {
         // Load the library and call the method
-        exports.ModalDialog.load().then(function () { SP.UI.ModialDialog.OpenPopUpPage(url, callback, width, height); });
+        exports.ModalDialog.load().then(function () { SP.UI.ModalDialog.OpenPopUpPage(url, callback, width, height); });
     },
     // Refreshes the page
     RefreshPage: function (dialogResult) {
         // Load the library and call the method
-        exports.ModalDialog.load().then(function () { SP.UI.ModialDialog.RefreshPage(dialogResult); });
+        exports.ModalDialog.load().then(function () { SP.UI.ModalDialog.RefreshPage(dialogResult); });
     },
     // Shows a modal dialog
     showModalDialog: function (options) {
         // Load the library and call the method
-        exports.ModalDialog.load().then(function () { SP.UI.ModialDialog.showModalDialog(options); });
+        exports.ModalDialog.load().then(function () { SP.UI.ModalDialog.showModalDialog(options); });
     },
     // Shows a pop-up dialog
     ShowPopupDialog: function (url) {
         // Load the library and call the method
-        exports.ModalDialog.load().then(function () { SP.UI.ModialDialog.ShowPopupDialog(url); });
+        exports.ModalDialog.load().then(function () { SP.UI.ModalDialog.ShowPopupDialog(url); });
     },
     // Shows a wait screen
     showWaitScreenSize: function (title, message, callback, height, width) {
         // Load the library and call the method
-        exports.ModalDialog.load().then(function () { SP.UI.ModialDialog.showWaitScreenSize(title, message, callback, height, width); });
+        exports.ModalDialog.load().then(function () { SP.UI.ModalDialog.showWaitScreenSize(title, message, callback, height, width); });
     },
     // Shows a wait screen w/ no close button
     showWaitScreenWithNoClose: function (title, message, height, width) {
         // Load the library and call the method
-        exports.ModalDialog.load().then(function () { SP.UI.ModialDialog.showWaitScreenWithNoClose(title, message, height, width); });
+        exports.ModalDialog.load().then(function () { SP.UI.ModalDialog.showWaitScreenWithNoClose(title, message, height, width); });
     }
 };
 /**
@@ -11465,7 +11467,7 @@ var Mapper = __webpack_require__(3);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.44,
+    __ver: 3.46,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {
