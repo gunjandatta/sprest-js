@@ -1,9 +1,9 @@
 import { Helper, SPTypes, Types } from "gd-sprest";
 import { IDropdownOption, IFieldProps } from "./types";
 import {
-    fabric, CheckBox, Dropdown, DropdownTypes,
-    TextField, TextFieldTypes,
-    Toggle
+    fabric, CheckBox, DatePicker,
+    Dropdown, DropdownTypes, TextField,
+    TextFieldTypes, Toggle
 } from ".";
 
 /**
@@ -114,6 +114,20 @@ export const Field = (props: IFieldProps) => {
                     onChange: props.onChange,
                     options: getChoiceOptions(fieldInfo as Helper.Types.IListFormChoiceFieldInfo),
                     required: fieldInfo.required,
+                    value: props.value
+                });
+                break;
+
+            // Date/Time
+            case SPTypes.FieldType.DateTime:
+                DatePicker({
+                    className: props.className,
+                    disable: props.disabled,
+                    el: props.el,
+                    label: fieldInfo.title,
+                    onChange: props.onChange,
+                    required: fieldInfo.required,
+                    showTime: (fieldInfo as Helper.Types.IListFormDateFieldInfo).showTime,
                     value: props.value
                 });
                 break;

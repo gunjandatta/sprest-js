@@ -15,7 +15,10 @@ window.addEventListener("load", () => {
                 let panelContent = "";
 
                 // Parse the fields
-                let fields = ["Title", "TestChoice", "TestBoolean", "TestMultiChoice", "TestLookup", "TestMultiLookup", "TestManagedMetadata"];
+                let fields = [
+                    "Title", "TestChoice", "TestBoolean", "TestDate", "TestDateTime", "TestMultiChoice",
+                    "TestLookup", "TestMultiLookup", "TestManagedMetadata"
+                ];
                 for (let i = 0; i < fields.length; i++) {
                     // Append the div for this field
                     panelContent += "<div data-field='" + fields[i] + "'></div>";

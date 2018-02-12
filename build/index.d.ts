@@ -1,6 +1,7 @@
 export * from "./fabric";
 export * from "./button";
 export * from "./checkbox";
+export * from "./datepicker";
 export * from "./dropdown";
 export * from "./panel";
 export * from "./textfield";

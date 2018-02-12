@@ -1,6 +1,7 @@
 export * from "./button";
 export * from "./checkbox";
 export * from "./common";
+export * from "./datepicker";
 export * from "./dropdown";
 export * from "./field";
 export * from "./panel";
