@@ -38,10 +38,10 @@ gulp.task("copy-fabric-css", ["build"], () => {
 gulp.task("copy-fabric-js", ["build"], () => {
     // Get the source file
     return gulp.src("node_modules/office-ui-fabric-js/dist/js/fabric.min.js")
-        // Prepend an import of the jquery library
-        .pipe(insert.prepend("var $ = require('../lib/jquery');"))
         // Prepend an import of the pickadate library
-        .pipe(insert.prepend("require('../lib/pickadate');"))
+        .pipe(insert.prepend("require('../lib/pickadate');\n"))
+        // Prepend an import of the jquery library
+        .pipe(insert.prepend("var $ = require('../lib/jquery');\n"))
         // Append an export statement to the library
         .pipe(insert.append("exports.fabric = fabric;"))
         // Output to the build directory
