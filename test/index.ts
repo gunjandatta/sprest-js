@@ -1,4 +1,4 @@
-import { Button, Panel, Field } from "../build";
+import { Button, Field, Panel, PanelTypes } from "../build";
 
 window.addEventListener("load", () => {
     // Get the element
@@ -44,7 +44,8 @@ window.addEventListener("load", () => {
         // Render the panel
         let panel = Panel({
             el: el.lastElementChild,
-            headerText: "SPReact List Form"
+            headerText: "SPReact List Form",
+            panelType: PanelTypes.Large
         });
     }
 });

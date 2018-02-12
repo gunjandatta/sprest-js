@@ -2314,7 +2314,8 @@ window.addEventListener("load", function () {
         // Render the panel
         var panel_1 = build_1.Panel({
             el: el.lastElementChild,
-            headerText: "SPReact List Form"
+            headerText: "SPReact List Form",
+            panelType: build_1.PanelTypes.Large
         });
     }
 });
@@ -3105,7 +3106,7 @@ exports.Panel = function (props) {
         // Add the panel html
         props.el.innerHTML = [
             '<div class="ms-Panel ' + className.trim() + '">',
-            '<div class="ms-Panel-contentInner">',
+            '<div class="ms-Panel-contentInner" style="height: 90vh;">',
             '<p class="ms-Panel-headerText"></p>',
             '<div class="ms-Panel-content">',
             content,

@@ -109,7 +109,7 @@ export const Panel = (props: IPanelProps): IPanel => {
         // Add the panel html
         props.el.innerHTML = [
             '<div class="ms-Panel ' + className.trim() + '">',
-            '<div class="ms-Panel-contentInner">',
+            '<div class="ms-Panel-contentInner" style="height: 90vh;">',
             '<p class="ms-Panel-headerText"></p>',
             '<div class="ms-Panel-content">',
             content,
