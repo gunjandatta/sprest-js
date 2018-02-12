@@ -2700,82 +2700,146 @@ exports.CheckBox = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = __webpack_require__(2);
 /**
+ * Time Picker Type
+ */
+var TimePickerType;
+(function (TimePickerType) {
+    TimePickerType[TimePickerType["Default"] = 0] = "Default";
+    TimePickerType[TimePickerType["Military"] = 1] = "Military";
+})(TimePickerType = exports.TimePickerType || (exports.TimePickerType = {}));
+/**
  * Date Picker
  */
 exports.DatePicker = function (props) {
-    var _dt = null;
-    // Method to get the datetime element
-    var get = function () {
+    // Method to get the date picker element
+    var getDate = function () {
         // Returns the datetime element
         return props.el.querySelector(".ms-DatePicker");
     };
+    // Method to get the time picker element
+    var getTime = function () {
+        // Returns the datetime element
+        return props.el.querySelector(".ms-TimePicker");
+    };
     // Method to get the fabric component
     var getFabricComponent = function () {
-        // Return the datetime
-        return _dt;
+        // Return the date picker
+        return _dp;
     };
     // Method to get the value
     var getValue = function () {
         // Get the datetime value
-        return _dt ? _dt.getValue() : false;
+        // TO DO
+        return null;
     };
-    // Add the datetime html
+    // Method to render the date picker
+    var renderDatePicker = function (el) {
+        // Add the datetime html
+        el.innerHTML = [
+            '<div class="ms-TextField">',
+            '<label class="ms-Label" style="padding-left: 12px;">' + (props.label || '') + '</label>',
+            '<i class="ms-DatePicker-event ms-Icon ms-Icon--Event"></i>',
+            '<input class="ms-TextField-field" type="text" placeholder="Select a date&hellip;">',
+            '</div>',
+            '<div class="ms-DatePicker-monthComponents">',
+            '<span class="ms-DatePicker-nextMonth js-nextMonth"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>',
+            '<span class="ms-DatePicker-prevMonth js-prevMonth"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span>',
+            '<div class="ms-DatePicker-headerToggleView js-showMonthPicker"></div>',
+            '</div>',
+            '<span class="ms-DatePicker-goToday js-goToday">Go to today</span>',
+            '<div class="ms-DatePicker-monthPicker">',
+            '<div class="ms-DatePicker-header">',
+            '<div class="ms-DatePicker-yearComponents">',
+            '<span class="ms-DatePicker-nextYear js-nextYear"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>',
+            '<span class="ms-DatePicker-prevYear js-prevYear"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span>',
+            '</div>',
+            '<div class="ms-DatePicker-currentYear js-showYearPicker"></div>',
+            '</div>',
+            '<div class="ms-DatePicker-optionGrid">',
+            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="0">Jan</span>',
+            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="1">Feb</span>',
+            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="2">Mar</span>',
+            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="3">Apr</span>',
+            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="4">May</span>',
+            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="5">Jun</span>',
+            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="6">Jul</span>',
+            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="7">Aug</span>',
+            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="8">Sep</span>',
+            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="9">Oct</span>',
+            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="10">Nov</span>',
+            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="11">Dec</span>',
+            '</div>',
+            '</div>',
+            '<div class="ms-DatePicker-yearPicker">',
+            '<div class="ms-DatePicker-decadeComponents">',
+            '<span class="ms-DatePicker-nextDecade js-nextDecade"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>',
+            '<span class="ms-DatePicker-prevDecade js-prevDecade"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span> ',
+            '</div>',
+            '</div>'
+        ].join('\n');
+        // Set the date picker change event
+        el.onchange = function () {
+            // Execute the change event
+            props.onChange ? props.onChange(getValue()) : null;
+        };
+        // Create the date picker
+        return new _1.fabric.DatePicker(el);
+    };
+    // Method to render the time picker
+    var renderTimePicker = function (el) {
+        // Render the options
+        var options = [];
+        // Create the hours
+        for (var i = 0; i < 25; i++) {
+            var hour = "";
+            // See if this is military time
+            if (props.timePickerType == TimePickerType.Military) {
+                // Set the hour
+                hour = ("0" + i).slice(-2);
+            }
+            else {
+                // Set the hour
+                if (i == 0 || i == 12) {
+                    hour = "12";
+                }
+                else {
+                    hour = ("0" + (i % 12)).slice(-2);
+                }
+            }
+            // Create the minutes
+            for (var j = 0; j < 4; j++) {
+                var min = ("0" + (j * 15)).slice(-2);
+                // See if this is not military time
+                if (props.timePickerType != TimePickerType.Military) {
+                    min += " " + (i < 12 ? "AM" : "PM");
+                }
+                // Add the option
+                options.push({
+                    text: hour + ":" + min,
+                    value: hour + ":" + min
+                });
+            }
+        }
+        // Render a dropdown
+        return _1.Dropdown({
+            el: el,
+            label: "Time",
+            options: options
+        });
+    };
+    // Add the date picker
     props.el.innerHTML = [
-        '<div class="ms-DatePicker">',
-        '<div class="ms-TextField">',
-        '<label class="ms-Label">' + (props.label || '') + '</label>',
-        '<i class="ms-DatePicker-event ms-Icon ms-Icon--Event"></i>',
-        '<input class="ms-TextField-field" type="text" placeholder="Select a date&hellip;">',
-        '</div>',
-        '<div class="ms-DatePicker-monthComponents">',
-        '<span class="ms-DatePicker-nextMonth js-nextMonth"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>',
-        '<span class="ms-DatePicker-prevMonth js-prevMonth"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span>',
-        '<div class="ms-DatePicker-headerToggleView js-showMonthPicker"></div>',
-        '</div>',
-        '<span class="ms-DatePicker-goToday js-goToday">Go to today</span>',
-        '<div class="ms-DatePicker-monthPicker">',
-        '<div class="ms-DatePicker-header">',
-        '<div class="ms-DatePicker-yearComponents">',
-        '<span class="ms-DatePicker-nextYear js-nextYear"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>',
-        '<span class="ms-DatePicker-prevYear js-prevYear"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span>',
-        '</div>',
-        '<div class="ms-DatePicker-currentYear js-showYearPicker"></div>',
-        '</div>',
-        '<div class="ms-DatePicker-optionGrid">',
-        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="0">Jan</span>',
-        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="1">Feb</span>',
-        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="2">Mar</span>',
-        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="3">Apr</span>',
-        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="4">May</span>',
-        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="5">Jun</span>',
-        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="6">Jul</span>',
-        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="7">Aug</span>',
-        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="8">Sep</span>',
-        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="9">Oct</span>',
-        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="10">Nov</span>',
-        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="11">Dec</span>',
-        '</div>',
-        '</div>',
-        '<div class="ms-DatePicker-yearPicker">',
-        '<div class="ms-DatePicker-decadeComponents">',
-        '<span class="ms-DatePicker-nextDecade js-nextDecade"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>',
-        '<span class="ms-DatePicker-prevDecade js-prevDecade"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span> ',
-        '</div>',
-        '</div>',
-        '</div>'
+        '<div class="ms-DatePicker"></div>',
+        props.showTime ? '<div class="ms-TimePicker"></div>' : ''
     ].join('\n');
-    // Get the date picker
-    var dt = get();
-    // Set the date picker change event
-    dt.onchange = function () {
-        // Execute the change event
-        props.onChange ? props.onChange(_dt.getValue()) : null;
-    };
-    // Create the date picker
-    _dt = new _1.fabric.DatePicker(dt);
+    // Render the date picker
+    var _dp = renderDatePicker(props.el.children[0]);
+    // Render the time picker
+    var _tp = props.showTime ? renderTimePicker(props.el.children[1]) : null;
     // Return the date picker
     return {
-        get: get,
+        getDate: getDate,
+        getTime: getTime,
         getFabricComponent: getFabricComponent,
         getValue: getValue
     };
@@ -2973,7 +3037,7 @@ exports.Panel = function (props) {
     // Method to get the panel element
     var getPanel = function () {
         // Return the panel
-        return _panel ? _panel._panel : (props.el).querySelector(".ms-Panel ");
+        return _panel ? _panel._panel : (props.el).querySelector(".ms-Panel");
     };
     // Method to hide the panel
     var hide = function () {
@@ -3057,7 +3121,7 @@ exports.Panel = function (props) {
         // Set the header text
         setHeaderText(props.headerText);
         // Show the panel
-        _panel = new _1.fabric.Panel(props.el.firstElementChild);
+        _panel = new _1.fabric.Panel(getPanel());
         // Return the panel content
         return getContent();
     };

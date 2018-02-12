@@ -34,7 +34,7 @@ export const Panel = (props: IPanelProps): IPanel => {
     // Method to get the panel element
     let getPanel = (): HTMLElement => {
         // Return the panel
-        return _panel ? _panel._panel : (props.el).querySelector(".ms-Panel ") as HTMLElement;
+        return _panel ? _panel._panel : (props.el).querySelector(".ms-Panel") as HTMLElement;
     }
 
     // Method to hide the panel
@@ -128,7 +128,7 @@ export const Panel = (props: IPanelProps): IPanel => {
         setHeaderText(props.headerText);
 
         // Show the panel
-        _panel = new fabric.Panel(props.el.firstElementChild);
+        _panel = new fabric.Panel(getPanel());
 
         // Return the panel content
         return getContent();
