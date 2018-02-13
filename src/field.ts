@@ -2,8 +2,9 @@ import { Helper, SPTypes, Types } from "gd-sprest";
 import { IDropdownOption, IFieldProps } from "./types";
 import {
     fabric, CheckBox, DatePicker,
-    Dropdown, DropdownTypes, TextField,
-    TextFieldTypes, Toggle
+    Dropdown, DropdownTypes, LinkField,
+    NumberField, NumberFieldTypes,
+    TextField, TextFieldTypes, Toggle
 } from ".";
 
 /**
@@ -169,7 +170,7 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.Currency:
             case SPTypes.FieldType.Number:
                 let fldInfo = fieldInfo as Helper.Types.IListFormNumberFieldInfo;
-                TextField({
+                NumberField({
                     className: props.className,
                     decimals: fldInfo.decimals,
                     disable: props.disabled,
@@ -179,7 +180,7 @@ export const Field = (props: IFieldProps) => {
                     minValue: fldInfo.minValue,
                     onChange: props.onChange,
                     required: fldInfo.required,
-                    type: fldInfo.showAsPercentage ? TextFieldTypes.Percentage : (fldInfo.decimals == 0 ? TextFieldTypes.Integer : TextFieldTypes.Number),
+                    type: fldInfo.showAsPercentage ? NumberFieldTypes.Percentage : (fldInfo.decimals == 0 ? NumberFieldTypes.Integer : NumberFieldTypes.Number),
                     value: props.value || fldInfo.defaultValue || ""
                 });
                 break;
@@ -197,6 +198,22 @@ export const Field = (props: IFieldProps) => {
                     value: props.value || fieldInfo.defaultValue || ""
                 });
                 break;
+
+            // Url Field
+            case SPTypes.FieldType.URL:
+                LinkField({
+                    className: props.className,
+                    description: props.value ? props.value.Description : "",
+                    disable: props.disabled,
+                    el: props.el,
+                    label: fieldInfo.title,
+                    onChange: props.onChange,
+                    required: fieldInfo.required,
+                    value: props.value ? props.value.Url : ""
+                });
+                break;
+
+            // Default
             default:
                 // See if this is a taxonomy field
                 if (fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {

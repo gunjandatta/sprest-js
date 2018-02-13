@@ -18,7 +18,7 @@ window.addEventListener("load", () => {
                 let fields = [
                     "Title", "TestChoice", "TestBoolean", "TestDate", "TestDateTime", "TestMultiChoice",
                     "TestNumberDecimal", "TestNumberInteger", "TestNumberPercentage",
-                    "TestLookup", "TestMultiLookup", "TestManagedMetadata"
+                    "TestLookup", "TestMultiLookup", "TestManagedMetadata", "TestUrl", "TestUser"
                 ];
                 for (let i = 0; i < fields.length; i++) {
                     // Append the div for this field

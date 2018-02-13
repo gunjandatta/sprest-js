@@ -6,6 +6,8 @@ export * from "./button";
 export * from "./checkbox";
 export * from "./datepicker";
 export * from "./dropdown";
+export * from "./linkfield";
+export * from "./numberfield";
 export * from "./panel";
 export * from "./textfield";
 export * from "./toggle";

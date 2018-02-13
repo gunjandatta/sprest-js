@@ -6,11 +6,8 @@ import { fabric } from ".";
  */
 export enum TextFieldTypes {
     Default = 0,
-    Integer = 1,
-    Multi = 2,
-    Number = 3,
-    Percentage = 4,
-    Underline = 5
+    Multi = 1,
+    Underline = 2
 }
 
 /**
@@ -56,66 +53,16 @@ export const TextField = (props: ITextFieldProps): ITextField => {
 
     // Method to validate the value
     let validate = (value: string): boolean => {
-        let maxValue = typeof (props.minValue) === "number" ? props.maxValue : Number.MAX_VALUE;
-        let minValue = typeof (props.minValue) === "number" ? props.minValue : Number.MIN_VALUE;
-        let numberValue: number = null;
-        let valueExists: boolean = (value || "").length > 0;
+        // Clear the error message
+        setErrorMessage("");
 
         // See if this field is required
-        if (props.required && !valueExists) {
+        if (props.required && (value || "").length == 0) {
             // Set the error message
             setErrorMessage("This field is required");
 
             // Validation failed
             return false;
-        }
-
-        // Clear the error message
-        setErrorMessage("");
-
-        // Ensure a value exists
-        if (valueExists) {
-            // Validate based on the type
-            switch (props.type) {
-                // Integer
-                case TextFieldTypes.Integer:
-                    // Ensure this is an integer
-                    numberValue = parseInt(value);
-                    if (!(numberValue >= minValue && numberValue <= maxValue) || numberValue.toString() != value) {
-                        // Set the error message
-                        setErrorMessage("The value is not an integer");
-
-                        // Validation failed
-                        return false;
-                    }
-                    break;
-                case TextFieldTypes.Number:
-                    // Ensure this is a number
-                    numberValue = parseFloat(value);
-                    if (!(numberValue >= minValue && numberValue <= maxValue)) {
-                        // Set the error message
-                        setErrorMessage("The value is not a number");
-
-                        // Validation failed
-                        return false;
-                    }
-                    break;
-                case TextFieldTypes.Percentage:
-                    // Update the min/max values
-                    maxValue = maxValue == Number.MAX_VALUE ? 1 : maxValue;
-                    minValue = minValue == Number.MIN_VALUE ? 1 : minValue;
-
-                    // Ensure this is a number
-                    numberValue = parseFloat(value);
-                    if (!(numberValue >= minValue && numberValue <= maxValue)) {
-                        // Set the error message
-                        setErrorMessage("The value is not a number");
-
-                        // Validation failed
-                        return false;
-                    }
-                    break;
-            }
         }
 
         // Validation passed
@@ -132,7 +79,7 @@ export const TextField = (props: ITextFieldProps): ITextField => {
         isUnderline = true;
     }
 
-    // Add the button html
+    // Add the textfield html
     props.el.innerHTML = [
         '<div class="ms-TextField ' + className.trim() + '">',
         '<label class="ms-Label' + (props.required ? ' is-required' : '') + '"' + (isUnderline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
@@ -147,9 +94,9 @@ export const TextField = (props: ITextFieldProps): ITextField => {
     // Get the textfield
     let tb = get();
 
-    // See if the button is disabled
+    // See if the textfield is disabled
     if (props.disable) {
-        // Disable the button
+        // Disable the textfield
         tb.disabled = true;
     }
 
@@ -174,6 +121,7 @@ export const TextField = (props: ITextFieldProps): ITextField => {
         get,
         getFabricComponent,
         getValue,
+        setErrorMessage,
         setValue
     };
 }
