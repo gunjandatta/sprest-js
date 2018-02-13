@@ -7,5 +7,6 @@ export * from "./field";
 export * from "./linkfield";
 export * from "./numberfield";
 export * from "./panel";
+export * from "./peoplepicker";
 export * from "./textfield";
 export * from "./toggle";

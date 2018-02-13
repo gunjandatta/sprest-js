@@ -3,7 +3,7 @@ import { IDropdownOption, IFieldProps } from "./types";
 import {
     fabric, CheckBox, DatePicker,
     Dropdown, DropdownTypes, LinkField,
-    NumberField, NumberFieldTypes,
+    NumberField, NumberFieldTypes, PeoplePicker,
     TextField, TextFieldTypes, Toggle
 } from ".";
 
@@ -169,19 +169,19 @@ export const Field = (props: IFieldProps) => {
             // Number
             case SPTypes.FieldType.Currency:
             case SPTypes.FieldType.Number:
-                let fldInfo = fieldInfo as Helper.Types.IListFormNumberFieldInfo;
+                let numberInfo = fieldInfo as Helper.Types.IListFormNumberFieldInfo;
                 NumberField({
                     className: props.className,
-                    decimals: fldInfo.decimals,
+                    decimals: numberInfo.decimals,
                     disable: props.disabled,
                     el: props.el,
-                    label: fldInfo.title,
-                    maxValue: fldInfo.maxValue,
-                    minValue: fldInfo.minValue,
+                    label: numberInfo.title,
+                    maxValue: numberInfo.maxValue,
+                    minValue: numberInfo.minValue,
                     onChange: props.onChange,
-                    required: fldInfo.required,
-                    type: fldInfo.showAsPercentage ? NumberFieldTypes.Percentage : (fldInfo.decimals == 0 ? NumberFieldTypes.Integer : NumberFieldTypes.Number),
-                    value: props.value || fldInfo.defaultValue || ""
+                    required: numberInfo.required,
+                    type: numberInfo.showAsPercentage ? NumberFieldTypes.Percentage : (numberInfo.decimals == 0 ? NumberFieldTypes.Integer : NumberFieldTypes.Number),
+                    value: props.value || numberInfo.defaultValue || ""
                 });
                 break;
 
@@ -210,6 +210,18 @@ export const Field = (props: IFieldProps) => {
                     onChange: props.onChange,
                     required: fieldInfo.required,
                     value: props.value ? props.value.Url : ""
+                });
+                break;
+
+            // User Field
+            case SPTypes.FieldType.User:
+                let userInfo = fieldInfo as Helper.Types.IListFormUserFieldInfo;
+                PeoplePicker({
+                    allowGroups: userInfo.allowGroups,
+                    allowMultiple: userInfo.multi,
+                    el: props.el,
+                    required: userInfo.required,
+                    value: props.value
                 });
                 break;
 
