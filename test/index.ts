@@ -17,6 +17,7 @@ window.addEventListener("load", () => {
                 // Parse the fields
                 let fields = [
                     "Title", "TestChoice", "TestBoolean", "TestDate", "TestDateTime", "TestMultiChoice",
+                    "TestNumberDecimal", "TestNumberInteger", "TestNumberPercentage",
                     "TestLookup", "TestMultiLookup", "TestManagedMetadata"
                 ];
                 for (let i = 0; i < fields.length; i++) {

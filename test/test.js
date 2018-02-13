@@ -2293,7 +2293,7 @@ window.addEventListener("load", function () {
             onClick: function onClick() {
                 var panelContent = "";
                 // Parse the fields
-                var fields = ["Title", "TestChoice", "TestBoolean", "TestDate", "TestDateTime", "TestMultiChoice", "TestLookup", "TestMultiLookup", "TestManagedMetadata"];
+                var fields = ["Title", "TestChoice", "TestBoolean", "TestDate", "TestDateTime", "TestMultiChoice", "TestNumberDecimal", "TestNumberInteger", "TestNumberPercentage", "TestLookup", "TestMultiLookup", "TestManagedMetadata"];
                 for (var i = 0; i < fields.length; i++) {
                     // Append the div for this field
                     panelContent += "<div data-field='" + fields[i] + "'></div>";
@@ -3187,8 +3187,11 @@ var _1 = __webpack_require__(2);
 var TextFieldTypes;
 (function (TextFieldTypes) {
     TextFieldTypes[TextFieldTypes["Default"] = 0] = "Default";
-    TextFieldTypes[TextFieldTypes["Multi"] = 1] = "Multi";
-    TextFieldTypes[TextFieldTypes["Underline"] = 2] = "Underline";
+    TextFieldTypes[TextFieldTypes["Integer"] = 1] = "Integer";
+    TextFieldTypes[TextFieldTypes["Multi"] = 2] = "Multi";
+    TextFieldTypes[TextFieldTypes["Number"] = 3] = "Number";
+    TextFieldTypes[TextFieldTypes["Percentage"] = 4] = "Percentage";
+    TextFieldTypes[TextFieldTypes["Underline"] = 5] = "Underline";
 })(TextFieldTypes = exports.TextFieldTypes || (exports.TextFieldTypes = {}));
 /**
  * Text Field
@@ -3209,25 +3212,103 @@ exports.TextField = function (props) {
         // Get the text field
         return get().value;
     };
+    // Method to set the error message
+    var setErrorMessage = function (message) {
+        // Get the error message
+        var errorMessage = (_textfield ? _textfield._container : props.el.querySelector(".ms-TextField")).querySelector(".error");
+        if (errorMessage) {
+            // Set the error message
+            errorMessage.innerHTML = message || "";
+        }
+    };
+    // Method to set the value
+    var setValue = function (value) {
+        // Get the text field
+        var textfield = get();
+        if (textfield) {
+            textfield.value = value;
+        }
+    };
+    // Method to validate the value
+    var validate = function (value) {
+        var maxValue = typeof (props.minValue) === "number" ? props.maxValue : Number.MAX_VALUE;
+        var minValue = typeof (props.minValue) === "number" ? props.minValue : Number.MIN_VALUE;
+        var numberValue = null;
+        var valueExists = (value || "").length > 0;
+        // See if this field is required
+        if (props.required && !valueExists) {
+            // Set the error message
+            setErrorMessage("This field is required");
+            // Validation failed
+            return false;
+        }
+        // Clear the error message
+        setErrorMessage("");
+        // Ensure a value exists
+        if (valueExists) {
+            // Validate based on the type
+            switch (props.type) {
+                // Integer
+                case TextFieldTypes.Integer:
+                    // Ensure this is an integer
+                    numberValue = parseInt(value);
+                    if (!(numberValue >= minValue && numberValue <= maxValue) || numberValue.toString() != value) {
+                        // Set the error message
+                        setErrorMessage("The value is not an integer");
+                        // Validation failed
+                        return false;
+                    }
+                    break;
+                case TextFieldTypes.Number:
+                    // Ensure this is a number
+                    numberValue = parseFloat(value);
+                    if (!(numberValue >= minValue && numberValue <= maxValue)) {
+                        // Set the error message
+                        setErrorMessage("The value is not a number");
+                        // Validation failed
+                        return false;
+                    }
+                    break;
+                case TextFieldTypes.Percentage:
+                    // Update the min/max values
+                    maxValue = maxValue == Number.MAX_VALUE ? 1 : maxValue;
+                    minValue = minValue == Number.MIN_VALUE ? 1 : minValue;
+                    // Ensure this is a number
+                    numberValue = parseFloat(value);
+                    if (!(numberValue >= minValue && numberValue <= maxValue)) {
+                        // Set the error message
+                        setErrorMessage("The value is not a number");
+                        // Validation failed
+                        return false;
+                    }
+                    break;
+            }
+        }
+        // Validation passed
+        return true;
+    };
     // Set the class name
     var className = props.className || "";
+    var isUnderline = false;
     if (props.placeholder) {
         className += " ms-TextField--placeholder";
     }
     if (props.type == TextFieldTypes.Multi) {
         className += " ms-TextField--multiline";
     }
-    if (props.type == TextFieldTypes.Underline) {
+    else if (props.type != TextFieldTypes.Default) {
         className += " ms-TextField--underlined";
+        isUnderline = true;
     }
     // Add the button html
     props.el.innerHTML = [
         '<div class="ms-TextField ' + className.trim() + '">',
-        '<label class="ms-Label' + (props.required ? ' is-required' : '') + '"' + (props.type == TextFieldTypes.Underline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
+        '<label class="ms-Label' + (props.required ? ' is-required' : '') + '"' + (isUnderline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
         props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
         props.type == TextFieldTypes.Multi ?
             '<textarea class="ms-TextField-field"></textarea>' :
             '<input class="ms-TextField-field" type="text" value="' + (props.value || "") + '" placeholder=""></input>',
+        '<label class="ms-Label ms-fontColor-redDark error" style="color:#a80000;"></label>',
         '</div>'
     ].join('\n');
     // Get the textfield
@@ -3237,21 +3318,25 @@ exports.TextField = function (props) {
         // Disable the button
         tb.disabled = true;
     }
-    // See if we are adding a change event
-    if (props.onChange) {
-        // Set the change event
-        tb.onchange = function () {
+    // Set the change event
+    tb.onchange = function () {
+        // Validate the value
+        var value = (getValue() + "").trim();
+        if (validate(value) && props.onChange) {
             // Call the change event
-            props.onChange(getValue());
-        };
-    }
+            props.onChange(value);
+        }
+    };
+    // Validate the textfield
+    validate(props.value);
     // Create the textfield
     var _textfield = new _1.fabric.TextField(props.el.firstElementChild);
     // Return the text field
     return {
         get: get,
         getFabricComponent: getFabricComponent,
-        getValue: getValue
+        getValue: getValue,
+        setValue: setValue
     };
 };
 
@@ -3466,6 +3551,24 @@ exports.Field = function (props) {
                     options: getChoiceOptions(fieldInfo),
                     required: fieldInfo.required,
                     value: props.value ? props.value.results : props.value
+                });
+                break;
+            // Number
+            case gd_sprest_1.SPTypes.FieldType.Currency:
+            case gd_sprest_1.SPTypes.FieldType.Number:
+                var fldInfo = fieldInfo;
+                _1.TextField({
+                    className: props.className,
+                    decimals: fldInfo.decimals,
+                    disable: props.disabled,
+                    el: props.el,
+                    label: fldInfo.title,
+                    maxValue: fldInfo.maxValue,
+                    minValue: fldInfo.minValue,
+                    onChange: props.onChange,
+                    required: fldInfo.required,
+                    type: fldInfo.showAsPercentage ? _1.TextFieldTypes.Percentage : (fldInfo.decimals == 0 ? _1.TextFieldTypes.Integer : _1.TextFieldTypes.Number),
+                    value: props.value || fldInfo.defaultValue || ""
                 });
                 break;
             // Text Field
@@ -10688,6 +10791,8 @@ var _ListFormField = /** @class */ (function () {
                 // Number
                 case __1.SPTypes.FieldType.Number:
                     var fldNumber = _this._fieldInfo.field;
+                    var startIdx = fldNumber.SchemaXml.indexOf('Decimals="') + 10;
+                    _this._fieldInfo.decimals = startIdx > 10 ? parseInt(fldNumber.SchemaXml.substr(startIdx, fldNumber.SchemaXml.substr(startIdx).indexOf('"'))) : 0;
                     _this._fieldInfo.maxValue = fldNumber.MaximumValue;
                     _this._fieldInfo.minValue = fldNumber.MinimumValue;
                     if (fldNumber.ShowAsPercentage != undefined) {
@@ -11467,7 +11572,7 @@ var Mapper = __webpack_require__(3);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.46,
+    __ver: 3.47,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {

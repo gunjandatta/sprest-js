@@ -165,6 +165,25 @@ export const Field = (props: IFieldProps) => {
                 });
                 break;
 
+            // Number
+            case SPTypes.FieldType.Currency:
+            case SPTypes.FieldType.Number:
+                let fldInfo = fieldInfo as Helper.Types.IListFormNumberFieldInfo;
+                TextField({
+                    className: props.className,
+                    decimals: fldInfo.decimals,
+                    disable: props.disabled,
+                    el: props.el,
+                    label: fldInfo.title,
+                    maxValue: fldInfo.maxValue,
+                    minValue: fldInfo.minValue,
+                    onChange: props.onChange,
+                    required: fldInfo.required,
+                    type: fldInfo.showAsPercentage ? TextFieldTypes.Percentage : (fldInfo.decimals == 0 ? TextFieldTypes.Integer : TextFieldTypes.Number),
+                    value: props.value || fldInfo.defaultValue || ""
+                });
+                break;
+
             // Text Field
             case SPTypes.FieldType.Text:
                 TextField({
