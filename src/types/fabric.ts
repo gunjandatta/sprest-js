@@ -95,6 +95,7 @@ export interface IPeoplePicker {
     _selectedCount: HTMLDivElement;
     _selectedPeople: HTMLDivElement;
     _selectedPlural: HTMLDivElement;
+    _selectResult(ev: Event);
 }
 
 /**

@@ -137,13 +137,13 @@ __export(__webpack_require__(29));
 __export(__webpack_require__(30));
 __export(__webpack_require__(31));
 __export(__webpack_require__(32));
-__export(__webpack_require__(90));
-__export(__webpack_require__(91));
 __export(__webpack_require__(92));
-// SharePoint Components
 __export(__webpack_require__(93));
+__export(__webpack_require__(94));
+// SharePoint Components
+__export(__webpack_require__(95));
 // Types
-var Types = __webpack_require__(94);
+var Types = __webpack_require__(96);
 exports.Types = Types;
 
 
@@ -3351,11 +3351,13 @@ exports.Panel = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(4);
 var _1 = __webpack_require__(2);
+var Templates = __webpack_require__(90);
 /**
  * People Picker
  */
 exports.PeoplePicker = function (props) {
     var _filterText = "";
+    var _templates = Templates.PeoplePicker(props);
     // Method to get the component
     var get = function () {
         // Return the people picker
@@ -3365,182 +3367,92 @@ exports.PeoplePicker = function (props) {
     var getValue = function () {
         var users = [];
         // Parse the selected users
-        if (_peoplepicker._peoplePickerResults) {
-            // Set the value
-            for (var i = 0; i < _peoplepicker._peoplePickerResults.length; i++) {
-                var result = _peoplepicker._peoplePickerResults[i];
-                // Add the user information
-                users.push(JSON.parse(result.getAttribute("data-user")));
-            }
+        var selectedUsers = _peoplepicker._peoplePickerSearchBox ? _peoplepicker._peoplePickerSearchBox.querySelectorAll(".ms-Persona") : [];
+        // Set the value
+        for (var i = 0; i < selectedUsers.length; i++) {
+            var userInfo = selectedUsers[i].getAttribute("data-user");
+            // Add the user information
+            userInfo ? users.push(JSON.parse(userInfo)) : null;
         }
         // Return the users
         return users;
     };
     // Method to render the results
-    var renderResults = function (searchAll) {
+    var renderResults = function (ev, searchAll) {
         if (searchAll === void 0) { searchAll = false; }
-        // Get the menu
-        var menu = _peoplepicker._peoplePickerMenu;
-        if (menu) {
-            // Clear the results
-            menu.innerHTML = [
-                '<div class="ms-PeoplePicker-resultGroup">',
-                '<div class="ms-PeoplePicker-resultGroupTitle">',
-                'Users',
-                '</div>',
-                '</div>',
-                '<div class="ms-PeoplePicker-result">',
-                '<div class="ms-Persona"></div>',
-                '<button class="ms-PeoplePicker-resultAction" style="display: none;"></button>',
-                '</div>',
-                '<button class="ms-PeoplePicker-searchMore">',
-                '<div class="ms-PeoplePicker-searchMoreIcon">',
-                '<i class="ms-Icon ms-Icon--Search"></i>',
-                '</div>',
-                '<div class="ms-PeoplePicker-searchMoreText">',
-                'Search All Users',
-                '</div>',
-                '</button>'
-            ].join('\n');
-            // Set the search click event
-            menu.querySelector(".ms-PeoplePicker-searchMore").onclick = function () {
-                // Search all sources
-                renderResults(true);
-                // Disable postback
-                return false;
-            };
-            // Ensure 2 characters exist
-            if (_filterText.length > 1) {
-                // Update the search text
-                menu.querySelector(".ms-PeoplePicker-resultGroupTitle").innerHTML = "Searching for '" + _filterText + "'";
-                // Search for the user
-                (new gd_sprest_1.PeoplePicker()).clientPeoplePickerSearchUser({
-                    MaximumEntitySuggestions: 15,
-                    PrincipalSource: searchAll ? gd_sprest_1.SPTypes.PrincipalSources.All : gd_sprest_1.SPTypes.PrincipalSources.UserInfoList,
-                    PrincipalType: props.allowGroups ? gd_sprest_1.SPTypes.PrincipalTypes.All : gd_sprest_1.SPTypes.PrincipalTypes.User,
-                    QueryString: _filterText
-                }).execute(function (search) {
-                    var users = [];
-                    var value = getValue();
-                    // Parse the users
-                    for (var i = 0; i < search.ClientPeoplePickerSearchUser.length; i++) {
-                        var exists = false;
-                        var user = search.ClientPeoplePickerSearchUser[i];
-                        // Parse the current value
-                        for (var j = 0; j < value.length; j++) {
-                            // See if this user is already selected
-                            if (exists = user.Key == value[j].Key) {
-                                break;
-                            }
+        var searchDialog = _peoplepicker._contextualHostView._contextualHost;
+        // Clear the results
+        searchDialog.innerHTML = _templates.group("User Search");
+        // Ensure 2 characters exist
+        if (_filterText.length > 1) {
+            // Search for the user
+            (new gd_sprest_1.PeoplePicker()).clientPeoplePickerSearchUser({
+                MaximumEntitySuggestions: 15,
+                PrincipalSource: searchAll ? gd_sprest_1.SPTypes.PrincipalSources.All : gd_sprest_1.SPTypes.PrincipalSources.UserInfoList,
+                PrincipalType: props.allowGroups ? gd_sprest_1.SPTypes.PrincipalTypes.All : gd_sprest_1.SPTypes.PrincipalTypes.User,
+                QueryString: _filterText
+            }).execute(function (search) {
+                var users = [];
+                var value = getValue();
+                // Parse the users
+                for (var i = 0; i < search.ClientPeoplePickerSearchUser.length; i++) {
+                    var exists = false;
+                    var user = search.ClientPeoplePickerSearchUser[i];
+                    // Parse the current value
+                    for (var j = 0; j < value.length; j++) {
+                        // See if this user is already selected
+                        if (exists = user.Key == value[j].Key) {
+                            break;
                         }
-                        // Ensure the user isn't already selected
-                        if (exists) {
-                            continue;
-                        }
-                        // Add the user
-                        users.push([
-                            '<div class="ms-PeoplePicker-result" tabindex="1" data-user=\'' + JSON.stringify(user) + '\'>',
-                            '<div class="ms-Persona ms-Persona--sm">',
-                            '<div class="ms-Persona-imageArea"></div>',
-                            '<div class="ms-Persona-details">',
-                            '<div class="ms-Persona-primaryText">' + user.DisplayText + '</div>',
-                            '<div class="ms-Persona-secondaryText">' + user.EntityData.Email + '</div>',
-                            '</div>',
-                            '</div>',
-                            '<button class="ms-PeoplePicker-resultAction" style="display: none;"></button>',
-                            '</div>'
-                        ].join('\n'));
                     }
-                    // Append the results
-                    menu.innerHTML = [
-                        '<div class="ms-PeoplePicker-resultGroup">',
-                        '<div class="ms-PeoplePicker-resultGroupTitle">',
-                        'Search Results for \'' + _filterText + '\'',
-                        '</div>',
-                        '</div>',
-                        users.join('\n'),
-                        '<button class="ms-PeoplePicker-searchMore">',
-                        '<div class="ms-PeoplePicker-searchMoreIcon">',
-                        '<i class="ms-Icon ms-Icon--Search"></i>',
-                        '</div>',
-                        '<div class="ms-PeoplePicker-searchMoreText">',
-                        'Search All Users',
-                        '</div>',
-                        '</button>'
-                    ].join('\n');
-                    // Get the results
-                    var results = menu.querySelectorAll(".ms-PeoplePicker-result");
-                    for (var i = 0; i < results.length; i++) {
-                        // Set the click event
-                        results[i].addEventListener("click", function (ev) {
-                            var result = ev.currentTarget;
-                            // Save the result
-                            _peoplepicker._peoplePickerResults = _peoplepicker._peoplePickerResults || [];
-                            _peoplepicker._peoplePickerResults.push(result);
-                            // Create the persona
-                            var persona = document.createElement("div");
-                            persona.className = "ms-Persona ms-Persona--token ms-PeoplePicker-persona ms-Persona--xs";
-                            persona.innerHTML = ev.currentTarget.querySelector(".ms-Persona").innerHTML;
-                            persona.innerHTML += '<div class="ms-Persona-actionIcon"><i class="ms-Icon ms-Icon--Cancel"></i></div>';
-                            persona.setAttribute("data-user", result.getAttribute("data-user"));
-                            // Set the click event
-                            persona.querySelector(".ms-Persona-actionIcon").addEventListener("click", function (ev) {
-                                var userInfo = JSON.parse(ev.currentTarget.parentElement.getAttribute("data-user"));
-                                // Parse the results
-                                for (var i_1 = 0; i_1 < _peoplepicker._peoplePickerResults.length; i_1++) {
-                                    var result_1 = _peoplepicker._peoplePickerResults[i_1];
-                                    var resultInfo = JSON.parse(result_1.getAttribute("data-user"));
-                                    // See if this is the target user
-                                    if (resultInfo.Key == userInfo.Key) {
-                                        // Remove this user
-                                        _peoplepicker._peoplePickerResults.splice(i_1, 1);
-                                        break;
-                                    }
-                                }
-                                // Remove this persona
-                                ev.currentTarget.parentElement.remove();
-                            });
-                            // Add the persona
-                            _peoplepicker._container.querySelector(".selected-users").appendChild(persona);
+                    // Ensure the user isn't already selected
+                    if (exists) {
+                        continue;
+                    }
+                    // Add the user
+                    users.push(_templates.result(user));
+                }
+                // Append the results
+                searchDialog.innerHTML = _templates.group('Search Results for \'' + _filterText + '\'', 'Search All Users', users.length == 0 ? '<div class="ms-PeoplePicker-result">Search returned no results</div>' : users.join('\n'));
+                // See if we have searched all sources
+                var btn = _peoplepicker._contextualHostView._contextualHost.querySelector(".ms-PeoplePicker-searchMore");
+                if (searchAll) {
+                    // Hide the button
+                    btn.style.display = "none";
+                }
+                else {
+                    // Set the search click event
+                    btn.addEventListener("click", function () {
+                        // Search all sources
+                        renderResults(ev, true);
+                        // Disable postback
+                        return false;
+                    });
+                }
+                // Parse the results
+                var results = _peoplepicker._contextualHostView._contextualHost.querySelectorAll(".ms-PeoplePicker-result");
+                for (var i = 0; i < results.length; i++) {
+                    // Set the click event
+                    var personaResult = results[i].querySelector(".ms-Persona");
+                    if (personaResult) {
+                        personaResult.addEventListener("click", function (ev) {
                             // Clear the filter
                             _filterText = "";
                             _peoplepicker._peoplePickerSearch.value = "";
-                            // Clear the results
-                            renderResults();
-                            // Close the search dialog
-                            _peoplepicker._contextualHostView.disposeModal();
+                            // Select the result
+                            _peoplepicker._selectResult.apply(_peoplepicker, [ev]);
                         });
                     }
-                });
-            }
-            else {
-                // Clear the filter
-                _filterText = "";
-                _peoplepicker._peoplePickerSearch.value = "";
-            }
+                }
+            });
         }
     };
     // Add the people picker html
     props.el.innerHTML = [
         '<div class="ms-PeoplePicker">',
-        '<label class="ms-Label field-label' + (props.required ? ' is-required' : '') + '" style="display:block">' + (props.label || "") + '</label>',
-        '<div class="ms-PeoplePicker-searchBox">',
-        '<div class="ms-TextField ms-TextField--textFieldUnderlined">',
-        '<input class="ms-TextField-field" type="text" value="" placeholder="User Search"></input>',
-        '</div>',
-        '</div>',
-        '<div class="ms-PeoplePicker-results">',
-        '<div class="ms-PeoplePicker-resultGroup">',
-        '<div class="ms-PeoplePicker-resultGroupTitle">',
-        'Search for users...',
-        '</div>',
-        '</div>',
-        '<div class="ms-PeoplePicker-result">',
-        '<div class="ms-Persona"></div>',
-        '<button class="ms-PeoplePicker-resultAction" style="display: none;"></button>',
-        '</div>',
-        '</div>',
-        '<div class="selected-users"></div>',
+        _templates.header(),
+        _templates.searchBox(),
+        _templates.results("Users"),
         '</div>'
     ].join('\n');
     // Create the people picker
@@ -3551,11 +3463,11 @@ exports.PeoplePicker = function (props) {
         var filterText = _peoplepicker._peoplePickerSearch.value;
         _filterText = filterText;
         // Wait 500ms before searching
-        setTimeout(function () {
+        setTimeout(function (ev) {
             // Ensure the filters match
             if (filterText == _filterText) {
                 // Render the users
-                renderResults();
+                renderResults(ev);
             }
         }, 500);
     });
@@ -11563,6 +11475,117 @@ if (global == null || global.__ver == null || global.__ver < exports.$REST.__ver
 
 "use strict";
 
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(91));
+
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * People Picker
+ */
+exports.PeoplePicker = function (props) {
+    // Group
+    var group = function (title, searchText, results) {
+        if (title === void 0) { title = ""; }
+        if (searchText === void 0) { searchText = ""; }
+        return [
+            '<div class="ms-PeoplePicker-resultGroup">',
+            '<div class="ms-PeoplePicker-resultGroupTitle">',
+            title,
+            '</div>',
+            '</div>',
+            results ? results : result(),
+            '<button class="ms-PeoplePicker-searchMore"' + (searchText ? '' : ' style="display: none;"') + '>',
+            '<div class="ms-PeoplePicker-searchMoreIcon">',
+            '<i class="ms-Icon ms-Icon--Search"></i>',
+            '</div>',
+            '<div class="ms-PeoplePicker-searchMoreText">',
+            searchText,
+            '</div>',
+            '</button>',
+            '</div>',
+        ].join('\n');
+    };
+    // Header
+    var header = function () {
+        return [
+            '<label class="ms-Label field-label',
+            props.required ? ' is-required' : '',
+            '" style="display:block">',
+            props.label || "",
+            '</label>'
+        ].join('');
+    };
+    // Result
+    var result = function (user) {
+        // Ensure the user exists
+        if (user) {
+            return [
+                '<div class="ms-PeoplePicker-result" tabindex="1">',
+                '<div class="ms-Persona ms-Persona--sm" data-user=\'' + JSON.stringify(user) + '\'>',
+                '<div class="ms-Persona-imageArea"></div>',
+                '<div class="ms-Persona-details">',
+                '<div class="ms-Persona-primaryText">' + user.DisplayText + '</div>',
+                '<div class="ms-Persona-secondaryText">' + user.EntityData.Email + '</div>',
+                '</div>',
+                '</div>',
+                '<button class="ms-PeoplePicker-resultAction" style="display: none;"></button>',
+                '</div>'
+            ].join('\n');
+        }
+        // Return an empty persona
+        return [
+            '<div class="ms-PeoplePicker-result" style="display: none;">',
+            '<div class="ms-Persona"></div>',
+            '<button class="ms-PeoplePicker-resultAction"></button>',
+            '</div>',
+        ].join('\n');
+    };
+    // Results
+    var results = function (title, searchText) {
+        if (title === void 0) { title = ""; }
+        if (searchText === void 0) { searchText = ""; }
+        return [
+            '<div class="ms-PeoplePicker-results">',
+            group(title, searchText),
+            '<div class="selected-users"></div>',
+        ].join('\n');
+    };
+    // Search Box
+    var searchBox = function () {
+        return [
+            '<div class="ms-PeoplePicker-searchBox">',
+            '<div class="ms-TextField ms-TextField--textFieldUnderlined">',
+            '<input class="ms-TextField-field" type="text" value="" placeholder="Search"></input>',
+            '</div>',
+            '</div>',
+        ].join('\n');
+    };
+    return {
+        group: group,
+        header: header,
+        result: result,
+        results: results,
+        searchBox: searchBox
+    };
+};
+
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = __webpack_require__(2);
 /**
@@ -11590,7 +11613,7 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 91 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11712,7 +11735,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 92 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11774,7 +11797,7 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 93 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12015,19 +12038,19 @@ exports.Field = function (props) {
 
 
 /***/ }),
-/* 94 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(95);
+var Fabric = __webpack_require__(97);
 exports.Fabric = Fabric;
 
 
 /***/ }),
-/* 95 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
