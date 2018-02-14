@@ -1,7 +1,6 @@
-import { Helper } from "gd-sprest";
 import { Spinner } from "../fabric";
-import { IItemFormProps } from "./types";
-import { Field } from ".";
+import { IItemFormProps, IListFormResult } from "./types";
+import { Field, ListForm } from ".";
 
 /**
  * Item Form
@@ -10,7 +9,7 @@ export const ItemForm = (props: IItemFormProps) => {
     // Load the list information
     let loadformInfo = () => {
         // Create an instance of the list form
-        new Helper.ListForm({
+        new ListForm({
             cacheKey: this.props.cacheKey,
             fields: props.fields,
             item: props.item,
@@ -23,7 +22,7 @@ export const ItemForm = (props: IItemFormProps) => {
     }
 
     // Render the form
-    let renderForm = (formInfo: Helper.Types.IListFormResult) => {
+    let renderForm = (formInfo: IListFormResult) => {
     }
 
     // Render a spinner
