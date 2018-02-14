@@ -1,4 +1,4 @@
-import { ITextField, ITextFieldProps } from "./types";
+import { Fabric, ITextField, ITextFieldProps } from "./types";
 import { fabric } from ".";
 
 /**
@@ -114,7 +114,7 @@ export const TextField = (props: ITextFieldProps): ITextField => {
     validate(props.value);
 
     // Create the textfield
-    let _textfield = new fabric.TextField(props.el.firstElementChild);
+    let _textfield:Fabric.ITextField = new fabric.TextField(props.el.firstElementChild);
 
     // Return the text field
     return {

@@ -1,6 +1,9 @@
 // Office Fabric-UI JavaScript Library
 export * from "./fabric";
 
+// Include the styles
+import "./styles.css";
+
 // Common Components
 export * from "./button";
 export * from "./checkbox";

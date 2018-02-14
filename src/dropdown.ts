@@ -1,4 +1,4 @@
-import { IDropdown, IDropdownOption, IDropdownProps } from "./types";
+import { Fabric, IDropdown, IDropdownOption, IDropdownProps } from "./types";
 import { fabric, TextField, TextFieldTypes } from ".";
 
 /**
@@ -151,7 +151,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     }
 
     // Create the menu
-    let _menu = new fabric.ContextualMenu(get(), _tb.getFabricComponent()._container);
+    let _menu: Fabric.IContextualMenu = new fabric.ContextualMenu(get(), _tb.getFabricComponent()._container);
 
     // Return the dropdown
     return {

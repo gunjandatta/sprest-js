@@ -24,7 +24,7 @@ gulp.task("clean", () => {
 });
 
 // Copy the libraries
-gulp.task("copy-lib", ["copy-fabric-css", "copy-fabric-js", "copy-fabric-lib-jquery", "copy-fabric-lib-pickadate"]);
+gulp.task("copy-lib", ["copy-fabric-css", "copy-fabric-js", "copy-fabric-lib-jquery", "copy-fabric-lib-pickadate", "copy-styles"]);
 
 // Copy the fabric css
 gulp.task("copy-fabric-css", ["build"], () => {
@@ -67,6 +67,14 @@ gulp.task("copy-fabric-lib-pickadate", ["build"], () => {
         .pipe(replace(/\"jquery\"/g, '"./jquery.js"'))
         // Output to the build directory
         .pipe(gulp.dest("build/lib/js"));
+});
+
+// Copy the styles
+gulp.task("copy-styles", ["build"], () => {
+    // Get the source file
+    return gulp.src("src/styles.css")
+        // Output to the build directory
+        .pipe(gulp.dest("build"));
 });
 
 // Update the lib reference

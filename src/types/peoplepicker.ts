@@ -1,18 +1,15 @@
 import { Types } from "gd-sprest"
-import { IProps, IComponentProps } from ".";
+import { Fabric, IProps, IComponentProps } from ".";
 
 /**
  * People Picker
  */
 export interface IPeoplePicker {
-    /** Returns the link element. */
-    get(): HTMLElement;
-
     /** Returns the fabric component. */
-    getFabricComponent(): any;
+    get(): Fabric.IPeoplePicker;
 
     /** Returns the link value. */
-    getValue(): Array<Types.SP.ComplexTypes.FieldUserValue>;
+    getValue(): Array<Types.SP.IPeoplePickerUser>;
 }
 
 /**

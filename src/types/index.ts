@@ -1,3 +1,8 @@
+// Fabric Components
+import * as Fabric from "./fabric";
+export { Fabric }
+
+// Components
 export * from "./button";
 export * from "./checkbox";
 export * from "./common";

@@ -1,49 +1,32 @@
-import { IProps } from ".";
+import { Fabric, IProps } from ".";
 
-// Panel
+/**
+ * Panel
+ */
 export interface IPanel {
-    /** Returns the panel element. */
-    getContent(): HTMLElement;
-
     /** Returns the fabric component. */
-    getFabricComponent(): any;
-
-    /** Method to get the panel element */
-    getPanel(): HTMLElement;
+    get(): Fabric.IPanel;
 
     /** Hides the panel. */
     hide: () => void;
 
     /**
-     * Queries the panel for a single element.
-     * @param qs - The query selector.
-     */
-    query(qs?: string): HTMLElement;
-
-    /**
-     * Queries the panel for multiple elements.
-     * @param qs - The query selector.
-     */
-    queryAll(qs?: string): Array<HTMLElement>;
-
-    /**
      * Sets the header text.
      * @param html - The header html.
      */
-    setHeaderText(html: string): HTMLElement;
+    setHeaderText(html: string): HTMLDivElement;
 
     /**
      * Shows the panel.
      * @param content - The panel content.
      * @returns The panel content element.
      */
-    show(content?: string): HTMLElement;
-
-    /** Shows the close button. */
-    showCloseButton();
+    show(content?: string): HTMLDivElement;
 }
 
-// Panel
+/**
+ * Panel Properties
+ */
 export interface IPanelProps extends IProps {
     /** The header text */
     headerText?: string;

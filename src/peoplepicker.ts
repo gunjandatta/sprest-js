@@ -1,38 +1,45 @@
 import { PeoplePicker as Search, SPTypes, Types, Web } from "gd-sprest";
 import { fabric } from ".";
-import { IPeoplePicker, IPeoplePickerProps } from "./types";
+import { Fabric, IPeoplePicker, IPeoplePickerProps } from "./types";
 
 /**
  * People Picker
  */
 export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
-    // Method to get the text field element
-    let get = (): HTMLInputElement => {
-        // Returns the text field element
-        return props.el.querySelector(".ms-PeoplePicker") as HTMLInputElement;
-    }
+    let _filterText = "";
 
-    // Method to get the fabric component
-    let getFabricComponent = () => {
+    // Method to get the component
+    let get = () => {
         // Return the people picker
         return _peoplepicker;
     }
 
     // Method to get the value
-    let getValue = (): Array<Types.SP.ComplexTypes.FieldUserValue> => {
-        let value: Array<Types.SP.ComplexTypes.FieldUserValue> = [];
+    let getValue = (): Array<Types.SP.IPeoplePickerUser> => {
+        let users: Array<Types.SP.IPeoplePickerUser> = [];
 
-        // Return the value
-        return value;
+        // Parse the selected users
+        if (_peoplepicker._peoplePickerResults) {
+            // Set the value
+            for (let i = 0; i < _peoplepicker._peoplePickerResults.length; i++) {
+                let result = _peoplepicker._peoplePickerResults[i];
+
+                // Add the user information
+                users.push(JSON.parse(result.getAttribute("data-user")));
+            }
+        }
+
+        // Return the users
+        return users;
     }
 
     // Method to render the results
     let renderResults = (searchAll: boolean = false) => {
-        // Get the results
-        let results = document.querySelector(".ms-PeoplePicker-results");
-        if (results) {
+        // Get the menu
+        let menu = _peoplepicker._peoplePickerMenu;
+        if (menu) {
             // Clear the results
-            results.innerHTML = [
+            menu.innerHTML = [
                 '<div class="ms-PeoplePicker-resultGroup">',
                 '<div class="ms-PeoplePicker-resultGroupTitle">',
                 'Users',
@@ -49,7 +56,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
             ].join('\n');
 
             // Set the search click event
-            (results.querySelector(".ms-PeoplePicker-searchMore") as HTMLButtonElement).onclick = () => {
+            (menu.querySelector(".ms-PeoplePicker-searchMore") as HTMLButtonElement).onclick = () => {
                 // Search all sources
                 renderResults(true);
 
@@ -60,7 +67,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
             // Ensure 2 characters exist
             if (_filterText.length > 1) {
                 // Update the search text
-                results.querySelector(".ms-PeoplePicker-resultGroupTitle").innerHTML = "Searching for '" + _filterText + "'";
+                menu.querySelector(".ms-PeoplePicker-resultGroupTitle").innerHTML = "Searching for '" + _filterText + "'";
 
                 // Search for the user
                 (new Search()).clientPeoplePickerSearchUser({
@@ -70,29 +77,38 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
                     QueryString: _filterText
                 }).execute((search) => {
                     let users = [];
+                    let value = getValue();
 
                     // Parse the users
                     for (let i = 0; i < search.ClientPeoplePickerSearchUser.length; i++) {
+                        let exists = false;
                         let user = search.ClientPeoplePickerSearchUser[i];
+
+                        // Parse the current value
+                        for (let j = 0; j < value.length; j++) {
+                            // See if this user is already selected
+                            if (exists = user.Key == value[j].Key) { break; }
+                        }
+
+                        // Ensure the user isn't already selected
+                        if (exists) { continue; }
 
                         // Add the user
                         users.push([
-                            '<div class="ms-PeoplePicker-result" tabindex="1" data-id="' + user.Key + '">',
+                            '<div class="ms-PeoplePicker-result" tabindex="1" data-user=\'' + JSON.stringify(user) + '\'>',
                             '<div class="ms-Persona ms-Persona--sm">',
+                            '<div class="ms-Persona-imageArea"></div>',
                             '<div class="ms-Persona-details">',
                             '<div class="ms-Persona-primaryText">' + user.DisplayText + '</div>',
                             '<div class="ms-Persona-secondaryText">' + user.EntityData.Email + '</div>',
                             '</div>',
                             '</div>',
-                            '<button class="ms-PeoplePicker-resultAction">',
-                            '<i class="ms-Icon ms-Icon--Clear"></i>',
-                            '</button>',
                             '</div>'
                         ].join('\n'));
                     }
 
                     // Append the results
-                    results.innerHTML = [
+                    menu.innerHTML = [
                         '<div class="ms-PeoplePicker-resultGroup">',
                         '<div class="ms-PeoplePicker-resultGroupTitle">',
                         'Search Results for \'' + _filterText + '\'',
@@ -109,17 +125,58 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
                         '</button>'
                     ].join('\n');
 
-                    // Add the result click event
-                    let userResults = results.querySelectorAll(".ms-PeoplePicker-result");
-                    for (let i = 0; i < userResults.length; i++) {
-                        (userResults[i] as HTMLDivElement).onclick = (ev) => {
+                    // Get the results
+                    let results = menu.querySelectorAll(".ms-PeoplePicker-result");
+                    for (let i = 0; i < results.length; i++) {
+                        // Set the click event
+                        results[i].addEventListener("click", (ev) => {
+                            let result = ev.currentTarget as HTMLDivElement;
+
+                            // Save the result
+                            _peoplepicker._peoplePickerResults = _peoplepicker._peoplePickerResults || [];
+                            _peoplepicker._peoplePickerResults.push(result);
+
+                            // Create the persona
+                            let persona = document.createElement("div");
+                            persona.className = "ms-Persona ms-Persona--token ms-PeoplePicker-persona ms-Persona--xs";
+                            persona.innerHTML = (ev.currentTarget as HTMLDivElement).querySelector(".ms-Persona").innerHTML;
+                            persona.innerHTML += '<div class="ms-Persona-actionIcon"><i class="ms-Icon ms-Icon--Cancel"></i></div>';
+                            persona.setAttribute("data-user", result.getAttribute("data-user"));
+
+                            // Set the click event
+                            persona.querySelector(".ms-Persona-actionIcon").addEventListener("click", (ev) => {
+                                let userInfo = JSON.parse((ev.currentTarget as HTMLDivElement).parentElement.getAttribute("data-user")) as Types.SP.IPeoplePickerUser;
+
+                                // Parse the results
+                                for (let i = 0; i < _peoplepicker._peoplePickerResults.length; i++) {
+                                    let result = _peoplepicker._peoplePickerResults[i];
+                                    let resultInfo = JSON.parse(result.getAttribute("data-user")) as Types.SP.IPeoplePickerUser;
+
+                                    // See if this is the target user
+                                    if (resultInfo.Key == userInfo.Key) {
+                                        // Remove this user
+                                        _peoplepicker._peoplePickerResults.splice(i, 1);
+                                        break;
+                                    }
+                                }
+
+                                // Remove this persona
+                                (ev.currentTarget as HTMLDivElement).parentElement.remove();
+                            });
+
+                            // Add the persona
+                            _peoplepicker._container.querySelector(".selected-users").appendChild(persona);
+
                             // Clear the filter
                             _filterText = "";
-                            tb.value = "";
+                            _peoplepicker._peoplePickerSearch.value = "";
 
-                            // Select the user
-                            _peoplepicker._selectResult(ev);
-                        };
+                            // Clear the results
+                            renderResults();
+
+                            // Close the search dialog
+                            _peoplepicker._contextualHostView.disposeModal();
+                        });
                     }
                 });
             }
@@ -142,37 +199,32 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
         '</div>',
         '</div>',
         '</div>',
+        '<div class="selected-users"></div>',
         '</div>'
     ].join('\n');
 
-    // Get the search textbox
-    let _filterText = "";
-    let tb = get().querySelector(".ms-TextField-field") as HTMLInputElement;
-    if (tb) {
-        // Add the search event
-        tb.onkeyup = () => {
-            // Set the filter text
-            let filterText = tb.value;
-            _filterText = filterText;
-
-            // Wait 500ms before searching
-            setTimeout(() => {
-                // Ensure the filters match
-                if (filterText == _filterText) {
-                    // Render the users
-                    renderResults();
-                }
-            }, 500);
-        }
-    }
-
     // Create the people picker
-    let _peoplepicker = new fabric.PeoplePicker(get());
+    let _peoplepicker: Fabric.IPeoplePicker = new fabric.PeoplePicker(props.el.querySelector(".ms-PeoplePicker"));
+
+    // Add the search event
+    _peoplepicker._peoplePickerSearch.addEventListener("keyup", (ev) => {
+        // Set the filter text
+        let filterText = _peoplepicker._peoplePickerSearch.value;
+        _filterText = filterText;
+
+        // Wait 500ms before searching
+        setTimeout(() => {
+            // Ensure the filters match
+            if (filterText == _filterText) {
+                // Render the users
+                renderResults();
+            }
+        }, 500);
+    });
 
     // Return the people picker
     return {
         get,
-        getFabricComponent,
         getValue
     };
 }
