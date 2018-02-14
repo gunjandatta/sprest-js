@@ -195,7 +195,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
         '<div class="ms-PeoplePicker-results">',
         '<div class="ms-PeoplePicker-resultGroup">',
         '<div class="ms-PeoplePicker-resultGroupTitle">',
-        'Search Users',
+        'Search for users...',
         '</div>',
         '</div>',
         '</div>',

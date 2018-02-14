@@ -3522,7 +3522,7 @@ exports.PeoplePicker = function (props) {
         '<div class="ms-PeoplePicker-results">',
         '<div class="ms-PeoplePicker-resultGroup">',
         '<div class="ms-PeoplePicker-resultGroupTitle">',
-        'Search Users',
+        'Search for users...',
         '</div>',
         '</div>',
         '</div>',
@@ -11568,6 +11568,10 @@ exports.Spinner = function (props) {
     ].join('\n');
     // Initialize the spinner
     var _spinner = new _1.fabric.Spinner(props.el.querySelector(".ms-Spinner"));
+    // Return the spinner
+    return {
+        get: get
+    };
 };
 
 

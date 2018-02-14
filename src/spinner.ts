@@ -1,10 +1,10 @@
 import { fabric } from ".";
-import { ISpinnerProps } from "./types";
+import { ISpinner, ISpinnerProps } from "./types";
 
 /**
  * Spinner
  */
-export const Spinner = (props: ISpinnerProps) => {
+export const Spinner = (props: ISpinnerProps): ISpinner => {
     // Method to get the component
     let get = () => {
         // Return the spinner
@@ -20,4 +20,9 @@ export const Spinner = (props: ISpinnerProps) => {
 
     // Initialize the spinner
     let _spinner = new fabric.Spinner(props.el.querySelector(".ms-Spinner"));
+
+    // Return the spinner
+    return {
+        get
+    };
 }
