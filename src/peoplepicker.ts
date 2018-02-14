@@ -186,7 +186,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
     // Add the people picker html
     props.el.innerHTML = [
         '<div class="ms-PeoplePicker">',
-        '<label class="ms-Label' + (props.required ? ' is-required' : '') + '" style="display:block">' + (props.label || "") + '</label>',
+        '<label class="ms-Label field-label' + (props.required ? ' is-required' : '') + '" style="display:block">' + (props.label || "") + '</label>',
         '<div class="ms-PeoplePicker-searchBox">',
         '<div class="ms-TextField ms-TextField--textFieldUnderlined">',
         '<input class="ms-TextField-field" type="text" value="" placeholder="User Search"></input>',

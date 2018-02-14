@@ -43,7 +43,7 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
         // Add the datetime html
         el.innerHTML = [
             '<div class="ms-TextField">',
-            '<label class="ms-Label" style="padding-left: 12px;">' + (props.label || '') + '</label>',
+            '<label class="ms-Label field-label">' + (props.label || '') + '</label>',
             '<i class="ms-DatePicker-event ms-Icon ms-Icon--Event"></i>',
             '<input class="ms-TextField-field" type="text" placeholder="Select a date&hellip;">',
             '</div>',

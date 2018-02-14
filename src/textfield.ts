@@ -82,7 +82,7 @@ export const TextField = (props: ITextFieldProps): ITextField => {
     // Add the textfield html
     props.el.innerHTML = [
         '<div class="ms-TextField ' + className.trim() + '">',
-        '<label class="ms-Label' + (props.required ? ' is-required' : '') + '"' + (isUnderline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
+        '<label class="ms-Label field-label' + (props.required ? ' is-required' : '') + '"' + (isUnderline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
         props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
         props.type == TextFieldTypes.Multi ?
             '<textarea class="ms-TextField-field"></textarea>' :

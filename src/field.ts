@@ -220,6 +220,7 @@ export const Field = (props: IFieldProps) => {
                     allowGroups: userInfo.allowGroups,
                     allowMultiple: userInfo.multi,
                     el: props.el,
+                    label: userInfo.title,
                     required: userInfo.required,
                     value: props.value
                 });

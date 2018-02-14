@@ -29,7 +29,7 @@ export const Toggle = (props: IToggleProps): IToggle => {
 
     // Add the toggle html
     props.el.innerHTML = [
-        props.label ? '<label class="ms-Label" style="padding-left: 12px;"><span class="ms-fontSize-m ms-fontWeight-semibold">' + props.label + '</span></label>' : '',
+        props.label ? '<label class="ms-Label field-label">' + props.label + '</label>' : '',
         '<div class="ms-Toggle ' + className.trim() + '">',
         props.description ? '<span class="ms-Toggle-description">' + props.description + "</span>" : '',
         '<input type="checkbox" class="ms-Toggle-input"></input>',

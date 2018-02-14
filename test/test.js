@@ -2662,7 +2662,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}", ""]);
+exports.push([module.i, "/** Field Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}", ""]);
 
 // exports
 
@@ -2738,7 +2738,7 @@ exports.CheckBox = function (props) {
     props.el.innerHTML = [
         '<div class="ms-CheckBox ' + (props.className || "") + '">',
         '<input tabindex="-1" type="checkbox" class="ms-CheckBox-input"></input>',
-        '<label role="checkbox" class="ms-CheckBox-field' + (props.disable ? " is-disabled" : "") + '" tabindex="0" aria-checked="" name="checkbox' + props.label + '">',
+        '<label role="checkbox" class="ms-CheckBox-field field-label' + (props.disable ? " is-disabled" : "") + '" tabindex="0" aria-checked="" name="checkbox' + props.label + '">',
         '<span class="ms-Label' + (props.required ? ' is-required' : '') + '">' + props.label + '</span>',
         '</label>',
         '</div>'
@@ -2809,7 +2809,7 @@ exports.DatePicker = function (props) {
         // Add the datetime html
         el.innerHTML = [
             '<div class="ms-TextField">',
-            '<label class="ms-Label" style="padding-left: 12px;">' + (props.label || '') + '</label>',
+            '<label class="ms-Label field-label">' + (props.label || '') + '</label>',
             '<i class="ms-DatePicker-event ms-Icon ms-Icon--Event"></i>',
             '<input class="ms-TextField-field" type="text" placeholder="Select a date&hellip;">',
             '</div>',
@@ -3512,7 +3512,7 @@ exports.PeoplePicker = function (props) {
     // Add the people picker html
     props.el.innerHTML = [
         '<div class="ms-PeoplePicker">',
-        '<label class="ms-Label' + (props.required ? ' is-required' : '') + '" style="display:block">' + (props.label || "") + '</label>',
+        '<label class="ms-Label field-label' + (props.required ? ' is-required' : '') + '" style="display:block">' + (props.label || "") + '</label>',
         '<div class="ms-PeoplePicker-searchBox">',
         '<div class="ms-TextField ms-TextField--textFieldUnderlined">',
         '<input class="ms-TextField-field" type="text" value="" placeholder="User Search"></input>',
@@ -11625,7 +11625,7 @@ exports.TextField = function (props) {
     // Add the textfield html
     props.el.innerHTML = [
         '<div class="ms-TextField ' + className.trim() + '">',
-        '<label class="ms-Label' + (props.required ? ' is-required' : '') + '"' + (isUnderline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
+        '<label class="ms-Label field-label' + (props.required ? ' is-required' : '') + '"' + (isUnderline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
         props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
         props.type == TextFieldTypes.Multi ?
             '<textarea class="ms-TextField-field"></textarea>' :
@@ -11698,7 +11698,7 @@ exports.Toggle = function (props) {
     }
     // Add the toggle html
     props.el.innerHTML = [
-        props.label ? '<label class="ms-Label" style="padding-left: 12px;"><span class="ms-fontSize-m ms-fontWeight-semibold">' + props.label + '</span></label>' : '',
+        props.label ? '<label class="ms-Label field-label">' + props.label + '</label>' : '',
         '<div class="ms-Toggle ' + className.trim() + '">',
         props.description ? '<span class="ms-Toggle-description">' + props.description + "</span>" : '',
         '<input type="checkbox" class="ms-Toggle-input"></input>',
@@ -11927,6 +11927,7 @@ exports.Field = function (props) {
                     allowGroups: userInfo.allowGroups,
                     allowMultiple: userInfo.multi,
                     el: props.el,
+                    label: userInfo.title,
                     required: userInfo.required,
                     value: props.value
                 });
