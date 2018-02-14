@@ -1,19 +1,14 @@
 import { Helper, SPTypes, Types } from "gd-sprest";
-import { IDropdownOption, IFieldProps } from "./types";
-import {
-    fabric, CheckBox, DatePicker,
-    Dropdown, DropdownTypes, LinkField,
-    NumberField, NumberFieldTypes, PeoplePicker,
-    Spinner, TextField, TextFieldTypes, Toggle
-} from ".";
+import { Fabric } from "..";
+import { IFieldProps } from "./types";
 
 /**
  * Field
  */
 export const Field = (props: IFieldProps) => {
     // Method to generate the choice dropdown options
-    let getChoiceOptions = (fieldinfo: Helper.Types.IListFormChoiceFieldInfo): Array<IDropdownOption> => {
-        let options: Array<IDropdownOption> = [];
+    let getChoiceOptions = (fieldinfo: Helper.Types.IListFormChoiceFieldInfo): Array<Fabric.Types.IDropdownOption> => {
+        let options: Array<Fabric.Types.IDropdownOption> = [];
 
         // Parse the options
         for (let i = 0; i < fieldinfo.choices.length; i++) {
@@ -22,7 +17,7 @@ export const Field = (props: IFieldProps) => {
             // Add the option
             options.push({
                 text: choice,
-                type: DropdownTypes.Item,
+                type: Fabric.DropdownTypes.Item,
                 value: choice
             });
         }
@@ -32,8 +27,8 @@ export const Field = (props: IFieldProps) => {
     }
 
     // Method to generate the lookup dropdown options
-    let getLookupOptions = (fieldinfo: Helper.Types.IListFormLookupFieldInfo, items: Array<Types.SP.IListItemQueryResult>): Array<IDropdownOption> => {
-        let options: Array<IDropdownOption> = [];
+    let getLookupOptions = (fieldinfo: Helper.Types.IListFormLookupFieldInfo, items: Array<Types.SP.IListItemQueryResult>): Array<Fabric.Types.IDropdownOption> => {
+        let options: Array<Fabric.Types.IDropdownOption> = [];
 
         // Parse the options
         for (let i = 0; i < items.length; i++) {
@@ -42,7 +37,7 @@ export const Field = (props: IFieldProps) => {
             // Add the option
             options.push({
                 text: item[fieldinfo.lookupField],
-                type: DropdownTypes.Item,
+                type: Fabric.DropdownTypes.Item,
                 value: item.Id.toString()
             });
         }
@@ -52,15 +47,15 @@ export const Field = (props: IFieldProps) => {
     }
 
     // Method to get the mms dropdown options
-    let getMMSOptions = (term: Helper.Types.ITerm): Array<IDropdownOption> => {
-        let options: Array<IDropdownOption> = [];
+    let getMMSOptions = (term: Helper.Types.ITerm): Array<Fabric.Types.IDropdownOption> => {
+        let options: Array<Fabric.Types.IDropdownOption> = [];
 
         // See if information exists
         if (term.info) {
             // Add the heading
             options.push({
                 text: term.info.name,
-                type: DropdownTypes.Header,
+                type: Fabric.DropdownTypes.Header,
                 value: term.info.id
             });
         }
@@ -79,7 +74,7 @@ export const Field = (props: IFieldProps) => {
             options.push({
                 options: childOptions.length > 1 ? childOptions : null,
                 text: child.info.name,
-                type: DropdownTypes.Item,
+                type: Fabric.DropdownTypes.Item,
                 value: child.info.id
             });
         }
@@ -94,7 +89,7 @@ export const Field = (props: IFieldProps) => {
         switch (fieldInfo.type) {
             // Boolean Field
             case SPTypes.FieldType.Boolean:
-                Toggle({
+                Fabric.Toggle({
                     className: props.className,
                     description: fieldInfo.field.Description,
                     disable: props.disabled,
@@ -107,7 +102,7 @@ export const Field = (props: IFieldProps) => {
 
             // Choice Field
             case SPTypes.FieldType.Choice:
-                Dropdown({
+                Fabric.Dropdown({
                     className: props.className,
                     disable: props.disabled,
                     el: props.el,
@@ -121,7 +116,7 @@ export const Field = (props: IFieldProps) => {
 
             // Date/Time
             case SPTypes.FieldType.DateTime:
-                DatePicker({
+                Fabric.DatePicker({
                     className: props.className,
                     disable: props.disabled,
                     el: props.el,
@@ -137,7 +132,7 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.Lookup:
                 // Get the drop down information
                 Helper.ListFormField.loadLookupData(fieldInfo as Helper.Types.IListFormLookupFieldInfo, 500).then(items => {
-                    Dropdown({
+                    Fabric.Dropdown({
                         className: props.className,
                         disable: props.disabled,
                         el: props.el,
@@ -153,7 +148,7 @@ export const Field = (props: IFieldProps) => {
 
             // Multi-Choice Field
             case SPTypes.FieldType.MultiChoice:
-                Dropdown({
+                Fabric.Dropdown({
                     className: props.className,
                     disable: props.disabled,
                     el: props.el,
@@ -170,7 +165,7 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.Currency:
             case SPTypes.FieldType.Number:
                 let numberInfo = fieldInfo as Helper.Types.IListFormNumberFieldInfo;
-                NumberField({
+                Fabric.NumberField({
                     className: props.className,
                     decimals: numberInfo.decimals,
                     disable: props.disabled,
@@ -180,28 +175,28 @@ export const Field = (props: IFieldProps) => {
                     minValue: numberInfo.minValue,
                     onChange: props.onChange,
                     required: numberInfo.required,
-                    type: numberInfo.showAsPercentage ? NumberFieldTypes.Percentage : (numberInfo.decimals == 0 ? NumberFieldTypes.Integer : NumberFieldTypes.Number),
+                    type: numberInfo.showAsPercentage ? Fabric.NumberFieldTypes.Percentage : (numberInfo.decimals == 0 ? Fabric.NumberFieldTypes.Integer : Fabric.NumberFieldTypes.Number),
                     value: props.value || numberInfo.defaultValue || ""
                 });
                 break;
 
             // Text Field
             case SPTypes.FieldType.Text:
-                TextField({
+                Fabric.TextField({
                     className: props.className,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
                     onChange: props.onChange,
                     required: fieldInfo.required,
-                    type: TextFieldTypes.Underline,
+                    type: Fabric.TextFieldTypes.Underline,
                     value: props.value || fieldInfo.defaultValue || ""
                 });
                 break;
 
             // Url Field
             case SPTypes.FieldType.URL:
-                LinkField({
+                Fabric.LinkField({
                     className: props.className,
                     description: props.value ? props.value.Description : "",
                     disable: props.disabled,
@@ -216,7 +211,7 @@ export const Field = (props: IFieldProps) => {
             // User Field
             case SPTypes.FieldType.User:
                 let userInfo = fieldInfo as Helper.Types.IListFormUserFieldInfo;
-                PeoplePicker({
+                Fabric.PeoplePicker({
                     allowGroups: userInfo.allowGroups,
                     allowMultiple: userInfo.multi,
                     el: props.el,
@@ -233,7 +228,7 @@ export const Field = (props: IFieldProps) => {
                     let mmsInfo = fieldInfo as Helper.Types.IListFormMMSFieldInfo;
                     // Load the terms
                     Helper.ListFormField.loadMMSData(mmsInfo).then(terms => {
-                        Dropdown({
+                        Fabric.Dropdown({
                             className: props.className,
                             disable: props.disabled,
                             el: props.el,
@@ -254,7 +249,7 @@ export const Field = (props: IFieldProps) => {
     });
 
     // Render a spinner
-    let _spinner = Spinner({
+    let _spinner = Fabric.Spinner({
         el: props.el,
         text: "Loading the field..."
     });

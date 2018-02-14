@@ -80,11 +80,11 @@ gulp.task("copy-styles", ["build"], () => {
 // Update the lib reference
 gulp.task("update-lib-reference", ["copy-lib"], () => {
     // Get the source file
-    return gulp.src(["build/fabric.js", "build/fabric.d.ts"])
+    return gulp.src(["build/fabric/fabric.js", "build/fabric/fabric.d.ts"])
         // Replace the reference to jquery
-        .pipe(replace(/office-ui-fabric-js\/dist/g, './lib'))
+        .pipe(replace(/office-ui-fabric-js\/dist/g, '../lib'))
         // Output to the build directory
-        .pipe(gulp.dest("build"));
+        .pipe(gulp.dest("build/fabric"));
 });
 
 // Default

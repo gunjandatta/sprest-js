@@ -39,7 +39,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
         let searchDialog = _peoplepicker._contextualHostView._contextualHost;
 
         // Clear the results
-        searchDialog.innerHTML = _templates.group("User Search");
+        searchDialog.innerHTML = _templates.group(_filterText.length > 1 ? "Searching for '" + _filterText + "'" : "User Search");
 
         // Ensure 2 characters exist
         if (_filterText.length > 1) {

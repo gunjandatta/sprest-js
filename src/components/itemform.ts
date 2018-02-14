@@ -1,6 +1,7 @@
 import { Helper } from "gd-sprest";
+import { Spinner } from "../fabric";
 import { IItemFormProps } from "./types";
-import { Field, Spinner } from ".";
+import { Field } from ".";
 
 /**
  * Item Form

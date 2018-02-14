@@ -1,5 +1,6 @@
-import { Button, Field, Panel, PanelTypes } from "../build";
+import { Fabric, Field } from "../build";
 
+// Wait for the page to be loaded
 window.addEventListener("load", () => {
     // Get the element
     let el = document.querySelector("#test");
@@ -8,7 +9,7 @@ window.addEventListener("load", () => {
         el.innerHTML = "<div></div><div></div>";
 
         // Render the button
-        let button = Button({
+        let button = Fabric.Button({
             el: el.firstElementChild,
             text: "Show Panel",
             onClick: () => {
@@ -43,10 +44,10 @@ window.addEventListener("load", () => {
         })
 
         // Render the panel
-        let panel = Panel({
+        let panel = Fabric.Panel({
             el: el.lastElementChild,
             headerText: "SPReact List Form",
-            panelType: PanelTypes.Large
+            panelType: Fabric.PanelTypes.Large
         });
     }
 });
