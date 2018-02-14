@@ -1,66 +1,30 @@
 import { ContextInfo } from "gd-sprest";
-import * as WebPartTypes from "./types";
+import { IWebPartCfg, IWebPartInfo, IWebPartObject, IWebPartProps } from "./types";
 declare var SP;
 declare var MSOWebPartPageFormName;
 
 /**
- * WebPart Object
- */
-interface IWebPartObject {
-    /** The JSOM context object */
-    Context: any;
-
-    /** The webpart properties object */
-    Properties: any;
-
-    /** The webpart id */
-    WebPartId: string;
-
-    /** The webpart html element */
-    WebPart: HTMLElement;
-
-    /** The webpart definition object */
-    WebPartDefinition: any;
-}
-
-/**
  * Web Part
  */
-class _WebPart {
-    private _props: WebPartTypes.IWebPartProps = null;
-    private _wp: WebPartTypes.IWebPartInfo = null;
-
-    /**
-     * Constructor
-     * @param props - The webpart properties.
-     */
-    constructor(props: WebPartTypes.IWebPartProps) {
-        // Set the properties
-        this._props = props || {} as any;
-
-        // Add a load event
-        window.addEventListener("load", () => {
-            // Render the component
-            this.render();
-        });
-    }
+export const WebPart = (props: IWebPartProps) => {
+    let _wp = null;
 
     /**
      * Method to add the help link to a script part editor.
      * @wpId - The webpart id.
      */
-    private addHelpLink = () => {
+    let addHelpLink = () => {
         // Ensure the help properties exist
-        if (this._props.helpProps) {
+        if (props.helpProps) {
             // Get the webpart's "Snippet"
-            let link = document.querySelector("div[webpartid='" + this._wp.wpId + "'] a[title='Edit Snippet']");
+            let link = document.querySelector("div[webpartid='" + _wp.wpId + "'] a[title='Edit Snippet']");
             if (link) {
                 // Create the help link
                 let helpLink = document.createElement("a");
-                helpLink.href = this._props.helpProps.url || "#";
+                helpLink.href = props.helpProps.url || "#";
                 helpLink.style.paddingLeft = "10px";
                 helpLink.setAttribute("role", "button");
-                helpLink.title = this._props.helpProps.title || "Help";
+                helpLink.title = props.helpProps.title || "Help";
                 helpLink.innerHTML = "<span class='ms-metadata'>" + helpLink.title + "</span>";
                 helpLink.target = "_blank";
 
@@ -70,16 +34,10 @@ class _WebPart {
         }
     }
 
-    // Method to create an instance of the webpart
-    static create(props: WebPartTypes.IWebPartProps) {
-        // Return an instance of the webpart
-        return new _WebPart(props);
-    }
-
     /**
      * Method to get the webpart
      */
-    private getWebPart = (wpId: string): PromiseLike<IWebPartObject> => {
+    let getWebPart = (wpId: string): PromiseLike<IWebPartObject> => {
         // Return a promise
         return new Promise((resolve, reject) => {
             // Get the current context
@@ -118,7 +76,7 @@ class _WebPart {
      * Method to get the webpart id for a specified element
      * @param el - The target element.
      */
-    private getWebPartId = (el: HTMLElement) => {
+    let getWebPartId = (el: HTMLElement) => {
         // Loop until we find the webpart id
         while (el) {
             // See if this element contains the webpart id
@@ -139,17 +97,17 @@ class _WebPart {
     /**
      * Method to get the webpart information
      */
-    private getWebPartInfo = (): WebPartTypes.IWebPartInfo => {
-        let targetInfo: WebPartTypes.IWebPartInfo = {
+    let getWebPartInfo = (): IWebPartInfo => {
+        let targetInfo: IWebPartInfo = {
             cfg: null,
             el: null,
             wpId: null
         };
 
         // Ensure the element id exists
-        if (this._props.elementId) {
+        if (props.elementId) {
             // Get the webpart elements
-            let elements = document.querySelectorAll("#" + this._props.elementId);
+            let elements = document.querySelectorAll("#" + props.elementId);
             for (let i = 0; i < elements.length; i++) {
                 let elWebPart = elements[i] as HTMLElement;
 
@@ -157,14 +115,14 @@ class _WebPart {
                 if (elWebPart.getAttribute("data-isConfigured")) { continue; }
 
                 // Get the webpart id
-                let wpId = this.getWebPartId(elWebPart);
+                let wpId = getWebPartId(elWebPart);
                 if (wpId) {
                     // See if the configuration element exists
-                    let elCfg: HTMLElement = this._props.cfgElementId ? elWebPart.parentElement.querySelector("#" + this._props.cfgElementId) : null as any;
+                    let elCfg: HTMLElement = props.cfgElementId ? elWebPart.parentElement.querySelector("#" + props.cfgElementId) : null as any;
                     if (elCfg) {
                         try {
                             // Parse the configuration
-                            let cfg: WebPartTypes.IWebPartCfg = JSON.parse(elCfg.innerText.trim());
+                            let cfg: IWebPartCfg = JSON.parse(elCfg.innerText.trim());
 
                             // See if the webaprt id exists
                             if (cfg.WebPartId) {
@@ -201,7 +159,7 @@ class _WebPart {
                             };
 
                             // Log
-                            console.log("[sp-webpart] Error parsing the configuration for element '" + this._props.cfgElementId + "'.");
+                            console.log("[sp-webpart] Error parsing the configuration for element '" + props.cfgElementId + "'.");
                         }
 
                         // Break from the loop
@@ -223,7 +181,7 @@ class _WebPart {
             // Ensure elements were found
             if (elements.length == 0) {
                 // Log
-                console.log("[sp-webpart] Error - Unable to find elements with id '" + this._props.elementId + "'.")
+                console.log("[sp-webpart] Error - Unable to find elements with id '" + props.elementId + "'.")
             }
         } else {
             // Log
@@ -243,7 +201,7 @@ class _WebPart {
     /**
      * Method to detect if a page is being edited
      */
-    private isEditMode = () => {
+    let isEditMode = () => {
         let formName = MSOWebPartPageFormName ? MSOWebPartPageFormName : "";
 
         // Get the form
@@ -266,36 +224,36 @@ class _WebPart {
     /**
      * Method to render the webpart
      */
-    private render = () => {
+    let render = () => {
         let element = null;
 
         // Get the webpart information
-        this._wp = this.getWebPartInfo();
-        if (this._wp == null || this._wp.el == null) {
+        _wp = getWebPartInfo();
+        if (_wp == null || _wp.el == null) {
             // Log
-            console.log("[sp-webpart] The target webpart element '" + this._props.elementId + "' was not found.");
+            console.log("[sp-webpart] The target webpart element '" + props.elementId + "' was not found.");
             return;
         }
 
         // See if the page is being edited
         let returnVal = null;
-        if (this.isEditMode()) {
+        if (isEditMode()) {
             // Add the help link
-            this.addHelpLink();
+            addHelpLink();
 
             // Call the render event
-            if (this._props.onRenderEdit) {
+            if (props.onRenderEdit) {
                 // Execute the render edit event
-                returnVal = this._props.onRenderEdit(this._wp);
+                returnVal = props.onRenderEdit(_wp);
             }
         } else {
             // See if the configuration is defined, but has no value
-            if (this._wp.cfg || (this._props.cfgElementId || "").length == 0) {
+            if (_wp.cfg || (props.cfgElementId || "").length == 0) {
                 // Execute the render edit event
-                returnVal = this._props.onRenderDisplay(this._wp);
+                returnVal = props.onRenderDisplay(_wp);
             } else {
                 // Render a message
-                this._wp.el.innerHTML = '<h3>Please edit the page and configure the webpart.</h3>';
+                _wp.el.innerHTML = '<h3>Please edit the page and configure the webpart.</h3>';
             }
         }
 
@@ -304,12 +262,17 @@ class _WebPart {
             // Wait for the request to complete
             returnVal.then((...args) => {
                 // Execute the post render event
-                this._props.onPostRender ? this._props.onPostRender(this._wp) : null;
+                props.onPostRender ? props.onPostRender(_wp) : null;
             });
         } else {
             // Execute the post render event
-            this._props.onPostRender ? this._props.onPostRender(this._wp) : null;
+            props.onPostRender ? props.onPostRender(_wp) : null;
         }
     }
+
+    // Add a load event
+    window.addEventListener("load", () => {
+        // Render the component
+        render();
+    });
 }
-export const WebPart: WebPartTypes.IWebPart = _WebPart as any;

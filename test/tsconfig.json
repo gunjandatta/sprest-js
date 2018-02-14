@@ -1,9 +1,8 @@
 {
     "compilerOptions": {
-        "allowJs": true,
         "target": "es5"
     },
     "include": [
-        "index.ts"
+        "./index.ts"
     ]
 }

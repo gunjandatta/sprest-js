@@ -1,22 +1,5 @@
 /**
- * Web Part
- */
-export interface IWebPart {
-    /**
-     * Creates an instance of a webpart.
-     * @param props - The webpart properties.
-     */
-    new(props: IWebPartProps);
-
-    /**
-     * Creates an instance of a webpart.
-     * @param props - The webpart properties.
-     */
-    create(props: IWebPartProps)
-}
-
-/**
- * The webpart configuration
+ * WebPart Configuration
  */
 export interface IWebPartCfg {
     /** The webpart id */
@@ -24,7 +7,7 @@ export interface IWebPartCfg {
 }
 
 /**
- * The webpart information
+ * WebPart Information
  */
 export interface IWebPartInfo {
     /** The configuration */
@@ -38,7 +21,27 @@ export interface IWebPartInfo {
 }
 
 /**
- * The webpart properties
+ * WebPart Object
+ */
+export interface IWebPartObject {
+    /** The JSOM context object */
+    Context: any;
+
+    /** The webpart properties object */
+    Properties: any;
+
+    /** The webpart id */
+    WebPartId: string;
+
+    /** The webpart html element */
+    WebPart: HTMLElement;
+
+    /** The webpart definition object */
+    WebPartDefinition: any;
+}
+
+/**
+ * WebPart Properties
  */
 export interface IWebPartProps {
     /** The optional configuration element id */
