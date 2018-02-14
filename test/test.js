@@ -3508,6 +3508,11 @@ exports.PeoplePicker = function (props) {
                     }
                 });
             }
+            else {
+                // Clear the filter
+                _filterText = "";
+                _peoplepicker._peoplePickerSearch.value = "";
+            }
         }
     };
     // Add the people picker html

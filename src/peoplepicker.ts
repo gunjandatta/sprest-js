@@ -179,6 +179,10 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
                         });
                     }
                 });
+            } else {
+                // Clear the filter
+                _filterText = "";
+                _peoplepicker._peoplePickerSearch.value = "";
             }
         }
     }
