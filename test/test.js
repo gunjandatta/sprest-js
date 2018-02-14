@@ -3389,6 +3389,10 @@ exports.PeoplePicker = function (props) {
                 'Users',
                 '</div>',
                 '</div>',
+                '<div class="ms-PeoplePicker-result">',
+                '<div class="ms-Persona"></div>',
+                '<button class="ms-PeoplePicker-resultAction" style="display: none;"></button>',
+                '</div>',
                 '<button class="ms-PeoplePicker-searchMore">',
                 '<div class="ms-PeoplePicker-searchMoreIcon">',
                 '<i class="ms-Icon ms-Icon--Search"></i>',
@@ -3443,6 +3447,7 @@ exports.PeoplePicker = function (props) {
                             '<div class="ms-Persona-secondaryText">' + user.EntityData.Email + '</div>',
                             '</div>',
                             '</div>',
+                            '<button class="ms-PeoplePicker-resultAction" style="display: none;"></button>',
                             '</div>'
                         ].join('\n'));
                     }
@@ -3529,6 +3534,10 @@ exports.PeoplePicker = function (props) {
         '<div class="ms-PeoplePicker-resultGroupTitle">',
         'Search for users...',
         '</div>',
+        '</div>',
+        '<div class="ms-PeoplePicker-result">',
+        '<div class="ms-Persona"></div>',
+        '<button class="ms-PeoplePicker-resultAction" style="display: none;"></button>',
         '</div>',
         '</div>',
         '<div class="selected-users"></div>',
