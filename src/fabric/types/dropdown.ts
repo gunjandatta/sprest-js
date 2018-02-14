@@ -38,6 +38,9 @@ export interface IDropdownOption {
  * Dropdown Properties
  */
 export interface IDropdownProps extends IComponentProps {
+    /** The drop down description. */
+    description?: string;
+    
     /** Allow multiple values. */
     multi?: boolean;
 

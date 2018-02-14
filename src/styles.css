@@ -1,9 +1,25 @@
-/** Field Label **/
+/**
+ * Dropdown
+ */
+ .ms-ContextualMenu--callout {
+     max-height: 50vh;
+     overflow-y: auto;
+ }
+
+/**
+ * Field
+ */
+
+/** Label **/
 .field-label {
     padding-left: 12px;
     font-size: 14px;
     font-weight: 600;
 }
+
+/**
+ * Panel
+ */
 
 /** Update to display over the ribbon & panel. */
 .ms-ContextualHost.is-open {

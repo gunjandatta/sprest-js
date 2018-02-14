@@ -1,7 +1,6 @@
 import { PeoplePicker as Search, SPTypes, Types, Web } from "gd-sprest";
-import { fabric } from ".";
-import * as Templates from "./templates";
 import { Fabric, IPeoplePicker, IPeoplePickerProps } from "./types";
+import { fabric, Templates } from ".";
 
 /**
  * People Picker

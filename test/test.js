@@ -135,11 +135,15 @@ __export(__webpack_require__(85));
 __export(__webpack_require__(86));
 __export(__webpack_require__(87));
 __export(__webpack_require__(88));
+__export(__webpack_require__(89));
+__export(__webpack_require__(90));
 __export(__webpack_require__(91));
 __export(__webpack_require__(92));
-__export(__webpack_require__(93));
+// Templates
+var Templates = __webpack_require__(93);
+exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(94);
+var Types = __webpack_require__(98);
 exports.Types = Types;
 
 
@@ -2287,11 +2291,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Fabric = __webpack_require__(2);
 exports.Fabric = Fabric;
 // Include the styles
-__webpack_require__(96);
+__webpack_require__(100);
 // Components
-__export(__webpack_require__(98));
+__export(__webpack_require__(102));
 // WebParts
-var WebParts = __webpack_require__(103);
+var WebParts = __webpack_require__(107);
 exports.WebParts = WebParts;
 
 
@@ -10781,6 +10785,50 @@ exports.Button = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = __webpack_require__(2);
 /**
+ * Callout Positions
+ */
+exports.CalloutPositions = {
+    left: "left",
+    right: "right",
+    top: "top",
+    bottom: "bottom"
+};
+/**
+ * Callout Types
+ */
+var CalloutTypes;
+(function (CalloutTypes) {
+    /** Action */
+    CalloutTypes[CalloutTypes["Action"] = 0] = "Action";
+    /** Close */
+    CalloutTypes[CalloutTypes["Close"] = 1] = "Close";
+    /** Default */
+    CalloutTypes[CalloutTypes["Default"] = 2] = "Default";
+    /** Out of the Box */
+    CalloutTypes[CalloutTypes["OOBE"] = 3] = "OOBE";
+    /** Peek */
+    CalloutTypes[CalloutTypes["Peek"] = 4] = "Peek";
+})(CalloutTypes = exports.CalloutTypes || (exports.CalloutTypes = {}));
+/**
+ * Callout
+ */
+exports.Callout = function (props) {
+    // Set the template
+    props.el.innerHTML = _1.Templates.Callout(props);
+    // Return the callout
+    return new _1.fabric.Callout(props.el.querySelector(".ms-Callout"), props.elTarget, props.position || "top");
+};
+
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(2);
+/**
  * CheckBox
  */
 exports.CheckBox = function (props) {
@@ -10830,7 +10878,7 @@ exports.CheckBox = function (props) {
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10985,7 +11033,7 @@ exports.DatePicker = function (props) {
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11013,7 +11061,7 @@ exports.Dropdown = function (props) {
     // Method to get the fabric component
     var getFabricComponent = function () {
         // Return the menu
-        return _menu;
+        return _callout._contextualHost;
     };
     // Method to get the value
     var getValue = function () {
@@ -11022,17 +11070,20 @@ exports.Dropdown = function (props) {
     };
     // Method to get the value as a string
     var getValueAsString = function () {
-        // Set the textbox value
-        var selectedValues = getValue();
-        // Return the value as a string
-        return props.multi ? _values.join(", ") : _values[0];
+        // Ensure values exist
+        if (_values && _values.length > 0) {
+            // Return the value as a string
+            return props.multi ? _values.join(", ") : _values[0];
+        }
+        // Value doesn't exist
+        return "";
     };
     // Method to render the menu
     var renderMenu = function (options) {
         if (options === void 0) { options = []; }
         var menu = [];
         // Add the menu
-        menu.push('<ul class="ms-ContextualMenu is-hidden' + (props.multi ? ' ms-ContextualMenu--multiselect' : '') + '">');
+        menu.push('<ul class="ms-ContextualMenu ms-ContextualMenu--callout' + (props.multi ? ' ms-ContextualMenu--multiselect' : '') + '">');
         // Parse the options
         for (var i = 0; i < options.length; i++) {
             var option = options[i];
@@ -11081,13 +11132,17 @@ exports.Dropdown = function (props) {
     props.el.innerHTML = [
         '<div class="dropdown">',
         '<div class="textfield"></div>',
-        renderMenu(props.options),
+        '<div class="callout"></div>',
         '</div>'
     ].join('\n');
     // Render the textfield
     var _tb = _1.TextField({
+        disable: true,
         el: props.el.querySelector(".textfield"),
         label: props.label,
+        onChange: function () { if (_tb.getValue() == "undefined") {
+            _tb.setValue("");
+        } },
         required: props.required,
         type: _1.TextFieldTypes.Underline
     });
@@ -11124,8 +11179,15 @@ exports.Dropdown = function (props) {
             props.onChange ? props.onChange(getValue()) : null;
         });
     }
-    // Create the menu
-    var _menu = new _1.fabric.ContextualMenu(get(), _tb.getFabricComponent()._container);
+    // Create the callout
+    var _callout = _1.Callout({
+        content: renderMenu(props.options),
+        el: props.el.querySelector(".callout"),
+        elTarget: _tb.getFabricComponent()._container,
+        position: _1.CalloutPositions.left,
+        subText: props.description,
+        type: _1.CalloutTypes.Default
+    });
     // Return the dropdown
     return {
         get: get,
@@ -11137,7 +11199,7 @@ exports.Dropdown = function (props) {
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11201,7 +11263,7 @@ exports.LinkField = function (props) {
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11297,7 +11359,7 @@ exports.NumberField = function (props) {
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11408,7 +11470,7 @@ exports.Panel = function (props) {
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11416,13 +11478,12 @@ exports.Panel = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var _1 = __webpack_require__(2);
-var Templates = __webpack_require__(89);
 /**
  * People Picker
  */
 exports.PeoplePicker = function (props) {
     var _filterText = "";
-    var _templates = Templates.PeoplePicker(props);
+    var _templates = _1.Templates.PeoplePicker(props);
     // Method to get the component
     var get = function () {
         // Return the people picker
@@ -11545,118 +11606,7 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 89 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(90));
-
-
-/***/ }),
 /* 90 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * People Picker
- */
-exports.PeoplePicker = function (props) {
-    // Group
-    var group = function (title, searchText, results) {
-        if (title === void 0) { title = ""; }
-        if (searchText === void 0) { searchText = ""; }
-        return [
-            '<div class="ms-PeoplePicker-resultGroup">',
-            '<div class="ms-PeoplePicker-resultGroupTitle">',
-            title,
-            '</div>',
-            '</div>',
-            results ? results : result(),
-            '<button class="ms-PeoplePicker-searchMore"' + (searchText ? '' : ' style="display: none;"') + '>',
-            '<div class="ms-PeoplePicker-searchMoreIcon">',
-            '<i class="ms-Icon ms-Icon--Search"></i>',
-            '</div>',
-            '<div class="ms-PeoplePicker-searchMoreText">',
-            searchText,
-            '</div>',
-            '</button>',
-            '</div>',
-        ].join('\n');
-    };
-    // Header
-    var header = function () {
-        return [
-            '<label class="ms-Label field-label',
-            props.required ? ' is-required' : '',
-            '" style="display:block">',
-            props.label || "",
-            '</label>'
-        ].join('');
-    };
-    // Result
-    var result = function (user) {
-        // Ensure the user exists
-        if (user) {
-            return [
-                '<div class="ms-PeoplePicker-result" tabindex="1">',
-                '<div class="ms-Persona ms-Persona--sm" data-user=\'' + JSON.stringify(user) + '\'>',
-                '<div class="ms-Persona-imageArea"></div>',
-                '<div class="ms-Persona-details">',
-                '<div class="ms-Persona-primaryText">' + user.DisplayText + '</div>',
-                '<div class="ms-Persona-secondaryText">' + user.EntityData.Email + '</div>',
-                '</div>',
-                '</div>',
-                '<button class="ms-PeoplePicker-resultAction" style="display: none;"></button>',
-                '</div>'
-            ].join('\n');
-        }
-        // Return an empty persona
-        return [
-            '<div class="ms-PeoplePicker-result" style="display: none;">',
-            '<div class="ms-Persona"></div>',
-            '<button class="ms-PeoplePicker-resultAction"></button>',
-            '</div>',
-        ].join('\n');
-    };
-    // Results
-    var results = function (title, searchText) {
-        if (title === void 0) { title = ""; }
-        if (searchText === void 0) { searchText = ""; }
-        return [
-            '<div class="ms-PeoplePicker-results">',
-            group(title, searchText),
-            '<div class="selected-users"></div>',
-        ].join('\n');
-    };
-    // Search Box
-    var searchBox = function () {
-        return [
-            '<div class="ms-PeoplePicker-searchBox">',
-            '<div class="ms-TextField ms-TextField--textFieldUnderlined">',
-            '<input class="ms-TextField-field" type="text" value="" placeholder="Search"></input>',
-            '</div>',
-            '</div>',
-        ].join('\n');
-    };
-    return {
-        group: group,
-        header: header,
-        result: result,
-        results: results,
-        searchBox: searchBox
-    };
-};
-
-
-/***/ }),
-/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11688,7 +11638,7 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 92 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11810,7 +11760,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 93 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11872,15 +11822,72 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(94));
+__export(__webpack_require__(95));
+__export(__webpack_require__(96));
+__export(__webpack_require__(97));
+
+
+/***/ }),
 /* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-// Fabric Components
-var Fabric = __webpack_require__(95);
-exports.Fabric = Fabric;
+var __1 = __webpack_require__(2);
+/**
+ * Callout
+ */
+exports.Callout = function (props) {
+    // Set the class name
+    var className = props.className || "";
+    switch (props.type) {
+        case __1.CalloutTypes.Action:
+            className += " " + "ms-Callout--actionText";
+            break;
+        case __1.CalloutTypes.Close:
+            className += " " + "ms-Callout--close";
+            break;
+        case __1.CalloutTypes.OOBE:
+            className += " " + "ms-Callout--OOBE";
+            break;
+        case __1.CalloutTypes.Peek:
+            className += " " + "ms-Callout--peek";
+            break;
+        default:
+            break;
+    }
+    // Return the template
+    return [
+        '<div class="ms-Callout is-hidden ' + className.trim() + '">',
+        '<div class="ms-Callout-main">',
+        props.showCloseButton ? '<button class="ms-Callout-close"><i class="ms-Icon ms-Icon--Clear"></i></button>' : '',
+        '<div class="ms-Callout-header">',
+        '<p class="ms-Callout-title">' + (props.title || "") + '</p>',
+        '</div>',
+        '<div class="ms-Callout-inner">',
+        '<div class="ms-Callout-content">',
+        (props.content || ""),
+        props.subText ? '<div class="ms-Callout-subText">' + props.subText + '</div>' : '',
+        '</div>',
+        '<div class="ms-Callout-actions">',
+        (props.actions || ""),
+        '</div>',
+        '</div>',
+        '</div>',
+        '</div>'
+    ].join('\n');
+};
 
 
 /***/ }),
@@ -11890,14 +11897,179 @@ exports.Fabric = Fabric;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * List
+ */
+exports.List = function (props) {
+    // Return the list item
+    return [
+        '<ul class="ms-List ' + props.className + '">',
+        props.items,
+        '</ul>'
+    ].join('\n');
+};
 
 
 /***/ }),
 /* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-var content = __webpack_require__(97);
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * List Item
+ */
+exports.ListItem = function (props) {
+    // Set the class name
+    var className = [
+        props.className || "",
+        props.isDocument ? "ms-ListItem--document" : "",
+        props.isImage ? "ms-ListItem--image" : "",
+        props.isSelectable ? "is-selectable" : "",
+        props.isSelected ? "is-selected" : "",
+        props.isUnread ? "is-unread" : "",
+        props.isUnseen ? "is-unseen" : ""
+    ].join(' ').trim();
+    // Return the list item
+    return [
+        '<li class="ms-ListItem' + className.trim() + '" tabindex="0">',
+        '<span class="ms-ListItem-primaryText">' + props.primaryText + '</span>',
+        '<span class="ms-ListItem-secondaryText">' + props.secondaryText + '</span>',
+        '<span class="ms-ListItem-tertiaryText">' + props.tertiaryText + '</span>',
+        '<span class="ms-ListItem-metaText">' + props.metaText + '</span>',
+        '<div class="ms-ListItem-selectionTarget">' + (props.selectionTarget || "") + '</div>',
+        '<div class="ms-ListItem-actions">' + (props.actions || "") + '</div>',
+        '</li>'
+    ].join('\n');
+};
+
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * People Picker
+ */
+exports.PeoplePicker = function (props) {
+    // Group
+    var group = function (title, searchText, results) {
+        if (title === void 0) { title = ""; }
+        if (searchText === void 0) { searchText = ""; }
+        return [
+            '<div class="ms-PeoplePicker-resultGroup">',
+            '<div class="ms-PeoplePicker-resultGroupTitle">',
+            title,
+            '</div>',
+            '</div>',
+            results ? results : result(),
+            '<button class="ms-PeoplePicker-searchMore"' + (searchText ? '' : ' style="display: none;"') + '>',
+            '<div class="ms-PeoplePicker-searchMoreIcon">',
+            '<i class="ms-Icon ms-Icon--Search"></i>',
+            '</div>',
+            '<div class="ms-PeoplePicker-searchMoreText">',
+            searchText,
+            '</div>',
+            '</button>',
+            '</div>',
+        ].join('\n');
+    };
+    // Header
+    var header = function () {
+        return [
+            '<label class="ms-Label field-label',
+            props.required ? ' is-required' : '',
+            '" style="display:block">',
+            props.label || "",
+            '</label>'
+        ].join('');
+    };
+    // Result
+    var result = function (user) {
+        // Ensure the user exists
+        if (user) {
+            return [
+                '<div class="ms-PeoplePicker-result" tabindex="1">',
+                '<div class="ms-Persona ms-Persona--sm" data-user=\'' + JSON.stringify(user) + '\'>',
+                '<div class="ms-Persona-imageArea"></div>',
+                '<div class="ms-Persona-details">',
+                '<div class="ms-Persona-primaryText">' + user.DisplayText + '</div>',
+                '<div class="ms-Persona-secondaryText">' + user.EntityData.Email + '</div>',
+                '</div>',
+                '</div>',
+                '<button class="ms-PeoplePicker-resultAction" style="display: none;"></button>',
+                '</div>'
+            ].join('\n');
+        }
+        // Return an empty persona
+        return [
+            '<div class="ms-PeoplePicker-result" style="display: none;">',
+            '<div class="ms-Persona"></div>',
+            '<button class="ms-PeoplePicker-resultAction"></button>',
+            '</div>',
+        ].join('\n');
+    };
+    // Results
+    var results = function (title, searchText) {
+        if (title === void 0) { title = ""; }
+        if (searchText === void 0) { searchText = ""; }
+        return [
+            '<div class="ms-PeoplePicker-results">',
+            group(title, searchText),
+            '<div class="selected-users"></div>',
+        ].join('\n');
+    };
+    // Search Box
+    var searchBox = function () {
+        return [
+            '<div class="ms-PeoplePicker-searchBox">',
+            '<div class="ms-TextField ms-TextField--textFieldUnderlined">',
+            '<input class="ms-TextField-field" type="text" value="" placeholder="Search"></input>',
+            '</div>',
+            '</div>',
+        ].join('\n');
+    };
+    return {
+        group: group,
+        header: header,
+        result: result,
+        results: results,
+        searchBox: searchBox
+    };
+};
+
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+// Fabric Components
+var Fabric = __webpack_require__(99);
+exports.Fabric = Fabric;
+
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 100 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(101);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -11943,7 +12115,7 @@ if(false) {
 }
 
 /***/ }),
-/* 97 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -11951,13 +12123,13 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "/** Field Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}", ""]);
+exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n .ms-ContextualMenu--callout {\r\n     max-height: 50vh;\r\n     overflow-y: auto;\r\n }\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 98 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11966,15 +12138,15 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(99));
-__export(__webpack_require__(100));
-__export(__webpack_require__(101));
-var Types = __webpack_require__(102);
+__export(__webpack_require__(103));
+__export(__webpack_require__(104));
+__export(__webpack_require__(105));
+var Types = __webpack_require__(106);
 exports.Types = Types;
 
 
 /***/ }),
-/* 99 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12070,6 +12242,7 @@ exports.Field = function (props) {
             case gd_sprest_1.SPTypes.FieldType.Choice:
                 __1.Fabric.Dropdown({
                     className: props.className,
+                    description: props.fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -12098,6 +12271,7 @@ exports.Field = function (props) {
                 gd_sprest_1.Helper.ListFormField.loadLookupData(fieldInfo, 500).then(function (items) {
                     __1.Fabric.Dropdown({
                         className: props.className,
+                        description: props.fieldInfo.field.Description,
                         disable: props.disabled,
                         el: props.el,
                         label: fieldInfo.title,
@@ -12113,6 +12287,7 @@ exports.Field = function (props) {
             case gd_sprest_1.SPTypes.FieldType.MultiChoice:
                 __1.Fabric.Dropdown({
                     className: props.className,
+                    description: props.fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -12188,6 +12363,7 @@ exports.Field = function (props) {
                     gd_sprest_1.Helper.ListFormField.loadMMSData(mmsInfo_1).then(function (terms) {
                         __1.Fabric.Dropdown({
                             className: props.className,
+                            description: props.fieldInfo.field.Description,
                             disable: props.disabled,
                             el: props.el,
                             label: mmsInfo_1.title,
@@ -12215,7 +12391,7 @@ exports.Field = function (props) {
 
 
 /***/ }),
-/* 100 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12592,7 +12768,7 @@ exports.ListForm = _ListForm;
 
 
 /***/ }),
-/* 101 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12807,7 +12983,7 @@ exports.ListFormField = _ListFormField;
 
 
 /***/ }),
-/* 102 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12816,7 +12992,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 103 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12825,11 +13001,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(104));
+__export(__webpack_require__(108));
 
 
 /***/ }),
-/* 104 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

@@ -1,4 +1,15 @@
 /**
+ * Callout
+ */
+export interface ICallout {
+    _container: HTMLDivElement;
+    _addTarget: HTMLDivElement;
+    _closeButton: HTMLButtonElement;
+    _position: string;
+    _contextualHost: IContextualHost
+}
+
+/**
  * Contextual Host
  */
 export interface IContextualHost {
@@ -19,6 +30,22 @@ export interface IContextualMenu {
     _position: string;
     _host: IContextualHost;
     _isOpen: boolean;
+}
+
+/**
+ * List
+ */
+export interface IList {
+    _container: HTMLUListElement;
+    _listItemComponents: Array<IListItem>;
+}
+
+/**
+ * List Item
+ */
+export interface IListItem {
+    _container: HTMLLIElement;
+    _toggleElement: HTMLDivElement;
 }
 
 /**

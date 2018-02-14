@@ -1,5 +1,5 @@
 import { Fabric, IDropdown, IDropdownOption, IDropdownProps } from "./types";
-import { fabric, TextField, TextFieldTypes } from ".";
+import { fabric, Callout, CalloutPositions, CalloutTypes, TextField, TextFieldTypes } from ".";
 
 /**
  * Dropdown Types
@@ -24,7 +24,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     // Method to get the fabric component
     let getFabricComponent = () => {
         // Return the menu
-        return _menu;
+        return _callout._contextualHost;
     }
 
     // Method to get the value
@@ -35,11 +35,14 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
     // Method to get the value as a string
     let getValueAsString = (): string => {
-        // Set the textbox value
-        let selectedValues = getValue();
+        // Ensure values exist
+        if (_values && _values.length > 0) {
+            // Return the value as a string
+            return props.multi ? _values.join(", ") : _values[0];
+        }
 
-        // Return the value as a string
-        return props.multi ? _values.join(", ") : _values[0];
+        // Value doesn't exist
+        return "";
     }
 
     // Method to render the menu
@@ -47,7 +50,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         let menu: Array<string> = [];
 
         // Add the menu
-        menu.push('<ul class="ms-ContextualMenu is-hidden' + (props.multi ? ' ms-ContextualMenu--multiselect' : '') + '">');
+        menu.push('<ul class="ms-ContextualMenu ms-ContextualMenu--callout' + (props.multi ? ' ms-ContextualMenu--multiselect' : '') + '">');
 
         // Parse the options
         for (let i = 0; i < options.length; i++) {
@@ -101,14 +104,16 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     props.el.innerHTML = [
         '<div class="dropdown">',
         '<div class="textfield"></div>',
-        renderMenu(props.options),
+        '<div class="callout"></div>',
         '</div>'
     ].join('\n');
 
     // Render the textfield
     let _tb = TextField({
+        disable: true,
         el: props.el.querySelector(".textfield"),
         label: props.label,
+        onChange: () => { if (_tb.getValue() == "undefined") { _tb.setValue(""); } },
         required: props.required,
         type: TextFieldTypes.Underline
     });
@@ -150,8 +155,15 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         });
     }
 
-    // Create the menu
-    let _menu: Fabric.IContextualMenu = new fabric.ContextualMenu(get(), _tb.getFabricComponent()._container);
+    // Create the callout
+    let _callout = Callout({
+        content: renderMenu(props.options),
+        el: props.el.querySelector(".callout"),
+        elTarget: _tb.getFabricComponent()._container,
+        position: CalloutPositions.left,
+        subText: props.description,
+        type: CalloutTypes.Default
+    });
 
     // Return the dropdown
     return {

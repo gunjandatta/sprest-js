@@ -104,6 +104,7 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.Choice:
                 Fabric.Dropdown({
                     className: props.className,
+                    description: props.fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -134,6 +135,7 @@ export const Field = (props: IFieldProps) => {
                 Helper.ListFormField.loadLookupData(fieldInfo as Helper.Types.IListFormLookupFieldInfo, 500).then(items => {
                     Fabric.Dropdown({
                         className: props.className,
+                        description: props.fieldInfo.field.Description,
                         disable: props.disabled,
                         el: props.el,
                         label: fieldInfo.title,
@@ -150,6 +152,7 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.MultiChoice:
                 Fabric.Dropdown({
                     className: props.className,
+                    description: props.fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -230,6 +233,7 @@ export const Field = (props: IFieldProps) => {
                     Helper.ListFormField.loadMMSData(mmsInfo).then(terms => {
                         Fabric.Dropdown({
                             className: props.className,
+                            description: props.fieldInfo.field.Description,
                             disable: props.disabled,
                             el: props.el,
                             label: mmsInfo.title,
