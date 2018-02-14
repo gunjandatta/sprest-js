@@ -139,10 +139,11 @@ __export(__webpack_require__(31));
 __export(__webpack_require__(32));
 __export(__webpack_require__(90));
 __export(__webpack_require__(91));
-// SharePoint Components
 __export(__webpack_require__(92));
+// SharePoint Components
+__export(__webpack_require__(93));
 // Types
-var Types = __webpack_require__(93);
+var Types = __webpack_require__(94);
 exports.Types = Types;
 
 
@@ -11551,6 +11552,34 @@ if (global == null || global.__ver == null || global.__ver < exports.$REST.__ver
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = __webpack_require__(2);
 /**
+ * Spinner
+ */
+exports.Spinner = function (props) {
+    // Method to get the component
+    var get = function () {
+        // Return the spinner
+        return _spinner;
+    };
+    // Render a spinner
+    props.el.innerHTML = [
+        '<div class="ms-Spinner' + '">',
+        '<div class="ms-Spinner-label">Loading the field...</div>',
+        '</div>'
+    ].join('\n');
+    // Initialize the spinner
+    var _spinner = new _1.fabric.Spinner(props.el.querySelector(".ms-Spinner"));
+};
+
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(2);
+/**
  * Text Field Types
  */
 var TextFieldTypes;
@@ -11665,7 +11694,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11727,7 +11756,7 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11960,26 +11989,27 @@ exports.Field = function (props) {
         }
     });
     // Render a spinner
-    props.el.innerHTML = "\n        <div class=\"ms-Spinner\">\n            <div class=\"ms-Spinner-label\">Loading the field...</div>\n        </div>\n    ".trim();
-    // Initialize the spinner
-    new _1.fabric.Spinner(props.el.firstChild);
+    var _spinner = _1.Spinner({
+        el: props.el,
+        text: "Loading the field..."
+    });
 };
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(94);
+var Fabric = __webpack_require__(95);
 exports.Fabric = Fabric;
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

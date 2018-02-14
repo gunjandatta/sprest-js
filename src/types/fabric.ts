@@ -98,6 +98,22 @@ export interface IPeoplePicker {
 }
 
 /**
+ * Spinner Component
+ */
+export interface ISpinner {
+    animationSpeed: number;
+    eightSize: number;
+    fadeIncrement: number;
+    interval: number;
+    numCircles: number;
+    offsetSize: number;
+    parentSize: number;
+    spinner: HTMLElement;
+    start();
+    stop();
+}
+
+/**
  * Text Field Component
  */
 export interface ITextField {

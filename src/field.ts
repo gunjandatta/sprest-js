@@ -4,7 +4,7 @@ import {
     fabric, CheckBox, DatePicker,
     Dropdown, DropdownTypes, LinkField,
     NumberField, NumberFieldTypes, PeoplePicker,
-    TextField, TextFieldTypes, Toggle
+    Spinner, TextField, TextFieldTypes, Toggle
 } from ".";
 
 /**
@@ -254,12 +254,8 @@ export const Field = (props: IFieldProps) => {
     });
 
     // Render a spinner
-    props.el.innerHTML = `
-        <div class="ms-Spinner">
-            <div class="ms-Spinner-label">Loading the field...</div>
-        </div>
-    `.trim();
-
-    // Initialize the spinner
-    new fabric.Spinner(props.el.firstChild as any);
+    let _spinner = Spinner({
+        el: props.el,
+        text: "Loading the field..."
+    });
 }
