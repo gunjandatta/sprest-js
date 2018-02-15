@@ -12,9 +12,6 @@ export interface IDropdown {
 
     /** Returns the dropdown value. */
     getValue(): string | Array<string>;
-
-    /** Returns the dropdown value as a string. */
-    getValueAsString(): string;
 }
 
 /**

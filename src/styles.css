@@ -1,10 +1,17 @@
 /**
  * Dropdown
  */
- .ms-ContextualMenu--callout {
-     max-height: 50vh;
-     overflow-y: auto;
- }
+
+/** Update the font color to make it more visible. */
+.dropdown .textfield .ms-TextField-field {
+    color: #444;
+}
+
+/** Set the max height of the dropdown */
+.ms-List--dropdown {
+    max-height: 50vh;
+    overflow-y: auto;
+}
 
 /**
  * Field

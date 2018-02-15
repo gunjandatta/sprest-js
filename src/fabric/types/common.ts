@@ -4,7 +4,7 @@ export interface IProps {
     className?: string;
 
     /** The element to render the panel to. */
-    el: Element | HTMLElement;
+    el?: Element | HTMLElement;
 }
 
 /** Component Properties */

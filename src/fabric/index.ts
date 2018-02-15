@@ -8,6 +8,8 @@ export * from "./checkbox";
 export * from "./datepicker";
 export * from "./dropdown";
 export * from "./linkfield";
+export * from "./list";
+export * from "./listitem";
 export * from "./numberfield";
 export * from "./panel";
 export * from "./peoplepicker";

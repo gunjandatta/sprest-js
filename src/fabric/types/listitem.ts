@@ -29,7 +29,7 @@ export interface IListItemProps extends IProps {
     metaText?: string;
 
     /** The primary text. */
-    primaryText?; string;
+    primaryText?: string;
 
     /** The secondary text. */
     secondaryText?: string;

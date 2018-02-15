@@ -3,7 +3,7 @@ import { IListItemProps } from "../types";
 /**
  * List Item
  */
-export const ListItem = (props: IListItemProps) => {
+export const ListItem = (props: IListItemProps): string => {
     // Set the class name
     let className = [
         props.className || "",
@@ -17,11 +17,11 @@ export const ListItem = (props: IListItemProps) => {
 
     // Return the list item
     return [
-        '<li class="ms-ListItem' + className.trim() + '" tabindex="0">',
-        '<span class="ms-ListItem-primaryText">' + props.primaryText + '</span>',
-        '<span class="ms-ListItem-secondaryText">' + props.secondaryText + '</span>',
-        '<span class="ms-ListItem-tertiaryText">' + props.tertiaryText + '</span>',
-        '<span class="ms-ListItem-metaText">' + props.metaText + '</span>',
+        '<li class="ms-ListItem ' + className + '" tabindex="0">',
+        '<span class="ms-ListItem-primaryText">' + (props.primaryText || "") + '</span>',
+        '<span class="ms-ListItem-secondaryText">' + (props.secondaryText || "") + '</span>',
+        '<span class="ms-ListItem-tertiaryText">' + (props.tertiaryText || "") + '</span>',
+        '<span class="ms-ListItem-metaText">' + (props.metaText || "") + '</span>',
         '<div class="ms-ListItem-selectionTarget">' + (props.selectionTarget || "") + '</div>',
         '<div class="ms-ListItem-actions">' + (props.actions || "") + '</div>',
         '</li>'

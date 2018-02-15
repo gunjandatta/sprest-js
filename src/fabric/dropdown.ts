@@ -1,5 +1,10 @@
 import { Fabric, IDropdown, IDropdownOption, IDropdownProps } from "./types";
-import { fabric, Callout, CalloutPositions, CalloutTypes, TextField, TextFieldTypes } from ".";
+import {
+    fabric,
+    Callout, CalloutPositions, CalloutTypes,
+    List, Templates,
+    TextField, TextFieldTypes
+} from ".";
 
 /**
  * Dropdown Types
@@ -15,6 +20,98 @@ export enum DropdownTypes {
 export const Dropdown = (props: IDropdownProps): IDropdown => {
     let _values = props.value && typeof (props.value) === "string" ? [props.value] : (props.value || []) as Array<string>
 
+    // Method to create the items
+    let createList = (el: Element): Fabric.IList => {
+        let items: Array<string> = [];
+
+        // Method to render the items
+        let renderItems = (options: Array<IDropdownOption>, isCategory: boolean = false) => {
+            let items: Array<string> = [];
+
+            // Parse the options
+            for (let i = 0; i < options.length; i++) {
+                let option = options[i];
+
+                // See if this is a header
+                if (option.type == DropdownTypes.Header) {
+                    // Add a header item
+                    items.push(Templates.ListItem({
+                        className: "ms-ListItem--" + (isCategory ? "category" : "header"),
+                        isSelectable: isCategory ? props.multi : false,
+                        primaryText: option.text
+                    }));
+                }
+                // Else, see if this option has children
+                else if (option.options && option.options.length > 0) {
+                    // Add the option as a category
+                    items.push(renderItems(option.options, true).join('\n'));
+                }
+                // Else, this is an item
+                else {
+                    // Add the item
+                    items.push(Templates.ListItem({
+                        isSelectable: props.multi,
+                        secondaryText: option.text
+                    }));
+                }
+            }
+
+            // Return the items
+            return items;
+        }
+
+        // Set the click event
+        let onClick = (ev: MouseEvent) => {
+            let item = ev.currentTarget as HTMLLIElement;
+
+            // Return if this is a header
+            if (item.className.indexOf("ms-ListItem--header") > 0) { return; }
+
+            // See if this is a multi-select
+            if (props.multi) {
+                // See if this item is selected
+                if (item.className.indexOf("is-selected") >= 0) {
+                    // Unselect this item
+                    item.className = item.className.replace(/is\-selected/g, "").trim();
+                } else {
+                    // Select this item
+                    item.className += " is-selected";
+                }
+
+                // Query the selected items
+                let values = [];
+                let items = _list._container.querySelectorAll(".is-selected");
+                for (let i = 0; i < items.length; i++) {
+                    // Add the item
+                    values.push(
+                        (items[i].querySelector(".ms-ListItem-primaryText") as HTMLDivElement).innerText ||
+                        (items[i].querySelector(".ms-ListItem-secondaryText") as HTMLDivElement).innerText
+                    );
+                }
+
+                // Update the textbox
+                _tb.setValue(values.join(', '));
+            } else {
+                // Update the textbox
+                _tb.setValue(
+                    (item.querySelector(".ms-ListItem-primaryText") as HTMLDivElement).innerText ||
+                    (item.querySelector(".ms-ListItem-secondaryText") as HTMLDivElement).innerText
+                );
+
+                // Close the callout
+                _callout._contextualHost.disposeModal();
+            }
+        };
+
+        // Return the list
+        return List({
+            className: "ms-List--dropdown",
+            el,
+            items: renderItems(props.options || []),
+            onClick
+        });
+    }
+
     // Method to get the toggle element
     let get = (): HTMLInputElement => {
         // Returns the toggle element
@@ -28,76 +125,9 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     }
 
     // Method to get the value
-    let getValue = (): string | Array<string> => {
+    let getValue = (): string => {
         // Return the value
-        return props.multi ? _values : _values[0];
-    }
-
-    // Method to get the value as a string
-    let getValueAsString = (): string => {
-        // Ensure values exist
-        if (_values && _values.length > 0) {
-            // Return the value as a string
-            return props.multi ? _values.join(", ") : _values[0];
-        }
-
-        // Value doesn't exist
-        return "";
-    }
-
-    // Method to render the menu
-    let renderMenu = (options: Array<IDropdownOption> = []): string => {
-        let menu: Array<string> = [];
-
-        // Add the menu
-        menu.push('<ul class="ms-ContextualMenu ms-ContextualMenu--callout' + (props.multi ? ' ms-ContextualMenu--multiselect' : '') + '">');
-
-        // Parse the options
-        for (let i = 0; i < options.length; i++) {
-            let option = options[i];
-
-            // See if this is a header
-            if (option.type == DropdownTypes.Header) {
-                // Add the header
-                menu.push([
-                    '<li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>',
-                    '<li class="ms-ContextualMenu-item ms-ContextualMenu-item--header">' + option.text + '</li>'
-                ].join('\n'));
-            } else {
-                let isSelected = false;
-
-                // Ensure a value exists
-                if (props.value) {
-                    // See if we are allowing multiple values
-                    if (props.multi) {
-                        // Parse the value
-                        for (let j = 0; j < props.value.length; j++) {
-                            // Set the flag
-                            isSelected = (props.value[j] == option.text) || (props.value[j] == option.value);
-                        }
-                    } else {
-                        // Set the flag
-                        isSelected = (props.value == option.text) || (props.value == option.value);
-                    }
-                }
-
-                // Add the item
-                let isSubMenu = option.options && option.options.length > 0;
-                menu.push([
-                    '<li class="ms-ContextualMenu-item' + (isSubMenu ? ' ms-ContextualMenu-item--hasMenu' : '') + '">',
-                    '<a class="ms-ContextualMenu-link' + (isSelected ? ' is-selected' : '') + '" tabindex="1">' + option.text + '</a>',
-                    isSubMenu ? '<i class="ms-ContextualMenu-subMenuIcon ms-Icon ms-Icon--ChevronRight"></i>' : '',
-                    isSubMenu ? renderMenu(option.options) : '',
-                    '</li>'
-                ].join('\n'));
-            }
-        }
-
-        // Close the menu
-        menu.push('</ul>');
-
-        // Return the menu
-        return menu.join('\n');
+        return _tb.getValue();
     }
 
     // Render the dropdown
@@ -118,46 +148,8 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         type: TextFieldTypes.Underline
     });
 
-    // Parse the menu items
-    let items = props.el.querySelectorAll(".ms-ContextualMenu-item");
-    for (let i = 0; i < items.length; i++) {
-        // Add a click event
-        items[i].addEventListener("click", (ev) => {
-            let link = ev.currentTarget as HTMLLIElement;
-
-            // See if the item clicked is not a menu
-            if (link.className.indexOf("--hasMenu") < 0) {
-                let isSelected = link.firstElementChild.className.indexOf("is-selected") > 0;
-                let value = link.innerText.trim();
-
-                // See if we are selecting the item
-                if (isSelected) {
-                    // Add the item
-                    props.multi ? _values.push(value) : _values = [value];
-                } else {
-                    // Parse the values
-                    for (let i = 0; i < _values.length; i++) {
-                        // See if this is the target item
-                        if (_values[i] == value) {
-                            // Remove this item
-                            _values.splice(i, 1);
-                            break;
-                        }
-                    }
-                }
-            }
-
-            // Set the textbox value
-            _tb.get().value = getValueAsString();
-
-            // Call the change event
-            props.onChange ? props.onChange(getValue()) : null;
-        });
-    }
-
     // Create the callout
     let _callout = Callout({
-        content: renderMenu(props.options),
         el: props.el.querySelector(".callout"),
         elTarget: _tb.getFabricComponent()._container,
         position: CalloutPositions.left,
@@ -165,11 +157,13 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         type: CalloutTypes.Default
     });
 
+    // Render the list
+    let _list = createList(_callout._container);
+
     // Return the dropdown
     return {
         get,
         getFabricComponent,
-        getValue,
-        getValueAsString
+        getValue
     };
 }

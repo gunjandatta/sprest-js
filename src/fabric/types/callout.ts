@@ -11,7 +11,7 @@ export interface ICalloutProps extends IProps {
     content?: string;
 
     /** The target element. */
-    elTarget: Element;
+    elTarget?: Element;
 
     /** The callout position. */
     position?: string;

@@ -4,7 +4,7 @@ import { CalloutTypes } from "..";
 /**
  * Callout
  */
-export const Callout = (props: ICalloutProps) => {
+export const Callout = (props: ICalloutProps): string => {
     // Set the class name
     let className = props.className || "";
     switch (props.type) {

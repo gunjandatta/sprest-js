@@ -166,59 +166,61 @@ window["TestJS"] = {
     },
 
     // Initialize the webpart
-    init: WebParts.WebPart({
-        cfgElementId: "wp-test-js-cfg",
-        elementId: "wp-test-js",
-        onRenderDisplay: (cfg) => {
-            // Render elements
-            cfg.el.innerHTML = "<div></div><div></div>";
+    init: () => {
+        WebParts.WebPart({
+            cfgElementId: "wp-test-js-cfg",
+            elementId: "wp-test-js",
+            onRenderDisplay: (cfg) => {
+                // Render elements
+                cfg.el.innerHTML = "<div></div><div></div>";
 
-            // Render the button
-            let button = Fabric.Button({
-                el: cfg.el.firstElementChild,
-                text: "Show Panel",
-                onClick: () => {
-                    let panelContent = "";
+                // Render the button
+                let button = Fabric.Button({
+                    el: cfg.el.firstElementChild,
+                    text: "Show Panel",
+                    onClick: () => {
+                        let panelContent = "";
 
-                    // Parse the fields
-                    let fields = [
-                        "Title", "TestChoice", "TestBoolean", "TestDate", "TestDateTime", "TestMultiChoice",
-                        "TestNumberDecimal", "TestNumberInteger", "TestNumberPercentage",
-                        "TestLookup", "TestMultiLookup", "TestManagedMetadata", "TestUrl", "TestUser"
-                    ];
-                    for (let i = 0; i < fields.length; i++) {
-                        // Append the div for this field
-                        panelContent += "<div data-field='" + fields[i] + "'></div>";
+                        // Parse the fields
+                        let fields = [
+                            "Title", "TestChoice", "TestBoolean", "TestDate", "TestDateTime", "TestMultiChoice",
+                            "TestNumberDecimal", "TestNumberInteger", "TestNumberPercentage",
+                            "TestLookup", "TestMultiLookup", "TestManagedMetadata", "TestUrl", "TestUser"
+                        ];
+                        for (let i = 0; i < fields.length; i++) {
+                            // Append the div for this field
+                            panelContent += "<div data-field='" + fields[i] + "'></div>";
+                        }
+
+                        // Show the panel
+                        let content = panel.show(panelContent);
+
+                        // Parse the fields
+                        for (let i = 0; i < fields.length; i++) {
+                            // Render the field
+                            Field({
+                                el: content.children[i],
+                                fieldInfo: {
+                                    listName: "SPReact",
+                                    name: fields[i]
+                                }
+                            });
+                        }
                     }
+                })
 
-                    // Show the panel
-                    let content = panel.show(panelContent);
-
-                    // Parse the fields
-                    for (let i = 0; i < fields.length; i++) {
-                        // Render the field
-                        Field({
-                            el: content.children[i],
-                            fieldInfo: {
-                                listName: "SPReact",
-                                name: fields[i]
-                            }
-                        });
-                    }
-                }
-            })
-
-            // Render the panel
-            let panel = Fabric.Panel({
-                el: cfg.el.lastElementChild,
-                headerText: "JS List Form",
-                panelType: Fabric.PanelTypes.Large
-            });
-        },
-        onRenderEdit: (cfg) => {
-            cfg.el.innerHTML = "<div class='ms-fontSize-xl'>The Page Is Being Edited</div>";
-        }
-    })
+                // Render the panel
+                let panel = Fabric.Panel({
+                    el: cfg.el.lastElementChild,
+                    headerText: "JS List Form",
+                    panelType: Fabric.PanelTypes.Large
+                });
+            },
+            onRenderEdit: (cfg) => {
+                cfg.el.innerHTML = "<div class='ms-fontSize-xl'>The Page Is Being Edited</div>";
+            }
+        });
+    }
 }
 
 // Notify SharePoint that this script is loaded

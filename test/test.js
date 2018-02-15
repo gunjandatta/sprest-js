@@ -139,11 +139,13 @@ __export(__webpack_require__(89));
 __export(__webpack_require__(90));
 __export(__webpack_require__(91));
 __export(__webpack_require__(92));
+__export(__webpack_require__(93));
+__export(__webpack_require__(94));
 // Templates
-var Templates = __webpack_require__(93);
+var Templates = __webpack_require__(95);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(98);
+var Types = __webpack_require__(100);
 exports.Types = Types;
 
 
@@ -2291,11 +2293,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Fabric = __webpack_require__(2);
 exports.Fabric = Fabric;
 // Include the styles
-__webpack_require__(100);
+__webpack_require__(102);
 // Components
-__export(__webpack_require__(102));
+__export(__webpack_require__(104));
 // WebParts
-var WebParts = __webpack_require__(107);
+var WebParts = __webpack_require__(109);
 exports.WebParts = WebParts;
 
 
@@ -2423,50 +2425,52 @@ window["TestJS"] = {
         })
     },
     // Initialize the webpart
-    init: build_1.WebParts.WebPart({
-        cfgElementId: "wp-test-js-cfg",
-        elementId: "wp-test-js",
-        onRenderDisplay: function onRenderDisplay(cfg) {
-            // Render elements
-            cfg.el.innerHTML = "<div></div><div></div>";
-            // Render the button
-            var button = build_1.Fabric.Button({
-                el: cfg.el.firstElementChild,
-                text: "Show Panel",
-                onClick: function onClick() {
-                    var panelContent = "";
-                    // Parse the fields
-                    var fields = ["Title", "TestChoice", "TestBoolean", "TestDate", "TestDateTime", "TestMultiChoice", "TestNumberDecimal", "TestNumberInteger", "TestNumberPercentage", "TestLookup", "TestMultiLookup", "TestManagedMetadata", "TestUrl", "TestUser"];
-                    for (var i = 0; i < fields.length; i++) {
-                        // Append the div for this field
-                        panelContent += "<div data-field='" + fields[i] + "'></div>";
+    init: function init() {
+        build_1.WebParts.WebPart({
+            cfgElementId: "wp-test-js-cfg",
+            elementId: "wp-test-js",
+            onRenderDisplay: function onRenderDisplay(cfg) {
+                // Render elements
+                cfg.el.innerHTML = "<div></div><div></div>";
+                // Render the button
+                var button = build_1.Fabric.Button({
+                    el: cfg.el.firstElementChild,
+                    text: "Show Panel",
+                    onClick: function onClick() {
+                        var panelContent = "";
+                        // Parse the fields
+                        var fields = ["Title", "TestChoice", "TestBoolean", "TestDate", "TestDateTime", "TestMultiChoice", "TestNumberDecimal", "TestNumberInteger", "TestNumberPercentage", "TestLookup", "TestMultiLookup", "TestManagedMetadata", "TestUrl", "TestUser"];
+                        for (var i = 0; i < fields.length; i++) {
+                            // Append the div for this field
+                            panelContent += "<div data-field='" + fields[i] + "'></div>";
+                        }
+                        // Show the panel
+                        var content = panel.show(panelContent);
+                        // Parse the fields
+                        for (var i = 0; i < fields.length; i++) {
+                            // Render the field
+                            build_1.Field({
+                                el: content.children[i],
+                                fieldInfo: {
+                                    listName: "SPReact",
+                                    name: fields[i]
+                                }
+                            });
+                        }
                     }
-                    // Show the panel
-                    var content = panel.show(panelContent);
-                    // Parse the fields
-                    for (var i = 0; i < fields.length; i++) {
-                        // Render the field
-                        build_1.Field({
-                            el: content.children[i],
-                            fieldInfo: {
-                                listName: "SPReact",
-                                name: fields[i]
-                            }
-                        });
-                    }
-                }
-            });
-            // Render the panel
-            var panel = build_1.Fabric.Panel({
-                el: cfg.el.lastElementChild,
-                headerText: "JS List Form",
-                panelType: build_1.Fabric.PanelTypes.Large
-            });
-        },
-        onRenderEdit: function onRenderEdit(cfg) {
-            cfg.el.innerHTML = "<div class='ms-fontSize-xl'>The Page Is Being Edited</div>";
-        }
-    })
+                });
+                // Render the panel
+                var panel = build_1.Fabric.Panel({
+                    el: cfg.el.lastElementChild,
+                    headerText: "JS List Form",
+                    panelType: build_1.Fabric.PanelTypes.Large
+                });
+            },
+            onRenderEdit: function onRenderEdit(cfg) {
+                cfg.el.innerHTML = "<div class='ms-fontSize-xl'>The Page Is Being Edited</div>";
+            }
+        });
+    }
 };
 // Notify SharePoint that this script is loaded
 SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("test.js");
@@ -11053,6 +11057,85 @@ var DropdownTypes;
  */
 exports.Dropdown = function (props) {
     var _values = props.value && typeof (props.value) === "string" ? [props.value] : (props.value || []);
+    // Method to create the items
+    var createList = function (el) {
+        var items = [];
+        // Method to render the items
+        var renderItems = function (options, isCategory) {
+            if (isCategory === void 0) { isCategory = false; }
+            var items = [];
+            // Parse the options
+            for (var i = 0; i < options.length; i++) {
+                var option = options[i];
+                // See if this is a header
+                if (option.type == DropdownTypes.Header) {
+                    // Add a header item
+                    items.push(_1.Templates.ListItem({
+                        className: "ms-ListItem--" + (isCategory ? "category" : "header"),
+                        isSelectable: isCategory ? props.multi : false,
+                        primaryText: option.text
+                    }));
+                }
+                else if (option.options && option.options.length > 0) {
+                    // Add the option as a category
+                    items.push(renderItems(option.options, true).join('\n'));
+                }
+                else {
+                    // Add the item
+                    items.push(_1.Templates.ListItem({
+                        isSelectable: props.multi,
+                        secondaryText: option.text
+                    }));
+                }
+            }
+            // Return the items
+            return items;
+        };
+        // Set the click event
+        var onClick = function (ev) {
+            var item = ev.currentTarget;
+            // Return if this is a header
+            if (item.className.indexOf("ms-ListItem--header") > 0) {
+                return;
+            }
+            // See if this is a multi-select
+            if (props.multi) {
+                // See if this item is selected
+                if (item.className.indexOf("is-selected") >= 0) {
+                    // Unselect this item
+                    item.className = item.className.replace(/is\-selected/g, "").trim();
+                }
+                else {
+                    // Select this item
+                    item.className += " is-selected";
+                }
+                // Query the selected items
+                var values = [];
+                var items_1 = _list._container.querySelectorAll(".is-selected");
+                for (var i = 0; i < items_1.length; i++) {
+                    // Add the item
+                    values.push(items_1[i].querySelector(".ms-ListItem-primaryText").innerText ||
+                        items_1[i].querySelector(".ms-ListItem-secondaryText").innerText);
+                }
+                // Update the textbox
+                _tb.setValue(values.join(', '));
+            }
+            else {
+                // Update the textbox
+                _tb.setValue(item.querySelector(".ms-ListItem-primaryText").innerText ||
+                    item.querySelector(".ms-ListItem-secondaryText").innerText);
+                // Close the callout
+                _callout._contextualHost.disposeModal();
+            }
+        };
+        // Return the list
+        return _1.List({
+            className: "ms-List--dropdown",
+            el: el,
+            items: renderItems(props.options || []),
+            onClick: onClick
+        });
+    };
     // Method to get the toggle element
     var get = function () {
         // Returns the toggle element
@@ -11066,67 +11149,7 @@ exports.Dropdown = function (props) {
     // Method to get the value
     var getValue = function () {
         // Return the value
-        return props.multi ? _values : _values[0];
-    };
-    // Method to get the value as a string
-    var getValueAsString = function () {
-        // Ensure values exist
-        if (_values && _values.length > 0) {
-            // Return the value as a string
-            return props.multi ? _values.join(", ") : _values[0];
-        }
-        // Value doesn't exist
-        return "";
-    };
-    // Method to render the menu
-    var renderMenu = function (options) {
-        if (options === void 0) { options = []; }
-        var menu = [];
-        // Add the menu
-        menu.push('<ul class="ms-ContextualMenu ms-ContextualMenu--callout' + (props.multi ? ' ms-ContextualMenu--multiselect' : '') + '">');
-        // Parse the options
-        for (var i = 0; i < options.length; i++) {
-            var option = options[i];
-            // See if this is a header
-            if (option.type == DropdownTypes.Header) {
-                // Add the header
-                menu.push([
-                    '<li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>',
-                    '<li class="ms-ContextualMenu-item ms-ContextualMenu-item--header">' + option.text + '</li>'
-                ].join('\n'));
-            }
-            else {
-                var isSelected = false;
-                // Ensure a value exists
-                if (props.value) {
-                    // See if we are allowing multiple values
-                    if (props.multi) {
-                        // Parse the value
-                        for (var j = 0; j < props.value.length; j++) {
-                            // Set the flag
-                            isSelected = (props.value[j] == option.text) || (props.value[j] == option.value);
-                        }
-                    }
-                    else {
-                        // Set the flag
-                        isSelected = (props.value == option.text) || (props.value == option.value);
-                    }
-                }
-                // Add the item
-                var isSubMenu = option.options && option.options.length > 0;
-                menu.push([
-                    '<li class="ms-ContextualMenu-item' + (isSubMenu ? ' ms-ContextualMenu-item--hasMenu' : '') + '">',
-                    '<a class="ms-ContextualMenu-link' + (isSelected ? ' is-selected' : '') + '" tabindex="1">' + option.text + '</a>',
-                    isSubMenu ? '<i class="ms-ContextualMenu-subMenuIcon ms-Icon ms-Icon--ChevronRight"></i>' : '',
-                    isSubMenu ? renderMenu(option.options) : '',
-                    '</li>'
-                ].join('\n'));
-            }
-        }
-        // Close the menu
-        menu.push('</ul>');
-        // Return the menu
-        return menu.join('\n');
+        return _tb.getValue();
     };
     // Render the dropdown
     props.el.innerHTML = [
@@ -11146,54 +11169,21 @@ exports.Dropdown = function (props) {
         required: props.required,
         type: _1.TextFieldTypes.Underline
     });
-    // Parse the menu items
-    var items = props.el.querySelectorAll(".ms-ContextualMenu-item");
-    for (var i = 0; i < items.length; i++) {
-        // Add a click event
-        items[i].addEventListener("click", function (ev) {
-            var link = ev.currentTarget;
-            // See if the item clicked is not a menu
-            if (link.className.indexOf("--hasMenu") < 0) {
-                var isSelected = link.firstElementChild.className.indexOf("is-selected") > 0;
-                var value = link.innerText.trim();
-                // See if we are selecting the item
-                if (isSelected) {
-                    // Add the item
-                    props.multi ? _values.push(value) : _values = [value];
-                }
-                else {
-                    // Parse the values
-                    for (var i_1 = 0; i_1 < _values.length; i_1++) {
-                        // See if this is the target item
-                        if (_values[i_1] == value) {
-                            // Remove this item
-                            _values.splice(i_1, 1);
-                            break;
-                        }
-                    }
-                }
-            }
-            // Set the textbox value
-            _tb.get().value = getValueAsString();
-            // Call the change event
-            props.onChange ? props.onChange(getValue()) : null;
-        });
-    }
     // Create the callout
     var _callout = _1.Callout({
-        content: renderMenu(props.options),
         el: props.el.querySelector(".callout"),
         elTarget: _tb.getFabricComponent()._container,
         position: _1.CalloutPositions.left,
         subText: props.description,
         type: _1.CalloutTypes.Default
     });
+    // Render the list
+    var _list = createList(_callout._container);
     // Return the dropdown
     return {
         get: get,
         getFabricComponent: getFabricComponent,
-        getValue: getValue,
-        getValueAsString: getValueAsString
+        getValue: getValue
     };
 };
 
@@ -11264,6 +11254,53 @@ exports.LinkField = function (props) {
 
 /***/ }),
 /* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(2);
+/**
+ * List
+ */
+exports.List = function (props) {
+    // Set the template
+    props.el.innerHTML = _1.Templates.List(props);
+    // Create the list and parse the items
+    var _list = new _1.fabric.List(props.el.querySelector(".ms-List"));
+    // See if the click event is defined
+    if (props.onClick && _list._listItemComponents) {
+        for (var i = 0; i < _list._listItemComponents.length; i++) {
+            // Add the click event
+            _list._listItemComponents[i]._container.addEventListener("click", props.onClick.bind(_list._listItemComponents[i]));
+        }
+    }
+    // Return the list
+    return _list;
+};
+
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(2);
+/**
+ * List Item
+ */
+exports.ListItem = function (props) {
+    // Set the template
+    props.el.innerHTML = _1.Templates.ListItem(props);
+    // Return the list item
+    return new _1.fabric.ListItem(props.el.querySelector(".ms-ListItem"));
+};
+
+
+/***/ }),
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11359,7 +11396,7 @@ exports.NumberField = function (props) {
 
 
 /***/ }),
-/* 88 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11470,7 +11507,7 @@ exports.Panel = function (props) {
 
 
 /***/ }),
-/* 89 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11606,7 +11643,7 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 90 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11638,7 +11675,7 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 91 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11760,7 +11797,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 92 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11822,7 +11859,7 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 93 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11831,14 +11868,14 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(94));
-__export(__webpack_require__(95));
 __export(__webpack_require__(96));
 __export(__webpack_require__(97));
+__export(__webpack_require__(98));
+__export(__webpack_require__(99));
 
 
 /***/ }),
-/* 94 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11891,7 +11928,7 @@ exports.Callout = function (props) {
 
 
 /***/ }),
-/* 95 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11903,15 +11940,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.List = function (props) {
     // Return the list item
     return [
-        '<ul class="ms-List ' + props.className + '">',
-        props.items,
+        '<ul class="ms-List ' + (props.className || "") + '">',
+        props.items && props.items.length > 0 ? props.items.join('\n') : '',
         '</ul>'
     ].join('\n');
 };
 
 
 /***/ }),
-/* 96 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11933,11 +11970,11 @@ exports.ListItem = function (props) {
     ].join(' ').trim();
     // Return the list item
     return [
-        '<li class="ms-ListItem' + className.trim() + '" tabindex="0">',
-        '<span class="ms-ListItem-primaryText">' + props.primaryText + '</span>',
-        '<span class="ms-ListItem-secondaryText">' + props.secondaryText + '</span>',
-        '<span class="ms-ListItem-tertiaryText">' + props.tertiaryText + '</span>',
-        '<span class="ms-ListItem-metaText">' + props.metaText + '</span>',
+        '<li class="ms-ListItem ' + className + '" tabindex="0">',
+        '<span class="ms-ListItem-primaryText">' + (props.primaryText || "") + '</span>',
+        '<span class="ms-ListItem-secondaryText">' + (props.secondaryText || "") + '</span>',
+        '<span class="ms-ListItem-tertiaryText">' + (props.tertiaryText || "") + '</span>',
+        '<span class="ms-ListItem-metaText">' + (props.metaText || "") + '</span>',
         '<div class="ms-ListItem-selectionTarget">' + (props.selectionTarget || "") + '</div>',
         '<div class="ms-ListItem-actions">' + (props.actions || "") + '</div>',
         '</li>'
@@ -11946,7 +11983,7 @@ exports.ListItem = function (props) {
 
 
 /***/ }),
-/* 97 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12044,19 +12081,19 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 98 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(99);
+var Fabric = __webpack_require__(101);
 exports.Fabric = Fabric;
 
 
 /***/ }),
-/* 99 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12065,11 +12102,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(101);
+var content = __webpack_require__(103);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -12115,7 +12152,7 @@ if(false) {
 }
 
 /***/ }),
-/* 101 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -12123,13 +12160,13 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n .ms-ContextualMenu--callout {\r\n     max-height: 50vh;\r\n     overflow-y: auto;\r\n }\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}", ""]);
+exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12138,15 +12175,15 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(103));
-__export(__webpack_require__(104));
 __export(__webpack_require__(105));
-var Types = __webpack_require__(106);
+__export(__webpack_require__(106));
+__export(__webpack_require__(107));
+var Types = __webpack_require__(108);
 exports.Types = Types;
 
 
 /***/ }),
-/* 103 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12391,7 +12428,7 @@ exports.Field = function (props) {
 
 
 /***/ }),
-/* 104 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12768,7 +12805,7 @@ exports.ListForm = _ListForm;
 
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12983,7 +13020,7 @@ exports.ListFormField = _ListFormField;
 
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12992,7 +13029,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13001,11 +13038,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(108));
+__export(__webpack_require__(110));
 
 
 /***/ }),
-/* 108 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13124,9 +13161,10 @@ exports.WebPart = function (props) {
                     if (elCfg) {
                         try {
                             // Parse the configuration
-                            var cfg = JSON.parse(elCfg.innerText.trim());
+                            var data = elCfg.innerText.trim();
+                            var cfg = data.length > 0 ? JSON.parse(data) : null;
                             // See if the webaprt id exists
-                            if (cfg.WebPartId) {
+                            if (cfg && cfg.WebPartId) {
                                 // See if it's for this webpart
                                 if (cfg.WebPartId == wpId) {
                                     // Set the target information

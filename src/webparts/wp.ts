@@ -122,10 +122,11 @@ export const WebPart = (props: IWebPartProps) => {
                     if (elCfg) {
                         try {
                             // Parse the configuration
-                            let cfg: IWebPartCfg = JSON.parse(elCfg.innerText.trim());
+                            let data = elCfg.innerText.trim();
+                            let cfg: IWebPartCfg = data.length > 0 ? JSON.parse(data) : null;
 
                             // See if the webaprt id exists
-                            if (cfg.WebPartId) {
+                            if (cfg && cfg.WebPartId) {
                                 // See if it's for this webpart
                                 if (cfg.WebPartId == wpId) {
                                     // Set the target information

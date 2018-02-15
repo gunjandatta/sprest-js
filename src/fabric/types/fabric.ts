@@ -18,7 +18,9 @@ export interface IContextualHost {
     _contextualHost: HTMLDivElement;
     _contextualHostMain: HTMLDivElement;
     _hasArrow: boolean;
-    disposeModal: () => void;
+    contains(value: HTMLElement);
+    disposeModal();
+    setChildren(value: IContextualHost);
 }
 
 /**
