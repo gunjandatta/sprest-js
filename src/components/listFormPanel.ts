@@ -1,5 +1,5 @@
 import { SPTypes } from "gd-sprest";
-import { Button, Panel, PanelTypes, Templates } from "../fabric";
+import { Button, Panel, PanelTypes, Templates, Spinner } from "../fabric";
 import { Fabric, IPanel } from "../fabric/types";
 import { Field, ListForm } from ".";
 import { IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
@@ -9,43 +9,42 @@ import { IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
  */
 export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
     let _formInfo: IListFormResult = null;
-    let _isOpen = false;
 
-    // Render the panel
-    let renderPanel = () => {
+    // Render the form
+    let renderForm = () => {
         let panelContent = "";
 
         // Parse the fields
-        for (let i = 0; i < props.fields.length; i++) {
+        for (let fieldName in _formInfo.fields) {
             // Append the div for this field
-            panelContent += "<div data-field='" + props.fields[i] + "'></div>";
+            panelContent += "<div data-field='" + fieldName + "'></div>";
         }
 
-        // Show the panel
-        let content = _panel.show(panelContent);
+        // Update the panel
+        let content = _panel.update(panelContent);
 
         // Parse the fields
-        for (let i = 0; i < props.fields.length; i++) {
-            let field = props.fields[i];
+        for (let fieldName in _formInfo.fields) {
+            let field = _formInfo.fields[fieldName];
 
             // Render the field
             Field({
-                el: content.children[i],
+                el: content.querySelector("[data-field='" + fieldName + "']"),
                 fieldInfo: {
-                    field: _formInfo.fields[field],
-                    listName: props.listName,
-                    name: field
+                    field,
+                    listName: _formInfo.list.Title,
+                    name: fieldName
                 }
             });
         }
     }
 
     // Render the panel
-    props.el.innerHTML = Templates.Panel(props, Templates.Spinner({ text: "Loading..." }));
+    props.el.innerHTML = Templates.Panel(props);
 
     // Create the panel
     let _panel = Panel({
-        el: props.el.querySelector(".panel"),
+        el: props.el,
         className: props.className,
         headerText: props.panelTitle || "",
         panelType: typeof (props.panelType) === "number" ? props.panelType : PanelTypes.Large
@@ -66,9 +65,9 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         _formInfo = formInfo;
 
         // See if the panel is open
-        if (_isOpen) {
+        if (_panel.isOpen()) {
             // Render the panel
-            renderPanel();
+            renderForm();
         }
     });
 
@@ -76,13 +75,22 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
     return {
         show: (controlMode: number = SPTypes.ControlMode.Display) => {
             // See if the panel is open
-            if (_isOpen) { return; }
+            if (_panel.isOpen()) { return; }
 
-            // Show the panel
-            _panel.show();
+            // See if the list info exists
+            if (_formInfo) {
+                // Show the form
+                _panel.show()
 
-            // Set the flag
-            _isOpen = true;
+                // Render the form
+                renderForm();
+            } else {
+                // Show the panel
+                let content = _panel.show(_formInfo ? "" : "<div class='spinner'></div>");
+
+                // Render a spinner
+                Spinner({ el: content.querySelector(".spinner"), text: "Loading..." });
+            }
         }
     }
 }

@@ -34,6 +34,9 @@ export const Panel = (props: IPanelProps): IPanel => {
         _panel = null;
     }
 
+    // Method to determine if the panel is open
+    let isOpen = () => { return _panel && _panel._panel.className.indexOf("is-open") > 0; }
+
     // Method to set the header text
     let setHeaderText = (html: string): HTMLDivElement => {
         let header = get()._panel.querySelector(".ms-Panel-headerText") as HTMLDivElement;
@@ -63,6 +66,16 @@ export const Panel = (props: IPanelProps): IPanel => {
         return _panel._panel.querySelector(".ms-Panel-content") as HTMLDivElement;
     }
 
+    // Method to update the panel content
+    let update = (content: string = ""): HTMLDivElement => {
+        // Update the content
+        let el = _panel._panel.querySelector(".ms-Panel-content") as HTMLDivElement;
+        el ? el.innerHTML = content : null;
+
+        // Return the panel content
+        return el;
+    }
+
     // See if we are showing the panel
     if (props.visible) {
         // Show the panel
@@ -73,7 +86,9 @@ export const Panel = (props: IPanelProps): IPanel => {
     return {
         get,
         hide,
+        isOpen,
         setHeaderText,
-        show
+        show,
+        update
     };
 }

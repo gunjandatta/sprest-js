@@ -11382,6 +11382,8 @@ exports.Panel = function (props) {
         // Clear the panel
         _panel = null;
     };
+    // Method to determine if the panel is open
+    var isOpen = function () { return _panel && _panel._panel.className.indexOf("is-open") > 0; };
     // Method to set the header text
     var setHeaderText = function (html) {
         var header = get()._panel.querySelector(".ms-Panel-headerText");
@@ -11406,6 +11408,15 @@ exports.Panel = function (props) {
         // Return the panel content
         return _panel._panel.querySelector(".ms-Panel-content");
     };
+    // Method to update the panel content
+    var update = function (content) {
+        if (content === void 0) { content = ""; }
+        // Update the content
+        var el = _panel._panel.querySelector(".ms-Panel-content");
+        el ? el.innerHTML = content : null;
+        // Return the panel content
+        return el;
+    };
     // See if we are showing the panel
     if (props.visible) {
         // Show the panel
@@ -11415,8 +11426,10 @@ exports.Panel = function (props) {
     return {
         get: get,
         hide: hide,
+        isOpen: isOpen,
         setHeaderText: setHeaderText,
-        show: show
+        show: show,
+        update: update
     };
 };
 
@@ -13136,36 +13149,35 @@ var _1 = __webpack_require__(14);
  */
 exports.ListFormPanel = function (props) {
     var _formInfo = null;
-    var _isOpen = false;
-    // Render the panel
-    var renderPanel = function () {
+    // Render the form
+    var renderForm = function () {
         var panelContent = "";
         // Parse the fields
-        for (var i = 0; i < props.fields.length; i++) {
+        for (var fieldName in _formInfo.fields) {
             // Append the div for this field
-            panelContent += "<div data-field='" + props.fields[i] + "'></div>";
+            panelContent += "<div data-field='" + fieldName + "'></div>";
         }
-        // Show the panel
-        var content = _panel.show(panelContent);
+        // Update the panel
+        var content = _panel.update(panelContent);
         // Parse the fields
-        for (var i = 0; i < props.fields.length; i++) {
-            var field = props.fields[i];
+        for (var fieldName in _formInfo.fields) {
+            var field = _formInfo.fields[fieldName];
             // Render the field
             _1.Field({
-                el: content.children[i],
+                el: content.querySelector("[data-field='" + fieldName + "']"),
                 fieldInfo: {
-                    field: _formInfo.fields[field],
-                    listName: props.listName,
-                    name: field
+                    field: field,
+                    listName: _formInfo.list.Title,
+                    name: fieldName
                 }
             });
         }
     };
     // Render the panel
-    props.el.innerHTML = fabric_1.Templates.Panel(props, fabric_1.Templates.Spinner({ text: "Loading..." }));
+    props.el.innerHTML = fabric_1.Templates.Panel(props);
     // Create the panel
     var _panel = fabric_1.Panel({
-        el: props.el.querySelector(".panel"),
+        el: props.el,
         className: props.className,
         headerText: props.panelTitle || "",
         panelType: typeof (props.panelType) === "number" ? props.panelType : fabric_1.PanelTypes.Large
@@ -13184,9 +13196,9 @@ exports.ListFormPanel = function (props) {
         // Save the form information
         _formInfo = formInfo;
         // See if the panel is open
-        if (_isOpen) {
+        if (_panel.isOpen()) {
             // Render the panel
-            renderPanel();
+            renderForm();
         }
     });
     // Return the panel
@@ -13194,13 +13206,22 @@ exports.ListFormPanel = function (props) {
         show: function (controlMode) {
             if (controlMode === void 0) { controlMode = gd_sprest_1.SPTypes.ControlMode.Display; }
             // See if the panel is open
-            if (_isOpen) {
+            if (_panel.isOpen()) {
                 return;
             }
-            // Show the panel
-            _panel.show();
-            // Set the flag
-            _isOpen = true;
+            // See if the list info exists
+            if (_formInfo) {
+                // Show the form
+                _panel.show();
+                // Render the form
+                renderForm();
+            }
+            else {
+                // Show the panel
+                var content = _panel.show(_formInfo ? "" : "<div class='spinner'></div>");
+                // Render a spinner
+                fabric_1.Spinner({ el: content.querySelector(".spinner"), text: "Loading..." });
+            }
         }
     };
 };
