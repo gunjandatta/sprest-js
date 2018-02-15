@@ -1,5 +1,5 @@
 import { Fabric, ITextField, ITextFieldProps } from "./types";
-import { fabric } from ".";
+import { fabric, Templates } from ".";
 
 /**
  * Text Field Types
@@ -69,27 +69,8 @@ export const TextField = (props: ITextFieldProps): ITextField => {
         return true;
     }
 
-    // Set the class name
-    let className = props.className || "";
-    let isUnderline = false;
-    if (props.placeholder) { className += " ms-TextField--placeholder" }
-    if (props.type == TextFieldTypes.Multi) { className += " ms-TextField--multiline"; }
-    else if (props.type != TextFieldTypes.Default) {
-        className += " ms-TextField--underlined";
-        isUnderline = true;
-    }
-
     // Add the textfield html
-    props.el.innerHTML = [
-        '<div class="ms-TextField ' + className.trim() + '">',
-        '<label class="ms-Label field-label' + (props.required ? ' is-required' : '') + '"' + (isUnderline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
-        props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
-        props.type == TextFieldTypes.Multi ?
-            '<textarea class="ms-TextField-field"></textarea>' :
-            '<input class="ms-TextField-field" type="text" value="' + (props.value || "") + '" placeholder=""></input>',
-        '<label class="ms-Label ms-fontColor-redDark error" style="color:#a80000;"></label>',
-        '</div>'
-    ].join('\n');
+    props.el.innerHTML = Templates.TextField(props);
 
     // Get the textfield
     let tb = get();
@@ -114,7 +95,7 @@ export const TextField = (props: ITextFieldProps): ITextField => {
     validate(props.value);
 
     // Create the textfield
-    let _textfield:Fabric.ITextField = new fabric.TextField(props.el.firstElementChild);
+    let _textfield: Fabric.ITextField = new fabric.TextField(props.el.firstElementChild);
 
     // Return the text field
     return {

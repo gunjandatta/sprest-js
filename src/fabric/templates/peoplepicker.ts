@@ -7,6 +7,7 @@ import { IPeoplePickerProps } from "../types";
 export const PeoplePicker = (props: IPeoplePickerProps) => {
     // Group
     let group = (title: string = "", searchText: string = "", results?: string): string => {
+        // Return the template
         return [
             '<div class="ms-PeoplePicker-resultGroup">',
             '<div class="ms-PeoplePicker-resultGroupTitle">',
@@ -28,6 +29,7 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
 
     // Header
     let header = (): string => {
+        // Return the template
         return [
             '<label class="ms-Label field-label',
             props.required ? ' is-required' : '',
@@ -66,6 +68,7 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
 
     // Results
     let results = (title: string = "", searchText: string = ""): string => {
+        // Return the template
         return [
             '<div class="ms-PeoplePicker-results">',
             group(title, searchText),
@@ -75,6 +78,7 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
 
     // Search Box
     let searchBox = (): string => {
+        // Return the template
         return [
             '<div class="ms-PeoplePicker-searchBox">',
             '<div class="ms-TextField ms-TextField--textFieldUnderlined">',

@@ -15,7 +15,7 @@ export const ListItem = (props: IListItemProps): string => {
         props.isUnseen ? "is-unseen" : ""
     ].join(' ').trim();
 
-    // Return the list item
+    // Return the template
     return [
         '<li class="ms-ListItem ' + className + '" tabindex="0">',
         '<span class="ms-ListItem-primaryText">' + (props.primaryText || "") + '</span>',

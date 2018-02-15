@@ -28,7 +28,7 @@ export const Panel = (props: IPanelProps, content?: string): string => {
             break;
     }
 
-    // Return the list item
+    // Return the template
     return [
         '<div class="ms-Panel ' + className.trim() + '">',
         '<button class="ms-Panel-closeButton ms-PanelAction-close">',

@@ -97,33 +97,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(17));
-__export(__webpack_require__(47));
-__export(__webpack_require__(48));
-__export(__webpack_require__(49));
-__export(__webpack_require__(50));
-__export(__webpack_require__(51));
-__export(__webpack_require__(52));
-__export(__webpack_require__(53));
-__export(__webpack_require__(54));
-__export(__webpack_require__(55));
-__export(__webpack_require__(56));
-__export(__webpack_require__(57));
-__export(__webpack_require__(9));
-var Types = __webpack_require__(58);
-exports.Types = Types;
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
 // Office Fabric-UI JavaScript Library
 __export(__webpack_require__(73));
 // Fabric Components
@@ -145,9 +118,36 @@ __export(__webpack_require__(95));
 var Templates = __webpack_require__(96);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(104);
+var Types = __webpack_require__(108);
 exports.Types = Types;
 
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(17));
+__export(__webpack_require__(47));
+__export(__webpack_require__(48));
+__export(__webpack_require__(49));
+__export(__webpack_require__(50));
+__export(__webpack_require__(51));
+__export(__webpack_require__(52));
+__export(__webpack_require__(53));
+__export(__webpack_require__(54));
+__export(__webpack_require__(55));
+__export(__webpack_require__(56));
+__export(__webpack_require__(57));
+__export(__webpack_require__(9));
+var Types = __webpack_require__(58);
+exports.Types = Types;
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 /* 3 */
@@ -191,7 +191,7 @@ var mapper_1 = __webpack_require__(4);
 exports.SPTypes = mapper_1.SPTypes;
 var Types = __webpack_require__(71);
 exports.Types = Types;
-__export(__webpack_require__(1));
+__export(__webpack_require__(2));
 __export(__webpack_require__(72));
 //# sourceMappingURL=index.js.map
 
@@ -771,7 +771,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(61));
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 var _1 = __webpack_require__(5);
 /**
  * SharePoint Configuration
@@ -2290,14 +2290,14 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric
-var Fabric = __webpack_require__(2);
+var Fabric = __webpack_require__(1);
 exports.Fabric = Fabric;
 // Include the styles
-__webpack_require__(106);
+__webpack_require__(110);
 // Components
 __export(__webpack_require__(14));
 // WebParts
-var WebParts = __webpack_require__(113);
+var WebParts = __webpack_require__(117);
 exports.WebParts = WebParts;
 
 
@@ -2311,11 +2311,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(108));
-__export(__webpack_require__(109));
-__export(__webpack_require__(110));
-__export(__webpack_require__(111));
-var Types = __webpack_require__(112);
+__export(__webpack_require__(112));
+__export(__webpack_require__(113));
+__export(__webpack_require__(114));
+__export(__webpack_require__(115));
+var Types = __webpack_require__(116);
 exports.Types = Types;
 
 
@@ -2483,7 +2483,7 @@ SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("test.js");
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 /**
  * App Helper Methods
  * Helper methods designed to be run from the app web.
@@ -3421,7 +3421,7 @@ exports.RequestType = {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 var mapper_1 = __webpack_require__(4);
 var _1 = __webpack_require__(0);
 /**
@@ -6614,7 +6614,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 var _1 = __webpack_require__(0);
 /**
  * Base Execution
@@ -6852,7 +6852,7 @@ exports.Base = Base;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 var _1 = __webpack_require__(0);
 /**
  * Batch Requests
@@ -7330,7 +7330,7 @@ exports.OData = OData;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 /**
  * Target Information
  */
@@ -7471,7 +7471,7 @@ exports.TargetInfo = TargetInfo;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 /**
  * XML HTTP Request Class
  */
@@ -7649,7 +7649,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 /**
  * JS Link
  */
@@ -8099,7 +8099,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(0);
-var _1 = __webpack_require__(1);
+var _1 = __webpack_require__(2);
 /*********************************************************************************************************************************/
 // Site
 // The SPSite object.
@@ -8359,7 +8359,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 /**
  * Dependencies
  * This class will ensure the core SP scripts are loaded on the page.
@@ -8437,7 +8437,7 @@ exports.Dependencies = _Dependencies;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 var __1 = __webpack_require__(3);
 var spCfg_1 = __webpack_require__(10);
 /**
@@ -8831,7 +8831,7 @@ exports.SPCfgType = {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 var mapper_1 = __webpack_require__(4);
 /**
  * JSLink Helper Methods
@@ -9203,7 +9203,7 @@ exports.JSLink = {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 var parse_1 = __webpack_require__(11);
 /**
  * List Form
@@ -9581,7 +9581,7 @@ exports.ListForm = _ListForm;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 var __1 = __webpack_require__(3);
 var taxonomy_1 = __webpack_require__(12);
 /**
@@ -9799,7 +9799,7 @@ exports.ListFormField = _ListFormField;
 
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 /**
  * Loader
  */
@@ -9934,7 +9934,7 @@ exports.SuiteBarLink = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(1);
+var lib_1 = __webpack_require__(2);
 /**
  * Web Part
  */
@@ -10420,7 +10420,7 @@ exports.Util = utils_1.Types;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var Helper = __webpack_require__(5);
-var Lib = __webpack_require__(1);
+var Lib = __webpack_require__(2);
 var Mapper = __webpack_require__(4);
 /**
  * SharePoint REST Library
@@ -10749,7 +10749,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_LOCA
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * Button
  */
@@ -10784,7 +10784,7 @@ exports.Button = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * Callout Positions
  */
@@ -10828,7 +10828,7 @@ exports.Callout = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * CheckBox
  */
@@ -10850,14 +10850,7 @@ exports.CheckBox = function (props) {
         return _cb ? _cb.getValue() : false;
     };
     // Add the checkbox html
-    props.el.innerHTML = [
-        '<div class="ms-CheckBox ' + (props.className || "") + '">',
-        '<input tabindex="-1" type="checkbox" class="ms-CheckBox-input"></input>',
-        '<label role="checkbox" class="ms-CheckBox-field field-label' + (props.disable ? " is-disabled" : "") + '" tabindex="0" aria-checked="" name="checkbox' + props.label + '">',
-        '<span class="ms-Label' + (props.required ? ' is-required' : '') + '">' + props.label + '</span>',
-        '</label>',
-        '</div>'
-    ].join('\n');
+    props.el.innerHTML = _1.Templates.CheckBox(props);
     // Get the checkbox
     var cb = get();
     // Set the checkbox change event
@@ -10885,7 +10878,7 @@ exports.CheckBox = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * Time Picker Type
  */
@@ -10922,48 +10915,7 @@ exports.DatePicker = function (props) {
     // Method to render the date picker
     var renderDatePicker = function (el) {
         // Add the datetime html
-        el.innerHTML = [
-            '<div class="ms-TextField">',
-            '<label class="ms-Label field-label">' + (props.label || '') + '</label>',
-            '<i class="ms-DatePicker-event ms-Icon ms-Icon--Event"></i>',
-            '<input class="ms-TextField-field" type="text" placeholder="Select a date&hellip;">',
-            '</div>',
-            '<div class="ms-DatePicker-monthComponents">',
-            '<span class="ms-DatePicker-nextMonth js-nextMonth"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>',
-            '<span class="ms-DatePicker-prevMonth js-prevMonth"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span>',
-            '<div class="ms-DatePicker-headerToggleView js-showMonthPicker"></div>',
-            '</div>',
-            '<span class="ms-DatePicker-goToday js-goToday">Go to today</span>',
-            '<div class="ms-DatePicker-monthPicker">',
-            '<div class="ms-DatePicker-header">',
-            '<div class="ms-DatePicker-yearComponents">',
-            '<span class="ms-DatePicker-nextYear js-nextYear"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>',
-            '<span class="ms-DatePicker-prevYear js-prevYear"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span>',
-            '</div>',
-            '<div class="ms-DatePicker-currentYear js-showYearPicker"></div>',
-            '</div>',
-            '<div class="ms-DatePicker-optionGrid">',
-            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="0">Jan</span>',
-            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="1">Feb</span>',
-            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="2">Mar</span>',
-            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="3">Apr</span>',
-            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="4">May</span>',
-            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="5">Jun</span>',
-            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="6">Jul</span>',
-            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="7">Aug</span>',
-            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="8">Sep</span>',
-            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="9">Oct</span>',
-            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="10">Nov</span>',
-            '<span class="ms-DatePicker-monthOption js-changeDate" data-month="11">Dec</span>',
-            '</div>',
-            '</div>',
-            '<div class="ms-DatePicker-yearPicker">',
-            '<div class="ms-DatePicker-decadeComponents">',
-            '<span class="ms-DatePicker-nextDecade js-nextDecade"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>',
-            '<span class="ms-DatePicker-prevDecade js-prevDecade"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span> ',
-            '</div>',
-            '</div>'
-        ].join('\n');
+        el.innerHTML = _1.Templates.DatePicker(props);
         // Set the date picker change event
         el.onchange = function () {
             // Execute the change event
@@ -11040,7 +10992,7 @@ exports.DatePicker = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * Dropdown Types
  */
@@ -11192,7 +11144,7 @@ exports.Dropdown = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * Link Field
  */
@@ -11256,7 +11208,7 @@ exports.LinkField = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * List
  */
@@ -11284,7 +11236,7 @@ exports.List = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * List Item
  */
@@ -11303,7 +11255,7 @@ exports.ListItem = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * Number Field Types
  */
@@ -11400,7 +11352,7 @@ exports.NumberField = function (props) {
 
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * Panel Types
  */
@@ -11477,7 +11429,7 @@ exports.Panel = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * People Picker
  */
@@ -11612,7 +11564,7 @@ exports.PeoplePicker = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * Spinner
  */
@@ -11640,7 +11592,7 @@ exports.Spinner = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * Text Field Types
  */
@@ -11700,30 +11652,8 @@ exports.TextField = function (props) {
         // Validation passed
         return true;
     };
-    // Set the class name
-    var className = props.className || "";
-    var isUnderline = false;
-    if (props.placeholder) {
-        className += " ms-TextField--placeholder";
-    }
-    if (props.type == TextFieldTypes.Multi) {
-        className += " ms-TextField--multiline";
-    }
-    else if (props.type != TextFieldTypes.Default) {
-        className += " ms-TextField--underlined";
-        isUnderline = true;
-    }
     // Add the textfield html
-    props.el.innerHTML = [
-        '<div class="ms-TextField ' + className.trim() + '">',
-        '<label class="ms-Label field-label' + (props.required ? ' is-required' : '') + '"' + (isUnderline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
-        props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
-        props.type == TextFieldTypes.Multi ?
-            '<textarea class="ms-TextField-field"></textarea>' :
-            '<input class="ms-TextField-field" type="text" value="' + (props.value || "") + '" placeholder=""></input>',
-        '<label class="ms-Label ms-fontColor-redDark error" style="color:#a80000;"></label>',
-        '</div>'
-    ].join('\n');
+    props.el.innerHTML = _1.Templates.TextField(props);
     // Get the textfield
     var tb = get();
     // See if the textfield is disabled
@@ -11762,7 +11692,7 @@ exports.TextField = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(2);
+var _1 = __webpack_require__(1);
 /**
  * Toggle
  */
@@ -11782,23 +11712,8 @@ exports.Toggle = function (props) {
         // Get the toggle value
         return _toggle ? _toggle._container.querySelector(".ms-Toggle-field").className.indexOf("is-selected") > 0 : false;
     };
-    // Set the class name
-    var className = props.className || "";
-    if (props.disable) {
-        className += " is-disabled";
-    }
     // Add the toggle html
-    props.el.innerHTML = [
-        props.label ? '<label class="ms-Label field-label">' + props.label + '</label>' : '',
-        '<div class="ms-Toggle ' + className.trim() + '">',
-        props.description ? '<span class="ms-Toggle-description">' + props.description + "</span>" : '',
-        '<input type="checkbox" class="ms-Toggle-input"></input>',
-        '<label class="ms-Toggle-field' + (props.value ? ' is-selected' : '') + '" tabindex="0">',
-        '<span class="ms-Label ms-Label--off">Off</span>',
-        '<span class="ms-Label ms-Label--on">On</span>',
-        '</label>',
-        '</div>'
-    ].join('\n');
+    props.el.innerHTML = _1.Templates.Toggle(props);
     // Get the toggle
     var toggle = get();
     // Set the toggle click event
@@ -11834,6 +11749,10 @@ __export(__webpack_require__(100));
 __export(__webpack_require__(101));
 __export(__webpack_require__(102));
 __export(__webpack_require__(103));
+__export(__webpack_require__(104));
+__export(__webpack_require__(105));
+__export(__webpack_require__(106));
+__export(__webpack_require__(107));
 
 
 /***/ }),
@@ -11847,7 +11766,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Button
  */
 exports.Button = function (props) {
-    // Return the list item
+    // Return the template
     return [
         '<button class="ms-Button ' + (props.className || "") + '">',
         '<span class="ms-Button-label">' + (props.text || "") + '</span>',
@@ -11863,7 +11782,7 @@ exports.Button = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var __1 = __webpack_require__(2);
+var __1 = __webpack_require__(1);
 /**
  * Callout
  */
@@ -11917,10 +11836,90 @@ exports.Callout = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
+ * CheckBox
+ */
+exports.CheckBox = function (props) {
+    // Return the template
+    return [
+        '<div class="ms-CheckBox ' + (props.className || "") + '">',
+        '<input tabindex="-1" type="checkbox" class="ms-CheckBox-input"></input>',
+        '<label role="checkbox" class="ms-CheckBox-field field-label' + (props.disable ? " is-disabled" : "") + '" tabindex="0" aria-checked="" name="checkbox' + props.label + '">',
+        '<span class="ms-Label' + (props.required ? ' is-required' : '') + '">' + props.label + '</span>',
+        '</label>',
+        '</div>'
+    ].join('\n');
+};
+
+
+/***/ }),
+/* 100 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Date Picker
+ */
+exports.DatePicker = function (props) {
+    // Return the template
+    return [
+        '<div class="ms-TextField">',
+        '<label class="ms-Label field-label">' + (props.label || '') + '</label>',
+        '<i class="ms-DatePicker-event ms-Icon ms-Icon--Event"></i>',
+        '<input class="ms-TextField-field" type="text" placeholder="Select a date&hellip;">',
+        '</div>',
+        '<div class="ms-DatePicker-monthComponents">',
+        '<span class="ms-DatePicker-nextMonth js-nextMonth"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>',
+        '<span class="ms-DatePicker-prevMonth js-prevMonth"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span>',
+        '<div class="ms-DatePicker-headerToggleView js-showMonthPicker"></div>',
+        '</div>',
+        '<span class="ms-DatePicker-goToday js-goToday">Go to today</span>',
+        '<div class="ms-DatePicker-monthPicker">',
+        '<div class="ms-DatePicker-header">',
+        '<div class="ms-DatePicker-yearComponents">',
+        '<span class="ms-DatePicker-nextYear js-nextYear"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>',
+        '<span class="ms-DatePicker-prevYear js-prevYear"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span>',
+        '</div>',
+        '<div class="ms-DatePicker-currentYear js-showYearPicker"></div>',
+        '</div>',
+        '<div class="ms-DatePicker-optionGrid">',
+        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="0">Jan</span>',
+        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="1">Feb</span>',
+        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="2">Mar</span>',
+        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="3">Apr</span>',
+        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="4">May</span>',
+        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="5">Jun</span>',
+        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="6">Jul</span>',
+        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="7">Aug</span>',
+        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="8">Sep</span>',
+        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="9">Oct</span>',
+        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="10">Nov</span>',
+        '<span class="ms-DatePicker-monthOption js-changeDate" data-month="11">Dec</span>',
+        '</div>',
+        '</div>',
+        '<div class="ms-DatePicker-yearPicker">',
+        '<div class="ms-DatePicker-decadeComponents">',
+        '<span class="ms-DatePicker-nextDecade js-nextDecade"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>',
+        '<span class="ms-DatePicker-prevDecade js-prevDecade"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span> ',
+        '</div>',
+        '</div>'
+    ].join('\n');
+};
+
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
  * List
  */
 exports.List = function (props) {
-    // Return the list item
+    // Return the template
     return [
         '<ul class="ms-List ' + (props.className || "") + '">',
         props.items && props.items.length > 0 ? props.items.join('\n') : '',
@@ -11930,7 +11929,7 @@ exports.List = function (props) {
 
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11950,7 +11949,7 @@ exports.ListItem = function (props) {
         props.isUnread ? "is-unread" : "",
         props.isUnseen ? "is-unseen" : ""
     ].join(' ').trim();
-    // Return the list item
+    // Return the template
     return [
         '<li class="ms-ListItem ' + className + '" tabindex="0">',
         '<span class="ms-ListItem-primaryText">' + (props.primaryText || "") + '</span>',
@@ -11965,13 +11964,13 @@ exports.ListItem = function (props) {
 
 
 /***/ }),
-/* 101 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var __1 = __webpack_require__(2);
+var __1 = __webpack_require__(1);
 /**
  * Panel
  */
@@ -11998,7 +11997,7 @@ exports.Panel = function (props, content) {
             className += " ms-Panel--xxl";
             break;
     }
-    // Return the list item
+    // Return the template
     return [
         '<div class="ms-Panel ' + className.trim() + '">',
         '<button class="ms-Panel-closeButton ms-PanelAction-close">',
@@ -12014,7 +12013,7 @@ exports.Panel = function (props, content) {
 
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12028,6 +12027,7 @@ exports.PeoplePicker = function (props) {
     var group = function (title, searchText, results) {
         if (title === void 0) { title = ""; }
         if (searchText === void 0) { searchText = ""; }
+        // Return the template
         return [
             '<div class="ms-PeoplePicker-resultGroup">',
             '<div class="ms-PeoplePicker-resultGroupTitle">',
@@ -12048,6 +12048,7 @@ exports.PeoplePicker = function (props) {
     };
     // Header
     var header = function () {
+        // Return the template
         return [
             '<label class="ms-Label field-label',
             props.required ? ' is-required' : '',
@@ -12085,6 +12086,7 @@ exports.PeoplePicker = function (props) {
     var results = function (title, searchText) {
         if (title === void 0) { title = ""; }
         if (searchText === void 0) { searchText = ""; }
+        // Return the template
         return [
             '<div class="ms-PeoplePicker-results">',
             group(title, searchText),
@@ -12093,6 +12095,7 @@ exports.PeoplePicker = function (props) {
     };
     // Search Box
     var searchBox = function () {
+        // Return the template
         return [
             '<div class="ms-PeoplePicker-searchBox">',
             '<div class="ms-TextField ms-TextField--textFieldUnderlined">',
@@ -12112,7 +12115,7 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 103 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12122,7 +12125,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Spinner
  */
 exports.Spinner = function (props) {
-    // Return the list item
+    // Return the template
     return [
         '<div class="ms-Spinner ' + (props.className || "") + '">',
         '<div class="ms-Spinner-label">' + (props.text || "") + '</div>',
@@ -12132,19 +12135,84 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 104 */
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var __1 = __webpack_require__(1);
+/**
+ * TextField
+ */
+exports.TextField = function (props) {
+    var isUnderline = props.type != __1.TextFieldTypes.Multi && props.type != __1.TextFieldTypes.Default;
+    // Set the class name
+    var className = [
+        props.className || "",
+        props.placeholder ? "ms-TextField--placeholder" : "",
+        props.type == __1.TextFieldTypes.Multi ? "ms-TextField--multiline" : "",
+        isUnderline ? "ms-TextField--underlined" : ""
+    ].join(' ').trim();
+    // Return the template
+    return [
+        '<div class="ms-TextField ' + className.trim() + '">',
+        '<label class="ms-Label field-label' + (props.required ? ' is-required' : '') + '"' + (isUnderline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
+        props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
+        props.type == __1.TextFieldTypes.Multi ?
+            '<textarea class="ms-TextField-field"></textarea>' :
+            '<input class="ms-TextField-field" type="text" value="' + (props.value || "") + '" placeholder=""></input>',
+        '<label class="ms-Label ms-fontColor-redDark error" style="color:#a80000;"></label>',
+        '</div>'
+    ].join('\n');
+};
+
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Toggle
+ */
+exports.Toggle = function (props) {
+    // Set the class name
+    var className = props.className || "";
+    if (props.disable) {
+        className += " is-disabled";
+    }
+    // Return the template
+    return [
+        props.label ? '<label class="ms-Label field-label">' + props.label + '</label>' : '',
+        '<div class="ms-Toggle ' + className.trim() + '">',
+        props.description ? '<span class="ms-Toggle-description">' + props.description + "</span>" : '',
+        '<input type="checkbox" class="ms-Toggle-input"></input>',
+        '<label class="ms-Toggle-field' + (props.value ? ' is-selected' : '') + '" tabindex="0">',
+        '<span class="ms-Label ms-Label--off">Off</span>',
+        '<span class="ms-Label ms-Label--on">On</span>',
+        '</label>',
+        '</div>'
+    ].join('\n');
+};
+
+
+/***/ }),
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(105);
+var Fabric = __webpack_require__(109);
 exports.Fabric = Fabric;
 
 
 /***/ }),
-/* 105 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12153,11 +12221,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 106 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(107);
+var content = __webpack_require__(111);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -12203,7 +12271,7 @@ if(false) {
 }
 
 /***/ }),
-/* 107 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -12217,7 +12285,7 @@ exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font co
 
 
 /***/ }),
-/* 108 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12462,7 +12530,7 @@ exports.Field = function (props) {
 
 
 /***/ }),
-/* 109 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12839,7 +12907,7 @@ exports.ListForm = _ListForm;
 
 
 /***/ }),
-/* 110 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13054,14 +13122,14 @@ exports.ListFormField = _ListFormField;
 
 
 /***/ }),
-/* 111 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var fabric_1 = __webpack_require__(2);
+var fabric_1 = __webpack_require__(1);
 var _1 = __webpack_require__(14);
 /**
  * Item Form
@@ -13139,7 +13207,7 @@ exports.ListFormPanel = function (props) {
 
 
 /***/ }),
-/* 112 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13148,7 +13216,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 113 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13157,11 +13225,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(114));
+__export(__webpack_require__(118));
 
 
 /***/ }),
-/* 114 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
