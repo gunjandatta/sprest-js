@@ -1,4 +1,4 @@
-import { fabric } from ".";
+import { fabric, Templates } from ".";
 import { ISpinner, ISpinnerProps } from "./types";
 
 /**
@@ -12,11 +12,7 @@ export const Spinner = (props: ISpinnerProps): ISpinner => {
     }
 
     // Render a spinner
-    props.el.innerHTML = [
-        '<div class="ms-Spinner' + '">',
-        '<div class="ms-Spinner-label">Loading the field...</div>',
-        '</div>'
-    ].join('\n');
+    props.el.innerHTML = Templates.Spinner(props);
 
     // Initialize the spinner
     let _spinner = new fabric.Spinner(props.el.querySelector(".ms-Spinner"));

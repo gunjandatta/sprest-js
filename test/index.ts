@@ -1,5 +1,5 @@
 import { Helper, SPTypes, Types } from "gd-sprest";
-import { Fabric, Field, WebParts } from "../build";
+import { Fabric, ListFormPanel, WebParts } from "../build";
 declare var SP;
 
 // Create the global variable
@@ -174,46 +174,22 @@ window["TestJS"] = {
                 // Render elements
                 cfg.el.innerHTML = "<div></div><div></div>";
 
+                // Render the list form panel
+                let listForm = ListFormPanel({
+                    el: cfg.el.children[0],
+                    listName: "SPReact",
+                    panelTitle: "Test Item Form",
+                    panelType: Fabric.PanelTypes.Large
+                });
+
                 // Render the button
                 let button = Fabric.Button({
-                    el: cfg.el.firstElementChild,
+                    el: cfg.el.children[1],
                     text: "Show Panel",
                     onClick: () => {
-                        let panelContent = "";
-
-                        // Parse the fields
-                        let fields = [
-                            "Title", "TestChoice", "TestBoolean", "TestDate", "TestDateTime", "TestMultiChoice",
-                            "TestNumberDecimal", "TestNumberInteger", "TestNumberPercentage",
-                            "TestLookup", "TestMultiLookup", "TestManagedMetadata", "TestUrl", "TestUser"
-                        ];
-                        for (let i = 0; i < fields.length; i++) {
-                            // Append the div for this field
-                            panelContent += "<div data-field='" + fields[i] + "'></div>";
-                        }
-
-                        // Show the panel
-                        let content = panel.show(panelContent);
-
-                        // Parse the fields
-                        for (let i = 0; i < fields.length; i++) {
-                            // Render the field
-                            Field({
-                                el: content.children[i],
-                                fieldInfo: {
-                                    listName: "SPReact",
-                                    name: fields[i]
-                                }
-                            });
-                        }
+                        // Show the list form
+                        listForm.show(SPTypes.ControlMode.New);
                     }
-                })
-
-                // Render the panel
-                let panel = Fabric.Panel({
-                    el: cfg.el.lastElementChild,
-                    headerText: "JS List Form",
-                    panelType: Fabric.PanelTypes.Large
                 });
             },
             onRenderEdit: (cfg) => {

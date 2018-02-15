@@ -1,16 +1,12 @@
 import { IButtonProps } from "./types"
-import { fabric } from ".";
+import { fabric, Templates } from ".";
 
 /**
  * Button
  */
 export const Button = (props: IButtonProps): HTMLButtonElement => {
     // Add the button html
-    props.el.innerHTML = [
-        '<button class="ms-Button ' + (props.className || "") + '">',
-        '<span class="ms-Button-label">' + (props.text || "") + '</span>',
-        '</button>'
-    ].join('\n');
+    props.el.innerHTML = Templates.Button(props);
 
     // Get the button
     let btn = props.el.firstElementChild as HTMLButtonElement;

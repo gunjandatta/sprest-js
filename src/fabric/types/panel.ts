@@ -28,8 +28,11 @@ export interface IPanel {
  * Panel Properties
  */
 export interface IPanelProps extends IProps {
-    /** The header text */
+    /** The header text. */
     headerText?: string;
+
+    /** The panel content. */
+    panelContent?: string;
 
     /**
      * The panel type
