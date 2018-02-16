@@ -43,7 +43,7 @@ export const NumberField = (props: INumberFieldProps): INumberField => {
                 case NumberFieldTypes.Number:
                     // Ensure this is a number
                     numberValue = parseFloat(value);
-                    if (!(numberValue >= minValue && numberValue <= maxValue) || numberValue.toString() != value) {
+                    if (!(numberValue >= minValue && numberValue <= maxValue) || numberValue != value as any) {
                         // Set the error message
                         _numberfield.setErrorMessage("The value is not a number");
 
@@ -53,12 +53,12 @@ export const NumberField = (props: INumberFieldProps): INumberField => {
                     break;
                 case NumberFieldTypes.Percentage:
                     // Update the min/max values
-                    maxValue = maxValue == Number.MAX_VALUE ? 1 : maxValue;
+                    maxValue = maxValue == Number.MAX_VALUE ? 100 : maxValue;
                     minValue = minValue == Number.MIN_VALUE ? 0 : minValue;
 
                     // Ensure this is a number
                     numberValue = parseFloat(value);
-                    if (!(numberValue >= minValue && numberValue <= maxValue) || numberValue.toString() != value) {
+                    if (!(numberValue >= minValue && numberValue <= maxValue) || numberValue != value as any) {
                         // Set the error message
                         _numberfield.setErrorMessage("The value is not a number");
 

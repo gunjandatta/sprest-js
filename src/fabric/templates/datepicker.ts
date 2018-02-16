@@ -1,3 +1,4 @@
+import { Label } from "../templates";
 import { IDatePickerProps } from "../types";
 
 /**
@@ -7,7 +8,7 @@ export const DatePicker = (props: IDatePickerProps): string => {
     // Return the template
     return [
         '<div class="ms-TextField">',
-        '<label class="ms-Label field-label">' + (props.label || '') + '</label>',
+        Label({ text: props.label }),
         '<i class="ms-DatePicker-event ms-Icon ms-Icon--Event"></i>',
         '<input class="ms-TextField-field" type="text" placeholder="Select a date&hellip;">',
         '</div>',
@@ -46,5 +47,5 @@ export const DatePicker = (props: IDatePickerProps): string => {
         '<span class="ms-DatePicker-prevDecade js-prevDecade"><i class="ms-Icon ms-Icon--ChevronLeft"></i></span> ',
         '</div>',
         '</div>'
-].join('\n');
+    ].join('\n');
 }

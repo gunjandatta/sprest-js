@@ -1,3 +1,4 @@
+import { Label } from "../templates";
 import { IToggleProps } from "../types";
 
 /**
@@ -10,7 +11,7 @@ export const Toggle = (props: IToggleProps): string => {
 
     // Return the template
     return [
-        props.label ? '<label class="ms-Label field-label">' + props.label + '</label>' : '',
+        props.label ? Label({ className: "field-label", text: props.label}) : '',
         '<div class="ms-Toggle ' + className.trim() + '">',
         props.description ? '<span class="ms-Toggle-description">' + props.description + "</span>" : '',
         '<input type="checkbox" class="ms-Toggle-input"></input>',

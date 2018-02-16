@@ -9,6 +9,7 @@ export * from "./callout";
 export * from "./common";
 export * from "./datepicker";
 export * from "./dropdown";
+export * from "./label";
 export * from "./linkfield";
 export * from "./list";
 export * from "./listitem";

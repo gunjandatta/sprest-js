@@ -2,6 +2,7 @@ export * from "./button";
 export * from "./callout";
 export * from "./checkbox";
 export * from "./datepicker";
+export * from "./label";
 export * from "./list";
 export * from "./listitem";
 export * from "./panel";

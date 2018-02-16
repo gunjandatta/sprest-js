@@ -100,6 +100,20 @@ export const Field = (props: IFieldProps) => {
                 });
                 break;
 
+            // Calculated Field
+            case SPTypes.FieldType.Calculated:
+                Fabric.TextField({
+                    className: props.className,
+                    disable: true,
+                    el: props.el,
+                    label: fieldInfo.title,
+                    onChange: props.onChange,
+                    required: fieldInfo.required,
+                    type: Fabric.TextFieldTypes.Underline,
+                    value: props.value || fieldInfo.defaultValue || ""
+                });
+                break;
+
             // Choice Field
             case SPTypes.FieldType.Choice:
                 Fabric.Dropdown({
@@ -164,9 +178,23 @@ export const Field = (props: IFieldProps) => {
                 });
                 break;
 
-            // Number
-            case SPTypes.FieldType.Currency:
+            // Note Field
+            case SPTypes.FieldType.Note:
+                Fabric.TextField({
+                    className: props.className,
+                    disable: props.disabled,
+                    el: props.el,
+                    label: fieldInfo.title,
+                    onChange: props.onChange,
+                    required: fieldInfo.required,
+                    type: Fabric.TextFieldTypes.Multi,
+                    value: props.value || fieldInfo.defaultValue || ""
+                });
+                break;
+
+            // Number or Currency Field
             case SPTypes.FieldType.Number:
+            case SPTypes.FieldType.Currency:
                 let numberInfo = fieldInfo as Helper.Types.IListFormNumberFieldInfo;
                 Fabric.NumberField({
                     className: props.className,

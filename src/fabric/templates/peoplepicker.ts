@@ -1,4 +1,5 @@
 import { IPeoplePickerUser } from "gd-sprest/build/mapper/types";
+import { Label } from "../templates";
 import { IPeoplePickerProps } from "../types";
 
 /**
@@ -30,13 +31,7 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
     // Header
     let header = (): string => {
         // Return the template
-        return [
-            '<label class="ms-Label field-label',
-            props.required ? ' is-required' : '',
-            '" style="display:block">',
-            props.label || "",
-            '</label>'
-        ].join('');
+        return Label({ isRequired: props.required, text: props.label });
     }
 
     // Result

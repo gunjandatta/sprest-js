@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/gunjandatta/sprest-js#readme",
   "dependencies": {
-    "gd-sprest": "^3.4.8"
+    "gd-sprest": "^3.4.9"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -43,7 +43,7 @@
     "gulp-typescript": "^4.0.1",
     "gulp-uglify": "^3.0.0",
     "office-ui-fabric-js": "^1.5.0",
-    "style-loader": "^0.20.1",
+    "style-loader": "^0.20.2",
     "ts-loader": "^3.5.0",
     "webpack": "^3.11.0"
   }
