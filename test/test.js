@@ -11657,25 +11657,20 @@ var TextFieldTypes;
  * Text Field
  */
 exports.TextField = function (props) {
-    // Method to get the text field element
-    var get = function () {
-        // Returns the text field element
-        return props.el.querySelector(".ms-TextField-field");
-    };
     // Method to get the fabric component
-    var getFabricComponent = function () {
+    var get = function () {
         // Return the textfield
         return _textfield;
     };
     // Method to get the value
     var getValue = function () {
         // Get the text field
-        return get().value;
+        return _textfield._textField.value || "";
     };
     // Method to set the error message
     var setErrorMessage = function (message) {
         // Get the error message
-        var errorMessage = (_textfield ? _textfield._container : props.el.querySelector(".ms-TextField")).querySelector(".error");
+        var errorMessage = _textfield._container.querySelector(".error");
         if (errorMessage) {
             // Set the error message
             errorMessage.innerHTML = message || "";
@@ -11684,10 +11679,7 @@ exports.TextField = function (props) {
     // Method to set the value
     var setValue = function (value) {
         // Get the text field
-        var textfield = get();
-        if (textfield) {
-            textfield.value = value;
-        }
+        _textfield._textField.value = value || "";
     };
     // Method to validate the value
     var validate = function (value) {
@@ -11705,17 +11697,12 @@ exports.TextField = function (props) {
     };
     // Add the textfield html
     props.el.innerHTML = _1.Templates.TextField(props);
-    // Get the textfield
-    var tb = get();
-    // See if the textfield is disabled
-    if (props.disable) {
-        // Disable the textfield
-        tb.disabled = true;
-    }
+    // Create the textfield
+    var _textfield = new _1.fabric.TextField(props.el.firstElementChild);
     // Set the change event
-    tb.onchange = function () {
+    _textfield._textField.onchange = function () {
         // Validate the value
-        var value = (getValue() + "").trim();
+        var value = getValue().trim();
         if (validate(value) && props.onChange) {
             // Call the change event
             props.onChange(value);
@@ -11723,12 +11710,9 @@ exports.TextField = function (props) {
     };
     // Validate the textfield
     validate(props.value);
-    // Create the textfield
-    var _textfield = new _1.fabric.TextField(props.el.firstElementChild);
     // Return the text field
     return {
         get: get,
-        getFabricComponent: getFabricComponent,
         getValue: getValue,
         setErrorMessage: setErrorMessage,
         setValue: setValue
@@ -12341,7 +12325,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display:none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display:block; }\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n /** Update the label for the underline type */\r\n .ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n     display: block;\r\n }", ""]);
+exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n /** Update the label for the underline type */\r\n .ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n     display: block;\r\n }", ""]);
 
 // exports
 

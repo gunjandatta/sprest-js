@@ -1,14 +1,11 @@
-import { IComponentProps, IProps } from ".";
+import { Fabric, IComponentProps, IProps } from ".";
 
 /**
  * Text Field
  */
 export interface ITextField {
-    /** Returns the textfield element. */
-    get(): HTMLInputElement;
-
     /** Returns the fabric component. */
-    getFabricComponent(): any;
+    get(): Fabric.ITextField;
 
     /** Returns the textfield value. */
     getValue(): string;
