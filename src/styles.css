@@ -25,6 +25,16 @@
 }
 
 /**
+ * Label
+ */
+
+/** Hide the description by default */
+.ms-Icon.is-description span { display: none; }
+
+/** Show the description on hover */
+.ms-Icon.is-description:hover span { display: block; }
+
+/**
  * Panel
  */
 
@@ -37,3 +47,12 @@
 .ms-PanelHost {
     z-index: 1000;
 }
+
+/**
+ * Text Field
+ */
+
+ /** Update the label for the underline type */
+ .ms-TextField.ms-TextField--underlined > .ms-Label.field-label {
+     display: block;
+ }

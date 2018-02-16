@@ -22,6 +22,9 @@ export interface IPeoplePickerProps extends IProps {
     /** Flag to allow groups. */
     allowGroups?: boolean;
 
+    /** The people picker description. */
+    description?: string;
+
     /** The people picker label. */
     label?: string;
 

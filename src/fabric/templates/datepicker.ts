@@ -8,7 +8,7 @@ export const DatePicker = (props: IDatePickerProps): string => {
     // Return the template
     return [
         '<div class="ms-TextField">',
-        Label({ text: props.label }),
+        props.label ? Label({ description: props.description, text: props.label }) : '',
         '<i class="ms-DatePicker-event ms-Icon ms-Icon--Event"></i>',
         '<input class="ms-TextField-field" type="text" placeholder="Select a date&hellip;">',
         '</div>',

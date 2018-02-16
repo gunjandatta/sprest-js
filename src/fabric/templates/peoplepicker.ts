@@ -31,7 +31,11 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
     // Header
     let header = (): string => {
         // Return the template
-        return Label({ isRequired: props.required, text: props.label });
+        return Label({
+            description: props.description,
+            isRequired: props.required,
+            text: props.label
+        }) || "";
     }
 
     // Result

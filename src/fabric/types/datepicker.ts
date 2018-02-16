@@ -21,6 +21,9 @@ export interface IDatePicker {
  * DatePicker Properties
  */
 export interface IDatePickerProps extends IComponentProps {
+    /** The field description. */
+    description?: string;
+
     /** The change event */
     onChange?: (value: Date) => void;
 

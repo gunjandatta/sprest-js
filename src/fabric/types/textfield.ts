@@ -24,6 +24,9 @@ export interface ITextField {
  * Text Field Properties
  */
 export interface ITextFieldProps extends IComponentProps {
+    /** The field description */
+    description?: string;
+
     /** The change event */
     onChange?: (value: string) => void;
 

@@ -115,7 +115,7 @@ __export(__webpack_require__(94));
 __export(__webpack_require__(95));
 __export(__webpack_require__(96));
 // Templates
-var Templates = __webpack_require__(6);
+var Templates = __webpack_require__(5);
 exports.Templates = Templates;
 // Types
 var Types = __webpack_require__(109);
@@ -185,7 +185,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ***************************************************************************************************/
-var Helper = __webpack_require__(5);
+var Helper = __webpack_require__(6);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(4);
 exports.SPTypes = mapper_1.SPTypes;
@@ -220,6 +220,30 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(97));
+__export(__webpack_require__(98));
+__export(__webpack_require__(99));
+__export(__webpack_require__(100));
+__export(__webpack_require__(101));
+__export(__webpack_require__(102));
+__export(__webpack_require__(103));
+__export(__webpack_require__(104));
+__export(__webpack_require__(105));
+__export(__webpack_require__(106));
+__export(__webpack_require__(107));
+__export(__webpack_require__(108));
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(17));
 __export(__webpack_require__(60));
 __export(__webpack_require__(61));
@@ -238,30 +262,6 @@ exports.SP = SP;
 var Types = __webpack_require__(71);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(97));
-__export(__webpack_require__(98));
-__export(__webpack_require__(99));
-__export(__webpack_require__(100));
-__export(__webpack_require__(101));
-__export(__webpack_require__(102));
-__export(__webpack_require__(103));
-__export(__webpack_require__(104));
-__export(__webpack_require__(105));
-__export(__webpack_require__(106));
-__export(__webpack_require__(107));
-__export(__webpack_require__(108));
-
 
 /***/ }),
 /* 7 */
@@ -796,7 +796,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(62));
 var lib_1 = __webpack_require__(2);
-var _1 = __webpack_require__(5);
+var _1 = __webpack_require__(6);
 /**
  * SharePoint Configuration
  */
@@ -10442,7 +10442,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(5);
+var helper_1 = __webpack_require__(6);
 exports.Helper = helper_1.Types;
 var mapper_1 = __webpack_require__(4);
 exports.SP = mapper_1.Types;
@@ -10457,7 +10457,7 @@ exports.Util = utils_1.Types;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Helper = __webpack_require__(5);
+var Helper = __webpack_require__(6);
 var Lib = __webpack_require__(2);
 var Mapper = __webpack_require__(4);
 /**
@@ -11886,7 +11886,7 @@ exports.CheckBox = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var templates_1 = __webpack_require__(6);
+var templates_1 = __webpack_require__(5);
 /**
  * Date Picker
  */
@@ -11894,7 +11894,7 @@ exports.DatePicker = function (props) {
     // Return the template
     return [
         '<div class="ms-TextField">',
-        templates_1.Label({ text: props.label }),
+        props.label ? templates_1.Label({ description: props.description, text: props.label }) : '',
         '<i class="ms-DatePicker-event ms-Icon ms-Icon--Event"></i>',
         '<input class="ms-TextField-field" type="text" placeholder="Select a date&hellip;">',
         '</div>',
@@ -11955,7 +11955,12 @@ exports.Label = function (props) {
         props.isRequired ? "is-required" : ""
     ].join(' ').trim();
     // Return the template
-    return '<label class="ms-Label ' + className + ':>' + (props.text || "") + '</label>';
+    return [
+        '<label class="ms-Label ' + className + '">',
+        props.text || "",
+        props.description ? '<i class="ms-Icon ms-Icon--Info is-description"><span>' + props.description + '</span></i>' : '',
+        '</label>'
+    ].join("");
 };
 
 
@@ -12070,7 +12075,7 @@ exports.Panel = function (props, content) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var templates_1 = __webpack_require__(6);
+var templates_1 = __webpack_require__(5);
 /**
  * People Picker
  */
@@ -12101,7 +12106,11 @@ exports.PeoplePicker = function (props) {
     // Header
     var header = function () {
         // Return the template
-        return templates_1.Label({ isRequired: props.required, text: props.label });
+        return templates_1.Label({
+            description: props.description,
+            isRequired: props.required,
+            text: props.label
+        }) || "";
     };
     // Result
     var result = function (user) {
@@ -12187,6 +12196,7 @@ exports.Spinner = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var templates_1 = __webpack_require__(5);
 var __1 = __webpack_require__(1);
 /**
  * TextField
@@ -12203,7 +12213,12 @@ exports.TextField = function (props) {
     // Return the template
     return [
         '<div class="ms-TextField ' + className.trim() + '">',
-        '<label class="ms-Label field-label' + (props.required ? ' is-required' : '') + '"' + (isUnderline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
+        props.label ? templates_1.Label({
+            className: "field-label",
+            description: props.description,
+            isRequired: props.required,
+            text: props.label
+        }) : '',
         props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
         props.type == __1.TextFieldTypes.Multi ?
             '<textarea class="ms-TextField-field"></textarea>' :
@@ -12221,7 +12236,7 @@ exports.TextField = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var templates_1 = __webpack_require__(6);
+var templates_1 = __webpack_require__(5);
 /**
  * Toggle
  */
@@ -12326,7 +12341,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}", ""]);
+exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display:none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display:block; }\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n /** Update the label for the underline type */\r\n .ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n     display: block;\r\n }", ""]);
 
 // exports
 
@@ -12428,6 +12443,7 @@ exports.Field = function (props) {
             case gd_sprest_1.SPTypes.FieldType.Calculated:
                 __1.Fabric.TextField({
                     className: props.className,
+                    description: fieldInfo.field.Description,
                     disable: true,
                     el: props.el,
                     label: fieldInfo.title,
@@ -12441,7 +12457,7 @@ exports.Field = function (props) {
             case gd_sprest_1.SPTypes.FieldType.Choice:
                 __1.Fabric.Dropdown({
                     className: props.className,
-                    description: props.fieldInfo.field.Description,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -12455,6 +12471,7 @@ exports.Field = function (props) {
             case gd_sprest_1.SPTypes.FieldType.DateTime:
                 __1.Fabric.DatePicker({
                     className: props.className,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -12470,7 +12487,7 @@ exports.Field = function (props) {
                 gd_sprest_1.Helper.ListFormField.loadLookupData(fieldInfo, 500).then(function (items) {
                     __1.Fabric.Dropdown({
                         className: props.className,
-                        description: props.fieldInfo.field.Description,
+                        description: fieldInfo.field.Description,
                         disable: props.disabled,
                         el: props.el,
                         label: fieldInfo.title,
@@ -12486,7 +12503,7 @@ exports.Field = function (props) {
             case gd_sprest_1.SPTypes.FieldType.MultiChoice:
                 __1.Fabric.Dropdown({
                     className: props.className,
-                    description: props.fieldInfo.field.Description,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -12501,6 +12518,7 @@ exports.Field = function (props) {
             case gd_sprest_1.SPTypes.FieldType.Note:
                 __1.Fabric.TextField({
                     className: props.className,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -12517,6 +12535,7 @@ exports.Field = function (props) {
                 __1.Fabric.NumberField({
                     className: props.className,
                     decimals: numberInfo.decimals,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: numberInfo.title,
@@ -12532,6 +12551,7 @@ exports.Field = function (props) {
             case gd_sprest_1.SPTypes.FieldType.Text:
                 __1.Fabric.TextField({
                     className: props.className,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -12545,7 +12565,7 @@ exports.Field = function (props) {
             case gd_sprest_1.SPTypes.FieldType.URL:
                 __1.Fabric.LinkField({
                     className: props.className,
-                    description: props.value ? props.value.Description : "",
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -12560,6 +12580,7 @@ exports.Field = function (props) {
                 __1.Fabric.PeoplePicker({
                     allowGroups: userInfo.allowGroups,
                     allowMultiple: userInfo.multi,
+                    description: fieldInfo.field.Description,
                     el: props.el,
                     label: userInfo.title,
                     required: userInfo.required,
@@ -12575,7 +12596,7 @@ exports.Field = function (props) {
                     gd_sprest_1.Helper.ListFormField.loadMMSData(mmsInfo_1).then(function (terms) {
                         __1.Fabric.Dropdown({
                             className: props.className,
-                            description: props.fieldInfo.field.Description,
+                            description: fieldInfo.field.Description,
                             disable: props.disabled,
                             el: props.el,
                             label: mmsInfo_1.title,

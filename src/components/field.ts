@@ -104,6 +104,7 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.Calculated:
                 Fabric.TextField({
                     className: props.className,
+                    description: fieldInfo.field.Description,
                     disable: true,
                     el: props.el,
                     label: fieldInfo.title,
@@ -118,7 +119,7 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.Choice:
                 Fabric.Dropdown({
                     className: props.className,
-                    description: props.fieldInfo.field.Description,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -133,6 +134,7 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.DateTime:
                 Fabric.DatePicker({
                     className: props.className,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -149,7 +151,7 @@ export const Field = (props: IFieldProps) => {
                 Helper.ListFormField.loadLookupData(fieldInfo as Helper.Types.IListFormLookupFieldInfo, 500).then(items => {
                     Fabric.Dropdown({
                         className: props.className,
-                        description: props.fieldInfo.field.Description,
+                        description: fieldInfo.field.Description,
                         disable: props.disabled,
                         el: props.el,
                         label: fieldInfo.title,
@@ -166,7 +168,7 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.MultiChoice:
                 Fabric.Dropdown({
                     className: props.className,
-                    description: props.fieldInfo.field.Description,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -182,6 +184,7 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.Note:
                 Fabric.TextField({
                     className: props.className,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -199,6 +202,7 @@ export const Field = (props: IFieldProps) => {
                 Fabric.NumberField({
                     className: props.className,
                     decimals: numberInfo.decimals,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: numberInfo.title,
@@ -215,6 +219,7 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.Text:
                 Fabric.TextField({
                     className: props.className,
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -229,7 +234,7 @@ export const Field = (props: IFieldProps) => {
             case SPTypes.FieldType.URL:
                 Fabric.LinkField({
                     className: props.className,
-                    description: props.value ? props.value.Description : "",
+                    description: fieldInfo.field.Description,
                     disable: props.disabled,
                     el: props.el,
                     label: fieldInfo.title,
@@ -245,6 +250,7 @@ export const Field = (props: IFieldProps) => {
                 Fabric.PeoplePicker({
                     allowGroups: userInfo.allowGroups,
                     allowMultiple: userInfo.multi,
+                    description: fieldInfo.field.Description,
                     el: props.el,
                     label: userInfo.title,
                     required: userInfo.required,
@@ -261,7 +267,7 @@ export const Field = (props: IFieldProps) => {
                     Helper.ListFormField.loadMMSData(mmsInfo).then(terms => {
                         Fabric.Dropdown({
                             className: props.className,
-                            description: props.fieldInfo.field.Description,
+                            description: fieldInfo.field.Description,
                             disable: props.disabled,
                             el: props.el,
                             label: mmsInfo.title,

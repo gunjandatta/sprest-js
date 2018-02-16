@@ -1,3 +1,4 @@
+import { Label } from "../templates";
 import { ITextFieldProps } from "../types";
 import { TextFieldTypes } from "..";
 
@@ -18,7 +19,12 @@ export const TextField = (props: ITextFieldProps): string => {
     // Return the template
     return [
         '<div class="ms-TextField ' + className.trim() + '">',
-        '<label class="ms-Label field-label' + (props.required ? ' is-required' : '') + '"' + (isUnderline ? ' style="display:block"' : '') + '>' + (props.label || "") + '</label>',
+        props.label ? Label({
+            className: "field-label",
+            description: props.description,
+            isRequired: props.required,
+            text: props.label
+        }) : '',
         props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
         props.type == TextFieldTypes.Multi ?
             '<textarea class="ms-TextField-field"></textarea>' :

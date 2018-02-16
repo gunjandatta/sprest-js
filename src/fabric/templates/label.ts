@@ -12,5 +12,10 @@ export const Label = (props: ILabelProps): string => {
     ].join(' ').trim();
 
     // Return the template
-    return '<label class="ms-Label ' + className + ':>' + (props.text || "") + '</label>';
+    return [
+        '<label class="ms-Label ' + className + '">',
+        props.text || "",
+        props.description ? '<i class="ms-Icon ms-Icon--Info is-description"><span>' + props.description + '</span></i>' : '',
+        '</label>'
+    ].join("");
 }
