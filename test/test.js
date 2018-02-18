@@ -114,11 +114,14 @@ __export(__webpack_require__(93));
 __export(__webpack_require__(94));
 __export(__webpack_require__(95));
 __export(__webpack_require__(96));
+__export(__webpack_require__(97));
+__export(__webpack_require__(98));
+__export(__webpack_require__(99));
 // Templates
-var Templates = __webpack_require__(5);
+var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(110);
+var Types = __webpack_require__(115);
 exports.Types = Types;
 
 
@@ -187,7 +190,7 @@ SOFTWARE.
 ***************************************************************************************************/
 var Helper = __webpack_require__(6);
 exports.Helper = Helper;
-var mapper_1 = __webpack_require__(4);
+var mapper_1 = __webpack_require__(5);
 exports.SPTypes = mapper_1.SPTypes;
 var Types = __webpack_require__(72);
 exports.Types = Types;
@@ -201,28 +204,10 @@ __export(__webpack_require__(73));
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var Mapper = __webpack_require__(21);
-exports.Mapper = Mapper;
-var SPTypes = __webpack_require__(34);
-exports.SPTypes = SPTypes;
-var Types = __webpack_require__(35);
-exports.Types = Types;
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(97));
-__export(__webpack_require__(98));
-__export(__webpack_require__(99));
 __export(__webpack_require__(100));
 __export(__webpack_require__(101));
 __export(__webpack_require__(102));
@@ -233,7 +218,27 @@ __export(__webpack_require__(106));
 __export(__webpack_require__(107));
 __export(__webpack_require__(108));
 __export(__webpack_require__(109));
+__export(__webpack_require__(110));
+__export(__webpack_require__(111));
+__export(__webpack_require__(112));
+__export(__webpack_require__(113));
+__export(__webpack_require__(114));
 
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var Mapper = __webpack_require__(21);
+exports.Mapper = Mapper;
+var SPTypes = __webpack_require__(34);
+exports.SPTypes = SPTypes;
+var Types = __webpack_require__(35);
+exports.Types = Types;
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 /* 6 */
@@ -2332,11 +2337,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Fabric = __webpack_require__(1);
 exports.Fabric = Fabric;
 // Include the styles
-__webpack_require__(112);
+__webpack_require__(117);
 // Components
 __export(__webpack_require__(15));
 // WebParts
-var WebParts = __webpack_require__(119);
+var WebParts = __webpack_require__(124);
 exports.WebParts = WebParts;
 
 
@@ -2350,11 +2355,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(114));
-__export(__webpack_require__(115));
-__export(__webpack_require__(116));
-__export(__webpack_require__(117));
-var Types = __webpack_require__(118);
+__export(__webpack_require__(119));
+__export(__webpack_require__(120));
+__export(__webpack_require__(121));
+__export(__webpack_require__(122));
+var Types = __webpack_require__(123);
 exports.Types = Types;
 
 
@@ -3462,7 +3467,7 @@ exports.RequestType = {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(2);
-var mapper_1 = __webpack_require__(4);
+var mapper_1 = __webpack_require__(5);
 var _1 = __webpack_require__(0);
 /**
  * Request Helper
@@ -8872,7 +8877,7 @@ exports.SPCfgType = {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(2);
-var mapper_1 = __webpack_require__(4);
+var mapper_1 = __webpack_require__(5);
 /**
  * JSLink Helper Methods
  */
@@ -10446,7 +10451,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 Object.defineProperty(exports, "__esModule", { value: true });
 var helper_1 = __webpack_require__(6);
 exports.Helper = helper_1.Types;
-var mapper_1 = __webpack_require__(4);
+var mapper_1 = __webpack_require__(5);
 exports.SP = mapper_1.Types;
 var utils_1 = __webpack_require__(0);
 exports.Util = utils_1.Types;
@@ -10461,7 +10466,7 @@ exports.Util = utils_1.Types;
 Object.defineProperty(exports, "__esModule", { value: true });
 var Helper = __webpack_require__(6);
 var Lib = __webpack_require__(2);
-var Mapper = __webpack_require__(4);
+var Mapper = __webpack_require__(5);
 /**
  * SharePoint REST Library
  */
@@ -10920,6 +10925,75 @@ exports.CheckBox = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = __webpack_require__(1);
 /**
+ * Command Bar
+ */
+exports.CommandBar = function (props) {
+    // Method to get the command bar
+    var get = function () { return _menu; };
+    // Set the command bar html
+    props.el.innerHTML = _1.Templates.CommandBar(props);
+    // Create the command bar
+    var _menu = new _1.fabric.CommandBar(props.el.querySelector(".ms-CommandBar"));
+    // Return the command bar
+    return { get: get };
+};
+
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(1);
+/**
+ * Command Button
+ */
+exports.CommandButton = function (props) {
+    // Method to get the fabric component
+    var get = function () { return _button; };
+    // Set the command button html
+    props.el.innerHTML = _1.Templates.CommandButton(props);
+    // Create the contextual menu
+    var _button = new _1.fabric.CommandButton(props.el.querySelector(".ms-CommandButton"));
+    // Return the contextual menu
+    return { get: get };
+};
+
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(1);
+/**
+ * Contextual Menu
+ */
+exports.ContextualMenu = function (props) {
+    // Method to get the contextual menu
+    var get = function () { return _menu; };
+    // Set the contextual menu html
+    props.el.innerHTML = _1.Templates.ContextualMenu(props);
+    // Create the contextual menu
+    var _menu = new _1.fabric.ContextualMenu(props.el.querySelector(".ms-ContextualMenu"), props.elTarget);
+    // Return the contextual menu
+    return { get: get };
+};
+
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(1);
+/**
  * Time Picker Type
  */
 var TimePickerType;
@@ -11026,7 +11100,7 @@ exports.DatePicker = function (props) {
 
 
 /***/ }),
-/* 87 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11178,7 +11252,7 @@ exports.Dropdown = function (props) {
 
 
 /***/ }),
-/* 88 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11242,7 +11316,7 @@ exports.LinkField = function (props) {
 
 
 /***/ }),
-/* 89 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11270,7 +11344,7 @@ exports.List = function (props) {
 
 
 /***/ }),
-/* 90 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11289,7 +11363,7 @@ exports.ListItem = function (props) {
 
 
 /***/ }),
-/* 91 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11384,7 +11458,7 @@ exports.NumberField = function (props) {
 
 
 /***/ }),
-/* 92 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11484,7 +11558,7 @@ exports.Panel = function (props) {
 
 
 /***/ }),
-/* 93 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11620,7 +11694,7 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 94 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11648,7 +11722,7 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 95 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11732,7 +11806,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 96 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11779,7 +11853,7 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 97 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11799,7 +11873,7 @@ exports.Button = function (props) {
 
 
 /***/ }),
-/* 98 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11852,7 +11926,7 @@ exports.Callout = function (props) {
 
 
 /***/ }),
-/* 99 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11875,24 +11949,37 @@ exports.CheckBox = function (props) {
 
 
 /***/ }),
-/* 100 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(4);
 /**
  * Command Bar
  */
 exports.CommandBar = function (props) {
+    // Render the button
+    var renderButtons = function (buttonProps) {
+        if (buttonProps === void 0) { buttonProps = []; }
+        var buttons = [];
+        // Parse the buttons
+        for (var i = 0; i < buttonProps.length; i++) {
+            // Add the button
+            buttons.push(_1.CommandButton(buttonProps[i]));
+        }
+        // Return the buttons
+        return buttons.join('\n');
+    };
     // Return the template
     return [
         '<div class="ms-CommandBar ' + (props.className || "") + '">',
         '<div class="ms-CommandBar-sideCommands">',
-        props.sideCommands ? props.sideCommands.join('\n') : '',
+        renderButtons(props.sideCommands),
         '</div>',
         '<div class="ms-CommandBar-mainArea">',
-        props.mainCommands ? props.mainCommands.join('\n') : '',
+        renderButtons(props.mainCommands),
         '</div>',
         '</div>'
     ].join('\n');
@@ -11900,13 +11987,96 @@ exports.CommandBar = function (props) {
 
 
 /***/ }),
-/* 101 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var templates_1 = __webpack_require__(5);
+var _1 = __webpack_require__(4);
+/**
+ * Command Button
+ */
+exports.CommandButton = function (props) {
+    // Determine the class name
+    var className = [
+        props.className || "",
+        props.isAction ? "ms-CommandButton--actionButton" : "",
+        props.isActive ? "is-active" : "",
+        props.isDisabled ? "is-disabled" : "",
+        props.isInline ? "ms-CommandButton--inline" : "",
+        props.isPivot ? "ms-CommandButton--pivot" : "",
+        props.isTextOnly ? "ms-CommandButton--TextOnly" : "",
+        props.text ? "" : "ms-CommandButton--noLabel"
+    ].join(' ').trim();
+    // Return the template
+    return [
+        '<div class="ms-CommandButton ' + (props.className || "") + '">',
+        '<button class="ms-CommandButton-button">',
+        props.icon ? '<span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--' + props.icon + '"></i></span>' : '',
+        props.text ? '<span class="ms-CommandButton-label">' + props.text + '</span>' : '',
+        props.menu ? '<span class="ms-CommandButton-dropdownIcon"><i class="ms-Icon ms-Icon--ChevronDown"></i></span>' : '',
+        '</button>',
+        props.isSplit ? '<button class="ms-CommandButton-splitIcon"><i class="ms-Icon ms-Icon--ChevronDown"></i></button>' : '',
+        props.menu ? _1.ContextualMenu(props.menu) : '',
+        '</div>'
+    ].join('\n');
+};
+
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Contextual Menu
+ */
+exports.ContextualMenu = function (props) {
+    // Method to render the items
+    var renderItems = function (items) {
+        var menuItems = [];
+        // Ensure items exist
+        if (items && items.length > 0) {
+            // Parse the items
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                // Set the class name
+                var className = [
+                    "ms-ContextualMenu-link",
+                    item.isDisabled ? "is-disabled" : "",
+                    item.isSelected ? "is-selected" : ""
+                ].join(" ");
+                // Add the menu item
+                menuItems.push([
+                    '<li class="ms-ContextualMenu-item">',
+                    '<a class="ms-ContextualMenu-link' + (item.isSelected) + '" tabindex="1">' + (item.text || "") + '</a>',
+                    '</li>'
+                ].join('\n'));
+            }
+        }
+        // Return the items
+        return menuItems;
+    };
+    // Return the template
+    return [
+        '<ul class="ms-ContextualMenu ' + (props.className || "") + '">',
+        renderItems(props.items),
+        '</ul>'
+    ].join('\n');
+};
+
+
+/***/ }),
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var templates_1 = __webpack_require__(4);
 /**
  * Date Picker
  */
@@ -11958,7 +12128,7 @@ exports.DatePicker = function (props) {
 
 
 /***/ }),
-/* 102 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11985,7 +12155,7 @@ exports.Label = function (props) {
 
 
 /***/ }),
-/* 103 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12005,7 +12175,7 @@ exports.List = function (props) {
 
 
 /***/ }),
-/* 104 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12040,7 +12210,7 @@ exports.ListItem = function (props) {
 
 
 /***/ }),
-/* 105 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12098,13 +12268,13 @@ exports.Panel = function (props, content) {
 
 
 /***/ }),
-/* 106 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var templates_1 = __webpack_require__(5);
+var templates_1 = __webpack_require__(4);
 /**
  * People Picker
  */
@@ -12199,7 +12369,7 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 107 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12219,13 +12389,13 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 108 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var templates_1 = __webpack_require__(5);
+var templates_1 = __webpack_require__(4);
 var __1 = __webpack_require__(1);
 /**
  * TextField
@@ -12259,13 +12429,13 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 109 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var templates_1 = __webpack_require__(5);
+var templates_1 = __webpack_require__(4);
 /**
  * Toggle
  */
@@ -12291,19 +12461,19 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 110 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(111);
+var Fabric = __webpack_require__(116);
 exports.Fabric = Fabric;
 
 
 /***/ }),
-/* 111 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12312,11 +12482,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 112 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(113);
+var content = __webpack_require__(118);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -12362,7 +12532,7 @@ if(false) {
 }
 
 /***/ }),
-/* 113 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(7)(false);
@@ -12376,7 +12546,7 @@ exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font co
 
 
 /***/ }),
-/* 114 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12653,7 +12823,7 @@ exports.Field = function (props) {
 
 
 /***/ }),
-/* 115 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13030,7 +13200,7 @@ exports.ListForm = _ListForm;
 
 
 /***/ }),
-/* 116 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13245,7 +13415,7 @@ exports.ListFormField = _ListFormField;
 
 
 /***/ }),
-/* 117 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13313,8 +13483,8 @@ exports.ListFormPanel = function (props) {
             // Append the div for this field
             fields += "<div data-field='" + fieldName + "'></div>";
         }
-        // Update the panel header
-        _panel.updateHeader(renderMenu());
+        // Render the menu
+        renderMenu();
         // Update the panel content
         _panel.updateContent('<div class="ms-ListForm">' + fields + '</div>');
         // Render the fields
@@ -13330,61 +13500,45 @@ exports.ListFormPanel = function (props) {
             // Edit Button
             case gd_sprest_1.SPTypes.ControlMode.Display:
                 mainCommands = [
-                    '<div class="ms-CommandButton">',
-                    '<button class="ms-CommandButton-button ms-CommandButton-edit">',
-                    '<span class="ms-CommandButton-icon">',
-                    '<i class="ms-Icon ms-Icon--Edit"></i>',
-                    '</span>',
-                    '<span class="ms-CommandButton-label">Edit</span>',
-                    '</button>',
-                    '</div>',
-                    '<div class="ms-CommandButton">',
-                    '<button class="ms-CommandButton-button ms-CommandButton-cancel">',
-                    '<span class="ms-CommandButton-icon">',
-                    '<i class="ms-Icon ms-Icon--Cancel"></i>',
-                    '</span>',
-                    '<span class="ms-CommandButton-label">Cancel</span>',
-                    '</button>',
-                    '</div>'
+                    {
+                        className: "ms-CommandButton-edit",
+                        icon: "Edit",
+                        text: "Edit"
+                    },
+                    {
+                        className: "ms-CommandButton-cancel",
+                        icon: "Cancel",
+                        text: "Cancel"
+                    }
                 ];
                 break;
             // Save Button
             case gd_sprest_1.SPTypes.ControlMode.Edit:
             case gd_sprest_1.SPTypes.ControlMode.New:
                 mainCommands = [
-                    '<div class="ms-CommandButton">',
-                    '<button class="ms-CommandButton-button ms-CommandButton-save">',
-                    '<span class="ms-CommandButton-icon">',
-                    '<i class="ms-Icon ms-Icon--Save"></i>',
-                    '</span>',
-                    '<span class="ms-CommandButton-label">Save</span>',
-                    '</button>',
-                    '</div>',
-                    '<div class="ms-CommandButton">',
-                    '<button class="ms-CommandButton-button ms-CommandButton-cancel">',
-                    '<span class="ms-CommandButton-icon">',
-                    '<i class="ms-Icon ms-Icon--Cancel"></i>',
-                    '</span>',
-                    '<span class="ms-CommandButton-label">Cancel</span>',
-                    '</button>',
-                    '</div>'
+                    {
+                        className: "ms-CommandButton-save",
+                        icon: "Save",
+                        text: "Save"
+                    },
+                    {
+                        className: "ms-CommandButton-cancel",
+                        icon: "Cancel",
+                        text: "Cancel"
+                    }
                 ];
                 break;
-            // Render nothing by default
-            default:
-                return "";
         }
         // Render the menu
-        return fabric_1.Templates.CommandBar({
+        fabric_1.CommandBar({
             className: "ms-CommandBar--navBar",
+            el: _panel.get()._panel.querySelector(".ms-Panel-header"),
             mainCommands: mainCommands,
             sideCommands: [
-                '<div class="ms-CommandButton ms-CommandButton--noLabel">',
-                '<button class="ms-CommandButton-button ms-CommandButton-cancel">',
-                '<span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Cancel"></i></span>',
-                '<span class="ms-CommandButton-label"></span>',
-                '</button>',
-                '</div>'
+                {
+                    className: "ms-CommandButton-cancel",
+                    icon: "Cancel"
+                }
             ]
         });
     };
@@ -13444,7 +13598,7 @@ exports.ListFormPanel = function (props) {
 
 
 /***/ }),
-/* 118 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13453,7 +13607,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 119 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13462,11 +13616,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(120));
+__export(__webpack_require__(125));
 
 
 /***/ }),
-/* 120 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

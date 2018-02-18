@@ -1,5 +1,5 @@
 import { SPTypes } from "gd-sprest";
-import { Button, Panel, PanelTypes, Templates, Spinner } from "../fabric";
+import { Button, CommandBar, Panel, PanelTypes, Templates, Spinner } from "../fabric";
 import { Fabric, IPanel } from "../fabric/types";
 import { Field, ListForm } from ".";
 import { IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
@@ -71,8 +71,8 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
             fields += "<div data-field='" + fieldName + "'></div>";
         }
 
-        // Update the panel header
-        _panel.updateHeader(renderMenu());
+        // Render the menu
+        renderMenu();
 
         // Update the panel content
         _panel.updateContent('<div class="ms-ListForm">' + fields + '</div>');
@@ -92,22 +92,16 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
             // Edit Button
             case SPTypes.ControlMode.Display:
                 mainCommands = [
-                    '<div class="ms-CommandButton">',
-                    '<button class="ms-CommandButton-button ms-CommandButton-edit">',
-                    '<span class="ms-CommandButton-icon">',
-                    '<i class="ms-Icon ms-Icon--Edit"></i>',
-                    '</span>',
-                    '<span class="ms-CommandButton-label">Edit</span>',
-                    '</button>',
-                    '</div>',
-                    '<div class="ms-CommandButton">',
-                    '<button class="ms-CommandButton-button ms-CommandButton-cancel">',
-                    '<span class="ms-CommandButton-icon">',
-                    '<i class="ms-Icon ms-Icon--Cancel"></i>',
-                    '</span>',
-                    '<span class="ms-CommandButton-label">Cancel</span>',
-                    '</button>',
-                    '</div>'
+                    {
+                        className: "ms-CommandButton-edit",
+                        icon: "Edit",
+                        text: "Edit"
+                    },
+                    {
+                        className: "ms-CommandButton-cancel",
+                        icon: "Cancel",
+                        text: "Cancel"
+                    }
                 ];
                 break;
 
@@ -115,41 +109,30 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
             case SPTypes.ControlMode.Edit:
             case SPTypes.ControlMode.New:
                 mainCommands = [
-                    '<div class="ms-CommandButton">',
-                    '<button class="ms-CommandButton-button ms-CommandButton-save">',
-                    '<span class="ms-CommandButton-icon">',
-                    '<i class="ms-Icon ms-Icon--Save"></i>',
-                    '</span>',
-                    '<span class="ms-CommandButton-label">Save</span>',
-                    '</button>',
-                    '</div>',
-                    '<div class="ms-CommandButton">',
-                    '<button class="ms-CommandButton-button ms-CommandButton-cancel">',
-                    '<span class="ms-CommandButton-icon">',
-                    '<i class="ms-Icon ms-Icon--Cancel"></i>',
-                    '</span>',
-                    '<span class="ms-CommandButton-label">Cancel</span>',
-                    '</button>',
-                    '</div>'
+                    {
+                        className: "ms-CommandButton-save",
+                        icon: "Save",
+                        text: "Save"
+                    },
+                    {
+                        className: "ms-CommandButton-cancel",
+                        icon: "Cancel",
+                        text: "Cancel"
+                    }
                 ];
                 break;
-
-            // Render nothing by default
-            default:
-                return "";
         }
 
         // Render the menu
-        return Templates.CommandBar({
+        CommandBar({
             className: "ms-CommandBar--navBar",
+            el: _panel.get()._panel.querySelector(".ms-Panel-header"),
             mainCommands,
             sideCommands: [
-                '<div class="ms-CommandButton ms-CommandButton--noLabel">',
-                '<button class="ms-CommandButton-button ms-CommandButton-cancel">',
-                '<span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Cancel"></i></span>',
-                '<span class="ms-CommandButton-label"></span>',
-                '</button>',
-                '</div>'
+                {
+                    className: "ms-CommandButton-cancel",
+                    icon: "Cancel"
+                }
             ]
         });
     }

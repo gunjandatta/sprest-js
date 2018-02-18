@@ -10,6 +10,20 @@ export interface ICallout {
 }
 
 /**
+ * Command Bar
+ */
+export interface ICommandBar {
+    _container: HTMLDivElement;
+}
+
+/**
+ * Command Button
+ */
+export interface ICommandButton {
+    _container: HTMLDivElement;
+}
+
+/**
  * Contextual Host
  */
 export interface IContextualHost {
