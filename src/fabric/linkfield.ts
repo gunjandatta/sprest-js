@@ -8,7 +8,7 @@ export const LinkField = (props: ILinkFieldProps): ILinkField => {
     // Method to get the link element
     let get = (): HTMLInputElement => {
         // Returns the link element
-        return _url ? _url.get() : null;
+        return _url ? _url.get()._textField : null;
     }
 
     // Method to get the fabric component

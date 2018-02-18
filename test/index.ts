@@ -176,6 +176,7 @@ window["TestJS"] = {
 
                 // Render the list form panel
                 let listForm = ListFormPanel({
+                    controlMode: SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
                     listName: "SPReact",
                     panelTitle: "Test Item Form",

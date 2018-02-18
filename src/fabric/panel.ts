@@ -37,17 +37,6 @@ export const Panel = (props: IPanelProps): IPanel => {
     // Method to determine if the panel is open
     let isOpen = () => { return _panel && _panel._panel.className.indexOf("is-open") > 0; }
 
-    // Method to set the header text
-    let setHeaderText = (html: string): HTMLDivElement => {
-        let header = get()._panel.querySelector(".ms-Panel-headerText") as HTMLDivElement;
-        if (header) {
-            header.innerHTML = html;
-        }
-
-        // Return the header
-        return header;
-    }
-
     // Method to show the panel
     let show = (content: string = ""): HTMLDivElement => {
         // Add the panel html
@@ -67,9 +56,29 @@ export const Panel = (props: IPanelProps): IPanel => {
     }
 
     // Method to update the panel content
-    let update = (content: string = ""): HTMLDivElement => {
+    let updateContent = (content: string = ""): HTMLDivElement => {
         // Update the content
         let el = _panel._panel.querySelector(".ms-Panel-content") as HTMLDivElement;
+        el ? el.innerHTML = content : null;
+
+        // Return the panel content
+        return el;
+    }
+
+    // Method to update the panel footer
+    let updateFooter = (content: string = ""): HTMLDivElement => {
+        // Update the content
+        let el = _panel._panel.querySelector(".ms-Panel-footer") as HTMLDivElement;
+        el ? el.innerHTML = content : null;
+
+        // Return the panel content
+        return el;
+    }
+
+    // Method to update the panel header
+    let updateHeader = (content: string = ""): HTMLDivElement => {
+        // Update the content
+        let el = _panel._panel.querySelector(".ms-Panel-header") as HTMLDivElement;
         el ? el.innerHTML = content : null;
 
         // Return the panel content
@@ -87,8 +96,9 @@ export const Panel = (props: IPanelProps): IPanel => {
         get,
         hide,
         isOpen,
-        setHeaderText,
         show,
-        update
+        updateContent,
+        updateFooter,
+        updateHeader
     };
 }

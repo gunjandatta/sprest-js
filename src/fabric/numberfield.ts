@@ -91,7 +91,6 @@ export const NumberField = (props: INumberFieldProps): INumberField => {
     // Return the number field
     return {
         get: _numberfield.get,
-        getFabricComponent: _numberfield.getFabricComponent,
         getValue: _numberfield.getValue,
         setErrorMessage: _numberfield.setErrorMessage,
         setValue: _numberfield.setValue

@@ -1,6 +1,7 @@
 export * from "./button";
 export * from "./callout";
 export * from "./checkbox";
+export * from "./commandbar";
 export * from "./datepicker";
 export * from "./label";
 export * from "./list";

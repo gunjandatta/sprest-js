@@ -14,12 +14,6 @@ export interface IPanel {
     isOpen: () => boolean;
 
     /**
-     * Sets the header text.
-     * @param html - The header html.
-     */
-    setHeaderText(html: string): HTMLDivElement;
-
-    /**
      * Shows the panel.
      * @param content - The panel content.
      * @returns The panel content element.
@@ -27,11 +21,25 @@ export interface IPanel {
     show(content?: string): HTMLDivElement;
 
     /**
-     * Updates the pnael content.
+     * Updates the panel content.
      * @param content - The panel content.
      * @returns The panel content element.
      */
-    update(content?: string): HTMLDivElement;
+    updateContent(content?: string): HTMLDivElement;
+
+    /**
+     * Updates the panel footer.
+     * @param content - The header content.
+     * @returns The panel footer element.
+     */
+    updateFooter(content?: string): HTMLDivElement;
+
+    /**
+     * Updates the panel header.
+     * @param content - The footer content.
+     * @returns The panel header element.
+     */
+    updateHeader(content?: string): HTMLDivElement;
 }
 
 /**
@@ -43,6 +51,12 @@ export interface IPanelProps extends IProps {
 
     /** The panel content. */
     panelContent?: string;
+
+    /** The panel footer content. */
+    panelFooter?: string;
+
+    /** The panel header content. */
+    panelHeader?: string;
 
     /**
      * The panel type

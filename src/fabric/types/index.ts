@@ -6,6 +6,7 @@ export { Fabric }
 export * from "./button";
 export * from "./checkbox";
 export * from "./callout";
+export * from "./commandbar";
 export * from "./common";
 export * from "./datepicker";
 export * from "./dropdown";

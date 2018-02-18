@@ -151,7 +151,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     // Create the callout
     let _callout = Callout({
         el: props.el.querySelector(".callout"),
-        elTarget: _tb.getFabricComponent()._container,
+        elTarget: _tb.get()._textField,
         position: CalloutPositions.left,
         subText: props.description,
         type: CalloutTypes.Default

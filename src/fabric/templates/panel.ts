@@ -26,18 +26,27 @@ export const Panel = (props: IPanelProps, content?: string): string => {
         case PanelTypes.XXLarge:
             className += " ms-Panel--xxl";
             break;
-    }
+    };
+
+    // Method to render the close button
+    let renderCloseButton = () => {
+        return props.showCloseButton ? [
+            '<button class="ms-Panel-closeButton ms-PanelAction-close">',
+            '<i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>',
+            '</button>',
+        ].join('\n') : '';
+    };
 
     // Return the template
     return [
         '<div class="ms-Panel ' + className.trim() + '">',
-        '<button class="ms-Panel-closeButton ms-PanelAction-close">',
-        '<i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>',
-        '</button>',
+        renderCloseButton(),
+        '<div class="ms-Panel-header">' + (props.panelHeader || "") + '</div>',
         '<div class="ms-Panel-contentInner" style="height: 90vh;">',
-        '<p class="ms-Panel-headerText">' + (props.headerText || "") + '</p>',
+        props.headerText ? '<p class="ms-Panel-headerText">' + props.headerText + '</p>' : '',
         '<div class="ms-Panel-content">' + (content || props.panelContent || "") + '</div>',
         '</div>',
+        '<div class="ms-Panel-footer">' + (props.panelFooter || "") + '</div>',
         '</div>',
     ].join('\n');
 }

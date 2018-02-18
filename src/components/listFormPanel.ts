@@ -10,26 +10,49 @@ import { IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
 export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
     let _formInfo: IListFormResult = null;
 
-    // Render the form
-    let renderForm = () => {
-        let panelContent = "";
+    // Add the menu click events
+    let addMenuClickEvents = () => {
+        // Parse the buttons
+        let buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
+        for (let i = 0; i < buttons.length; i++) {
+            // Add a click event
+            buttons[i].addEventListener("click", () => {
+                // Close the panel
+                _panel.hide();
 
-        // Parse the fields
-        for (let fieldName in _formInfo.fields) {
-            // Append the div for this field
-            panelContent += "<div data-field='" + fieldName + "'></div>";
+                // Disable postback
+                return false;
+            });
         }
 
-        // Update the panel
-        let content = _panel.update(panelContent);
+        // Set the edit button click event
+        let edit = _panel.get()._panel.querySelector(".ms-CommandButton-edit") as HTMLButtonElement;
+        if (edit) {
+            edit.addEventListener("click", () => {
+                // Disable postback
+                return false;
+            });
+        }
 
+        // Set the save button click event
+        let save = _panel.get()._panel.querySelector(".ms-CommandButton-save") as HTMLButtonElement;
+        if (save) {
+            save.addEventListener("click", () => {
+                // Disable postback
+                return false;
+            });
+        }
+    }
+
+    // Render the fields
+    let renderFields = () => {
         // Parse the fields
         for (let fieldName in _formInfo.fields) {
             let field = _formInfo.fields[fieldName];
 
             // Render the field
             Field({
-                el: content.querySelector("[data-field='" + fieldName + "']"),
+                el: _panel.get()._panel.querySelector("[data-field='" + fieldName + "']"),
                 fieldInfo: {
                     field,
                     listName: _formInfo.list.Title,
@@ -39,16 +62,109 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         }
     }
 
+    // Render the form
+    let renderForm = () => {
+        // Parse the fields
+        let fields = "";
+        for (let fieldName in _formInfo.fields) {
+            // Append the div for this field
+            fields += "<div data-field='" + fieldName + "'></div>";
+        }
+
+        // Update the panel header
+        _panel.updateHeader(renderMenu());
+
+        // Update the panel content
+        _panel.updateContent('<div class="ms-ListForm">' + fields + '</div>');
+
+        // Render the fields
+        renderFields();
+
+        // Add the menu click event
+        addMenuClickEvents();
+    }
+
+    // Render the menu
+    let renderMenu = () => {
+        // Determine the main commands
+        let mainCommands = null;
+        switch (props.controlMode) {
+            // Edit Button
+            case SPTypes.ControlMode.Display:
+                mainCommands = [
+                    '<div class="ms-CommandButton">',
+                    '<button class="ms-CommandButton-button ms-CommandButton-edit">',
+                    '<span class="ms-CommandButton-icon">',
+                    '<i class="ms-Icon ms-Icon--Edit"></i>',
+                    '</span>',
+                    '<span class="ms-CommandButton-label">Edit</span>',
+                    '</button>',
+                    '</div>',
+                    '<div class="ms-CommandButton">',
+                    '<button class="ms-CommandButton-button ms-CommandButton-cancel">',
+                    '<span class="ms-CommandButton-icon">',
+                    '<i class="ms-Icon ms-Icon--Cancel"></i>',
+                    '</span>',
+                    '<span class="ms-CommandButton-label">Cancel</span>',
+                    '</button>',
+                    '</div>'
+                ];
+                break;
+
+            // Save Button
+            case SPTypes.ControlMode.Edit:
+            case SPTypes.ControlMode.New:
+                mainCommands = [
+                    '<div class="ms-CommandButton">',
+                    '<button class="ms-CommandButton-button ms-CommandButton-save">',
+                    '<span class="ms-CommandButton-icon">',
+                    '<i class="ms-Icon ms-Icon--Save"></i>',
+                    '</span>',
+                    '<span class="ms-CommandButton-label">Save</span>',
+                    '</button>',
+                    '</div>',
+                    '<div class="ms-CommandButton">',
+                    '<button class="ms-CommandButton-button ms-CommandButton-cancel">',
+                    '<span class="ms-CommandButton-icon">',
+                    '<i class="ms-Icon ms-Icon--Cancel"></i>',
+                    '</span>',
+                    '<span class="ms-CommandButton-label">Cancel</span>',
+                    '</button>',
+                    '</div>'
+                ];
+                break;
+
+            // Render nothing by default
+            default:
+                return "";
+        }
+
+        // Render the menu
+        return Templates.CommandBar({
+            className: "ms-CommandBar--navBar",
+            mainCommands,
+            sideCommands: [
+                '<div class="ms-CommandButton ms-CommandButton--noLabel">',
+                '<button class="ms-CommandButton-button ms-CommandButton-cancel">',
+                '<span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Cancel"></i></span>',
+                '<span class="ms-CommandButton-label"></span>',
+                '</button>',
+                '</div>'
+            ]
+        });
+    }
+
     // Render the panel
-    props.el.innerHTML = Templates.Panel(props);
+    props.el.innerHTML = Templates.Panel({
+        className: props.className,
+        el: props.el,
+        headerText: props.panelTitle,
+        panelType: typeof (props.panelType) === "number" ? props.panelType : PanelTypes.Large,
+        showCloseButton: false
+    });
 
     // Create the panel
-    let _panel = Panel({
-        el: props.el,
-        className: props.className,
-        headerText: props.panelTitle || "",
-        panelType: typeof (props.panelType) === "number" ? props.panelType : PanelTypes.Large
-    });
+    let _panel = Panel(props);
 
     // Create an instance of the list form
     new ListForm({

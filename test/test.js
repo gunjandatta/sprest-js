@@ -118,7 +118,7 @@ __export(__webpack_require__(96));
 var Templates = __webpack_require__(5);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(109);
+var Types = __webpack_require__(110);
 exports.Types = Types;
 
 
@@ -232,6 +232,7 @@ __export(__webpack_require__(105));
 __export(__webpack_require__(106));
 __export(__webpack_require__(107));
 __export(__webpack_require__(108));
+__export(__webpack_require__(109));
 
 
 /***/ }),
@@ -2331,11 +2332,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Fabric = __webpack_require__(1);
 exports.Fabric = Fabric;
 // Include the styles
-__webpack_require__(111);
+__webpack_require__(112);
 // Components
 __export(__webpack_require__(15));
 // WebParts
-var WebParts = __webpack_require__(118);
+var WebParts = __webpack_require__(119);
 exports.WebParts = WebParts;
 
 
@@ -2349,11 +2350,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(113));
 __export(__webpack_require__(114));
 __export(__webpack_require__(115));
 __export(__webpack_require__(116));
-var Types = __webpack_require__(117);
+__export(__webpack_require__(117));
+var Types = __webpack_require__(118);
 exports.Types = Types;
 
 
@@ -2490,6 +2491,7 @@ window["TestJS"] = {
                 cfg.el.innerHTML = "<div></div><div></div>";
                 // Render the list form panel
                 var listForm = build_1.ListFormPanel({
+                    controlMode: gd_sprest_1.SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
                     listName: "SPReact",
                     panelTitle: "Test Item Form",
@@ -11159,7 +11161,7 @@ exports.Dropdown = function (props) {
     // Create the callout
     var _callout = _1.Callout({
         el: props.el.querySelector(".callout"),
-        elTarget: _tb.getFabricComponent()._container,
+        elTarget: _tb.get()._textField,
         position: _1.CalloutPositions.left,
         subText: props.description,
         type: _1.CalloutTypes.Default
@@ -11190,7 +11192,7 @@ exports.LinkField = function (props) {
     // Method to get the link element
     var get = function () {
         // Returns the link element
-        return _url ? _url.get() : null;
+        return _url ? _url.get()._textField : null;
     };
     // Method to get the fabric component
     var getFabricComponent = function () {
@@ -11374,7 +11376,6 @@ exports.NumberField = function (props) {
     // Return the number field
     return {
         get: _numberfield.get,
-        getFabricComponent: _numberfield.getFabricComponent,
         getValue: _numberfield.getValue,
         setErrorMessage: _numberfield.setErrorMessage,
         setValue: _numberfield.setValue
@@ -11422,15 +11423,6 @@ exports.Panel = function (props) {
     };
     // Method to determine if the panel is open
     var isOpen = function () { return _panel && _panel._panel.className.indexOf("is-open") > 0; };
-    // Method to set the header text
-    var setHeaderText = function (html) {
-        var header = get()._panel.querySelector(".ms-Panel-headerText");
-        if (header) {
-            header.innerHTML = html;
-        }
-        // Return the header
-        return header;
-    };
     // Method to show the panel
     var show = function (content) {
         if (content === void 0) { content = ""; }
@@ -11447,10 +11439,28 @@ exports.Panel = function (props) {
         return _panel._panel.querySelector(".ms-Panel-content");
     };
     // Method to update the panel content
-    var update = function (content) {
+    var updateContent = function (content) {
         if (content === void 0) { content = ""; }
         // Update the content
         var el = _panel._panel.querySelector(".ms-Panel-content");
+        el ? el.innerHTML = content : null;
+        // Return the panel content
+        return el;
+    };
+    // Method to update the panel footer
+    var updateFooter = function (content) {
+        if (content === void 0) { content = ""; }
+        // Update the content
+        var el = _panel._panel.querySelector(".ms-Panel-footer");
+        el ? el.innerHTML = content : null;
+        // Return the panel content
+        return el;
+    };
+    // Method to update the panel header
+    var updateHeader = function (content) {
+        if (content === void 0) { content = ""; }
+        // Update the content
+        var el = _panel._panel.querySelector(".ms-Panel-header");
         el ? el.innerHTML = content : null;
         // Return the panel content
         return el;
@@ -11465,9 +11475,10 @@ exports.Panel = function (props) {
         get: get,
         hide: hide,
         isOpen: isOpen,
-        setHeaderText: setHeaderText,
         show: show,
-        update: update
+        updateContent: updateContent,
+        updateFooter: updateFooter,
+        updateHeader: updateHeader
     };
 };
 
@@ -11870,6 +11881,31 @@ exports.CheckBox = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Command Bar
+ */
+exports.CommandBar = function (props) {
+    // Return the template
+    return [
+        '<div class="ms-CommandBar ' + (props.className || "") + '">',
+        '<div class="ms-CommandBar-sideCommands">',
+        props.sideCommands ? props.sideCommands.join('\n') : '',
+        '</div>',
+        '<div class="ms-CommandBar-mainArea">',
+        props.mainCommands ? props.mainCommands.join('\n') : '',
+        '</div>',
+        '</div>'
+    ].join('\n');
+};
+
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 var templates_1 = __webpack_require__(5);
 /**
  * Date Picker
@@ -11922,7 +11958,7 @@ exports.DatePicker = function (props) {
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11949,7 +11985,7 @@ exports.Label = function (props) {
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11969,7 +12005,7 @@ exports.List = function (props) {
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12004,7 +12040,7 @@ exports.ListItem = function (props) {
 
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12037,23 +12073,32 @@ exports.Panel = function (props, content) {
             className += " ms-Panel--xxl";
             break;
     }
+    ;
+    // Method to render the close button
+    var renderCloseButton = function () {
+        return props.showCloseButton ? [
+            '<button class="ms-Panel-closeButton ms-PanelAction-close">',
+            '<i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>',
+            '</button>',
+        ].join('\n') : '';
+    };
     // Return the template
     return [
         '<div class="ms-Panel ' + className.trim() + '">',
-        '<button class="ms-Panel-closeButton ms-PanelAction-close">',
-        '<i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>',
-        '</button>',
+        renderCloseButton(),
+        '<div class="ms-Panel-header">' + (props.panelHeader || "") + '</div>',
         '<div class="ms-Panel-contentInner" style="height: 90vh;">',
-        '<p class="ms-Panel-headerText">' + (props.headerText || "") + '</p>',
+        props.headerText ? '<p class="ms-Panel-headerText">' + props.headerText + '</p>' : '',
         '<div class="ms-Panel-content">' + (content || props.panelContent || "") + '</div>',
         '</div>',
+        '<div class="ms-Panel-footer">' + (props.panelFooter || "") + '</div>',
         '</div>',
     ].join('\n');
 };
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12154,7 +12199,7 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12174,7 +12219,7 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12214,7 +12259,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12246,32 +12291,32 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 109 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-// Fabric Components
-var Fabric = __webpack_require__(110);
-exports.Fabric = Fabric;
-
-
-/***/ }),
 /* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+// Fabric Components
+var Fabric = __webpack_require__(111);
+exports.Fabric = Fabric;
 
 
 /***/ }),
 /* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-var content = __webpack_require__(112);
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(113);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -12317,7 +12362,7 @@ if(false) {
 }
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(7)(false);
@@ -12331,7 +12376,7 @@ exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font co
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12608,7 +12653,7 @@ exports.Field = function (props) {
 
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12985,7 +13030,7 @@ exports.ListForm = _ListForm;
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13200,7 +13245,7 @@ exports.ListFormField = _ListFormField;
 
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13214,22 +13259,44 @@ var _1 = __webpack_require__(15);
  */
 exports.ListFormPanel = function (props) {
     var _formInfo = null;
-    // Render the form
-    var renderForm = function () {
-        var panelContent = "";
-        // Parse the fields
-        for (var fieldName in _formInfo.fields) {
-            // Append the div for this field
-            panelContent += "<div data-field='" + fieldName + "'></div>";
+    // Add the menu click events
+    var addMenuClickEvents = function () {
+        // Parse the buttons
+        var buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
+        for (var i = 0; i < buttons.length; i++) {
+            // Add a click event
+            buttons[i].addEventListener("click", function () {
+                // Close the panel
+                _panel.hide();
+                // Disable postback
+                return false;
+            });
         }
-        // Update the panel
-        var content = _panel.update(panelContent);
+        // Set the edit button click event
+        var edit = _panel.get()._panel.querySelector(".ms-CommandButton-edit");
+        if (edit) {
+            edit.addEventListener("click", function () {
+                // Disable postback
+                return false;
+            });
+        }
+        // Set the save button click event
+        var save = _panel.get()._panel.querySelector(".ms-CommandButton-save");
+        if (save) {
+            save.addEventListener("click", function () {
+                // Disable postback
+                return false;
+            });
+        }
+    };
+    // Render the fields
+    var renderFields = function () {
         // Parse the fields
         for (var fieldName in _formInfo.fields) {
             var field = _formInfo.fields[fieldName];
             // Render the field
             _1.Field({
-                el: content.querySelector("[data-field='" + fieldName + "']"),
+                el: _panel.get()._panel.querySelector("[data-field='" + fieldName + "']"),
                 fieldInfo: {
                     field: field,
                     listName: _formInfo.list.Title,
@@ -13238,15 +13305,99 @@ exports.ListFormPanel = function (props) {
             });
         }
     };
+    // Render the form
+    var renderForm = function () {
+        // Parse the fields
+        var fields = "";
+        for (var fieldName in _formInfo.fields) {
+            // Append the div for this field
+            fields += "<div data-field='" + fieldName + "'></div>";
+        }
+        // Update the panel header
+        _panel.updateHeader(renderMenu());
+        // Update the panel content
+        _panel.updateContent('<div class="ms-ListForm">' + fields + '</div>');
+        // Render the fields
+        renderFields();
+        // Add the menu click event
+        addMenuClickEvents();
+    };
+    // Render the menu
+    var renderMenu = function () {
+        // Determine the main commands
+        var mainCommands = null;
+        switch (props.controlMode) {
+            // Edit Button
+            case gd_sprest_1.SPTypes.ControlMode.Display:
+                mainCommands = [
+                    '<div class="ms-CommandButton">',
+                    '<button class="ms-CommandButton-button ms-CommandButton-edit">',
+                    '<span class="ms-CommandButton-icon">',
+                    '<i class="ms-Icon ms-Icon--Edit"></i>',
+                    '</span>',
+                    '<span class="ms-CommandButton-label">Edit</span>',
+                    '</button>',
+                    '</div>',
+                    '<div class="ms-CommandButton">',
+                    '<button class="ms-CommandButton-button ms-CommandButton-cancel">',
+                    '<span class="ms-CommandButton-icon">',
+                    '<i class="ms-Icon ms-Icon--Cancel"></i>',
+                    '</span>',
+                    '<span class="ms-CommandButton-label">Cancel</span>',
+                    '</button>',
+                    '</div>'
+                ];
+                break;
+            // Save Button
+            case gd_sprest_1.SPTypes.ControlMode.Edit:
+            case gd_sprest_1.SPTypes.ControlMode.New:
+                mainCommands = [
+                    '<div class="ms-CommandButton">',
+                    '<button class="ms-CommandButton-button ms-CommandButton-save">',
+                    '<span class="ms-CommandButton-icon">',
+                    '<i class="ms-Icon ms-Icon--Save"></i>',
+                    '</span>',
+                    '<span class="ms-CommandButton-label">Save</span>',
+                    '</button>',
+                    '</div>',
+                    '<div class="ms-CommandButton">',
+                    '<button class="ms-CommandButton-button ms-CommandButton-cancel">',
+                    '<span class="ms-CommandButton-icon">',
+                    '<i class="ms-Icon ms-Icon--Cancel"></i>',
+                    '</span>',
+                    '<span class="ms-CommandButton-label">Cancel</span>',
+                    '</button>',
+                    '</div>'
+                ];
+                break;
+            // Render nothing by default
+            default:
+                return "";
+        }
+        // Render the menu
+        return fabric_1.Templates.CommandBar({
+            className: "ms-CommandBar--navBar",
+            mainCommands: mainCommands,
+            sideCommands: [
+                '<div class="ms-CommandButton ms-CommandButton--noLabel">',
+                '<button class="ms-CommandButton-button ms-CommandButton-cancel">',
+                '<span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Cancel"></i></span>',
+                '<span class="ms-CommandButton-label"></span>',
+                '</button>',
+                '</div>'
+            ]
+        });
+    };
     // Render the panel
-    props.el.innerHTML = fabric_1.Templates.Panel(props);
-    // Create the panel
-    var _panel = fabric_1.Panel({
-        el: props.el,
+    props.el.innerHTML = fabric_1.Templates.Panel({
         className: props.className,
-        headerText: props.panelTitle || "",
-        panelType: typeof (props.panelType) === "number" ? props.panelType : fabric_1.PanelTypes.Large
+        el: props.el,
+        headerText: props.panelTitle,
+        panelType: typeof (props.panelType) === "number" ? props.panelType : fabric_1.PanelTypes.Large,
+        showCloseButton: false
     });
+    // Create the panel
+    var _panel = fabric_1.Panel(props);
     // Create an instance of the list form
     new _1.ListForm({
         cacheKey: props.cacheKey,
@@ -13293,7 +13444,7 @@ exports.ListFormPanel = function (props) {
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13302,7 +13453,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13311,11 +13462,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(119));
+__export(__webpack_require__(120));
 
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
