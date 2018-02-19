@@ -17,7 +17,7 @@ export const ListItem = (props: IListItemProps): string => {
 
     // Return the template
     return [
-        '<li class="ms-ListItem ' + className + '" tabindex="0">',
+        '<li class="ms-ListItem ' + className + '" tabindex="0" data-value=\'' + (props.value || "") + '\'>',
         '<span class="ms-ListItem-primaryText">' + (props.primaryText || "") + '</span>',
         '<span class="ms-ListItem-secondaryText">' + (props.secondaryText || "") + '</span>',
         '<span class="ms-ListItem-tertiaryText">' + (props.tertiaryText || "") + '</span>',

@@ -38,7 +38,8 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                     items.push(Templates.ListItem({
                         className: "ms-ListItem--" + (isCategory ? "category" : "header"),
                         isSelectable: isCategory ? props.multi : false,
-                        primaryText: option.text
+                        primaryText: option.text,
+                        value: JSON.stringify(option)
                     }));
                 }
                 // Else, see if this option has children
@@ -51,7 +52,8 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                     // Add the item
                     items.push(Templates.ListItem({
                         isSelectable: props.multi,
-                        secondaryText: option.text
+                        secondaryText: option.text,
+                        value: JSON.stringify(option)
                     }));
                 }
             }
@@ -63,6 +65,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         // Set the click event
         let onClick = (ev: MouseEvent) => {
             let item = ev.currentTarget as HTMLLIElement;
+            let tb = _tb.get()._textField;
 
             // Return if this is a header
             if (item.className.indexOf("ms-ListItem--header") > 0) { return; }
@@ -79,24 +82,35 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                 }
 
                 // Query the selected items
-                let values = [];
+                let textValues = [];
+                let values: Array<IDropdownOption> = [];
                 let items = _list._container.querySelectorAll(".is-selected");
                 for (let i = 0; i < items.length; i++) {
-                    // Add the item
-                    values.push(
-                        (items[i].querySelector(".ms-ListItem-primaryText") as HTMLDivElement).innerText ||
-                        (items[i].querySelector(".ms-ListItem-secondaryText") as HTMLDivElement).innerText
-                    );
+                    let option = JSON.parse(item.getAttribute("data-value")) as IDropdownOption;
+
+                    // Add the values
+                    textValues.push(option.text);
+                    values.push({
+                        text: option.text,
+                        value: option.value
+                    });
                 }
 
                 // Update the textbox
-                _tb.setValue(values.join(', '));
+                tb.value = textValues.join(", ");
+                tb.setAttribute("data-value", JSON.stringify(values));
+
+                // Call the change event
+                props.onChange ? props.onChange(values) : null;
             } else {
+                let option = JSON.parse(item.getAttribute("data-value")) as IDropdownOption;
+
                 // Update the textbox
-                _tb.setValue(
-                    (item.querySelector(".ms-ListItem-primaryText") as HTMLDivElement).innerText ||
-                    (item.querySelector(".ms-ListItem-secondaryText") as HTMLDivElement).innerText
-                );
+                tb.value = option.text;
+                tb.setAttribute("data-value", JSON.stringify(option));
+
+                // Call the change event
+                props.onChange ? props.onChange(option) : null;
 
                 // Close the callout
                 _callout._contextualHost.disposeModal();
@@ -122,6 +136,12 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     let getFabricComponent = () => {
         // Return the menu
         return _callout._contextualHost;
+    }
+
+    // Method to get the selected option
+    let getOption = (): IDropdownOption => {
+        // Return the option
+        return JSON.parse(_tb.get()._textField.getAttribute("data-value"));
     }
 
     // Method to get the value
@@ -164,6 +184,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     return {
         get,
         getFabricComponent,
+        getOption,
         getValue
     };
 }

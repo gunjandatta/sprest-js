@@ -10,6 +10,9 @@ export interface IDropdown {
     /** Returns the fabric component. */
     getFabricComponent(): any;
 
+    /** Returns the selected option. */
+    getOption(): IDropdownOption;
+
     /** Returns the dropdown value. */
     getValue(): string | Array<string>;
 }
@@ -42,7 +45,7 @@ export interface IDropdownProps extends IComponentProps {
     multi?: boolean;
 
     /** The change event */
-    onChange?: (checked: string | Array<string>) => void;
+    onChange?: (value: IDropdownOption | Array<IDropdownOption>) => void;
 
     /** The dropdown options. */
     options?: Array<IDropdownOption>
@@ -51,5 +54,5 @@ export interface IDropdownProps extends IComponentProps {
     placeholder?: string;
 
     /** The dropdown value(s). */
-    value?: string | Array<string>;
+    value?: IDropdownOption | Array<IDropdownOption>;
 }

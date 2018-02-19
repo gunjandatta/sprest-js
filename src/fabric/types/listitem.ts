@@ -39,4 +39,7 @@ export interface IListItemProps extends IProps {
 
     /** The tertiary text. */
     tertiaryText?: string;
+
+    /** The list item value. */
+    value?: string;
 }

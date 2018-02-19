@@ -11136,7 +11136,8 @@ exports.Dropdown = function (props) {
                     items.push(_1.Templates.ListItem({
                         className: "ms-ListItem--" + (isCategory ? "category" : "header"),
                         isSelectable: isCategory ? props.multi : false,
-                        primaryText: option.text
+                        primaryText: option.text,
+                        value: JSON.stringify(option)
                     }));
                 }
                 else if (option.options && option.options.length > 0) {
@@ -11147,7 +11148,8 @@ exports.Dropdown = function (props) {
                     // Add the item
                     items.push(_1.Templates.ListItem({
                         isSelectable: props.multi,
-                        secondaryText: option.text
+                        secondaryText: option.text,
+                        value: JSON.stringify(option)
                     }));
                 }
             }
@@ -11157,6 +11159,7 @@ exports.Dropdown = function (props) {
         // Set the click event
         var onClick = function (ev) {
             var item = ev.currentTarget;
+            var tb = _tb.get()._textField;
             // Return if this is a header
             if (item.className.indexOf("ms-ListItem--header") > 0) {
                 return;
@@ -11173,20 +11176,31 @@ exports.Dropdown = function (props) {
                     item.className += " is-selected";
                 }
                 // Query the selected items
+                var textValues = [];
                 var values = [];
                 var items_1 = _list._container.querySelectorAll(".is-selected");
                 for (var i = 0; i < items_1.length; i++) {
-                    // Add the item
-                    values.push(items_1[i].querySelector(".ms-ListItem-primaryText").innerText ||
-                        items_1[i].querySelector(".ms-ListItem-secondaryText").innerText);
+                    var option = JSON.parse(item.getAttribute("data-value"));
+                    // Add the values
+                    textValues.push(option.text);
+                    values.push({
+                        text: option.text,
+                        value: option.value
+                    });
                 }
                 // Update the textbox
-                _tb.setValue(values.join(', '));
+                tb.value = textValues.join(", ");
+                tb.setAttribute("data-value", JSON.stringify(values));
+                // Call the change event
+                props.onChange ? props.onChange(values) : null;
             }
             else {
+                var option = JSON.parse(item.getAttribute("data-value"));
                 // Update the textbox
-                _tb.setValue(item.querySelector(".ms-ListItem-primaryText").innerText ||
-                    item.querySelector(".ms-ListItem-secondaryText").innerText);
+                tb.value = option.text;
+                tb.setAttribute("data-value", JSON.stringify(option));
+                // Call the change event
+                props.onChange ? props.onChange(option) : null;
                 // Close the callout
                 _callout._contextualHost.disposeModal();
             }
@@ -11208,6 +11222,11 @@ exports.Dropdown = function (props) {
     var getFabricComponent = function () {
         // Return the menu
         return _callout._contextualHost;
+    };
+    // Method to get the selected option
+    var getOption = function () {
+        // Return the option
+        return _tb.get()._textField.getAttribute("data-value");
     };
     // Method to get the value
     var getValue = function () {
@@ -11246,6 +11265,7 @@ exports.Dropdown = function (props) {
     return {
         get: get,
         getFabricComponent: getFabricComponent,
+        getOption: getOption,
         getValue: getValue
     };
 };
@@ -12197,7 +12217,7 @@ exports.ListItem = function (props) {
     ].join(' ').trim();
     // Return the template
     return [
-        '<li class="ms-ListItem ' + className + '" tabindex="0">',
+        '<li class="ms-ListItem ' + className + '" tabindex="0" data-value=\'' + (props.value || "") + '\'>',
         '<span class="ms-ListItem-primaryText">' + (props.primaryText || "") + '</span>',
         '<span class="ms-ListItem-secondaryText">' + (props.secondaryText || "") + '</span>',
         '<span class="ms-ListItem-tertiaryText">' + (props.tertiaryText || "") + '</span>',
