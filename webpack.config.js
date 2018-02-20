@@ -17,7 +17,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.tsx?/,
+                test: /\.jsx?/,
                 exclude: /node_modules/,
                 use: [
                     {
@@ -25,9 +25,6 @@ module.exports = {
                         options: {
                             presets: ["es2015"]
                         }
-                    },
-                    {
-                        loader: "ts-loader"
                     }
                 ]
             }
