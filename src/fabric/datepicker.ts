@@ -43,7 +43,7 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
         }
 
         // See if the time exists
-        let timeValue: any = _tp ? _tp.getOption() : null;
+        let timeValue: IDropdownOption | Array<string> = _tp ? _tp.getValue() as IDropdownOption : null;
         timeValue = timeValue ? timeValue.value.split(" ") : null;
         if (timeValue) {
             // Set the time

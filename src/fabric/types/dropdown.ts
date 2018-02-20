@@ -10,11 +10,8 @@ export interface IDropdown {
     /** Returns the fabric component. */
     getFabricComponent(): any;
 
-    /** Returns the selected option. */
-    getOption(): IDropdownOption;
-
     /** Returns the dropdown value. */
-    getValue(): string | Array<string>;
+    getValue(): IDropdownOption | Array<IDropdownOption>;
 }
 
 /**

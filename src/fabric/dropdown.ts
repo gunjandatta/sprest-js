@@ -138,14 +138,8 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         return _callout._contextualHost;
     }
 
-    // Method to get the selected option
-    let getOption = (): IDropdownOption => {
-        // Return the option
-        return JSON.parse(_tb.get()._textField.getAttribute("data-value"));
-    }
-
     // Method to get the value
-    let getValue = (): string => {
+    let getValue = (): IDropdownOption | Array<IDropdownOption> => {
         let value = _tb.get()._textField.getAttribute("data-value");
 
         // Return the value
@@ -186,7 +180,6 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     return {
         get,
         getFabricComponent,
-        getOption,
         getValue
     };
 }

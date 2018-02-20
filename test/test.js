@@ -11033,7 +11033,7 @@ exports.DatePicker = function (props) {
             dt = new Date(dtValue);
         }
         // See if the time exists
-        var timeValue = _tp ? _tp.getOption() : null;
+        var timeValue = _tp ? _tp.getValue() : null;
         timeValue = timeValue ? timeValue.value.split(" ") : null;
         if (timeValue) {
             // Set the time
@@ -11246,11 +11246,6 @@ exports.Dropdown = function (props) {
         // Return the menu
         return _callout._contextualHost;
     };
-    // Method to get the selected option
-    var getOption = function () {
-        // Return the option
-        return JSON.parse(_tb.get()._textField.getAttribute("data-value"));
-    };
     // Method to get the value
     var getValue = function () {
         var value = _tb.get()._textField.getAttribute("data-value");
@@ -11289,7 +11284,6 @@ exports.Dropdown = function (props) {
     return {
         get: get,
         getFabricComponent: getFabricComponent,
-        getOption: getOption,
         getValue: getValue
     };
 };
