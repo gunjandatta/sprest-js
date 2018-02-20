@@ -2,12 +2,13 @@ import { SPTypes } from "gd-sprest";
 import { Button, CommandBar, Panel, PanelTypes, Templates, Spinner } from "../fabric";
 import { Fabric, IPanel } from "../fabric/types";
 import { Field, ListForm } from ".";
-import { IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
+import { IField, IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
 
 /**
  * Item Form
  */
 export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
+    let _fields: Array<IField> = [];
     let _formInfo: IListFormResult = null;
 
     // Add the menu click events
@@ -38,6 +39,21 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         let save = _panel.get()._panel.querySelector(".ms-CommandButton-save") as HTMLButtonElement;
         if (save) {
             save.addEventListener("click", () => {
+                let formValues = {};
+
+                // Parse the fields
+                debugger;
+                for (let i = 0; i < _fields.length; i++) {
+                    let field = _fields[i];
+
+                    // Set the form value
+                    formValues[field.fieldInfo.name] = field.element.getValue();
+                }
+                debugger;
+
+                // Save the item
+                ListForm.saveItem(_formInfo, formValues);
+
                 // Disable postback
                 return false;
             });
@@ -58,6 +74,9 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                     listName: _formInfo.list.Title,
                     name: fieldName
                 }
+            }).then(field => {
+                // Add the field
+                _fields.push(field);
             });
         }
     }

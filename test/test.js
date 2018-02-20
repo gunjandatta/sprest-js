@@ -11024,7 +11024,7 @@ exports.DatePicker = function (props) {
     var getValue = function () {
         // Get the datetime value
         // TO DO
-        return null;
+        return new Date(Date.now());
     };
     // Method to render the date picker
     var renderDatePicker = function (el) {
@@ -11226,7 +11226,7 @@ exports.Dropdown = function (props) {
     // Method to get the selected option
     var getOption = function () {
         // Return the option
-        return _tb.get()._textField.getAttribute("data-value");
+        return JSON.parse(_tb.get()._textField.getAttribute("data-value"));
     };
     // Method to get the value
     var getValue = function () {
@@ -12642,202 +12642,249 @@ exports.Field = function (props) {
         // Return the options
         return options;
     };
-    // Load the field information
-    gd_sprest_1.Helper.ListFormField.create(props.fieldInfo).then(function (fieldInfo) {
-        // Render the field based on the type
-        switch (fieldInfo.type) {
-            // Boolean Field
-            case gd_sprest_1.SPTypes.FieldType.Boolean:
-                __1.Fabric.Toggle({
-                    className: props.className,
-                    description: fieldInfo.field.Description,
-                    disable: props.disabled,
-                    el: props.el,
-                    label: fieldInfo.title,
-                    onChange: props.onChange,
-                    value: props.value
-                });
-                break;
-            // Calculated Field
-            case gd_sprest_1.SPTypes.FieldType.Calculated:
-                __1.Fabric.TextField({
-                    className: props.className,
-                    description: fieldInfo.field.Description,
-                    disable: true,
-                    el: props.el,
-                    label: fieldInfo.title,
-                    onChange: props.onChange,
-                    required: fieldInfo.required,
-                    type: __1.Fabric.TextFieldTypes.Underline,
-                    value: props.value || fieldInfo.defaultValue || ""
-                });
-                break;
-            // Choice Field
-            case gd_sprest_1.SPTypes.FieldType.Choice:
-                __1.Fabric.Dropdown({
-                    className: props.className,
-                    description: fieldInfo.field.Description,
-                    disable: props.disabled,
-                    el: props.el,
-                    label: fieldInfo.title,
-                    onChange: props.onChange,
-                    options: getChoiceOptions(fieldInfo),
-                    required: fieldInfo.required,
-                    value: props.value
-                });
-                break;
-            // Date/Time
-            case gd_sprest_1.SPTypes.FieldType.DateTime:
-                __1.Fabric.DatePicker({
-                    className: props.className,
-                    description: fieldInfo.field.Description,
-                    disable: props.disabled,
-                    el: props.el,
-                    label: fieldInfo.title,
-                    onChange: props.onChange,
-                    required: fieldInfo.required,
-                    showTime: fieldInfo.showTime,
-                    value: props.value
-                });
-                break;
-            // Lookup Field
-            case gd_sprest_1.SPTypes.FieldType.Lookup:
-                // Get the drop down information
-                gd_sprest_1.Helper.ListFormField.loadLookupData(fieldInfo, 500).then(function (items) {
-                    __1.Fabric.Dropdown({
-                        className: props.className,
-                        description: fieldInfo.field.Description,
-                        disable: props.disabled,
-                        el: props.el,
-                        label: fieldInfo.title,
-                        multi: fieldInfo.multi,
-                        onChange: props.onChange,
-                        options: getLookupOptions(fieldInfo, items),
-                        required: fieldInfo.required,
-                        value: props.value
-                    });
-                });
-                break;
-            // Multi-Choice Field
-            case gd_sprest_1.SPTypes.FieldType.MultiChoice:
-                __1.Fabric.Dropdown({
-                    className: props.className,
-                    description: fieldInfo.field.Description,
-                    disable: props.disabled,
-                    el: props.el,
-                    label: fieldInfo.title,
-                    multi: true,
-                    onChange: props.onChange,
-                    options: getChoiceOptions(fieldInfo),
-                    required: fieldInfo.required,
-                    value: props.value ? props.value.results : props.value
-                });
-                break;
-            // Note Field
-            case gd_sprest_1.SPTypes.FieldType.Note:
-                __1.Fabric.TextField({
-                    className: props.className,
-                    description: fieldInfo.field.Description,
-                    disable: props.disabled,
-                    el: props.el,
-                    label: fieldInfo.title,
-                    onChange: props.onChange,
-                    required: fieldInfo.required,
-                    type: __1.Fabric.TextFieldTypes.Multi,
-                    value: props.value || fieldInfo.defaultValue || ""
-                });
-                break;
-            // Number or Currency Field
-            case gd_sprest_1.SPTypes.FieldType.Number:
-            case gd_sprest_1.SPTypes.FieldType.Currency:
-                var numberInfo = fieldInfo;
-                __1.Fabric.NumberField({
-                    className: props.className,
-                    decimals: numberInfo.decimals,
-                    description: fieldInfo.field.Description,
-                    disable: props.disabled,
-                    el: props.el,
-                    label: numberInfo.title,
-                    maxValue: numberInfo.maxValue,
-                    minValue: numberInfo.minValue,
-                    onChange: props.onChange,
-                    required: numberInfo.required,
-                    type: numberInfo.showAsPercentage ? __1.Fabric.NumberFieldTypes.Percentage : (numberInfo.decimals == 0 ? __1.Fabric.NumberFieldTypes.Integer : __1.Fabric.NumberFieldTypes.Number),
-                    value: props.value || numberInfo.defaultValue || ""
-                });
-                break;
-            // Text Field
-            case gd_sprest_1.SPTypes.FieldType.Text:
-                __1.Fabric.TextField({
-                    className: props.className,
-                    description: fieldInfo.field.Description,
-                    disable: props.disabled,
-                    el: props.el,
-                    label: fieldInfo.title,
-                    onChange: props.onChange,
-                    required: fieldInfo.required,
-                    type: __1.Fabric.TextFieldTypes.Underline,
-                    value: props.value || fieldInfo.defaultValue || ""
-                });
-                break;
-            // Url Field
-            case gd_sprest_1.SPTypes.FieldType.URL:
-                __1.Fabric.LinkField({
-                    className: props.className,
-                    description: fieldInfo.field.Description,
-                    disable: props.disabled,
-                    el: props.el,
-                    label: fieldInfo.title,
-                    onChange: props.onChange,
-                    required: fieldInfo.required,
-                    value: props.value ? props.value.Url : ""
-                });
-                break;
-            // User Field
-            case gd_sprest_1.SPTypes.FieldType.User:
-                var userInfo = fieldInfo;
-                __1.Fabric.PeoplePicker({
-                    allowGroups: userInfo.allowGroups,
-                    allowMultiple: userInfo.multi,
-                    description: fieldInfo.field.Description,
-                    el: props.el,
-                    label: userInfo.title,
-                    required: userInfo.required,
-                    value: props.value
-                });
-                break;
-            // Default
-            default:
-                // See if this is a taxonomy field
-                if (fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
-                    var mmsInfo_1 = fieldInfo;
-                    // Load the terms
-                    gd_sprest_1.Helper.ListFormField.loadMMSData(mmsInfo_1).then(function (terms) {
-                        __1.Fabric.Dropdown({
+    // Method to update the value
+    var _value = props.value;
+    var updateValue = function (value) {
+        // Update the value
+        _value = value;
+        // Call the change event
+        props.onChange ? props.onChange(value) : null;
+    };
+    // Render a loading message
+    var _spinner = __1.Fabric.Spinner({
+        el: props.el,
+        text: "Loading the field..."
+    });
+    // Return a promise
+    return new Promise(function (resolve, reject) {
+        // Load the field information
+        gd_sprest_1.Helper.ListFormField.create(props.fieldInfo).then(function (fieldInfo) {
+            // Render the field based on the type
+            switch (fieldInfo.type) {
+                // Boolean Field
+                case gd_sprest_1.SPTypes.FieldType.Boolean:
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: __1.Fabric.Toggle({
                             className: props.className,
                             description: fieldInfo.field.Description,
                             disable: props.disabled,
                             el: props.el,
-                            label: mmsInfo_1.title,
-                            multi: mmsInfo_1.multi,
-                            onChange: props.onChange,
-                            options: getMMSOptions(gd_sprest_1.Helper.Taxonomy.toObject(terms)),
-                            required: mmsInfo_1.required,
-                            value: props.value ? props.value.results : props.value
+                            label: fieldInfo.title,
+                            onChange: updateValue,
+                            value: props.value
+                        })
+                    });
+                    break;
+                // Calculated Field
+                case gd_sprest_1.SPTypes.FieldType.Calculated:
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: __1.Fabric.TextField({
+                            className: props.className,
+                            description: fieldInfo.field.Description,
+                            disable: true,
+                            el: props.el,
+                            label: fieldInfo.title,
+                            onChange: updateValue,
+                            required: fieldInfo.required,
+                            type: __1.Fabric.TextFieldTypes.Underline,
+                            value: props.value || fieldInfo.defaultValue || ""
+                        })
+                    });
+                    break;
+                // Choice Field
+                case gd_sprest_1.SPTypes.FieldType.Choice:
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: __1.Fabric.Dropdown({
+                            className: props.className,
+                            description: fieldInfo.field.Description,
+                            disable: props.disabled,
+                            el: props.el,
+                            label: fieldInfo.title,
+                            onChange: updateValue,
+                            options: getChoiceOptions(fieldInfo),
+                            required: fieldInfo.required,
+                            value: props.value
+                        })
+                    });
+                    break;
+                // Date/Time
+                case gd_sprest_1.SPTypes.FieldType.DateTime:
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: __1.Fabric.DatePicker({
+                            className: props.className,
+                            description: fieldInfo.field.Description,
+                            disable: props.disabled,
+                            el: props.el,
+                            label: fieldInfo.title,
+                            onChange: updateValue,
+                            required: fieldInfo.required,
+                            showTime: fieldInfo.showTime,
+                            value: props.value
+                        })
+                    });
+                    break;
+                // Lookup Field
+                case gd_sprest_1.SPTypes.FieldType.Lookup:
+                    // Get the drop down information
+                    gd_sprest_1.Helper.ListFormField.loadLookupData(fieldInfo, 500).then(function (items) {
+                        resolve({
+                            fieldInfo: props.fieldInfo,
+                            element: __1.Fabric.Dropdown({
+                                className: props.className,
+                                description: fieldInfo.field.Description,
+                                disable: props.disabled,
+                                el: props.el,
+                                label: fieldInfo.title,
+                                multi: fieldInfo.multi,
+                                onChange: updateValue,
+                                options: getLookupOptions(fieldInfo, items),
+                                required: fieldInfo.required,
+                                value: props.value
+                            })
                         });
                     });
-                }
-                else {
-                    // Log
-                    console.log("[gd-sprest] The field type '" + fieldInfo.typeAsString + "' is not supported.");
-                }
-                break;
-        }
-    });
-    // Render a spinner
-    var _spinner = __1.Fabric.Spinner({
-        el: props.el,
-        text: "Loading the field..."
+                    break;
+                // Multi-Choice Field
+                case gd_sprest_1.SPTypes.FieldType.MultiChoice:
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: __1.Fabric.Dropdown({
+                            className: props.className,
+                            description: fieldInfo.field.Description,
+                            disable: props.disabled,
+                            el: props.el,
+                            label: fieldInfo.title,
+                            multi: true,
+                            onChange: updateValue,
+                            options: getChoiceOptions(fieldInfo),
+                            required: fieldInfo.required,
+                            value: props.value ? props.value.results : props.value
+                        })
+                    });
+                    break;
+                // Note Field
+                case gd_sprest_1.SPTypes.FieldType.Note:
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: __1.Fabric.TextField({
+                            className: props.className,
+                            description: fieldInfo.field.Description,
+                            disable: props.disabled,
+                            el: props.el,
+                            label: fieldInfo.title,
+                            onChange: updateValue,
+                            required: fieldInfo.required,
+                            type: __1.Fabric.TextFieldTypes.Multi,
+                            value: props.value || fieldInfo.defaultValue || ""
+                        })
+                    });
+                    break;
+                // Number or Currency Field
+                case gd_sprest_1.SPTypes.FieldType.Number:
+                case gd_sprest_1.SPTypes.FieldType.Currency:
+                    var numberInfo = fieldInfo;
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: __1.Fabric.NumberField({
+                            className: props.className,
+                            decimals: numberInfo.decimals,
+                            description: fieldInfo.field.Description,
+                            disable: props.disabled,
+                            el: props.el,
+                            label: numberInfo.title,
+                            maxValue: numberInfo.maxValue,
+                            minValue: numberInfo.minValue,
+                            onChange: updateValue,
+                            required: numberInfo.required,
+                            type: numberInfo.showAsPercentage ? __1.Fabric.NumberFieldTypes.Percentage : (numberInfo.decimals == 0 ? __1.Fabric.NumberFieldTypes.Integer : __1.Fabric.NumberFieldTypes.Number),
+                            value: props.value || numberInfo.defaultValue || ""
+                        })
+                    });
+                    break;
+                // Text Field
+                case gd_sprest_1.SPTypes.FieldType.Text:
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: __1.Fabric.TextField({
+                            className: props.className,
+                            description: fieldInfo.field.Description,
+                            disable: props.disabled,
+                            el: props.el,
+                            label: fieldInfo.title,
+                            onChange: updateValue,
+                            required: fieldInfo.required,
+                            type: __1.Fabric.TextFieldTypes.Underline,
+                            value: props.value || fieldInfo.defaultValue || ""
+                        })
+                    });
+                    break;
+                // Url Field
+                case gd_sprest_1.SPTypes.FieldType.URL:
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: __1.Fabric.LinkField({
+                            className: props.className,
+                            description: fieldInfo.field.Description,
+                            disable: props.disabled,
+                            el: props.el,
+                            label: fieldInfo.title,
+                            onChange: updateValue,
+                            required: fieldInfo.required,
+                            value: props.value ? props.value.Url : ""
+                        })
+                    });
+                    break;
+                // User Field
+                case gd_sprest_1.SPTypes.FieldType.User:
+                    var userInfo = fieldInfo;
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: __1.Fabric.PeoplePicker({
+                            allowGroups: userInfo.allowGroups,
+                            allowMultiple: userInfo.multi,
+                            description: fieldInfo.field.Description,
+                            el: props.el,
+                            label: userInfo.title,
+                            required: userInfo.required,
+                            value: props.value
+                        })
+                    });
+                    break;
+                // Default
+                default:
+                    // See if this is a taxonomy field
+                    if (fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
+                        var mmsInfo_1 = fieldInfo;
+                        // Load the terms
+                        gd_sprest_1.Helper.ListFormField.loadMMSData(mmsInfo_1).then(function (terms) {
+                            resolve({
+                                fieldInfo: props.fieldInfo,
+                                element: __1.Fabric.Dropdown({
+                                    className: props.className,
+                                    description: fieldInfo.field.Description,
+                                    disable: props.disabled,
+                                    el: props.el,
+                                    label: mmsInfo_1.title,
+                                    multi: mmsInfo_1.multi,
+                                    onChange: updateValue,
+                                    options: getMMSOptions(gd_sprest_1.Helper.Taxonomy.toObject(terms)),
+                                    required: mmsInfo_1.required,
+                                    value: props.value ? props.value.results : props.value
+                                })
+                            });
+                        });
+                    }
+                    else {
+                        // Log
+                        console.log("[gd-sprest] The field type '" + fieldInfo.typeAsString + "' is not supported.");
+                    }
+                    break;
+            }
+        });
     });
 };
 
@@ -13448,6 +13495,7 @@ var _1 = __webpack_require__(15);
  * Item Form
  */
 exports.ListFormPanel = function (props) {
+    var _fields = [];
     var _formInfo = null;
     // Add the menu click events
     var addMenuClickEvents = function () {
@@ -13474,6 +13522,17 @@ exports.ListFormPanel = function (props) {
         var save = _panel.get()._panel.querySelector(".ms-CommandButton-save");
         if (save) {
             save.addEventListener("click", function () {
+                var formValues = {};
+                // Parse the fields
+                debugger;
+                for (var i = 0; i < _fields.length; i++) {
+                    var field = _fields[i];
+                    // Set the form value
+                    formValues[field.fieldInfo.name] = field.element.getValue();
+                }
+                debugger;
+                // Save the item
+                _1.ListForm.saveItem(_formInfo, formValues);
                 // Disable postback
                 return false;
             });
@@ -13492,6 +13551,9 @@ exports.ListFormPanel = function (props) {
                     listName: _formInfo.list.Title,
                     name: fieldName
                 }
+            }).then(function (field) {
+                // Add the field
+                _fields.push(field);
             });
         }
     };

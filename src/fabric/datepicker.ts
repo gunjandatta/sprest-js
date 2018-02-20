@@ -35,7 +35,7 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
     let getValue = (): Date => {
         // Get the datetime value
         // TO DO
-        return null;
+        return new Date(Date.now());
     }
 
     // Method to render the date picker
