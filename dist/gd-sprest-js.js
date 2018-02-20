@@ -275,6 +275,26 @@ exports.Types = Types;
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function __export(m) {
+    for (var p in m) {
+        if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+    }
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(119));
+__export(__webpack_require__(120));
+__export(__webpack_require__(121));
+__export(__webpack_require__(122));
+var Types = __webpack_require__(123);
+exports.Types = Types;
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports) {
 
 /*
@@ -356,7 +376,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -738,7 +758,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2966,26 +2986,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)(module)))
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function __export(m) {
-    for (var p in m) {
-        if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-    }
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(119));
-__export(__webpack_require__(120));
-__export(__webpack_require__(121));
-__export(__webpack_require__(122));
-var Types = __webpack_require__(123);
-exports.Types = Types;
-
-/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3004,10 +3004,22 @@ exports.Fabric = Fabric;
 // Include the styles
 __webpack_require__(117);
 // Components
-__export(__webpack_require__(10));
+var Components = __webpack_require__(7);
+__export(__webpack_require__(7));
 // WebParts
 var WebParts = __webpack_require__(124);
 exports.WebParts = WebParts;
+// Wait for the core library to be loaded
+SP ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+    // Get the global variable
+    var $REST = window["$REST"];
+    if ($REST) {
+        // Add the JS library
+        $REST["JS"] = { Components: Components, Fabric: Fabric, WebParts: WebParts };
+    }
+    // Alert other scripts this library is loaded
+    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest-js.js");
+}, "gd-sprest.js") : null;
 
 /***/ }),
 /* 12 */
@@ -4627,7 +4639,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(8)(content, options);
+var update = __webpack_require__(9)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -4662,7 +4674,7 @@ if(false) {
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(8)(false);
 // imports
 
 
@@ -4786,7 +4798,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(8)(content, options);
+var update = __webpack_require__(9)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -4821,7 +4833,7 @@ if(false) {
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(8)(false);
 // imports
 
 
@@ -4838,7 +4850,7 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 "use strict";
 
 
-var $ = __webpack_require__(9);
+var $ = __webpack_require__(10);
 __webpack_require__(25);
 //Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
 /**
@@ -5997,7 +6009,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_LOCA
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 !function (a) {
-   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(9)], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
+   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(10)], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
 				__WEBPACK_LOCAL_MODULE_0__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__)) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? module.exports = a(require("./jquery.js")) : this.Picker = a(jQuery);
 }(function (a) {
@@ -6144,7 +6156,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     }, a.fn[c].defaults = d.defaults;
   }, b;
 }), function (a) {
-   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__WEBPACK_LOCAL_MODULE_0__, __webpack_require__(9)], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
+   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__WEBPACK_LOCAL_MODULE_0__, __webpack_require__(10)], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? module.exports = a(require("./picker.js"), require("./jquery.js")) : a(Picker, jQuery);
@@ -15297,6 +15309,8 @@ var global = Lib.ContextInfo.window.$REST;
 if (global == null || global.__ver == null || global.__ver < exports.$REST.__ver) {
     // Set the global variable
     Lib.ContextInfo.window.$REST = exports.$REST;
+    // Alert other scripts this library is loaded
+    SP ? SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest.js") : null;
 }
 //# sourceMappingURL=rest.js.map
 
@@ -15894,7 +15908,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(8)(content, options);
+var update = __webpack_require__(9)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -15929,7 +15943,7 @@ if(false) {
 /* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(8)(false);
 // imports
 
 
@@ -15949,7 +15963,7 @@ exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font co
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var __1 = __webpack_require__(11);
-var _1 = __webpack_require__(10);
+var _1 = __webpack_require__(7);
 /**
  * Field
  */
@@ -16855,7 +16869,7 @@ exports.ListFormField = _ListFormField;
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var fabric_1 = __webpack_require__(1);
-var _1 = __webpack_require__(10);
+var _1 = __webpack_require__(7);
 /**
  * Item Form
  */
