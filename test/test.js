@@ -2505,7 +2505,7 @@ window["TestJS"] = {
                 // Render the button
                 var button = build_1.Fabric.Button({
                     el: cfg.el.children[1],
-                    text: "Show Panel",
+                    text: "New Item",
                     onClick: function onClick() {
                         // Show the list form
                         listForm.show(gd_sprest_1.SPTypes.ControlMode.New);
@@ -13542,7 +13542,7 @@ exports.ListFormPanel = function (props) {
             });
         }
         // Set the edit button click event
-        buttons = _panel.get()._panel.querySelector(".ms-CommandButton-edit");
+        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-edit");
         for (var i = 0; i < buttons.length; i++) {
             // Add a click event
             buttons[i].addEventListener("click", function () {
@@ -13553,7 +13553,7 @@ exports.ListFormPanel = function (props) {
             });
         }
         // Set the save button click event
-        buttons = _panel.get()._panel.querySelector(".ms-CommandButton-save");
+        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-save");
         for (var i = 0; i < buttons.length; i++) {
             // Add a click event
             buttons[i].addEventListener("click", function () {

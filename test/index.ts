@@ -186,7 +186,7 @@ window["TestJS"] = {
                 // Render the button
                 let button = Fabric.Button({
                     el: cfg.el.children[1],
-                    text: "Show Panel",
+                    text: "New Item",
                     onClick: () => {
                         // Show the list form
                         listForm.show(SPTypes.ControlMode.New);
