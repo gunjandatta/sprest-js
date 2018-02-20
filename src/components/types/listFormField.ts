@@ -98,6 +98,9 @@ export interface IListFormMMSFieldInfo extends IListFormFieldInfo {
 
     /** The term store id */
     termStoreId?: string;
+
+    /** The value field */
+    valueField?: Types.SP.IFieldNote;
 }
 
 /**
@@ -182,5 +185,5 @@ export interface IListFormField {
     loadMMSData(info: IListFormMMSFieldInfo): PromiseLike<Array<Helper.Types.ITermInfo>>;
 
     /** Method to load the mms value field */
-    loadMMSValueField(info: IListFormMMSFieldInfo): PromiseLike<Types.SP.IFieldManagedMetadata>;
+    loadMMSValueField(info: IListFormMMSFieldInfo): PromiseLike<Types.SP.IFieldNote>;
 }

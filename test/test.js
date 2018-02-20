@@ -2509,6 +2509,7 @@ window["TestJS"] = {
                     text: "New Item",
                     onClick: function onClick() {
                         // Show the list form
+                        debugger;
                         listForm.show(gd_sprest_1.SPTypes.ControlMode.New);
                         // Disable postback
                         return false;
@@ -11261,12 +11262,8 @@ exports.Dropdown = function (props) {
     ].join('\n');
     // Render the textfield
     var _tb = _1.TextField({
-        disable: true,
         el: props.el.querySelector(".textfield"),
         label: props.label,
-        onChange: function () { if (_tb.getValue() == "undefined") {
-            _tb.setValue("");
-        } },
         required: props.required,
         type: _1.TextFieldTypes.Underline
     });
@@ -12458,9 +12455,9 @@ exports.TextField = function (props) {
             text: props.label
         }) : '',
         props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
-        props.type == __1.TextFieldTypes.Multi ?
-            '<textarea class="ms-TextField-field"></textarea>' :
-            '<input class="ms-TextField-field" type="text" value="' + (props.value || "") + '" placeholder=""></input>',
+        props.type == __1.TextFieldTypes.Multi && props.disable != true ?
+            '<textarea class="ms-TextField-field">' + (props.value || "") + '</textarea>' :
+            '<input class="ms-TextField-field" type="text" value="' + (props.value || "") + '" placeholder=""' + (props.disable ? " disabled" : "") + '></input>',
         '<label class="ms-Label ms-fontColor-redDark error" style="color:#a80000;"></label>',
         '</div>'
     ].join('\n');
@@ -12684,26 +12681,27 @@ exports.Field = function (props) {
                 element: __1.Fabric.TextField({
                     className: props.className,
                     description: props.fieldInfo.field.Description,
-                    disable: props.disabled,
+                    disable: true,
                     el: props.el,
-                    label: props.fieldInfo.title,
+                    label: props.fieldInfo.field.Title,
                     onChange: updateValue,
                     required: props.fieldInfo.required,
-                    type: __1.Fabric.TextFieldTypes.Multi,
+                    type: __1.Fabric.TextFieldTypes.Underline,
                     value: props.value || ""
                 })
             });
+            return;
         }
         // Load the field information
         _1.ListFormField.create(props.fieldInfo).then(function (fieldInfo) {
             // Set the value
-            var value = props.value || (props.controlMode == gd_sprest_1.SPTypes.ControlMode.New ? props.fieldInfo.defaultValue : null);
+            var value = props.controlMode == gd_sprest_1.SPTypes.ControlMode.New ? props.fieldInfo.defaultValue : props.value;
             // Render the field based on the type
             switch (fieldInfo.type) {
                 // Boolean Field
                 case gd_sprest_1.SPTypes.FieldType.Boolean:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo: fieldInfo,
                         element: __1.Fabric.Toggle({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -12718,7 +12716,7 @@ exports.Field = function (props) {
                 // Calculated Field
                 case gd_sprest_1.SPTypes.FieldType.Calculated:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo: fieldInfo,
                         element: __1.Fabric.TextField({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -12735,7 +12733,7 @@ exports.Field = function (props) {
                 // Choice Field
                 case gd_sprest_1.SPTypes.FieldType.Choice:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo: fieldInfo,
                         element: __1.Fabric.Dropdown({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -12752,7 +12750,7 @@ exports.Field = function (props) {
                 // Date/Time
                 case gd_sprest_1.SPTypes.FieldType.DateTime:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo: fieldInfo,
                         element: __1.Fabric.DatePicker({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -12771,7 +12769,7 @@ exports.Field = function (props) {
                     // Get the drop down information
                     _1.ListFormField.loadLookupData(fieldInfo, 500).then(function (items) {
                         resolve({
-                            fieldInfo: props.fieldInfo,
+                            fieldInfo: fieldInfo,
                             element: __1.Fabric.Dropdown({
                                 className: props.className,
                                 description: fieldInfo.field.Description,
@@ -12790,7 +12788,7 @@ exports.Field = function (props) {
                 // Multi-Choice Field
                 case gd_sprest_1.SPTypes.FieldType.MultiChoice:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo: fieldInfo,
                         element: __1.Fabric.Dropdown({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -12808,7 +12806,7 @@ exports.Field = function (props) {
                 // Note Field
                 case gd_sprest_1.SPTypes.FieldType.Note:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo: fieldInfo,
                         element: __1.Fabric.TextField({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -12827,11 +12825,11 @@ exports.Field = function (props) {
                 case gd_sprest_1.SPTypes.FieldType.Currency:
                     var numberInfo = fieldInfo;
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo: numberInfo,
                         element: __1.Fabric.NumberField({
                             className: props.className,
                             decimals: numberInfo.decimals,
-                            description: fieldInfo.field.Description,
+                            description: numberInfo.field.Description,
                             disable: props.disabled,
                             el: props.el,
                             label: numberInfo.title,
@@ -12847,7 +12845,7 @@ exports.Field = function (props) {
                 // Text Field
                 case gd_sprest_1.SPTypes.FieldType.Text:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo: fieldInfo,
                         element: __1.Fabric.TextField({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -12864,7 +12862,7 @@ exports.Field = function (props) {
                 // Url Field
                 case gd_sprest_1.SPTypes.FieldType.URL:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo: fieldInfo,
                         element: __1.Fabric.LinkField({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -12881,11 +12879,11 @@ exports.Field = function (props) {
                 case gd_sprest_1.SPTypes.FieldType.User:
                     var userInfo = fieldInfo;
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo: userInfo,
                         element: __1.Fabric.PeoplePicker({
                             allowGroups: userInfo.allowGroups,
                             allowMultiple: userInfo.multi,
-                            description: fieldInfo.field.Description,
+                            description: userInfo.field.Description,
                             el: props.el,
                             label: userInfo.title,
                             required: userInfo.required,
@@ -12900,20 +12898,25 @@ exports.Field = function (props) {
                         var mmsInfo_1 = fieldInfo;
                         // Load the terms
                         _1.ListFormField.loadMMSData(mmsInfo_1).then(function (terms) {
-                            resolve({
-                                fieldInfo: props.fieldInfo,
-                                element: __1.Fabric.Dropdown({
-                                    className: props.className,
-                                    description: fieldInfo.field.Description,
-                                    disable: props.disabled,
-                                    el: props.el,
-                                    label: mmsInfo_1.title,
-                                    multi: mmsInfo_1.multi,
-                                    onChange: updateValue,
-                                    options: getMMSOptions(gd_sprest_1.Helper.Taxonomy.toObject(terms)),
-                                    required: mmsInfo_1.required,
-                                    value: value ? value.results : value
-                                })
+                            // Load the value field
+                            _1.ListFormField.loadMMSValueField(mmsInfo_1).then(function (valueField) {
+                                // Set the value field
+                                mmsInfo_1.valueField = valueField;
+                                resolve({
+                                    fieldInfo: mmsInfo_1,
+                                    element: __1.Fabric.Dropdown({
+                                        className: props.className,
+                                        description: mmsInfo_1.field.Description,
+                                        disable: props.disabled,
+                                        el: props.el,
+                                        label: mmsInfo_1.title,
+                                        multi: mmsInfo_1.multi,
+                                        onChange: updateValue,
+                                        options: getMMSOptions(gd_sprest_1.Helper.Taxonomy.toObject(terms)),
+                                        required: mmsInfo_1.required,
+                                        value: value ? value.results : value
+                                    })
+                                });
                             });
                         });
                     }
@@ -13604,7 +13607,7 @@ exports.ListFormPanel = function (props) {
                         // Multi-Choice
                         case gd_sprest_1.SPTypes.FieldType.MultiChoice:
                             var options = fieldValue || [];
-                            fieldValue = options.length > 0 ? { results: [] } : null;
+                            fieldValue = { results: [] };
                             // Parse the options
                             for (var i_2 = 0; i_2 < options.length; i_2++) {
                                 // Add the option
@@ -13657,8 +13660,9 @@ exports.ListFormPanel = function (props) {
                 fieldInfo: {
                     field: field,
                     listName: _formInfo.list.Title,
-                    name: fieldName
-                }
+                    name: fieldName,
+                },
+                value: _formInfo.item ? _formInfo.item[fieldName] : null
             }).then(function (field) {
                 // Add the field
                 _fields.push(field);

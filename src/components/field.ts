@@ -109,29 +109,29 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 element: Fabric.TextField({
                     className: props.className,
                     description: props.fieldInfo.field.Description,
-                    disable: props.disabled,
+                    disable: true,
                     el: props.el,
-                    label: props.fieldInfo.title,
+                    label: props.fieldInfo.field.Title,
                     onChange: updateValue,
                     required: props.fieldInfo.required,
-                    type: Fabric.TextFieldTypes.Multi,
+                    type: Fabric.TextFieldTypes.Underline,
                     value: props.value || ""
                 })
             });
+            return;
         }
-
 
         // Load the field information
         ListFormField.create(props.fieldInfo).then(fieldInfo => {
             // Set the value
-            let value = props.value || (props.controlMode == SPTypes.ControlMode.New ? props.fieldInfo.defaultValue : null);
+            let value = props.controlMode == SPTypes.ControlMode.New ? props.fieldInfo.defaultValue : props.value;
 
             // Render the field based on the type
             switch (fieldInfo.type) {
                 // Boolean Field
                 case SPTypes.FieldType.Boolean:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo,
                         element: Fabric.Toggle({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -147,7 +147,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 // Calculated Field
                 case SPTypes.FieldType.Calculated:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo,
                         element: Fabric.TextField({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -165,7 +165,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 // Choice Field
                 case SPTypes.FieldType.Choice:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo,
                         element: Fabric.Dropdown({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -183,7 +183,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 // Date/Time
                 case SPTypes.FieldType.DateTime:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo,
                         element: Fabric.DatePicker({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -203,7 +203,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                     // Get the drop down information
                     ListFormField.loadLookupData(fieldInfo as FieldTypes.IListFormLookupFieldInfo, 500).then(items => {
                         resolve({
-                            fieldInfo: props.fieldInfo,
+                            fieldInfo,
                             element: Fabric.Dropdown({
                                 className: props.className,
                                 description: fieldInfo.field.Description,
@@ -223,7 +223,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 // Multi-Choice Field
                 case SPTypes.FieldType.MultiChoice:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo,
                         element: Fabric.Dropdown({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -242,7 +242,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 // Note Field
                 case SPTypes.FieldType.Note:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo,
                         element: Fabric.TextField({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -262,11 +262,11 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 case SPTypes.FieldType.Currency:
                     let numberInfo = fieldInfo as FieldTypes.IListFormNumberFieldInfo;
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo: numberInfo,
                         element: Fabric.NumberField({
                             className: props.className,
                             decimals: numberInfo.decimals,
-                            description: fieldInfo.field.Description,
+                            description: numberInfo.field.Description,
                             disable: props.disabled,
                             el: props.el,
                             label: numberInfo.title,
@@ -283,7 +283,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 // Text Field
                 case SPTypes.FieldType.Text:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo,
                         element: Fabric.TextField({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -301,7 +301,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 // Url Field
                 case SPTypes.FieldType.URL:
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo,
                         element: Fabric.LinkField({
                             className: props.className,
                             description: fieldInfo.field.Description,
@@ -319,11 +319,11 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 case SPTypes.FieldType.User:
                     let userInfo = fieldInfo as FieldTypes.IListFormUserFieldInfo;
                     resolve({
-                        fieldInfo: props.fieldInfo,
+                        fieldInfo: userInfo,
                         element: Fabric.PeoplePicker({
                             allowGroups: userInfo.allowGroups,
                             allowMultiple: userInfo.multi,
-                            description: fieldInfo.field.Description,
+                            description: userInfo.field.Description,
                             el: props.el,
                             label: userInfo.title,
                             required: userInfo.required,
@@ -339,20 +339,25 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                         let mmsInfo = fieldInfo as FieldTypes.IListFormMMSFieldInfo;
                         // Load the terms
                         ListFormField.loadMMSData(mmsInfo).then(terms => {
-                            resolve({
-                                fieldInfo: props.fieldInfo,
-                                element: Fabric.Dropdown({
-                                    className: props.className,
-                                    description: fieldInfo.field.Description,
-                                    disable: props.disabled,
-                                    el: props.el,
-                                    label: mmsInfo.title,
-                                    multi: mmsInfo.multi,
-                                    onChange: updateValue,
-                                    options: getMMSOptions(Helper.Taxonomy.toObject(terms)),
-                                    required: mmsInfo.required,
-                                    value: value ? value.results : value
-                                })
+                            // Load the value field
+                            ListFormField.loadMMSValueField(mmsInfo).then(valueField => {
+                                // Set the value field
+                                mmsInfo.valueField = valueField;
+                                resolve({
+                                    fieldInfo: mmsInfo,
+                                    element: Fabric.Dropdown({
+                                        className: props.className,
+                                        description: mmsInfo.field.Description,
+                                        disable: props.disabled,
+                                        el: props.el,
+                                        label: mmsInfo.title,
+                                        multi: mmsInfo.multi,
+                                        onChange: updateValue,
+                                        options: getMMSOptions(Helper.Taxonomy.toObject(terms)),
+                                        required: mmsInfo.required,
+                                        value: value ? value.results : value
+                                    })
+                                });
                             });
                         });
                     } else {

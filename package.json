@@ -5,9 +5,9 @@
   "main": "build/index.js",
   "typings": "build/index.d.ts",
   "scripts": {
-    "prestart": "gulp",
-    "start": "webpack",
-    "poststart": "webpack --config test/webpack.config.js"
+    "build": "gulp",
+    "package": "webpack",
+    "test": "gulp && webpack --config test/webpack.config.js"
   },
   "repository": {
     "type": "git",

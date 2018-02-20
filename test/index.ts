@@ -190,6 +190,7 @@ window["TestJS"] = {
                     text: "New Item",
                     onClick: () => {
                         // Show the list form
+                        debugger;
                         listForm.show(SPTypes.ControlMode.New);
 
                         // Disable postback

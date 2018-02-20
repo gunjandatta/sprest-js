@@ -156,10 +156,8 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
     // Render the textfield
     let _tb = TextField({
-        disable: true,
         el: props.el.querySelector(".textfield"),
         label: props.label,
-        onChange: () => { if (_tb.getValue() == "undefined") { _tb.setValue(""); } },
         required: props.required,
         type: TextFieldTypes.Underline
     });

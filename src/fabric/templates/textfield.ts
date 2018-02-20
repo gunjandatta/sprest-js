@@ -26,9 +26,9 @@ export const TextField = (props: ITextFieldProps): string => {
             text: props.label
         }) : '',
         props.placeholder ? '<label class="ms-Label">' + props.placeholder + '</label>' : '',
-        props.type == TextFieldTypes.Multi ?
-            '<textarea class="ms-TextField-field"></textarea>' :
-            '<input class="ms-TextField-field" type="text" value="' + (props.value || "") + '" placeholder=""></input>',
+        props.type == TextFieldTypes.Multi && props.disable != true ?
+            '<textarea class="ms-TextField-field">' + (props.value || "") + '</textarea>' :
+            '<input class="ms-TextField-field" type="text" value="' + (props.value || "") + '" placeholder=""' + (props.disable ? " disabled" : "") + '></input>',
         '<label class="ms-Label ms-fontColor-redDark error" style="color:#a80000;"></label>',
         '</div>'
     ].join('\n');

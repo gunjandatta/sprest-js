@@ -91,7 +91,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                         // Multi-Choice
                         case SPTypes.FieldType.MultiChoice:
                             let options: Array<IDropdownOption> = fieldValue || [];
-                            fieldValue = options.length > 0 ? { results: [] } : null;
+                            fieldValue = { results: [] };
 
                             // Parse the options
                             for (let i = 0; i < options.length; i++) {
@@ -152,8 +152,9 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                 fieldInfo: {
                     field,
                     listName: _formInfo.list.Title,
-                    name: fieldName
-                }
+                    name: fieldName,
+                },
+                value: _formInfo.item ? _formInfo.item[fieldName] : null
             }).then(field => {
                 // Add the field
                 _fields.push(field);
