@@ -101,8 +101,30 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
 
     // Return a promise
     return new Promise((resolve, reject) => {
+        // See if we are displaying the field
+        if (props.controlMode == SPTypes.ControlMode.Display) {
+            resolve({
+                fieldInfo: props.fieldInfo,
+                element: Fabric.TextField({
+                    className: props.className,
+                    description: props.fieldInfo.field.Description,
+                    disable: props.disabled,
+                    el: props.el,
+                    label: props.fieldInfo.title,
+                    onChange: updateValue,
+                    required: props.fieldInfo.required,
+                    type: Fabric.TextFieldTypes.Multi,
+                    value: props.value || ""
+                })
+            });
+        }
+
+
         // Load the field information
         Helper.ListFormField.create(props.fieldInfo).then(fieldInfo => {
+            // Set the value
+            let value = props.value || (props.controlMode == SPTypes.ControlMode.New ? props.fieldInfo.defaultValue : null);
+
             // Render the field based on the type
             switch (fieldInfo.type) {
                 // Boolean Field
@@ -116,7 +138,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             el: props.el,
                             label: fieldInfo.title,
                             onChange: updateValue,
-                            value: props.value
+                            value
                         })
                     });
                     break;
@@ -134,7 +156,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             onChange: updateValue,
                             required: fieldInfo.required,
                             type: Fabric.TextFieldTypes.Underline,
-                            value: props.value || fieldInfo.defaultValue || ""
+                            value
                         })
                     });
                     break;
@@ -152,7 +174,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             onChange: updateValue,
                             options: getChoiceOptions(fieldInfo as Helper.Types.IListFormChoiceFieldInfo),
                             required: fieldInfo.required,
-                            value: props.value
+                            value
                         })
                     });
                     break;
@@ -170,7 +192,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             onChange: updateValue,
                             required: fieldInfo.required,
                             showTime: (fieldInfo as Helper.Types.IListFormDateFieldInfo).showTime,
-                            value: props.value
+                            value
                         })
                     });
                     break;
@@ -191,7 +213,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                                 onChange: updateValue,
                                 options: getLookupOptions(fieldInfo as Helper.Types.IListFormLookupFieldInfo, items),
                                 required: fieldInfo.required,
-                                value: props.value
+                                value
                             })
                         });
                     });
@@ -211,7 +233,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             onChange: updateValue,
                             options: getChoiceOptions(fieldInfo as Helper.Types.IListFormChoiceFieldInfo),
                             required: fieldInfo.required,
-                            value: props.value ? props.value.results : props.value
+                            value: value ? value.results : value
                         })
                     });
                     break;
@@ -229,7 +251,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             onChange: updateValue,
                             required: fieldInfo.required,
                             type: Fabric.TextFieldTypes.Multi,
-                            value: props.value || fieldInfo.defaultValue || ""
+                            value
                         })
                     });
                     break;
@@ -252,7 +274,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             onChange: updateValue,
                             required: numberInfo.required,
                             type: numberInfo.showAsPercentage ? Fabric.NumberFieldTypes.Percentage : (numberInfo.decimals == 0 ? Fabric.NumberFieldTypes.Integer : Fabric.NumberFieldTypes.Number),
-                            value: props.value || numberInfo.defaultValue || ""
+                            value
                         })
                     });
                     break;
@@ -270,7 +292,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             onChange: updateValue,
                             required: fieldInfo.required,
                             type: Fabric.TextFieldTypes.Underline,
-                            value: props.value || fieldInfo.defaultValue || ""
+                            value
                         })
                     });
                     break;
@@ -287,7 +309,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             label: fieldInfo.title,
                             onChange: updateValue,
                             required: fieldInfo.required,
-                            value: props.value ? props.value.Url : ""
+                            value
                         })
                     });
                     break;
@@ -304,7 +326,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             el: props.el,
                             label: userInfo.title,
                             required: userInfo.required,
-                            value: props.value
+                            value
                         })
                     });
                     break;
@@ -328,7 +350,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                                     onChange: updateValue,
                                     options: getMMSOptions(Helper.Taxonomy.toObject(terms)),
                                     required: mmsInfo.required,
-                                    value: props.value ? props.value.results : props.value
+                                    value: value ? value.results : value
                                 })
                             });
                         });

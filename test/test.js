@@ -12657,8 +12657,27 @@ exports.Field = function (props) {
     });
     // Return a promise
     return new Promise(function (resolve, reject) {
+        // See if we are displaying the field
+        if (props.controlMode == gd_sprest_1.SPTypes.ControlMode.Display) {
+            resolve({
+                fieldInfo: props.fieldInfo,
+                element: __1.Fabric.TextField({
+                    className: props.className,
+                    description: props.fieldInfo.field.Description,
+                    disable: props.disabled,
+                    el: props.el,
+                    label: props.fieldInfo.title,
+                    onChange: updateValue,
+                    required: props.fieldInfo.required,
+                    type: __1.Fabric.TextFieldTypes.Multi,
+                    value: props.value || ""
+                })
+            });
+        }
         // Load the field information
         gd_sprest_1.Helper.ListFormField.create(props.fieldInfo).then(function (fieldInfo) {
+            // Set the value
+            var value = props.value || (props.controlMode == gd_sprest_1.SPTypes.ControlMode.New ? props.fieldInfo.defaultValue : null);
             // Render the field based on the type
             switch (fieldInfo.type) {
                 // Boolean Field
@@ -12672,7 +12691,7 @@ exports.Field = function (props) {
                             el: props.el,
                             label: fieldInfo.title,
                             onChange: updateValue,
-                            value: props.value
+                            value: value
                         })
                     });
                     break;
@@ -12689,7 +12708,7 @@ exports.Field = function (props) {
                             onChange: updateValue,
                             required: fieldInfo.required,
                             type: __1.Fabric.TextFieldTypes.Underline,
-                            value: props.value || fieldInfo.defaultValue || ""
+                            value: value
                         })
                     });
                     break;
@@ -12706,7 +12725,7 @@ exports.Field = function (props) {
                             onChange: updateValue,
                             options: getChoiceOptions(fieldInfo),
                             required: fieldInfo.required,
-                            value: props.value
+                            value: value
                         })
                     });
                     break;
@@ -12723,7 +12742,7 @@ exports.Field = function (props) {
                             onChange: updateValue,
                             required: fieldInfo.required,
                             showTime: fieldInfo.showTime,
-                            value: props.value
+                            value: value
                         })
                     });
                     break;
@@ -12743,7 +12762,7 @@ exports.Field = function (props) {
                                 onChange: updateValue,
                                 options: getLookupOptions(fieldInfo, items),
                                 required: fieldInfo.required,
-                                value: props.value
+                                value: value
                             })
                         });
                     });
@@ -12762,7 +12781,7 @@ exports.Field = function (props) {
                             onChange: updateValue,
                             options: getChoiceOptions(fieldInfo),
                             required: fieldInfo.required,
-                            value: props.value ? props.value.results : props.value
+                            value: value ? value.results : value
                         })
                     });
                     break;
@@ -12779,7 +12798,7 @@ exports.Field = function (props) {
                             onChange: updateValue,
                             required: fieldInfo.required,
                             type: __1.Fabric.TextFieldTypes.Multi,
-                            value: props.value || fieldInfo.defaultValue || ""
+                            value: value
                         })
                     });
                     break;
@@ -12801,7 +12820,7 @@ exports.Field = function (props) {
                             onChange: updateValue,
                             required: numberInfo.required,
                             type: numberInfo.showAsPercentage ? __1.Fabric.NumberFieldTypes.Percentage : (numberInfo.decimals == 0 ? __1.Fabric.NumberFieldTypes.Integer : __1.Fabric.NumberFieldTypes.Number),
-                            value: props.value || numberInfo.defaultValue || ""
+                            value: value
                         })
                     });
                     break;
@@ -12818,7 +12837,7 @@ exports.Field = function (props) {
                             onChange: updateValue,
                             required: fieldInfo.required,
                             type: __1.Fabric.TextFieldTypes.Underline,
-                            value: props.value || fieldInfo.defaultValue || ""
+                            value: value
                         })
                     });
                     break;
@@ -12834,7 +12853,7 @@ exports.Field = function (props) {
                             label: fieldInfo.title,
                             onChange: updateValue,
                             required: fieldInfo.required,
-                            value: props.value ? props.value.Url : ""
+                            value: value
                         })
                     });
                     break;
@@ -12850,7 +12869,7 @@ exports.Field = function (props) {
                             el: props.el,
                             label: userInfo.title,
                             required: userInfo.required,
-                            value: props.value
+                            value: value
                         })
                     });
                     break;
@@ -12873,7 +12892,7 @@ exports.Field = function (props) {
                                     onChange: updateValue,
                                     options: getMMSOptions(gd_sprest_1.Helper.Taxonomy.toObject(terms)),
                                     required: mmsInfo_1.required,
-                                    value: props.value ? props.value.results : props.value
+                                    value: value ? value.results : value
                                 })
                             });
                         });
@@ -13499,8 +13518,20 @@ exports.ListFormPanel = function (props) {
     var _formInfo = null;
     // Add the menu click events
     var addMenuClickEvents = function () {
-        // Parse the buttons
-        var buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
+        var buttons = null;
+        // Cancel buttons
+        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
+        for (var i = 0; i < buttons.length; i++) {
+            // Add a click event
+            buttons[i].addEventListener("click", function () {
+                // Close the panel
+                _panel.hide();
+                // Disable postback
+                return false;
+            });
+        }
+        // Close buttons
+        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
         for (var i = 0; i < buttons.length; i++) {
             // Add a click event
             buttons[i].addEventListener("click", function () {
@@ -13511,22 +13542,26 @@ exports.ListFormPanel = function (props) {
             });
         }
         // Set the edit button click event
-        var edit = _panel.get()._panel.querySelector(".ms-CommandButton-edit");
-        if (edit) {
-            edit.addEventListener("click", function () {
+        buttons = _panel.get()._panel.querySelector(".ms-CommandButton-edit");
+        for (var i = 0; i < buttons.length; i++) {
+            // Add a click event
+            buttons[i].addEventListener("click", function () {
+                // Render the form
+                renderForm(gd_sprest_1.SPTypes.ControlMode.Display);
                 // Disable postback
                 return false;
             });
         }
         // Set the save button click event
-        var save = _panel.get()._panel.querySelector(".ms-CommandButton-save");
-        if (save) {
-            save.addEventListener("click", function () {
+        buttons = _panel.get()._panel.querySelector(".ms-CommandButton-save");
+        for (var i = 0; i < buttons.length; i++) {
+            // Add a click event
+            buttons[i].addEventListener("click", function () {
                 var formValues = {};
                 // Parse the fields
                 debugger;
-                for (var i = 0; i < _fields.length; i++) {
-                    var field = _fields[i];
+                for (var i_1 = 0; i_1 < _fields.length; i_1++) {
+                    var field = _fields[i_1];
                     // Set the form value
                     formValues[field.fieldInfo.name] = field.element.getValue();
                 }
@@ -13539,12 +13574,23 @@ exports.ListFormPanel = function (props) {
         }
     };
     // Render the fields
-    var renderFields = function () {
+    var renderFields = function (controlMode) {
+        if (controlMode === void 0) { controlMode = gd_sprest_1.SPTypes.ControlMode.Display; }
+        // Clear the fields
+        _fields = [];
         // Parse the fields
         for (var fieldName in _formInfo.fields) {
             var field = _formInfo.fields[fieldName];
+            // See if this is a read-only field
+            if (field.ReadOnlyField) {
+                // Do not render in the new form
+                if (controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
+                    continue;
+                }
+            }
             // Render the field
             _1.Field({
+                controlMode: controlMode,
                 el: _panel.get()._panel.querySelector("[data-field='" + fieldName + "']"),
                 fieldInfo: {
                     field: field,
@@ -13558,7 +13604,8 @@ exports.ListFormPanel = function (props) {
         }
     };
     // Render the form
-    var renderForm = function () {
+    var renderForm = function (controlMode) {
+        if (controlMode === void 0) { controlMode = gd_sprest_1.SPTypes.ControlMode.Display; }
         // Parse the fields
         var fields = "";
         for (var fieldName in _formInfo.fields) {
@@ -13570,7 +13617,7 @@ exports.ListFormPanel = function (props) {
         // Update the panel content
         _panel.updateContent('<div class="ms-ListForm">' + fields + '</div>');
         // Render the fields
-        renderFields();
+        renderFields(controlMode);
         // Add the menu click event
         addMenuClickEvents();
     };
@@ -13579,7 +13626,7 @@ exports.ListFormPanel = function (props) {
         // Determine the main commands
         var mainCommands = null;
         switch (props.controlMode) {
-            // Edit Button
+            // Display
             case gd_sprest_1.SPTypes.ControlMode.Display:
                 mainCommands = [
                     {
@@ -13588,14 +13635,28 @@ exports.ListFormPanel = function (props) {
                         text: "Edit"
                     },
                     {
+                        className: "ms-CommandButton-close",
+                        icon: "Close",
+                        text: "Close"
+                    }
+                ];
+                break;
+            // Edit
+            case gd_sprest_1.SPTypes.ControlMode.Edit:
+                mainCommands = [
+                    {
+                        className: "ms-CommandButton-update",
+                        icon: "Update",
+                        text: "Update"
+                    },
+                    {
                         className: "ms-CommandButton-cancel",
                         icon: "Cancel",
                         text: "Cancel"
                     }
                 ];
                 break;
-            // Save Button
-            case gd_sprest_1.SPTypes.ControlMode.Edit:
+            // New
             case gd_sprest_1.SPTypes.ControlMode.New:
                 mainCommands = [
                     {
@@ -13604,9 +13665,9 @@ exports.ListFormPanel = function (props) {
                         text: "Save"
                     },
                     {
-                        className: "ms-CommandButton-cancel",
-                        icon: "Cancel",
-                        text: "Cancel"
+                        className: "ms-CommandButton-close",
+                        icon: "Close",
+                        text: "Close"
                     }
                 ];
                 break;
@@ -13650,7 +13711,7 @@ exports.ListFormPanel = function (props) {
         // See if the panel is open
         if (_panel.isOpen()) {
             // Render the panel
-            renderForm();
+            renderForm(props.controlMode);
         }
     });
     // Return the panel
@@ -13666,7 +13727,7 @@ exports.ListFormPanel = function (props) {
                 // Show the form
                 _panel.show();
                 // Render the form
-                renderForm();
+                renderForm(props.controlMode);
             }
             else {
                 // Show the panel

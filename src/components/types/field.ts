@@ -17,6 +17,9 @@ export interface IFieldProps {
     /** Class name */
     className?: string;
 
+    /** The control mode of the form. */
+    controlMode?: number;
+
     /** Disabled */
     disabled?: boolean;
 

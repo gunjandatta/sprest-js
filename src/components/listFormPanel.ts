@@ -13,8 +13,23 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
 
     // Add the menu click events
     let addMenuClickEvents = () => {
-        // Parse the buttons
-        let buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
+        let buttons: any = null;
+
+        // Cancel buttons
+        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
+        for (let i = 0; i < buttons.length; i++) {
+            // Add a click event
+            buttons[i].addEventListener("click", () => {
+                // Close the panel
+                _panel.hide();
+
+                // Disable postback
+                return false;
+            });
+        }
+
+        // Close buttons
+        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
         for (let i = 0; i < buttons.length; i++) {
             // Add a click event
             buttons[i].addEventListener("click", () => {
@@ -27,18 +42,23 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         }
 
         // Set the edit button click event
-        let edit = _panel.get()._panel.querySelector(".ms-CommandButton-edit") as HTMLButtonElement;
-        if (edit) {
-            edit.addEventListener("click", () => {
+        buttons = _panel.get()._panel.querySelector(".ms-CommandButton-edit") as HTMLButtonElement;
+        for (let i = 0; i < buttons.length; i++) {
+            // Add a click event
+            buttons[i].addEventListener("click", () => {
+                // Render the form
+                renderForm(SPTypes.ControlMode.Display);
+
                 // Disable postback
                 return false;
             });
         }
 
         // Set the save button click event
-        let save = _panel.get()._panel.querySelector(".ms-CommandButton-save") as HTMLButtonElement;
-        if (save) {
-            save.addEventListener("click", () => {
+        buttons = _panel.get()._panel.querySelector(".ms-CommandButton-save") as HTMLButtonElement;
+        for (let i = 0; i < buttons.length; i++) {
+            // Add a click event
+            buttons[i].addEventListener("click", () => {
                 let formValues = {};
 
                 // Parse the fields
@@ -61,13 +81,23 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
     }
 
     // Render the fields
-    let renderFields = () => {
+    let renderFields = (controlMode: number = SPTypes.ControlMode.Display) => {
+        // Clear the fields
+        _fields = [];
+
         // Parse the fields
         for (let fieldName in _formInfo.fields) {
             let field = _formInfo.fields[fieldName];
 
+            // See if this is a read-only field
+            if (field.ReadOnlyField) {
+                // Do not render in the new form
+                if (controlMode == SPTypes.ControlMode.New) { continue; }
+            }
+
             // Render the field
             Field({
+                controlMode,
                 el: _panel.get()._panel.querySelector("[data-field='" + fieldName + "']"),
                 fieldInfo: {
                     field,
@@ -82,7 +112,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
     }
 
     // Render the form
-    let renderForm = () => {
+    let renderForm = (controlMode: number = SPTypes.ControlMode.Display) => {
         // Parse the fields
         let fields = "";
         for (let fieldName in _formInfo.fields) {
@@ -97,7 +127,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         _panel.updateContent('<div class="ms-ListForm">' + fields + '</div>');
 
         // Render the fields
-        renderFields();
+        renderFields(controlMode);
 
         // Add the menu click event
         addMenuClickEvents();
@@ -108,13 +138,29 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         // Determine the main commands
         let mainCommands = null;
         switch (props.controlMode) {
-            // Edit Button
+            // Display
             case SPTypes.ControlMode.Display:
                 mainCommands = [
                     {
                         className: "ms-CommandButton-edit",
                         icon: "Edit",
                         text: "Edit"
+                    },
+                    {
+                        className: "ms-CommandButton-close",
+                        icon: "Close",
+                        text: "Close"
+                    }
+                ];
+                break;
+
+            // Edit
+            case SPTypes.ControlMode.Edit:
+                mainCommands = [
+                    {
+                        className: "ms-CommandButton-update",
+                        icon: "Update",
+                        text: "Update"
                     },
                     {
                         className: "ms-CommandButton-cancel",
@@ -124,8 +170,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                 ];
                 break;
 
-            // Save Button
-            case SPTypes.ControlMode.Edit:
+            // New
             case SPTypes.ControlMode.New:
                 mainCommands = [
                     {
@@ -134,9 +179,9 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                         text: "Save"
                     },
                     {
-                        className: "ms-CommandButton-cancel",
-                        icon: "Cancel",
-                        text: "Cancel"
+                        className: "ms-CommandButton-close",
+                        icon: "Close",
+                        text: "Close"
                     }
                 ];
                 break;
@@ -185,7 +230,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         // See if the panel is open
         if (_panel.isOpen()) {
             // Render the panel
-            renderForm();
+            renderForm(props.controlMode);
         }
     });
 
@@ -201,7 +246,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                 _panel.show()
 
                 // Render the form
-                renderForm();
+                renderForm(props.controlMode);
             } else {
                 // Show the panel
                 let content = _panel.show(_formInfo ? "" : "<div class='spinner'></div>");
