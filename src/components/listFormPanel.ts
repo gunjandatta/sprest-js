@@ -61,6 +61,13 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
             buttons[i].addEventListener("click", () => {
                 let formValues = {};
 
+                // Render a saving message
+                let content = _panel.updateContent(Templates.Spinner({ text: "Saving the item..." }));
+                Spinner({
+                    el: content,
+                    text: "Saving the item..."
+                });
+
                 // Parse the fields
                 for (let i = 0; i < _fields.length; i++) {
                     let field = _fields[i];
@@ -116,7 +123,6 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
 
                 // Save the item
                 ListForm.saveItem(_formInfo, formValues).then(formInfo => {
-                    debugger;
                     // Update the form info
                     _formInfo = formInfo;
 

@@ -2493,9 +2493,9 @@ window["TestJS"] = {
             elementId: "wp-test-js",
             onRenderDisplay: function onRenderDisplay(cfg) {
                 // Render elements
-                cfg.el.innerHTML = "<div></div><div></div>";
-                // Render the list form panel
-                var listForm = build_1.ListFormPanel({
+                cfg.el.innerHTML = "<div></div><div></div><div></div><div></div>";
+                // Render the new form
+                var newForm = build_1.ListFormPanel({
                     controlMode: gd_sprest_1.SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
                     fields: ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice"],
@@ -2503,16 +2503,44 @@ window["TestJS"] = {
                     panelTitle: "Test Item Form",
                     panelType: build_1.Fabric.PanelTypes.Large
                 });
-                // Render the button
-                var button = build_1.Fabric.Button({
+                // Render the new button
+                var newButton = build_1.Fabric.Button({
                     el: cfg.el.children[1],
                     text: "New Item",
                     onClick: function onClick() {
                         // Show the list form
-                        debugger;
-                        listForm.show(gd_sprest_1.SPTypes.ControlMode.New);
+                        newForm.show(gd_sprest_1.SPTypes.ControlMode.New);
                         // Disable postback
                         return false;
+                    }
+                });
+                // Get the list
+                new gd_sprest_1.List("SPReact").Items().query({
+                    Top: 1
+                }).execute(function (items) {
+                    var item = items.results ? items.results[0] : null;
+                    if (item) {
+                        // Render the view form
+                        var viewForm_1 = build_1.ListFormPanel({
+                            controlMode: gd_sprest_1.SPTypes.ControlMode.Display,
+                            el: cfg.el.children[2],
+                            fields: ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice"],
+                            item: item,
+                            listName: "SPReact",
+                            panelTitle: item["Title"] || "",
+                            panelType: build_1.Fabric.PanelTypes.Large
+                        });
+                        // Render the view button
+                        var editButton = build_1.Fabric.Button({
+                            el: cfg.el.children[3],
+                            text: "View Item",
+                            onClick: function onClick() {
+                                // Show the list form
+                                viewForm_1.show(gd_sprest_1.SPTypes.ControlMode.Display);
+                                // Disable postback
+                                return false;
+                            }
+                        });
                     }
                 });
             },
@@ -12676,6 +12704,14 @@ exports.Field = function (props) {
     return new Promise(function (resolve, reject) {
         // See if we are displaying the field
         if (props.controlMode == gd_sprest_1.SPTypes.ControlMode.Display) {
+            // Update the value, based on the type
+            var value = props.value || "";
+            switch (props.fieldInfo.type) {
+                case gd_sprest_1.SPTypes.FieldType.MultiChoice:
+                    // Update the values
+                    value = value.results ? value.results.join(", ") : value;
+                    break;
+            }
             resolve({
                 fieldInfo: props.fieldInfo,
                 element: __1.Fabric.TextField({
@@ -13581,6 +13617,12 @@ exports.ListFormPanel = function (props) {
             // Add a click event
             buttons[i].addEventListener("click", function () {
                 var formValues = {};
+                // Render a saving message
+                var content = _panel.updateContent(fabric_1.Templates.Spinner({ text: "Saving the item..." }));
+                fabric_1.Spinner({
+                    el: content,
+                    text: "Saving the item..."
+                });
                 // Parse the fields
                 for (var i_1 = 0; i_1 < _fields.length; i_1++) {
                     var field = _fields[i_1];
@@ -13627,7 +13669,6 @@ exports.ListFormPanel = function (props) {
                 }
                 // Save the item
                 _1.ListForm.saveItem(_formInfo, formValues).then(function (formInfo) {
-                    debugger;
                     // Update the form info
                     _formInfo = formInfo;
                     // Render the form

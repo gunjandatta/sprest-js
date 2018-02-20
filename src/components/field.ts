@@ -104,6 +104,16 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
     return new Promise((resolve, reject) => {
         // See if we are displaying the field
         if (props.controlMode == SPTypes.ControlMode.Display) {
+            // Update the value, based on the type
+            let value = props.value || "";
+            switch (props.fieldInfo.type) {
+                case SPTypes.FieldType.MultiChoice:
+                    // Update the values
+                    value = value.results ? value.results.join(", ") : value;
+                    break;
+            }
+
+
             resolve({
                 fieldInfo: props.fieldInfo,
                 element: Fabric.TextField({

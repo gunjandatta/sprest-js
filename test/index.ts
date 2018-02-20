@@ -1,4 +1,4 @@
-import { Helper, SPTypes, Types } from "gd-sprest";
+import { Helper, List, SPTypes, Types } from "gd-sprest";
 import { Fabric, ListFormPanel, WebParts } from "../build";
 declare var SP;
 
@@ -172,10 +172,10 @@ window["TestJS"] = {
             elementId: "wp-test-js",
             onRenderDisplay: (cfg) => {
                 // Render elements
-                cfg.el.innerHTML = "<div></div><div></div>";
+                cfg.el.innerHTML = "<div></div><div></div><div></div><div></div>";
 
-                // Render the list form panel
-                let listForm = ListFormPanel({
+                // Render the new form
+                let newForm = ListFormPanel({
                     controlMode: SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
                     fields: ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice"],
@@ -184,19 +184,56 @@ window["TestJS"] = {
                     panelType: Fabric.PanelTypes.Large
                 });
 
-                // Render the button
-                let button = Fabric.Button({
+                // Render the new button
+                let newButton = Fabric.Button({
                     el: cfg.el.children[1],
                     text: "New Item",
                     onClick: () => {
                         // Show the list form
-                        debugger;
-                        listForm.show(SPTypes.ControlMode.New);
+                        newForm.show(SPTypes.ControlMode.New);
 
                         // Disable postback
                         return false;
                     }
                 });
+
+                // Get the list
+                (new List("SPReact"))
+                    // Get the items
+                    .Items()
+                    // Query for the first item
+                    .query({
+                        Top: 1
+                    })
+                    // Execute the request
+                    .execute(items => {
+                        let item = items.results ? items.results[0] : null;
+                        if (item) {
+                            // Render the view form
+                            let viewForm = ListFormPanel({
+                                controlMode: SPTypes.ControlMode.Display,
+                                el: cfg.el.children[2],
+                                fields: ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice"],
+                                item: item,
+                                listName: "SPReact",
+                                panelTitle: item["Title"] || "",
+                                panelType: Fabric.PanelTypes.Large
+                            });
+
+                            // Render the view button
+                            let editButton = Fabric.Button({
+                                el: cfg.el.children[3],
+                                text: "View Item",
+                                onClick: () => {
+                                    // Show the list form
+                                    viewForm.show(SPTypes.ControlMode.Display);
+
+                                    // Disable postback
+                                    return false;
+                                }
+                            });
+                        }
+                    });
             },
             onRenderEdit: (cfg) => {
                 cfg.el.innerHTML = "<div class='ms-fontSize-xl'>The Page Is Being Edited</div>";
