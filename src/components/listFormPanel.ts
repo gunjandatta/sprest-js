@@ -42,7 +42,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         }
 
         // Set the edit button click event
-        buttons = _panel.get()._panel.querySelector(".ms-CommandButton-edit") as HTMLButtonElement;
+        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-edit");
         for (let i = 0; i < buttons.length; i++) {
             // Add a click event
             buttons[i].addEventListener("click", () => {
@@ -55,7 +55,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         }
 
         // Set the save button click event
-        buttons = _panel.get()._panel.querySelector(".ms-CommandButton-save") as HTMLButtonElement;
+        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-save");
         for (let i = 0; i < buttons.length; i++) {
             // Add a click event
             buttons[i].addEventListener("click", () => {
