@@ -6,7 +6,6 @@
   "typings": "build/index.d.ts",
   "scripts": {
     "build": "gulp",
-    "package": "webpack",
     "test": "gulp && webpack --config test/webpack.config.js"
   },
   "repository": {
@@ -40,9 +39,11 @@
     "gulp": "^3.9.1",
     "gulp-clean": "^0.4.0",
     "gulp-insert": "^0.5.0",
+    "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
     "gulp-typescript": "^4.0.1",
     "gulp-uglify": "^3.0.0",
+    "gulp-webpack": "^1.5.0",
     "office-ui-fabric-js": "^1.5.0",
     "style-loader": "^0.20.2",
     "ts-loader": "^3.5.0",

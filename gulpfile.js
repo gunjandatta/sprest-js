@@ -1,9 +1,12 @@
-var gulp = require("gulp");
 var clean = require("gulp-clean");
+var gulp = require("gulp");
+var gulpWebpack = require("gulp-webpack");
 var insert = require("gulp-insert");
+var rename = require("gulp-rename");
 var replace = require("gulp-replace");
 var ts = require("gulp-typescript");
 var uglify = require("gulp-uglify");
+var webpack = require("webpack");
 
 // Build
 gulp.task("build", ["clean"], () => {
@@ -77,6 +80,58 @@ gulp.task("copy-styles", ["build"], () => {
         .pipe(gulp.dest("build"));
 });
 
+// Package the library
+gulp.task("package", ["package-bundle", "package-minify"]);
+
+// Bundle the library
+gulp.task("package-bundle", ["update-lib-reference"], () => {
+    // Get the source files
+    return gulp.src(["build/index.js"])
+        // Bundle the files
+        .pipe(gulpWebpack({
+            output: {
+                filename: "gd-sprest-js.js",
+            },
+            module: {
+                loaders: [
+                    {
+                        test: /\.css$/,
+                        use: [
+                            { loader: "style-loader" },
+                            { loader: "css-loader" }
+                        ]
+                    },
+                    {
+                        test: /\.jsx?$/,
+                        exclude: /node_modules/,
+                        use: [
+                            {
+                                loader: "babel-loader",
+                                options: {
+                                    presets: ["es2015"]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }, webpack))
+        // Save to the dist directory
+        .pipe(gulp.dest("dist/"));
+});
+
+// Minify the bundle
+gulp.task("package-minify", ["package-bundle"], () => {
+    // Get the source files
+    return gulp.src(["dist/gd-sprest-js.js"])
+        // Minify the bundle
+        .pipe(uglify())
+        // Update the file extension
+        .pipe(rename({ suffix: ".min" }))
+        // Save to the dist directory
+        .pipe(gulp.dest("dist/"));
+});
+
 // Update the lib reference
 gulp.task("update-lib-reference", ["copy-lib"], () => {
     // Get the source file
@@ -88,4 +143,4 @@ gulp.task("update-lib-reference", ["copy-lib"], () => {
 });
 
 // Default
-gulp.task("default", ["clean", "build", "copy-lib", "update-lib-reference"]);
+gulp.task("default", ["clean", "build", "copy-lib", "update-lib-reference", "package"]);
