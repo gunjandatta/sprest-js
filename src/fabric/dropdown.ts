@@ -146,8 +146,10 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
     // Method to get the value
     let getValue = (): string => {
+        let value = _tb.get()._textField.getAttribute("data-value");
+
         // Return the value
-        return _tb.getValue();
+        return value ? JSON.parse(value) : value;
     }
 
     // Render the dropdown

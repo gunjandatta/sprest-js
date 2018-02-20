@@ -1,13 +1,14 @@
 import { Helper, SPTypes, Types } from "gd-sprest";
 import { Fabric } from "..";
 import { IField, IFieldProps } from "./types";
+import { ListFormField, Types as FieldTypes } from ".";
 
 /**
  * Field
  */
 export const Field = (props: IFieldProps): PromiseLike<IField> => {
     // Method to generate the choice dropdown options
-    let getChoiceOptions = (fieldinfo: Helper.Types.IListFormChoiceFieldInfo): Array<Fabric.Types.IDropdownOption> => {
+    let getChoiceOptions = (fieldinfo: FieldTypes.IListFormChoiceFieldInfo): Array<Fabric.Types.IDropdownOption> => {
         let options: Array<Fabric.Types.IDropdownOption> = [];
 
         // Parse the options
@@ -27,7 +28,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
     }
 
     // Method to generate the lookup dropdown options
-    let getLookupOptions = (fieldinfo: Helper.Types.IListFormLookupFieldInfo, items: Array<Types.SP.IListItemQueryResult>): Array<Fabric.Types.IDropdownOption> => {
+    let getLookupOptions = (fieldinfo: FieldTypes.IListFormLookupFieldInfo, items: Array<Types.SP.IListItemQueryResult>): Array<Fabric.Types.IDropdownOption> => {
         let options: Array<Fabric.Types.IDropdownOption> = [];
 
         // Parse the options
@@ -121,7 +122,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
 
 
         // Load the field information
-        Helper.ListFormField.create(props.fieldInfo).then(fieldInfo => {
+        ListFormField.create(props.fieldInfo).then(fieldInfo => {
             // Set the value
             let value = props.value || (props.controlMode == SPTypes.ControlMode.New ? props.fieldInfo.defaultValue : null);
 
@@ -172,7 +173,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             el: props.el,
                             label: fieldInfo.title,
                             onChange: updateValue,
-                            options: getChoiceOptions(fieldInfo as Helper.Types.IListFormChoiceFieldInfo),
+                            options: getChoiceOptions(fieldInfo as FieldTypes.IListFormChoiceFieldInfo),
                             required: fieldInfo.required,
                             value
                         })
@@ -191,7 +192,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             label: fieldInfo.title,
                             onChange: updateValue,
                             required: fieldInfo.required,
-                            showTime: (fieldInfo as Helper.Types.IListFormDateFieldInfo).showTime,
+                            showTime: (fieldInfo as FieldTypes.IListFormDateFieldInfo).showTime,
                             value
                         })
                     });
@@ -200,7 +201,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 // Lookup Field
                 case SPTypes.FieldType.Lookup:
                     // Get the drop down information
-                    Helper.ListFormField.loadLookupData(fieldInfo as Helper.Types.IListFormLookupFieldInfo, 500).then(items => {
+                    ListFormField.loadLookupData(fieldInfo as FieldTypes.IListFormLookupFieldInfo, 500).then(items => {
                         resolve({
                             fieldInfo: props.fieldInfo,
                             element: Fabric.Dropdown({
@@ -209,9 +210,9 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                                 disable: props.disabled,
                                 el: props.el,
                                 label: fieldInfo.title,
-                                multi: (fieldInfo as Helper.Types.IFieldInfoLookup).multi,
+                                multi: (fieldInfo as FieldTypes.IListFormLookupFieldInfo).multi,
                                 onChange: updateValue,
-                                options: getLookupOptions(fieldInfo as Helper.Types.IListFormLookupFieldInfo, items),
+                                options: getLookupOptions(fieldInfo as FieldTypes.IListFormLookupFieldInfo, items),
                                 required: fieldInfo.required,
                                 value
                             })
@@ -231,7 +232,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             label: fieldInfo.title,
                             multi: true,
                             onChange: updateValue,
-                            options: getChoiceOptions(fieldInfo as Helper.Types.IListFormChoiceFieldInfo),
+                            options: getChoiceOptions(fieldInfo as FieldTypes.IListFormChoiceFieldInfo),
                             required: fieldInfo.required,
                             value: value ? value.results : value
                         })
@@ -259,7 +260,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 // Number or Currency Field
                 case SPTypes.FieldType.Number:
                 case SPTypes.FieldType.Currency:
-                    let numberInfo = fieldInfo as Helper.Types.IListFormNumberFieldInfo;
+                    let numberInfo = fieldInfo as FieldTypes.IListFormNumberFieldInfo;
                     resolve({
                         fieldInfo: props.fieldInfo,
                         element: Fabric.NumberField({
@@ -316,7 +317,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
 
                 // User Field
                 case SPTypes.FieldType.User:
-                    let userInfo = fieldInfo as Helper.Types.IListFormUserFieldInfo;
+                    let userInfo = fieldInfo as FieldTypes.IListFormUserFieldInfo;
                     resolve({
                         fieldInfo: props.fieldInfo,
                         element: Fabric.PeoplePicker({
@@ -335,9 +336,9 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 default:
                     // See if this is a taxonomy field
                     if (fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
-                        let mmsInfo = fieldInfo as Helper.Types.IListFormMMSFieldInfo;
+                        let mmsInfo = fieldInfo as FieldTypes.IListFormMMSFieldInfo;
                         // Load the terms
-                        Helper.ListFormField.loadMMSData(mmsInfo).then(terms => {
+                        ListFormField.loadMMSData(mmsInfo).then(terms => {
                             resolve({
                                 fieldInfo: props.fieldInfo,
                                 element: Fabric.Dropdown({

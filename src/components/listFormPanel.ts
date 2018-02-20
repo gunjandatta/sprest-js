@@ -1,8 +1,8 @@
 import { SPTypes } from "gd-sprest";
 import { Button, CommandBar, Panel, PanelTypes, Templates, Spinner } from "../fabric";
-import { Fabric, IPanel } from "../fabric/types";
+import { Fabric, IDropdown, IDropdownOption, IPanel } from "../fabric/types";
 import { Field, ListForm } from ".";
-import { IField, IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
+import { IField, IListFormLookupFieldInfo, IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
 
 /**
  * Item Form
@@ -29,7 +29,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         }
 
         // Close buttons
-        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
+        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-close");
         for (let i = 0; i < buttons.length; i++) {
             // Add a click event
             buttons[i].addEventListener("click", () => {
@@ -62,17 +62,61 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                 let formValues = {};
 
                 // Parse the fields
-                debugger;
                 for (let i = 0; i < _fields.length; i++) {
                     let field = _fields[i];
+                    let fieldName = field.fieldInfo.name;
+                    let fieldValue: any = field.element.getValue();
 
-                    // Set the form value
-                    formValues[field.fieldInfo.name] = field.element.getValue();
+                    // Update the field name/value, based on the type
+                    switch (field.fieldInfo.type) {
+                        // Choice
+                        case SPTypes.FieldType.Choice:
+                            // Update the field value
+                            fieldValue = fieldValue ? (fieldValue as IDropdownOption).value : fieldValue;
+                            break;
+
+                        // Lookup
+                        case SPTypes.FieldType.Lookup:
+                        case SPTypes.FieldType.User:
+                            // Append 'Id' to the field name
+                            fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
+
+                            // See if this is a multi-value field
+                            if ((field.fieldInfo as IListFormLookupFieldInfo).multi) {
+                                // Ensure a value exists
+                                fieldValue = fieldValue ? fieldValue : [];
+                            }
+                            break;
+
+                        // Multi-Choice
+                        case SPTypes.FieldType.MultiChoice:
+                            let options: Array<IDropdownOption> = fieldValue || [];
+                            fieldValue = options.length > 0 ? { results: [] } : null;
+
+                            // Parse the options
+                            for (let i = 0; i < options.length; i++) {
+                                // Add the option
+                                fieldValue.results.push(options[i].value);
+                            }
+                            break;
+
+                        // MMS
+                        default:
+                            if (field.fieldInfo.typeAsString == "TaxonomyFieldTypeMulti") {
+                                // Update the field name to the value field
+
+                                // Update the value
+                            }
+                            break;
+                    }
+
+                    // Set the field value
+                    formValues[fieldName] = fieldValue;
                 }
-                debugger;
 
                 // Save the item
                 ListForm.saveItem(_formInfo, formValues).then(formInfo => {
+                    debugger;
                     // Update the form info
                     _formInfo = formInfo;
 

@@ -178,7 +178,7 @@ window["TestJS"] = {
                 let listForm = ListFormPanel({
                     controlMode: SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
-                    fields: ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime"],
+                    fields: ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice"],
                     listName: "SPReact",
                     panelTitle: "Test Item Form",
                     panelType: Fabric.PanelTypes.Large
@@ -191,6 +191,9 @@ window["TestJS"] = {
                     onClick: () => {
                         // Show the list form
                         listForm.show(SPTypes.ControlMode.New);
+
+                        // Disable postback
+                        return false;
                     }
                 });
             },

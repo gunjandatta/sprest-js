@@ -147,7 +147,7 @@ __export(__webpack_require__(55));
 __export(__webpack_require__(56));
 __export(__webpack_require__(57));
 __export(__webpack_require__(58));
-__export(__webpack_require__(10));
+__export(__webpack_require__(11));
 var Types = __webpack_require__(59);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
@@ -257,11 +257,11 @@ __export(__webpack_require__(63));
 __export(__webpack_require__(64));
 __export(__webpack_require__(65));
 __export(__webpack_require__(66));
-__export(__webpack_require__(12));
+__export(__webpack_require__(13));
 __export(__webpack_require__(67));
 __export(__webpack_require__(68));
-__export(__webpack_require__(11));
-__export(__webpack_require__(13));
+__export(__webpack_require__(12));
+__export(__webpack_require__(14));
 __export(__webpack_require__(69));
 var SP = __webpack_require__(70);
 exports.SP = SP;
@@ -749,6 +749,24 @@ void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&&"get"in e&&null!=
 
 "use strict";
 
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(119));
+__export(__webpack_require__(120));
+__export(__webpack_require__(121));
+__export(__webpack_require__(122));
+var Types = __webpack_require__(123);
+exports.Types = Types;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -791,7 +809,7 @@ exports.Web = _Web;
 //# sourceMappingURL=web.js.map
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1851,7 +1869,7 @@ exports.SPConfig = _SPConfig;
 //# sourceMappingURL=spCfg.js.map
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1881,7 +1899,7 @@ exports.parse = function (jsonString) {
 //# sourceMappingURL=parse.js.map
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2324,7 +2342,7 @@ exports.Taxonomy = {
 //# sourceMappingURL=taxonomy.js.map
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2339,28 +2357,10 @@ exports.Fabric = Fabric;
 // Include the styles
 __webpack_require__(117);
 // Components
-__export(__webpack_require__(15));
+__export(__webpack_require__(10));
 // WebParts
 var WebParts = __webpack_require__(124);
 exports.WebParts = WebParts;
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(119));
-__export(__webpack_require__(120));
-__export(__webpack_require__(121));
-__export(__webpack_require__(122));
-var Types = __webpack_require__(123);
-exports.Types = Types;
 
 
 /***/ }),
@@ -2372,7 +2372,7 @@ exports.Types = Types;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var build_1 = __webpack_require__(14);
+var build_1 = __webpack_require__(15);
 // Create the global variable
 window["TestJS"] = {
     // Configuration
@@ -2498,7 +2498,7 @@ window["TestJS"] = {
                 var listForm = build_1.ListFormPanel({
                     controlMode: gd_sprest_1.SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
-                    fields: ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime"],
+                    fields: ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice"],
                     listName: "SPReact",
                     panelTitle: "Test Item Form",
                     panelType: build_1.Fabric.PanelTypes.Large
@@ -2510,6 +2510,8 @@ window["TestJS"] = {
                     onClick: function onClick() {
                         // Show the list form
                         listForm.show(gd_sprest_1.SPTypes.ControlMode.New);
+                        // Disable postback
+                        return false;
                     }
                 });
             },
@@ -7827,7 +7829,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(0);
-var web_1 = __webpack_require__(10);
+var web_1 = __webpack_require__(11);
 /**
  * List
  */
@@ -8485,7 +8487,7 @@ exports.Dependencies = _Dependencies;
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(2);
 var __1 = __webpack_require__(3);
-var spCfg_1 = __webpack_require__(11);
+var spCfg_1 = __webpack_require__(12);
 /**
  * Field Schema XML
  * Helper class for generating the field schema xml
@@ -9250,7 +9252,7 @@ exports.JSLink = {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(2);
-var parse_1 = __webpack_require__(12);
+var parse_1 = __webpack_require__(13);
 /**
  * List Form
  */
@@ -9629,7 +9631,7 @@ exports.ListForm = _ListForm;
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(2);
 var __1 = __webpack_require__(3);
-var taxonomy_1 = __webpack_require__(13);
+var taxonomy_1 = __webpack_require__(14);
 /**
  * List Form Field
  */
@@ -11251,8 +11253,9 @@ exports.Dropdown = function (props) {
     };
     // Method to get the value
     var getValue = function () {
+        var value = _tb.get()._textField.getAttribute("data-value");
         // Return the value
-        return _tb.getValue();
+        return value ? JSON.parse(value) : value;
     };
     // Render the dropdown
     props.el.innerHTML = [
@@ -12595,7 +12598,8 @@ exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font co
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var __1 = __webpack_require__(14);
+var __1 = __webpack_require__(15);
+var _1 = __webpack_require__(10);
 /**
  * Field
  */
@@ -12697,7 +12701,7 @@ exports.Field = function (props) {
             });
         }
         // Load the field information
-        gd_sprest_1.Helper.ListFormField.create(props.fieldInfo).then(function (fieldInfo) {
+        _1.ListFormField.create(props.fieldInfo).then(function (fieldInfo) {
             // Set the value
             var value = props.value || (props.controlMode == gd_sprest_1.SPTypes.ControlMode.New ? props.fieldInfo.defaultValue : null);
             // Render the field based on the type
@@ -12771,7 +12775,7 @@ exports.Field = function (props) {
                 // Lookup Field
                 case gd_sprest_1.SPTypes.FieldType.Lookup:
                     // Get the drop down information
-                    gd_sprest_1.Helper.ListFormField.loadLookupData(fieldInfo, 500).then(function (items) {
+                    _1.ListFormField.loadLookupData(fieldInfo, 500).then(function (items) {
                         resolve({
                             fieldInfo: props.fieldInfo,
                             element: __1.Fabric.Dropdown({
@@ -12901,7 +12905,7 @@ exports.Field = function (props) {
                     if (fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
                         var mmsInfo_1 = fieldInfo;
                         // Load the terms
-                        gd_sprest_1.Helper.ListFormField.loadMMSData(mmsInfo_1).then(function (terms) {
+                        _1.ListFormField.loadMMSData(mmsInfo_1).then(function (terms) {
                             resolve({
                                 fieldInfo: props.fieldInfo,
                                 element: __1.Fabric.Dropdown({
@@ -13531,7 +13535,7 @@ exports.ListFormField = _ListFormField;
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var fabric_1 = __webpack_require__(1);
-var _1 = __webpack_require__(15);
+var _1 = __webpack_require__(10);
 /**
  * Item Form
  */
@@ -13553,7 +13557,7 @@ exports.ListFormPanel = function (props) {
             });
         }
         // Close buttons
-        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
+        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-close");
         for (var i = 0; i < buttons.length; i++) {
             // Add a click event
             buttons[i].addEventListener("click", function () {
@@ -13581,15 +13585,52 @@ exports.ListFormPanel = function (props) {
             buttons[i].addEventListener("click", function () {
                 var formValues = {};
                 // Parse the fields
-                debugger;
                 for (var i_1 = 0; i_1 < _fields.length; i_1++) {
                     var field = _fields[i_1];
-                    // Set the form value
-                    formValues[field.fieldInfo.name] = field.element.getValue();
+                    var fieldName = field.fieldInfo.name;
+                    var fieldValue = field.element.getValue();
+                    // Update the field name/value, based on the type
+                    switch (field.fieldInfo.type) {
+                        // Choice
+                        case gd_sprest_1.SPTypes.FieldType.Choice:
+                            // Update the field value
+                            fieldValue = fieldValue ? fieldValue.value : fieldValue;
+                            break;
+                        // Lookup
+                        case gd_sprest_1.SPTypes.FieldType.Lookup:
+                        case gd_sprest_1.SPTypes.FieldType.User:
+                            // Append 'Id' to the field name
+                            fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
+                            // See if this is a multi-value field
+                            if (field.fieldInfo.multi) {
+                                // Ensure a value exists
+                                fieldValue = fieldValue ? fieldValue : [];
+                            }
+                            break;
+                        // Multi-Choice
+                        case gd_sprest_1.SPTypes.FieldType.MultiChoice:
+                            var options = fieldValue || [];
+                            fieldValue = options.length > 0 ? { results: [] } : null;
+                            // Parse the options
+                            for (var i_2 = 0; i_2 < options.length; i_2++) {
+                                // Add the option
+                                fieldValue.results.push(options[i_2].value);
+                            }
+                            break;
+                        // MMS
+                        default:
+                            if (field.fieldInfo.typeAsString == "TaxonomyFieldTypeMulti") {
+                                // Update the field name to the value field
+                                // Update the value
+                            }
+                            break;
+                    }
+                    // Set the field value
+                    formValues[fieldName] = fieldValue;
                 }
-                debugger;
                 // Save the item
                 _1.ListForm.saveItem(_formInfo, formValues).then(function (formInfo) {
+                    debugger;
                     // Update the form info
                     _formInfo = formInfo;
                     // Render the form
