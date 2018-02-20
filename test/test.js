@@ -11180,7 +11180,7 @@ exports.Dropdown = function (props) {
                 var values = [];
                 var items_1 = _list._container.querySelectorAll(".is-selected");
                 for (var i = 0; i < items_1.length; i++) {
-                    var option = JSON.parse(item.getAttribute("data-value"));
+                    var option = JSON.parse(items_1[i].getAttribute("data-value"));
                     // Add the values
                     textValues.push(option.text);
                     values.push({

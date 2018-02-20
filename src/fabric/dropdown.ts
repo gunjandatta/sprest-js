@@ -86,7 +86,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                 let values: Array<IDropdownOption> = [];
                 let items = _list._container.querySelectorAll(".is-selected");
                 for (let i = 0; i < items.length; i++) {
-                    let option = JSON.parse(item.getAttribute("data-value")) as IDropdownOption;
+                    let option = JSON.parse(items[i].getAttribute("data-value")) as IDropdownOption;
 
                     // Add the values
                     textValues.push(option.text);
