@@ -13640,7 +13640,7 @@ exports.ListFormPanel = function (props) {
             fields += "<div data-field='" + fieldName + "'></div>";
         }
         // Render the menu
-        renderMenu();
+        renderMenu(controlMode);
         // Update the panel content
         _panel.updateContent('<div class="ms-ListForm">' + fields + '</div>');
         // Render the fields
@@ -13649,10 +13649,10 @@ exports.ListFormPanel = function (props) {
         addMenuClickEvents();
     };
     // Render the menu
-    var renderMenu = function () {
+    var renderMenu = function (controlMode) {
         // Determine the main commands
         var mainCommands = null;
-        switch (props.controlMode) {
+        switch (controlMode) {
             // Display
             case gd_sprest_1.SPTypes.ControlMode.Display:
                 mainCommands = [
@@ -13663,7 +13663,7 @@ exports.ListFormPanel = function (props) {
                     },
                     {
                         className: "ms-CommandButton-close",
-                        icon: "Close",
+                        icon: "Cancel",
                         text: "Close"
                     }
                 ];
@@ -13693,7 +13693,7 @@ exports.ListFormPanel = function (props) {
                     },
                     {
                         className: "ms-CommandButton-close",
-                        icon: "Close",
+                        icon: "Cancel",
                         text: "Close"
                     }
                 ];

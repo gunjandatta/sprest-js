@@ -127,7 +127,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         }
 
         // Render the menu
-        renderMenu();
+        renderMenu(controlMode);
 
         // Update the panel content
         _panel.updateContent('<div class="ms-ListForm">' + fields + '</div>');
@@ -140,10 +140,10 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
     }
 
     // Render the menu
-    let renderMenu = () => {
+    let renderMenu = (controlMode: number) => {
         // Determine the main commands
         let mainCommands = null;
-        switch (props.controlMode) {
+        switch (controlMode) {
             // Display
             case SPTypes.ControlMode.Display:
                 mainCommands = [
@@ -154,7 +154,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                     },
                     {
                         className: "ms-CommandButton-close",
-                        icon: "Close",
+                        icon: "Cancel",
                         text: "Close"
                     }
                 ];
@@ -186,7 +186,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                     },
                     {
                         className: "ms-CommandButton-close",
-                        icon: "Close",
+                        icon: "Cancel",
                         text: "Close"
                     }
                 ];
@@ -249,7 +249,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
             // See if the list info exists
             if (_formInfo) {
                 // Show the form
-                _panel.show()
+                _panel.show();
 
                 // Render the form
                 renderForm(props.controlMode);
