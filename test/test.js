@@ -13547,8 +13547,8 @@ exports.ListFormPanel = function (props) {
         for (var i = 0; i < buttons.length; i++) {
             // Add a click event
             buttons[i].addEventListener("click", function () {
-                // Close the panel
-                _panel.hide();
+                // Render the form
+                renderForm(gd_sprest_1.SPTypes.ControlMode.Display);
                 // Disable postback
                 return false;
             });
@@ -13570,7 +13570,7 @@ exports.ListFormPanel = function (props) {
             // Add a click event
             buttons[i].addEventListener("click", function () {
                 // Render the form
-                renderForm(gd_sprest_1.SPTypes.ControlMode.Display);
+                renderForm(gd_sprest_1.SPTypes.ControlMode.Edit);
                 // Disable postback
                 return false;
             });
@@ -13711,14 +13711,14 @@ exports.ListFormPanel = function (props) {
             case gd_sprest_1.SPTypes.ControlMode.Edit:
                 mainCommands = [
                     {
-                        className: "ms-CommandButton-update",
-                        icon: "Update",
-                        text: "Update"
+                        className: "ms-CommandButton-cancel",
+                        icon: "Back",
+                        text: "Cancel"
                     },
                     {
-                        className: "ms-CommandButton-cancel",
-                        icon: "Cancel",
-                        text: "Cancel"
+                        className: "ms-CommandButton-save",
+                        icon: "Save",
+                        text: "Update"
                     }
                 ];
                 break;
@@ -13745,7 +13745,7 @@ exports.ListFormPanel = function (props) {
             mainCommands: mainCommands,
             sideCommands: [
                 {
-                    className: "ms-CommandButton-cancel",
+                    className: "ms-CommandButton-close",
                     icon: "Cancel"
                 }
             ]

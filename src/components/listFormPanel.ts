@@ -20,8 +20,8 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         for (let i = 0; i < buttons.length; i++) {
             // Add a click event
             buttons[i].addEventListener("click", () => {
-                // Close the panel
-                _panel.hide();
+                // Render the form
+                renderForm(SPTypes.ControlMode.Display);
 
                 // Disable postback
                 return false;
@@ -47,7 +47,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
             // Add a click event
             buttons[i].addEventListener("click", () => {
                 // Render the form
-                renderForm(SPTypes.ControlMode.Display);
+                renderForm(SPTypes.ControlMode.Edit);
 
                 // Disable postback
                 return false;
@@ -209,14 +209,14 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
             case SPTypes.ControlMode.Edit:
                 mainCommands = [
                     {
-                        className: "ms-CommandButton-update",
-                        icon: "Update",
-                        text: "Update"
+                        className: "ms-CommandButton-cancel",
+                        icon: "Back",
+                        text: "Cancel"
                     },
                     {
-                        className: "ms-CommandButton-cancel",
-                        icon: "Cancel",
-                        text: "Cancel"
+                        className: "ms-CommandButton-save",
+                        icon: "Save",
+                        text: "Update"
                     }
                 ];
                 break;
@@ -245,7 +245,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
             mainCommands,
             sideCommands: [
                 {
-                    className: "ms-CommandButton-cancel",
+                    className: "ms-CommandButton-close",
                     icon: "Cancel"
                 }
             ]
