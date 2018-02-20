@@ -72,7 +72,13 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                 debugger;
 
                 // Save the item
-                ListForm.saveItem(_formInfo, formValues);
+                ListForm.saveItem(_formInfo, formValues).then(formInfo => {
+                    // Update the form info
+                    _formInfo = formInfo;
+
+                    // Render the form
+                    renderForm(SPTypes.ControlMode.Display);
+                });
 
                 // Disable postback
                 return false;

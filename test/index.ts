@@ -178,6 +178,7 @@ window["TestJS"] = {
                 let listForm = ListFormPanel({
                     controlMode: SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
+                    fields: ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime"],
                     listName: "SPReact",
                     panelTitle: "Test Item Form",
                     panelType: Fabric.PanelTypes.Large

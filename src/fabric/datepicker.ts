@@ -33,9 +33,34 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
 
     // Method to get the value
     let getValue = (): Date => {
-        // Get the datetime value
-        // TO DO
-        return new Date(Date.now());
+        let dt: Date = null;
+
+        // Get the date value
+        let dtValue = _dp.picker.get();
+        if (dtValue) {
+            // Set the date
+            dt = new Date(dtValue);
+        }
+
+        // See if the time exists
+        let timeValue: any = _tp ? _tp.getOption() : null;
+        timeValue = timeValue ? timeValue.value.split(" ") : null;
+        if (timeValue) {
+            // Set the time
+            // Set the hours
+            let hours = parseInt(timeValue[0].split(":")[0])
+            hours += timeValue[1] == "PM" ? 12 : 0;
+
+            // Set the minutes
+            let minutes = parseInt(timeValue[0].split(":")[1]);
+
+            // Set the time value
+            dt.setHours(hours);
+            dt.setMinutes(minutes);
+        }
+
+        // Return the date
+        return dt;
     }
 
     // Method to render the date picker

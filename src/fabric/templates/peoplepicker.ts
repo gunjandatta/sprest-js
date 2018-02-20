@@ -32,6 +32,7 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
     let header = (): string => {
         // Return the template
         return Label({
+            className: "field-label",
             description: props.description,
             isRequired: props.required,
             text: props.label

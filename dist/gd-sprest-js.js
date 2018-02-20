@@ -6615,9 +6615,29 @@ exports.DatePicker = function (props) {
     };
     // Method to get the value
     var getValue = function getValue() {
-        // Get the datetime value
-        // TO DO
-        return new Date(Date.now());
+        var dt = null;
+        // Get the date value
+        var dtValue = _dp.picker.get();
+        if (dtValue) {
+            // Set the date
+            dt = new Date(dtValue);
+        }
+        // See if the time exists
+        var timeValue = _tp ? _tp.getOption() : null;
+        timeValue = timeValue ? timeValue.value.split(" ") : null;
+        if (timeValue) {
+            // Set the time
+            // Set the hours
+            var hours = parseInt(timeValue[0].split(":")[0]);
+            hours += timeValue[1] == "PM" ? 12 : 0;
+            // Set the minutes
+            var minutes = parseInt(timeValue[0].split(":")[1]);
+            // Set the time value
+            dt.setHours(hours);
+            dt.setMinutes(minutes);
+        }
+        // Return the date
+        return dt;
     };
     // Method to render the date picker
     var renderDatePicker = function renderDatePicker(el) {
@@ -6708,7 +6728,7 @@ var DropdownTypes;
  */
 exports.Dropdown = function (props) {
     var _values = props.value && typeof props.value === "string" ? [props.value] : props.value || [];
-    // Method to create the items
+    // Method to create the list items
     var createList = function createList(el) {
         var items = [];
         // Method to render the items
@@ -15741,6 +15761,7 @@ exports.PeoplePicker = function (props) {
     var header = function header() {
         // Return the template
         return templates_1.Label({
+            className: "field-label",
             description: props.description,
             isRequired: props.required,
             text: props.label
@@ -16888,7 +16909,12 @@ exports.ListFormPanel = function (props) {
                 }
                 debugger;
                 // Save the item
-                _1.ListForm.saveItem(_formInfo, formValues);
+                _1.ListForm.saveItem(_formInfo, formValues).then(function (formInfo) {
+                    // Update the form info
+                    _formInfo = formInfo;
+                    // Render the form
+                    renderForm(gd_sprest_1.SPTypes.ControlMode.Display);
+                });
                 // Disable postback
                 return false;
             });
