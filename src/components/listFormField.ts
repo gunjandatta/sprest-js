@@ -125,31 +125,25 @@ class _ListFormField {
     static loadMMSValueField(info: ListFormFieldTypes.IListFormMMSFieldInfo): PromiseLike<Types.SP.IFieldResult> {
         // Return a promise
         return new Promise((resolve, reject) => {
-            // See if we are allowing multiple values
-            if (info.multi) {
-                // Get the web
-                (new Web(info.webUrl))
-                    // Get the list
-                    .Lists(info.listName)
-                    // Get the fields
-                    .Fields()
-                    // Get the hidden field
-                    .getByInternalNameOrTitle(info.name + "_0")
-                    // Execute the request
-                    .execute(field => {
-                        // See if the field exists
-                        if (field.existsFl) {
-                            // Resolve the promise
-                            resolve(field);
-                        } else {
-                            // Log
-                            console.log("[gd-sprest] Unable to find the hidden value field for '" + info.name + "'.");
-                        }
-                    });
-            } else {
-                // Resolve the promise
-                resolve();
-            }
+            // Get the web
+            (new Web(info.webUrl))
+                // Get the list
+                .Lists(info.listName)
+                // Get the fields
+                .Fields()
+                // Get the hidden field
+                .getByInternalNameOrTitle(info.name + "_0")
+                // Execute the request
+                .execute(field => {
+                    // See if the field exists
+                    if (field.existsFl) {
+                        // Resolve the promise
+                        resolve(field);
+                    } else {
+                        // Log
+                        console.log("[gd-sprest] Unable to find the hidden value field for '" + info.name + "'.");
+                    }
+                });
         });
     }
 

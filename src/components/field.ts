@@ -141,6 +141,24 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
         return options;
     }
 
+    // Method to get the MMS values
+    let getMMSValues = (value) => {
+        let values = [];
+
+        // Parse the MMS values
+        let mmsValues = (value || "").split(";#");
+        for (let i = 0; i < values.length; i++) {
+            let mmsValue = mmsValues[i].split("|");
+            if (mmsValue[1]) {
+                // Add the value
+                values.push(mmsValue[1]);
+            }
+        }
+
+        // Return the values
+        return values;
+    }
+
     // Method to update the value
     let _value = props.value;
     let updateValue = (value) => {
@@ -186,6 +204,21 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                     // Update the values
                     value = value.results ? value.results.join(", ") : value;
                     break;
+            }
+
+            // See if this is a taxonomy field
+            if (props.fieldInfo.field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                let mmsValues = (value || "").split(";#")
+                value = [];
+
+                // Parse the values
+                for (let i = 0; i < mmsValues.length; i++) {
+                    // Add the term label
+                    value.push(mmsValues[i].split("|")[0]);
+                }
+
+                // Update the value
+                value = value.join(", ");
             }
 
             // Resolve the promise
@@ -424,12 +457,42 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                     // See if this is a taxonomy field
                     if (fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
                         let mmsInfo = fieldInfo as FieldTypes.IListFormMMSFieldInfo;
+
+                        // See if this is a new form
+                        if (props.controlMode == SPTypes.ControlMode.New) {
+                            // Clear the value
+                            value = [];
+
+                            // Get the default values
+                            let values = (mmsInfo.defaultValue || props.value || "").split(";#")
+                            for (let i = 0; i < values.length; i++) {
+                                let value = values[i].split("|");
+                                if (value.length == 2) {
+                                    // Add the term id
+                                    value.push(value[1]);
+                                }
+                            }
+                        } else {
+                            // Parse the values
+                            let values = value && value.results ? value.results : [value];
+                            value = [];
+                            for (let i = 0; i < values.length; i++) {
+                                // Ensure the value exists
+                                if (values[i] && values[i].TermGuid) {
+                                    // Add the value
+                                    value.push(values[i].TermGuid);
+                                }
+                            }
+                        }
+
                         // Load the terms
                         ListFormField.loadMMSData(mmsInfo).then(terms => {
                             // Load the value field
                             ListFormField.loadMMSValueField(mmsInfo).then(valueField => {
                                 // Set the value field
                                 mmsInfo.valueField = valueField;
+
+                                // Resolve the promise
                                 resolve({
                                     fieldInfo: mmsInfo,
                                     element: Fabric.Dropdown({
@@ -442,7 +505,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                                         onChange: updateValue,
                                         options: getMMSOptions(Helper.Taxonomy.toObject(terms)),
                                         required: mmsInfo.required,
-                                        value: value ? value.results : value
+                                        value
                                     })
                                 });
                             });

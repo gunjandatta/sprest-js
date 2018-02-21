@@ -50,7 +50,7 @@ window["TestJS"] = {
                             type: Helper.SPCfgFieldType.Lookup
                         } as Types.Helper.IFieldInfoLookup,
                         {
-                            name: "TestMMS",
+                            name: "TestManagedMetadata",
                             title: "MMS",
                             type: Helper.SPCfgFieldType.MMS
                         },
@@ -175,7 +175,7 @@ window["TestJS"] = {
                 cfg.el.innerHTML = "<div></div><div></div><div></div><div></div>";
 
                 // The fields to render
-                let fields = ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice", "TestLookup", "TestMultiLookup"];
+                let fields = ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice", "TestLookup", "TestMultiLookup", "TestManagedMetadata"];
 
                 // Render the new form
                 let newForm = ListFormPanel({

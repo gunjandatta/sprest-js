@@ -118,10 +118,35 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
 
                         // MMS
                         default:
-                            if (field.fieldInfo.typeAsString == "TaxonomyFieldTypeMulti") {
-                                // Update the field name to the value field
+                            if (field.fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
+                                // See if this is a multi field
+                                if (field.fieldInfo.typeAsString.endsWith("Multi")) {
+                                    // Update the field name to the value field
+                                    for (let valueFieldName in _formInfo.fields) {
+                                        let valueField = _formInfo.fields[valueFieldName];
 
-                                // Update the value
+                                        // See if this is the value field
+                                        if (valueField.InternalName == field.fieldInfo.name + "_0" || valueField.Title == field.fieldInfo.name + "_0") {
+                                            // Update the field name
+                                            fieldName = valueFieldName;
+                                        }
+                                    }
+
+                                    // Update the value
+                                    // TO DO - This will need to be updated
+                                    fieldValue = {
+                                        __metadata: { type: "Collection(SP.Taxonomy.TaxonomyFieldValue)" },
+                                        results: fieldValue.join(";#")
+                                    };
+                                } else {
+                                    // Update the value
+                                    fieldValue = {
+                                        __metadata: { type: "SP.Taxonomy.TaxonomyFieldValue" },
+                                        Label: fieldValue.text,
+                                        TermGuid: fieldValue.value,
+                                        WssId: -1
+                                    };
+                                }
                             }
                             break;
                     }
@@ -153,11 +178,34 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         // Parse the fields
         for (let fieldName in _formInfo.fields) {
             let field = _formInfo.fields[fieldName];
+            let value = _formInfo.item ? _formInfo.item[fieldName] : null;
 
             // See if this is a read-only field
             if (field.ReadOnlyField) {
                 // Do not render in the new form
                 if (controlMode == SPTypes.ControlMode.New) { continue; }
+            }
+
+            // See if this is the hidden taxonomy field
+            if (field.Hidden && field.FieldTypeKind == SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
+                // Do not render this field
+                continue;
+            }
+
+            // See if this is a taxonomy field
+            if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                // See if we are displaying the field
+                if (controlMode == SPTypes.ControlMode.Display) {
+                    // Find the value field
+                    for (let valueFieldName in _formInfo.fields) {
+                        let valueField = _formInfo.fields[valueFieldName];
+                        if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
+                            // Update the value
+                            value = _formInfo.item ? _formInfo.item[valueFieldName] : null;
+                            break;
+                        }
+                    }
+                }
             }
 
             // Render the field
@@ -169,7 +217,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                     listName: _formInfo.list.Title,
                     name: fieldName,
                 },
-                value: _formInfo.item ? _formInfo.item[fieldName] : null
+                value
             }).then(field => {
                 // Add the field
                 _fields.push(field);

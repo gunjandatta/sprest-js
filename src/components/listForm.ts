@@ -256,6 +256,24 @@ class _ListForm {
                         this._info.query.Select.push(field.InternalName + "/Id");
                         this._info.query.Select.push(field.InternalName + "/Title");
                         break;
+
+                    // Default
+                    default:
+                        // See if this is an taxonomy field
+                        if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                            // Parse the fields
+                            for (let fieldName in this._info.fields) {
+                                let valueField = this._info.fields[fieldName];
+
+                                // See if this is the value field
+                                if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
+                                    // Include the value field
+                                    this._info.query.Select.push(valueField.InternalName);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
                 }
             }
 
@@ -337,6 +355,21 @@ class _ListForm {
             if (field) {
                 // Save the field
                 formFields[field.InternalName] = field;
+
+                // See if this is a taxonomy field
+                if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                    // Parse the list fields
+                    for (let fieldName in this._info.fields) {
+                        let valueField = this._info.fields[fieldName];
+
+                        // See if this is a value field
+                        if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
+                            // Include this field
+                            formFields[valueField.InternalName] = valueField;
+                            break;
+                        }
+                    }
+                }
             }
         }
 

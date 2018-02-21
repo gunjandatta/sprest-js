@@ -152,17 +152,32 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
             _tb.get()._textField.setAttribute("data-value", JSON.stringify(props.multi ? values : values[0] || {}));
             _tb.setValue(textValues.join(", "));
         } else {
-            // Parse the options
-            for (let i = 0; i < props.options.length; i++) {
-                let option = props.options[i];
+            let findOption = (options: Array<IDropdownOption>) => {
+                // Ensure options exist
+                if (options && options.length > 0) {
+                    // Parse the options
+                    for (let i = 0; i < options.length; i++) {
+                        let option = options[i];
 
-                // See if this is the target item
-                if (option.value == value) {
-                    // Update the textbox
-                    _tb.get()._textField.setAttribute("data-value", JSON.stringify(option));
-                    _tb.setValue(option.text);
-                    break;
+                        // See if this is the target item, and return it
+                        if (option.value == value) { return option }
+
+                        // Search the sub-options
+                        option = findOption(option.options);
+                        if (option) { return option; }
+                    }
                 }
+
+                // Option not found
+                return null;
+            }
+
+            // Find the option
+            let option = findOption(props.options);
+            if (option) {
+                // Update the textbox
+                _tb.get()._textField.setAttribute("data-value", JSON.stringify(option));
+                _tb.setValue(option.text);
             }
         }
 

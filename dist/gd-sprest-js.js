@@ -6852,16 +6852,32 @@ exports.Dropdown = function (props) {
             _tb.get()._textField.setAttribute("data-value", JSON.stringify(props.multi ? values : values[0] || {}));
             _tb.setValue(textValues.join(", "));
         } else {
-            // Parse the options
-            for (var i = 0; i < props.options.length; i++) {
-                var option = props.options[i];
-                // See if this is the target item
-                if (option.value == value) {
-                    // Update the textbox
-                    _tb.get()._textField.setAttribute("data-value", JSON.stringify(option));
-                    _tb.setValue(option.text);
-                    break;
+            var findOption_1 = function findOption_1(options) {
+                // Ensure options exist
+                if (options && options.length > 0) {
+                    // Parse the options
+                    for (var i = 0; i < options.length; i++) {
+                        var option_1 = options[i];
+                        // See if this is the target item, and return it
+                        if (option_1.value == value) {
+                            return option_1;
+                        }
+                        // Search the sub-options
+                        option_1 = findOption_1(option_1.options);
+                        if (option_1) {
+                            return option_1;
+                        }
+                    }
                 }
+                // Option not found
+                return null;
+            };
+            // Find the option
+            var option = findOption_1(props.options);
+            if (option) {
+                // Update the textbox
+                _tb.get()._textField.setAttribute("data-value", JSON.stringify(option));
+                _tb.setValue(option.text);
             }
         }
         // Return the values
@@ -15349,15 +15365,19 @@ var _1 = __webpack_require__(1);
  * Spinner
  */
 exports.Spinner = function (props) {
+    var _spinner = null;
     // Method to get the component
     var get = function get() {
         // Return the spinner
         return _spinner;
     };
-    // Render a spinner
-    props.el.innerHTML = _1.Templates.Spinner(props);
-    // Initialize the spinner
-    var _spinner = new _1.fabric.Spinner(props.el.querySelector(".ms-Spinner"));
+    // Ensure the element exists
+    if (props.el) {
+        // Render a spinner
+        props.el.innerHTML = _1.Templates.Spinner(props);
+        // Initialize the spinner
+        _spinner = new _1.fabric.Spinner(props.el.querySelector(".ms-Spinner"));
+    }
     // Return the spinner
     return {
         get: get
@@ -16103,6 +16123,21 @@ exports.Field = function (props) {
         // Return the options
         return options;
     };
+    // Method to get the MMS values
+    var getMMSValues = function getMMSValues(value) {
+        var values = [];
+        // Parse the MMS values
+        var mmsValues = (value || "").split(";#");
+        for (var i = 0; i < values.length; i++) {
+            var mmsValue = mmsValues[i].split("|");
+            if (mmsValue[1]) {
+                // Add the value
+                values.push(mmsValue[1]);
+            }
+        }
+        // Return the values
+        return values;
+    };
     // Method to update the value
     var _value = props.value;
     var updateValue = function updateValue(value) {
@@ -16142,6 +16177,18 @@ exports.Field = function (props) {
                     // Update the values
                     value = value.results ? value.results.join(", ") : value;
                     break;
+            }
+            // See if this is a taxonomy field
+            if (props.fieldInfo.field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                var mmsValues = (value || "").split(";#");
+                value = [];
+                // Parse the values
+                for (var i = 0; i < mmsValues.length; i++) {
+                    // Add the term label
+                    value.push(mmsValues[i].split("|")[0]);
+                }
+                // Update the value
+                value = value.join(", ");
             }
             // Resolve the promise
             resolve({
@@ -16365,12 +16412,38 @@ exports.Field = function (props) {
                     // See if this is a taxonomy field
                     if (fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
                         var mmsInfo_1 = fieldInfo;
+                        // See if this is a new form
+                        if (props.controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
+                            // Clear the value
+                            value = [];
+                            // Get the default values
+                            var values = (mmsInfo_1.defaultValue || props.value || "").split(";#");
+                            for (var i = 0; i < values.length; i++) {
+                                var value_1 = values[i].split("|");
+                                if (value_1.length == 2) {
+                                    // Add the term id
+                                    value_1.push(value_1[1]);
+                                }
+                            }
+                        } else {
+                            // Parse the values
+                            var values = value && value.results ? value.results : [value];
+                            value = [];
+                            for (var i = 0; i < values.length; i++) {
+                                // Ensure the value exists
+                                if (values[i] && values[i].TermGuid) {
+                                    // Add the value
+                                    value.push(values[i].TermGuid);
+                                }
+                            }
+                        }
                         // Load the terms
                         _1.ListFormField.loadMMSData(mmsInfo_1).then(function (terms) {
                             // Load the value field
                             _1.ListFormField.loadMMSValueField(mmsInfo_1).then(function (valueField) {
                                 // Set the value field
                                 mmsInfo_1.valueField = valueField;
+                                // Resolve the promise
                                 resolve({
                                     fieldInfo: mmsInfo_1,
                                     element: __1.Fabric.Dropdown({
@@ -16383,7 +16456,7 @@ exports.Field = function (props) {
                                         onChange: updateValue,
                                         options: getMMSOptions(gd_sprest_1.Helper.Taxonomy.toObject(terms)),
                                         required: mmsInfo_1.required,
-                                        value: value ? value.results : value
+                                        value: value
                                     })
                                 });
                             });
@@ -16580,6 +16653,22 @@ var _ListForm = /** @class */function () {
                             _this._info.query.Select.push(field.InternalName + "/Id");
                             _this._info.query.Select.push(field.InternalName + "/Title");
                             break;
+                        // Default
+                        default:
+                            // See if this is an taxonomy field
+                            if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                                // Parse the fields
+                                for (var fieldName_1 in _this._info.fields) {
+                                    var valueField = _this._info.fields[fieldName_1];
+                                    // See if this is the value field
+                                    if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
+                                        // Include the value field
+                                        _this._info.query.Select.push(valueField.InternalName);
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
                     }
                 }
                 // Get the list item
@@ -16639,6 +16728,19 @@ var _ListForm = /** @class */function () {
                 if (field) {
                     // Save the field
                     formFields[field.InternalName] = field;
+                    // See if this is a taxonomy field
+                    if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                        // Parse the list fields
+                        for (var fieldName in _this._info.fields) {
+                            var valueField = _this._info.fields[fieldName];
+                            // See if this is a value field
+                            if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
+                                // Include this field
+                                formFields[valueField.InternalName] = valueField;
+                                break;
+                            }
+                        }
+                    }
                 }
             }
             // Update the fields
@@ -16950,23 +17052,17 @@ var _ListFormField = /** @class */function () {
     _ListFormField.loadMMSValueField = function (info) {
         // Return a promise
         return new Promise(function (resolve, reject) {
-            // See if we are allowing multiple values
-            if (info.multi) {
-                // Get the web
-                new gd_sprest_1.Web(info.webUrl).Lists(info.listName).Fields().getByInternalNameOrTitle(info.name + "_0").execute(function (field) {
-                    // See if the field exists
-                    if (field.existsFl) {
-                        // Resolve the promise
-                        resolve(field);
-                    } else {
-                        // Log
-                        console.log("[gd-sprest] Unable to find the hidden value field for '" + info.name + "'.");
-                    }
-                });
-            } else {
-                // Resolve the promise
-                resolve();
-            }
+            // Get the web
+            new gd_sprest_1.Web(info.webUrl).Lists(info.listName).Fields().getByInternalNameOrTitle(info.name + "_0").execute(function (field) {
+                // See if the field exists
+                if (field.existsFl) {
+                    // Resolve the promise
+                    resolve(field);
+                } else {
+                    // Log
+                    console.log("[gd-sprest] Unable to find the hidden value field for '" + info.name + "'.");
+                }
+            });
         });
     };
     return _ListFormField;
@@ -17081,9 +17177,33 @@ exports.ListFormPanel = function (props) {
                             break;
                         // MMS
                         default:
-                            if (field.fieldInfo.typeAsString == "TaxonomyFieldTypeMulti") {
-                                // Update the field name to the value field
-                                // Update the value
+                            if (field.fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
+                                // See if this is a multi field
+                                if (field.fieldInfo.typeAsString.endsWith("Multi")) {
+                                    // Update the field name to the value field
+                                    for (var valueFieldName in _formInfo.fields) {
+                                        var valueField = _formInfo.fields[valueFieldName];
+                                        // See if this is the value field
+                                        if (valueField.InternalName == field.fieldInfo.name + "_0" || valueField.Title == field.fieldInfo.name + "_0") {
+                                            // Update the field name
+                                            fieldName = valueFieldName;
+                                        }
+                                    }
+                                    // Update the value
+                                    // TO DO - This will need to be updated
+                                    fieldValue = {
+                                        __metadata: { type: "Collection(SP.Taxonomy.TaxonomyFieldValue)" },
+                                        results: fieldValue.join(";#")
+                                    };
+                                } else {
+                                    // Update the value
+                                    fieldValue = {
+                                        __metadata: { type: "SP.Taxonomy.TaxonomyFieldValue" },
+                                        Label: fieldValue.text,
+                                        TermGuid: fieldValue.value,
+                                        WssId: -1
+                                    };
+                                }
                             }
                             break;
                     }
@@ -17112,11 +17232,32 @@ exports.ListFormPanel = function (props) {
         // Parse the fields
         for (var fieldName in _formInfo.fields) {
             var field = _formInfo.fields[fieldName];
+            var value = _formInfo.item ? _formInfo.item[fieldName] : null;
             // See if this is a read-only field
             if (field.ReadOnlyField) {
                 // Do not render in the new form
                 if (controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
                     continue;
+                }
+            }
+            // See if this is the hidden taxonomy field
+            if (field.Hidden && field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
+                // Do not render this field
+                continue;
+            }
+            // See if this is a taxonomy field
+            if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                // See if we are displaying the field
+                if (controlMode == gd_sprest_1.SPTypes.ControlMode.Display) {
+                    // Find the value field
+                    for (var valueFieldName in _formInfo.fields) {
+                        var valueField = _formInfo.fields[valueFieldName];
+                        if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
+                            // Update the value
+                            value = _formInfo.item ? _formInfo.item[valueFieldName] : null;
+                            break;
+                        }
+                    }
                 }
             }
             // Render the field
@@ -17128,7 +17269,7 @@ exports.ListFormPanel = function (props) {
                     listName: _formInfo.list.Title,
                     name: fieldName
                 },
-                value: _formInfo.item ? _formInfo.item[fieldName] : null
+                value: value
             }).then(function (field) {
                 // Add the field
                 _fields.push(field);
