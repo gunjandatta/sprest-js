@@ -6636,7 +6636,7 @@ exports.DatePicker = function (props) {
         }
         // See if the time exists
         var timeValue = _tp ? _tp.getValue() : null;
-        timeValue = timeValue ? timeValue.value.split(" ") : null;
+        timeValue = timeValue && timeValue.value ? timeValue.value.split(" ") : null;
         if (timeValue) {
             // Set the time
             // Set the hours
@@ -6758,6 +6758,7 @@ exports.Dropdown = function (props) {
                     items.push(_1.Templates.ListItem({
                         className: "ms-ListItem--" + (isCategory ? "category" : "header"),
                         isSelectable: isCategory ? props.multi : false,
+                        isSelected: option.isSelected,
                         primaryText: option.text,
                         value: JSON.stringify(option)
                     }));
@@ -6768,6 +6769,7 @@ exports.Dropdown = function (props) {
                     // Add the item
                     items.push(_1.Templates.ListItem({
                         isSelectable: props.multi,
+                        isSelected: option.isSelected,
                         secondaryText: option.text,
                         value: JSON.stringify(option)
                     }));
@@ -6794,22 +6796,8 @@ exports.Dropdown = function (props) {
                     // Select this item
                     item.className += " is-selected";
                 }
-                // Query the selected items
-                var textValues = [];
-                var values = [];
-                var items_1 = _list._container.querySelectorAll(".is-selected");
-                for (var i = 0; i < items_1.length; i++) {
-                    var option = JSON.parse(items_1[i].getAttribute("data-value"));
-                    // Add the values
-                    textValues.push(option.text);
-                    values.push({
-                        text: option.text,
-                        value: option.value
-                    });
-                }
-                // Update the textbox
-                tb.value = textValues.join(", ");
-                tb.setAttribute("data-value", JSON.stringify(values));
+                // Update the value
+                var values = updateValue();
                 // Call the change event
                 props.onChange ? props.onChange(values) : null;
             } else {
@@ -6847,6 +6835,24 @@ exports.Dropdown = function (props) {
         // Return the value
         return value ? JSON.parse(value) : value;
     };
+    // Method to update the value
+    var updateValue = function updateValue() {
+        var textValues = [];
+        var values = [];
+        // Get the selected values
+        var items = _list._container.querySelectorAll(".is-selected");
+        for (var i = 0; i < items.length; i++) {
+            var option = JSON.parse(items[i].getAttribute("data-value"));
+            // Add the values
+            textValues.push(option.text);
+            values.push(option);
+        }
+        // Update the textbox
+        _tb.get()._textField.setAttribute("data-value", JSON.stringify(props.multi ? values : values[0] || {}));
+        _tb.setValue(textValues.join(", "));
+        // Return the values
+        return values;
+    };
     // Render the dropdown
     props.el.innerHTML = ['<div class="dropdown">', '<div class="textfield"></div>', '<div class="callout"></div>', '</div>'].join('\n');
     // Render the textfield
@@ -6866,6 +6872,8 @@ exports.Dropdown = function (props) {
     });
     // Render the list
     var _list = createList(_callout._container);
+    // Update the value
+    updateValue();
     // Return the dropdown
     return {
         get: get,
@@ -15971,11 +15979,25 @@ exports.Field = function (props) {
     // Method to generate the choice dropdown options
     var getChoiceOptions = function getChoiceOptions(fieldinfo) {
         var options = [];
+        // Get the current value
+        var values = props.value || null;
+        values = values && values.results ? values.results : [values];
         // Parse the options
         for (var i = 0; i < fieldinfo.choices.length; i++) {
             var choice = fieldinfo.choices[i];
+            var isSelected = false;
+            // Determine if this choice is selected
+            for (var j = 0; j < values.length; j++) {
+                // See if this choice is selected
+                if (choice == values[j]) {
+                    // Set the flag and break from the loop
+                    isSelected = true;
+                    break;
+                }
+            }
             // Add the option
             options.push({
+                isSelected: isSelected,
                 text: choice,
                 type: __1.Fabric.DropdownTypes.Item,
                 value: choice
@@ -15987,9 +16009,22 @@ exports.Field = function (props) {
     // Method to generate the lookup dropdown options
     var getLookupOptions = function getLookupOptions(fieldinfo, items) {
         var options = [];
+        // Get the current value
+        var values = props.value || null;
+        values = values && values.results ? values.results : [values];
         // Parse the options
         for (var i = 0; i < items.length; i++) {
             var item = items[i];
+            var isSelected = false;
+            // Determine if this choice is selected
+            for (var j = 0; j < values.length; j++) {
+                // See if this choice is selected
+                if (item.Id == values[j]) {
+                    // Set the flag and break from the loop
+                    isSelected = true;
+                    break;
+                }
+            }
             // Add the option
             options.push({
                 text: item[fieldinfo.lookupField],

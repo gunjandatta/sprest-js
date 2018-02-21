@@ -18,6 +18,9 @@ export interface IDropdown {
  * Dropdown Option
  */
 export interface IDropdownOption {
+    /** Flag determining if the option is selected */
+    isSelected?: boolean;
+
     /** The option children. */
     options?: Array<IDropdownOption>;
 

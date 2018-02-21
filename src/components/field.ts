@@ -11,12 +11,28 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
     let getChoiceOptions = (fieldinfo: FieldTypes.IListFormChoiceFieldInfo): Array<Fabric.Types.IDropdownOption> => {
         let options: Array<Fabric.Types.IDropdownOption> = [];
 
+        // Get the current value
+        let values = props.value || null;
+        values = values && values.results ? values.results : [values];
+
         // Parse the options
         for (let i = 0; i < fieldinfo.choices.length; i++) {
             let choice = fieldinfo.choices[i];
+            let isSelected = false;
+
+            // Determine if this choice is selected
+            for(let j=0; j<values.length; j++) {
+                // See if this choice is selected
+                if(choice == values[j]) {
+                    // Set the flag and break from the loop
+                    isSelected = true;
+                    break;
+                }
+            }
 
             // Add the option
             options.push({
+                isSelected,
                 text: choice,
                 type: Fabric.DropdownTypes.Item,
                 value: choice
@@ -31,9 +47,24 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
     let getLookupOptions = (fieldinfo: FieldTypes.IListFormLookupFieldInfo, items: Array<Types.SP.IListItemQueryResult>): Array<Fabric.Types.IDropdownOption> => {
         let options: Array<Fabric.Types.IDropdownOption> = [];
 
+        // Get the current value
+        let values = props.value || null;
+        values = values && values.results ? values.results : [values];
+
         // Parse the options
         for (let i = 0; i < items.length; i++) {
             let item = items[i];
+            let isSelected = false;
+
+            // Determine if this choice is selected
+            for(let j=0; j<values.length; j++) {
+                // See if this choice is selected
+                if(item.Id == values[j]) {
+                    // Set the flag and break from the loop
+                    isSelected = true;
+                    break;
+                }
+            }
 
             // Add the option
             options.push({

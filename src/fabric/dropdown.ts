@@ -38,6 +38,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                     items.push(Templates.ListItem({
                         className: "ms-ListItem--" + (isCategory ? "category" : "header"),
                         isSelectable: isCategory ? props.multi : false,
+                        isSelected: option.isSelected,
                         primaryText: option.text,
                         value: JSON.stringify(option)
                     }));
@@ -52,6 +53,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                     // Add the item
                     items.push(Templates.ListItem({
                         isSelectable: props.multi,
+                        isSelected: option.isSelected,
                         secondaryText: option.text,
                         value: JSON.stringify(option)
                     }));
@@ -81,24 +83,8 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                     item.className += " is-selected";
                 }
 
-                // Query the selected items
-                let textValues = [];
-                let values: Array<IDropdownOption> = [];
-                let items = _list._container.querySelectorAll(".is-selected");
-                for (let i = 0; i < items.length; i++) {
-                    let option = JSON.parse(items[i].getAttribute("data-value")) as IDropdownOption;
-
-                    // Add the values
-                    textValues.push(option.text);
-                    values.push({
-                        text: option.text,
-                        value: option.value
-                    });
-                }
-
-                // Update the textbox
-                tb.value = textValues.join(", ");
-                tb.setAttribute("data-value", JSON.stringify(values));
+                // Update the value
+                let values = updateValue();
 
                 // Call the change event
                 props.onChange ? props.onChange(values) : null;
@@ -146,6 +132,29 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         return value ? JSON.parse(value) : value;
     }
 
+    // Method to update the value
+    let updateValue = () => {
+        let textValues = [];
+        let values: Array<IDropdownOption> = [];
+
+        // Get the selected values
+        let items = _list._container.querySelectorAll(".is-selected");
+        for (let i = 0; i < items.length; i++) {
+            let option = JSON.parse(items[i].getAttribute("data-value")) as IDropdownOption;
+
+            // Add the values
+            textValues.push(option.text);
+            values.push(option);
+        }
+
+        // Update the textbox
+        _tb.get()._textField.setAttribute("data-value", JSON.stringify(props.multi ? values : values[0] || {}));
+        _tb.setValue(textValues.join(", "));
+
+        // Return the values
+        return values;
+    }
+
     // Render the dropdown
     props.el.innerHTML = [
         '<div class="dropdown">',
@@ -173,6 +182,9 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
     // Render the list
     let _list = createList(_callout._container);
+
+    // Update the value
+    updateValue();
 
     // Return the dropdown
     return {
