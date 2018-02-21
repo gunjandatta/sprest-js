@@ -52,7 +52,12 @@
  * Text Field
  */
 
- /** Update the label for the underline type */
- .ms-TextField.ms-TextField--underlined > .ms-Label.field-label {
-     display: block;
- }
+/** Update the disabled labels font color */
+.ms-TextField .ms-TextField-field:disabled {
+    color: #444;
+}
+
+/** Update the label for the underline type */
+.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {
+    display: block;
+}

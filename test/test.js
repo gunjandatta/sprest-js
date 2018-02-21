@@ -12618,7 +12618,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n /** Update the label for the underline type */\r\n .ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n     display: block;\r\n }", ""]);
+exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}", ""]);
 
 // exports
 
@@ -12720,12 +12720,13 @@ exports.Field = function (props) {
         if (props.controlMode == gd_sprest_1.SPTypes.ControlMode.Display) {
             // Update the value, based on the type
             var value = props.value || "";
-            switch (props.fieldInfo.type) {
+            switch (props.fieldInfo.field.FieldTypeKind) {
                 case gd_sprest_1.SPTypes.FieldType.MultiChoice:
                     // Update the values
                     value = value.results ? value.results.join(", ") : value;
                     break;
             }
+            // Resolve the promise
             resolve({
                 fieldInfo: props.fieldInfo,
                 element: __1.Fabric.TextField({
@@ -12737,9 +12738,10 @@ exports.Field = function (props) {
                     onChange: updateValue,
                     required: props.fieldInfo.required,
                     type: __1.Fabric.TextFieldTypes.Underline,
-                    value: props.value || ""
+                    value: value
                 })
             });
+            // Return
             return;
         }
         // Load the field information

@@ -106,14 +106,14 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
         if (props.controlMode == SPTypes.ControlMode.Display) {
             // Update the value, based on the type
             let value = props.value || "";
-            switch (props.fieldInfo.type) {
+            switch (props.fieldInfo.field.FieldTypeKind) {
                 case SPTypes.FieldType.MultiChoice:
                     // Update the values
                     value = value.results ? value.results.join(", ") : value;
                     break;
             }
 
-
+            // Resolve the promise
             resolve({
                 fieldInfo: props.fieldInfo,
                 element: Fabric.TextField({
@@ -125,9 +125,11 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                     onChange: updateValue,
                     required: props.fieldInfo.required,
                     type: Fabric.TextFieldTypes.Underline,
-                    value: props.value || ""
+                    value
                 })
             });
+
+            // Return
             return;
         }
 
