@@ -90,8 +90,17 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
 
                             // See if this is a multi-value field
                             if ((field.fieldInfo as IListFormLookupFieldInfo).multi) {
-                                // Ensure a value exists
-                                fieldValue = fieldValue ? fieldValue : [];
+                                let values: Array<IDropdownOption> = fieldValue || [];
+                                fieldValue = { results: [] };
+
+                                // Parse the options
+                                for (let i = 0; i < values.length; i++) {
+                                    // Add the value
+                                    fieldValue.results.push(values[i].value);
+                                }
+                            } else {
+                                // Update the field value
+                                fieldValue = fieldValue ? (fieldValue as IDropdownOption).value : fieldValue;
                             }
                             break;
 

@@ -54,5 +54,5 @@ export interface IDropdownProps extends IComponentProps {
     placeholder?: string;
 
     /** The dropdown value(s). */
-    value?: IDropdownOption | Array<IDropdownOption>;
+    value?: string | Array<string>;
 }

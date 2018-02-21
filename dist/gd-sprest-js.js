@@ -6758,7 +6758,7 @@ exports.Dropdown = function (props) {
                     items.push(_1.Templates.ListItem({
                         className: "ms-ListItem--" + (isCategory ? "category" : "header"),
                         isSelectable: isCategory ? props.multi : false,
-                        isSelected: option.isSelected,
+                        isSelected: props.multi ? option.isSelected : false,
                         primaryText: option.text,
                         value: JSON.stringify(option)
                     }));
@@ -6803,8 +6803,7 @@ exports.Dropdown = function (props) {
             } else {
                 var option = JSON.parse(item.getAttribute("data-value"));
                 // Update the textbox
-                tb.value = option.text;
-                tb.setAttribute("data-value", JSON.stringify(option));
+                updateValue(option.value);
                 // Call the change event
                 props.onChange ? props.onChange(option) : null;
                 // Close the callout
@@ -6836,20 +6835,35 @@ exports.Dropdown = function (props) {
         return value ? JSON.parse(value) : value;
     };
     // Method to update the value
-    var updateValue = function updateValue() {
+    var updateValue = function updateValue(value) {
         var textValues = [];
         var values = [];
-        // Get the selected values
-        var items = _list._container.querySelectorAll(".is-selected");
-        for (var i = 0; i < items.length; i++) {
-            var option = JSON.parse(items[i].getAttribute("data-value"));
-            // Add the values
-            textValues.push(option.text);
-            values.push(option);
+        // See if this is a multi-select dropdown
+        if (props.multi) {
+            // Get the selected values
+            var items = _list._container.querySelectorAll(".is-selected");
+            for (var i = 0; i < items.length; i++) {
+                var option = JSON.parse(items[i].getAttribute("data-value"));
+                // Add the values
+                textValues.push(option.text);
+                values.push(option);
+            }
+            // Update the textbox
+            _tb.get()._textField.setAttribute("data-value", JSON.stringify(props.multi ? values : values[0] || {}));
+            _tb.setValue(textValues.join(", "));
+        } else {
+            // Parse the options
+            for (var i = 0; i < props.options.length; i++) {
+                var option = props.options[i];
+                // See if this is the target item
+                if (option.value == value) {
+                    // Update the textbox
+                    _tb.get()._textField.setAttribute("data-value", JSON.stringify(option));
+                    _tb.setValue(option.text);
+                    break;
+                }
+            }
         }
-        // Update the textbox
-        _tb.get()._textField.setAttribute("data-value", JSON.stringify(props.multi ? values : values[0] || {}));
-        _tb.setValue(textValues.join(", "));
         // Return the values
         return values;
     };
@@ -6873,7 +6887,7 @@ exports.Dropdown = function (props) {
     // Render the list
     var _list = createList(_callout._container);
     // Update the value
-    updateValue();
+    updateValue(props.value);
     // Return the dropdown
     return {
         get: get,
@@ -15741,7 +15755,7 @@ exports.Panel = function (props, content) {
         return props.showCloseButton ? ['<button class="ms-Panel-closeButton ms-PanelAction-close">', '<i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>', '</button>'].join('\n') : '';
     };
     // Return the template
-    return ['<div class="ms-Panel ' + className.trim() + '">', renderCloseButton(), '<div class="ms-Panel-header">' + (props.panelHeader || "") + '</div>', '<div class="ms-Panel-contentInner" style="height: 90vh;">', props.headerText ? '<p class="ms-Panel-headerText">' + props.headerText + '</p>' : '', '<div class="ms-Panel-content">' + (content || props.panelContent || "") + '</div>', '</div>', '<div class="ms-Panel-footer">' + (props.panelFooter || "") + '</div>', '</div>'].join('\n');
+    return ['<div class="ms-Panel ' + className.trim() + '">', renderCloseButton(), '<div class="ms-Panel-header">' + (props.panelHeader || "") + '</div>', '<div class="ms-Panel-contentInner">', props.headerText ? '<p class="ms-Panel-headerText">' + props.headerText + '</p>' : '', '<div class="ms-Panel-content">' + (content || props.panelContent || "") + '</div>', '</div>', '<div class="ms-Panel-footer">' + (props.panelFooter || "") + '</div>', '</div>'].join('\n');
 };
 
 /***/ }),
@@ -15956,7 +15970,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}", ""]);
+exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: 85vh;\r\n}\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}", ""]);
 
 // exports
 
@@ -16016,17 +16030,21 @@ exports.Field = function (props) {
         for (var i = 0; i < items.length; i++) {
             var item = items[i];
             var isSelected = false;
-            // Determine if this choice is selected
-            for (var j = 0; j < values.length; j++) {
-                // See if this choice is selected
-                if (item.Id == values[j]) {
-                    // Set the flag and break from the loop
-                    isSelected = true;
-                    break;
+            // See if this is a multi-lookup field
+            if (fieldinfo.multi) {
+                // Determine if this lookup is selected
+                for (var j = 0; j < values.length; j++) {
+                    // See if this choice is selected
+                    if (item.Id == values[j].Id) {
+                        // Set the flag and break from the loop
+                        isSelected = true;
+                        break;
+                    }
                 }
             }
             // Add the option
             options.push({
+                isSelected: isSelected,
                 text: item[fieldinfo.lookupField],
                 type: __1.Fabric.DropdownTypes.Item,
                 value: item.Id.toString()
@@ -16034,6 +16052,24 @@ exports.Field = function (props) {
         }
         // Return the options
         return options;
+    };
+    // Method to get the lookup values
+    var getLookupValues = function getLookupValues(fieldinfo, value) {
+        var values = [];
+        // See if this is a multi-lookup
+        if (fieldinfo.multi) {
+            var results = value && value.results ? value.results : [];
+            // Parse the values
+            for (var i = 0; i < results.length; i++) {
+                // Add the value
+                values.push(results[i].Id ? results[i].Id : results[i]);
+            }
+        } else {
+            // Set the value
+            values.push(value && value.Id > 0 ? value.Id : value);
+        }
+        // Return the values
+        return values;
     };
     // Method to get the mms dropdown options
     var getMMSOptions = function getMMSOptions(term) {
@@ -16087,6 +16123,21 @@ exports.Field = function (props) {
             // Update the value, based on the type
             var value = props.value || "";
             switch (props.fieldInfo.field.FieldTypeKind) {
+                case gd_sprest_1.SPTypes.FieldType.Lookup:
+                    var results = value.results ? value.results : [value];
+                    var values = [];
+                    // Parse the results
+                    for (var i = 0; i < results.length; i++) {
+                        var result = results[i] ? results[i][props.fieldInfo.field.LookupField] : null;
+                        // Ensure the value exists
+                        if (result) {
+                            // Add the value
+                            values.push(result);
+                        }
+                    }
+                    // Update the value
+                    value = values.join(", ");
+                    break;
                 case gd_sprest_1.SPTypes.FieldType.MultiChoice:
                     // Update the values
                     value = value.results ? value.results.join(", ") : value;
@@ -16198,7 +16249,7 @@ exports.Field = function (props) {
                                 onChange: updateValue,
                                 options: getLookupOptions(fieldInfo, items),
                                 required: fieldInfo.required,
-                                value: value
+                                value: getLookupValues(fieldInfo, value)
                             })
                         });
                     });
@@ -16504,6 +16555,32 @@ var _ListForm = /** @class */function () {
                     // Select the attachment files
                     _this._info.query.Select.push("Attachments");
                     _this._info.query.Select.push("AttachmentFiles");
+                }
+                // Parse the fields
+                for (var fieldName in _this._info.fields) {
+                    var field = _this._info.fields[fieldName];
+                    // Update the query, based on the type
+                    switch (field.FieldTypeKind) {
+                        // Lookup Field
+                        case gd_sprest_1.SPTypes.FieldType.Lookup:
+                            // Expand the field
+                            _this._info.query.Expand = _this._info.query.Expand || [];
+                            _this._info.query.Expand.push(field.InternalName);
+                            // Select the field
+                            _this._info.query.Select.push(field.InternalName + "/Id");
+                            _this._info.query.Select.push(field.InternalName + "/" + field.LookupField);
+                            break;
+                        // User Field
+                        case gd_sprest_1.SPTypes.FieldType.User:
+                            // Expand the field
+                            _this._info.query.Expand = _this._info.query.Expand || [];
+                            _this._info.query.Expand.push(field.InternalName);
+                            // Select the field
+                            _this._info.query.Select.push(field.InternalName + "/Email");
+                            _this._info.query.Select.push(field.InternalName + "/Id");
+                            _this._info.query.Select.push(field.InternalName + "/Title");
+                            break;
+                    }
                 }
                 // Get the list item
                 _this._info.list.Items(_this._props.itemId).query(_this._info.query).execute(function (item) {
@@ -16980,8 +17057,16 @@ exports.ListFormPanel = function (props) {
                             fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
                             // See if this is a multi-value field
                             if (field.fieldInfo.multi) {
-                                // Ensure a value exists
-                                fieldValue = fieldValue ? fieldValue : [];
+                                var values = fieldValue || [];
+                                fieldValue = { results: [] };
+                                // Parse the options
+                                for (var i_2 = 0; i_2 < values.length; i_2++) {
+                                    // Add the value
+                                    fieldValue.results.push(values[i_2].value);
+                                }
+                            } else {
+                                // Update the field value
+                                fieldValue = fieldValue ? fieldValue.value : fieldValue;
                             }
                             break;
                         // Multi-Choice
@@ -16989,9 +17074,9 @@ exports.ListFormPanel = function (props) {
                             var options = fieldValue || [];
                             fieldValue = { results: [] };
                             // Parse the options
-                            for (var i_2 = 0; i_2 < options.length; i_2++) {
+                            for (var i_3 = 0; i_3 < options.length; i_3++) {
                                 // Add the option
-                                fieldValue.results.push(options[i_2].value);
+                                fieldValue.results.push(options[i_3].value);
                             }
                             break;
                         // MMS

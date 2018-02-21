@@ -1,4 +1,4 @@
-import { Helper, Types, Web } from "gd-sprest";
+import { Helper, SPTypes, Types, Web } from "gd-sprest";
 import * as ListFormTypes from "./types";
 
 /**
@@ -226,6 +226,37 @@ class _ListForm {
                 // Select the attachment files
                 this._info.query.Select.push("Attachments");
                 this._info.query.Select.push("AttachmentFiles");
+            }
+
+            // Parse the fields
+            for (let fieldName in this._info.fields) {
+                let field = this._info.fields[fieldName];
+
+                // Update the query, based on the type
+                switch (field.FieldTypeKind) {
+                    // Lookup Field
+                    case SPTypes.FieldType.Lookup:
+                        // Expand the field
+                        this._info.query.Expand = this._info.query.Expand || [];
+                        this._info.query.Expand.push(field.InternalName);
+
+                        // Select the field
+                        this._info.query.Select.push(field.InternalName + "/Id");
+                        this._info.query.Select.push(field.InternalName + "/" + (field as Types.SP.IFieldLookup).LookupField);
+                        break;
+
+                    // User Field
+                    case SPTypes.FieldType.User:
+                        // Expand the field
+                        this._info.query.Expand = this._info.query.Expand || [];
+                        this._info.query.Expand.push(field.InternalName);
+
+                        // Select the field
+                        this._info.query.Select.push(field.InternalName + "/Email");
+                        this._info.query.Select.push(field.InternalName + "/Id");
+                        this._info.query.Select.push(field.InternalName + "/Title");
+                        break;
+                }
             }
 
             // Get the list item

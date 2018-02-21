@@ -42,7 +42,7 @@ export const Panel = (props: IPanelProps, content?: string): string => {
         '<div class="ms-Panel ' + className.trim() + '">',
         renderCloseButton(),
         '<div class="ms-Panel-header">' + (props.panelHeader || "") + '</div>',
-        '<div class="ms-Panel-contentInner" style="height: 90vh;">',
+        '<div class="ms-Panel-contentInner">',
         props.headerText ? '<p class="ms-Panel-headerText">' + props.headerText + '</p>' : '',
         '<div class="ms-Panel-content">' + (content || props.panelContent || "") + '</div>',
         '</div>',

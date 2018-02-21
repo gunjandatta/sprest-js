@@ -174,11 +174,14 @@ window["TestJS"] = {
                 // Render elements
                 cfg.el.innerHTML = "<div></div><div></div><div></div><div></div>";
 
+                // The fields to render
+                let fields = ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice", "TestLookup", "TestMultiLookup"];
+
                 // Render the new form
                 let newForm = ListFormPanel({
                     controlMode: SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
-                    fields: ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice"],
+                    fields,
                     listName: "SPReact",
                     panelTitle: "Test Item Form",
                     panelType: Fabric.PanelTypes.Large
@@ -213,8 +216,8 @@ window["TestJS"] = {
                             let viewForm = ListFormPanel({
                                 controlMode: SPTypes.ControlMode.Display,
                                 el: cfg.el.children[2],
-                                fields: ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice"],
-                                item: item,
+                                fields,
+                                itemId: item.Id,
                                 listName: "SPReact",
                                 panelTitle: item["Title"] || "",
                                 panelType: Fabric.PanelTypes.Large

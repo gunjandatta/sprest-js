@@ -21,9 +21,9 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
             let isSelected = false;
 
             // Determine if this choice is selected
-            for(let j=0; j<values.length; j++) {
+            for (let j = 0; j < values.length; j++) {
                 // See if this choice is selected
-                if(choice == values[j]) {
+                if (choice == values[j]) {
                     // Set the flag and break from the loop
                     isSelected = true;
                     break;
@@ -56,18 +56,22 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
             let item = items[i];
             let isSelected = false;
 
-            // Determine if this choice is selected
-            for(let j=0; j<values.length; j++) {
-                // See if this choice is selected
-                if(item.Id == values[j]) {
-                    // Set the flag and break from the loop
-                    isSelected = true;
-                    break;
+            // See if this is a multi-lookup field
+            if (fieldinfo.multi) {
+                // Determine if this lookup is selected
+                for (let j = 0; j < values.length; j++) {
+                    // See if this choice is selected
+                    if (item.Id == values[j].Id) {
+                        // Set the flag and break from the loop
+                        isSelected = true;
+                        break;
+                    }
                 }
             }
 
             // Add the option
             options.push({
+                isSelected,
                 text: item[fieldinfo.lookupField],
                 type: Fabric.DropdownTypes.Item,
                 value: item.Id.toString()
@@ -76,6 +80,28 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
 
         // Return the options
         return options;
+    }
+
+    // Method to get the lookup values
+    let getLookupValues = (fieldinfo: FieldTypes.IListFormLookupFieldInfo, value) => {
+        let values = [];
+
+        // See if this is a multi-lookup
+        if (fieldinfo.multi) {
+            let results = value && value.results ? value.results : [];
+
+            // Parse the values
+            for (let i = 0; i < results.length; i++) {
+                // Add the value
+                values.push(results[i].Id ? results[i].Id : results[i]);
+            }
+        } else {
+            // Set the value
+            values.push(value && value.Id > 0 ? value.Id : value);
+        }
+
+        // Return the values
+        return values;
     }
 
     // Method to get the mms dropdown options
@@ -138,6 +164,24 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
             // Update the value, based on the type
             let value = props.value || "";
             switch (props.fieldInfo.field.FieldTypeKind) {
+                case SPTypes.FieldType.Lookup:
+                    let results = value.results ? value.results : [value];
+                    let values = [];
+
+                    // Parse the results
+                    for (let i = 0; i < results.length; i++) {
+                        let result = results[i] ? results[i][(props.fieldInfo.field as Types.SP.IFieldLookup).LookupField] : null;
+
+                        // Ensure the value exists
+                        if (result) {
+                            // Add the value
+                            values.push(result);
+                        }
+                    }
+
+                    // Update the value
+                    value = values.join(", ");
+                    break;
                 case SPTypes.FieldType.MultiChoice:
                     // Update the values
                     value = value.results ? value.results.join(", ") : value;
@@ -257,7 +301,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                                 onChange: updateValue,
                                 options: getLookupOptions(fieldInfo as FieldTypes.IListFormLookupFieldInfo, items),
                                 required: fieldInfo.required,
-                                value
+                                value: getLookupValues(fieldInfo as FieldTypes.IListFormLookupFieldInfo, value)
                             })
                         });
                     });
