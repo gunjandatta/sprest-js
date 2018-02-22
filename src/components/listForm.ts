@@ -38,6 +38,77 @@ class _ListForm {
         return new _ListForm(props);
     }
 
+    // Method to generate the odata query
+    static generateODataQuery = (info: ListFormTypes.IListFormResult, loadAttachments: boolean = false): Types.SP.ODataQuery => {
+        let query: Types.SP.ODataQuery = info.query || {};
+
+        // Default the select query to get all the fields by default
+        query.Select = query.Select || ["*"];
+
+        // See if we are loading the attachments
+        if (loadAttachments) {
+            // Expand the attachment files collection
+            query.Expand = query.Expand || [];
+            query.Expand.push("AttachmentFiles")
+
+            // Select the attachment files
+            query.Select.push("Attachments");
+            query.Select.push("AttachmentFiles");
+        }
+
+        // Parse the fields
+        for (let fieldName in info.fields) {
+            let field = info.fields[fieldName];
+
+            // Update the query, based on the type
+            switch (field.FieldTypeKind) {
+                // Lookup Field
+                case SPTypes.FieldType.Lookup:
+                    // Expand the field
+                    query.Expand = query.Expand || [];
+                    query.Expand.push(field.InternalName);
+
+                    // Select the field
+                    query.Select.push(field.InternalName + "/Id");
+                    query.Select.push(field.InternalName + "/" + (field as Types.SP.IFieldLookup).LookupField);
+                    break;
+
+                // User Field
+                case SPTypes.FieldType.User:
+                    // Expand the field
+                    query.Expand = query.Expand || [];
+                    query.Expand.push(field.InternalName);
+
+                    // Select the field
+                    query.Select.push(field.InternalName + "/Email");
+                    query.Select.push(field.InternalName + "/Id");
+                    query.Select.push(field.InternalName + "/Title");
+                    break;
+
+                // Default
+                default:
+                    // See if this is an taxonomy field
+                    if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                        // Parse the fields
+                        for (let fieldName in info.fields) {
+                            let valueField = info.fields[fieldName];
+
+                            // See if this is the value field
+                            if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
+                                // Include the value field
+                                query.Select.push(valueField.InternalName);
+                                break;
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+
+        // Return the query
+        return query;
+    }
+
     // Method to load the list data
     private load = () => {
         // Clear the information
@@ -213,69 +284,8 @@ class _ListForm {
         }
         // Else, see if we are loading the list item
         else if (this._props.itemId > 0) {
-            // Default the select query to get all the fields by default
-            this._info.query = this._props.query || {};
-            this._info.query.Select = this._info.query.Select || ["*"];
-
-            // See if we are loading the attachments
-            if (this._props.loadAttachments) {
-                // Expand the attachment files collection
-                this._info.query.Expand = this._info.query.Expand || [];
-                this._info.query.Expand.push("AttachmentFiles")
-
-                // Select the attachment files
-                this._info.query.Select.push("Attachments");
-                this._info.query.Select.push("AttachmentFiles");
-            }
-
-            // Parse the fields
-            for (let fieldName in this._info.fields) {
-                let field = this._info.fields[fieldName];
-
-                // Update the query, based on the type
-                switch (field.FieldTypeKind) {
-                    // Lookup Field
-                    case SPTypes.FieldType.Lookup:
-                        // Expand the field
-                        this._info.query.Expand = this._info.query.Expand || [];
-                        this._info.query.Expand.push(field.InternalName);
-
-                        // Select the field
-                        this._info.query.Select.push(field.InternalName + "/Id");
-                        this._info.query.Select.push(field.InternalName + "/" + (field as Types.SP.IFieldLookup).LookupField);
-                        break;
-
-                    // User Field
-                    case SPTypes.FieldType.User:
-                        // Expand the field
-                        this._info.query.Expand = this._info.query.Expand || [];
-                        this._info.query.Expand.push(field.InternalName);
-
-                        // Select the field
-                        this._info.query.Select.push(field.InternalName + "/Email");
-                        this._info.query.Select.push(field.InternalName + "/Id");
-                        this._info.query.Select.push(field.InternalName + "/Title");
-                        break;
-
-                    // Default
-                    default:
-                        // See if this is an taxonomy field
-                        if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
-                            // Parse the fields
-                            for (let fieldName in this._info.fields) {
-                                let valueField = this._info.fields[fieldName];
-
-                                // See if this is the value field
-                                if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
-                                    // Include the value field
-                                    this._info.query.Select.push(valueField.InternalName);
-                                    break;
-                                }
-                            }
-                        }
-                        break;
-                }
-            }
+            // Update the item query
+            this._info.query = _ListForm.generateODataQuery(this._info, this._props.loadAttachments);
 
             // Get the list item
             this._info.list.Items(this._props.itemId)
@@ -381,6 +391,9 @@ class _ListForm {
     static refreshItem(info: ListFormTypes.IListFormResult): PromiseLike<ListFormTypes.IListFormResult> {
         // Return a promise
         return new Promise((resolve, reject) => {
+            // Update the query
+            info.query = this.generateODataQuery(info, true);
+
             // Get the item
             info.list.Items(info.item.Id).query(info.query).execute(item => {
                 // Update the item

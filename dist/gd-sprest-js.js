@@ -16054,8 +16054,9 @@ exports.Field = function (props) {
             if (fieldinfo.multi) {
                 // Determine if this lookup is selected
                 for (var j = 0; j < values.length; j++) {
+                    var id = values[j] ? values[j].Id : null;
                     // See if this choice is selected
-                    if (item.Id == values[j].Id) {
+                    if (item.Id == id) {
                         // Set the flag and break from the loop
                         isSelected = true;
                         break;
@@ -16617,60 +16618,8 @@ var _ListForm = /** @class */function () {
                 // Resolve the promise
                 _this._resolve(_this._info);
             } else if (_this._props.itemId > 0) {
-                // Default the select query to get all the fields by default
-                _this._info.query = _this._props.query || {};
-                _this._info.query.Select = _this._info.query.Select || ["*"];
-                // See if we are loading the attachments
-                if (_this._props.loadAttachments) {
-                    // Expand the attachment files collection
-                    _this._info.query.Expand = _this._info.query.Expand || [];
-                    _this._info.query.Expand.push("AttachmentFiles");
-                    // Select the attachment files
-                    _this._info.query.Select.push("Attachments");
-                    _this._info.query.Select.push("AttachmentFiles");
-                }
-                // Parse the fields
-                for (var fieldName in _this._info.fields) {
-                    var field = _this._info.fields[fieldName];
-                    // Update the query, based on the type
-                    switch (field.FieldTypeKind) {
-                        // Lookup Field
-                        case gd_sprest_1.SPTypes.FieldType.Lookup:
-                            // Expand the field
-                            _this._info.query.Expand = _this._info.query.Expand || [];
-                            _this._info.query.Expand.push(field.InternalName);
-                            // Select the field
-                            _this._info.query.Select.push(field.InternalName + "/Id");
-                            _this._info.query.Select.push(field.InternalName + "/" + field.LookupField);
-                            break;
-                        // User Field
-                        case gd_sprest_1.SPTypes.FieldType.User:
-                            // Expand the field
-                            _this._info.query.Expand = _this._info.query.Expand || [];
-                            _this._info.query.Expand.push(field.InternalName);
-                            // Select the field
-                            _this._info.query.Select.push(field.InternalName + "/Email");
-                            _this._info.query.Select.push(field.InternalName + "/Id");
-                            _this._info.query.Select.push(field.InternalName + "/Title");
-                            break;
-                        // Default
-                        default:
-                            // See if this is an taxonomy field
-                            if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
-                                // Parse the fields
-                                for (var fieldName_1 in _this._info.fields) {
-                                    var valueField = _this._info.fields[fieldName_1];
-                                    // See if this is the value field
-                                    if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
-                                        // Include the value field
-                                        _this._info.query.Select.push(valueField.InternalName);
-                                        break;
-                                    }
-                                }
-                            }
-                            break;
-                    }
-                }
+                // Update the item query
+                _this._info.query = _ListForm.generateODataQuery(_this._info, _this._props.loadAttachments);
                 // Get the list item
                 _this._info.list.Items(_this._props.itemId).query(_this._info.query).execute(function (item) {
                     // Save the attachments
@@ -16785,8 +16734,11 @@ var _ListForm = /** @class */function () {
     };
     // Method to refresh an item
     _ListForm.refreshItem = function (info) {
+        var _this = this;
         // Return a promise
         return new Promise(function (resolve, reject) {
+            // Update the query
+            info.query = _this.generateODataQuery(info, true);
             // Get the item
             info.list.Items(info.item.Id).query(info.query).execute(function (item) {
                 // Update the item
@@ -16873,6 +16825,68 @@ var _ListForm = /** @class */function () {
                 });
             }
         });
+    };
+    // Method to generate the odata query
+    _ListForm.generateODataQuery = function (info, loadAttachments) {
+        if (loadAttachments === void 0) {
+            loadAttachments = false;
+        }
+        var query = info.query || {};
+        // Default the select query to get all the fields by default
+        query.Select = query.Select || ["*"];
+        // See if we are loading the attachments
+        if (loadAttachments) {
+            // Expand the attachment files collection
+            query.Expand = query.Expand || [];
+            query.Expand.push("AttachmentFiles");
+            // Select the attachment files
+            query.Select.push("Attachments");
+            query.Select.push("AttachmentFiles");
+        }
+        // Parse the fields
+        for (var fieldName in info.fields) {
+            var field = info.fields[fieldName];
+            // Update the query, based on the type
+            switch (field.FieldTypeKind) {
+                // Lookup Field
+                case gd_sprest_1.SPTypes.FieldType.Lookup:
+                    // Expand the field
+                    query.Expand = query.Expand || [];
+                    query.Expand.push(field.InternalName);
+                    // Select the field
+                    query.Select.push(field.InternalName + "/Id");
+                    query.Select.push(field.InternalName + "/" + field.LookupField);
+                    break;
+                // User Field
+                case gd_sprest_1.SPTypes.FieldType.User:
+                    // Expand the field
+                    query.Expand = query.Expand || [];
+                    query.Expand.push(field.InternalName);
+                    // Select the field
+                    query.Select.push(field.InternalName + "/Email");
+                    query.Select.push(field.InternalName + "/Id");
+                    query.Select.push(field.InternalName + "/Title");
+                    break;
+                // Default
+                default:
+                    // See if this is an taxonomy field
+                    if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                        // Parse the fields
+                        for (var fieldName_1 in info.fields) {
+                            var valueField = info.fields[fieldName_1];
+                            // See if this is the value field
+                            if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
+                                // Include the value field
+                                query.Select.push(valueField.InternalName);
+                                break;
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+        // Return the query
+        return query;
     };
     return _ListForm;
 }();

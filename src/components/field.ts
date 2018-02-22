@@ -60,8 +60,10 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
             if (fieldinfo.multi) {
                 // Determine if this lookup is selected
                 for (let j = 0; j < values.length; j++) {
+                    let id = values[j] ? values[j].Id : null;
+
                     // See if this choice is selected
-                    if (item.Id == values[j].Id) {
+                    if (item.Id == id) {
                         // Set the flag and break from the loop
                         isSelected = true;
                         break;
