@@ -3,7 +3,10 @@ import { ITextField, ITextFieldProps } from ".";
 /**
  * Number Field
  */
-export interface INumberField extends ITextField { }
+export interface INumberField extends ITextField {
+    /** Returns the textfield value. */
+    getValue(): number | any;
+}
 
 /**
  * Number Field Properties

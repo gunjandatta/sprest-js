@@ -177,7 +177,7 @@ window["TestJS"] = {
                 // The fields to render
                 let fields = ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime",
                     "TestMultiChoice", "TestLookup", "TestMultiLookup", "TestManagedMetadata",
-                    //"TestNote", "TestNumberDecimal", "TestNumberInteger", "TestNumberPercentage",
+                    "TestNote", "TestNumberDecimal", "TestNumberInteger", "TestNumberPercentage",
                     "TestUrl"
                 ];
 

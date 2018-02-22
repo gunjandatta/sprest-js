@@ -7078,10 +7078,30 @@ var NumberFieldTypes;
  * Number Field
  */
 exports.NumberField = function (props) {
+    // Method to get the value
+    var getValue = function getValue() {
+        // Ensure a value exists
+        var value = _numberfield.getValue();
+        if (value) {
+            switch (props.type) {
+                case NumberFieldTypes.Integer:
+                    value = parseInt(value);
+                    return typeof value === "number" ? value : null;
+                case NumberFieldTypes.Number:
+                    value = parseFloat(value);
+                    return typeof value === "number" ? value : null;
+                case NumberFieldTypes.Percentage:
+                    value = parseFloat(value);
+                    return typeof value === "number" ? value / 100 : null;
+            }
+        }
+        // Return nothing
+        return null;
+    };
     // Method to validate the value
     var validate = function validate(value) {
         var maxValue = typeof props.minValue === "number" ? props.maxValue : Number.MAX_VALUE;
-        var minValue = typeof props.minValue === "number" ? props.minValue : Number.MIN_VALUE;
+        var minValue = typeof props.minValue === "number" ? props.minValue : Number.MAX_VALUE * -1;
         var numberValue = null;
         var valueExists = (value || "").length > 0;
         // Clear the error message
@@ -7094,9 +7114,16 @@ exports.NumberField = function (props) {
                 case NumberFieldTypes.Integer:
                     // Ensure this is an integer
                     numberValue = parseInt(value);
-                    if (!(numberValue >= minValue && numberValue <= maxValue) || numberValue.toString() != value) {
+                    if (numberValue.toString() != value) {
                         // Set the error message
                         _numberfield.setErrorMessage("The value is not an integer");
+                        // Validation failed
+                        return false;
+                    }
+                    // Ensure it's between the min/max range
+                    if (!(numberValue >= minValue && numberValue <= maxValue)) {
+                        // Set the error message
+                        _numberfield.setErrorMessage("The value must be between " + minValue + " and " + maxValue + ".");
                         // Validation failed
                         return false;
                     }
@@ -7104,9 +7131,16 @@ exports.NumberField = function (props) {
                 case NumberFieldTypes.Number:
                     // Ensure this is a number
                     numberValue = parseFloat(value);
-                    if (!(numberValue >= minValue && numberValue <= maxValue) || numberValue != value) {
+                    if (numberValue != value) {
                         // Set the error message
-                        _numberfield.setErrorMessage("The value is not a number");
+                        _numberfield.setErrorMessage("The value is not an number");
+                        // Validation failed
+                        return false;
+                    }
+                    // Ensure it's between the min/max range
+                    if (!(numberValue >= minValue && numberValue <= maxValue)) {
+                        // Set the error message
+                        _numberfield.setErrorMessage("The value must be between " + minValue + " and " + maxValue + ".");
                         // Validation failed
                         return false;
                     }
@@ -7114,12 +7148,19 @@ exports.NumberField = function (props) {
                 case NumberFieldTypes.Percentage:
                     // Update the min/max values
                     maxValue = maxValue == Number.MAX_VALUE ? 100 : maxValue;
-                    minValue = minValue == Number.MIN_VALUE ? 0 : minValue;
+                    minValue = minValue == Number.MAX_VALUE * -1 ? 0 : minValue;
                     // Ensure this is a number
                     numberValue = parseFloat(value);
-                    if (!(numberValue >= minValue && numberValue <= maxValue) || numberValue != value) {
+                    if (numberValue != value) {
                         // Set the error message
-                        _numberfield.setErrorMessage("The value is not a number");
+                        _numberfield.setErrorMessage("The value is not an number");
+                        // Validation failed
+                        return false;
+                    }
+                    // Ensure it's between the min/max range
+                    if (!(numberValue >= minValue && numberValue <= maxValue)) {
+                        // Set the error message
+                        _numberfield.setErrorMessage("The value must be between " + minValue + " and " + maxValue + ".");
                         // Validation failed
                         return false;
                     }
@@ -7145,7 +7186,7 @@ exports.NumberField = function (props) {
     // Return the number field
     return {
         get: _numberfield.get,
-        getValue: _numberfield.getValue,
+        getValue: getValue,
         setErrorMessage: _numberfield.setErrorMessage,
         setValue: _numberfield.setValue
     };
