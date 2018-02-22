@@ -1,8 +1,8 @@
-import { SPTypes } from "gd-sprest";
+import { SPTypes, Types, Web } from "gd-sprest";
 import { Button, CommandBar, Panel, PanelTypes, Templates, Spinner } from "../fabric";
 import { Fabric, IDropdown, IDropdownOption, IPanel } from "../fabric/types";
 import { Field, ListForm } from ".";
-import { IField, IListFormLookupFieldInfo, IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
+import { IField, IListFormLookupFieldInfo, IListFormUserFieldInfo, IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
 
 /**
  * Item Form
@@ -60,6 +60,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
             // Add a click event
             buttons[i].addEventListener("click", () => {
                 let formValues = {};
+                let unknownUsers = {};
 
                 // Render a saving message
                 let content = _panel.updateContent(Templates.Spinner({ text: "Saving the item..." }));
@@ -84,7 +85,6 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
 
                         // Lookup
                         case SPTypes.FieldType.Lookup:
-                        case SPTypes.FieldType.User:
                             // Append 'Id' to the field name
                             fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
 
@@ -122,6 +122,47 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                             if (fieldValue) {
                                 // Add the metadata
                                 fieldValue.__metadata = { type: "SP.FieldUrlValue" };
+                            }
+                            break;
+
+                        // User
+                        case SPTypes.FieldType.User:
+                            // Append 'Id' to the field name
+                            fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
+
+                            // See if this is a multi-value field
+                            if ((field.fieldInfo as IListFormUserFieldInfo).multi) {
+                                let values: Array<IDropdownOption> = fieldValue || [];
+                                fieldValue = { results: [] };
+
+                                // Parse the options
+                                for (let i = 0; i < values.length; i++) {
+                                    let userValue = values[i] as Types.SP.IPeoplePickerUser;
+                                    if (userValue && userValue.EntityData) {
+                                        // Ensure the user or group id exists
+                                        if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
+                                            // Update the field value
+                                            fieldValue.results.push(userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID);
+                                        } else {
+                                            // Add the unknown user account
+                                            unknownUsers[fieldName] = unknownUsers[fieldName] || [];
+                                            unknownUsers[fieldName].push(userValue.Key);
+                                        }
+                                    }
+                                }
+                            } else {
+                                let userValue: Types.SP.IPeoplePickerUser = fieldValue ? fieldValue[0] : null;
+                                if (userValue && userValue.EntityData) {
+                                    // Ensure the user or group id exists
+                                    if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
+                                        // Update the field value
+                                        fieldValue = userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID;
+                                    } else {
+                                        // Add the unknown user account
+                                        unknownUsers[fieldName] = unknownUsers[fieldName] || [];
+                                        unknownUsers[fieldName].push(userValue.Key);
+                                    }
+                                }
                             }
                             break;
 
@@ -164,19 +205,70 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                     formValues[fieldName] = fieldValue;
                 }
 
-                // Save the item
-                ListForm.saveItem(_formInfo, formValues).then(formInfo => {
-                    // Update the form info
-                    _formInfo = formInfo;
+                // Ensure the user accounts exist
+                ensureUserAccounts(unknownUsers, formValues).then(formValues => {
+                    // Save the item
+                    ListForm.saveItem(_formInfo, formValues).then(formInfo => {
+                        // Update the form info
+                        _formInfo = formInfo;
 
-                    // Render the form
-                    renderForm(SPTypes.ControlMode.Display);
+                        // Render the form
+                        renderForm(SPTypes.ControlMode.Display);
+                    });
                 });
 
                 // Disable postback
                 return false;
             });
         }
+    }
+
+    // Method to ensure the user accounts exist
+    let ensureUserAccounts = (userAccounts, formValues) => {
+        // Return a promise
+        return new Promise((resolve, reject) => {
+            let web = new Web();
+
+            // Parse the field names
+            for (let fieldName in userAccounts) {
+                // Parse the user accounts
+                for (let i = 0; i < userAccounts[fieldName].length; i++) {
+                    // Ensure this user account exists
+                    web.ensureUser(userAccounts[fieldName][i]).execute(true);
+                }
+            }
+
+            // Wait for the requests to complete
+            web.done((...args) => {
+                // Parse the field names
+                for (let fieldName in userAccounts) {
+                    // Parse the user accounts
+                    for (let i = 0; i < userAccounts[fieldName].length; i++) {
+                        let userLogin = userAccounts[fieldName][i];
+
+                        // Parse the responses
+                        for (let j = 0; j < args.length; j++) {
+                            let user = args[j] as Types.SP.IUserResult;
+
+                            // See if this is the user
+                            if (user.LoginName == userLogin) {
+                                // See if this is a multi-user value
+                                if (formValues[fieldName].results != null) {
+                                    // Set the user account
+                                    formValues[fieldName].push(user.Id);
+                                } else {
+                                    // Set the user account
+                                    formValues[fieldName] = user.Id;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Resolve the promise
+                resolve(formValues);
+            });
+        });
     }
 
     // Render the fields

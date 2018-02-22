@@ -16293,6 +16293,21 @@ exports.Field = function (props) {
                         })
                     });
                     return;
+                // User
+                case gd_sprest_1.SPTypes.FieldType.User:
+                    // Resolve the promise
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: __1.Fabric.PeoplePicker({
+                            className: props.className,
+                            description: props.fieldInfo.field.Description,
+                            el: props.el,
+                            label: props.fieldInfo.field.Title,
+                            required: props.fieldInfo.required,
+                            value: value
+                        })
+                    });
+                    return;
             }
             // See if this is a taxonomy field
             if (props.fieldInfo.field.TypeAsString.startsWith("TaxonomyFieldType")) {
@@ -17256,6 +17271,7 @@ exports.ListFormPanel = function (props) {
             // Add a click event
             buttons[i].addEventListener("click", function () {
                 var formValues = {};
+                var unknownUsers = {};
                 // Render a saving message
                 var content = _panel.updateContent(fabric_1.Templates.Spinner({ text: "Saving the item..." }));
                 fabric_1.Spinner({
@@ -17276,7 +17292,6 @@ exports.ListFormPanel = function (props) {
                             break;
                         // Lookup
                         case gd_sprest_1.SPTypes.FieldType.Lookup:
-                        case gd_sprest_1.SPTypes.FieldType.User:
                             // Append 'Id' to the field name
                             fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
                             // See if this is a multi-value field
@@ -17309,6 +17324,44 @@ exports.ListFormPanel = function (props) {
                             if (fieldValue) {
                                 // Add the metadata
                                 fieldValue.__metadata = { type: "SP.FieldUrlValue" };
+                            }
+                            break;
+                        // User
+                        case gd_sprest_1.SPTypes.FieldType.User:
+                            // Append 'Id' to the field name
+                            fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
+                            // See if this is a multi-value field
+                            if (field.fieldInfo.multi) {
+                                var values = fieldValue || [];
+                                fieldValue = { results: [] };
+                                // Parse the options
+                                for (var i_4 = 0; i_4 < values.length; i_4++) {
+                                    var userValue = values[i_4];
+                                    if (userValue && userValue.EntityData) {
+                                        // Ensure the user or group id exists
+                                        if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
+                                            // Update the field value
+                                            fieldValue.results.push(userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID);
+                                        } else {
+                                            // Add the unknown user account
+                                            unknownUsers[fieldName] = unknownUsers[fieldName] || [];
+                                            unknownUsers[fieldName].push(userValue.Key);
+                                        }
+                                    }
+                                }
+                            } else {
+                                var userValue = fieldValue ? fieldValue[0] : null;
+                                if (userValue && userValue.EntityData) {
+                                    // Ensure the user or group id exists
+                                    if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
+                                        // Update the field value
+                                        fieldValue = userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID;
+                                    } else {
+                                        // Add the unknown user account
+                                        unknownUsers[fieldName] = unknownUsers[fieldName] || [];
+                                        unknownUsers[fieldName].push(userValue.Key);
+                                    }
+                                }
                             }
                             break;
                         // MMS
@@ -17346,17 +17399,66 @@ exports.ListFormPanel = function (props) {
                     // Set the field value
                     formValues[fieldName] = fieldValue;
                 }
-                // Save the item
-                _1.ListForm.saveItem(_formInfo, formValues).then(function (formInfo) {
-                    // Update the form info
-                    _formInfo = formInfo;
-                    // Render the form
-                    renderForm(gd_sprest_1.SPTypes.ControlMode.Display);
+                // Ensure the user accounts exist
+                ensureUserAccounts(unknownUsers, formValues).then(function (formValues) {
+                    // Save the item
+                    _1.ListForm.saveItem(_formInfo, formValues).then(function (formInfo) {
+                        // Update the form info
+                        _formInfo = formInfo;
+                        // Render the form
+                        renderForm(gd_sprest_1.SPTypes.ControlMode.Display);
+                    });
                 });
                 // Disable postback
                 return false;
             });
         }
+    };
+    // Method to ensure the user accounts exist
+    var ensureUserAccounts = function ensureUserAccounts(userAccounts, formValues) {
+        // Return a promise
+        return new Promise(function (resolve, reject) {
+            var web = new gd_sprest_1.Web();
+            // Parse the field names
+            for (var fieldName in userAccounts) {
+                // Parse the user accounts
+                for (var i = 0; i < userAccounts[fieldName].length; i++) {
+                    // Ensure this user account exists
+                    web.ensureUser(userAccounts[fieldName][i]).execute(true);
+                }
+            }
+            // Wait for the requests to complete
+            web.done(function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                // Parse the field names
+                for (var fieldName in userAccounts) {
+                    // Parse the user accounts
+                    for (var i = 0; i < userAccounts[fieldName].length; i++) {
+                        var userLogin = userAccounts[fieldName][i];
+                        // Parse the responses
+                        for (var j = 0; j < args.length; j++) {
+                            var user = args[j];
+                            // See if this is the user
+                            if (user.LoginName == userLogin) {
+                                // See if this is a multi-user value
+                                if (formValues[fieldName].results != null) {
+                                    // Set the user account
+                                    formValues[fieldName].push(user.Id);
+                                } else {
+                                    // Set the user account
+                                    formValues[fieldName] = user.Id;
+                                }
+                            }
+                        }
+                    }
+                }
+                // Resolve the promise
+                resolve(formValues);
+            });
+        });
     };
     // Render the fields
     var renderFields = function renderFields(controlMode) {

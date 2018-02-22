@@ -226,6 +226,22 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                         })
                     });
                     return;
+
+                // User
+                case SPTypes.FieldType.User:
+                    // Resolve the promise
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: Fabric.PeoplePicker({
+                            className: props.className,
+                            description: props.fieldInfo.field.Description,
+                            el: props.el,
+                            label: props.fieldInfo.field.Title,
+                            required: props.fieldInfo.required,
+                            value
+                        })
+                    });
+                    return;
             }
 
             // See if this is a taxonomy field
