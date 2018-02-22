@@ -16977,7 +16977,7 @@ var _ListForm = /** @class */function () {
                     query.Expand = query.Expand || [];
                     query.Expand.push(field.InternalName);
                     // Select the field
-                    query.Select.push(field.InternalName + "/Email");
+                    query.Select.push(field.InternalName + "/EMail");
                     query.Select.push(field.InternalName + "/Id");
                     query.Select.push(field.InternalName + "/Title");
                     break;

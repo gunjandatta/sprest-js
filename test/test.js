@@ -2507,13 +2507,10 @@ window["TestJS"] = {
             onRenderDisplay: function onRenderDisplay(cfg) {
                 // Render elements
                 cfg.el.innerHTML = "<div></div><div></div><div></div><div></div>";
-                // The fields to render
-                var fields = ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice", "TestLookup", "TestMultiLookup", "TestManagedMetadata", "TestNote", "TestNumberDecimal", "TestNumberInteger", "TestNumberPercentage", "TestUrl"];
                 // Render the new form
                 var newForm = build_1.ListFormPanel({
                     controlMode: gd_sprest_1.SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
-                    fields: fields,
                     listName: "SPReact",
                     panelTitle: "Test Item Form",
                     panelType: build_1.Fabric.PanelTypes.Large
@@ -2539,7 +2536,6 @@ window["TestJS"] = {
                         var viewForm_1 = build_1.ListFormPanel({
                             controlMode: gd_sprest_1.SPTypes.ControlMode.Display,
                             el: cfg.el.children[2],
-                            fields: fields,
                             itemId: item.Id,
                             listName: "SPReact",
                             panelTitle: item["Title"] || "",
@@ -13682,7 +13678,7 @@ var _ListForm = /** @class */ (function () {
                     query.Expand = query.Expand || [];
                     query.Expand.push(field.InternalName);
                     // Select the field
-                    query.Select.push(field.InternalName + "/Email");
+                    query.Select.push(field.InternalName + "/EMail");
                     query.Select.push(field.InternalName + "/Id");
                     query.Select.push(field.InternalName + "/Title");
                     break;
