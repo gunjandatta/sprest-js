@@ -184,6 +184,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
             // Update the value, based on the type
             let value = props.value || "";
             switch (props.fieldInfo.field.FieldTypeKind) {
+                // Lookup
                 case SPTypes.FieldType.Lookup:
                     let results = value.results ? value.results : [value];
                     let values = [];
@@ -202,10 +203,29 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                     // Update the value
                     value = values.join(", ");
                     break;
+
+                // Multi-Choice
                 case SPTypes.FieldType.MultiChoice:
                     // Update the values
                     value = value.results ? value.results.join(", ") : value;
                     break;
+
+                // URL
+                case SPTypes.FieldType.URL:
+                    // Resolve the promise
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: Fabric.LinkField({
+                            className: props.className,
+                            description: props.fieldInfo.field.Description,
+                            disable: true,
+                            el: props.el,
+                            label: props.fieldInfo.field.Title,
+                            required: props.fieldInfo.required,
+                            value
+                        })
+                    });
+                    return;
             }
 
             // See if this is a taxonomy field
@@ -232,7 +252,6 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                     disable: true,
                     el: props.el,
                     label: props.fieldInfo.field.Title,
-                    onChange: updateValue,
                     required: props.fieldInfo.required,
                     type: Fabric.TextFieldTypes.Underline,
                     value

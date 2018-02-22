@@ -35,6 +35,23 @@
 .ms-Icon.is-description:hover span { display: block; }
 
 /**
+ * Link Field
+ */
+
+ /** Add the underline */
+.ms-LinkField {
+    border-bottom: 1px solid #c8c8c8;
+}
+.ms-LinkField:hover {
+    border-color: #767676;
+}
+
+/** Align the link */
+.ms-LinkField .ms-Link {
+    padding-left: 5px;
+}
+
+/**
  * Panel
  */
 

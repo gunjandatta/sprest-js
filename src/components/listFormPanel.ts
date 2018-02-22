@@ -116,6 +116,15 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                             }
                             break;
 
+                        // URL
+                        case SPTypes.FieldType.URL:
+                            // See if the field value exists
+                            if (fieldValue) {
+                                // Add the metadata
+                                fieldValue.__metadata = { type: "SP.FieldUrlValue" };
+                            }
+                            break;
+
                         // MMS
                         default:
                             if (field.fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
@@ -136,16 +145,16 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                                     // TO DO - This will need to be updated
                                     fieldValue = {
                                         __metadata: { type: "Collection(SP.Taxonomy.TaxonomyFieldValue)" },
-                                        results: fieldValue.join(";#")
+                                        results: fieldValue ? fieldValue.join(";#") : ""
                                     };
                                 } else {
                                     // Update the value
-                                    fieldValue = {
+                                    fieldValue = fieldValue ? {
                                         __metadata: { type: "SP.Taxonomy.TaxonomyFieldValue" },
                                         Label: fieldValue.text,
                                         TermGuid: fieldValue.value,
                                         WssId: -1
-                                    };
+                                    } : fieldValue;
                                 }
                             }
                             break;

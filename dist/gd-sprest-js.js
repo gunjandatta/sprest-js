@@ -124,7 +124,7 @@ __export(__webpack_require__(99));
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(115);
+var Types = __webpack_require__(116);
 exports.Types = Types;
 
 /***/ }),
@@ -228,6 +228,7 @@ __export(__webpack_require__(111));
 __export(__webpack_require__(112));
 __export(__webpack_require__(113));
 __export(__webpack_require__(114));
+__export(__webpack_require__(115));
 
 /***/ }),
 /* 5 */
@@ -286,11 +287,11 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(119));
 __export(__webpack_require__(120));
 __export(__webpack_require__(121));
 __export(__webpack_require__(122));
-var Types = __webpack_require__(123);
+__export(__webpack_require__(123));
+var Types = __webpack_require__(124);
 exports.Types = Types;
 
 /***/ }),
@@ -3002,12 +3003,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Fabric = __webpack_require__(1);
 exports.Fabric = Fabric;
 // Include the styles
-__webpack_require__(117);
+__webpack_require__(118);
 // Components
 var Components = __webpack_require__(7);
 __export(__webpack_require__(7));
 // WebParts
-var WebParts = __webpack_require__(124);
+var WebParts = __webpack_require__(125);
 exports.WebParts = WebParts;
 // Wait for the core library to be loaded
 SP ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
@@ -6925,6 +6926,8 @@ var _1 = __webpack_require__(1);
  * Link Field
  */
 exports.LinkField = function (props) {
+    var _desc = null;
+    var _url = null;
     // Method to get the link element
     var get = function get() {
         // Returns the link element
@@ -6943,32 +6946,61 @@ exports.LinkField = function (props) {
             Url: _url ? _url.getValue() : ""
         };
     };
-    // Add the link html
-    props.el.innerHTML = ['<div class="url"></div>', '<div class="description"></div>'].join('\n');
-    // Create the url textfield
-    var _url = _1.TextField({
-        disable: props.disable,
-        el: props.el.children[0],
-        label: props.label,
-        onChange: props.onChange ? function (value) {
+    // Method to validate the url
+    var validate = function validate(url) {
+        // Clear the error message
+        _url.setErrorMessage("");
+        // See if the url exists
+        if (url) {
+            // Validate the url
+            if (/^https?\:\/\//.test(url) == false) {
+                // Set the error message
+                _url.setErrorMessage("The value must start with http:// or https://");
+            }
+        } else {
+            // See if this field is required
+            if (props.required) {
+                // Set the error message
+                _url.setErrorMessage("This field requires a value.");
+            }
+        }
+        // Call the change event
+        props.onChange ? function (value) {
             props.onChange(getValue());
-        } : null,
-        required: props.required,
-        type: _1.TextFieldTypes.Underline,
-        value: props.value && props.value.Url ? props.value.Url : ""
-    });
-    // Create the description textfield
-    var _desc = _1.TextField({
-        disable: props.disable,
-        el: props.el.children[1],
-        label: props.label + " Description",
-        onChange: props.onChange ? function (value) {
-            props.onChange(getValue());
-        } : null,
-        required: props.required,
-        type: _1.TextFieldTypes.Underline,
-        value: props.value && props.value.Description ? props.value.Description : ""
-    });
+        } : null;
+    };
+    // See if the field is disabled
+    if (props.disable) {
+        // Add the link html
+        props.el.innerHTML = _1.Templates.LinkField(props);
+    } else {
+        // Add the link html
+        props.el.innerHTML = ['<div class="url"></div>', '<div class="description"></div>'].join('\n');
+        // Create the url textfield
+        _url = _1.TextField({
+            disable: props.disable,
+            el: props.el.children[0],
+            label: props.label,
+            onChange: validate,
+            required: props.required,
+            type: _1.TextFieldTypes.Underline,
+            value: props.value && props.value.Url ? props.value.Url : ""
+        });
+        // Create the description textfield
+        _desc = _1.TextField({
+            disable: props.disable,
+            el: props.el.children[1],
+            label: props.label + " Description",
+            onChange: props.onChange ? function (value) {
+                props.onChange(getValue());
+            } : null,
+            required: props.required,
+            type: _1.TextFieldTypes.Underline,
+            value: props.value && props.value.Description ? props.value.Description : ""
+        });
+        // Validate the url
+        validate(props.value ? props.value.Url : "");
+    }
     // Return the link
     return {
         get: get,
@@ -15708,6 +15740,30 @@ exports.Label = function (props) {
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(4);
+/**
+ * Link Field
+ */
+exports.LinkField = function (props) {
+    var desc = (props.value ? props.value.Description : null) || "";
+    var url = (props.value ? props.value.Url : null) || "";
+    // Return the template
+    return ['<div class="ms-LinkField ' + (props.className || "") + '">', props.label ? _1.Label({
+        className: "field-label",
+        description: props.description,
+        isRequired: props.required,
+        text: props.label
+    }) : '', '<a class="ms-Link" href="' + url + '">' + (desc || url) + '</a>', '</div>'].join("");
+};
+
+/***/ }),
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * List
  */
@@ -15717,7 +15773,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15735,7 +15791,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15779,7 +15835,7 @@ exports.Panel = function (props, content) {
 };
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15847,7 +15903,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15863,7 +15919,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15889,7 +15945,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15911,18 +15967,6 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 115 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-// Fabric Components
-var Fabric = __webpack_require__(116);
-exports.Fabric = Fabric;
-
-/***/ }),
 /* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15930,13 +15974,25 @@ exports.Fabric = Fabric;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+// Fabric Components
+var Fabric = __webpack_require__(117);
+exports.Fabric = Fabric;
 
 /***/ }),
 /* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-var content = __webpack_require__(118);
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+/***/ }),
+/* 118 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(119);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15982,7 +16038,7 @@ if(false) {
 }
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -15990,13 +16046,13 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: 85vh;\r\n}\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}", ""]);
+exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: 85vh;\r\n}\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16159,6 +16215,7 @@ exports.Field = function (props) {
             // Update the value, based on the type
             var value = props.value || "";
             switch (props.fieldInfo.field.FieldTypeKind) {
+                // Lookup
                 case gd_sprest_1.SPTypes.FieldType.Lookup:
                     var results = value.results ? value.results : [value];
                     var values = [];
@@ -16174,10 +16231,27 @@ exports.Field = function (props) {
                     // Update the value
                     value = values.join(", ");
                     break;
+                // Multi-Choice
                 case gd_sprest_1.SPTypes.FieldType.MultiChoice:
                     // Update the values
                     value = value.results ? value.results.join(", ") : value;
                     break;
+                // URL
+                case gd_sprest_1.SPTypes.FieldType.URL:
+                    // Resolve the promise
+                    resolve({
+                        fieldInfo: props.fieldInfo,
+                        element: __1.Fabric.LinkField({
+                            className: props.className,
+                            description: props.fieldInfo.field.Description,
+                            disable: true,
+                            el: props.el,
+                            label: props.fieldInfo.field.Title,
+                            required: props.fieldInfo.required,
+                            value: value
+                        })
+                    });
+                    return;
             }
             // See if this is a taxonomy field
             if (props.fieldInfo.field.TypeAsString.startsWith("TaxonomyFieldType")) {
@@ -16200,7 +16274,6 @@ exports.Field = function (props) {
                     disable: true,
                     el: props.el,
                     label: props.fieldInfo.field.Title,
-                    onChange: updateValue,
                     required: props.fieldInfo.required,
                     type: __1.Fabric.TextFieldTypes.Underline,
                     value: value
@@ -16473,7 +16546,7 @@ exports.Field = function (props) {
 };
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16893,7 +16966,7 @@ var _ListForm = /** @class */function () {
 exports.ListForm = _ListForm;
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17084,7 +17157,7 @@ var _ListFormField = /** @class */function () {
 exports.ListFormField = _ListFormField;
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17189,6 +17262,14 @@ exports.ListFormPanel = function (props) {
                                 fieldValue.results.push(options[i_3].value);
                             }
                             break;
+                        // URL
+                        case gd_sprest_1.SPTypes.FieldType.URL:
+                            // See if the field value exists
+                            if (fieldValue) {
+                                // Add the metadata
+                                fieldValue.__metadata = { type: "SP.FieldUrlValue" };
+                            }
+                            break;
                         // MMS
                         default:
                             if (field.fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
@@ -17207,16 +17288,16 @@ exports.ListFormPanel = function (props) {
                                     // TO DO - This will need to be updated
                                     fieldValue = {
                                         __metadata: { type: "Collection(SP.Taxonomy.TaxonomyFieldValue)" },
-                                        results: fieldValue.join(";#")
+                                        results: fieldValue ? fieldValue.join(";#") : ""
                                     };
                                 } else {
                                     // Update the value
-                                    fieldValue = {
+                                    fieldValue = fieldValue ? {
                                         __metadata: { type: "SP.Taxonomy.TaxonomyFieldValue" },
                                         Label: fieldValue.text,
                                         TermGuid: fieldValue.value,
                                         WssId: -1
-                                    };
+                                    } : fieldValue;
                                 }
                             }
                             break;
@@ -17419,7 +17500,7 @@ exports.ListFormPanel = function (props) {
 };
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17428,7 +17509,7 @@ exports.ListFormPanel = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17440,10 +17521,10 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(125));
+__export(__webpack_require__(126));
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

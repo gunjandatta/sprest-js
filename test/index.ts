@@ -175,7 +175,11 @@ window["TestJS"] = {
                 cfg.el.innerHTML = "<div></div><div></div><div></div><div></div>";
 
                 // The fields to render
-                let fields = ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime", "TestMultiChoice", "TestLookup", "TestMultiLookup", "TestManagedMetadata"];
+                let fields = ["Title", "TestBoolean", "TestChoice", "TestComments", "TestDate", "TestDateTime",
+                    "TestMultiChoice", "TestLookup", "TestMultiLookup", "TestManagedMetadata",
+                    //"TestNote", "TestNumberDecimal", "TestNumberInteger", "TestNumberPercentage",
+                    "TestUrl"
+                ];
 
                 // Render the new form
                 let newForm = ListFormPanel({
