@@ -12763,7 +12763,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: 85vh;\r\n}\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}", ""]);
+exports.push([module.i, "/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: 85vh;\r\n}\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}", ""]);
 
 // exports
 
@@ -12971,18 +12971,18 @@ exports.Field = function (props) {
                     return;
                 // User
                 case gd_sprest_1.SPTypes.FieldType.User:
-                    // Resolve the promise
-                    resolve({
-                        fieldInfo: props.fieldInfo,
-                        element: __1.Fabric.PeoplePicker({
-                            className: props.className,
-                            description: props.fieldInfo.field.Description,
-                            el: props.el,
-                            label: props.fieldInfo.field.Title,
-                            required: props.fieldInfo.required,
-                            value: value
-                        })
-                    });
+                    var userNames = [];
+                    var userValues = value && value.results ? value.results : [value];
+                    // Parse the user values
+                    for (var i = 0; i < userValues.length; i++) {
+                        // Ensure the name exists
+                        if (userValues[i] && userValues[i].Title) {
+                            // Add the user name
+                            userNames.push(userValues[i].Title);
+                        }
+                    }
+                    // Update the value
+                    value = userNames.join(", ");
                     return;
             }
             // See if this is a taxonomy field
@@ -13664,10 +13664,10 @@ var _ListForm = /** @class */ (function () {
         var query = info.query || {};
         // Default the select query to get all the fields by default
         query.Select = query.Select || ["*"];
+        query.Expand = query.Expand || [];
         // See if we are loading the attachments
         if (loadAttachments) {
             // Expand the attachment files collection
-            query.Expand = query.Expand || [];
             query.Expand.push("AttachmentFiles");
             // Select the attachment files
             query.Select.push("Attachments");
@@ -13681,19 +13681,16 @@ var _ListForm = /** @class */ (function () {
                 // Lookup Field
                 case gd_sprest_1.SPTypes.FieldType.Lookup:
                     // Expand the field
-                    query.Expand = query.Expand || [];
                     query.Expand.push(field.InternalName);
-                    // Select the field
+                    // Select the fields
                     query.Select.push(field.InternalName + "/Id");
                     query.Select.push(field.InternalName + "/" + field.LookupField);
                     break;
                 // User Field
                 case gd_sprest_1.SPTypes.FieldType.User:
                     // Expand the field
-                    query.Expand = query.Expand || [];
                     query.Expand.push(field.InternalName);
-                    // Select the field
-                    query.Select.push(field.InternalName + "/EMail");
+                    // Select the fields
                     query.Select.push(field.InternalName + "/Id");
                     query.Select.push(field.InternalName + "/Title");
                     break;
@@ -14184,11 +14181,46 @@ exports.ListFormPanel = function (props) {
             });
         });
     };
+    // Render the display form
+    var renderDisplayForm = function () {
+        // Get the list
+        _formInfo.list
+            .Items(_formInfo.item.Id)
+            .FieldValuesAsHtml()
+            .execute(function (formValues) {
+            // Parse the fields
+            for (var fieldName in _formInfo.fields) {
+                // Get the element
+                var el = _panel.get()._panel.querySelector("[data-field='" + fieldName + "']");
+                if (el) {
+                    var field = _formInfo.fields[fieldName];
+                    var html = formValues[fieldName] || formValues[fieldName.replace(/\_/g, "_x005f_")] || "";
+                    // Set the html for this field
+                    el.innerHTML = [
+                        '<div class="display-form">',
+                        fabric_1.Templates.Label({
+                            className: "field-label",
+                            description: field.Description,
+                            text: field.Title
+                        }),
+                        '<div class="field-value">' + html + '</div>',
+                        '</div>'
+                    ].join('\n');
+                }
+            }
+        });
+    };
     // Render the fields
     var renderFields = function (controlMode) {
         if (controlMode === void 0) { controlMode = gd_sprest_1.SPTypes.ControlMode.Display; }
         // Clear the fields
         _fields = [];
+        // See if we are displaying the fields
+        if (controlMode == gd_sprest_1.SPTypes.ControlMode.Display) {
+            // Render the display form
+            renderDisplayForm();
+            return;
+        }
         // Parse the fields
         for (var fieldName in _formInfo.fields) {
             var field = _formInfo.fields[fieldName];
@@ -14203,6 +14235,15 @@ exports.ListFormPanel = function (props) {
             // See if this is the hidden taxonomy field
             if (field.Hidden && field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
                 // Do not render this field
+                continue;
+            }
+            // See if we are displaying the field
+            if (controlMode == gd_sprest_1.SPTypes.ControlMode.Display) {
+                var el = _panel.get()._panel.querySelector("[data-field='" + fieldName + "']");
+                if (el) {
+                    // Render the field
+                    el.innerHTML = _formInfo.item.FieldValuesAsHtml[fieldName];
+                }
                 continue;
             }
             // See if this is a taxonomy field

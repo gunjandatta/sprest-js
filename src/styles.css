@@ -1,4 +1,25 @@
 /**
+ * Display Form
+ */
+
+/** Add an underline to the field */
+.display-form {
+    border-bottom: 1px solid #c8c8c8;
+    padding: 5px 0px;
+}
+.display-form:hover {
+    border-color: #767676;
+}
+
+/** The field value */
+.display-form .field-value{
+    font-size: 14px;
+    font-weight: 300;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+/**
  * Dropdown
  */
 

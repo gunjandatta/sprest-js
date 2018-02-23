@@ -271,10 +271,51 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         });
     }
 
+    // Render the display form
+    let renderDisplayForm = () => {
+        // Get the list
+        _formInfo.list
+            // Load the target item
+            .Items(_formInfo.item.Id)
+            // Get the html for the fields
+            .FieldValuesAsHtml()
+            // Execute the request
+            .execute(formValues => {
+                // Parse the fields
+                for (let fieldName in _formInfo.fields) {
+                    // Get the element
+                    let el = _panel.get()._panel.querySelector("[data-field='" + fieldName + "']");
+                    if (el) {
+                        let field = _formInfo.fields[fieldName];
+                        let html = formValues[fieldName] || formValues[fieldName.replace(/\_/g, "_x005f_")] || "";
+
+                        // Set the html for this field
+                        el.innerHTML = [
+                            '<div class="display-form">',
+                            Templates.Label({
+                                className: "field-label",
+                                description: field.Description,
+                                text: field.Title
+                            }),
+                            '<div class="field-value">' + html + '</div>',
+                            '</div>'
+                        ].join('\n');
+                    }
+                }
+            });
+    }
+
     // Render the fields
     let renderFields = (controlMode: number = SPTypes.ControlMode.Display) => {
         // Clear the fields
         _fields = [];
+
+        // See if we are displaying the fields
+        if (controlMode == SPTypes.ControlMode.Display) {
+            // Render the display form
+            renderDisplayForm();
+            return;
+        }
 
         // Parse the fields
         for (let fieldName in _formInfo.fields) {
@@ -290,6 +331,16 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
             // See if this is the hidden taxonomy field
             if (field.Hidden && field.FieldTypeKind == SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
                 // Do not render this field
+                continue;
+            }
+
+            // See if we are displaying the field
+            if (controlMode == SPTypes.ControlMode.Display) {
+                let el = _panel.get()._panel.querySelector("[data-field='" + fieldName + "']");
+                if (el) {
+                    // Render the field
+                    el.innerHTML = _formInfo.item.FieldValuesAsHtml[fieldName];
+                }
                 continue;
             }
 

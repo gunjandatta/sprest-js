@@ -229,18 +229,20 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
 
                 // User
                 case SPTypes.FieldType.User:
-                    // Resolve the promise
-                    resolve({
-                        fieldInfo: props.fieldInfo,
-                        element: Fabric.PeoplePicker({
-                            className: props.className,
-                            description: props.fieldInfo.field.Description,
-                            el: props.el,
-                            label: props.fieldInfo.field.Title,
-                            required: props.fieldInfo.required,
-                            value
-                        })
-                    });
+                    let userNames = [];
+                    let userValues = value && value.results ? value.results : [value];
+
+                    // Parse the user values
+                    for (let i = 0; i < userValues.length; i++) {
+                        // Ensure the name exists
+                        if (userValues[i] && userValues[i].Title) {
+                            // Add the user name
+                            userNames.push(userValues[i].Title);
+                        }
+                    }
+
+                    // Update the value
+                    value = userNames.join(", ");
                     return;
             }
 

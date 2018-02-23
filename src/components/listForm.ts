@@ -44,11 +44,11 @@ class _ListForm {
 
         // Default the select query to get all the fields by default
         query.Select = query.Select || ["*"];
+        query.Expand = query.Expand || [];
 
         // See if we are loading the attachments
         if (loadAttachments) {
             // Expand the attachment files collection
-            query.Expand = query.Expand || [];
             query.Expand.push("AttachmentFiles")
 
             // Select the attachment files
@@ -65,10 +65,9 @@ class _ListForm {
                 // Lookup Field
                 case SPTypes.FieldType.Lookup:
                     // Expand the field
-                    query.Expand = query.Expand || [];
                     query.Expand.push(field.InternalName);
 
-                    // Select the field
+                    // Select the fields
                     query.Select.push(field.InternalName + "/Id");
                     query.Select.push(field.InternalName + "/" + (field as Types.SP.IFieldLookup).LookupField);
                     break;
@@ -76,11 +75,9 @@ class _ListForm {
                 // User Field
                 case SPTypes.FieldType.User:
                     // Expand the field
-                    query.Expand = query.Expand || [];
                     query.Expand.push(field.InternalName);
 
-                    // Select the field
-                    query.Select.push(field.InternalName + "/EMail");
+                    // Select the fields
                     query.Select.push(field.InternalName + "/Id");
                     query.Select.push(field.InternalName + "/Title");
                     break;
