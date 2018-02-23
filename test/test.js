@@ -12871,6 +12871,15 @@ exports.Field = function (props) {
         var options = [];
         // See if information exists
         if (term.info) {
+            var isSelected = false;
+            // Parse the selected values
+            for (var i = 0; i < selectedValues.length; i++) {
+                // See if this item is selected
+                if (selectedValues[i] == term.info.id) {
+                    isSelected = true;
+                    break;
+                }
+            }
             // Add the heading
             options.push({
                 text: term.info.name,

@@ -112,6 +112,17 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
 
         // See if information exists
         if (term.info) {
+            let isSelected = false;
+
+            // Parse the selected values
+            for (let i = 0; i < selectedValues.length; i++) {
+                // See if this item is selected
+                if (selectedValues[i] == term.info.id) {
+                    isSelected = true;
+                    break;
+                }
+            }
+
             // Add the heading
             options.push({
                 text: term.info.name,
