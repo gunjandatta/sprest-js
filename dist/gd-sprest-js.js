@@ -17370,14 +17370,7 @@ exports.ListFormPanel = function (props) {
                                 // See if this is a multi field
                                 if (field.fieldInfo.typeAsString.endsWith("Multi")) {
                                     // Update the field name to the value field
-                                    for (var valueFieldName in _formInfo.fields) {
-                                        var valueField = _formInfo.fields[valueFieldName];
-                                        // See if this is the value field
-                                        if (valueField.InternalName == field.fieldInfo.name + "_0" || valueField.Title == field.fieldInfo.name + "_0") {
-                                            // Update the field name
-                                            fieldName = valueFieldName;
-                                        }
-                                    }
+                                    fieldName = field.fieldInfo.valueField.InternalName;
                                     // Parse the field values
                                     var fieldValues = fieldValue || [];
                                     fieldValue = [];
@@ -17387,10 +17380,7 @@ exports.ListFormPanel = function (props) {
                                         fieldValue.push(-1 + ";#" + termInfo.text + "|" + termInfo.value);
                                     }
                                     // Set the field value
-                                    fieldValue = {
-                                        __metadata: { type: "Collection(SP.Taxonomy.TaxonomyFieldValue)" },
-                                        results: fieldValue.join(";#")
-                                    };
+                                    fieldValue = fieldValue.join(";#");
                                 } else {
                                     // Update the value
                                     fieldValue = fieldValue ? {

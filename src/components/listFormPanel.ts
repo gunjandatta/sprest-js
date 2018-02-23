@@ -2,7 +2,7 @@ import { SPTypes, Types, Web } from "gd-sprest";
 import { Button, CommandBar, Panel, PanelTypes, Templates, Spinner } from "../fabric";
 import { Fabric, IDropdown, IDropdownOption, IPanel } from "../fabric/types";
 import { Field, ListForm } from ".";
-import { IField, IListFormLookupFieldInfo, IListFormUserFieldInfo, IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
+import { IField, IListFormMMSFieldInfo, IListFormLookupFieldInfo, IListFormUserFieldInfo, IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
 
 /**
  * Item Form
@@ -175,15 +175,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                                 // See if this is a multi field
                                 if (field.fieldInfo.typeAsString.endsWith("Multi")) {
                                     // Update the field name to the value field
-                                    for (let valueFieldName in _formInfo.fields) {
-                                        let valueField = _formInfo.fields[valueFieldName];
-
-                                        // See if this is the value field
-                                        if (valueField.InternalName == field.fieldInfo.name + "_0" || valueField.Title == field.fieldInfo.name + "_0") {
-                                            // Update the field name
-                                            fieldName = valueFieldName;
-                                        }
-                                    }
+                                    fieldName = (field.fieldInfo as IListFormMMSFieldInfo).valueField.InternalName;
 
                                     // Parse the field values
                                     let fieldValues:Array<IDropdownOption> = fieldValue || [];
@@ -196,10 +188,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                                     }
 
                                     // Set the field value
-                                    fieldValue = {
-                                        __metadata: { type: "Collection(SP.Taxonomy.TaxonomyFieldValue)" },
-                                        results: fieldValue.join(";#")
-                                    };
+                                    fieldValue = fieldValue.join(";#");
                                 } else {
                                     // Update the value
                                     fieldValue = fieldValue ? {
