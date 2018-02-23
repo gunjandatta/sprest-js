@@ -100,14 +100,14 @@ export const WebPart = (props: IWebPartProps) => {
     let getWebPartInfo = (): IWebPartInfo => {
         let targetInfo: IWebPartInfo = {
             cfg: null,
-            el: null,
+            el: props.element,
             wpId: null
         };
 
         // Ensure the element id exists
-        if (props.elementId) {
+        if (props.element || props.elementId) {
             // Get the webpart elements
-            let elements = document.querySelectorAll("#" + props.elementId);
+            let elements = props.element ? [props.element] : document.querySelectorAll("#" + props.elementId);
             for (let i = 0; i < elements.length; i++) {
                 let elWebPart = elements[i] as HTMLElement;
 
@@ -118,7 +118,8 @@ export const WebPart = (props: IWebPartProps) => {
                 let wpId = getWebPartId(elWebPart);
                 if (wpId) {
                     // See if the configuration element exists
-                    let elCfg: HTMLElement = props.cfgElementId ? elWebPart.parentElement.querySelector("#" + props.cfgElementId) : null as any;
+                    let elCfg: HTMLElement = props.cfgElement ? props.cfgElement :
+                        (props.cfgElementId ? elWebPart.parentElement.querySelector("#" + props.cfgElementId) : null) as any;
                     if (elCfg) {
                         try {
                             // Parse the configuration

@@ -29,4 +29,7 @@ export interface IPivotLink {
 
     /** The tab name. */
     name: string;
+
+    /** The click event for the tab. */
+    onClick?: Function;
 }

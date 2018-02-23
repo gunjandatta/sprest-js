@@ -1,34 +1,32 @@
+import { IPivotLink } from "../fabric/types";
+import { Pivot } from "../fabric";
+import { IWebPartInfo, IWPTabsProps } from "./types";
+import { WebPart } from ".";
 
 /**
  * Web Part Tabs
  */
-export const WebPartTabs = (props) => {
-    /**
-     * Flag to determine if the webpart is inside a content zone.
-     */
+export const WPTabs = (props: IWPTabsProps) => {
     let _isContentZone: boolean = false;
 
-    /**
-     * Methods
-     */
-
-    /**
-     * Methods to get the webparts
-     */
-    let getWebParts = () => {
+    // Method to get the webparts
+    let getWebParts = (wpInfo: IWebPartInfo) => {
         let wps = [];
 
         // Get the webpart element and zone
-        let elWebPart = document.querySelector("div[webpartid='" + props.cfg.WebPartId + "']") as HTMLDivElement;
-        let elWebPartZone = elWebPart ? this.getWebPartZone(elWebPart) : null;
+        let elWebPart = document.querySelector("div[webpartid='" + wpInfo.cfg.WebPartId + "']") as HTMLDivElement;
+        let elWebPartZone = elWebPart ? getWebPartZone(elWebPart) : null;
         if (elWebPart && elWebPartZone) {
+            // Add a class name to the webpart zone
+            elWebPartZone.className += " wp-tabs"
+
             // Parse the webparts in this zone
             let webparts = elWebPartZone.querySelectorAll(".ms-webpartzone-cell[id^='MSOZoneCell_WebPart']");
             for (let i = 0; i < webparts.length; i++) {
                 let webpart = webparts[i] as HTMLElement;
 
                 // Skip this webpart
-                if (webpart.querySelector("div[webpartid='" + props.cfg.WebPartId + "']")) { continue; }
+                if (webpart.querySelector("div[webpartid='" + wpInfo.cfg.WebPartId + "']")) { continue; }
 
                 // Skip hidden webparts
                 let wpTitle: string = ((webpart.querySelector(".ms-webpart-titleText") || {}) as HTMLDivElement).innerText || "";
@@ -37,7 +35,7 @@ export const WebPartTabs = (props) => {
                 if (isHidden) { continue; }
 
                 // See if this is within a content zone
-                if (this._isContentZone) {
+                if (_isContentZone) {
                     // Get the parent webpart box
                     while (webpart.parentNode) {
                         // See if this is the webpart box element
@@ -61,9 +59,7 @@ export const WebPartTabs = (props) => {
         return wps;
     }
 
-    /**
-     * Method to get the webpart zone
-     */
+    // Method to get the webpart zone
     let getWebPartZone = (el: HTMLDivElement) => {
         // Ensure the element exists
         if (el) {
@@ -76,108 +72,78 @@ export const WebPartTabs = (props) => {
             // See if this is the inner page zone
             if (el.className.indexOf("ms-rte-layoutszone-inner") >= 0) {
                 // Set the flag
-                this._isContentZone = true;
+                _isContentZone = true;
 
                 // Return it
                 return el;
             }
 
             // Check the parent element
-            return this.getWebPartZone(el.parentNode as HTMLDivElement);
+            return getWebPartZone(el.parentNode as HTMLDivElement);
         }
 
         // Return nothing
         return null;
     }
 
-    /**
-     * Method to render the component
-     */
-    let render = () => {
-        // Get the web
-
-        return (`
-            <div className={(props.className || "")
-    }>
-        { this.onRenderHeader() }
-        < Pivot onLinkClick= { this.updateSelectedTab } linkFormat= { props.linkFormat } linkSize= { props.linkSize } >
-            { this.renderTabs() }
-            < /Pivot>
-    { this.onRenderFooter() }
-    </div>`
-        );
-    }
-
-    /**
-     * Method to render the tabs
-     */
-    let renderTabs = () => {
-        let tabs = [];
-
-        // Parse the webparts
+    // Method to update the visibility of the webparts
+    let updateWebParts = () => {
         for (let i = 0; i < _webparts.length; i++) {
-            let webpart = _webparts[i];
-
-            // Get the webpart title
-            let wpTitle: string | HTMLDivElement = webpart.querySelector(".ms-webpart-titleText") as HTMLDivElement;
-            wpTitle = wpTitle ? wpTitle.innerText : null;
-            if (wpTitle) {
-                // Add the tab
-                tabs.push(`
-                    <PivotItem
-                        itemID={ i.toString() }
-                        linkText= { wpTitle }
-                        key= { i }
-                        onRenderItemLink= { props.onRenderTab }
-                    />
-                `)
-
-                // Get the webpart title element
-                let elWebPartTitle = webpart.querySelector(".ms-webpart-chrome-title") as HTMLDivElement;
-                if (elWebPartTitle) {
-                    // Hide the title element
-                    elWebPartTitle.style.display = "none";
-                }
+            // Get the webpart
+            let webpart = document.querySelector("#" + _webparts[i].id) as HTMLDivElement;
+            if (webpart) {
+                // Update the visibility
+                webpart.style.display = i == _selectedTabId ? "" : "none";
             }
         }
-
-        // Return the tabs
-        return tabs;
-    }
-
-    /**
-     * Method to update the
-     * @param item - The pivot item.
-     * @param ev - The tab click event.
-     */
-    let updateSelectedTab = (item: any, ev?: any) => {
-        // Update the state
-        this.setState({
-            selectedTabId: parseInt(item.props.itemID)
-        });
     }
 
     /**
      * Main
      */
 
-    // Get the webparts
-    let _webparts = this.getWebParts();
-
-    // Parse the webparts
+    // Create the webpart to manage the webparts w/in the zone containing this webpart.
     let _selectedTabId = 0;
-    for (_selectedTabId = 0; _selectedTabId < _webparts.length; _selectedTabId++) {
-        // Break if this webpart has a title
-        if (_webparts[_selectedTabId].querySelector(".ms-webpart-titleText")) { break; }
-    }
+    let _webparts = [];
+    let _wp = WebPart({
+        element: props.element,
+        elementId: props.elementId,
+        onRenderDisplay: (wpInfo: IWebPartInfo) => {
+            // Set the webparts
+            _webparts = getWebParts(wpInfo);
 
-    // Parse the webparts
-    for (let i = 0; i < _webparts.length; i++) {
-        // Get the webpart
-        let webpart = document.querySelector("#" + _webparts[i].id) as HTMLDivElement;
-        if (webpart) {
-            // Update the visibility
-            webpart.style.display = i == _selectedTabId ? "" : "none";
+            // Parse the webparts
+            for (_selectedTabId = 0; _selectedTabId < _webparts.length; _selectedTabId++) {
+                // Break if this webpart has a title
+                if (_webparts[_selectedTabId].querySelector(".ms-webpart-titleText")) { break; }
+            }
+
+            // Parse the webparts
+            let tabs: Array<IPivotLink> = [];
+            for (let i = 0; i < _webparts.length; i++) {
+                // Add the tab
+                let wpTitle = _webparts[i].querySelector(".ms-webpart-titleText") as HTMLDivElement;
+                tabs.push({
+                    isSelected: i == 0,
+                    name: wpTitle.innerText,
+                    onClick: updateWebParts
+                });
+            }
+
+            // Update the webparts
+            updateWebParts();
+
+            // Render the tabs
+            let pivot = Pivot({
+                className: props.className,
+                el: wpInfo.el,
+                isLarge: props.isLarge,
+                isTabs: props.isTabs,
+                tabs
+            });
         }
-    }
+    });
+
+    // Return a webpart
+    return _wp;
 }

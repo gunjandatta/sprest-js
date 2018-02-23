@@ -1,4 +1,4 @@
-import { Helper, List, SPTypes, Types } from "gd-sprest";
+import { $REST, Helper, List, SPTypes, Types } from "gd-sprest";
 import { Fabric, ListFormPanel, WebParts } from "../build";
 import "../build/lib/css/fabric.min.css";
 import "../build/lib/css/fabric.components.min.css";
