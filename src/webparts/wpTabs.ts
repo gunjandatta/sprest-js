@@ -87,13 +87,38 @@ export const WPTabs = (props: IWPTabsProps) => {
     }
 
     // Method to update the visibility of the webparts
-    let updateWebParts = () => {
+    let updateWebParts = (ev?: Event) => {
+        let selectedTabId = 0;
+
+        // See if the event exists
+        if (ev) {
+            // Parse the webparts
+            for (let i = 0; i < _webparts.length; i++) {
+                // Get the webpart
+                let wpTitle = _webparts[i].querySelector(".ms-webpart-titleText") as HTMLDivElement;
+                if (wpTitle && wpTitle.innerText == (ev.currentTarget as HTMLElement).getAttribute("title")) {
+                    // Update the selected tab id
+                    selectedTabId = i;
+                    break;
+                }
+            }
+        }
+        // Else, default the selected tab to the first visible webpart
+        else {
+            // Parse the webparts
+            for (selectedTabId = 0; selectedTabId < _webparts.length; selectedTabId++) {
+                // Break if this webpart has a title
+                if (_webparts[selectedTabId].querySelector(".ms-webpart-titleText")) { break; }
+            }
+        }
+
+        // Parse the webparts
         for (let i = 0; i < _webparts.length; i++) {
             // Get the webpart
             let webpart = document.querySelector("#" + _webparts[i].id) as HTMLDivElement;
             if (webpart) {
                 // Update the visibility
-                webpart.style.display = i == _selectedTabId ? "" : "none";
+                webpart.style.display = i == selectedTabId ? "" : "none";
             }
         }
     }
@@ -102,21 +127,14 @@ export const WPTabs = (props: IWPTabsProps) => {
      * Main
      */
 
-    // Create the webpart to manage the webparts w/in the zone containing this webpart.
-    let _selectedTabId = 0;
     let _webparts = [];
+
+    // Return the webpart
     let _wp = WebPart({
-        element: props.element,
         elementId: props.elementId,
         onRenderDisplay: (wpInfo: IWebPartInfo) => {
             // Set the webparts
             _webparts = getWebParts(wpInfo);
-
-            // Parse the webparts
-            for (_selectedTabId = 0; _selectedTabId < _webparts.length; _selectedTabId++) {
-                // Break if this webpart has a title
-                if (_webparts[_selectedTabId].querySelector(".ms-webpart-titleText")) { break; }
-            }
 
             // Parse the webparts
             let tabs: Array<IPivotLink> = [];
@@ -130,9 +148,6 @@ export const WPTabs = (props: IWPTabsProps) => {
                 });
             }
 
-            // Update the webparts
-            updateWebParts();
-
             // Render the tabs
             let pivot = Pivot({
                 className: props.className,
@@ -141,9 +156,9 @@ export const WPTabs = (props: IWPTabsProps) => {
                 isTabs: props.isTabs,
                 tabs
             });
+
+            // Update the webparts
+            updateWebParts();
         }
     });
-
-    // Return a webpart
-    return _wp;
 }

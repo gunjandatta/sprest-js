@@ -123,3 +123,8 @@
 .ms-webpart-zone.wp-tabs {
     border-spacing: 0px;
 }
+
+/** Hide the titles of the webparts */
+.ms-webpart-zone.wp-tabs .ms-webpart-titleText {
+    display: none;
+}

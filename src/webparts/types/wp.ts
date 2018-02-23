@@ -44,12 +44,12 @@ export interface IWebPartObject {
  * WebPart Properties
  */
 export interface IWebPartProps {
-    /** The optional configuration element */
-    cfgElement?: HTMLElement;
-
     /** The optional configuration element id */
     cfgElementId?: string;
 
+    /** The class name. */
+    className?: string;
+    
     /** The optional help link properties */
     helpProps?: {
         /** The link title */
@@ -67,9 +67,6 @@ export interface IWebPartProps {
 
     /** The render event triggered when the page is in 'Edit' mode */
     onRenderEdit?: (wp: IWebPartInfo) => any;
-
-    /** The element to render the webpart to */
-    element?: HTMLElement;
 
     /** The target element id to render the webpart to */
     elementId?: string;

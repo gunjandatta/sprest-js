@@ -45,6 +45,9 @@ export const Panel = (props: IPanelProps): IPanel => {
         // Show the panel
         _panel = new fabric.Panel(props.el.querySelector(".ms-Panel"), content);
 
+        // Update the z-index of the panel host
+        _panel.panelHost.panelHost.style.zIndex = "1000";
+
         // See if we are hiding the close button
         if (props.showCloseButton == false) {
             // Remove the button
