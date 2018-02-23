@@ -14229,10 +14229,6 @@ exports.ListFormPanel = function (props) {
         for (var fieldName in _formInfo.fields) {
             var field = _formInfo.fields[fieldName];
             var value = _formInfo.item ? _formInfo.item[fieldName] : null;
-            // Skip invalid field types
-            if (field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Invalid) {
-                continue;
-            }
             // See if this is a read-only field
             if (field.ReadOnlyField) {
                 // Do not render in the new form
@@ -14268,6 +14264,10 @@ exports.ListFormPanel = function (props) {
                         }
                     }
                 }
+            }
+            else if (field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Invalid) {
+                // Skip this field
+                continue;
             }
             // Render the field
             _1.Field({
