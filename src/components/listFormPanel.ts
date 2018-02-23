@@ -186,13 +186,13 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                                     }
 
                                     // Parse the field values
-                                    let fieldValues = fieldValue || [];
+                                    let fieldValues:Array<IDropdownOption> = fieldValue || [];
                                     fieldValue = [];
                                     for (let j = 0; j < fieldValues.length; j++) {
                                         let termInfo = fieldValues[j];
 
                                         // Add the field value
-                                        fieldValue.push(-1 + ";#" + termInfo.Label + "|" + termInfo.TermGuid);
+                                        fieldValue.push(-1 + ";#" + termInfo.text + "|" + termInfo.value);
                                     }
 
                                     // Set the field value
