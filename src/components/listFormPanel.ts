@@ -162,6 +162,9 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                                         unknownUsers[fieldName] = unknownUsers[fieldName] || [];
                                         unknownUsers[fieldName].push(userValue.Key);
                                     }
+                                } else {
+                                    // Clear the field value
+                                    fieldValue = null;
                                 }
                             }
                             break;

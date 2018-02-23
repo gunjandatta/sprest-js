@@ -14081,6 +14081,10 @@ exports.ListFormPanel = function (props) {
                                         unknownUsers[fieldName].push(userValue.Key);
                                     }
                                 }
+                                else {
+                                    // Clear the field value
+                                    fieldValue = null;
+                                }
                             }
                             break;
                         // MMS
