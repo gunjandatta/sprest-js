@@ -178,7 +178,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                                     fieldName = (field.fieldInfo as IListFormMMSFieldInfo).valueField.InternalName;
 
                                     // Parse the field values
-                                    let fieldValues:Array<IDropdownOption> = fieldValue || [];
+                                    let fieldValues: Array<IDropdownOption> = fieldValue || [];
                                     fieldValue = [];
                                     for (let j = 0; j < fieldValues.length; j++) {
                                         let termInfo = fieldValues[j];
@@ -335,35 +335,10 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                 continue;
             }
 
-            // See if we are displaying the field
-            if (controlMode == SPTypes.ControlMode.Display) {
-                let el = _panel.get()._panel.querySelector("[data-field='" + fieldName + "']");
-                if (el) {
-                    // Render the field
-                    el.innerHTML = _formInfo.item.FieldValuesAsHtml[fieldName];
-                }
-                continue;
-            }
-
-            // See if this is a taxonomy field
-            if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
-                // See if we are displaying the field
-                if (controlMode == SPTypes.ControlMode.Display) {
-                    // Find the value field
-                    for (let valueFieldName in _formInfo.fields) {
-                        let valueField = _formInfo.fields[valueFieldName];
-                        if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
-                            // Update the value
-                            value = _formInfo.item ? _formInfo.item[valueFieldName] : null;
-                            break;
-                        }
-                    }
-                }
-            }
-            // Else, see if this is an invalid field type
-            else if (field.FieldTypeKind == SPTypes.FieldType.Invalid) {
-                // Skip this field
-                continue;
+            // See if this is an invalid field type
+            if (field.FieldTypeKind == SPTypes.FieldType.Invalid) {
+                // Ensure it's not a taxonomy field
+                if (!field.TypeAsString.startsWith("TaxonomyFieldType")) { continue; }
             }
 
             // Render the field

@@ -12783,10 +12783,10 @@ var _1 = __webpack_require__(7);
  */
 exports.Field = function (props) {
     // Method to generate the choice dropdown options
-    var getChoiceOptions = function (fieldinfo) {
+    var getChoiceOptions = function (fieldinfo, selectedValues) {
         var options = [];
         // Get the current value
-        var values = props.value || null;
+        var values = selectedValues || null;
         values = values && values.results ? values.results : [values];
         // Parse the options
         for (var i = 0; i < fieldinfo.choices.length; i++) {
@@ -12813,14 +12813,14 @@ exports.Field = function (props) {
         return options;
     };
     // Method to generate the lookup dropdown options
-    var getLookupOptions = function (fieldinfo, items) {
+    var getLookupOptions = function (fieldinfo, selectedValues) {
         var options = [];
         // Get the current value
         var values = props.value || null;
         values = values && values.results ? values.results : [values];
-        // Parse the options
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
+        // Parse the selected values
+        for (var i = 0; i < selectedValues.length; i++) {
+            var item = selectedValues[i];
             var isSelected = false;
             // See if this is a multi-lookup field
             if (fieldinfo.multi) {
@@ -12866,7 +12866,8 @@ exports.Field = function (props) {
         return values;
     };
     // Method to get the mms dropdown options
-    var getMMSOptions = function (term) {
+    var getMMSOptions = function (term, selectedValues) {
+        if (selectedValues === void 0) { selectedValues = []; }
         var options = [];
         // See if information exists
         if (term.info) {
@@ -12880,14 +12881,24 @@ exports.Field = function (props) {
         // Parse the terms
         for (var termName in term) {
             var child = term[termName];
+            var isSelected = false;
             // Skip the info and parent properties
             if (termName == "info" || termName == "parent") {
                 continue;
             }
             // Get the child options
-            var childOptions = getMMSOptions(child);
+            var childOptions = getMMSOptions(child, selectedValues);
+            // Parse the selected values
+            for (var i = 0; i < selectedValues.length; i++) {
+                // See if this item is selected
+                if (selectedValues[i] == child.info.id) {
+                    isSelected = true;
+                    break;
+                }
+            }
             // Add the option
             options.push({
+                isSelected: isSelected,
                 options: childOptions.length > 1 ? childOptions : null,
                 text: child.info.name,
                 type: __1.Fabric.DropdownTypes.Item,
@@ -13063,7 +13074,7 @@ exports.Field = function (props) {
                             el: props.el,
                             label: fieldInfo.title,
                             onChange: updateValue,
-                            options: getChoiceOptions(fieldInfo),
+                            options: getChoiceOptions(fieldInfo, value),
                             required: fieldInfo.required,
                             value: value
                         })
@@ -13119,7 +13130,7 @@ exports.Field = function (props) {
                             label: fieldInfo.title,
                             multi: true,
                             onChange: updateValue,
-                            options: getChoiceOptions(fieldInfo),
+                            options: getChoiceOptions(fieldInfo, value),
                             required: fieldInfo.required,
                             value: value ? value.results : value
                         })
@@ -13261,7 +13272,7 @@ exports.Field = function (props) {
                                         label: mmsInfo_1.title,
                                         multi: mmsInfo_1.multi,
                                         onChange: updateValue,
-                                        options: getMMSOptions(gd_sprest_1.Helper.Taxonomy.toObject(terms)),
+                                        options: getMMSOptions(gd_sprest_1.Helper.Taxonomy.toObject(terms), value),
                                         required: mmsInfo_1.required,
                                         value: value
                                     })
@@ -14238,33 +14249,12 @@ exports.ListFormPanel = function (props) {
                 // Do not render this field
                 continue;
             }
-            // See if we are displaying the field
-            if (controlMode == gd_sprest_1.SPTypes.ControlMode.Display) {
-                var el = _panel.get()._panel.querySelector("[data-field='" + fieldName + "']");
-                if (el) {
-                    // Render the field
-                    el.innerHTML = _formInfo.item.FieldValuesAsHtml[fieldName];
+            // See if this is an invalid field type
+            if (field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Invalid) {
+                // Ensure it's not a taxonomy field
+                if (!field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                    continue;
                 }
-                continue;
-            }
-            // See if this is a taxonomy field
-            if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
-                // See if we are displaying the field
-                if (controlMode == gd_sprest_1.SPTypes.ControlMode.Display) {
-                    // Find the value field
-                    for (var valueFieldName in _formInfo.fields) {
-                        var valueField = _formInfo.fields[valueFieldName];
-                        if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
-                            // Update the value
-                            value = _formInfo.item ? _formInfo.item[valueFieldName] : null;
-                            break;
-                        }
-                    }
-                }
-            }
-            else if (field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Invalid) {
-                // Skip this field
-                continue;
             }
             // Render the field
             _1.Field({

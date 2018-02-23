@@ -8,11 +8,11 @@ import { ListFormField, Types as FieldTypes } from ".";
  */
 export const Field = (props: IFieldProps): PromiseLike<IField> => {
     // Method to generate the choice dropdown options
-    let getChoiceOptions = (fieldinfo: FieldTypes.IListFormChoiceFieldInfo): Array<Fabric.Types.IDropdownOption> => {
+    let getChoiceOptions = (fieldinfo: FieldTypes.IListFormChoiceFieldInfo, selectedValues): Array<Fabric.Types.IDropdownOption> => {
         let options: Array<Fabric.Types.IDropdownOption> = [];
 
         // Get the current value
-        let values = props.value || null;
+        let values = selectedValues || null;
         values = values && values.results ? values.results : [values];
 
         // Parse the options
@@ -44,16 +44,16 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
     }
 
     // Method to generate the lookup dropdown options
-    let getLookupOptions = (fieldinfo: FieldTypes.IListFormLookupFieldInfo, items: Array<Types.SP.IListItemQueryResult>): Array<Fabric.Types.IDropdownOption> => {
+    let getLookupOptions = (fieldinfo: FieldTypes.IListFormLookupFieldInfo, selectedValues: Array<Types.SP.IListItemQueryResult>): Array<Fabric.Types.IDropdownOption> => {
         let options: Array<Fabric.Types.IDropdownOption> = [];
 
         // Get the current value
         let values = props.value || null;
         values = values && values.results ? values.results : [values];
 
-        // Parse the options
-        for (let i = 0; i < items.length; i++) {
-            let item = items[i];
+        // Parse the selected values
+        for (let i = 0; i < selectedValues.length; i++) {
+            let item = selectedValues[i];
             let isSelected = false;
 
             // See if this is a multi-lookup field
@@ -107,7 +107,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
     }
 
     // Method to get the mms dropdown options
-    let getMMSOptions = (term: Helper.Types.ITerm): Array<Fabric.Types.IDropdownOption> => {
+    let getMMSOptions = (term: Helper.Types.ITerm, selectedValues = []): Array<Fabric.Types.IDropdownOption> => {
         let options: Array<Fabric.Types.IDropdownOption> = [];
 
         // See if information exists
@@ -123,15 +123,26 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
         // Parse the terms
         for (let termName in term) {
             let child = term[termName];
+            let isSelected = false;
 
             // Skip the info and parent properties
             if (termName == "info" || termName == "parent") { continue; }
 
             // Get the child options
-            let childOptions = getMMSOptions(child);
+            let childOptions = getMMSOptions(child, selectedValues);
+
+            // Parse the selected values
+            for (let i = 0; i < selectedValues.length; i++) {
+                // See if this item is selected
+                if (selectedValues[i] == child.info.id) {
+                    isSelected = true;
+                    break;
+                }
+            }
 
             // Add the option
             options.push({
+                isSelected,
                 options: childOptions.length > 1 ? childOptions : null,
                 text: child.info.name,
                 type: Fabric.DropdownTypes.Item,
@@ -332,7 +343,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             el: props.el,
                             label: fieldInfo.title,
                             onChange: updateValue,
-                            options: getChoiceOptions(fieldInfo as FieldTypes.IListFormChoiceFieldInfo),
+                            options: getChoiceOptions(fieldInfo as FieldTypes.IListFormChoiceFieldInfo, value),
                             required: fieldInfo.required,
                             value
                         })
@@ -391,7 +402,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             label: fieldInfo.title,
                             multi: true,
                             onChange: updateValue,
-                            options: getChoiceOptions(fieldInfo as FieldTypes.IListFormChoiceFieldInfo),
+                            options: getChoiceOptions(fieldInfo as FieldTypes.IListFormChoiceFieldInfo, value),
                             required: fieldInfo.required,
                             value: value ? value.results : value
                         })
@@ -542,7 +553,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                                         label: mmsInfo.title,
                                         multi: mmsInfo.multi,
                                         onChange: updateValue,
-                                        options: getMMSOptions(Helper.Taxonomy.toObject(terms)),
+                                        options: getMMSOptions(Helper.Taxonomy.toObject(terms), value),
                                         required: mmsInfo.required,
                                         value
                                     })
