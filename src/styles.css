@@ -35,14 +35,24 @@
 }
 
 /**
+ * Error Label
+ */
+.ms-Label.error {
+    color: #a80000;
+    font-size: 14px;
+    font-weight: 600;
+    padding-left: 12px;
+}
+
+/**
  * Field
  */
 
 /** Label **/
 .field-label {
-    padding-left: 12px;
     font-size: 14px;
     font-weight: 600;
+    padding-left: 12px;
 }
 
 /**

@@ -12763,7 +12763,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    padding-left: 12px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: 85vh;\r\n}\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}", ""]);
+exports.push([module.i, "/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Error Label\r\n */\r\n.ms-Label.error {\r\n    color: #a80000;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: 85vh;\r\n}\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/** Update to display over the ribbon. */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}", ""]);
 
 // exports
 
@@ -13963,8 +13963,119 @@ var _1 = __webpack_require__(7);
  * Item Form
  */
 exports.ListFormPanel = function (props) {
+    /**
+     * Display Form
+     */
+    // Render the display form
+    var renderDisplayForm = function () {
+        // Get the list
+        _formInfo.list
+            .Items(_formInfo.item.Id)
+            .FieldValuesAsHtml()
+            .execute(function (formValues) {
+            // Parse the fields
+            for (var fieldName in _formInfo.fields) {
+                // Get the element
+                var el = _panel.get()._panel.querySelector("[data-field='" + fieldName + "']");
+                if (el) {
+                    var field = _formInfo.fields[fieldName];
+                    var html = formValues[fieldName] || formValues[fieldName.replace(/\_/g, "_x005f_")] || "";
+                    // Set the html for this field
+                    el.innerHTML = [
+                        '<div class="display-form">',
+                        fabric_1.Templates.Label({
+                            className: "field-label",
+                            description: field.Description,
+                            text: field.Title
+                        }),
+                        '<div class="field-value">' + html + '</div>',
+                        '</div>'
+                    ].join('\n');
+                }
+            }
+        });
+    };
+    /**
+     * Edit Form
+     */
     var _fields = [];
     var _formInfo = null;
+    // Render the edit form
+    var renderEditForm = function (controlMode) {
+        // Clear the fields
+        _fields = [];
+        // Parse the fields
+        for (var fieldName in _formInfo.fields) {
+            var field = _formInfo.fields[fieldName];
+            var value = _formInfo.item ? _formInfo.item[fieldName] : null;
+            // See if this is a read-only field
+            if (field.ReadOnlyField) {
+                // Do not render in the new form
+                if (controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
+                    continue;
+                }
+            }
+            // See if this is the hidden taxonomy field
+            if (field.Hidden && field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
+                // Do not render this field
+                continue;
+            }
+            // See if this is an invalid field type
+            if (field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Invalid) {
+                // Ensure it's not a taxonomy field
+                if (!field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                    continue;
+                }
+            }
+            // Render the field
+            _1.Field({
+                controlMode: controlMode,
+                el: _panel.get()._panel.querySelector("[data-field='" + fieldName + "']"),
+                fieldInfo: {
+                    field: field,
+                    listName: _formInfo.list.Title,
+                    name: fieldName,
+                },
+                value: value
+            }).then(function (field) {
+                // Add the field
+                _fields.push(field);
+            });
+        }
+    };
+    /**
+     * Render Form
+     */
+    // Render the form
+    var renderForm = function (controlMode) {
+        if (controlMode === void 0) { controlMode = gd_sprest_1.SPTypes.ControlMode.Display; }
+        // Parse the fields
+        var fields = "";
+        for (var fieldName in _formInfo.fields) {
+            // Append the div for this field
+            fields += "<div data-field='" + fieldName + "'></div>";
+        }
+        // Render the menu
+        renderMenu(controlMode);
+        // Update the panel content
+        _panel.updateContent([
+            '<div class="ms-ListForm">',
+            '<label class="ms-Label ms-fontColor-redDark form-error error"></label>',
+            fields,
+            '</div>'
+        ].join('\n'));
+        // See if this is a new/edit form
+        if (controlMode == gd_sprest_1.SPTypes.ControlMode.Edit || controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
+            // Render the edit form
+            renderEditForm(controlMode);
+        }
+        else {
+            // Render the display form
+            renderDisplayForm();
+        }
+        // Add the menu click event
+        addMenuClickEvents();
+    };
     // Add the menu click events
     var addMenuClickEvents = function () {
         var buttons = null;
@@ -14008,6 +14119,17 @@ exports.ListFormPanel = function (props) {
             buttons[i].addEventListener("click", function () {
                 var formValues = {};
                 var unknownUsers = {};
+                // Validate the form
+                if (validate() == false) {
+                    // Display an error message
+                    var errorMessage = _panel.get()._panel.querySelector(".form-error");
+                    if (errorMessage) {
+                        // Set the error message
+                        errorMessage.innerHTML = "The form contains errors.";
+                    }
+                    // Return
+                    return;
+                }
                 // Render a saving message
                 var content = _panel.updateContent(fabric_1.Templates.Spinner({ text: "Saving the item..." }));
                 fabric_1.Spinner({
@@ -14203,103 +14325,6 @@ exports.ListFormPanel = function (props) {
             });
         });
     };
-    // Render the display form
-    var renderDisplayForm = function () {
-        // Get the list
-        _formInfo.list
-            .Items(_formInfo.item.Id)
-            .FieldValuesAsHtml()
-            .execute(function (formValues) {
-            // Parse the fields
-            for (var fieldName in _formInfo.fields) {
-                // Get the element
-                var el = _panel.get()._panel.querySelector("[data-field='" + fieldName + "']");
-                if (el) {
-                    var field = _formInfo.fields[fieldName];
-                    var html = formValues[fieldName] || formValues[fieldName.replace(/\_/g, "_x005f_")] || "";
-                    // Set the html for this field
-                    el.innerHTML = [
-                        '<div class="display-form">',
-                        fabric_1.Templates.Label({
-                            className: "field-label",
-                            description: field.Description,
-                            text: field.Title
-                        }),
-                        '<div class="field-value">' + html + '</div>',
-                        '</div>'
-                    ].join('\n');
-                }
-            }
-        });
-    };
-    // Render the fields
-    var renderFields = function (controlMode) {
-        if (controlMode === void 0) { controlMode = gd_sprest_1.SPTypes.ControlMode.Display; }
-        // Clear the fields
-        _fields = [];
-        // See if we are displaying the fields
-        if (controlMode == gd_sprest_1.SPTypes.ControlMode.Display) {
-            // Render the display form
-            renderDisplayForm();
-            return;
-        }
-        // Parse the fields
-        for (var fieldName in _formInfo.fields) {
-            var field = _formInfo.fields[fieldName];
-            var value = _formInfo.item ? _formInfo.item[fieldName] : null;
-            // See if this is a read-only field
-            if (field.ReadOnlyField) {
-                // Do not render in the new form
-                if (controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
-                    continue;
-                }
-            }
-            // See if this is the hidden taxonomy field
-            if (field.Hidden && field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
-                // Do not render this field
-                continue;
-            }
-            // See if this is an invalid field type
-            if (field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Invalid) {
-                // Ensure it's not a taxonomy field
-                if (!field.TypeAsString.startsWith("TaxonomyFieldType")) {
-                    continue;
-                }
-            }
-            // Render the field
-            _1.Field({
-                controlMode: controlMode,
-                el: _panel.get()._panel.querySelector("[data-field='" + fieldName + "']"),
-                fieldInfo: {
-                    field: field,
-                    listName: _formInfo.list.Title,
-                    name: fieldName,
-                },
-                value: value
-            }).then(function (field) {
-                // Add the field
-                _fields.push(field);
-            });
-        }
-    };
-    // Render the form
-    var renderForm = function (controlMode) {
-        if (controlMode === void 0) { controlMode = gd_sprest_1.SPTypes.ControlMode.Display; }
-        // Parse the fields
-        var fields = "";
-        for (var fieldName in _formInfo.fields) {
-            // Append the div for this field
-            fields += "<div data-field='" + fieldName + "'></div>";
-        }
-        // Render the menu
-        renderMenu(controlMode);
-        // Update the panel content
-        _panel.updateContent('<div class="ms-ListForm">' + fields + '</div>');
-        // Render the fields
-        renderFields(controlMode);
-        // Add the menu click event
-        addMenuClickEvents();
-    };
     // Render the menu
     var renderMenu = function (controlMode) {
         // Determine the main commands
@@ -14364,6 +14389,24 @@ exports.ListFormPanel = function (props) {
             ]
         });
     };
+    // Method to validate the form
+    var validate = function () {
+        // Get the fields
+        var fields = _panel.get()._panel.querySelectorAll(".ms-ListForm > div");
+        for (var i = 0; i < fields.length; i++) {
+            // See if there is an error message
+            var errorMessage = fields[i].querySelector(".ms-Label.error");
+            if (errorMessage && errorMessage.innerText) {
+                // Form contains error
+                return false;
+            }
+        }
+        // Form is valid
+        return true;
+    };
+    /**
+     * Main
+     */
     // Render the panel
     props.el.innerHTML = fabric_1.Templates.Panel({
         className: props.className,
