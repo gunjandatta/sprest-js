@@ -17378,13 +17378,13 @@ exports.ListFormPanel = function (props) {
                                             fieldName = valueFieldName;
                                         }
                                     }
-                                    // Parse the results
-                                    var results = fieldValue ? fieldValue.results : [];
+                                    // Parse the field values
+                                    var fieldValues = fieldValue || [];
                                     fieldValue = [];
-                                    for (var j = 0; j < results.length; j++) {
-                                        var result = results[j];
+                                    for (var j = 0; j < fieldValues.length; j++) {
+                                        var termInfo = fieldValues[j];
                                         // Add the field value
-                                        fieldValue.push(-1 + ";#" + result.Label + "|" + result.TermGuid);
+                                        fieldValue.push(-1 + ";#" + termInfo.Label + "|" + termInfo.TermGuid);
                                     }
                                     // Set the field value
                                     fieldValue = {

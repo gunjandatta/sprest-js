@@ -185,14 +185,14 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                                         }
                                     }
 
-                                    // Parse the results
-                                    let results = fieldValue ? fieldValue.results : [];
+                                    // Parse the field values
+                                    let fieldValues = fieldValue || [];
                                     fieldValue = [];
-                                    for (let j = 0; j < results.length; j++) {
-                                        let result = results[j];
+                                    for (let j = 0; j < fieldValues.length; j++) {
+                                        let termInfo = fieldValues[j];
 
                                         // Add the field value
-                                        fieldValue.push(-1 + ";#" + result.Label + "|" + result.TermGuid);
+                                        fieldValue.push(-1 + ";#" + termInfo.Label + "|" + termInfo.TermGuid);
                                     }
 
                                     // Set the field value
