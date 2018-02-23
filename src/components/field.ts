@@ -125,6 +125,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
 
             // Add the heading
             options.push({
+                isSelected,
                 text: term.info.name,
                 type: Fabric.DropdownTypes.Header,
                 value: term.info.id

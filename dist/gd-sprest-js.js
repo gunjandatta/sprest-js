@@ -16208,6 +16208,7 @@ exports.Field = function (props) {
             }
             // Add the heading
             options.push({
+                isSelected: isSelected,
                 text: term.info.name,
                 type: __1.Fabric.DropdownTypes.Header,
                 value: term.info.id
