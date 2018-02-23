@@ -14,7 +14,6 @@ export const Spinner = (props: ISpinnerProps): ISpinner => {
 
     // Ensure the element exists
     if (props.el) {
-
         // Render a spinner
         props.el.innerHTML = Templates.Spinner(props);
 

@@ -20,6 +20,7 @@ export * from "./listitem";
 export * from "./numberfield";
 export * from "./panel";
 export * from "./peoplepicker";
+export * from "./pivot";
 export * from "./spinner";
 export * from "./textfield";
 export * from "./toggle";
