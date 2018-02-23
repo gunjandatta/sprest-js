@@ -94,9 +94,9 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                                 fieldValue = { results: [] };
 
                                 // Parse the options
-                                for (let i = 0; i < values.length; i++) {
+                                for (let j = 0; j < values.length; j++) {
                                     // Add the value
-                                    fieldValue.results.push(values[i].value);
+                                    fieldValue.results.push(values[j].value);
                                 }
                             } else {
                                 // Update the field value
@@ -110,9 +110,9 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                             fieldValue = { results: [] };
 
                             // Parse the options
-                            for (let i = 0; i < options.length; i++) {
+                            for (let j = 0; j < options.length; j++) {
                                 // Add the option
-                                fieldValue.results.push(options[i].value);
+                                fieldValue.results.push(options[j].value);
                             }
                             break;
 
@@ -136,8 +136,8 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                                 fieldValue = { results: [] };
 
                                 // Parse the options
-                                for (let i = 0; i < values.length; i++) {
-                                    let userValue = values[i] as Types.SP.IPeoplePickerUser;
+                                for (let j = 0; j < values.length; j++) {
+                                    let userValue = values[j] as Types.SP.IPeoplePickerUser;
                                     if (userValue && userValue.EntityData) {
                                         // Ensure the user or group id exists
                                         if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
@@ -185,11 +185,20 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                                         }
                                     }
 
-                                    // Update the value
-                                    // TO DO - This will need to be updated
+                                    // Parse the results
+                                    let results = fieldValue ? fieldValue.results : [];
+                                    fieldValue = [];
+                                    for (let j = 0; j < results.length; j++) {
+                                        let result = results[j];
+
+                                        // Add the field value
+                                        fieldValue.push(-1 + ";#" + result.Label + "|" + result.TermGuid);
+                                    }
+
+                                    // Set the field value
                                     fieldValue = {
                                         __metadata: { type: "Collection(SP.Taxonomy.TaxonomyFieldValue)" },
-                                        results: fieldValue ? fieldValue.join(";#") : ""
+                                        results: fieldValue.join(";#")
                                     };
                                 } else {
                                     // Update the value

@@ -14014,9 +14014,9 @@ exports.ListFormPanel = function (props) {
                                 var values = fieldValue || [];
                                 fieldValue = { results: [] };
                                 // Parse the options
-                                for (var i_2 = 0; i_2 < values.length; i_2++) {
+                                for (var j = 0; j < values.length; j++) {
                                     // Add the value
-                                    fieldValue.results.push(values[i_2].value);
+                                    fieldValue.results.push(values[j].value);
                                 }
                             }
                             else {
@@ -14029,9 +14029,9 @@ exports.ListFormPanel = function (props) {
                             var options = fieldValue || [];
                             fieldValue = { results: [] };
                             // Parse the options
-                            for (var i_3 = 0; i_3 < options.length; i_3++) {
+                            for (var j = 0; j < options.length; j++) {
                                 // Add the option
-                                fieldValue.results.push(options[i_3].value);
+                                fieldValue.results.push(options[j].value);
                             }
                             break;
                         // URL
@@ -14051,8 +14051,8 @@ exports.ListFormPanel = function (props) {
                                 var values = fieldValue || [];
                                 fieldValue = { results: [] };
                                 // Parse the options
-                                for (var i_4 = 0; i_4 < values.length; i_4++) {
-                                    var userValue = values[i_4];
+                                for (var j = 0; j < values.length; j++) {
+                                    var userValue = values[j];
                                     if (userValue && userValue.EntityData) {
                                         // Ensure the user or group id exists
                                         if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
@@ -14101,11 +14101,18 @@ exports.ListFormPanel = function (props) {
                                             fieldName = valueFieldName;
                                         }
                                     }
-                                    // Update the value
-                                    // TO DO - This will need to be updated
+                                    // Parse the results
+                                    var results = fieldValue ? fieldValue.results : [];
+                                    fieldValue = [];
+                                    for (var j = 0; j < results.length; j++) {
+                                        var result = results[j];
+                                        // Add the field value
+                                        fieldValue.push(-1 + ";#" + result.Label + "|" + result.TermGuid);
+                                    }
+                                    // Set the field value
                                     fieldValue = {
                                         __metadata: { type: "Collection(SP.Taxonomy.TaxonomyFieldValue)" },
-                                        results: fieldValue ? fieldValue.join(";#") : ""
+                                        results: fieldValue.join(";#")
                                     };
                                 }
                                 else {
