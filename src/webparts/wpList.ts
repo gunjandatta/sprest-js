@@ -32,7 +32,7 @@ export const WPList = (props: IWPListProps) => {
         // See if items exist
         if (_items && _items.length > 0) {
             // Call the render event
-            props.onRenderItems ? props.onRenderItems(_items) : null;
+            props.onRenderItems ? props.onRenderItems(_wpInfo, _items) : null;
             return;
         }
 
@@ -59,7 +59,7 @@ export const WPList = (props: IWPListProps) => {
                     // Execute the request
                     .execute(items => {
                         // Render the items
-                        props.onRenderItems ? props.onRenderItems(items.results) : null;
+                        props.onRenderItems ? props.onRenderItems(_wpInfo, items.results) : null;
                     });
             });
         } else {
@@ -72,7 +72,7 @@ export const WPList = (props: IWPListProps) => {
                 // Execute the request
                 .execute(items => {
                     // Render the items
-                    props.onRenderItems ? props.onRenderItems(items.results) : null;
+                    props.onRenderItems ? props.onRenderItems(_wpInfo, items.results) : null;
                 });
         }
     }
@@ -90,7 +90,7 @@ export const WPList = (props: IWPListProps) => {
             // Execute the request
             .execute((items) => {
                 // Render the items
-                props.onRenderItems ? props.onRenderItems(items.results) : null;
+                props.onRenderItems ? props.onRenderItems(_wpInfo, items.results) : null;
             });
     }
 
@@ -152,6 +152,9 @@ export const WPList = (props: IWPListProps) => {
                     // Save the lists
                     _lists = lists.results;
 
+                    // Call the 
+                    _lists = props.onListsRendering ? props.onListsRendering(_wpInfo, _lists) : _lists;
+
                     // Render the dropdown
                     renderDropdown();
                 });
@@ -165,8 +168,10 @@ export const WPList = (props: IWPListProps) => {
     let renderConfiguration = () => {
         // Render the panel contents
         _panelContents = _panel.updateContent([
+            (props.onRenderHeader ? props.onRenderHeader(_wpInfo) : null) || "",
             '<div></div>',
             '<div></div>',
+            (props.onRenderFooter ? props.onRenderFooter(_wpInfo) : null) || "",
             '<div></div>',
             '<div></div>'
         ].join('\n'));
@@ -201,12 +206,18 @@ export const WPList = (props: IWPListProps) => {
             onClick: () => {
                 let selectedList = _ddl.getValue() as Fabric.Types.IDropdownOption;
 
-                // Save the configuration
-                WPCfg.saveConfiguration(_wpInfo.wpId, props.cfgElementId, {
+                // Get the configuration
+                let cfg = {
                     ListName: selectedList ? selectedList.text : "",
                     WebPartId: _wpInfo.wpId,
                     WebUrl: tb.getValue()
-                } as IWPListCfg);
+                } as IWPListCfg;
+
+                // Call the save event
+                cfg = props.onSave ? props.onSave(cfg) : cfg;
+
+                // Save the configuration
+                WPCfg.saveConfiguration(_wpInfo.wpId, props.cfgElementId, cfg);
             }
         });
 
@@ -231,11 +242,27 @@ export const WPList = (props: IWPListProps) => {
         _ddl = Fabric.Dropdown({
             el: _panelContents.children[1],
             options,
-            value: !_init && _wpInfo.cfg ? _wpInfo.cfg.ListName : null
+            value: !_init && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
+            onChange: (option: Fabric.Types.IDropdownOption) => {
+                // Parse the list
+                for (let i = 0; i < _lists.length; i++) {
+                    // See if this is the target list
+                    if (_lists[i].Title == option.text) {
+                        // Call the change event
+                        props.onListChanged ? props.onListChanged(_wpInfo, _lists[i]) : null;
+                    }
+                }
+            }
         });
 
-        // Set the intialization flag
-        _init = true;
+        // See if we haven't initialized the dropdown
+        if (!_init) {
+            // Call the post render event
+            props.onPostRender ? props.onPostRender(_wpInfo, _lists) : null;
+
+            // Set the intialization flag
+            _init = true;
+        }
     }
 
     /**

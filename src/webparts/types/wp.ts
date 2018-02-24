@@ -49,7 +49,7 @@ export interface IWebPartProps {
 
     /** The class name. */
     className?: string;
-    
+
     /** The optional help link properties */
     helpProps?: {
         /** The link title */
@@ -60,7 +60,7 @@ export interface IWebPartProps {
     };
 
     /** The post render event */
-    onPostRender?: (wp: IWebPartInfo) => void;
+    onPostRender?: (wp: IWebPartInfo, ...args) => void;
 
     /** The render event triggered when the page is in 'Display' mode */
     onRenderDisplay?: (wp: IWebPartInfo) => any;
