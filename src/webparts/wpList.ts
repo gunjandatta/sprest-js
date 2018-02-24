@@ -38,13 +38,13 @@ export const WPList = (props: IWPListProps) => {
 
         // See if we are using the CAML query
         let cfg: IWPListCfg = _wpInfo.cfg || {};
-        if (this._caml) { loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery); }
+        if (props.camlQuery || props.onExecutingCAMLQuery) { loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery); }
         // Else, load using the ODATA query
         else { loadODATA(cfg.WebUrl, cfg.ListName, props.odataQuery); }
     }
 
     // Method to load the items using a CAML query
-    let loadCAML = (webUrl: string, listName: string, caml: string) => {
+    let loadCAML = (webUrl: string, listName: string, caml: string = "") => {
         // Call the load caml query event
         caml = props.onExecutingCAMLQuery ? props.onExecutingCAMLQuery(_wpInfo, caml) : null;
 
@@ -81,7 +81,7 @@ export const WPList = (props: IWPListProps) => {
     }
 
     // Method to load the items using an ODATA query
-    let loadODATA = (webUrl: string, listName: string, query: Types.SP.ODataQuery) => {
+    let loadODATA = (webUrl: string, listName: string, query: Types.SP.ODataQuery = {}) => {
         // Call the load caml query event
         query = props.onExecutingODATAQuery ? props.onExecutingODATAQuery(_wpInfo, query) : null;
 

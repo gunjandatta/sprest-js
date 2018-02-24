@@ -18136,7 +18136,6 @@ exports.WPCfg = {
 "use strict";
 
 
-var _this = undefined;
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var __1 = __webpack_require__(6);
@@ -18170,7 +18169,7 @@ exports.WPList = function (props) {
         }
         // See if we are using the CAML query
         var cfg = _wpInfo.cfg || {};
-        if (_this._caml) {
+        if (props.camlQuery || props.onExecutingCAMLQuery) {
             loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery);
         } else {
             loadODATA(cfg.WebUrl, cfg.ListName, props.odataQuery);
@@ -18178,6 +18177,9 @@ exports.WPList = function (props) {
     };
     // Method to load the items using a CAML query
     var loadCAML = function loadCAML(webUrl, listName, caml) {
+        if (caml === void 0) {
+            caml = "";
+        }
         // Call the load caml query event
         caml = props.onExecutingCAMLQuery ? props.onExecutingCAMLQuery(_wpInfo, caml) : null;
         // See if we are targeting a different web
@@ -18201,6 +18203,9 @@ exports.WPList = function (props) {
     };
     // Method to load the items using an ODATA query
     var loadODATA = function loadODATA(webUrl, listName, query) {
+        if (query === void 0) {
+            query = {};
+        }
         // Call the load caml query event
         query = props.onExecutingODATAQuery ? props.onExecutingODATAQuery(_wpInfo, query) : null;
         // Get the web
