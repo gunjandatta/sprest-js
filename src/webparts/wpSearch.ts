@@ -10,53 +10,50 @@ export const WPSearch = (props: IWPSearchProps) => {
     let ddlFields: Fabric.Types.IDropdown = null;
 
     // Method to update the 
-    let listChanged = (wpInfo: IWPSearchInfo, list: Types.SP.IListResult) => {
-        // Get the fields
-        list.Fields().execute(fields => {
-            let options: Array<Fabric.Types.IDropdownOption> = [];
+    let listChanged = (wpInfo: IWPSearchInfo, list: Types.SP.IListQueryResult) => {
+        let options: Array<Fabric.Types.IDropdownOption> = [];
 
-            // Parse the fields
-            for (let i = 0; i < fields.results.length; i++) {
-                let addField = false;
-                let field = fields.results[i];
+        // Parse the fields
+        for (let i = 0; i < list.Fields.results.length; i++) {
+            let addField = false;
+            let field = list.Fields.results[i];
 
-                // Add the field, based on the type
-                switch (field.FieldTypeKind) {
-                    // Searchable Fields
-                    case SPTypes.FieldType.Choice:
-                    case SPTypes.FieldType.MultiChoice:
-                    case SPTypes.FieldType.Lookup:
-                    case SPTypes.FieldType.Text:
-                    case SPTypes.FieldType.URL:
-                    case SPTypes.FieldType.User:
-                        addField = true;
-                        break;
-                    default:
-                        // Allow managed metadata fields
-                        addField = field.TypeAsString.startsWith("TaxonomyFieldType");
-                        break;
-                }
-
-                // See if we are adding the field
-                if (addField) {
-                    options.push({
-                        text: field.Title + " [" + field.InternalName + "]",
-                        value: field.InternalName
-                    });
-                }
+            // Add the field, based on the type
+            switch (field.FieldTypeKind) {
+                // Searchable Fields
+                case SPTypes.FieldType.Choice:
+                case SPTypes.FieldType.MultiChoice:
+                case SPTypes.FieldType.Lookup:
+                case SPTypes.FieldType.Text:
+                case SPTypes.FieldType.URL:
+                case SPTypes.FieldType.User:
+                    addField = true;
+                    break;
+                default:
+                    // Allow managed metadata fields
+                    addField = field.TypeAsString.startsWith("TaxonomyFieldType");
+                    break;
             }
 
-            // Render the field dropdown
-            ddlFields = Fabric.Dropdown({
-                el: wpInfo.el.querySelector("#field-cfg"),
-                multi: true,
-                options
-            });
+            // See if we are adding the field
+            if (addField) {
+                options.push({
+                    text: field.Title + " [" + field.InternalName + "]",
+                    value: field.InternalName
+                });
+            }
+        }
+
+        // Render the field dropdown
+        ddlFields = Fabric.Dropdown({
+            el: wpInfo.el.querySelector("#field-cfg"),
+            multi: true,
+            options
         });
     }
 
     // Method to render the footer
-    let renderFooter = (wpInfo: IWPSearchInfo, lists: Array<Types.SP.IListResult>) => {
+    let renderFooter = (wpInfo: IWPSearchInfo, lists: Array<Types.SP.IListQueryResult>) => {
         // Render a field dropdown if a list exists
         let footer = document.querySelector("#field-cfg");
         if (footer && wpInfo.cfg && wpInfo.cfg.ListName) {
@@ -106,5 +103,5 @@ export const WPSearch = (props: IWPSearchProps) => {
         onRenderHeader: props.onRenderHeader,
         onRenderItems: props.onRenderItems,
         onSave: saveConfiguration
-    })
+    });
 }

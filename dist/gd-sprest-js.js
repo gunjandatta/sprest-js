@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -191,7 +191,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ***************************************************************************************************/
-var Helper = __webpack_require__(6);
+var Helper = __webpack_require__(7);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(5);
 exports.SPTypes = mapper_1.SPTypes;
@@ -253,6 +253,42 @@ exports.Types = Types;
 
 "use strict";
 
+
+function __export(m) {
+    for (var p in m) {
+        if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+    }
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+// Fabric
+var Fabric = __webpack_require__(1);
+exports.Fabric = Fabric;
+// Include the styles
+__webpack_require__(114);
+// Components
+var Components = __webpack_require__(8);
+__export(__webpack_require__(8));
+// WebParts
+var WebParts = __webpack_require__(9);
+exports.WebParts = WebParts;
+// Wait for the core library to be loaded
+SP ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+    // Get the global variable
+    var $REST = window["$REST"];
+    if ($REST) {
+        // Add the JS library
+        $REST["JS"] = { Components: Components, Fabric: Fabric, WebParts: WebParts };
+    }
+    // Alert other scripts this library is loaded
+    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest-js.js");
+}, "gd-sprest.js") : null;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -277,7 +313,7 @@ exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -297,7 +333,7 @@ var Types = __webpack_require__(123);
 exports.Types = Types;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -309,31 +345,14 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-// Fabric
-var Fabric = __webpack_require__(1);
-exports.Fabric = Fabric;
-// Include the styles
-__webpack_require__(114);
-// Components
-var Components = __webpack_require__(7);
-__export(__webpack_require__(7));
-// WebParts
-var WebParts = __webpack_require__(10);
-exports.WebParts = WebParts;
-// Wait for the core library to be loaded
-SP ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
-    // Get the global variable
-    var $REST = window["$REST"];
-    if ($REST) {
-        // Add the JS library
-        $REST["JS"] = { Components: Components, Fabric: Fabric, WebParts: WebParts };
-    }
-    // Alert other scripts this library is loaded
-    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest-js.js");
-}, "gd-sprest.js") : null;
+__export(__webpack_require__(124));
+__export(__webpack_require__(125));
+__export(__webpack_require__(126));
+__export(__webpack_require__(127));
+__export(__webpack_require__(128));
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2561,24 +2580,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)(module)))
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function __export(m) {
-    for (var p in m) {
-        if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-    }
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(124));
-__export(__webpack_require__(125));
-__export(__webpack_require__(126));
-__export(__webpack_require__(127));
-
-/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2637,7 +2638,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(79));
 var lib_1 = __webpack_require__(2);
-var _1 = __webpack_require__(6);
+var _1 = __webpack_require__(7);
 /**
  * SharePoint Configuration
  */
@@ -4181,7 +4182,7 @@ __export(__webpack_require__(16));
 "use strict";
 
 
-var $ = __webpack_require__(9);
+var $ = __webpack_require__(10);
 __webpack_require__(19);
 //Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
 /**
@@ -5340,7 +5341,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_LOCA
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 !function (a) {
-   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(9)], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
+   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(10)], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
 				__WEBPACK_LOCAL_MODULE_0__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__)) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? module.exports = a(require("./jquery.js")) : this.Picker = a(jQuery);
 }(function (a) {
@@ -5487,7 +5488,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     }, a.fn[c].defaults = d.defaults;
   }, b;
 }), function (a) {
-   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__WEBPACK_LOCAL_MODULE_0__, __webpack_require__(9)], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
+   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__WEBPACK_LOCAL_MODULE_0__, __webpack_require__(10)], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? module.exports = a(require("./picker.js"), require("./jquery.js")) : a(Picker, jQuery);
@@ -14701,7 +14702,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(6);
+var helper_1 = __webpack_require__(7);
 exports.Helper = helper_1.Types;
 var mapper_1 = __webpack_require__(5);
 exports.SP = mapper_1.Types;
@@ -14716,7 +14717,7 @@ exports.Util = utils_1.Types;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Helper = __webpack_require__(6);
+var Helper = __webpack_require__(7);
 var Lib = __webpack_require__(2);
 var Mapper = __webpack_require__(5);
 /**
@@ -15496,7 +15497,7 @@ exports = module.exports = __webpack_require__(116)(false);
 
 
 // module
-exports.push([module.i, "/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Form Error\r\n */\r\n.ms-Label.form-error {\r\n    color: #a80000;\r\n    font-size: 16px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner.ms-Panel-main {\r\n    height: 85vh;\r\n}\r\n\r\n/** Update to display over the ribbon & panel. */\r\n.ms-Panel-contentInner.ms-Panel-main .ms-ContextualHost.is-open {\r\n    z-index: 1010;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}\r\n\r\n/**\r\n * WebPart Tabs\r\n */\r\n\r\n/** Remove the spacing around the webparts */\r\n.ms-webpart-zone.wp-tabs {\r\n    border-spacing: 0px;\r\n}\r\n\r\n/** Hide the titles of the webparts */\r\n.ms-webpart-zone.wp-tabs .ms-webpart-titleText {\r\n    display: none;\r\n}", ""]);
+exports.push([module.i, "/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Form Error\r\n */\r\n.ms-Label.form-error {\r\n    color: #a80000;\r\n    font-size: 16px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner.ms-Panel-main {\r\n    height: 85vh;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}\r\n\r\n/**\r\n * WebPart Tabs\r\n */\r\n\r\n/** Remove the spacing around the webparts */\r\n.ms-webpart-zone.wp-tabs {\r\n    border-spacing: 0px;\r\n}\r\n\r\n/** Hide the titles of the webparts */\r\n.ms-webpart-zone.wp-tabs .ms-webpart-titleText {\r\n    display: none;\r\n}", ""]);
 
 // exports
 
@@ -16069,8 +16070,8 @@ module.exports = function (css) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var __1 = __webpack_require__(8);
-var _1 = __webpack_require__(7);
+var __1 = __webpack_require__(6);
+var _1 = __webpack_require__(8);
 /**
  * Field
  */
@@ -17210,7 +17211,7 @@ exports.ListFormField = _ListFormField;
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var fabric_1 = __webpack_require__(1);
-var _1 = __webpack_require__(7);
+var _1 = __webpack_require__(8);
 /**
  * Item Form
  */
@@ -18138,8 +18139,8 @@ exports.WPCfg = {
 var _this = undefined;
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var __1 = __webpack_require__(8);
-var _1 = __webpack_require__(10);
+var __1 = __webpack_require__(6);
+var _1 = __webpack_require__(9);
 /**
  * List WebPart
  */
@@ -18242,8 +18243,12 @@ exports.WPList = function (props) {
         });
         // See if no data has been loaded
         if (_lists == null) {
+            // Set the query
+            var query = props.camlQuery || {};
+            query.Expand = query.Expand || [];
+            query.Expand.push("Fields");
             // Get the web
-            new gd_sprest_1.Web(webUrl).Lists().execute(function (lists) {
+            new gd_sprest_1.Web(webUrl).Lists().query(query).execute(function (lists) {
                 // Save the lists
                 _lists = lists.results;
                 // Call the 
@@ -18356,8 +18361,113 @@ exports.WPList = function (props) {
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var gd_sprest_1 = __webpack_require__(3);
+var __1 = __webpack_require__(6);
+var _1 = __webpack_require__(9);
+/**
+ * Search WebPart
+ */
+exports.WPSearch = function (props) {
+    var ddlFields = null;
+    // Method to update the 
+    var listChanged = function listChanged(wpInfo, list) {
+        var options = [];
+        // Parse the fields
+        for (var i = 0; i < list.Fields.results.length; i++) {
+            var addField = false;
+            var field = list.Fields.results[i];
+            // Add the field, based on the type
+            switch (field.FieldTypeKind) {
+                // Searchable Fields
+                case gd_sprest_1.SPTypes.FieldType.Choice:
+                case gd_sprest_1.SPTypes.FieldType.MultiChoice:
+                case gd_sprest_1.SPTypes.FieldType.Lookup:
+                case gd_sprest_1.SPTypes.FieldType.Text:
+                case gd_sprest_1.SPTypes.FieldType.URL:
+                case gd_sprest_1.SPTypes.FieldType.User:
+                    addField = true;
+                    break;
+                default:
+                    // Allow managed metadata fields
+                    addField = field.TypeAsString.startsWith("TaxonomyFieldType");
+                    break;
+            }
+            // See if we are adding the field
+            if (addField) {
+                options.push({
+                    text: field.Title + " [" + field.InternalName + "]",
+                    value: field.InternalName
+                });
+            }
+        }
+        // Render the field dropdown
+        ddlFields = __1.Fabric.Dropdown({
+            el: wpInfo.el.querySelector("#field-cfg"),
+            multi: true,
+            options: options
+        });
+    };
+    // Method to render the footer
+    var renderFooter = function renderFooter(wpInfo, lists) {
+        // Render a field dropdown if a list exists
+        var footer = document.querySelector("#field-cfg");
+        if (footer && wpInfo.cfg && wpInfo.cfg.ListName) {
+            // Render a spinner
+            __1.Fabric.Spinner({
+                el: footer,
+                text: "Loading the fields..."
+            });
+            // Parse the lists
+            for (var i = 0; i < lists.length; i++) {
+                var list = lists[i];
+                // See if this is the target list
+                if (list.Title == wpInfo.cfg.ListName) {
+                    // Load the fields
+                    listChanged(wpInfo, list);
+                    break;
+                }
+            }
+        }
+    };
+    // Method to save the configuration
+    var saveConfiguration = function saveConfiguration(cfg) {
+        // Set the fields configuraiton
+        cfg.Fields = ddlFields ? ddlFields.getValue() : [];
+        // Return the configuration
+        return cfg;
+    };
+    // Return the webpart
+    return _1.WPList({
+        camlQuery: props.camlQuery,
+        cfgElementId: props.cfgElementId,
+        className: props.className,
+        elementId: props.elementId,
+        helpProps: props.helpProps,
+        odataQuery: props.odataQuery,
+        onListChanged: listChanged,
+        onListsRendering: props.onListsRendering,
+        onPostRender: renderFooter,
+        onRenderDisplay: props.onRenderDisplay,
+        onRenderEdit: props.onRenderEdit,
+        onRenderFooter: function onRenderFooter() {
+            return "<div id='field-cfg'></div>";
+        },
+        onRenderHeader: props.onRenderHeader,
+        onRenderItems: props.onRenderItems,
+        onSave: saveConfiguration
+    });
+};
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
 var fabric_1 = __webpack_require__(1);
-var _1 = __webpack_require__(10);
+var _1 = __webpack_require__(9);
 /**
  * Web Part Tabs
  */

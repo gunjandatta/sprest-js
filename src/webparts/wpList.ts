@@ -133,7 +133,7 @@ export const WPList = (props: IWPListProps) => {
     }
 
     // Method to load the lists
-    let _lists: Array<Types.SP.IListResult> = null;
+    let _lists: Array<Types.SP.IListQueryResult> = null;
     let loadLists = (webUrl?: string) => {
         // Render a loading message
         Fabric.Spinner({
@@ -143,10 +143,17 @@ export const WPList = (props: IWPListProps) => {
 
         // See if no data has been loaded
         if (_lists == null) {
+            // Set the query
+            let query: Types.SP.ODataQuery = props.camlQuery || {};
+            query.Expand = query.Expand || [];
+            query.Expand.push("Fields");
+
             // Get the web
             (new Web(webUrl))
                 // Get the lists
                 .Lists()
+                // Include the fields
+                .query(query)
                 // Execute the request
                 .execute(lists => {
                     // Save the lists

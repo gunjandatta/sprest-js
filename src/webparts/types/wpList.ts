@@ -30,17 +30,20 @@ export interface IWPListProps extends IWebPartProps {
     /** The caml query. */
     camlQuery?: string;
 
+    /** The odata list query. */
+    listQuery?: Types.SP.ODataQuery;
+
     /** The odata query. */
     odataQuery?: Types.SP.ODataQuery;
 
     /** The list changed event. */
-    onListChanged?: (wpInfo: IWPListInfo, list: Types.SP.IListResult) => void;
+    onListChanged?: (wpInfo: IWPListInfo, list: Types.SP.IListQueryResult) => void;
 
     /** The lists rendering event. */
-    onListsRendering?: (wpInfo: IWPListInfo, lists: Array<Types.SP.IListResult>) => Array<Types.SP.IListResult>;
+    onListsRendering?: (wpInfo: IWPListInfo, lists: Array<Types.SP.IListQueryResult>) => Array<Types.SP.IListQueryResult>;
 
     /** The on post render event. */
-    onPostRender?: (wpInfo: IWPListInfo, lists: Array<Types.SP.IListResult>) => void;
+    onPostRender?: (wpInfo: IWPListInfo, lists: Array<Types.SP.IListQueryResult>) => void;
 
     /** The on render footer event. */
     onRenderFooter?: (wpInfo: IWPListInfo) => void;
