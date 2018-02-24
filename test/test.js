@@ -14950,6 +14950,8 @@ exports.WPList = function (props) {
     };
     // Method to load the items using a CAML query
     var loadCAML = function (webUrl, listName, caml) {
+        // Call the load caml query event
+        caml = props.onExecutingCAMLQuery ? props.onExecutingCAMLQuery(_wpInfo, caml) : null;
         // See if we are targeting a different web
         if (webUrl) {
             // Get the context information for the destination web
@@ -14978,6 +14980,8 @@ exports.WPList = function (props) {
     };
     // Method to load the items using an ODATA query
     var loadODATA = function (webUrl, listName, query) {
+        // Call the load caml query event
+        query = props.onExecutingODATAQuery ? props.onExecutingODATAQuery(_wpInfo, query) : null;
         // Get the web
         (new gd_sprest_1.Web(webUrl))
             .Lists(listName)

@@ -36,6 +36,12 @@ export interface IWPListProps extends IWebPartProps {
     /** The odata query. */
     odataQuery?: Types.SP.ODataQuery;
 
+    /** The executing caml query event. */
+    onExecutingCAMLQuery?: (wpInfo: IWPListInfo, caml: string) => string;
+
+    /** The executing odata query event. */
+    onExecutingODATAQuery?: (wpInfo: IWPListInfo, odata: Types.SP.ODataQuery) => Types.SP.ODataQuery;
+
     /** The list changed event. */
     onListChanged?: (wpInfo: IWPListInfo, list: Types.SP.IListQueryResult) => void;
 

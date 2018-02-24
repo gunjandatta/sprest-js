@@ -45,6 +45,9 @@ export const WPList = (props: IWPListProps) => {
 
     // Method to load the items using a CAML query
     let loadCAML = (webUrl: string, listName: string, caml: string) => {
+        // Call the load caml query event
+        caml = props.onExecutingCAMLQuery ? props.onExecutingCAMLQuery(_wpInfo, caml) : null;
+
         // See if we are targeting a different web
         if (webUrl) {
             // Get the context information for the destination web
@@ -79,6 +82,9 @@ export const WPList = (props: IWPListProps) => {
 
     // Method to load the items using an ODATA query
     let loadODATA = (webUrl: string, listName: string, query: Types.SP.ODataQuery) => {
+        // Call the load caml query event
+        query = props.onExecutingODATAQuery ? props.onExecutingODATAQuery(_wpInfo, query) : null;
+
         // Get the web
         (new Web(webUrl))
             // Get the list
