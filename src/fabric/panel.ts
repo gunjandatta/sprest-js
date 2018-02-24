@@ -54,8 +54,17 @@ export const Panel = (props: IPanelProps): IPanel => {
             _panel._closeButton.remove();
         }
 
-        // Return the panel content
-        return _panel._panel.querySelector(".ms-Panel-content") as HTMLDivElement;
+        // Get the inner content
+        let innerContent = _panel._panel.querySelector(".ms-Panel-contentInner");
+        if (innerContent) {
+            // Set the class name
+            innerContent.className += " ms-Panel-main";
+            // Return the panel content
+            return innerContent.querySelector(".ms-Panel-content") as HTMLDivElement;
+        }
+
+        // Return nothing
+        return null;
     }
 
     // Method to update the panel content

@@ -87,18 +87,8 @@
  */
 
 /** Fix the height */
-.ms-Panel-contentInner {
+.ms-Panel-contentInner.ms-Panel-main {
     height: 85vh;
-}
-
-/** Update to display over the ribbon & panel. */
-.ms-ContextualHost.is-open {
-    z-index: 1010;
-}
-
-/** Update to display over the ribbon. */
-.ms-PanelHost {
-    z-index: 1000;
 }
 
 /**
