@@ -17636,9 +17636,7 @@ exports.WPList = function (props) {
         // See if no data has been loaded
         if (_lists == null) {
             // Set the query
-            var query = props.camlQuery || {};
-            query.Expand = query.Expand || [];
-            query.Expand.push("Fields");
+            var query = props.listQuery || {};
             // Get the web
             new gd_sprest_1.Web(webUrl).Lists().query(query).execute(function (lists) {
                 // Save the lists

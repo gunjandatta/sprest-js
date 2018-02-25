@@ -150,9 +150,7 @@ export const WPList = (props: IWPListProps) => {
         // See if no data has been loaded
         if (_lists == null) {
             // Set the query
-            let query: Types.SP.ODataQuery = props.camlQuery || {};
-            query.Expand = query.Expand || [];
-            query.Expand.push("Fields");
+            let query: Types.SP.ODataQuery = props.listQuery || {};
 
             // Get the web
             (new Web(webUrl))
