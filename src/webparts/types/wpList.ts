@@ -1,15 +1,12 @@
 import { Types } from "gd-sprest";
-import { IWPCfg, IWebPartInfo, IWebPartProps } from ".";
+import { IWPCfg, IWebPartCfg, IWebPartInfo, IWebPartProps } from ".";
 
 /**
  * WebPart List Configuration
  */
-export interface IWPListCfg {
+export interface IWPListCfg extends IWebPartCfg {
     /** The list name */
     ListName?: string;
-
-    /** The webpart id */
-    WebPartId?: string;
 
     /** The relative web url */
     WebUrl?: string;

@@ -5742,18 +5742,13 @@ exports.Button = function (props) {
     props.el.innerHTML = _1.Templates.Button(props);
     // Get the button
     var btn = props.el.firstElementChild;
-    // See if the button is disabled
-    if (props.disable) {
-        // Disable the button
-        btn.disabled = true;
-    }
     // Set the button click event
-    btn.onclick = function () {
+    btn.addEventListener("click", function () {
         // Execute the click event
         props.onClick ? props.onClick() : null;
         // Disable postback
         return false;
-    };
+    });
     // Create the button
     var _btn = new _1.fabric.Button(btn);
     // Return the button
@@ -14991,7 +14986,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 exports.Button = function (props) {
     // Return the template
-    return ['<button class="ms-Button ' + (props.className || "") + '">', '<span class="ms-Button-label">' + (props.text || "") + '</span>', '</button>'].join('\n');
+    return ['<button class="ms-Button ' + (props.className || "") + '"' + (props.disable ? " disabled" : "") + '>', '<span class="ms-Button-label">' + (props.text || "") + '</span>', '</button>'].join('\n');
 };
 
 /***/ }),

@@ -50,6 +50,9 @@ export interface IWebPartProps {
     /** The class name. */
     className?: string;
 
+    /** The target element id to render the webpart to */
+    elementId?: string;
+
     /** The optional help link properties */
     helpProps?: {
         /** The link title */
@@ -67,7 +70,4 @@ export interface IWebPartProps {
 
     /** The render event triggered when the page is in 'Edit' mode */
     onRenderEdit?: (wp: IWebPartInfo) => any;
-
-    /** The target element id to render the webpart to */
-    elementId?: string;
 }
