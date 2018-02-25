@@ -348,6 +348,8 @@ __export(__webpack_require__(121));
 __export(__webpack_require__(122));
 __export(__webpack_require__(123));
 __export(__webpack_require__(124));
+var Types = __webpack_require__(125);
+exports.Types = Types;
 
 /***/ }),
 /* 10 */
@@ -4162,7 +4164,7 @@ exports.Taxonomy = {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(6);
-module.exports = __webpack_require__(125);
+module.exports = __webpack_require__(126);
 
 
 /***/ }),
@@ -18007,8 +18009,17 @@ exports.WPTabs = function (props) {
 /* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-var content = __webpack_require__(126);
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+/***/ }),
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(127);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -18022,7 +18033,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(128)(content, options);
+var update = __webpack_require__(129)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -18054,10 +18065,10 @@ if(false) {
 }
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(127)(false);
+exports = module.exports = __webpack_require__(128)(false);
 // imports
 
 
@@ -18068,7 +18079,7 @@ exports.push([module.i, "/**\r\n * Contextual Host\r\n */\r\n\r\n/** Ensure the 
 
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports) {
 
 /*
@@ -18150,7 +18161,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -18216,7 +18227,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(129);
+var	fixUrls = __webpack_require__(130);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -18532,7 +18543,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports) {
 
 

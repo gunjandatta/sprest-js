@@ -337,6 +337,8 @@ __export(__webpack_require__(122));
 __export(__webpack_require__(123));
 __export(__webpack_require__(124));
 __export(__webpack_require__(125));
+var Types = __webpack_require__(126);
+exports.Types = Types;
 
 
 /***/ }),
@@ -498,7 +500,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(128);
+var	fixUrls = __webpack_require__(129);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -2403,9 +2405,9 @@ exports.Taxonomy = {
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var build_1 = __webpack_require__(7);
-__webpack_require__(126);
-__webpack_require__(129);
-__webpack_require__(131);
+__webpack_require__(127);
+__webpack_require__(130);
+__webpack_require__(132);
 // Create the global variable
 window["TestJS"] = {
     // Configuration
@@ -15258,8 +15260,17 @@ exports.WPTabs = function (props) {
 /* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-var content = __webpack_require__(127);
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(128);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15305,7 +15316,7 @@ if(false) {
 }
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -15319,7 +15330,7 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports) {
 
 
@@ -15414,11 +15425,11 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(130);
+var content = __webpack_require__(131);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15464,7 +15475,7 @@ if(false) {
 }
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -15478,11 +15489,11 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(132);
+var content = __webpack_require__(133);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15528,7 +15539,7 @@ if(false) {
 }
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
