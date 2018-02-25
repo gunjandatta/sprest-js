@@ -15356,7 +15356,7 @@ exports.Pivot = function (props) {
         // Add the tab
         tabs.push(['<li class="ms-Pivot-link ' + className_1 + '" data-content="' + tab.name + '" title="' + tab.name + '" tabindex="1">', tab.name, '</li>'].join('\n'));
         // Add the tab content
-        tabContents.push(['<div class="ms-Pivot-content" data-content=">' + tab.name + '">', tab.content, '</div>'].join('\n'));
+        tabContents.push(['<div class="ms-Pivot-content" data-content="' + tab.name + '">', tab.content, '</div>'].join('\n'));
     }
     // Set the class name
     var className = [props.className || "", props.isLarge ? "ms-Pivot--large" : "", props.isTabs ? "ms-Pivot--tabs" : ""].join(" ").trim();

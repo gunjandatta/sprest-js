@@ -12465,7 +12465,7 @@ exports.Pivot = function (props) {
         ].join('\n'));
         // Add the tab content
         tabContents.push([
-            '<div class="ms-Pivot-content" data-content=">' + tab.name + '">',
+            '<div class="ms-Pivot-content" data-content="' + tab.name + '">',
             tab.content,
             '</div>'
         ].join('\n'));
