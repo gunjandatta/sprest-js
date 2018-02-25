@@ -38,6 +38,9 @@ export const Callout = (props: ICalloutProps): Fabric.ICallout => {
     // Set the template
     props.el.innerHTML = Templates.Callout(props);
 
+    // Create the callout
+    let _callout:Fabric.ICallout = new fabric.Callout(props.el.querySelector(".ms-Callout"), props.elTarget, props.position || "top");
+
     // Return the callout
-    return new fabric.Callout(props.el.querySelector(".ms-Callout"), props.elTarget, props.position || "top");
+    return _callout;
 }

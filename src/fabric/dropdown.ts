@@ -203,6 +203,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
     // Create the callout
     let _callout = Callout({
+        className: "dropdown-list",
         el: props.el.querySelector(".callout"),
         elTarget: _tb.get()._textField,
         position: CalloutPositions.left,

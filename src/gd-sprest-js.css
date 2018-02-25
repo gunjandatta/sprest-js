@@ -28,6 +28,11 @@
     color: #444;
 }
 
+/** Ensure the dropdown is on top of the panel */
+.dropdown-list {
+    z-index: 1010;
+}
+
 /** Set the max height of the dropdown */
 .ms-List--dropdown {
     max-height: 50vh;
