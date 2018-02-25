@@ -193,9 +193,6 @@ window["TestJS"] = {
                     onClick: () => {
                         // Show the list form
                         newForm.show(SPTypes.ControlMode.New);
-
-                        // Disable postback
-                        return false;
                     }
                 });
 
@@ -228,9 +225,6 @@ window["TestJS"] = {
                                 onClick: () => {
                                     // Show the list form
                                     viewForm.show(SPTypes.ControlMode.Display);
-
-                                    // Disable postback
-                                    return false;
                                 }
                             });
                         }

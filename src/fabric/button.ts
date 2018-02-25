@@ -12,12 +12,12 @@ export const Button = (props: IButtonProps): HTMLButtonElement => {
     let btn = props.el.firstElementChild as HTMLButtonElement;
 
     // Set the button click event
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (ev: MouseEvent) => {
+        // Disable postback
+        ev ? ev.preventDefault() : null;
+
         // Execute the click event
         props.onClick ? props.onClick() : null;
-
-        // Disable postback
-        return false;
     });
 
     // Create the button

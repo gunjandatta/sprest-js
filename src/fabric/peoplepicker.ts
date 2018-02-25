@@ -84,12 +84,12 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
                     btn.style.display = "none";
                 } else {
                     // Set the search click event
-                    btn.addEventListener("click", () => {
+                    btn.addEventListener("click", (ev: MouseEvent) => {
+                        // Disable postback
+                        ev ? ev.preventDefault() : null;
+
                         // Search all sources
                         renderResults(ev, true);
-
-                        // Disable postback
-                        return false;
                     });
                 }
 

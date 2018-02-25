@@ -143,12 +143,12 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
         for (let i = 0; i < buttons.length; i++) {
             // Add a click event
-            buttons[i].addEventListener("click", () => {
+            buttons[i].addEventListener("click", (ev: MouseEvent) => {
+                // Disable postback
+                ev ? ev.preventDefault() : null;
+
                 // Render the form
                 renderForm(SPTypes.ControlMode.Display);
-
-                // Disable postback
-                return false;
             });
         }
 
@@ -156,12 +156,12 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-close");
         for (let i = 0; i < buttons.length; i++) {
             // Add a click event
-            buttons[i].addEventListener("click", () => {
+            buttons[i].addEventListener("click", (ev: MouseEvent) => {
+                // Disable postback
+                ev ? ev.preventDefault() : null;
+
                 // Close the panel
                 _panel.hide();
-
-                // Disable postback
-                return false;
             });
         }
 
@@ -169,12 +169,12 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-edit");
         for (let i = 0; i < buttons.length; i++) {
             // Add a click event
-            buttons[i].addEventListener("click", () => {
+            buttons[i].addEventListener("click", (ev: MouseEvent) => {
+                // Disable postback
+                ev ? ev.preventDefault() : null;
+
                 // Render the form
                 renderForm(SPTypes.ControlMode.Edit);
-
-                // Disable postback
-                return false;
             });
         }
 
@@ -182,9 +182,12 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-save");
         for (let i = 0; i < buttons.length; i++) {
             // Add a click event
-            buttons[i].addEventListener("click", () => {
+            buttons[i].addEventListener("click", (ev: MouseEvent) => {
                 let formValues = {};
                 let unknownUsers = {};
+
+                // Disable postback
+                ev ? ev.preventDefault() : null;
 
                 // Validate the form
                 if (validate() == false) {
@@ -354,9 +357,6 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                         renderForm(SPTypes.ControlMode.Display);
                     });
                 });
-
-                // Disable postback
-                return false;
             });
         }
     }

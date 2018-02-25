@@ -2544,8 +2544,6 @@ window["TestJS"] = {
                     onClick: function onClick() {
                         // Show the list form
                         newForm.show(gd_sprest_1.SPTypes.ControlMode.New);
-                        // Disable postback
-                        return false;
                     }
                 });
                 // Get the list
@@ -2570,8 +2568,6 @@ window["TestJS"] = {
                             onClick: function onClick() {
                                 // Show the list form
                                 viewForm_1.show(gd_sprest_1.SPTypes.ControlMode.Display);
-                                // Disable postback
-                                return false;
                             }
                         });
                     }
@@ -10645,11 +10641,11 @@ exports.Button = function (props) {
     // Get the button
     var btn = props.el.firstElementChild;
     // Set the button click event
-    btn.addEventListener("click", function () {
+    btn.addEventListener("click", function (ev) {
+        // Disable postback
+        ev ? ev.preventDefault() : null;
         // Execute the click event
         props.onClick ? props.onClick() : null;
-        // Disable postback
-        return false;
     });
     // Create the button
     var _btn = new _1.fabric.Button(btn);
@@ -11641,11 +11637,11 @@ exports.PeoplePicker = function (props) {
                 }
                 else {
                     // Set the search click event
-                    btn.addEventListener("click", function () {
+                    btn.addEventListener("click", function (ev) {
+                        // Disable postback
+                        ev ? ev.preventDefault() : null;
                         // Search all sources
                         renderResults(ev, true);
-                        // Disable postback
-                        return false;
                     });
                 }
                 // Parse the results
@@ -13923,42 +13919,44 @@ exports.ListFormPanel = function (props) {
         buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
         for (var i = 0; i < buttons.length; i++) {
             // Add a click event
-            buttons[i].addEventListener("click", function () {
+            buttons[i].addEventListener("click", function (ev) {
+                // Disable postback
+                ev ? ev.preventDefault() : null;
                 // Render the form
                 renderForm(gd_sprest_1.SPTypes.ControlMode.Display);
-                // Disable postback
-                return false;
             });
         }
         // Close buttons
         buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-close");
         for (var i = 0; i < buttons.length; i++) {
             // Add a click event
-            buttons[i].addEventListener("click", function () {
+            buttons[i].addEventListener("click", function (ev) {
+                // Disable postback
+                ev ? ev.preventDefault() : null;
                 // Close the panel
                 _panel.hide();
-                // Disable postback
-                return false;
             });
         }
         // Set the edit button click event
         buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-edit");
         for (var i = 0; i < buttons.length; i++) {
             // Add a click event
-            buttons[i].addEventListener("click", function () {
+            buttons[i].addEventListener("click", function (ev) {
+                // Disable postback
+                ev ? ev.preventDefault() : null;
                 // Render the form
                 renderForm(gd_sprest_1.SPTypes.ControlMode.Edit);
-                // Disable postback
-                return false;
             });
         }
         // Set the save button click event
         buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-save");
         for (var i = 0; i < buttons.length; i++) {
             // Add a click event
-            buttons[i].addEventListener("click", function () {
+            buttons[i].addEventListener("click", function (ev) {
                 var formValues = {};
                 var unknownUsers = {};
+                // Disable postback
+                ev ? ev.preventDefault() : null;
                 // Validate the form
                 if (validate() == false) {
                     // Display an error message
@@ -14113,8 +14111,6 @@ exports.ListFormPanel = function (props) {
                         renderForm(gd_sprest_1.SPTypes.ControlMode.Display);
                     });
                 });
-                // Disable postback
-                return false;
             });
         }
     };
