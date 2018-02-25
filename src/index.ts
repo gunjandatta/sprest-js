@@ -4,9 +4,6 @@ declare var SP;
 import * as Fabric from "./fabric";
 export { Fabric }
 
-// Include the styles
-import "./styles.css";
-
 // Components
 import * as Components from "./components";
 export * from "./components";

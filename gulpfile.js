@@ -34,7 +34,8 @@ gulp.task("copy-fabric-css", ["build"], () => {
     // Copy the css libraries
     return gulp.src([
         "node_modules/office-ui-fabric-js/dist/css/fabric.min.css",
-        "node_modules/office-ui-fabric-js/dist/css/fabric.components.min.css"
+        "node_modules/office-ui-fabric-js/dist/css/fabric.components.min.css",
+        "src/gd-sprest-js.css"
     ])
         // Copy to the build folder
         .pipe(gulp.dest("build/lib/css"));
@@ -86,7 +87,7 @@ gulp.task("package", ["package-bundle", "package-minify"]);
 // Bundle the library
 gulp.task("package-bundle", ["update-lib-reference"], () => {
     // Get the source files
-    return gulp.src(["build/index.js"])
+    return gulp.src(["build/index.js", "src/gd-sprest-js.css"])
         // Bundle the files
         .pipe(gulpWebpack({
             output: {
