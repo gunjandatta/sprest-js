@@ -182,16 +182,16 @@ export const WPList = (props: IWPListProps) => {
         // Render the panel contents
         _panelContents = _panel.updateContent([
             (props.onRenderHeader ? props.onRenderHeader(_wpInfo) : null) || "",
-            '<div></div>',
+            '<div id="webUrl"></div>',
             '<div></div>',
             (props.onRenderFooter ? props.onRenderFooter(_wpInfo) : null) || "",
-            '<div></div>',
-            '<div></div>'
+            '<div id="refresh"></div>',
+            '<div id="save"></div>'
         ].join('\n'));
 
         // Render the web url textbox
         let tb = Fabric.TextField({
-            el: _panelContents.children[0],
+            el: _panelContents.querySelector("#webUrl"),
             label: "Relative Web Url:",
             description: "The web containing the list. If blank, the current web is used."
         });
@@ -204,7 +204,7 @@ export const WPList = (props: IWPListProps) => {
 
         // Render the refresh button
         Fabric.Button({
-            el: _panelContents.children[2],
+            el: _panelContents.querySelector("#refresh"),
             text: "Refresh",
             onClick: () => {
                 // Load the lists
@@ -214,7 +214,7 @@ export const WPList = (props: IWPListProps) => {
 
         // Render the refresh button
         Fabric.Button({
-            el: _panelContents.children[3],
+            el: _panelContents.querySelector("#save"),
             text: "Save",
             onClick: () => {
                 let selectedList = _ddl.getValue() as Fabric.Types.IDropdownOption;
