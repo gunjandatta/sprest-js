@@ -6580,7 +6580,7 @@ exports.Panel = function (props) {
         // Add the panel html
         props.el.innerHTML = _1.Templates.Panel(props);
         // Show the panel
-        _panel = new _1.fabric.Panel(props.el.querySelector(".ms-Panel"), content);
+        _panel = new _1.fabric.Panel(props.el.querySelector(".ms-Panel"));
         // Update the z-index of the panel host
         _panel.panelHost.panelHost.style.zIndex = "1000";
         // See if we are hiding the close button
@@ -6593,8 +6593,12 @@ exports.Panel = function (props) {
         if (innerContent) {
             // Set the class name
             innerContent.className += " ms-Panel-main";
-            // Return the panel content
-            return innerContent.querySelector(".ms-Panel-content");
+            // Get the panel content
+            innerContent = innerContent.querySelector(".ms-Panel-content");
+            if (innerContent) {
+                // Update the panel content
+                innerContent.innerHTML = content;
+            }
         }
         // Return content
         return innerContent;

@@ -43,7 +43,7 @@ export const Panel = (props: IPanelProps): IPanel => {
         props.el.innerHTML = Templates.Panel(props);
 
         // Show the panel
-        _panel = new fabric.Panel(props.el.querySelector(".ms-Panel"), content);
+        _panel = new fabric.Panel(props.el.querySelector(".ms-Panel"));
 
         // Update the z-index of the panel host
         _panel.panelHost.panelHost.style.zIndex = "1000";
@@ -59,8 +59,13 @@ export const Panel = (props: IPanelProps): IPanel => {
         if (innerContent) {
             // Set the class name
             innerContent.className += " ms-Panel-main";
-            // Return the panel content
-            return innerContent.querySelector(".ms-Panel-content") as HTMLDivElement;
+
+            // Get the panel content
+            innerContent = innerContent.querySelector(".ms-Panel-content") as HTMLDivElement;
+            if (innerContent) {
+                // Update the panel content
+                innerContent.innerHTML = content;
+            }
         }
 
         // Return content
@@ -72,7 +77,7 @@ export const Panel = (props: IPanelProps): IPanel => {
         let panelContent = null;
 
         // Ensure the panel exists
-        if(_panel == null) {
+        if (_panel == null) {
             // Show the panel
             panelContent = show(content);
         } else {
