@@ -5,6 +5,7 @@ export * from "./commandbar";
 export * from "./commandbutton";
 export * from "./contextualmenu";
 export * from "./datepicker";
+export * from "./dialog";
 export * from "./label";
 export * from "./linkfield";
 export * from "./list";

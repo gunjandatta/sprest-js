@@ -49,6 +49,15 @@ export interface IContextualMenu {
 }
 
 /**
+ * Dialog
+ */
+export interface IDialog {
+    _containter: HTMLDivElement;
+    close();
+    open();
+}
+
+/**
  * List
  */
 export interface IList {

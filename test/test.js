@@ -118,11 +118,12 @@ __export(__webpack_require__(93));
 __export(__webpack_require__(94));
 __export(__webpack_require__(95));
 __export(__webpack_require__(96));
+__export(__webpack_require__(97));
 // Templates
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(114);
+var Types = __webpack_require__(116);
 exports.Types = Types;
 
 
@@ -209,7 +210,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(97));
 __export(__webpack_require__(98));
 __export(__webpack_require__(99));
 __export(__webpack_require__(100));
@@ -226,6 +226,8 @@ __export(__webpack_require__(110));
 __export(__webpack_require__(111));
 __export(__webpack_require__(112));
 __export(__webpack_require__(113));
+__export(__webpack_require__(114));
+__export(__webpack_require__(115));
 
 
 /***/ }),
@@ -314,11 +316,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(116));
-__export(__webpack_require__(117));
 __export(__webpack_require__(118));
 __export(__webpack_require__(119));
-var Types = __webpack_require__(120);
+__export(__webpack_require__(120));
+__export(__webpack_require__(121));
+var Types = __webpack_require__(122);
 exports.Types = Types;
 
 
@@ -332,12 +334,12 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(121));
-__export(__webpack_require__(122));
 __export(__webpack_require__(123));
 __export(__webpack_require__(124));
 __export(__webpack_require__(125));
-var Types = __webpack_require__(126);
+__export(__webpack_require__(126));
+__export(__webpack_require__(127));
+var Types = __webpack_require__(128);
 exports.Types = Types;
 
 
@@ -500,7 +502,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(129);
+var	fixUrls = __webpack_require__(131);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -2405,9 +2407,9 @@ exports.Taxonomy = {
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var build_1 = __webpack_require__(7);
-__webpack_require__(127);
-__webpack_require__(130);
+__webpack_require__(129);
 __webpack_require__(132);
+__webpack_require__(134);
 // Create the global variable
 window["TestJS"] = {
     // Configuration
@@ -10962,6 +10964,26 @@ exports.DatePicker = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = __webpack_require__(1);
 /**
+ * Dialog
+ */
+exports.Dialog = function (props) {
+    // Create the dialog
+    props.el.innerHTML = _1.Templates.Dialog(props);
+    var _dialog = new _1.fabric.Dialog(props.el.querySelector(".ms-Dialog"));
+    // Return the dialog
+    return _dialog;
+};
+
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(1);
+/**
  * Dropdown Types
  */
 var DropdownTypes;
@@ -11157,7 +11179,7 @@ exports.Dropdown = function (props) {
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11254,7 +11276,7 @@ exports.LinkField = function (props) {
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11282,7 +11304,7 @@ exports.List = function (props) {
 
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11301,7 +11323,7 @@ exports.ListItem = function (props) {
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11437,7 +11459,7 @@ exports.NumberField = function (props) {
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11559,7 +11581,7 @@ exports.Panel = function (props) {
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11695,7 +11717,7 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11733,7 +11755,7 @@ exports.Pivot = function (props) {
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11765,7 +11787,7 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11849,7 +11871,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11896,7 +11918,7 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11916,7 +11938,7 @@ exports.Button = function (props) {
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11969,7 +11991,7 @@ exports.Callout = function (props) {
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11992,7 +12014,7 @@ exports.CheckBox = function (props) {
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12030,7 +12052,7 @@ exports.CommandBar = function (props) {
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12068,7 +12090,7 @@ exports.CommandButton = function (props) {
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12113,7 +12135,7 @@ exports.ContextualMenu = function (props) {
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12171,7 +12193,54 @@ exports.DatePicker = function (props) {
 
 
 /***/ }),
-/* 104 */
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(4);
+/**
+ * Dialog
+ */
+exports.Dialog = function (props) {
+    // Set the class name
+    var className = [
+        props.className || "",
+        props.isBlocking ? "ms-Dialog--blocking" : "",
+        props.isLargeHeader ? "ms-Dialog--lgHeader" : "",
+        props.isMultiLine ? "ms-Dialog--multiline" : "",
+        props.showCloseButton ? "ms-Dialog--close" : ""
+    ].join(' ').trim();
+    // Parse the actions
+    var actions = props.actions || [];
+    var dialogActions = [];
+    for (var i = 0; i < actions.length; i++) {
+        // Add the dialog action
+        dialogActions.push([
+            _1.Button({
+                className: "ms-Dialog-action " + actions[i].className,
+                disable: actions[i].disable,
+                text: actions[i].text
+            })
+        ]);
+    }
+    // Return the template
+    return [
+        '<div class="ms-Dialog ' + className + '">',
+        '<div class="ms-Dialog-title">' + (props.title || "") + '</div>',
+        '<div class="ms-Dialog-content">',
+        props.subText ? '<p class="ms-Dialog-subText">' + props.subText + '</p>' : '',
+        props.content || "",
+        '</div>',
+        actions ? '<div class="ms-Dialog-actions">' + (actions) + '</div>' : '',
+        '</div>'
+    ].join("");
+};
+
+
+/***/ }),
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12198,7 +12267,7 @@ exports.Label = function (props) {
 
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12227,7 +12296,7 @@ exports.LinkField = function (props) {
 
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12247,7 +12316,7 @@ exports.List = function (props) {
 
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12282,7 +12351,7 @@ exports.ListItem = function (props) {
 
 
 /***/ }),
-/* 108 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12340,7 +12409,7 @@ exports.Panel = function (props, content) {
 
 
 /***/ }),
-/* 109 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12442,7 +12511,7 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 110 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12492,7 +12561,7 @@ exports.Pivot = function (props) {
 
 
 /***/ }),
-/* 111 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12512,7 +12581,7 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 112 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12552,7 +12621,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 113 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12584,19 +12653,19 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 114 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(115);
+var Fabric = __webpack_require__(117);
 exports.Fabric = Fabric;
 
 
 /***/ }),
-/* 115 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12605,7 +12674,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 116 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13138,7 +13207,7 @@ exports.Field = function (props) {
 
 
 /***/ }),
-/* 117 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13578,7 +13647,7 @@ exports.ListForm = _ListForm;
 
 
 /***/ }),
-/* 118 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13786,7 +13855,7 @@ exports.ListFormField = _ListFormField;
 
 
 /***/ }),
-/* 119 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14299,7 +14368,7 @@ exports.ListFormPanel = function (props) {
 
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14308,7 +14377,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14578,7 +14647,7 @@ exports.WebPart = function (props) {
 
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14750,7 +14819,7 @@ exports.WPCfg = {
 
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15003,7 +15072,7 @@ exports.WPList = function (props) {
 
 
 /***/ }),
-/* 124 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15106,7 +15175,7 @@ exports.WPSearch = function (props) {
 
 
 /***/ }),
-/* 125 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15263,7 +15332,7 @@ exports.WPTabs = function (props) {
 
 
 /***/ }),
-/* 126 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15272,11 +15341,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 127 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(128);
+var content = __webpack_require__(130);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15322,7 +15391,7 @@ if(false) {
 }
 
 /***/ }),
-/* 128 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -15336,7 +15405,7 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 
 
 /***/ }),
-/* 129 */
+/* 131 */
 /***/ (function(module, exports) {
 
 
@@ -15431,11 +15500,11 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(131);
+var content = __webpack_require__(133);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15481,7 +15550,7 @@ if(false) {
 }
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -15495,11 +15564,11 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 
 
 /***/ }),
-/* 132 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(133);
+var content = __webpack_require__(135);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15545,7 +15614,7 @@ if(false) {
 }
 
 /***/ }),
-/* 133 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
