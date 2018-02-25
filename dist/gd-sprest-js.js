@@ -17983,13 +17983,16 @@ exports.WPTabs = function (props) {
             // Parse the webparts
             var tabs = [];
             for (var i = 0; i < _webparts.length; i++) {
-                // Add the tab
+                // Ensure a title exists
                 var wpTitle = _webparts[i].querySelector(".ms-webpart-titleText");
-                tabs.push({
-                    isSelected: i == 0,
-                    name: wpTitle.innerText,
-                    onClick: updateWebParts
-                });
+                if (wpTitle) {
+                    // Add the tab
+                    tabs.push({
+                        isSelected: i == 0,
+                        name: wpTitle.innerText,
+                        onClick: updateWebParts
+                    });
+                }
             }
             // Render the tabs
             var pivot = fabric_1.Pivot({
