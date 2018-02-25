@@ -55,7 +55,7 @@ export const Panel = (props: IPanelProps): IPanel => {
         }
 
         // Get the inner content
-        let innerContent = _panel._panel.querySelector(".ms-Panel-contentInner");
+        let innerContent = _panel._panel.querySelector(".ms-Panel-contentInner") as HTMLDivElement;
         if (innerContent) {
             // Set the class name
             innerContent.className += " ms-Panel-main";
@@ -63,18 +63,26 @@ export const Panel = (props: IPanelProps): IPanel => {
             return innerContent.querySelector(".ms-Panel-content") as HTMLDivElement;
         }
 
-        // Return nothing
-        return null;
+        // Return content
+        return innerContent;
     }
 
     // Method to update the panel content
     let updateContent = (content: string = ""): HTMLDivElement => {
-        // Update the content
-        let el = _panel._panel.querySelector(".ms-Panel-content") as HTMLDivElement;
-        el ? el.innerHTML = content : null;
+        let panelContent = null;
+
+        // Ensure the panel exists
+        if(_panel == null) {
+            // Show the panel
+            panelContent = show(content);
+        } else {
+            // Update the panel content
+            panelContent = _panel._panel.querySelector(".ms-Panel-content") as HTMLDivElement;
+            panelContent ? panelContent.innerHTML = content : null;
+        }
 
         // Return the panel content
-        return el;
+        return panelContent;
     }
 
     // Method to update the panel footer

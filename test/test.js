@@ -11502,17 +11502,25 @@ exports.Panel = function (props) {
             // Return the panel content
             return innerContent.querySelector(".ms-Panel-content");
         }
-        // Return nothing
-        return null;
+        // Return content
+        return innerContent;
     };
     // Method to update the panel content
     var updateContent = function (content) {
         if (content === void 0) { content = ""; }
-        // Update the content
-        var el = _panel._panel.querySelector(".ms-Panel-content");
-        el ? el.innerHTML = content : null;
+        var panelContent = null;
+        // Ensure the panel exists
+        if (_panel == null) {
+            // Show the panel
+            panelContent = show(content);
+        }
+        else {
+            // Update the panel content
+            panelContent = _panel._panel.querySelector(".ms-Panel-content");
+            panelContent ? panelContent.innerHTML = content : null;
+        }
         // Return the panel content
-        return el;
+        return panelContent;
     };
     // Method to update the panel footer
     var updateFooter = function (content) {
