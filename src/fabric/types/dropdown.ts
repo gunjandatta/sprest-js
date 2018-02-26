@@ -12,6 +12,9 @@ export interface IDropdown {
 
     /** Returns the dropdown value. */
     getValue(): IDropdownOption | Array<IDropdownOption>;
+
+    /** Sets the dropdown options. */
+    setOptions(options: Array<IDropdownOption>): IDropdown;
 }
 
 /**

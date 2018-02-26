@@ -6086,6 +6086,7 @@ exports.Dialog = function (props) {
 "use strict";
 
 
+var _this = undefined;
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = __webpack_require__(1);
 /**
@@ -6102,7 +6103,10 @@ var DropdownTypes;
 exports.Dropdown = function (props) {
     var _values = props.value && typeof props.value === "string" ? [props.value] : props.value || [];
     // Method to create the list items
-    var createList = function createList(el) {
+    var createList = function createList(el, options) {
+        if (options === void 0) {
+            options = [];
+        }
         var items = [];
         // Method to render the items
         var renderItems = function renderItems(options, isCategory) {
@@ -6175,7 +6179,7 @@ exports.Dropdown = function (props) {
         return _1.List({
             className: "ms-List--dropdown",
             el: el,
-            items: renderItems(props.options || []),
+            items: renderItems(options),
             onClick: onClick
         });
     };
@@ -6194,6 +6198,15 @@ exports.Dropdown = function (props) {
         var value = _tb.get()._textField.getAttribute("data-value");
         // Return the value
         return value ? JSON.parse(value) : value;
+    };
+    // Method to set the options
+    var setOptions = function setOptions(options) {
+        // Clear the textbox value
+        _tb.setValue("");
+        // Create the list
+        _list = createList(_callout._container, options);
+        // Return this object
+        return _this;
     };
     // Method to update the value
     var updateValue = function updateValue(value) {
@@ -6286,14 +6299,15 @@ exports.Dropdown = function (props) {
         type: _1.CalloutTypes.Default
     });
     // Render the list
-    var _list = createList(_callout._container);
+    var _list = createList(_callout._container, props.options);
     // Update the value
     updateValue(props.value);
     // Return the dropdown
     return {
         get: get,
         getFabricComponent: getFabricComponent,
-        getValue: getValue
+        getValue: getValue,
+        setOptions: setOptions
     };
 };
 

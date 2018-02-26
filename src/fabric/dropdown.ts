@@ -21,7 +21,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     let _values = props.value && typeof (props.value) === "string" ? [props.value] : (props.value || []) as Array<string>
 
     // Method to create the list items
-    let createList = (el: Element): Fabric.IList => {
+    let createList = (el: Element, options: Array<IDropdownOption> = []): Fabric.IList => {
         let items: Array<string> = [];
 
         // Method to render the items
@@ -106,7 +106,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         return List({
             className: "ms-List--dropdown",
             el,
-            items: renderItems(props.options || []),
+            items: renderItems(options),
             onClick
         });
     }
@@ -131,10 +131,22 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         return value ? JSON.parse(value) : value;
     }
 
+    // Method to set the options
+    let setOptions = (options: Array<IDropdownOption>): IDropdown => {
+        // Clear the textbox value
+        _tb.setValue("");
+
+        // Create the list
+        _list = createList(_callout._container, options);
+
+        // Return this object
+        return this;
+    }
+
     // Method to update the value
     let updateValue = (value?: any) => {
         let isUnsorted = props.multi && props.isUnsorted ? true : false;
-        let values:Array<IDropdownOption> = isUnsorted ? getValue() as any : [];
+        let values: Array<IDropdownOption> = isUnsorted ? getValue() as any : [];
 
         // See if this is a multi-select dropdown
         if (props.multi) {
@@ -169,7 +181,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
             // Parse the values
             let textValues = [];
-            for(let i=0; i<values.length; i++) {
+            for (let i = 0; i < values.length; i++) {
                 // Add the text value
                 textValues.push(values[i].text);
             }
@@ -238,7 +250,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     });
 
     // Render the list
-    let _list = createList(_callout._container);
+    let _list = createList(_callout._container, props.options);
 
     // Update the value
     updateValue(props.value);
@@ -247,6 +259,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     return {
         get,
         getFabricComponent,
-        getValue
+        getValue,
+        setOptions
     };
 }
