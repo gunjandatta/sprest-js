@@ -40,13 +40,13 @@ export interface IWPListProps extends IWebPartProps {
     onExecutingODATAQuery?: (wpInfo: IWPListInfo, odata: Types.SP.ODataQuery) => Types.SP.ODataQuery;
 
     /** The list changed event. */
-    onListChanged?: (wpInfo: IWPListInfo, list?: Types.SP.IListQueryResult) => void;
+    onListChanged?: (wpInfo: IWPListInfo, list?: Types.SP.IListQueryResult | Types.SP.IListResult) => void;
 
     /** The lists rendering event. */
-    onListsRendering?: (wpInfo: IWPListInfo, lists?: Array<Types.SP.IListQueryResult>) => Array<Types.SP.IListQueryResult>;
+    onListsRendering?: (wpInfo: IWPListInfo, lists?: Array<Types.SP.IListQueryResult | Types.SP.IListResult>) => Array<Types.SP.IListQueryResult | Types.SP.IListResult>;
 
     /** The on post render event. */
-    onPostRender?: (wpInfo: IWPListInfo, list?: Types.SP.IListQueryResult) => void;
+    onPostRender?: (wpInfo: IWPListInfo, list?: Types.SP.IListQueryResult | Types.SP.IListResult) => void;
 
     /** The on render footer event. */
     onRenderFooter?: (wpInfo: IWPListInfo) => string;

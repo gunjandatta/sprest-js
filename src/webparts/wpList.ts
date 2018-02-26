@@ -10,6 +10,7 @@ export const WPList = (props: IWPListProps) => {
     let _ddl: Fabric.Types.IDropdown = null;
     let _init = false;
     let _items: Array<Types.SP.IListItemQueryResult | Types.SP.IListItemResult> = null;
+    let _lists: Array<Types.SP.IListQueryResult | Types.SP.IListResult> = null;
     let _panel: Fabric.Types.IPanel = null;
     let _panelContents: HTMLElement = null;
     let _wpInfo: IWPListInfo = null;
@@ -120,7 +121,7 @@ export const WPList = (props: IWPListProps) => {
             el: _wpInfo.el.children[0],
             headerText: "Configuration Panel",
             panelType: props.panelType,
-            showCloseButton: true            
+            showCloseButton: true
         });
 
         // Render the button
@@ -138,7 +139,6 @@ export const WPList = (props: IWPListProps) => {
     }
 
     // Method to load the lists
-    let _lists: Array<Types.SP.IListQueryResult> = null;
     let loadLists = (webUrl?: string): PromiseLike<Array<Types.SP.IListQueryResult | Types.SP.IListResult>> => {
         // Render a loading message
         Fabric.Spinner({

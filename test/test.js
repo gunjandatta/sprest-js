@@ -14942,6 +14942,7 @@ exports.WPList = function (props) {
     var _ddl = null;
     var _init = false;
     var _items = null;
+    var _lists = null;
     var _panel = null;
     var _panelContents = null;
     var _wpInfo = null;
@@ -15050,7 +15051,6 @@ exports.WPList = function (props) {
         });
     };
     // Method to load the lists
-    var _lists = null;
     var loadLists = function (webUrl) {
         // Render a loading message
         __1.Fabric.Spinner({
