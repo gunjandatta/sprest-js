@@ -59,4 +59,7 @@ export interface IWPListProps extends IWebPartProps {
 
     /** The save configuration event. */
     onSave?: (cfg: IWPListCfg) => IWPListCfg;
+
+    /** The panel type. */
+    panelType?: number;
 }

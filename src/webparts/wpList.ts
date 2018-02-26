@@ -119,7 +119,8 @@ export const WPList = (props: IWPListProps) => {
         _panel = Fabric.Panel({
             el: _wpInfo.el.children[0],
             headerText: "Configuration Panel",
-            showCloseButton: true
+            panelType: props.panelType,
+            showCloseButton: true            
         });
 
         // Render the button
@@ -275,6 +276,7 @@ export const WPList = (props: IWPListProps) => {
                     if (_lists[i].Title == option.text) {
                         // Call the change event
                         props.onListChanged ? props.onListChanged(_wpInfo, _lists[i]) : null;
+                        break;
                     }
                 }
             }

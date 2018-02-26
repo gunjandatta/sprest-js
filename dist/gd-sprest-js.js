@@ -6197,17 +6197,40 @@ exports.Dropdown = function (props) {
     };
     // Method to update the value
     var updateValue = function updateValue(value) {
-        var textValues = [];
-        var values = [];
+        var isUnsorted = props.multi && props.isUnsorted ? true : false;
+        var values = isUnsorted ? getValue() : [];
         // See if this is a multi-select dropdown
         if (props.multi) {
             // Get the selected values
             var items = _list._container.querySelectorAll(".is-selected");
             for (var i = 0; i < items.length; i++) {
                 var option = JSON.parse(items[i].getAttribute("data-value"));
-                // Add the values
-                textValues.push(option.text);
-                values.push(option);
+                // See if the values are unsorted
+                if (isUnsorted) {
+                    var exists = false;
+                    // Parse the selected values
+                    for (var j = 0; j < values.length; j++) {
+                        if (values[j].value == option.value) {
+                            // Set the flag
+                            exists = true;
+                            break;
+                        }
+                    }
+                    // Ensure the value exists
+                    if (!exists) {
+                        // Add the value
+                        values.push(option);
+                    }
+                } else {
+                    // Add the value
+                    values.push(option);
+                }
+            }
+            // Parse the values
+            var textValues = [];
+            for (var i = 0; i < values.length; i++) {
+                // Add the text value
+                textValues.push(values[i].text);
             }
             // Update the textbox
             _tb.get()._textField.setAttribute("data-value", JSON.stringify(props.multi ? values : values[0] || {}));
@@ -17728,6 +17751,7 @@ exports.WPList = function (props) {
         _panel = __1.Fabric.Panel({
             el: _wpInfo.el.children[0],
             headerText: "Configuration Panel",
+            panelType: props.panelType,
             showCloseButton: true
         });
         // Render the button
@@ -17851,6 +17875,7 @@ exports.WPList = function (props) {
                     if (_lists[i].Title == option.text) {
                         // Call the change event
                         props.onListChanged ? props.onListChanged(_wpInfo, _lists[i]) : null;
+                        break;
                     }
                 }
             }
@@ -17928,7 +17953,7 @@ exports.WPSearch = function (props) {
         });
     };
     // Method to render the footer
-    var renderFooter = function renderFooter(wpInfo, lists) {
+    var renderFooter = function renderFooter(wpInfo, list) {
         // Render a field dropdown if a list exists
         var footer = document.querySelector("#field-cfg");
         if (footer && wpInfo.cfg && wpInfo.cfg.ListName) {
@@ -17937,16 +17962,8 @@ exports.WPSearch = function (props) {
                 el: footer,
                 text: "Loading the fields..."
             });
-            // Parse the lists
-            for (var i = 0; i < lists.length; i++) {
-                var list = lists[i];
-                // See if this is the target list
-                if (list.Title == wpInfo.cfg.ListName) {
-                    // Load the fields
-                    listChanged(wpInfo, list);
-                    break;
-                }
-            }
+            // Load the fields
+            listChanged(wpInfo, list);
         }
     };
     // Method to save the configuration

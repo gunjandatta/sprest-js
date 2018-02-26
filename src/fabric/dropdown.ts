@@ -133,8 +133,8 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
     // Method to update the value
     let updateValue = (value?: any) => {
-        let textValues = [];
-        let values: Array<IDropdownOption> = [];
+        let isUnsorted = props.multi && props.isUnsorted ? true : false;
+        let values:Array<IDropdownOption> = isUnsorted ? getValue() as any : [];
 
         // See if this is a multi-select dropdown
         if (props.multi) {
@@ -143,9 +143,35 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
             for (let i = 0; i < items.length; i++) {
                 let option = JSON.parse(items[i].getAttribute("data-value")) as IDropdownOption;
 
-                // Add the values
-                textValues.push(option.text);
-                values.push(option);
+                // See if the values are unsorted
+                if (isUnsorted) {
+                    let exists = false;
+
+                    // Parse the selected values
+                    for (let j = 0; j < values.length; j++) {
+                        if (values[j].value == option.value) {
+                            // Set the flag
+                            exists = true;
+                            break;
+                        }
+                    }
+
+                    // Ensure the value exists
+                    if (!exists) {
+                        // Add the value
+                        values.push(option);
+                    }
+                } else {
+                    // Add the value
+                    values.push(option);
+                }
+            }
+
+            // Parse the values
+            let textValues = [];
+            for(let i=0; i<values.length; i++) {
+                // Add the text value
+                textValues.push(values[i].text);
             }
 
             // Update the textbox

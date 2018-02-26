@@ -41,6 +41,9 @@ export interface IDropdownProps extends IComponentProps {
     /** The drop down description. */
     description?: string;
 
+    /** Flag determining if the selected options are sorted alphabetically. */
+    isUnsorted?: boolean;
+
     /** Allow multiple values. */
     multi?: boolean;
 

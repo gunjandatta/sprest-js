@@ -53,7 +53,7 @@ export const WPSearch = (props: IWPSearchProps) => {
     }
 
     // Method to render the footer
-    let renderFooter = (wpInfo: IWPSearchInfo, lists: Array<Types.SP.IListQueryResult>) => {
+    let renderFooter = (wpInfo: IWPSearchInfo, list: Types.SP.IListQueryResult) => {
         // Render a field dropdown if a list exists
         let footer = document.querySelector("#field-cfg");
         if (footer && wpInfo.cfg && wpInfo.cfg.ListName) {
@@ -63,17 +63,8 @@ export const WPSearch = (props: IWPSearchProps) => {
                 text: "Loading the fields..."
             });
 
-            // Parse the lists
-            for (let i = 0; i < lists.length; i++) {
-                let list = lists[i];
-
-                // See if this is the target list
-                if (list.Title == wpInfo.cfg.ListName) {
-                    // Load the fields
-                    listChanged(wpInfo, list);
-                    break;
-                }
-            }
+            // Load the fields
+            listChanged(wpInfo, list);
         }
     };
 
