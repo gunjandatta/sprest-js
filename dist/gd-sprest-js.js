@@ -17644,14 +17644,15 @@ var _1 = __webpack_require__(9);
  * List WebPart
  */
 exports.WPList = function (props) {
+    var _ddl = null;
     var _init = false;
+    var _items = null;
     var _panel = null;
     var _panelContents = null;
     var _wpInfo = null;
     /**
      * Display Form
      */
-    var _items = null;
     // Method to render the display form
     var renderDisplayForm = function renderDisplayForm(wpInfo) {
         // Save the information
@@ -17717,7 +17718,6 @@ exports.WPList = function (props) {
     /**
      * Edit Form
      */
-    var _ddl = null;
     // Method to render the edit form
     var renderEditForm = function renderEditForm(wpInfo) {
         // Save the information
@@ -17750,23 +17750,38 @@ exports.WPList = function (props) {
             el: _panelContents.children[1],
             text: "Loading the lists..."
         });
-        // See if no data has been loaded
-        if (_lists == null) {
-            // Set the query
-            var query = props.listQuery || {};
-            // Get the web
-            new gd_sprest_1.Web(webUrl).Lists().query(query).execute(function (lists) {
-                // Save the lists
-                _lists = lists.results;
-                // Call the 
-                _lists = props.onListsRendering ? props.onListsRendering(_wpInfo, _lists) : _lists;
+        // Return a promise
+        return new Promise(function (resolve, reject) {
+            // See if no data has been loaded
+            if (_lists == null) {
+                // Set the query
+                var query = props.listQuery || {};
+                // Get the web
+                new gd_sprest_1.Web(webUrl).Lists().query(query).execute(function (lists) {
+                    // Save the lists
+                    _lists = lists.results;
+                    // Call the list rendering event
+                    _lists = props.onListsRendering ? props.onListsRendering(_wpInfo, _lists) : _lists;
+                    // Render the dropdown
+                    renderDropdown();
+                    // See if the list name exists and a post render event exists
+                    var list = null;
+                    if (_wpInfo.cfg && _wpInfo.cfg.ListName && props.onPostRender) {
+                        // Parse the dropdown lists
+                        for (var i = 0; i < lists.results.length; i++) {
+                            var list_1 = lists.results[i];
+                            if (list_1.Title == _wpInfo.cfg.ListName) {
+                                // Call the post render event
+                                props.onPostRender(_wpInfo, list_1);
+                            }
+                        }
+                    }
+                });
+            } else {
                 // Render the dropdown
                 renderDropdown();
-            });
-        } else {
-            // Render the dropdown
-            renderDropdown();
-        }
+            }
+        });
     };
     // Method to render the configuration panel
     var renderConfiguration = function renderConfiguration() {
@@ -17812,8 +17827,6 @@ exports.WPList = function (props) {
         });
         // Load the lists
         loadLists(tb.getValue());
-        // Call the post render event
-        props.onPostRender ? props.onPostRender(_wpInfo, _lists) : null;
     };
     // Method to render the dropdown
     var renderDropdown = function renderDropdown() {

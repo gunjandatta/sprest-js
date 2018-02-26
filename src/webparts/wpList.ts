@@ -7,7 +7,9 @@ import { WebPart, WPCfg } from ".";
  * List WebPart
  */
 export const WPList = (props: IWPListProps) => {
+    let _ddl: Fabric.Types.IDropdown = null;
     let _init = false;
+    let _items: Array<Types.SP.IListItemQueryResult | Types.SP.IListItemResult> = null;
     let _panel: Fabric.Types.IPanel = null;
     let _panelContents: HTMLElement = null;
     let _wpInfo: IWPListInfo = null;
@@ -15,8 +17,6 @@ export const WPList = (props: IWPListProps) => {
     /**
      * Display Form
      */
-
-    let _items: Array<Types.SP.IListItemQueryResult | Types.SP.IListItemResult> = null;
 
     // Method to render the display form
     let renderDisplayForm = (wpInfo: IWPListInfo) => {
@@ -104,8 +104,6 @@ export const WPList = (props: IWPListProps) => {
      * Edit Form
      */
 
-    let _ddl: Fabric.Types.IDropdown = null;
-
     // Method to render the edit form
     let renderEditForm = (wpInfo: IWPListInfo) => {
         // Save the information
@@ -140,39 +138,55 @@ export const WPList = (props: IWPListProps) => {
 
     // Method to load the lists
     let _lists: Array<Types.SP.IListQueryResult> = null;
-    let loadLists = (webUrl?: string) => {
+    let loadLists = (webUrl?: string): PromiseLike<Array<Types.SP.IListQueryResult | Types.SP.IListResult>> => {
         // Render a loading message
         Fabric.Spinner({
             el: _panelContents.children[1],
             text: "Loading the lists..."
         });
 
-        // See if no data has been loaded
-        if (_lists == null) {
-            // Set the query
-            let query: Types.SP.ODataQuery = props.listQuery || {};
+        // Return a promise
+        return new Promise((resolve, reject) => {
+            // See if no data has been loaded
+            if (_lists == null) {
+                // Set the query
+                let query: Types.SP.ODataQuery = props.listQuery || {};
 
-            // Get the web
-            (new Web(webUrl))
-                // Get the lists
-                .Lists()
-                // Include the fields
-                .query(query)
-                // Execute the request
-                .execute(lists => {
-                    // Save the lists
-                    _lists = lists.results;
+                // Get the web
+                (new Web(webUrl))
+                    // Get the lists
+                    .Lists()
+                    // Include the fields
+                    .query(query)
+                    // Execute the request
+                    .execute(lists => {
+                        // Save the lists
+                        _lists = lists.results;
 
-                    // Call the 
-                    _lists = props.onListsRendering ? props.onListsRendering(_wpInfo, _lists) : _lists;
+                        // Call the list rendering event
+                        _lists = props.onListsRendering ? props.onListsRendering(_wpInfo, _lists) : _lists;
 
-                    // Render the dropdown
-                    renderDropdown();
-                });
-        } else {
-            // Render the dropdown
-            renderDropdown();
-        }
+                        // Render the dropdown
+                        renderDropdown();
+
+                        // See if the list name exists and a post render event exists
+                        let list = null;
+                        if (_wpInfo.cfg && _wpInfo.cfg.ListName && props.onPostRender) {
+                            // Parse the dropdown lists
+                            for (let i = 0; i < lists.results.length; i++) {
+                                let list = lists.results[i];
+                                if (list.Title == _wpInfo.cfg.ListName) {
+                                    // Call the post render event
+                                    props.onPostRender(_wpInfo, list);
+                                }
+                            }
+                        }
+                    });
+            } else {
+                // Render the dropdown
+                renderDropdown();
+            }
+        });
     }
 
     // Method to render the configuration panel
@@ -234,9 +248,6 @@ export const WPList = (props: IWPListProps) => {
 
         // Load the lists
         loadLists(tb.getValue());
-
-        // Call the post render event
-        props.onPostRender ? props.onPostRender(_wpInfo, _lists) : null;
     }
 
     // Method to render the dropdown
