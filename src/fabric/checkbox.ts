@@ -1,11 +1,11 @@
-import { ICheckBox, ICheckBoxProps } from "./types"
+import { Fabric, ICheckBox, ICheckBoxProps } from "./types"
 import { fabric, Templates } from ".";
 
 /**
  * CheckBox
  */
 export const CheckBox = (props: ICheckBoxProps): ICheckBox => {
-    let _cb = null;
+    let _cb: Fabric.ICheckBox = null;
 
     // Method to get the checkbox element
     let get = (): HTMLInputElement => {
@@ -14,7 +14,7 @@ export const CheckBox = (props: ICheckBoxProps): ICheckBox => {
     }
 
     // Method to get the fabric component
-    let getFabricComponent = () => {
+    let getFabricComponent = (): Fabric.ICheckBox => {
         // Return the checkbox
         return _cb;
     }
@@ -41,7 +41,7 @@ export const CheckBox = (props: ICheckBoxProps): ICheckBox => {
     _cb = new fabric.CheckBox(cb);
 
     // Update the value
-    props.value ? _cb.check() : _cb.uncheck();
+    props.value ? _cb.check() : _cb.unCheck();
 
     // Return the checkbox
     return {

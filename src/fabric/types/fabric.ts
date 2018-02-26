@@ -2,11 +2,35 @@
  * Callout
  */
 export interface ICallout {
-    _container: HTMLDivElement;
     _addTarget: HTMLDivElement;
     _closeButton: HTMLButtonElement;
-    _position: string;
+    _container: HTMLDivElement;
     _contextualHost: IContextualHost
+    _position: string;
+}
+
+/**
+ * CheckBox
+ */
+export interface ICheckBox {
+    _choiceField: HTMLLabelElement;
+    _choiceInput: HTMLInputElement;
+    _container: HTMLDivElement;
+
+    /** Checks the checkbox. */
+    check();
+
+    /** Gets the value of the checkbox. */
+    getValue(): boolean;
+
+    /** Removes the event listeners. */
+    removeListeners();
+
+    /** Toggles the checkbox. */
+    toggle();
+
+    /** Unchecks the checkbox. */
+    unCheck();
 }
 
 /**

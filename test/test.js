@@ -10744,7 +10744,7 @@ exports.CheckBox = function (props) {
     // Create the checkbox
     _cb = new _1.fabric.CheckBox(cb);
     // Update the value
-    props.value ? _cb.check() : _cb.uncheck();
+    props.value ? _cb.check() : _cb.unCheck();
     // Return the checkbox
     return {
         get: get,

@@ -1,4 +1,4 @@
-import { IComponentProps, IProps } from ".";
+import { Fabric, IComponentProps, IProps } from ".";
 
 /**
  * CheckBox
@@ -8,7 +8,7 @@ export interface ICheckBox {
     get(): HTMLElement;
 
     /** Returns the fabric component. */
-    getFabricComponent(): any;
+    getFabricComponent(): Fabric.ICheckBox;
 
     /** Returns the checkbox value. */
     getValue(): boolean;
@@ -20,7 +20,7 @@ export interface ICheckBox {
 export interface ICheckBoxProps extends IComponentProps {
     /** The change event */
     onChange?: (checked: boolean) => void;
-    
+
     /** The checkbox value */
     value?: boolean;
 }
