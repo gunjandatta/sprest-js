@@ -67,6 +67,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         // Set the click event
         let onClick = (ev: MouseEvent) => {
             let item = ev.currentTarget as HTMLLIElement;
+            let option = JSON.parse(item.getAttribute("data-value")) as IDropdownOption;
             let tb = _tb.get()._textField;
 
             // Return if this is a header
@@ -74,23 +75,26 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
             // See if this is a multi-select
             if (props.multi) {
+                let removeFl = false;
+
                 // See if this item is selected
                 if (item.className.indexOf("is-selected") >= 0) {
                     // Unselect this item
                     item.className = item.className.replace(/is\-selected/g, "").trim();
+
+                    // Set the flag
+                    removeFl = true;
                 } else {
                     // Select this item
                     item.className += " is-selected";
                 }
 
                 // Update the value
-                let values = updateValue();
+                let values = updateValue(option.value, removeFl);
 
                 // Call the change event
                 props.onChange ? props.onChange(values) : null;
             } else {
-                let option = JSON.parse(item.getAttribute("data-value")) as IDropdownOption;
-
                 // Update the textbox
                 updateValue(option.value);
 
@@ -144,9 +148,9 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     }
 
     // Method to update the value
-    let updateValue = (value?: any) => {
+    let updateValue = (value: any, removeFl: boolean = false) => {
         let isUnsorted = props.multi && props.isUnsorted ? true : false;
-        let values: Array<IDropdownOption> = isUnsorted ? getValue() as any : [];
+        let values: Array<IDropdownOption> = (isUnsorted ? getValue() as any : null) || [];
 
         // See if this is a multi-select dropdown
         if (props.multi) {
@@ -154,6 +158,9 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
             let items = _list._container.querySelectorAll(".is-selected");
             for (let i = 0; i < items.length; i++) {
                 let option = JSON.parse(items[i].getAttribute("data-value")) as IDropdownOption;
+
+                // See if we are removing this value
+                if (value == option.value && removeFl) { continue; }
 
                 // See if the values are unsorted
                 if (isUnsorted) {

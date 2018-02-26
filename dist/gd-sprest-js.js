@@ -6146,6 +6146,7 @@ exports.Dropdown = function (props) {
         // Set the click event
         var onClick = function onClick(ev) {
             var item = ev.currentTarget;
+            var option = JSON.parse(item.getAttribute("data-value"));
             var tb = _tb.get()._textField;
             // Return if this is a header
             if (item.className.indexOf("ms-ListItem--header") > 0) {
@@ -6153,20 +6154,22 @@ exports.Dropdown = function (props) {
             }
             // See if this is a multi-select
             if (props.multi) {
+                var removeFl = false;
                 // See if this item is selected
                 if (item.className.indexOf("is-selected") >= 0) {
                     // Unselect this item
                     item.className = item.className.replace(/is\-selected/g, "").trim();
+                    // Set the flag
+                    removeFl = true;
                 } else {
                     // Select this item
                     item.className += " is-selected";
                 }
                 // Update the value
-                var values = updateValue();
+                var values = updateValue(option.value, removeFl);
                 // Call the change event
                 props.onChange ? props.onChange(values) : null;
             } else {
-                var option = JSON.parse(item.getAttribute("data-value"));
                 // Update the textbox
                 updateValue(option.value);
                 // Call the change event
@@ -6209,15 +6212,22 @@ exports.Dropdown = function (props) {
         return _this;
     };
     // Method to update the value
-    var updateValue = function updateValue(value) {
+    var updateValue = function updateValue(value, removeFl) {
+        if (removeFl === void 0) {
+            removeFl = false;
+        }
         var isUnsorted = props.multi && props.isUnsorted ? true : false;
-        var values = isUnsorted ? getValue() : [];
+        var values = (isUnsorted ? getValue() : null) || [];
         // See if this is a multi-select dropdown
         if (props.multi) {
             // Get the selected values
             var items = _list._container.querySelectorAll(".is-selected");
             for (var i = 0; i < items.length; i++) {
                 var option = JSON.parse(items[i].getAttribute("data-value"));
+                // See if we are removing this value
+                if (value == option.value && removeFl) {
+                    continue;
+                }
                 // See if the values are unsorted
                 if (isUnsorted) {
                     var exists = false;
