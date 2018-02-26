@@ -49,10 +49,10 @@ export interface IWPListProps extends IWebPartProps {
     onPostRender?: (wpInfo: IWPListInfo, lists: Array<Types.SP.IListQueryResult>) => void;
 
     /** The on render footer event. */
-    onRenderFooter?: (wpInfo: IWPListInfo) => void;
+    onRenderFooter?: (wpInfo: IWPListInfo) => string;
 
     /** The on render header event. */
-    onRenderHeader?: (wpInfo: IWPListInfo) => void;
+    onRenderHeader?: (wpInfo: IWPListInfo) => string;
 
     /** The on render items event. */
     onRenderItems?: (wpInfo: IWPListInfo, items: Array<Types.SP.IListItemQueryResult | Types.SP.IListItemResult>) => void;

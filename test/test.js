@@ -119,11 +119,12 @@ __export(__webpack_require__(94));
 __export(__webpack_require__(95));
 __export(__webpack_require__(96));
 __export(__webpack_require__(97));
+__export(__webpack_require__(98));
 // Templates
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(116);
+var Types = __webpack_require__(118);
 exports.Types = Types;
 
 
@@ -210,7 +211,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(98));
 __export(__webpack_require__(99));
 __export(__webpack_require__(100));
 __export(__webpack_require__(101));
@@ -228,6 +228,8 @@ __export(__webpack_require__(112));
 __export(__webpack_require__(113));
 __export(__webpack_require__(114));
 __export(__webpack_require__(115));
+__export(__webpack_require__(116));
+__export(__webpack_require__(117));
 
 
 /***/ }),
@@ -316,11 +318,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(118));
-__export(__webpack_require__(119));
 __export(__webpack_require__(120));
 __export(__webpack_require__(121));
-var Types = __webpack_require__(122);
+__export(__webpack_require__(122));
+__export(__webpack_require__(123));
+var Types = __webpack_require__(124);
 exports.Types = Types;
 
 
@@ -334,12 +336,12 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(123));
-__export(__webpack_require__(124));
 __export(__webpack_require__(125));
 __export(__webpack_require__(126));
 __export(__webpack_require__(127));
-var Types = __webpack_require__(128);
+__export(__webpack_require__(128));
+__export(__webpack_require__(129));
+var Types = __webpack_require__(130);
 exports.Types = Types;
 
 
@@ -502,7 +504,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(131);
+var	fixUrls = __webpack_require__(133);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -2407,9 +2409,9 @@ exports.Taxonomy = {
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var build_1 = __webpack_require__(7);
-__webpack_require__(129);
-__webpack_require__(132);
+__webpack_require__(131);
 __webpack_require__(134);
+__webpack_require__(136);
 // Create the global variable
 window["TestJS"] = {
     // Configuration
@@ -11795,6 +11797,26 @@ exports.Spinner = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = __webpack_require__(1);
 /**
+ * Table
+ */
+exports.Table = function (props) {
+    // Create the table
+    props.el.innerHTML = _1.Templates.Dialog(props);
+    var _table = new _1.fabric.Table(props.el.querySelector(".ms-Table"));
+    // Return the dialog
+    return _table;
+};
+
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(1);
+/**
  * Text Field Types
  */
 var TextFieldTypes;
@@ -11871,7 +11893,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11918,7 +11940,7 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11938,7 +11960,7 @@ exports.Button = function (props) {
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11991,7 +12013,7 @@ exports.Callout = function (props) {
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12014,7 +12036,7 @@ exports.CheckBox = function (props) {
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12052,7 +12074,7 @@ exports.CommandBar = function (props) {
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12090,7 +12112,7 @@ exports.CommandButton = function (props) {
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12135,7 +12157,7 @@ exports.ContextualMenu = function (props) {
 
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12193,7 +12215,7 @@ exports.DatePicker = function (props) {
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12240,7 +12262,7 @@ exports.Dialog = function (props) {
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12267,7 +12289,7 @@ exports.Label = function (props) {
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12296,7 +12318,7 @@ exports.LinkField = function (props) {
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12316,7 +12338,7 @@ exports.List = function (props) {
 
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12351,7 +12373,7 @@ exports.ListItem = function (props) {
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12409,7 +12431,7 @@ exports.Panel = function (props, content) {
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12511,7 +12533,7 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12561,7 +12583,7 @@ exports.Pivot = function (props) {
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12581,7 +12603,56 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 114 */
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Table
+ */
+exports.Table = function (props) {
+    var columns = props.columns || [];
+    var rows = props.rows || [];
+    // Set the class name
+    var className = [
+        props.className || "",
+        props.isFixed ? "ms-Table--fixed" : "",
+        props.isSelectable ? "ms-Table--selectable" : ""
+    ].join(' ').trim();
+    // See if we are rendering the header row
+    var headerRow = props.renderHeaderRow ? [
+        '<thead>',
+        '<tr>',
+        '<th>' + columns.join('</th><th>') + '</th>',
+        '</tr>',
+        '</thead>'
+    ].join('\n') : "";
+    // Parse the rows
+    var rowData = [];
+    for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        // Parse the columns
+        for (var j = 0; j < columns.length; j++) {
+            // Add the row column
+            rowData.push(row[columns[j]] || "");
+        }
+    }
+    // Return the template
+    return [
+        '<table class="ms-Table ' + className + '">',
+        headerRow,
+        '<tbody>',
+        '<tr>' + rowData.join('</tr><tr>') + '</tr>',
+        '</tbody>',
+        '</table>'
+    ].join("");
+};
+
+
+/***/ }),
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12621,7 +12692,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 115 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12653,19 +12724,19 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 116 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(117);
+var Fabric = __webpack_require__(119);
 exports.Fabric = Fabric;
 
 
 /***/ }),
-/* 117 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12674,7 +12745,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 118 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13207,7 +13278,7 @@ exports.Field = function (props) {
 
 
 /***/ }),
-/* 119 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13647,7 +13718,7 @@ exports.ListForm = _ListForm;
 
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13855,7 +13926,7 @@ exports.ListFormField = _ListFormField;
 
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14368,7 +14439,7 @@ exports.ListFormPanel = function (props) {
 
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14377,7 +14448,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14647,7 +14718,7 @@ exports.WebPart = function (props) {
 
 
 /***/ }),
-/* 124 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14819,7 +14890,7 @@ exports.WPCfg = {
 
 
 /***/ }),
-/* 125 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15072,7 +15143,7 @@ exports.WPList = function (props) {
 
 
 /***/ }),
-/* 126 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15175,7 +15246,7 @@ exports.WPSearch = function (props) {
 
 
 /***/ }),
-/* 127 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15332,7 +15403,7 @@ exports.WPTabs = function (props) {
 
 
 /***/ }),
-/* 128 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15341,11 +15412,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 129 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(130);
+var content = __webpack_require__(132);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15391,7 +15462,7 @@ if(false) {
 }
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -15405,7 +15476,7 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, exports) {
 
 
@@ -15500,11 +15571,11 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 132 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(133);
+var content = __webpack_require__(135);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15550,7 +15621,7 @@ if(false) {
 }
 
 /***/ }),
-/* 133 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -15564,11 +15635,11 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 
 
 /***/ }),
-/* 134 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(135);
+var content = __webpack_require__(137);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15614,7 +15685,7 @@ if(false) {
 }
 
 /***/ }),
-/* 135 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);

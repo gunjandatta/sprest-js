@@ -122,11 +122,12 @@ __export(__webpack_require__(93));
 __export(__webpack_require__(94));
 __export(__webpack_require__(95));
 __export(__webpack_require__(96));
+__export(__webpack_require__(97));
 // Templates
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(115);
+var Types = __webpack_require__(117);
 exports.Types = Types;
 
 /***/ }),
@@ -215,7 +216,6 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(97));
 __export(__webpack_require__(98));
 __export(__webpack_require__(99));
 __export(__webpack_require__(100));
@@ -233,6 +233,8 @@ __export(__webpack_require__(111));
 __export(__webpack_require__(112));
 __export(__webpack_require__(113));
 __export(__webpack_require__(114));
+__export(__webpack_require__(115));
+__export(__webpack_require__(116));
 
 /***/ }),
 /* 5 */
@@ -325,11 +327,11 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(117));
-__export(__webpack_require__(118));
 __export(__webpack_require__(119));
 __export(__webpack_require__(120));
-var Types = __webpack_require__(121);
+__export(__webpack_require__(121));
+__export(__webpack_require__(122));
+var Types = __webpack_require__(123);
 exports.Types = Types;
 
 /***/ }),
@@ -345,12 +347,12 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(122));
-__export(__webpack_require__(123));
 __export(__webpack_require__(124));
 __export(__webpack_require__(125));
 __export(__webpack_require__(126));
-var Types = __webpack_require__(127);
+__export(__webpack_require__(127));
+__export(__webpack_require__(128));
+var Types = __webpack_require__(129);
 exports.Types = Types;
 
 /***/ }),
@@ -4166,7 +4168,7 @@ exports.Taxonomy = {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(6);
-module.exports = __webpack_require__(128);
+module.exports = __webpack_require__(130);
 
 
 /***/ }),
@@ -14885,6 +14887,26 @@ exports.Spinner = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = __webpack_require__(1);
 /**
+ * Table
+ */
+exports.Table = function (props) {
+    // Create the table
+    props.el.innerHTML = _1.Templates.Dialog(props);
+    var _table = new _1.fabric.Table(props.el.querySelector(".ms-Table"));
+    // Return the dialog
+    return _table;
+};
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(1);
+/**
  * Text Field Types
  */
 var TextFieldTypes;
@@ -14960,7 +14982,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15007,7 +15029,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15023,7 +15045,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15058,7 +15080,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15074,7 +15096,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15105,7 +15127,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15124,7 +15146,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15157,7 +15179,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15174,7 +15196,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15204,7 +15226,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15222,7 +15244,7 @@ exports.Label = function (props) {
 };
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15246,7 +15268,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15262,7 +15284,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15280,7 +15302,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15324,7 +15346,7 @@ exports.Panel = function (props, content) {
 };
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15392,7 +15414,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15423,7 +15445,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15439,7 +15461,39 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 113 */
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Table
+ */
+exports.Table = function (props) {
+    var columns = props.columns || [];
+    var rows = props.rows || [];
+    // Set the class name
+    var className = [props.className || "", props.isFixed ? "ms-Table--fixed" : "", props.isSelectable ? "ms-Table--selectable" : ""].join(' ').trim();
+    // See if we are rendering the header row
+    var headerRow = props.renderHeaderRow ? ['<thead>', '<tr>', '<th>' + columns.join('</th><th>') + '</th>', '</tr>', '</thead>'].join('\n') : "";
+    // Parse the rows
+    var rowData = [];
+    for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        // Parse the columns
+        for (var j = 0; j < columns.length; j++) {
+            // Add the row column
+            rowData.push(row[columns[j]] || "");
+        }
+    }
+    // Return the template
+    return ['<table class="ms-Table ' + className + '">', headerRow, '<tbody>', '<tr>' + rowData.join('</tr><tr>') + '</tr>', '</tbody>', '</table>'].join("");
+};
+
+/***/ }),
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15465,7 +15519,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 114 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15487,7 +15541,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 115 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15495,11 +15549,11 @@ exports.Toggle = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(116);
+var Fabric = __webpack_require__(118);
 exports.Fabric = Fabric;
 
 /***/ }),
-/* 116 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15508,7 +15562,7 @@ exports.Fabric = Fabric;
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 117 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16040,7 +16094,7 @@ exports.Field = function (props) {
 };
 
 /***/ }),
-/* 118 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16457,7 +16511,7 @@ var _ListForm = /** @class */function () {
 exports.ListForm = _ListForm;
 
 /***/ }),
-/* 119 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16648,7 +16702,7 @@ var _ListFormField = /** @class */function () {
 exports.ListFormField = _ListFormField;
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17132,7 +17186,7 @@ exports.ListFormPanel = function (props) {
 };
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17141,7 +17195,7 @@ exports.ListFormPanel = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17404,7 +17458,7 @@ exports.WebPart = function (props) {
 };
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17576,7 +17630,7 @@ exports.WPCfg = {
 };
 
 /***/ }),
-/* 124 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17807,7 +17861,7 @@ exports.WPList = function (props) {
 };
 
 /***/ }),
-/* 125 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17912,7 +17966,7 @@ exports.WPSearch = function (props) {
 };
 
 /***/ }),
-/* 126 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18067,7 +18121,7 @@ exports.WPTabs = function (props) {
 };
 
 /***/ }),
-/* 127 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18076,11 +18130,11 @@ exports.WPTabs = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 128 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(129);
+var content = __webpack_require__(131);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -18094,7 +18148,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(131)(content, options);
+var update = __webpack_require__(133)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -18126,10 +18180,10 @@ if(false) {
 }
 
 /***/ }),
-/* 129 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(130)(false);
+exports = module.exports = __webpack_require__(132)(false);
 // imports
 
 
@@ -18140,7 +18194,7 @@ exports.push([module.i, "/**\r\n * Contextual Host\r\n */\r\n\r\n/** Ensure the 
 
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, exports) {
 
 /*
@@ -18222,7 +18276,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -18288,7 +18342,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(132);
+var	fixUrls = __webpack_require__(134);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -18604,7 +18658,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 132 */
+/* 134 */
 /***/ (function(module, exports) {
 
 

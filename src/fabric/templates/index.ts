@@ -14,5 +14,6 @@ export * from "./panel";
 export * from "./peoplepicker";
 export * from "./pivot";
 export * from "./spinner";
+export * from "./table";
 export * from "./textfield";
 export * from "./toggle";

@@ -167,6 +167,13 @@ export interface ISpinner {
 }
 
 /**
+ * Table
+ */
+export interface ITable {
+    _container: HTMLTableElement;
+}
+
+/**
  * Text Field Component
  */
 export interface ITextField {
