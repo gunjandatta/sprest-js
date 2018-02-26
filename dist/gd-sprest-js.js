@@ -17812,6 +17812,8 @@ exports.WPList = function (props) {
         });
         // Load the lists
         loadLists(tb.getValue());
+        // Call the post render event
+        props.onPostRender ? props.onPostRender(_wpInfo, _lists) : null;
     };
     // Method to render the dropdown
     var renderDropdown = function renderDropdown() {
@@ -17842,8 +17844,6 @@ exports.WPList = function (props) {
         });
         // See if we haven't initialized the dropdown
         if (!_init) {
-            // Call the post render event
-            props.onPostRender ? props.onPostRender(_wpInfo, _lists) : null;
             // Set the intialization flag
             _init = true;
         }
