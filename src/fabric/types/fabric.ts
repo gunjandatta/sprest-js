@@ -76,7 +76,9 @@ export interface IContextualMenu {
  * Dialog
  */
 export interface IDialog {
-    _container: HTMLDivElement;
+    _actionButtonElements: Array<HTMLButtonElement>;
+    _closeButtonElement: HTMLButtonElement;
+    _dialog: HTMLDivElement;
     close();
     open();
 }

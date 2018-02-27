@@ -6079,15 +6079,15 @@ exports.Dialog = function (props) {
     };
     // Return the actions container
     var getActions = function getActions() {
-        return _dialog._container.querySelector(".ms-Dialog-actions");
+        return _dialog._dialog.querySelector(".ms-Dialog-actions");
     };
     // Return the actions container
     var getContent = function getContent() {
-        return _dialog._container.querySelector(".ms-Dialog-content");
+        return _dialog._dialog.querySelector(".ms-Dialog-content");
     };
     // Return the actions container
     var getTitle = function getTitle() {
-        return _dialog._container.querySelector(".ms-Dialog-title");
+        return _dialog._dialog.querySelector(".ms-Dialog-title");
     };
     // Create the dialog
     props.el.innerHTML = _1.Templates.Dialog(props);

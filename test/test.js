@@ -10973,11 +10973,11 @@ exports.Dialog = function (props) {
     // Returns the dialog component
     var get = function () { return _this._dialog; };
     // Return the actions container
-    var getActions = function () { return _dialog._container.querySelector(".ms-Dialog-actions"); };
+    var getActions = function () { return _dialog._dialog.querySelector(".ms-Dialog-actions"); };
     // Return the actions container
-    var getContent = function () { return _dialog._container.querySelector(".ms-Dialog-content"); };
+    var getContent = function () { return _dialog._dialog.querySelector(".ms-Dialog-content"); };
     // Return the actions container
-    var getTitle = function () { return _dialog._container.querySelector(".ms-Dialog-title"); };
+    var getTitle = function () { return _dialog._dialog.querySelector(".ms-Dialog-title"); };
     // Create the dialog
     props.el.innerHTML = _1.Templates.Dialog(props);
     var _dialog = new _1.fabric.Dialog(props.el.querySelector(".ms-Dialog"));
