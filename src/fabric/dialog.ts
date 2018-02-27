@@ -9,13 +9,13 @@ export const Dialog = (props: IDialogProps): IDialog => {
     let get = (): Fabric.IDialog => { return this._dialog; }
 
     // Return the actions container
-    let getActions = (): HTMLDivElement => { return _dialog._containter.querySelector(".ms-Dialog-actions") as HTMLDivElement; }
+    let getActions = (): HTMLDivElement => { return _dialog._container.querySelector(".ms-Dialog-actions") as HTMLDivElement; }
 
     // Return the actions container
-    let getContent = (): HTMLDivElement => { return _dialog._containter.querySelector(".ms-Dialog-content") as HTMLDivElement; }
+    let getContent = (): HTMLDivElement => { return _dialog._container.querySelector(".ms-Dialog-content") as HTMLDivElement; }
 
     // Return the actions container
-    let getTitle = (): HTMLDivElement => { return _dialog._containter.querySelector(".ms-Dialog-title") as HTMLDivElement; }
+    let getTitle = (): HTMLDivElement => { return _dialog._container.querySelector(".ms-Dialog-title") as HTMLDivElement; }
 
     // Create the dialog
     props.el.innerHTML = Templates.Dialog(props);

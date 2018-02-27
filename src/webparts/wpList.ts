@@ -152,16 +152,19 @@ export const WPList = (props: IWPListProps) => {
             let postRender = () => {
                 // See if the list name exists and a post render event exists
                 let list = null;
-                if (_wpInfo.cfg && _wpInfo.cfg.ListName && props.onPostRender) {
+                if (_wpInfo.cfg && _wpInfo.cfg.ListName) {
                     // Parse the dropdown lists
                     for (let i = 0; i < _lists.length; i++) {
-                        let list = _lists[i];
-                        if (list.Title == _wpInfo.cfg.ListName) {
-                            // Call the post render event
-                            props.onPostRender(_wpInfo, list);
+                        if (_lists[i].Title == _wpInfo.cfg.ListName) {
+                            // Set the list
+                            list = _lists[i];
+                            break;
                         }
                     }
                 }
+
+                // Call the post render event
+                props.onPostRender ? props.onPostRender(_wpInfo, list) : null;
             };
 
             // See if no data has been loaded

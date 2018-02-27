@@ -10973,11 +10973,11 @@ exports.Dialog = function (props) {
     // Returns the dialog component
     var get = function () { return _this._dialog; };
     // Return the actions container
-    var getActions = function () { return _dialog._containter.querySelector(".ms-Dialog-actions"); };
+    var getActions = function () { return _dialog._container.querySelector(".ms-Dialog-actions"); };
     // Return the actions container
-    var getContent = function () { return _dialog._containter.querySelector(".ms-Dialog-content"); };
+    var getContent = function () { return _dialog._container.querySelector(".ms-Dialog-content"); };
     // Return the actions container
-    var getTitle = function () { return _dialog._containter.querySelector(".ms-Dialog-title"); };
+    var getTitle = function () { return _dialog._container.querySelector(".ms-Dialog-title"); };
     // Create the dialog
     props.el.innerHTML = _1.Templates.Dialog(props);
     var _dialog = new _1.fabric.Dialog(props.el.querySelector(".ms-Dialog"));
@@ -15086,16 +15086,18 @@ exports.WPList = function (props) {
             var postRender = function () {
                 // See if the list name exists and a post render event exists
                 var list = null;
-                if (_wpInfo.cfg && _wpInfo.cfg.ListName && props.onPostRender) {
+                if (_wpInfo.cfg && _wpInfo.cfg.ListName) {
                     // Parse the dropdown lists
                     for (var i = 0; i < _lists.length; i++) {
-                        var list_1 = _lists[i];
-                        if (list_1.Title == _wpInfo.cfg.ListName) {
-                            // Call the post render event
-                            props.onPostRender(_wpInfo, list_1);
+                        if (_lists[i].Title == _wpInfo.cfg.ListName) {
+                            // Set the list
+                            list = _lists[i];
+                            break;
                         }
                     }
                 }
+                // Call the post render event
+                props.onPostRender ? props.onPostRender(_wpInfo, list) : null;
             };
             // See if no data has been loaded
             if (_lists == null) {

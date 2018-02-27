@@ -65,7 +65,7 @@ export interface IContextualHost {
  * Contextual Menu
  */
 export interface IContextualMenu {
-    _containter: HTMLDivElement;
+    _container: HTMLDivElement;
     _hostTarget: HTMLDivElement;
     _position: string;
     _host: IContextualHost;
@@ -76,7 +76,7 @@ export interface IContextualMenu {
  * Dialog
  */
 export interface IDialog {
-    _containter: HTMLDivElement;
+    _container: HTMLDivElement;
     close();
     open();
 }
