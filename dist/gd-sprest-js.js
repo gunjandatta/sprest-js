@@ -15290,7 +15290,7 @@ exports.Dialog = function (props) {
         })]);
     }
     // Return the template
-    return ['<div class="ms-Dialog ' + className + '">', props.showCloseButton ? '<button class="ms-Dialog-button ms-Dialog-buttonClose"><i class="ms-Icon ms-Icon--Cancel"></i></button>' : '', '<div class="ms-Dialog-title">' + (props.title || "") + '</div>', '<div class="ms-Dialog-content">', props.subText ? '<p class="ms-Dialog-subText">' + props.subText + '</p>' : '', props.content || "", '</div>', actions ? '<div class="ms-Dialog-actions">' + actions + '</div>' : '', '</div>'].join("");
+    return ['<div class="ms-Dialog ' + className + '">', props.showCloseButton ? '<button class="ms-Dialog-button ms-Dialog-buttonClose"><i class="ms-Icon ms-Icon--Cancel"></i></button>' : '', '<div class="ms-Dialog-title">' + (props.title || "") + '</div>', '<div class="ms-Dialog-content">', props.subText ? '<p class="ms-Dialog-subText">' + props.subText + '</p>' : '', props.content || "", '</div>', actions ? '<div class="ms-Dialog-actions">' + actions + '</div>' : '', '</div>'].join('\n');
 };
 
 /***/ }),
@@ -15557,7 +15557,7 @@ exports.Table = function (props) {
         }
     }
     // Return the template
-    return ['<table class="ms-Table ' + className + '">', headerRow, '<tbody>', '<tr>' + rowData.join() + '</tr>', '</tbody>', '</table>'].join("");
+    return ['<table class="ms-Table ' + className + '">', headerRow, '<tbody>', '<tr>\n' + rowData.join('\n') + '\n</tr>', '</tbody>', '</table>'].join('\n');
 };
 
 /***/ }),

@@ -12315,7 +12315,7 @@ exports.Dialog = function (props) {
         '</div>',
         actions ? '<div class="ms-Dialog-actions">' + (actions) + '</div>' : '',
         '</div>'
-    ].join("");
+    ].join('\n');
 };
 
 
@@ -12702,10 +12702,10 @@ exports.Table = function (props) {
         '<table class="ms-Table ' + className + '">',
         headerRow,
         '<tbody>',
-        '<tr>' + rowData.join() + '</tr>',
+        '<tr>\n' + rowData.join('\n') + '\n</tr>',
         '</tbody>',
         '</table>'
-    ].join("");
+    ].join('\n');
 };
 
 

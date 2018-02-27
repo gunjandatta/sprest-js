@@ -39,5 +39,5 @@ export const Dialog = (props: IDialogProps): string => {
         '</div>',
         actions ? '<div class="ms-Dialog-actions">' + (actions) + '</div>' : '',
         '</div>'
-    ].join("");
+    ].join('\n');
 }
