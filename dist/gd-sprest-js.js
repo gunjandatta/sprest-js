@@ -15558,7 +15558,7 @@ exports.Table = function (props) {
         }
     }
     // Return the template
-    return ['<table class="ms-Table ' + className + '">', headerRow, '<tbody>', '<tr>' + rowData.join('</tr><tr>') + '</tr>', '</tbody>', '</table>'].join("");
+    return ['<table class="ms-Table ' + className + '">', headerRow, '<tbody>', '<tr>' + rowData.join() + '</tr>', '</tbody>', '</table>'].join("");
 };
 
 /***/ }),

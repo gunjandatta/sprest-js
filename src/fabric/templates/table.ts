@@ -40,7 +40,7 @@ export const Table = (props: ITableProps): string => {
         '<table class="ms-Table ' + className + '">',
         headerRow,
         '<tbody>',
-        '<tr>' + rowData.join('</tr><tr>') + '</tr>',
+        '<tr>' + rowData.join() + '</tr>',
         '</tbody>',
         '</table>'
     ].join("");
