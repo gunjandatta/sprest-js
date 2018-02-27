@@ -3,7 +3,19 @@ import { Fabric, IButtonProps, IProps } from ".";
 /**
  * Dialog
  */
-export interface IDialog extends Fabric.IDialog { }
+export interface IDialog {
+    /** Returns the fabric component. */
+    get(): Fabric.IDialog;
+
+    /** Returns the actions container. */
+    getActions(): HTMLDivElement;
+
+    /** Returns the content container. */
+    getContent(): HTMLDivElement;
+
+    /** Returns the title container. */
+    getTitle(): HTMLDivElement;
+}
 
 /**
  * Dialog Properties

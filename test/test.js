@@ -10963,17 +10963,31 @@ exports.DatePicker = function (props) {
 
 "use strict";
 
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = __webpack_require__(1);
 /**
  * Dialog
  */
 exports.Dialog = function (props) {
+    // Returns the dialog component
+    var get = function () { return _this._dialog; };
+    // Return the actions container
+    var getActions = function () { return _dialog._containter.querySelector(".ms-Dialog-actions"); };
+    // Return the actions container
+    var getContent = function () { return _dialog._containter.querySelector(".ms-Dialog-content"); };
+    // Return the actions container
+    var getTitle = function () { return _dialog._containter.querySelector(".ms-Dialog-title"); };
     // Create the dialog
     props.el.innerHTML = _1.Templates.Dialog(props);
     var _dialog = new _1.fabric.Dialog(props.el.querySelector(".ms-Dialog"));
     // Return the dialog
-    return _dialog;
+    return {
+        get: get,
+        getActions: getActions,
+        getContent: getContent,
+        getTitle: getTitle
+    };
 };
 
 
@@ -12294,6 +12308,7 @@ exports.Dialog = function (props) {
     // Return the template
     return [
         '<div class="ms-Dialog ' + className + '">',
+        props.showCloseButton ? '<button class="ms-Dialog-button ms-Dialog-buttonClose"><i class="ms-Icon ms-Icon--Cancel"></i></button>' : '',
         '<div class="ms-Dialog-title">' + (props.title || "") + '</div>',
         '<div class="ms-Dialog-content">',
         props.subText ? '<p class="ms-Dialog-subText">' + props.subText + '</p>' : '',

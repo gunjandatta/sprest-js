@@ -31,6 +31,7 @@ export const Dialog = (props: IDialogProps): string => {
     // Return the template
     return [
         '<div class="ms-Dialog ' + className + '">',
+        props.showCloseButton ? '<button class="ms-Dialog-button ms-Dialog-buttonClose"><i class="ms-Icon ms-Icon--Cancel"></i></button>' : '',
         '<div class="ms-Dialog-title">' + (props.title || "") + '</div>',
         '<div class="ms-Dialog-content">',
         props.subText ? '<p class="ms-Dialog-subText">' + props.subText + '</p>' : '',
