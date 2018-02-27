@@ -10963,7 +10963,6 @@ exports.DatePicker = function (props) {
 
 "use strict";
 
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = __webpack_require__(1);
 /**
@@ -10971,7 +10970,7 @@ var _1 = __webpack_require__(1);
  */
 exports.Dialog = function (props) {
     // Returns the dialog component
-    var get = function () { return _this._dialog; };
+    var get = function () { return _dialog; };
     // Return the actions container
     var getActions = function () { return _dialog._dialog.querySelector(".ms-Dialog-actions"); };
     // Return the actions container

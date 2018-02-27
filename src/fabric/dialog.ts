@@ -6,7 +6,7 @@ import { fabric, Templates } from ".";
  */
 export const Dialog = (props: IDialogProps): IDialog => {
     // Returns the dialog component
-    let get = (): Fabric.IDialog => { return this._dialog; }
+    let get = (): Fabric.IDialog => { return _dialog; }
 
     // Return the actions container
     let getActions = (): HTMLDivElement => { return _dialog._dialog.querySelector(".ms-Dialog-actions") as HTMLDivElement; }
