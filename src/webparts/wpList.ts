@@ -148,6 +148,22 @@ export const WPList = (props: IWPListProps) => {
 
         // Return a promise
         return new Promise((resolve, reject) => {
+            // The post render event
+            let postRender = () => {
+                // See if the list name exists and a post render event exists
+                let list = null;
+                if (_wpInfo.cfg && _wpInfo.cfg.ListName && props.onPostRender) {
+                    // Parse the dropdown lists
+                    for (let i = 0; i < _lists.length; i++) {
+                        let list = _lists[i];
+                        if (list.Title == _wpInfo.cfg.ListName) {
+                            // Call the post render event
+                            props.onPostRender(_wpInfo, list);
+                        }
+                    }
+                }
+            };
+
             // See if no data has been loaded
             if (_lists == null) {
                 // Set the query
@@ -170,22 +186,15 @@ export const WPList = (props: IWPListProps) => {
                         // Render the dropdown
                         renderDropdown();
 
-                        // See if the list name exists and a post render event exists
-                        let list = null;
-                        if (_wpInfo.cfg && _wpInfo.cfg.ListName && props.onPostRender) {
-                            // Parse the dropdown lists
-                            for (let i = 0; i < lists.results.length; i++) {
-                                let list = lists.results[i];
-                                if (list.Title == _wpInfo.cfg.ListName) {
-                                    // Call the post render event
-                                    props.onPostRender(_wpInfo, list);
-                                }
-                            }
-                        }
+                        // Call the post render event
+                        postRender();
                     });
             } else {
                 // Render the dropdown
                 renderDropdown();
+
+                // Call the post render event
+                postRender();
             }
         });
     }

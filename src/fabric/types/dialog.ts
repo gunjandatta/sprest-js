@@ -1,4 +1,9 @@
-import { IButtonProps, IProps } from ".";
+import { Fabric, IButtonProps, IProps } from ".";
+
+/**
+ * Dialog
+ */
+export interface IDialog extends Fabric.IDialog { }
 
 /**
  * Dialog Properties

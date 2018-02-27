@@ -17800,6 +17800,21 @@ exports.WPList = function (props) {
         });
         // Return a promise
         return new Promise(function (resolve, reject) {
+            // The post render event
+            var postRender = function postRender() {
+                // See if the list name exists and a post render event exists
+                var list = null;
+                if (_wpInfo.cfg && _wpInfo.cfg.ListName && props.onPostRender) {
+                    // Parse the dropdown lists
+                    for (var i = 0; i < _lists.length; i++) {
+                        var list_1 = _lists[i];
+                        if (list_1.Title == _wpInfo.cfg.ListName) {
+                            // Call the post render event
+                            props.onPostRender(_wpInfo, list_1);
+                        }
+                    }
+                }
+            };
             // See if no data has been loaded
             if (_lists == null) {
                 // Set the query
@@ -17812,22 +17827,14 @@ exports.WPList = function (props) {
                     _lists = props.onListsRendering ? props.onListsRendering(_wpInfo, _lists) : _lists;
                     // Render the dropdown
                     renderDropdown();
-                    // See if the list name exists and a post render event exists
-                    var list = null;
-                    if (_wpInfo.cfg && _wpInfo.cfg.ListName && props.onPostRender) {
-                        // Parse the dropdown lists
-                        for (var i = 0; i < lists.results.length; i++) {
-                            var list_1 = lists.results[i];
-                            if (list_1.Title == _wpInfo.cfg.ListName) {
-                                // Call the post render event
-                                props.onPostRender(_wpInfo, list_1);
-                            }
-                        }
-                    }
+                    // Call the post render event
+                    postRender();
                 });
             } else {
                 // Render the dropdown
                 renderDropdown();
+                // Call the post render event
+                postRender();
             }
         });
     };
