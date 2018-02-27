@@ -14958,11 +14958,22 @@ var _1 = __webpack_require__(1);
  * Table
  */
 exports.Table = function (props) {
+    // Returns the fabric component
+    var get = function get() {
+        return _table;
+    };
+    // Returns the selected table rows
+    var getSelectedRows = function getSelectedRows() {
+        return _table.container.querySelectorAll("tbody>tr.is-selected");
+    };
     // Create the table
     props.el.innerHTML = _1.Templates.Table(props);
     var _table = new _1.fabric.Table(props.el.querySelector(".ms-Table"));
     // Return the table
-    return _table;
+    return {
+        get: get,
+        getSelectedRows: getSelectedRows
+    };
 };
 
 /***/ }),

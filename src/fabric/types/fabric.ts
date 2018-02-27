@@ -196,7 +196,7 @@ export interface ISpinner {
  * Table
  */
 export interface ITable {
-    _container: HTMLTableElement;
+    container: HTMLTableElement;
 }
 
 /**

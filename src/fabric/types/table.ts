@@ -3,7 +3,13 @@ import { Fabric, IDropdownOption, IProps } from ".";
 /**
  * Table
  */
-export interface ITable extends Fabric.ITable { }
+export interface ITable {
+    /** Returns the fabric component. */
+    get(): Fabric.ITable;
+
+    /** Returns the selected rows. */
+    getSelectedRows(): Array<HTMLTableRowElement>;
+}
 
 /**
  * Table Properties
