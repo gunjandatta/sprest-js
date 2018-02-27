@@ -6,9 +6,9 @@ import { fabric, Templates } from ".";
  */
 export const Table = (props: ITableProps) => {
     // Create the table
-    props.el.innerHTML = Templates.Dialog(props);
+    props.el.innerHTML = Templates.Table(props);
     let _table: Fabric.ITable = new fabric.Table(props.el.querySelector(".ms-Table"));
 
-    // Return the dialog
+    // Return the table
     return _table;
 }

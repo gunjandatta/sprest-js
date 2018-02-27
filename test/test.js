@@ -11859,9 +11859,9 @@ var _1 = __webpack_require__(1);
  */
 exports.Table = function (props) {
     // Create the table
-    props.el.innerHTML = _1.Templates.Dialog(props);
+    props.el.innerHTML = _1.Templates.Table(props);
     var _table = new _1.fabric.Table(props.el.querySelector(".ms-Table"));
-    // Return the dialog
+    // Return the table
     return _table;
 };
 
