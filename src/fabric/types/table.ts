@@ -1,4 +1,9 @@
-import { IDropdownOption, IProps } from ".";
+import { Fabric, IDropdownOption, IProps } from ".";
+
+/**
+ * Table
+ */
+export interface ITable extends Fabric.ITable { }
 
 /**
  * Table Properties
