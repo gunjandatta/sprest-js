@@ -31,7 +31,7 @@ export const Table = (props: ITableProps): string => {
         // Parse the columns
         for (let j = 0; j < columns.length; j++) {
             // Add the row column
-            rowData.push(row[columns[j]] || "");
+            rowData.push('<td>' + (row[columns[j]] || "") + '</td>');
         }
     }
 
