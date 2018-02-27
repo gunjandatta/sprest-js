@@ -279,6 +279,7 @@ export const WPList = (props: IWPListProps) => {
         // Render the dropdown
         _ddl = Fabric.Dropdown({
             el: _panelContents.children[1],
+            label: "List:",
             options,
             value: !_init && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
             onChange: (option: Fabric.Types.IDropdownOption) => {

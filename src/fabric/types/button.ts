@@ -8,7 +8,7 @@ export interface IButtonProps extends IProps {
     disable?: boolean;
 
     /** The click event */
-    onClick?: () => void;
+    onClick?: (btn?: HTMLButtonElement) => void;
 
     /** The button text */
     text: string;

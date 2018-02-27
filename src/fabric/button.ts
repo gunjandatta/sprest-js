@@ -17,7 +17,7 @@ export const Button = (props: IButtonProps): HTMLButtonElement => {
         ev ? ev.preventDefault() : null;
 
         // Execute the click event
-        props.onClick ? props.onClick() : null;
+        props.onClick ? props.onClick(ev.currentTarget as HTMLButtonElement) : null;
     });
 
     // Create the button

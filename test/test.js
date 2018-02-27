@@ -10649,7 +10649,7 @@ exports.Button = function (props) {
         // Disable postback
         ev ? ev.preventDefault() : null;
         // Execute the click event
-        props.onClick ? props.onClick() : null;
+        props.onClick ? props.onClick(ev.currentTarget) : null;
     });
     // Create the button
     var _btn = new _1.fabric.Button(btn);
@@ -15198,6 +15198,7 @@ exports.WPList = function (props) {
         // Render the dropdown
         _ddl = __1.Fabric.Dropdown({
             el: _panelContents.children[1],
+            label: "List:",
             options: options,
             value: !_init && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
             onChange: function (option) {
