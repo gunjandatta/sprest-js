@@ -1,5 +1,28 @@
 import { Types } from "gd-sprest";
-import { IWPCfg, IWebPartCfg, IWebPartInfo, IWebPartProps } from ".";
+import { IWebPart, IWPCfg, IWebPartCfg, IWebPartInfo, IWebPartProps } from ".";
+
+/**
+ * WebPart List
+ */
+export interface IWPList extends IWebPart {
+    /** The webpart configuration. */
+    cfg: IWPListCfg;
+
+    /** The webpart information. */
+    info: IWPListInfo;
+
+    /**
+     * In display mode, the target list items.
+     * In edit mode, null.
+     */
+    items: Array<Types.SP.IListItemQueryResult | Types.SP.IListItemResult>;
+
+    /**
+     * In display mode, the target list.
+     * In edit mode, the selected list.
+     */
+    list: Types.SP.IListQueryResult | Types.SP.IListResult;
+}
 
 /**
  * WebPart List Configuration

@@ -1,13 +1,14 @@
 import { ContextInfo } from "gd-sprest";
-import { IWebPartCfg, IWebPartInfo, IWebPartObject, IWebPartProps } from "./types";
+import { IWebPart, IWebPartCfg, IWebPartInfo, IWebPartObject, IWebPartProps } from "./types";
 declare var SP;
 declare var MSOWebPartPageFormName;
 
 /**
  * Web Part
  */
-export const WebPart = (props: IWebPartProps) => {
-    let _wp = null;
+export const WebPart = (props: IWebPartProps): IWebPart => {
+    let _wp: IWebPartInfo = null;
+    let _cfg: IWebPartCfg = {};
 
     /**
      * Method to add the help link to a script part editor.
@@ -236,6 +237,9 @@ export const WebPart = (props: IWebPartProps) => {
             return;
         }
 
+        // Set the configuration
+        _cfg = _wp.cfg;
+
         // See if the page is being edited
         let returnVal = null;
         if (isEditMode()) {
@@ -276,4 +280,9 @@ export const WebPart = (props: IWebPartProps) => {
         // Render the component
         render();
     });
+
+    return {
+        cfg: _cfg,
+        info: _wp
+    }
 }

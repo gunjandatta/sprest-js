@@ -1,4 +1,15 @@
 /**
+ * WebPart
+ */
+export interface IWebPart {
+    /** The webpart configuration. */
+    cfg: IWebPartCfg;
+
+    /** The webpart information. */
+    info: IWebPartInfo;
+}
+
+/**
  * WebPart Configuration
  */
 export interface IWebPartCfg {

@@ -1,18 +1,14 @@
 import { ContextInfo, Web, Types } from "gd-sprest";
-import { IWPListCfg, IWPListInfo, IWPListProps } from "./types";
+import { IWPList, IWPListCfg, IWPListInfo, IWPListProps } from "./types";
 import { Fabric } from "..";
 import { WebPart, WPCfg } from ".";
 
 /**
  * List WebPart
  */
-export const WPList = (props: IWPListProps) => {
-    let _ddl: Fabric.Types.IDropdown = null;
-    let _init = false;
+export const WPList = (props: IWPListProps): IWPList => {
     let _items: Array<Types.SP.IListItemQueryResult | Types.SP.IListItemResult> = null;
-    let _lists: Array<Types.SP.IListQueryResult | Types.SP.IListResult> = null;
-    let _panel: Fabric.Types.IPanel = null;
-    let _panelContents: HTMLElement = null;
+    let _list: Types.SP.IListQueryResult | Types.SP.IListResult = null;
     let _wpInfo: IWPListInfo = null;
 
     /**
@@ -104,6 +100,12 @@ export const WPList = (props: IWPListProps) => {
     /**
      * Edit Form
      */
+
+    let _ddl: Fabric.Types.IDropdown = null;
+    let _init = false;
+    let _lists: Array<Types.SP.IListQueryResult | Types.SP.IListResult> = null;
+    let _panel: Fabric.Types.IPanel = null;
+    let _panelContents: HTMLElement = null;
 
     // Method to render the edit form
     let renderEditForm = (wpInfo: IWPListInfo) => {
@@ -306,11 +308,19 @@ export const WPList = (props: IWPListProps) => {
      * Main
      */
 
-    // Return the webpart
-    return WebPart({
+    // Create the webpart
+    let _wp = WebPart({
         cfgElementId: props.cfgElementId,
         elementId: props.elementId,
         onRenderDisplay: renderDisplayForm,
         onRenderEdit: renderEditForm
     });
+
+    // Return the webpart
+    return {
+        cfg: _wp.cfg,
+        info: _wp.info,
+        items: _items,
+        list: _list
+    };
 }

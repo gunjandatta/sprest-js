@@ -14525,6 +14525,7 @@ var gd_sprest_1 = __webpack_require__(3);
  */
 exports.WebPart = function (props) {
     var _wp = null;
+    var _cfg = {};
     /**
      * Method to add the help link to a script part editor.
      * @wpId - The webpart id.
@@ -14735,6 +14736,8 @@ exports.WebPart = function (props) {
             console.log("[sp-webpart] The target webpart element '" + props.elementId + "' was not found.");
             return;
         }
+        // Set the configuration
+        _cfg = _wp.cfg;
         // See if the page is being edited
         var returnVal = null;
         if (isEditMode()) {
@@ -14779,6 +14782,10 @@ exports.WebPart = function (props) {
         // Render the component
         render();
     });
+    return {
+        cfg: _cfg,
+        info: _wp
+    };
 };
 
 
@@ -14968,12 +14975,8 @@ var _1 = __webpack_require__(9);
  * List WebPart
  */
 exports.WPList = function (props) {
-    var _ddl = null;
-    var _init = false;
     var _items = null;
-    var _lists = null;
-    var _panel = null;
-    var _panelContents = null;
+    var _list = null;
     var _wpInfo = null;
     /**
      * Display Form
@@ -15051,6 +15054,11 @@ exports.WPList = function (props) {
     /**
      * Edit Form
      */
+    var _ddl = null;
+    var _init = false;
+    var _lists = null;
+    var _panel = null;
+    var _panelContents = null;
     // Method to render the edit form
     var renderEditForm = function (wpInfo) {
         // Save the information
@@ -15222,13 +15230,20 @@ exports.WPList = function (props) {
     /**
      * Main
      */
-    // Return the webpart
-    return _1.WebPart({
+    // Create the webpart
+    var _wp = _1.WebPart({
         cfgElementId: props.cfgElementId,
         elementId: props.elementId,
         onRenderDisplay: renderDisplayForm,
         onRenderEdit: renderEditForm
     });
+    // Return the webpart
+    return {
+        cfg: _wp.cfg,
+        info: _wp.info,
+        items: _items,
+        list: _list
+    };
 };
 
 

@@ -1,6 +1,17 @@
 import { Types } from "gd-sprest";
 import { IDropdownOption } from "../../fabric/types";
-import { IWPCfg, IWPListCfg, IWPListInfo, IWPListProps } from ".";
+import { IWPCfg, IWPList, IWPListCfg, IWPListInfo, IWPListProps } from ".";
+
+/**
+ * WebPart Search
+ */
+export interface IWPSearch extends IWPList {
+    /** The webpart configuration. */
+    cfg: IWPSearchCfg;
+
+    /** The webpart information. */
+    info: IWPSearchInfo;
+}
 
 /**
  * WebPart Search Configuration
