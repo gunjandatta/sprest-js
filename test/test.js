@@ -15158,13 +15158,9 @@ exports.WPList = function (props) {
         var tb = __1.Fabric.TextField({
             el: _panelContents.querySelector("#webUrl"),
             label: "Relative Web Url:",
-            description: "The web containing the list. If blank, the current web is used."
+            description: "The web containing the list. If blank, the current web is used.",
+            value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.WebUrl : ""
         });
-        // See if the configuration exists
-        if (_wpInfo && _wpInfo.cfg) {
-            // Initialized the textbox
-            tb.setValue(_wpInfo.cfg.WebUrl || "");
-        }
         // Render the refresh button
         __1.Fabric.Button({
             el: _panelContents.querySelector("#refresh"),
@@ -15211,7 +15207,7 @@ exports.WPList = function (props) {
             el: _panelContents.children[1],
             label: "List:",
             options: options,
-            value: _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
+            value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
             onChange: function (option) {
                 // Parse the list
                 for (var i = 0; i < _lists.length; i++) {

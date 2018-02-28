@@ -219,14 +219,13 @@ export const WPList = (props: IWPListProps): IWPList => {
         let tb = Fabric.TextField({
             el: _panelContents.querySelector("#webUrl"),
             label: "Relative Web Url:",
-            description: "The web containing the list. If blank, the current web is used."
+            description: "The web containing the list. If blank, the current web is used.",
+            value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.WebUrl : "",
+            onChange: (value) => {
+                // Update the configuration
+                _wpInfo.cfg.WebUrl = value;
+            }
         });
-
-        // See if the configuration exists
-        if (_wpInfo && _wpInfo.cfg) {
-            // Initialized the textbox
-            tb.setValue(_wpInfo.cfg.WebUrl || "");
-        }
 
         // Render the refresh button
         Fabric.Button({
@@ -245,15 +244,9 @@ export const WPList = (props: IWPListProps): IWPList => {
             onClick: () => {
                 let selectedList = _ddl.getValue() as Fabric.Types.IDropdownOption;
 
-                // Get the configuration
-                let cfg = {
-                    ListName: selectedList ? selectedList.text : "",
-                    WebPartId: _wpInfo.wpId,
-                    WebUrl: tb.getValue()
-                } as IWPListCfg;
-
-                // Call the save event
-                cfg = props.onSave ? props.onSave(cfg) : cfg;
+                // Call the save event and set the configuration
+                let cfg = props.onSave ? props.onSave(_wpInfo.cfg) : null;
+                cfg = cfg ? cfg : _wpInfo.cfg;
 
                 // Save the configuration
                 WPCfg.saveConfiguration(_wpInfo.wpId, props.cfgElementId, cfg);
@@ -282,7 +275,7 @@ export const WPList = (props: IWPListProps): IWPList => {
             el: _panelContents.children[1],
             label: "List:",
             options,
-            value: _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
+            value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
             onChange: (option: Fabric.Types.IDropdownOption) => {
                 // Parse the list
                 for (let i = 0; i < _lists.length; i++) {
@@ -290,6 +283,9 @@ export const WPList = (props: IWPListProps): IWPList => {
                     if (_lists[i].Title == option.text) {
                         // Call the change event
                         props.onListChanged ? props.onListChanged(_wpInfo, _lists[i]) : null;
+
+                        // Update the configuration
+                        _wpInfo.cfg.ListName = option.value;
                         break;
                     }
                 }
