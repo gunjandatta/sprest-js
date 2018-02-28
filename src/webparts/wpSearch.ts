@@ -10,7 +10,7 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
     let ddlFields: Fabric.Types.IDropdown = null;
 
     // Method to update the 
-    let listChanged = (wpInfo: IWPSearchInfo, list: Types.SP.IListQueryResult) => {
+    let listChanged = (el: HTMLDivElement, wpInfo: IWPSearchInfo, list: Types.SP.IListQueryResult) => {
         let options: Array<Fabric.Types.IDropdownOption> = [];
 
         // Parse the fields
@@ -53,19 +53,15 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
     }
 
     // Method to render the footer
-    let renderFooter = (wpInfo: IWPSearchInfo, list: Types.SP.IListQueryResult) => {
-        // Render a field dropdown if a list exists
-        let footer = document.querySelector("#field-cfg");
-        if (footer && wpInfo.cfg && wpInfo.cfg.ListName) {
-            // Render a spinner
-            Fabric.Spinner({
-                el: footer,
-                text: "Loading the fields..."
-            });
+    let renderFooter = (el: HTMLDivElement, wpInfo: IWPSearchInfo, list: Types.SP.IListQueryResult) => {
+        // Render a spinner
+        Fabric.Spinner({
+            el,
+            text: "Loading the fields..."
+        });
 
-            // Load the fields
-            listChanged(wpInfo, list);
-        }
+        // Load the fields
+        listChanged(el, wpInfo, list);
     };
 
     // Method to save the configuration
@@ -82,16 +78,13 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
         camlQuery: props.camlQuery,
         cfgElementId: props.cfgElementId,
         className: props.className,
+        editPanel: {
+            onRenderFooter: renderFooter
+        },
         elementId: props.elementId,
         helpProps: props.helpProps,
+        listQuery: props.listQuery,
         odataQuery: props.odataQuery,
-        onListChanged: listChanged,
-        onListsRendering: props.onListsRendering,
-        onPostRender: renderFooter,
-        onRenderDisplay: props.onRenderDisplay,
-        onRenderEdit: props.onRenderEdit,
-        onRenderFooter: () => { return "<div id='field-cfg'></div>" },
-        onRenderHeader: props.onRenderHeader,
         onRenderItems: props.onRenderItems,
         onSave: saveConfiguration
     });
@@ -99,8 +92,6 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
     // Return the webpart
     return {
         cfg: _wp.cfg,
-        info: _wp.info,
-        items: _wp.items,
-        list: _wp.list
+        info: _wp.info
     } as any;
 }

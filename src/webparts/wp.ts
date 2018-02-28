@@ -1,5 +1,7 @@
 import { ContextInfo } from "gd-sprest";
-import { IWebPart, IWebPartCfg, IWebPartInfo, IWebPartObject, IWebPartProps } from "./types";
+import { Button, Panel, PanelTypes, Types } from "../fabric";
+import { IWebPart, IWebPartCfg, IWebPartEditPanel, IWebPartInfo, IWebPartObject, IWebPartProps } from "./types";
+import { WPCfg } from "./wpCfg";
 declare var SP;
 declare var MSOWebPartPageFormName;
 
@@ -7,8 +9,10 @@ declare var MSOWebPartPageFormName;
  * Web Part
  */
 export const WebPart = (props: IWebPartProps): IWebPart => {
-    let _wp: IWebPartInfo = null;
+    let _panel: Types.IPanel = null;
+    let _panelCfg: IWebPartEditPanel = props.editPanel || {};
     let _cfg: IWebPartCfg = {};
+    let _wp: IWebPartInfo = null;
 
     /**
      * Method to add the help link to a script part editor.
@@ -273,6 +277,79 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
             // Execute the post render event
             props.onPostRender ? props.onPostRender(_wp) : null;
         }
+    }
+
+    // Renders the configuration panel
+    let renderConfiguration = () => {
+        // Render the panel contents
+        let panelContents = _panel.updateContent([
+            '<div></div>',
+            '<div></div>',
+            '<div></div>'
+        ].join('\n'));
+
+        // See if the render header event exists
+        if (_panelCfg.onRenderHeader) {
+            // Call the event
+            _panelCfg.onRenderHeader(panelContents.children[0] as HTMLDivElement, _wp);
+        }
+
+        // See if we are rendering the save button
+        let hideSaveBtn = _panelCfg.hideSaveButton;
+        if (!hideSaveBtn) {
+            // Render the refresh button
+            Button({
+                el: panelContents.children[1],
+                text: "Save",
+                onClick: () => {
+                    // Call the save event and set the configuration
+                    let cfg = _panelCfg.onSave ? _panelCfg.onSave(_wp.cfg) : null;
+                    cfg = cfg ? cfg : _wp.cfg;
+
+                    // Save the configuration
+                    WPCfg.saveConfiguration(_wp.wpId, props.cfgElementId, cfg);
+                }
+            });
+        }
+
+        // See if the render footer event exists
+        if (_panelCfg.onRenderHeader) {
+            // Call the event
+            _panelCfg.onRenderFooter(panelContents.children[2] as HTMLDivElement, _wp);
+        }
+    }
+
+    // The default render method when the page is edited
+    let renderEditPanel = () => {
+        // Ensure we are rendering the panel
+        if (_panelCfg == null || _panelCfg.hide) { return; }
+
+        // Render the configuration panel
+        _wp.el.innerHTML = [
+            '<div></div>',
+            '<div></div>',
+        ].join('\n');
+
+        // Render the panel
+        _panel = Panel({
+            el: _wp.el.children[0],
+            headerText: "Configuration Panel",
+            panelType: _panelCfg.panelType || PanelTypes.Medium,
+            showCloseButton: true
+        });
+
+        // Render the button
+        let btn = Button({
+            el: _wp.el.children[1],
+            text: "Show Configuration",
+            onClick: () => {
+                // Show the panel
+                _panel.show();
+
+                // Render the configuration
+                renderConfiguration();
+            }
+        });
     }
 
     // Add a load event

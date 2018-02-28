@@ -1,5 +1,5 @@
 import { ContextInfo, Web, Types } from "gd-sprest";
-import { IWPList, IWPListCfg, IWPListInfo, IWPListProps } from "./types";
+import { IWPList, IWPListCfg, IWPListEditPanel, IWPListInfo, IWPListProps } from "./types";
 import { Fabric } from "..";
 import { WebPart, WPCfg } from ".";
 
@@ -7,8 +7,10 @@ import { WebPart, WPCfg } from ".";
  * List WebPart
  */
 export const WPList = (props: IWPListProps): IWPList => {
+    let _cfg: IWPListEditPanel = props.editPanel || {};
+    let _el: HTMLDivElement;
     let _items: Array<Types.SP.IListItemQueryResult | Types.SP.IListItemResult> = null;
-    let _list: Types.SP.IListQueryResult | Types.SP.IListResult = null;
+    let _lists: Array<Types.SP.IListQueryResult | Types.SP.IListResult> = null;
     let _wpInfo: IWPListInfo = null;
 
     /**
@@ -35,7 +37,7 @@ export const WPList = (props: IWPListProps): IWPList => {
 
         // See if we are using the CAML query
         let cfg: IWPListCfg = _wpInfo.cfg || {};
-        if (props.camlQuery || props.onExecutingCAMLQuery) { loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery); }
+        if (props.camlQuery || _cfg.onExecutingCAMLQuery) { loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery); }
         // Else, load using the ODATA query
         else { loadODATA(cfg.WebUrl, cfg.ListName, props.odataQuery); }
     }
@@ -43,7 +45,7 @@ export const WPList = (props: IWPListProps): IWPList => {
     // Method to load the items using a CAML query
     let loadCAML = (webUrl: string, listName: string, caml: string = "") => {
         // Call the load caml query event
-        caml = props.onExecutingCAMLQuery ? props.onExecutingCAMLQuery(_wpInfo, caml) : null;
+        caml = _cfg.onExecutingCAMLQuery ? _cfg.onExecutingCAMLQuery(_wpInfo, caml) : null;
 
         // See if we are targeting a different web
         if (webUrl) {
@@ -80,7 +82,7 @@ export const WPList = (props: IWPListProps): IWPList => {
     // Method to load the items using an ODATA query
     let loadODATA = (webUrl: string, listName: string, query: Types.SP.ODataQuery = {}) => {
         // Call the load caml query event
-        query = props.onExecutingODATAQuery ? props.onExecutingODATAQuery(_wpInfo, query) : null;
+        query = _cfg.onExecutingODATAQuery ? _cfg.onExecutingODATAQuery(_wpInfo, query) : null;
 
         // Get the web
         (new Web(webUrl))
@@ -101,56 +103,25 @@ export const WPList = (props: IWPListProps): IWPList => {
      * Edit Form
      */
 
-    let _ddl: Fabric.Types.IDropdown = null;
-    let _lists: Array<Types.SP.IListQueryResult | Types.SP.IListResult> = null;
-    let _panel: Fabric.Types.IPanel = null;
-    let _panelContents: HTMLElement = null;
-
-    // Method to render the edit form
-    let renderEditForm = (wpInfo: IWPListInfo) => {
-        // Save the information
-        _wpInfo = wpInfo;
-
-        // Render the configuration panel
-        _wpInfo.el.innerHTML = [
-            '<div></div>',
-            '<div></div>',
-        ].join('\n');
-
-        // Render the panel
-        _panel = Fabric.Panel({
-            el: _wpInfo.el.children[0],
-            headerText: "Configuration Panel",
-            panelType: props.panelType,
-            showCloseButton: true
-        });
-
-        // Render the button
-        let btn = Fabric.Button({
-            el: _wpInfo.el.children[1],
-            text: "Show Configuration",
-            onClick: () => {
-                // Show the panel
-                _panel.show();
-
-                // Render the configuration
-                renderConfiguration();
-            }
-        });
-    }
-
     // Method to load the lists
-    let loadLists = (webUrl?: string): PromiseLike<Array<Types.SP.IListQueryResult | Types.SP.IListResult>> => {
-        // Render a loading message
-        Fabric.Spinner({
-            el: _panelContents.children[1],
-            text: "Loading the lists..."
-        });
+    let loadLists = (webUrl?: string) => {
+        // Set the query
+        let query: Types.SP.ODataQuery = props.listQuery || {};
 
-        // Return a promise
-        return new Promise((resolve, reject) => {
-            // The post render event
-            let postRender = () => {
+        // Get the web
+        (new Web(webUrl))
+            // Get the lists
+            .Lists()
+            // Include the fields
+            .query(query)
+            // Execute the request
+            .execute(lists => {
+                // Save the lists
+                _lists = lists.results;
+
+                // Call the list rendering event
+                _lists = (_cfg.onListsRendering ? _cfg.onListsRendering(_wpInfo, _lists) : null) || _lists;
+
                 // See if the list name exists and a post render event exists
                 let list = null;
                 if (_wpInfo.cfg && _wpInfo.cfg.ListName) {
@@ -164,60 +135,26 @@ export const WPList = (props: IWPListProps): IWPList => {
                     }
                 }
 
-                // Call the post render event
-                props.onPostRender ? props.onPostRender(_wpInfo, list) : null;
-            };
-
-            // See if no data has been loaded
-            if (_lists == null) {
-                // Set the query
-                let query: Types.SP.ODataQuery = props.listQuery || {};
-
-                // Get the web
-                (new Web(webUrl))
-                    // Get the lists
-                    .Lists()
-                    // Include the fields
-                    .query(query)
-                    // Execute the request
-                    .execute(lists => {
-                        // Save the lists
-                        _lists = lists.results;
-
-                        // Call the list rendering event
-                        _lists = props.onListsRendering ? props.onListsRendering(_wpInfo, _lists) : _lists;
-
-                        // Render the dropdown
-                        renderDropdown();
-
-                        // Call the post render event
-                        postRender();
-                    });
-            } else {
-                // Render the dropdown
-                renderDropdown();
-
-                // Call the post render event
-                postRender();
-            }
-        });
+                // Render the configuration
+                renderConfiguration(list);
+            });
     }
 
     // Method to render the configuration panel
-    let renderConfiguration = () => {
+    let renderConfiguration = (list?: Types.SP.IListQueryResult | Types.SP.IListResult) => {
         // Render the panel contents
-        _panelContents = _panel.updateContent([
-            (props.onRenderHeader ? props.onRenderHeader(_wpInfo) : null) || "",
-            '<div id="webUrl"></div>',
+        _el.innerHTML = [
             '<div></div>',
-            (props.onRenderFooter ? props.onRenderFooter(_wpInfo) : null) || "",
-            '<div id="refresh"></div>',
-            '<div id="save"></div>'
-        ].join('\n'));
+            '<div></div>',
+            '<div></div>',
+            '<div></div>',
+            '<div></div>',
+            '<div></div>'
+        ].join('\n');
 
         // Render the web url textbox
         let tb = Fabric.TextField({
-            el: _panelContents.querySelector("#webUrl"),
+            el: _el.children[1],
             label: "Relative Web Url:",
             description: "The web containing the list. If blank, the current web is used.",
             value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.WebUrl : "",
@@ -227,38 +164,41 @@ export const WPList = (props: IWPListProps): IWPList => {
             }
         });
 
-        // Render the refresh button
-        Fabric.Button({
-            el: _panelContents.querySelector("#refresh"),
-            text: "Refresh",
-            onClick: () => {
-                // Load the lists
-                loadLists(tb.getValue());
+        // See if the lists exists
+        if (_lists) {
+            // Render the header
+            if (_cfg.onRenderHeader) {
+                _cfg.onRenderHeader(_el.children[0] as HTMLDivElement, _wpInfo, list);
             }
-        });
 
-        // Render the refresh button
-        Fabric.Button({
-            el: _panelContents.querySelector("#save"),
-            text: "Save",
-            onClick: () => {
-                let selectedList = _ddl.getValue() as Fabric.Types.IDropdownOption;
+            // Render the refresh button
+            Fabric.Button({
+                el: _el.children[4],
+                text: "Refresh",
+                onClick: () => {
+                    // Load the lists
+                    loadLists(tb.getValue());
+                }
+            });
 
-                // Call the save event and set the configuration
-                let cfg = props.onSave ? props.onSave(_wpInfo.cfg) : null;
-                cfg = cfg ? cfg : _wpInfo.cfg;
-
-                // Save the configuration
-                WPCfg.saveConfiguration(_wpInfo.wpId, props.cfgElementId, cfg);
+            // Render the footer
+            if (_cfg.onRenderFooter) {
+                _cfg.onRenderFooter(_el.children[3] as HTMLDivElement, _wpInfo, list);
             }
-        });
+        } else {
+            // Render a loading message
+            Fabric.Spinner({
+                el: _el.children[2],
+                text: "Loading the lists..."
+            });
 
-        // Load the lists
-        loadLists(tb.getValue());
+            // Load the lists
+            loadLists(tb.getValue());
+        }
     }
 
     // Method to render the dropdown
-    let renderDropdown = () => {
+    let renderDropdown = (el: HTMLDivElement) => {
         let options: Array<Fabric.Types.IDropdownOption> = [];
 
         // Parse the lists
@@ -271,8 +211,8 @@ export const WPList = (props: IWPListProps): IWPList => {
         }
 
         // Render the dropdown
-        _ddl = Fabric.Dropdown({
-            el: _panelContents.children[1],
+        let ddl = Fabric.Dropdown({
+            el,
             label: "List:",
             options,
             value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
@@ -281,11 +221,11 @@ export const WPList = (props: IWPListProps): IWPList => {
                 for (let i = 0; i < _lists.length; i++) {
                     // See if this is the target list
                     if (_lists[i].Title == option.text) {
-                        // Call the change event
-                        props.onListChanged ? props.onListChanged(_wpInfo, _lists[i]) : null;
-
                         // Update the configuration
                         _wpInfo.cfg.ListName = option.value;
+
+                        // Call the change event
+                        _cfg.onListChanged ? _cfg.onListChanged(_wpInfo, _lists[i]) : null;
                         break;
                     }
                 }
@@ -300,16 +240,30 @@ export const WPList = (props: IWPListProps): IWPList => {
     // Create the webpart
     let _wp = WebPart({
         cfgElementId: props.cfgElementId,
+        editPanel: {
+            onRenderHeader: (el, wpInfo) => {
+                // Save the properties
+                _el = el;
+                _wpInfo = wpInfo;
+
+                // Render the configuration
+                renderConfiguration();
+            },
+            panelType: props.editPanel ? props.editPanel.panelType : null,
+            onSave: (cfg:IWPListCfg) => {
+                // Update the webpart configuration and return it
+                cfg.ListName = _wpInfo.cfg.ListName;
+                cfg.WebUrl = _wpInfo.cfg.WebUrl;
+                return cfg;
+            }
+        },
         elementId: props.elementId,
-        onRenderDisplay: renderDisplayForm,
-        onRenderEdit: renderEditForm
+        onRenderDisplay: renderDisplayForm
     });
 
     // Return the webpart
     return {
         cfg: _wp.cfg,
-        info: _wp.info,
-        items: _items,
-        list: _list
+        info: _wp.info
     };
 }

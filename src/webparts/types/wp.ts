@@ -18,6 +18,29 @@ export interface IWebPartCfg {
 }
 
 /**
+ * WebPart Edit Panel
+ */
+export interface IWebPartEditPanel {
+    /** True to hide the panel. */
+    hide?: boolean;
+
+    /** True to hide the save button. */
+    hideSaveButton?: boolean;
+
+    /** The render footer event. */
+    onRenderFooter?: (el:HTMLDivElement, wpInfo: IWebPartInfo) => void;
+
+    /** The render header event. */
+    onRenderHeader?: (el:HTMLDivElement, wpInfo: IWebPartInfo) => void;
+
+    /** The save event. */
+    onSave?: (wpCfg: IWebPartCfg) => IWebPartCfg;
+
+    /** The edit panel type. */
+    panelType?: number;
+}
+
+/**
  * WebPart Information
  */
 export interface IWebPartInfo {
@@ -63,6 +86,9 @@ export interface IWebPartProps {
 
     /** The target element id to render the webpart to */
     elementId?: string;
+
+    /** The edit panel */
+    editPanel?: IWebPartEditPanel;
 
     /** The optional help link properties */
     helpProps?: {

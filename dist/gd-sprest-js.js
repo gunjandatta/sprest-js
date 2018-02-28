@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,9 +73,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(38));
 __export(__webpack_require__(39));
-__export(__webpack_require__(58));
+__export(__webpack_require__(40));
 __export(__webpack_require__(59));
 __export(__webpack_require__(60));
 __export(__webpack_require__(61));
@@ -83,7 +82,8 @@ __export(__webpack_require__(62));
 __export(__webpack_require__(63));
 __export(__webpack_require__(64));
 __export(__webpack_require__(65));
-var Types = __webpack_require__(66);
+__export(__webpack_require__(66));
+var Types = __webpack_require__(67);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -101,9 +101,8 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 // Office Fabric-UI JavaScript Library
-__export(__webpack_require__(16));
+__export(__webpack_require__(17));
 // Fabric Components
-__export(__webpack_require__(21));
 __export(__webpack_require__(22));
 __export(__webpack_require__(23));
 __export(__webpack_require__(24));
@@ -118,16 +117,17 @@ __export(__webpack_require__(32));
 __export(__webpack_require__(33));
 __export(__webpack_require__(34));
 __export(__webpack_require__(35));
-__export(__webpack_require__(93));
+__export(__webpack_require__(36));
 __export(__webpack_require__(94));
 __export(__webpack_require__(95));
 __export(__webpack_require__(96));
 __export(__webpack_require__(97));
+__export(__webpack_require__(98));
 // Templates
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(117);
+var Types = __webpack_require__(118);
 exports.Types = Types;
 
 /***/ }),
@@ -140,8 +140,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(37));
-__export(__webpack_require__(67));
+__export(__webpack_require__(38));
 __export(__webpack_require__(68));
 __export(__webpack_require__(69));
 __export(__webpack_require__(70));
@@ -152,8 +151,9 @@ __export(__webpack_require__(74));
 __export(__webpack_require__(75));
 __export(__webpack_require__(76));
 __export(__webpack_require__(77));
+__export(__webpack_require__(78));
 __export(__webpack_require__(11));
-var Types = __webpack_require__(78);
+var Types = __webpack_require__(79);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -197,10 +197,10 @@ var Helper = __webpack_require__(7);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(5);
 exports.SPTypes = mapper_1.SPTypes;
-var Types = __webpack_require__(91);
+var Types = __webpack_require__(92);
 exports.Types = Types;
 __export(__webpack_require__(2));
-__export(__webpack_require__(92));
+__export(__webpack_require__(93));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -216,7 +216,6 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(98));
 __export(__webpack_require__(99));
 __export(__webpack_require__(100));
 __export(__webpack_require__(101));
@@ -235,6 +234,7 @@ __export(__webpack_require__(113));
 __export(__webpack_require__(114));
 __export(__webpack_require__(115));
 __export(__webpack_require__(116));
+__export(__webpack_require__(117));
 
 /***/ }),
 /* 5 */
@@ -243,11 +243,11 @@ __export(__webpack_require__(116));
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Mapper = __webpack_require__(40);
+var Mapper = __webpack_require__(41);
 exports.Mapper = Mapper;
-var SPTypes = __webpack_require__(53);
+var SPTypes = __webpack_require__(54);
 exports.SPTypes = SPTypes;
-var Types = __webpack_require__(54);
+var Types = __webpack_require__(55);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -295,22 +295,22 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(36));
-__export(__webpack_require__(79));
+__export(__webpack_require__(37));
 __export(__webpack_require__(80));
-__export(__webpack_require__(82));
+__export(__webpack_require__(81));
 __export(__webpack_require__(83));
 __export(__webpack_require__(84));
 __export(__webpack_require__(85));
-__export(__webpack_require__(13));
 __export(__webpack_require__(86));
+__export(__webpack_require__(13));
 __export(__webpack_require__(87));
+__export(__webpack_require__(88));
 __export(__webpack_require__(12));
 __export(__webpack_require__(14));
-__export(__webpack_require__(88));
-var SP = __webpack_require__(89);
+__export(__webpack_require__(89));
+var SP = __webpack_require__(90);
 exports.SP = SP;
-var Types = __webpack_require__(90);
+var Types = __webpack_require__(91);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -327,11 +327,11 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(119));
 __export(__webpack_require__(120));
 __export(__webpack_require__(121));
 __export(__webpack_require__(122));
-var Types = __webpack_require__(123);
+__export(__webpack_require__(123));
+var Types = __webpack_require__(124);
 exports.Types = Types;
 
 /***/ }),
@@ -347,8 +347,8 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(124));
 __export(__webpack_require__(125));
+__export(__webpack_require__(15));
 __export(__webpack_require__(126));
 __export(__webpack_require__(127));
 __export(__webpack_require__(128));
@@ -2573,7 +2573,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return 1 === arguments.length ? this.off(a, "**") : this.off(b, a || "**", c);
     }, size: function size() {
       return this.length;
-    } }), n.fn.andSelf = n.fn.addBack, "function" == "function" && __webpack_require__(19) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+    } }), n.fn.andSelf = n.fn.addBack, "function" == "function" && __webpack_require__(20) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
     return n;
   }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));var Nb = a.jQuery,
@@ -2581,7 +2581,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return a.$ === n && (a.$ = Ob), b && a.jQuery === n && (a.jQuery = Nb), n;
   }, b || (a.jQuery = a.$ = n), n;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19)(module)))
 
 /***/ }),
 /* 11 */
@@ -2640,7 +2640,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(81));
+__export(__webpack_require__(82));
 var lib_1 = __webpack_require__(2);
 var _1 = __webpack_require__(7);
 /**
@@ -4167,12 +4167,184 @@ exports.Taxonomy = {
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var gd_sprest_1 = __webpack_require__(3);
+/**
+ * WebPart Configuration
+ */
+exports.WPCfg = {
+    // Method to get the webpart
+    getWebPart: function getWebPart(wpId) {
+        // Return a promise
+        return new Promise(function (resolve, reject) {
+            // Get the current context
+            var context = SP.ClientContext.get_current();
+            // Get the webpart from the current page
+            var page = context.get_web().getFileByServerRelativeUrl(gd_sprest_1.ContextInfo.serverRequestPath);
+            var wpMgr = page.getLimitedWebPartManager(SP.WebParts.PersonalizationScope.shared);
+            var wpDef = wpMgr.get_webParts().getById(wpId);
+            var wp = wpDef.get_webPart();
+            context.load(wp, "Properties");
+            // Execute the request
+            context.executeQueryAsync(
+            // Success
+            function () {
+                // Resolve the promise
+                resolve({
+                    Context: context,
+                    Properties: wp.get_properties(),
+                    WebPart: wp,
+                    WebPartDefinition: wpDef
+                });
+            },
+            // Error
+            function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                // Reject the promise
+                reject(args[1] ? args[1].get_message() : "");
+            });
+        });
+    },
+    // Method to get the webpart id for a specified element
+    getWebPartId: function getWebPartId(el) {
+        // Loop until we find the webpart id
+        while (el) {
+            // See if this element contains the webpart id
+            var wpId = el.getAttribute("webpartid");
+            if (wpId) {
+                // Return the webpart id
+                return wpId;
+            }
+            // Check the parent
+            el = el.parentElement;
+        }
+        // Unable to detect
+        return "";
+    },
+    // Method to save the webpart configuration
+    saveConfiguration: function saveConfiguration(wpId, cfgId, wpCfg) {
+        // Update the webpart content elements and return if they exist
+        if (exports.WPCfg.updateWebPartContentElements(wpId, cfgId, wpCfg)) {
+            return;
+        }
+        // Get the target webpart
+        exports.WPCfg.getWebPart(wpId).then(function (wpInfo) {
+            // Get the content
+            var content = wpInfo && wpInfo.Properties.get_fieldValues()["Content"];
+            if (content) {
+                // Create an element so we can update the configuration
+                var el = document.createElement("div");
+                el.innerHTML = content;
+                // Get the configuration element and update it
+                var cfg = el.querySelector("#" + cfgId);
+                cfg ? cfg.innerText = JSON.stringify(wpCfg) : null;
+                // Update the webpart
+                wpInfo.Properties.set_item("Content", el.innerHTML);
+                wpInfo.WebPartDefinition.saveWebPartChanges();
+                wpInfo.Context.load(wpInfo.WebPartDefinition);
+                // Execute the request
+                wpInfo.Context.executeQueryAsync(
+                // Success
+                function () {
+                    // Disable the edit page warning
+                    if (SP && SP.Ribbon && SP.Ribbon.PageState && SP.Ribbon.PageState.PageStateHandler) {
+                        SP.Ribbon.PageState.PageStateHandler.ignoreNextUnload = true;
+                    }
+                    // Refresh the page
+                    window.location.href = window.location.pathname + "?DisplayMode=Design";
+                },
+                // Error
+                function () {
+                    var args = [];
+                    for (var _i = 0; _i < arguments.length; _i++) {
+                        args[_i] = arguments[_i];
+                    }
+                    // Log
+                    console.error("[gd-sprest] Error saving the configuration. " + args[1].get_message());
+                });
+            }
+        });
+    },
+    // Method to update the configuration element
+    updateConfigurationInElement: function updateConfigurationInElement(cfgId, elTarget, wpCfg) {
+        // Create an element so we can update the configuration
+        var el = document.createElement("div");
+        el.innerHTML = elTarget.value;
+        // Get the configuration element and update it
+        var cfg = el.querySelector("#" + cfgId);
+        cfg ? cfg.innerText = JSON.stringify(wpCfg) : null;
+        // Update the value
+        elTarget.value = el.innerHTML;
+    },
+    // Method to update the webpart content elements
+    updateWebPartContentElements: function updateWebPartContentElements(wpId, cfgId, wpCfg) {
+        // Get the webpart element
+        var elWebPart = document.querySelector("div[webpartid='" + wpId + "']");
+        if (elWebPart) {
+            var wpContent = null;
+            var wpPageContent = null;
+            // Get the associated webpart id
+            var wpId2 = elWebPart.getAttribute("webpartid2");
+            // Update the configuration
+            var cfg = elWebPart.querySelector("#" + cfgId);
+            cfg ? cfg.innerText = JSON.stringify(wpCfg) : null;
+            // Parse the hidden elements on the page
+            var hiddenElements = document.querySelectorAll("input[type='hidden']");
+            for (var i = 0; i < hiddenElements.length; i++) {
+                var elHidden = hiddenElements[i];
+                // See if we have found the webpart content and page content hidden elements
+                if (wpContent && wpPageContent) {
+                    continue;
+                }
+                // See if this is a hidden webpart content element
+                if (elHidden.name && elHidden.name.indexOf("scriptcontent") == elHidden.name.length - 13) {
+                    // See if it's for this webpart
+                    if (elHidden.name.indexOf(wpId2) == 0) {
+                        // Set the webpart content element
+                        wpContent = elHidden;
+                        // Update the configuration in the webpart content element
+                        exports.WPCfg.updateConfigurationInElement(cfgId, wpContent, wpCfg);
+                    }
+                    // Continue the loop
+                    continue;
+                }
+                // Create an element and set the inner html to the value
+                var el = document.createElement("div");
+                el.innerHTML = elHidden.value;
+                // See if this is a hidden field element
+                if (el.querySelector("#" + cfgId)) {
+                    // Set the webpart page content
+                    wpPageContent = elHidden;
+                    // Update the configuration in the webpart content element
+                    exports.WPCfg.updateConfigurationInElement(cfgId, wpPageContent, wpCfg);
+                    // Continue the loop
+                    continue;
+                }
+            }
+            // Return true, if the page content exists
+            return wpPageContent != null;
+        }
+        // Webpart is not in a content field
+        return false;
+    }
+};
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
 __webpack_require__(6);
 module.exports = __webpack_require__(130);
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4185,17 +4357,17 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 // Include the fabric js
-__export(__webpack_require__(17));
+__export(__webpack_require__(18));
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var $ = __webpack_require__(10);
-__webpack_require__(20);
+__webpack_require__(21);
 //Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
 /**
  * Office UI Fabric JS 1.5.0
@@ -5307,7 +5479,7 @@ var fabric;!function (e) {
 }(fabric || (fabric = {}));exports.fabric = fabric;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -5335,7 +5507,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -5344,7 +5516,7 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5730,7 +5902,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5760,7 +5932,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5806,7 +5978,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5856,7 +6028,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5881,7 +6053,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5906,7 +6078,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5931,7 +6103,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6060,7 +6232,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6101,7 +6273,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6343,7 +6515,7 @@ exports.Dropdown = function (props) {
 };
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6439,7 +6611,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6467,7 +6639,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6486,7 +6658,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6622,7 +6794,7 @@ exports.NumberField = function (props) {
 };
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6753,7 +6925,7 @@ exports.Panel = function (props) {
 };
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6884,7 +7056,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7196,7 +7368,7 @@ exports.App = {
 //# sourceMappingURL=app.js.map
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7788,7 +7960,7 @@ exports.ContextInfo = _ContextInfo;
 //# sourceMappingURL=contextInfo.js.map
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7822,7 +7994,7 @@ exports.RequestType = {
 //# sourceMappingURL=requestType.js.map
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8096,7 +8268,7 @@ exports.BaseHelper = BaseHelper;
 //# sourceMappingURL=baseHelper.js.map
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8105,7 +8277,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(41));
 __export(__webpack_require__(42));
 __export(__webpack_require__(43));
 __export(__webpack_require__(44));
@@ -8117,10 +8288,11 @@ __export(__webpack_require__(49));
 __export(__webpack_require__(50));
 __export(__webpack_require__(51));
 __export(__webpack_require__(52));
+__export(__webpack_require__(53));
 //# sourceMappingURL=mapper.js.map
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8140,7 +8312,7 @@ exports.audit = {
 //# sourceMappingURL=audit.js.map
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8188,7 +8360,7 @@ exports.eventreceivers = {
 //# sourceMappingURL=eventReceiver.js.map
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8510,7 +8682,7 @@ exports.limitedwebpartmanager = {
 //# sourceMappingURL=file.js.map
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9054,7 +9226,7 @@ exports.views = {
 //# sourceMappingURL=list.js.map
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9084,7 +9256,7 @@ exports.navigationservicerest = {
 //# sourceMappingURL=navigation.js.map
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9104,7 +9276,7 @@ exports.propertyvalues = {
 //# sourceMappingURL=propertyValues.js.map
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9124,7 +9296,7 @@ exports.search = {
 //# sourceMappingURL=search.js.map
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9225,7 +9397,7 @@ exports.roledefinitions = {
 //# sourceMappingURL=security.js.map
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9732,7 +9904,7 @@ exports.webs = {
 //# sourceMappingURL=site.js.map
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9907,7 +10079,7 @@ exports.userprofile = {
 //# sourceMappingURL=social.js.map
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10062,7 +10234,7 @@ exports.users = {
 //# sourceMappingURL=user.js.map
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10112,7 +10284,7 @@ exports.usercustomactions = {
 //# sourceMappingURL=userCustomAction.js.map
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10665,28 +10837,19 @@ exports.ViewType = {
 //# sourceMappingURL=sptypes.js.map
 
 /***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ComplexTypes = __webpack_require__(55);
-exports.ComplexTypes = ComplexTypes;
-var Results = __webpack_require__(56);
-exports.Results = Results;
-var SPTypes = __webpack_require__(57);
-exports.SPTypes = SPTypes;
-//# sourceMappingURL=index.js.map
-
-/***/ }),
 /* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=complexTypes.js.map
+var ComplexTypes = __webpack_require__(56);
+exports.ComplexTypes = ComplexTypes;
+var Results = __webpack_require__(57);
+exports.Results = Results;
+var SPTypes = __webpack_require__(58);
+exports.SPTypes = SPTypes;
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 /* 56 */
@@ -10695,7 +10858,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=results.js.map
+//# sourceMappingURL=complexTypes.js.map
 
 /***/ }),
 /* 57 */
@@ -10704,10 +10867,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=sptypes.js.map
+//# sourceMappingURL=results.js.map
 
 /***/ }),
 /* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+//# sourceMappingURL=sptypes.js.map
+
+/***/ }),
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11005,7 +11177,7 @@ exports.BaseRequest = BaseRequest;
 //# sourceMappingURL=baseRequest.js.map
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11182,7 +11354,7 @@ exports.BaseExecution = BaseExecution;
 //# sourceMappingURL=baseExecution.js.map
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11253,7 +11425,7 @@ exports.Base = Base;
 //# sourceMappingURL=base.js.map
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11350,7 +11522,7 @@ exports.Batch = Batch;
 //# sourceMappingURL=batch.js.map
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11605,7 +11777,7 @@ exports.MethodInfo = MethodInfo;
 //# sourceMappingURL=methodInfo.js.map
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11731,7 +11903,7 @@ exports.OData = OData;
 //# sourceMappingURL=oData.js.map
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11872,7 +12044,7 @@ exports.TargetInfo = TargetInfo;
 //# sourceMappingURL=targetInfo.js.map
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12041,7 +12213,7 @@ exports.XHRRequest = XHRRequest;
 //# sourceMappingURL=xhrRequest.js.map
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12050,7 +12222,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12171,7 +12343,7 @@ exports.JSLink = _JSLink;
 //# sourceMappingURL=jslink.js.map
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12235,7 +12407,7 @@ exports.List = _List;
 //# sourceMappingURL=list.js.map
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12282,7 +12454,7 @@ exports.Navigation = _Navigation;
 //# sourceMappingURL=navigation.js.map
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12324,7 +12496,7 @@ exports.PeopleManager = _PeopleManager;
 //# sourceMappingURL=peopleManager.js.map
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12367,7 +12539,7 @@ exports.PeoplePicker = _PeoplePicker;
 //# sourceMappingURL=peoplePicker.js.map
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12410,7 +12582,7 @@ exports.ProfileLoader = _ProfileLoader;
 //# sourceMappingURL=profileLoader.js.map
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12489,7 +12661,7 @@ exports.Search = _Search;
 //# sourceMappingURL=search.js.map
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12546,7 +12718,7 @@ exports.Site = _Site;
 //# sourceMappingURL=site.js.map
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12615,7 +12787,7 @@ exports.SocialFeed = (new _SocialFeed());
 //# sourceMappingURL=socialFeed.js.map
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12658,7 +12830,7 @@ exports.UserProfile = _UserProfile;
 //# sourceMappingURL=userProfile.js.map
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12751,7 +12923,7 @@ exports.Utility = _Utility;
 //# sourceMappingURL=utility.js.map
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12760,7 +12932,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12838,7 +13010,7 @@ exports.Dependencies = _Dependencies;
 //# sourceMappingURL=dependencies.js.map
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13195,7 +13367,7 @@ exports.FieldSchemaXML = function (fieldInfo) {
 //# sourceMappingURL=fieldSchemaXML.js.map
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13232,7 +13404,7 @@ exports.SPCfgType = {
 //# sourceMappingURL=spCfgTypes.js.map
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13604,7 +13776,7 @@ exports.JSLink = {
 //# sourceMappingURL=jslink.js.map
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13982,7 +14154,7 @@ exports.ListForm = _ListForm;
 //# sourceMappingURL=listForm.js.map
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14199,7 +14371,7 @@ exports.ListFormField = _ListFormField;
 //# sourceMappingURL=listFormField.js.map
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14259,7 +14431,7 @@ exports.Loader = {
 //# sourceMappingURL=loader.js.map
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14295,7 +14467,7 @@ exports.RibbonLink = function (props) {
 //# sourceMappingURL=ribbonLink.js.map
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14335,7 +14507,7 @@ exports.SuiteBarLink = function (props) {
 //# sourceMappingURL=sbLink.js.map
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14621,7 +14793,7 @@ exports.WebPart = _WebPart;
 //# sourceMappingURL=webpart.js.map
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14796,7 +14968,7 @@ exports.Status = {
 //# sourceMappingURL=sp.js.map
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14805,7 +14977,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14820,7 +14992,7 @@ exports.Util = utils_1.Types;
 //# sourceMappingURL=types.js.map
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14876,7 +15048,7 @@ if (global == null || global.__ver == null || global.__ver < exports.$REST.__ver
 //# sourceMappingURL=rest.js.map
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14914,7 +15086,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14946,7 +15118,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14977,7 +15149,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15061,7 +15233,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15108,7 +15280,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15124,7 +15296,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15159,7 +15331,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15175,7 +15347,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15206,7 +15378,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15225,7 +15397,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15258,7 +15430,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15275,7 +15447,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15305,7 +15477,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15323,7 +15495,7 @@ exports.Label = function (props) {
 };
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15347,7 +15519,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15363,7 +15535,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15381,7 +15553,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15425,7 +15597,7 @@ exports.Panel = function (props, content) {
 };
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15493,7 +15665,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15524,7 +15696,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15540,7 +15712,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15576,7 +15748,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15602,7 +15774,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15624,18 +15796,6 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 117 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-// Fabric Components
-var Fabric = __webpack_require__(118);
-exports.Fabric = Fabric;
-
-/***/ }),
 /* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15643,9 +15803,21 @@ exports.Fabric = Fabric;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+// Fabric Components
+var Fabric = __webpack_require__(119);
+exports.Fabric = Fabric;
 
 /***/ }),
 /* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+/***/ }),
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16177,7 +16349,7 @@ exports.Field = function (props) {
 };
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16594,7 +16766,7 @@ var _ListForm = /** @class */function () {
 exports.ListForm = _ListForm;
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16785,7 +16957,7 @@ var _ListFormField = /** @class */function () {
 exports.ListFormField = _ListFormField;
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17269,7 +17441,7 @@ exports.ListFormPanel = function (props) {
 };
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17278,7 +17450,7 @@ exports.ListFormPanel = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17286,12 +17458,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
+var fabric_1 = __webpack_require__(1);
+var wpCfg_1 = __webpack_require__(15);
 /**
  * Web Part
  */
 exports.WebPart = function (props) {
-    var _wp = null;
+    var _panel = null;
+    var _panelCfg = props.editPanel || {};
     var _cfg = {};
+    var _wp = null;
     /**
      * Method to add the help link to a script part editor.
      * @wpId - The webpart id.
@@ -17536,6 +17712,64 @@ exports.WebPart = function (props) {
             props.onPostRender ? props.onPostRender(_wp) : null;
         }
     };
+    // Renders the configuration panel
+    var renderConfiguration = function renderConfiguration() {
+        // Render the panel contents
+        var panelContents = _panel.updateContent(['<div></div>', '<div></div>', '<div></div>'].join('\n'));
+        // See if the render header event exists
+        if (_panelCfg.onRenderHeader) {
+            // Call the event
+            _panelCfg.onRenderHeader(panelContents.children[0], _wp);
+        }
+        // See if we are rendering the save button
+        var hideSaveBtn = _panelCfg.hideSaveButton;
+        if (!hideSaveBtn) {
+            // Render the refresh button
+            fabric_1.Button({
+                el: panelContents.children[1],
+                text: "Save",
+                onClick: function onClick() {
+                    // Call the save event and set the configuration
+                    var cfg = _panelCfg.onSave ? _panelCfg.onSave(_wp.cfg) : null;
+                    cfg = cfg ? cfg : _wp.cfg;
+                    // Save the configuration
+                    wpCfg_1.WPCfg.saveConfiguration(_wp.wpId, props.cfgElementId, cfg);
+                }
+            });
+        }
+        // See if the render footer event exists
+        if (_panelCfg.onRenderHeader) {
+            // Call the event
+            _panelCfg.onRenderFooter(panelContents.children[2], _wp);
+        }
+    };
+    // The default render method when the page is edited
+    var renderEditPanel = function renderEditPanel() {
+        // Ensure we are rendering the panel
+        if (_panelCfg == null || _panelCfg.hide) {
+            return;
+        }
+        // Render the configuration panel
+        _wp.el.innerHTML = ['<div></div>', '<div></div>'].join('\n');
+        // Render the panel
+        _panel = fabric_1.Panel({
+            el: _wp.el.children[0],
+            headerText: "Configuration Panel",
+            panelType: _panelCfg.panelType || fabric_1.PanelTypes.Medium,
+            showCloseButton: true
+        });
+        // Render the button
+        var btn = fabric_1.Button({
+            el: _wp.el.children[1],
+            text: "Show Configuration",
+            onClick: function onClick() {
+                // Show the panel
+                _panel.show();
+                // Render the configuration
+                renderConfiguration();
+            }
+        });
+    };
     // Add a load event
     window.addEventListener("load", function () {
         // Render the component
@@ -17545,178 +17779,6 @@ exports.WebPart = function (props) {
         cfg: _cfg,
         info: _wp
     };
-};
-
-/***/ }),
-/* 125 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var gd_sprest_1 = __webpack_require__(3);
-/**
- * WebPart Configuration
- */
-exports.WPCfg = {
-    // Method to get the webpart
-    getWebPart: function getWebPart(wpId) {
-        // Return a promise
-        return new Promise(function (resolve, reject) {
-            // Get the current context
-            var context = SP.ClientContext.get_current();
-            // Get the webpart from the current page
-            var page = context.get_web().getFileByServerRelativeUrl(gd_sprest_1.ContextInfo.serverRequestPath);
-            var wpMgr = page.getLimitedWebPartManager(SP.WebParts.PersonalizationScope.shared);
-            var wpDef = wpMgr.get_webParts().getById(wpId);
-            var wp = wpDef.get_webPart();
-            context.load(wp, "Properties");
-            // Execute the request
-            context.executeQueryAsync(
-            // Success
-            function () {
-                // Resolve the promise
-                resolve({
-                    Context: context,
-                    Properties: wp.get_properties(),
-                    WebPart: wp,
-                    WebPartDefinition: wpDef
-                });
-            },
-            // Error
-            function () {
-                var args = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    args[_i] = arguments[_i];
-                }
-                // Reject the promise
-                reject(args[1] ? args[1].get_message() : "");
-            });
-        });
-    },
-    // Method to get the webpart id for a specified element
-    getWebPartId: function getWebPartId(el) {
-        // Loop until we find the webpart id
-        while (el) {
-            // See if this element contains the webpart id
-            var wpId = el.getAttribute("webpartid");
-            if (wpId) {
-                // Return the webpart id
-                return wpId;
-            }
-            // Check the parent
-            el = el.parentElement;
-        }
-        // Unable to detect
-        return "";
-    },
-    // Method to save the webpart configuration
-    saveConfiguration: function saveConfiguration(wpId, cfgId, wpCfg) {
-        // Update the webpart content elements and return if they exist
-        if (exports.WPCfg.updateWebPartContentElements(wpId, cfgId, wpCfg)) {
-            return;
-        }
-        // Get the target webpart
-        exports.WPCfg.getWebPart(wpId).then(function (wpInfo) {
-            // Get the content
-            var content = wpInfo && wpInfo.Properties.get_fieldValues()["Content"];
-            if (content) {
-                // Create an element so we can update the configuration
-                var el = document.createElement("div");
-                el.innerHTML = content;
-                // Get the configuration element and update it
-                var cfg = el.querySelector("#" + cfgId);
-                cfg ? cfg.innerText = JSON.stringify(wpCfg) : null;
-                // Update the webpart
-                wpInfo.Properties.set_item("Content", el.innerHTML);
-                wpInfo.WebPartDefinition.saveWebPartChanges();
-                wpInfo.Context.load(wpInfo.WebPartDefinition);
-                // Execute the request
-                wpInfo.Context.executeQueryAsync(
-                // Success
-                function () {
-                    // Disable the edit page warning
-                    if (SP && SP.Ribbon && SP.Ribbon.PageState && SP.Ribbon.PageState.PageStateHandler) {
-                        SP.Ribbon.PageState.PageStateHandler.ignoreNextUnload = true;
-                    }
-                    // Refresh the page
-                    window.location.href = window.location.pathname + "?DisplayMode=Design";
-                },
-                // Error
-                function () {
-                    var args = [];
-                    for (var _i = 0; _i < arguments.length; _i++) {
-                        args[_i] = arguments[_i];
-                    }
-                    // Log
-                    console.error("[gd-sprest] Error saving the configuration. " + args[1].get_message());
-                });
-            }
-        });
-    },
-    // Method to update the configuration element
-    updateConfigurationInElement: function updateConfigurationInElement(cfgId, elTarget, wpCfg) {
-        // Create an element so we can update the configuration
-        var el = document.createElement("div");
-        el.innerHTML = elTarget.value;
-        // Get the configuration element and update it
-        var cfg = el.querySelector("#" + cfgId);
-        cfg ? cfg.innerText = JSON.stringify(wpCfg) : null;
-        // Update the value
-        elTarget.value = el.innerHTML;
-    },
-    // Method to update the webpart content elements
-    updateWebPartContentElements: function updateWebPartContentElements(wpId, cfgId, wpCfg) {
-        // Get the webpart element
-        var elWebPart = document.querySelector("div[webpartid='" + wpId + "']");
-        if (elWebPart) {
-            var wpContent = null;
-            var wpPageContent = null;
-            // Get the associated webpart id
-            var wpId2 = elWebPart.getAttribute("webpartid2");
-            // Update the configuration
-            var cfg = elWebPart.querySelector("#" + cfgId);
-            cfg ? cfg.innerText = JSON.stringify(wpCfg) : null;
-            // Parse the hidden elements on the page
-            var hiddenElements = document.querySelectorAll("input[type='hidden']");
-            for (var i = 0; i < hiddenElements.length; i++) {
-                var elHidden = hiddenElements[i];
-                // See if we have found the webpart content and page content hidden elements
-                if (wpContent && wpPageContent) {
-                    continue;
-                }
-                // See if this is a hidden webpart content element
-                if (elHidden.name && elHidden.name.indexOf("scriptcontent") == elHidden.name.length - 13) {
-                    // See if it's for this webpart
-                    if (elHidden.name.indexOf(wpId2) == 0) {
-                        // Set the webpart content element
-                        wpContent = elHidden;
-                        // Update the configuration in the webpart content element
-                        exports.WPCfg.updateConfigurationInElement(cfgId, wpContent, wpCfg);
-                    }
-                    // Continue the loop
-                    continue;
-                }
-                // Create an element and set the inner html to the value
-                var el = document.createElement("div");
-                el.innerHTML = elHidden.value;
-                // See if this is a hidden field element
-                if (el.querySelector("#" + cfgId)) {
-                    // Set the webpart page content
-                    wpPageContent = elHidden;
-                    // Update the configuration in the webpart content element
-                    exports.WPCfg.updateConfigurationInElement(cfgId, wpPageContent, wpCfg);
-                    // Continue the loop
-                    continue;
-                }
-            }
-            // Return true, if the page content exists
-            return wpPageContent != null;
-        }
-        // Webpart is not in a content field
-        return false;
-    }
 };
 
 /***/ }),
@@ -17734,8 +17796,10 @@ var _1 = __webpack_require__(9);
  * List WebPart
  */
 exports.WPList = function (props) {
+    var _cfg = props.editPanel || {};
+    var _el;
     var _items = null;
-    var _list = null;
+    var _lists = null;
     var _wpInfo = null;
     /**
      * Display Form
@@ -17757,7 +17821,7 @@ exports.WPList = function (props) {
         }
         // See if we are using the CAML query
         var cfg = _wpInfo.cfg || {};
-        if (props.camlQuery || props.onExecutingCAMLQuery) {
+        if (props.camlQuery || _cfg.onExecutingCAMLQuery) {
             loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery);
         } else {
             loadODATA(cfg.WebUrl, cfg.ListName, props.odataQuery);
@@ -17769,7 +17833,7 @@ exports.WPList = function (props) {
             caml = "";
         }
         // Call the load caml query event
-        caml = props.onExecutingCAMLQuery ? props.onExecutingCAMLQuery(_wpInfo, caml) : null;
+        caml = _cfg.onExecutingCAMLQuery ? _cfg.onExecutingCAMLQuery(_wpInfo, caml) : null;
         // See if we are targeting a different web
         if (webUrl) {
             // Get the context information for the destination web
@@ -17795,7 +17859,7 @@ exports.WPList = function (props) {
             query = {};
         }
         // Call the load caml query event
-        query = props.onExecutingODATAQuery ? props.onExecutingODATAQuery(_wpInfo, query) : null;
+        query = _cfg.onExecutingODATAQuery ? _cfg.onExecutingODATAQuery(_wpInfo, query) : null;
         // Get the web
         new gd_sprest_1.Web(webUrl).Lists(listName).Items().query(query).execute(function (items) {
             // Render the items
@@ -17805,91 +17869,39 @@ exports.WPList = function (props) {
     /**
      * Edit Form
      */
-    var _ddl = null;
-    var _lists = null;
-    var _panel = null;
-    var _panelContents = null;
-    // Method to render the edit form
-    var renderEditForm = function renderEditForm(wpInfo) {
-        // Save the information
-        _wpInfo = wpInfo;
-        // Render the configuration panel
-        _wpInfo.el.innerHTML = ['<div></div>', '<div></div>'].join('\n');
-        // Render the panel
-        _panel = __1.Fabric.Panel({
-            el: _wpInfo.el.children[0],
-            headerText: "Configuration Panel",
-            panelType: props.panelType,
-            showCloseButton: true
-        });
-        // Render the button
-        var btn = __1.Fabric.Button({
-            el: _wpInfo.el.children[1],
-            text: "Show Configuration",
-            onClick: function onClick() {
-                // Show the panel
-                _panel.show();
-                // Render the configuration
-                renderConfiguration();
-            }
-        });
-    };
     // Method to load the lists
     var loadLists = function loadLists(webUrl) {
-        // Render a loading message
-        __1.Fabric.Spinner({
-            el: _panelContents.children[1],
-            text: "Loading the lists..."
-        });
-        // Return a promise
-        return new Promise(function (resolve, reject) {
-            // The post render event
-            var postRender = function postRender() {
-                // See if the list name exists and a post render event exists
-                var list = null;
-                if (_wpInfo.cfg && _wpInfo.cfg.ListName) {
-                    // Parse the dropdown lists
-                    for (var i = 0; i < _lists.length; i++) {
-                        if (_lists[i].Title == _wpInfo.cfg.ListName) {
-                            // Set the list
-                            list = _lists[i];
-                            break;
-                        }
+        // Set the query
+        var query = props.listQuery || {};
+        // Get the web
+        new gd_sprest_1.Web(webUrl).Lists().query(query).execute(function (lists) {
+            // Save the lists
+            _lists = lists.results;
+            // Call the list rendering event
+            _lists = (_cfg.onListsRendering ? _cfg.onListsRendering(_wpInfo, _lists) : null) || _lists;
+            // See if the list name exists and a post render event exists
+            var list = null;
+            if (_wpInfo.cfg && _wpInfo.cfg.ListName) {
+                // Parse the dropdown lists
+                for (var i = 0; i < _lists.length; i++) {
+                    if (_lists[i].Title == _wpInfo.cfg.ListName) {
+                        // Set the list
+                        list = _lists[i];
+                        break;
                     }
                 }
-                // Call the post render event
-                props.onPostRender ? props.onPostRender(_wpInfo, list) : null;
-            };
-            // See if no data has been loaded
-            if (_lists == null) {
-                // Set the query
-                var query = props.listQuery || {};
-                // Get the web
-                new gd_sprest_1.Web(webUrl).Lists().query(query).execute(function (lists) {
-                    // Save the lists
-                    _lists = lists.results;
-                    // Call the list rendering event
-                    _lists = props.onListsRendering ? props.onListsRendering(_wpInfo, _lists) : _lists;
-                    // Render the dropdown
-                    renderDropdown();
-                    // Call the post render event
-                    postRender();
-                });
-            } else {
-                // Render the dropdown
-                renderDropdown();
-                // Call the post render event
-                postRender();
             }
+            // Render the configuration
+            renderConfiguration(list);
         });
     };
     // Method to render the configuration panel
-    var renderConfiguration = function renderConfiguration() {
+    var renderConfiguration = function renderConfiguration(list) {
         // Render the panel contents
-        _panelContents = _panel.updateContent([(props.onRenderHeader ? props.onRenderHeader(_wpInfo) : null) || "", '<div id="webUrl"></div>', '<div></div>', (props.onRenderFooter ? props.onRenderFooter(_wpInfo) : null) || "", '<div id="refresh"></div>', '<div id="save"></div>'].join('\n'));
+        _el.innerHTML = ['<div></div>', '<div></div>', '<div></div>', '<div></div>', '<div></div>', '<div></div>'].join('\n');
         // Render the web url textbox
         var tb = __1.Fabric.TextField({
-            el: _panelContents.querySelector("#webUrl"),
+            el: _el.children[1],
             label: "Relative Web Url:",
             description: "The web containing the list. If blank, the current web is used.",
             value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.WebUrl : "",
@@ -17898,33 +17910,37 @@ exports.WPList = function (props) {
                 _wpInfo.cfg.WebUrl = value;
             }
         });
-        // Render the refresh button
-        __1.Fabric.Button({
-            el: _panelContents.querySelector("#refresh"),
-            text: "Refresh",
-            onClick: function onClick() {
-                // Load the lists
-                loadLists(tb.getValue());
+        // See if the lists exists
+        if (_lists) {
+            // Render the header
+            if (_cfg.onRenderHeader) {
+                _cfg.onRenderHeader(_el.children[0], _wpInfo, list);
             }
-        });
-        // Render the refresh button
-        __1.Fabric.Button({
-            el: _panelContents.querySelector("#save"),
-            text: "Save",
-            onClick: function onClick() {
-                var selectedList = _ddl.getValue();
-                // Call the save event and set the configuration
-                var cfg = props.onSave ? props.onSave(_wpInfo.cfg) : null;
-                cfg = cfg ? cfg : _wpInfo.cfg;
-                // Save the configuration
-                _1.WPCfg.saveConfiguration(_wpInfo.wpId, props.cfgElementId, cfg);
+            // Render the refresh button
+            __1.Fabric.Button({
+                el: _el.children[4],
+                text: "Refresh",
+                onClick: function onClick() {
+                    // Load the lists
+                    loadLists(tb.getValue());
+                }
+            });
+            // Render the footer
+            if (_cfg.onRenderFooter) {
+                _cfg.onRenderFooter(_el.children[3], _wpInfo, list);
             }
-        });
-        // Load the lists
-        loadLists(tb.getValue());
+        } else {
+            // Render a loading message
+            __1.Fabric.Spinner({
+                el: _el.children[2],
+                text: "Loading the lists..."
+            });
+            // Load the lists
+            loadLists(tb.getValue());
+        }
     };
     // Method to render the dropdown
-    var renderDropdown = function renderDropdown() {
+    var renderDropdown = function renderDropdown(el) {
         var options = [];
         // Parse the lists
         for (var i = 0; i < _lists.length; i++) {
@@ -17935,8 +17951,8 @@ exports.WPList = function (props) {
             });
         }
         // Render the dropdown
-        _ddl = __1.Fabric.Dropdown({
-            el: _panelContents.children[1],
+        var ddl = __1.Fabric.Dropdown({
+            el: el,
             label: "List:",
             options: options,
             value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
@@ -17945,10 +17961,10 @@ exports.WPList = function (props) {
                 for (var i = 0; i < _lists.length; i++) {
                     // See if this is the target list
                     if (_lists[i].Title == option.text) {
-                        // Call the change event
-                        props.onListChanged ? props.onListChanged(_wpInfo, _lists[i]) : null;
                         // Update the configuration
                         _wpInfo.cfg.ListName = option.value;
+                        // Call the change event
+                        _cfg.onListChanged ? _cfg.onListChanged(_wpInfo, _lists[i]) : null;
                         break;
                     }
                 }
@@ -17961,16 +17977,29 @@ exports.WPList = function (props) {
     // Create the webpart
     var _wp = _1.WebPart({
         cfgElementId: props.cfgElementId,
+        editPanel: {
+            onRenderHeader: function onRenderHeader(el, wpInfo) {
+                // Save the properties
+                _el = el;
+                _wpInfo = wpInfo;
+                // Render the configuration
+                renderConfiguration();
+            },
+            panelType: props.editPanel ? props.editPanel.panelType : null,
+            onSave: function onSave(cfg) {
+                // Update the webpart configuration and return it
+                cfg.ListName = _wpInfo.cfg.ListName;
+                cfg.WebUrl = _wpInfo.cfg.WebUrl;
+                return cfg;
+            }
+        },
         elementId: props.elementId,
-        onRenderDisplay: renderDisplayForm,
-        onRenderEdit: renderEditForm
+        onRenderDisplay: renderDisplayForm
     });
     // Return the webpart
     return {
         cfg: _wp.cfg,
-        info: _wp.info,
-        items: _items,
-        list: _list
+        info: _wp.info
     };
 };
 
@@ -17991,7 +18020,7 @@ var _1 = __webpack_require__(9);
 exports.WPSearch = function (props) {
     var ddlFields = null;
     // Method to update the 
-    var listChanged = function listChanged(wpInfo, list) {
+    var listChanged = function listChanged(el, wpInfo, list) {
         var options = [];
         // Parse the fields
         for (var i = 0; i < list.Fields.results.length; i++) {
@@ -18029,18 +18058,14 @@ exports.WPSearch = function (props) {
         });
     };
     // Method to render the footer
-    var renderFooter = function renderFooter(wpInfo, list) {
-        // Render a field dropdown if a list exists
-        var footer = document.querySelector("#field-cfg");
-        if (footer && wpInfo.cfg && wpInfo.cfg.ListName) {
-            // Render a spinner
-            __1.Fabric.Spinner({
-                el: footer,
-                text: "Loading the fields..."
-            });
-            // Load the fields
-            listChanged(wpInfo, list);
-        }
+    var renderFooter = function renderFooter(el, wpInfo, list) {
+        // Render a spinner
+        __1.Fabric.Spinner({
+            el: el,
+            text: "Loading the fields..."
+        });
+        // Load the fields
+        listChanged(el, wpInfo, list);
     };
     // Method to save the configuration
     var saveConfiguration = function saveConfiguration(cfg) {
@@ -18054,18 +18079,13 @@ exports.WPSearch = function (props) {
         camlQuery: props.camlQuery,
         cfgElementId: props.cfgElementId,
         className: props.className,
+        editPanel: {
+            onRenderFooter: renderFooter
+        },
         elementId: props.elementId,
         helpProps: props.helpProps,
+        listQuery: props.listQuery,
         odataQuery: props.odataQuery,
-        onListChanged: listChanged,
-        onListsRendering: props.onListsRendering,
-        onPostRender: renderFooter,
-        onRenderDisplay: props.onRenderDisplay,
-        onRenderEdit: props.onRenderEdit,
-        onRenderFooter: function onRenderFooter() {
-            return "<div id='field-cfg'></div>";
-        },
-        onRenderHeader: props.onRenderHeader,
         onRenderItems: props.onRenderItems,
         onSave: saveConfiguration
     });
