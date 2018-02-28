@@ -15572,7 +15572,7 @@ exports.Table = function (props) {
         rowData.push('</tr>');
     }
     // Return the template
-    return ['<table class="ms-Table ' + className + '">', headerRow, '<tbody>', '<tr>\n' + rowData.join('\n') + '\n</tr>', '</tbody>', '</table>'].join('\n');
+    return ['<table class="ms-Table ' + className + '">', headerRow, '<tbody>', rowData.join('\n'), '</tbody>', '</table>'].join('\n');
 };
 
 /***/ }),
