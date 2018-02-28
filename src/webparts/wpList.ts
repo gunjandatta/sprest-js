@@ -37,7 +37,7 @@ export const WPList = (props: IWPListProps): IWPList => {
 
         // See if we are using the CAML query
         let cfg: IWPListCfg = _wpInfo.cfg || {};
-        if (props.camlQuery || _cfg.onExecutingCAMLQuery) { loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery); }
+        if (props.camlQuery || props.onExecutingCAMLQuery) { loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery); }
         // Else, load using the ODATA query
         else { loadODATA(cfg.WebUrl, cfg.ListName, props.odataQuery); }
     }
@@ -45,7 +45,7 @@ export const WPList = (props: IWPListProps): IWPList => {
     // Method to load the items using a CAML query
     let loadCAML = (webUrl: string, listName: string, caml: string = "") => {
         // Call the load caml query event
-        caml = _cfg.onExecutingCAMLQuery ? _cfg.onExecutingCAMLQuery(_wpInfo, caml) : null;
+        caml = props.onExecutingCAMLQuery ? props.onExecutingCAMLQuery(_wpInfo, caml) : null;
 
         // See if we are targeting a different web
         if (webUrl) {
@@ -82,7 +82,7 @@ export const WPList = (props: IWPListProps): IWPList => {
     // Method to load the items using an ODATA query
     let loadODATA = (webUrl: string, listName: string, query: Types.SP.ODataQuery = {}) => {
         // Call the load caml query event
-        query = _cfg.onExecutingODATAQuery ? _cfg.onExecutingODATAQuery(_wpInfo, query) : null;
+        query = props.onExecutingODATAQuery ? props.onExecutingODATAQuery(_wpInfo, query) : null;
 
         // Get the web
         (new Web(webUrl))

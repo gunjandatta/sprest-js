@@ -15085,7 +15085,7 @@ exports.WPList = function (props) {
         }
         // See if we are using the CAML query
         var cfg = _wpInfo.cfg || {};
-        if (props.camlQuery || _cfg.onExecutingCAMLQuery) {
+        if (props.camlQuery || props.onExecutingCAMLQuery) {
             loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery);
         }
         else {
@@ -15096,7 +15096,7 @@ exports.WPList = function (props) {
     var loadCAML = function (webUrl, listName, caml) {
         if (caml === void 0) { caml = ""; }
         // Call the load caml query event
-        caml = _cfg.onExecutingCAMLQuery ? _cfg.onExecutingCAMLQuery(_wpInfo, caml) : null;
+        caml = props.onExecutingCAMLQuery ? props.onExecutingCAMLQuery(_wpInfo, caml) : null;
         // See if we are targeting a different web
         if (webUrl) {
             // Get the context information for the destination web
@@ -15127,7 +15127,7 @@ exports.WPList = function (props) {
     var loadODATA = function (webUrl, listName, query) {
         if (query === void 0) { query = {}; }
         // Call the load caml query event
-        query = _cfg.onExecutingODATAQuery ? _cfg.onExecutingODATAQuery(_wpInfo, query) : null;
+        query = props.onExecutingODATAQuery ? props.onExecutingODATAQuery(_wpInfo, query) : null;
         // Get the web
         (new gd_sprest_1.Web(webUrl))
             .Lists(listName)
@@ -15375,9 +15375,7 @@ exports.WPSearch = function (props) {
     // Return the webpart
     return {
         cfg: _wp.cfg,
-        info: _wp.info,
-        items: _wp.items,
-        list: _wp.list
+        info: _wp.info
     };
 };
 
