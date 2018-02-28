@@ -1,12 +1,12 @@
 import { SPTypes, Types } from "gd-sprest";
-import { IWPSearchCfg, IWPSearchInfo, IWPSearchProps } from "./types";
+import { IWPSearch, IWPSearchCfg, IWPSearchInfo, IWPSearchProps } from "./types";
 import { Fabric } from "..";
 import { WPList, WPCfg } from ".";
 
 /**
  * Search WebPart
  */
-export const WPSearch = (props: IWPSearchProps) => {
+export const WPSearch = (props: IWPSearchProps): IWPSearch => {
     let ddlFields: Fabric.Types.IDropdown = null;
 
     // Method to update the 
@@ -77,8 +77,8 @@ export const WPSearch = (props: IWPSearchProps) => {
         return cfg;
     }
 
-    // Return the webpart
-    return WPList({
+    // Create the webpart
+    let _wp = WPList({
         camlQuery: props.camlQuery,
         cfgElementId: props.cfgElementId,
         className: props.className,
@@ -95,4 +95,12 @@ export const WPSearch = (props: IWPSearchProps) => {
         onRenderItems: props.onRenderItems,
         onSave: saveConfiguration
     });
+
+    // Return the webpart
+    return {
+        cfg: _wp.cfg,
+        info: _wp.info,
+        items: _wp.items,
+        list: _wp.list
+    } as any;
 }

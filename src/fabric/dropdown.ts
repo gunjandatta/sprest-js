@@ -53,7 +53,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                     // Add the item
                     items.push(Templates.ListItem({
                         isSelectable: props.multi,
-                        isSelected: option.isSelected,
+                        isSelected: props.multi ? option.isSelected : false,
                         secondaryText: option.text,
                         value: JSON.stringify(option)
                     }));

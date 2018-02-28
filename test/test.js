@@ -11042,7 +11042,7 @@ exports.Dropdown = function (props) {
                     // Add the item
                     items.push(_1.Templates.ListItem({
                         isSelectable: props.multi,
-                        isSelected: option.isSelected,
+                        isSelected: props.multi ? option.isSelected : false,
                         secondaryText: option.text,
                         value: JSON.stringify(option)
                     }));
@@ -15321,8 +15321,8 @@ exports.WPSearch = function (props) {
         // Return the configuration
         return cfg;
     };
-    // Return the webpart
-    return _1.WPList({
+    // Create the webpart
+    var _wp = _1.WPList({
         camlQuery: props.camlQuery,
         cfgElementId: props.cfgElementId,
         className: props.className,
@@ -15339,6 +15339,13 @@ exports.WPSearch = function (props) {
         onRenderItems: props.onRenderItems,
         onSave: saveConfiguration
     });
+    // Return the webpart
+    return {
+        cfg: _wp.cfg,
+        info: _wp.info,
+        items: _wp.items,
+        list: _wp.list
+    };
 };
 
 
