@@ -15159,7 +15159,11 @@ exports.WPList = function (props) {
             el: _panelContents.querySelector("#webUrl"),
             label: "Relative Web Url:",
             description: "The web containing the list. If blank, the current web is used.",
-            value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.WebUrl : ""
+            value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.WebUrl : "",
+            onChange: function (value) {
+                // Update the configuration
+                _wpInfo.cfg.WebUrl = value;
+            }
         });
         // Render the refresh button
         __1.Fabric.Button({
@@ -15176,14 +15180,9 @@ exports.WPList = function (props) {
             text: "Save",
             onClick: function () {
                 var selectedList = _ddl.getValue();
-                // Get the configuration
-                var cfg = {
-                    ListName: selectedList ? selectedList.text : "",
-                    WebPartId: _wpInfo.wpId,
-                    WebUrl: tb.getValue()
-                };
-                // Call the save event
-                cfg = props.onSave ? props.onSave(cfg) : cfg;
+                // Call the save event and set the configuration
+                var cfg = props.onSave ? props.onSave(_wpInfo.cfg) : null;
+                cfg = cfg ? cfg : _wpInfo.cfg;
                 // Save the configuration
                 _1.WPCfg.saveConfiguration(_wpInfo.wpId, props.cfgElementId, cfg);
             }
@@ -15215,6 +15214,8 @@ exports.WPList = function (props) {
                     if (_lists[i].Title == option.text) {
                         // Call the change event
                         props.onListChanged ? props.onListChanged(_wpInfo, _lists[i]) : null;
+                        // Update the configuration
+                        _wpInfo.cfg.ListName = option.value;
                         break;
                     }
                 }
