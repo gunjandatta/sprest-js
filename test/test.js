@@ -12698,11 +12698,15 @@ exports.Table = function (props) {
     var rowData = [];
     for (var i = 0; i < rows.length; i++) {
         var row = rows[i];
+        // Add the opening row element
+        rowData.push('<tr>');
         // Parse the columns
         for (var j = 0; j < columns.length; j++) {
-            // Add the row column
+            // Add the column element
             rowData.push('<td>' + (row[columns[j]] || "") + '</td>');
         }
+        // Add the closing row element
+        rowData.push('</tr>');
     }
     // Return the template
     return [
