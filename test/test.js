@@ -15059,7 +15059,6 @@ exports.WPList = function (props) {
      * Edit Form
      */
     var _ddl = null;
-    var _init = false;
     var _lists = null;
     var _panel = null;
     var _panelContents = null;
@@ -15161,8 +15160,8 @@ exports.WPList = function (props) {
             label: "Relative Web Url:",
             description: "The web containing the list. If blank, the current web is used."
         });
-        // See if we haven't initialized the form
-        if (!_init && _wpInfo && _wpInfo.cfg) {
+        // See if the configuration exists
+        if (_wpInfo && _wpInfo.cfg) {
             // Initialized the textbox
             tb.setValue(_wpInfo.cfg.WebUrl || "");
         }
@@ -15212,7 +15211,7 @@ exports.WPList = function (props) {
             el: _panelContents.children[1],
             label: "List:",
             options: options,
-            value: !_init && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
+            value: _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
             onChange: function (option) {
                 // Parse the list
                 for (var i = 0; i < _lists.length; i++) {
@@ -15225,11 +15224,6 @@ exports.WPList = function (props) {
                 }
             }
         });
-        // See if we haven't initialized the dropdown
-        if (!_init) {
-            // Set the intialization flag
-            _init = true;
-        }
     };
     /**
      * Main

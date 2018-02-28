@@ -102,7 +102,6 @@ export const WPList = (props: IWPListProps): IWPList => {
      */
 
     let _ddl: Fabric.Types.IDropdown = null;
-    let _init = false;
     let _lists: Array<Types.SP.IListQueryResult | Types.SP.IListResult> = null;
     let _panel: Fabric.Types.IPanel = null;
     let _panelContents: HTMLElement = null;
@@ -223,8 +222,8 @@ export const WPList = (props: IWPListProps): IWPList => {
             description: "The web containing the list. If blank, the current web is used."
         });
 
-        // See if we haven't initialized the form
-        if (!_init && _wpInfo && _wpInfo.cfg) {
+        // See if the configuration exists
+        if (_wpInfo && _wpInfo.cfg) {
             // Initialized the textbox
             tb.setValue(_wpInfo.cfg.WebUrl || "");
         }
@@ -283,7 +282,7 @@ export const WPList = (props: IWPListProps): IWPList => {
             el: _panelContents.children[1],
             label: "List:",
             options,
-            value: !_init && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
+            value: _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
             onChange: (option: Fabric.Types.IDropdownOption) => {
                 // Parse the list
                 for (let i = 0; i < _lists.length; i++) {
@@ -296,12 +295,6 @@ export const WPList = (props: IWPListProps): IWPList => {
                 }
             }
         });
-
-        // See if we haven't initialized the dropdown
-        if (!_init) {
-            // Set the intialization flag
-            _init = true;
-        }
     }
 
     /**
