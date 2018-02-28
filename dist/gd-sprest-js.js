@@ -15120,7 +15120,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 exports.Button = function (props) {
     // Return the template
-    return ['<button class="ms-Button ' + (props.className || "") + '"' + (props.disable ? " disabled" : "") + '>', '<span class="ms-Button-label">' + (props.text || "") + '</span>', '</button>'].join('\n');
+    return [props.href ? '<a href="' + props.href + '">' : '', '<button class="ms-Button ' + (props.className || "") + '"' + (props.disable ? " disabled" : "") + '>', '<span class="ms-Button-label">' + (props.text || "") + '</span>', '</button>', props.href ? '</a>' : ''].join('\n');
 };
 
 /***/ }),
