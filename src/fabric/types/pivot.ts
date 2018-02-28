@@ -4,6 +4,9 @@ import { Fabric, IProps } from ".";
  * Pivot
  */
 export interface IPivotProps extends IProps {
+    /** True to render the tabs under the content. */
+    isFlipped?: boolean;
+
     /** True to render text. */
     isLarge?: boolean;
 

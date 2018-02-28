@@ -38,12 +38,22 @@ export const Pivot = (props: IPivotProps): string => {
     ].join(" ").trim();
 
     // Return the template
-    return [
-        '<div class="ms-Pivot ' + className + '">',
-        '<ul class="ms-Pivot-links">',
-        tabs.join('\n'),
-        '</ul>',
-        tabContents.join('\n'),
-        '</div>'
-    ].join('\n');
+    return props.isFlipped ?
+        [
+            '<div class="ms-Pivot ' + className + '">',
+            tabContents.join('\n'),
+            '<ul class="ms-Pivot-links">',
+            tabs.join('\n'),
+            '</ul>',
+            '</div>'
+        ].join('\n')
+        :
+        [
+            '<div class="ms-Pivot ' + className + '">',
+            '<ul class="ms-Pivot-links">',
+            tabs.join('\n'),
+            '</ul>',
+            tabContents.join('\n'),
+            '</div>'
+        ].join('\n');
 }
