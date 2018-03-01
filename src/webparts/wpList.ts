@@ -171,6 +171,9 @@ export const WPList = (props: IWPListProps): IWPList => {
                 _cfg.onRenderHeader(_el.children[0] as HTMLDivElement, _wpInfo, list);
             }
 
+            // Render the dropdown
+            renderDropdown(_el.children[2] as HTMLDivElement);
+
             // Render the refresh button
             Fabric.Button({
                 el: _el.children[4],
@@ -250,7 +253,7 @@ export const WPList = (props: IWPListProps): IWPList => {
                 renderConfiguration();
             },
             panelType: props.editPanel ? props.editPanel.panelType : null,
-            onSave: (cfg:IWPListCfg) => {
+            onSave: (cfg: IWPListCfg) => {
                 // Update the webpart configuration and return it
                 cfg.ListName = _wpInfo.cfg.ListName;
                 cfg.WebUrl = _wpInfo.cfg.WebUrl;

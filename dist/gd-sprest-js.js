@@ -17919,6 +17919,8 @@ exports.WPList = function (props) {
             if (_cfg.onRenderHeader) {
                 _cfg.onRenderHeader(_el.children[0], _wpInfo, list);
             }
+            // Render the dropdown
+            renderDropdown(_el.children[2]);
             // Render the refresh button
             __1.Fabric.Button({
                 el: _el.children[4],
