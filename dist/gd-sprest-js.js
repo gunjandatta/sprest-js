@@ -17456,7 +17456,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 
 
-var _this = undefined;
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var fabric_1 = __webpack_require__(1);
@@ -17688,7 +17687,7 @@ exports.WebPart = function (props) {
                 returnVal = props.onRenderEdit(_wp);
             } else if (!(props.editPanel && props.editPanel.hide)) {
                 // Display the edit panel
-                _this.renderEditPanel();
+                renderEditPanel();
             }
         } else {
             // See if the configuration is defined, but has no value

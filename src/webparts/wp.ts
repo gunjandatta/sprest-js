@@ -258,7 +258,7 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
             // See if we are displaying the default edit panel
             else if (!(props.editPanel && props.editPanel.hide)) {
                 // Display the edit panel
-                this.renderEditPanel();
+                renderEditPanel();
             }
         } else {
             // See if the configuration is defined, but has no value
