@@ -255,6 +255,11 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
                 // Execute the render edit event
                 returnVal = props.onRenderEdit(_wp);
             }
+            // See if we are displaying the default edit panel
+            else if (!(props.editPanel && props.editPanel.hide)) {
+                // Display the edit panel
+                this.renderEditPanel();
+            }
         } else {
             // See if the configuration is defined, but has no value
             if (_wp.cfg || (props.cfgElementId || "").length == 0) {
