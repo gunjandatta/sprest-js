@@ -318,7 +318,7 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
         }
 
         // See if the render footer event exists
-        if (_panelCfg.onRenderHeader) {
+        if (_panelCfg.onRenderFooter) {
             // Call the event
             _panelCfg.onRenderFooter(panelContents.children[2] as HTMLDivElement, _wp);
         }

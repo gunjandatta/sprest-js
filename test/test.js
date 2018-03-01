@@ -15003,7 +15003,7 @@ exports.WebPart = function (props) {
             });
         }
         // See if the render footer event exists
-        if (_panelCfg.onRenderHeader) {
+        if (_panelCfg.onRenderFooter) {
             // Call the event
             _panelCfg.onRenderFooter(panelContents.children[2], _wp);
         }
