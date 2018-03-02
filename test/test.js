@@ -12107,15 +12107,26 @@ exports.TextField = function (props) {
     props.el.innerHTML = _1.Templates.TextField(props);
     // Create the textfield
     var _textfield = new _1.fabric.TextField(props.el.firstElementChild);
-    // Set the change event
-    _textfield._textField.onchange = function () {
-        // Validate the value
+    var _value = props.value || "";
+    // The change event
+    var onChange = function () {
         var value = getValue().trim();
+        // See if the value is the same
+        if (value == _value) {
+            return;
+        }
+        // Update the value
+        _value = value;
+        // Validate the value
         if (validate(value) && props.onChange) {
             // Call the change event
             props.onChange(value);
         }
     };
+    // Set the change event
+    _textfield._textField.addEventListener("change", onChange);
+    // Set the click event
+    _textfield._textField.addEventListener("click", onChange);
     // Validate the textfield
     validate(props.value);
     // Return the text field

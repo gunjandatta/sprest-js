@@ -1,10 +1,10 @@
-import { Fabric, IListProps } from "./types";
+import { Fabric, IList, IListProps } from "./types";
 import { fabric, Templates } from ".";
 
 /**
  * List
  */
-export const List = (props: IListProps): Fabric.IList => {
+export const List = (props: IListProps): IList => {
     // Set the template
     props.el.innerHTML = Templates.List(props);
 

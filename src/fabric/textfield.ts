@@ -65,16 +65,30 @@ export const TextField = (props: ITextFieldProps): ITextField => {
 
     // Create the textfield
     let _textfield: Fabric.ITextField = new fabric.TextField(props.el.firstElementChild);
+    let _value = props.value || "";
 
-    // Set the change event
-    _textfield._textField.onchange = () => {
-        // Validate the value
+    // The change event
+    let onChange = () => {
         let value = getValue().trim();
+
+        // See if the value is the same
+        if (value == _value) { return; }
+
+        // Update the value
+        _value = value;
+
+        // Validate the value
         if (validate(value) && props.onChange) {
             // Call the change event
             props.onChange(value);
         }
     }
+
+    // Set the change event
+    _textfield._textField.addEventListener("change", onChange);
+
+    // Set the click event
+    _textfield._textField.addEventListener("click", onChange)
 
     // Validate the textfield
     validate(props.value);
