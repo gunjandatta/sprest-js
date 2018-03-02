@@ -31,7 +31,7 @@ export interface IDropdownOption {
     text?: string;
 
     /** The option value. */
-    value?: string;
+    value?: any;
 
     /** The option type. */
     type?: number;

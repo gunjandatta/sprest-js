@@ -84,11 +84,14 @@ export const TextField = (props: ITextFieldProps): ITextField => {
         }
     }
 
+    // Set the blur event
+    _textfield._textField.addEventListener("blur", onChange)
+
     // Set the change event
     _textfield._textField.addEventListener("change", onChange);
 
-    // Set the click event
-    _textfield._textField.addEventListener("click", onChange)
+    // Set the focus event
+    _textfield._textField.addEventListener("focus", onChange)
 
     // Validate the textfield
     validate(props.value);

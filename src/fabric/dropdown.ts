@@ -18,8 +18,6 @@ export enum DropdownTypes {
  * Dropdown
  */
 export const Dropdown = (props: IDropdownProps): IDropdown => {
-    let _values = props.value && typeof (props.value) === "string" ? [props.value] : (props.value || []) as Array<string>
-
     // Method to create the list items
     let createList = (el: Element, options: Array<IDropdownOption> = []): Fabric.IList => {
         let items: Array<string> = [];
