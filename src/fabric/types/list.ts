@@ -1,4 +1,9 @@
-import { IProps } from ".";
+import { Fabric, IProps } from ".";
+
+/**
+ * List
+ */
+export interface IList extends Fabric.IList { }
 
 /**
  * List Properties
