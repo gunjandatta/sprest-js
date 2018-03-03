@@ -15,7 +15,7 @@ export const CommandBar = (props: ICommandBarProps): ICommandBar => {
     let _menu: Fabric.ICommandBar = new fabric.CommandBar(props.el.querySelector(".ms-CommandBar"));
 
     // Parse the menu buttons
-    let buttonProps = (props.mainCommands || []).concat(props.sideCommands || []);
+    let buttonProps = (props.sideCommands || []).concat(props.mainCommands || []);
     let buttons = _menu._container.querySelectorAll(".ms-CommandButton-button");
     for (let i = 0; i < buttons.length; i++) {
         // See if a click event exists

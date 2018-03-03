@@ -10950,7 +10950,7 @@ exports.CommandBar = function (props) {
     // Create the command bar
     var _menu = new _1.fabric.CommandBar(props.el.querySelector(".ms-CommandBar"));
     // Parse the menu buttons
-    var buttonProps = (props.mainCommands || []).concat(props.sideCommands || []);
+    var buttonProps = (props.sideCommands || []).concat(props.mainCommands || []);
     var buttons = _menu._container.querySelectorAll(".ms-CommandButton-button");
     for (var i = 0; i < buttons.length; i++) {
         // See if a click event exists
