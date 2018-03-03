@@ -17803,7 +17803,7 @@ exports.WebPart = function (props) {
                 // Show the panel
                 _panel.show();
                 // See if we are adding the save button
-                if (_panelCfg.showSaveButton) {
+                if (_panelCfg.showSaveButton != false) {
                     // Add the save button
                     mainCommands.push({
                         icon: "Save",
@@ -18294,9 +18294,6 @@ exports.WPTabs = function (props) {
     // Return the webpart
     var _wp = _1.WebPart({
         elementId: props.elementId,
-        editPanel: {
-            hide: true
-        },
         onRenderDisplay: function onRenderDisplay(wpInfo) {
             // Set the webparts
             _webparts = getWebParts(wpInfo);

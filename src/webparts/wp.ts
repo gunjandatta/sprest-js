@@ -335,7 +335,7 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
                 _panel.show();
 
                 // See if we are adding the save button
-                if (_panelCfg.showSaveButton) {
+                if (_panelCfg.showSaveButton != false) {
                     // Add the save button
                     mainCommands.push({
                         icon: "Save",
