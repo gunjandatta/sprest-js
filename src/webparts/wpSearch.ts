@@ -79,6 +79,8 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
         cfgElementId: props.cfgElementId,
         className: props.className,
         editPanel: {
+            menuLeftCommands: props.editPanel ? props.editPanel.menuLeftCommands : null,
+            menuRightCommands: props.editPanel ? props.editPanel.menuRightCommands : null,
             onRenderFooter: renderFooter
         },
         elementId: props.elementId,

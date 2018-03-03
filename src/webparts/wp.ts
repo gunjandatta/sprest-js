@@ -256,7 +256,7 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
                 returnVal = props.onRenderEdit(_wp);
             }
             // See if we are displaying the default edit panel
-            else if (!(props.editPanel && props.editPanel.hide)) {
+            else if (props.editPanel) {
                 // Display the edit panel
                 renderEditPanel();
             }
@@ -308,7 +308,7 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
     // The default render method when the page is edited
     let renderEditPanel = () => {
         // Ensure we are rendering the panel
-        if (_panelCfg == null || _panelCfg.hide) { return; }
+        if (_panelCfg == null) { return; }
 
         // Render the configuration panel
         _wp.el.innerHTML = [
@@ -329,45 +329,40 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
             el: _wp.el.children[1],
             text: "Show Configuration",
             onClick: () => {
+                let mainCommands: Array<Types.ICommandButtonProps> = [];
+
                 // Show the panel
                 _panel.show();
 
-                // Render the menu
-                let showMenu = !(props.editPanel && props.editPanel.hide);
-                if (showMenu) {
-                    let mainCommands: Array<Types.ICommandButtonProps> = [];
+                // See if we are adding the save button
+                if (_panelCfg.showSaveButton) {
+                    // Add the save button
+                    mainCommands.push({
+                        icon: "Save",
+                        text: "Save",
+                        onClick: () => {
+                            // Call the save event and set the configuration
+                            let cfg = _panelCfg.onSave ? _panelCfg.onSave(_wp.cfg) : null;
+                            cfg = cfg ? cfg : _wp.cfg;
 
-                    // See if we are adding the save button
-                    let showSave = !(props.editPanel && props.editPanel.hideSaveButton);
-                    if (showSave) {
-                        // Add the save button
-                        mainCommands.push({
-                            icon: "Save",
-                            text: "Save",
-                            onClick: () => {
-                                // Call the save event and set the configuration
-                                let cfg = _panelCfg.onSave ? _panelCfg.onSave(_wp.cfg) : null;
-                                cfg = cfg ? cfg : _wp.cfg;
-
-                                // Save the configuration
-                                WPCfg.saveConfiguration(_wp.wpId, props.cfgElementId, cfg);
-                            }
-                        });
-                    }
-
-                    // See if custom buttons exist
-                    if (props.editPanel && props.editPanel.menuLeftCommands) {
-                        // Add the buttons
-                        mainCommands = mainCommands.concat(props.editPanel.menuLeftCommands);
-                    }
-
-                    // Render the menu
-                    CommandBar({
-                        el: _panel.getHeader(),
-                        mainCommands,
-                        sideCommands: props.editPanel.menuRightCommands
+                            // Save the configuration
+                            WPCfg.saveConfiguration(_wp.wpId, props.cfgElementId, cfg);
+                        }
                     });
                 }
+
+                // See if custom buttons exist
+                if (_panelCfg.menuLeftCommands) {
+                    // Add the buttons
+                    mainCommands = mainCommands.concat(_panelCfg.menuLeftCommands);
+                }
+
+                // Render the menu
+                CommandBar({
+                    el: _panel.getHeader(),
+                    mainCommands,
+                    sideCommands: _panelCfg.menuRightCommands
+                });
 
                 // Render the configuration
                 renderConfiguration();

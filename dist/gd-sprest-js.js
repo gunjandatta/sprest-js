@@ -17734,7 +17734,7 @@ exports.WebPart = function (props) {
             if (props.onRenderEdit) {
                 // Execute the render edit event
                 returnVal = props.onRenderEdit(_wp);
-            } else if (!(props.editPanel && props.editPanel.hide)) {
+            } else if (props.editPanel) {
                 // Display the edit panel
                 renderEditPanel();
             }
@@ -17782,7 +17782,7 @@ exports.WebPart = function (props) {
     // The default render method when the page is edited
     var renderEditPanel = function renderEditPanel() {
         // Ensure we are rendering the panel
-        if (_panelCfg == null || _panelCfg.hide) {
+        if (_panelCfg == null) {
             return;
         }
         // Render the configuration panel
@@ -17799,40 +17799,35 @@ exports.WebPart = function (props) {
             el: _wp.el.children[1],
             text: "Show Configuration",
             onClick: function onClick() {
+                var mainCommands = [];
                 // Show the panel
                 _panel.show();
-                // Render the menu
-                var showMenu = !(props.editPanel && props.editPanel.hide);
-                if (showMenu) {
-                    var mainCommands = [];
-                    // See if we are adding the save button
-                    var showSave = !(props.editPanel && props.editPanel.hideSaveButton);
-                    if (showSave) {
-                        // Add the save button
-                        mainCommands.push({
-                            icon: "Save",
-                            text: "Save",
-                            onClick: function onClick() {
-                                // Call the save event and set the configuration
-                                var cfg = _panelCfg.onSave ? _panelCfg.onSave(_wp.cfg) : null;
-                                cfg = cfg ? cfg : _wp.cfg;
-                                // Save the configuration
-                                wpCfg_1.WPCfg.saveConfiguration(_wp.wpId, props.cfgElementId, cfg);
-                            }
-                        });
-                    }
-                    // See if custom buttons exist
-                    if (props.editPanel && props.editPanel.menuLeftCommands) {
-                        // Add the buttons
-                        mainCommands = mainCommands.concat(props.editPanel.menuLeftCommands);
-                    }
-                    // Render the menu
-                    fabric_1.CommandBar({
-                        el: _panel.getHeader(),
-                        mainCommands: mainCommands,
-                        sideCommands: props.editPanel.menuRightCommands
+                // See if we are adding the save button
+                if (_panelCfg.showSaveButton) {
+                    // Add the save button
+                    mainCommands.push({
+                        icon: "Save",
+                        text: "Save",
+                        onClick: function onClick() {
+                            // Call the save event and set the configuration
+                            var cfg = _panelCfg.onSave ? _panelCfg.onSave(_wp.cfg) : null;
+                            cfg = cfg ? cfg : _wp.cfg;
+                            // Save the configuration
+                            wpCfg_1.WPCfg.saveConfiguration(_wp.wpId, props.cfgElementId, cfg);
+                        }
                     });
                 }
+                // See if custom buttons exist
+                if (_panelCfg.menuLeftCommands) {
+                    // Add the buttons
+                    mainCommands = mainCommands.concat(_panelCfg.menuLeftCommands);
+                }
+                // Render the menu
+                fabric_1.CommandBar({
+                    el: _panel.getHeader(),
+                    mainCommands: mainCommands,
+                    sideCommands: _panelCfg.menuRightCommands
+                });
                 // Render the configuration
                 renderConfiguration();
             }
@@ -18035,19 +18030,27 @@ exports.WPList = function (props) {
     /**
      * Main
      */
+    // Create the menu commands
+    var menuLeftCommands = [{
+        icon: "Refresh",
+        text: "Refresh",
+        onClick: function onClick() {
+            // Load the lists
+            loadLists(_wpInfo.cfg.WebUrl);
+        }
+    }];
+    // See if custom commands exist
+    if (props.editPanel && props.editPanel.menuLeftCommands) {
+        // Add the custom commands
+        menuLeftCommands = menuLeftCommands.concat(props.editPanel.menuLeftCommands);
+    }
     // Create the webpart
     var _wp = _1.WebPart({
         cfgElementId: props.cfgElementId,
         editPanel: {
             panelType: props.editPanel ? props.editPanel.panelType : null,
-            menuLeftCommands: [{
-                icon: "Refresh",
-                text: "Refresh",
-                onClick: function onClick() {
-                    // Load the lists
-                    loadLists(_wpInfo.cfg.WebUrl);
-                }
-            }],
+            menuLeftCommands: menuLeftCommands,
+            menuRightCommands: props.editPanel ? props.editPanel.menuRightCommands : null,
             onRenderHeader: function onRenderHeader(el, wpInfo) {
                 // Save the properties
                 _el = el;
@@ -18149,6 +18152,8 @@ exports.WPSearch = function (props) {
         cfgElementId: props.cfgElementId,
         className: props.className,
         editPanel: {
+            menuLeftCommands: props.editPanel ? props.editPanel.menuLeftCommands : null,
+            menuRightCommands: props.editPanel ? props.editPanel.menuRightCommands : null,
             onRenderFooter: renderFooter
         },
         elementId: props.elementId,

@@ -228,21 +228,31 @@ export const WPList = (props: IWPListProps): IWPList => {
      * Main
      */
 
+    // Create the menu commands
+    let menuLeftCommands: Array<Fabric.Types.ICommandButtonProps> = [
+        {
+            icon: "Refresh",
+            text: "Refresh",
+            onClick: () => {
+                // Load the lists
+                loadLists(_wpInfo.cfg.WebUrl);
+            }
+        }
+    ];
+
+    // See if custom commands exist
+    if (props.editPanel && props.editPanel.menuLeftCommands) {
+        // Add the custom commands
+        menuLeftCommands = menuLeftCommands.concat(props.editPanel.menuLeftCommands);
+    }
+
     // Create the webpart
     let _wp = WebPart({
         cfgElementId: props.cfgElementId,
         editPanel: {
             panelType: props.editPanel ? props.editPanel.panelType : null,
-            menuLeftCommands: [
-                {
-                    icon: "Refresh",
-                    text: "Refresh",
-                    onClick: () => {
-                        // Load the lists
-                        loadLists(_wpInfo.cfg.WebUrl);
-                    }
-                }
-            ],
+            menuLeftCommands,
+            menuRightCommands: props.editPanel ? props.editPanel.menuRightCommands : null,
             onRenderHeader: (el, wpInfo) => {
                 // Save the properties
                 _el = el;

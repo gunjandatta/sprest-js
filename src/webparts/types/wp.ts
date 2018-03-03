@@ -23,12 +23,6 @@ export interface IWebPartCfg {
  * WebPart Edit Panel
  */
 export interface IWebPartEditPanel {
-    /** True to hide the panel. */
-    hide?: boolean;
-
-    /** True to hide the save button. */
-    hideSaveButton?: boolean;
-
     /** Menu */
     menuLeftCommands?: Array<ICommandButtonProps>;
 
@@ -46,6 +40,9 @@ export interface IWebPartEditPanel {
 
     /** The edit panel type. */
     panelType?: number;
+
+    /** True to hide the save button. */
+    showSaveButton?: boolean;
 }
 
 /**
