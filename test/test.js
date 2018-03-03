@@ -11183,7 +11183,6 @@ var DropdownTypes;
  * Dropdown
  */
 exports.Dropdown = function (props) {
-    var _values = props.value && typeof (props.value) === "string" ? [props.value] : (props.value || []);
     // Method to create the list items
     var createList = function (el, options) {
         if (options === void 0) { options = []; }
@@ -12483,7 +12482,7 @@ exports.Dialog = function (props) {
         props.isBlocking ? "ms-Dialog--blocking" : "",
         props.isLargeHeader ? "ms-Dialog--lgHeader" : "",
         props.isMultiLine ? "ms-Dialog--multiline" : "",
-        props.showCloseButton ? "ms-Dialog--close" : ""
+        props.showCloseButton == false ? "" : "ms-Dialog--close"
     ].join(' ').trim();
     // Parse the actions
     var actions = props.actions || [];
@@ -12661,11 +12660,11 @@ exports.Panel = function (props, content) {
     ;
     // Method to render the close button
     var renderCloseButton = function () {
-        return props.showCloseButton ? [
+        return props.showCloseButton == false ? "" : [
             '<button class="ms-Panel-closeButton ms-PanelAction-close">',
             '<i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>',
             '</button>',
-        ].join('\n') : '';
+        ].join('\n');
     };
     // Return the template
     return [

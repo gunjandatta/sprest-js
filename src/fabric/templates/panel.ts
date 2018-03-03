@@ -30,11 +30,11 @@ export const Panel = (props: IPanelProps, content?: string): string => {
 
     // Method to render the close button
     let renderCloseButton = () => {
-        return props.showCloseButton ? [
+        return props.showCloseButton == false ? "" : [
             '<button class="ms-Panel-closeButton ms-PanelAction-close">',
             '<i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>',
             '</button>',
-        ].join('\n') : '';
+        ].join('\n');
     };
 
     // Return the template
