@@ -132,6 +132,9 @@ export const WPTabs = (props: IWPTabsProps) => {
     // Return the webpart
     let _wp = WebPart({
         elementId: props.elementId,
+        editPanel: {
+            hide: true
+        },
         onRenderDisplay: (wpInfo: IWebPartInfo) => {
             // Set the webparts
             _webparts = getWebParts(wpInfo);

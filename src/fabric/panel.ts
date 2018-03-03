@@ -25,6 +25,15 @@ export const Panel = (props: IPanelProps): IPanel => {
         return _panel;
     }
 
+    // Method to get the content element
+    let getContent = () => { return _panel ? _panel._panel.querySelector(".ms-Panel-content") as HTMLDivElement : null; }
+
+    // Method to get the footer element
+    let getFooter = () => { return _panel ? _panel._panel.querySelector(".ms-Panel-footer") as HTMLDivElement : null; }
+
+    // Method to get the header element
+    let getHeader = () => { return _panel ? _panel._panel.querySelector(".ms-Panel-header") as HTMLDivElement : null; }
+
     // Method to hide the panel
     let hide = () => {
         // Dismiss the panel
@@ -119,6 +128,9 @@ export const Panel = (props: IPanelProps): IPanel => {
     // Return the panel
     return {
         get,
+        getContent,
+        getFooter,
+        getHeader,
         hide,
         isOpen,
         show,

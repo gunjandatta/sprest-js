@@ -1,6 +1,6 @@
 import { SPTypes, Types, Web } from "gd-sprest";
 import { Button, CommandBar, Panel, PanelTypes, Templates, Spinner } from "../fabric";
-import { Fabric, IDropdown, IDropdownOption, IPanel } from "../fabric/types";
+import { Fabric, ICommandButtonProps, IDropdown, IDropdownOption, IPanel } from "../fabric/types";
 import { Field, ListForm } from ".";
 import { IField, IListFormMMSFieldInfo, IListFormLookupFieldInfo, IListFormUserFieldInfo, IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
 
@@ -412,7 +412,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
     // Render the menu
     let renderMenu = (controlMode: number) => {
         // Determine the main commands
-        let mainCommands = null;
+        let mainCommands: Array<ICommandButtonProps> = null;
         switch (controlMode) {
             // Display
             case SPTypes.ControlMode.Display:

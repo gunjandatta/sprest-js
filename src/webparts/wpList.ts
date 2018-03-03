@@ -108,6 +108,12 @@ export const WPList = (props: IWPListProps): IWPList => {
         // Set the query
         let query: Types.SP.ODataQuery = props.listQuery || {};
 
+        // Render a loading message
+        Fabric.Spinner({
+            el: _el.children[2],
+            text: "Loading the lists..."
+        });
+
         // Get the web
         (new Web(webUrl))
             // Get the lists
@@ -148,8 +154,6 @@ export const WPList = (props: IWPListProps): IWPList => {
             '<div></div>',
             '<div></div>',
             '<div></div>',
-            '<div></div>',
-            '<div></div>'
         ].join('\n');
 
         // Render the web url textbox
@@ -174,27 +178,11 @@ export const WPList = (props: IWPListProps): IWPList => {
             // Render the dropdown
             renderDropdown(_el.children[2] as HTMLDivElement);
 
-            // Render the refresh button
-            Fabric.Button({
-                el: _el.children[4],
-                text: "Refresh",
-                onClick: () => {
-                    // Load the lists
-                    loadLists(tb.getValue());
-                }
-            });
-
             // Render the footer
             if (_cfg.onRenderFooter) {
                 _cfg.onRenderFooter(_el.children[3] as HTMLDivElement, _wpInfo, list);
             }
         } else {
-            // Render a loading message
-            Fabric.Spinner({
-                el: _el.children[2],
-                text: "Loading the lists..."
-            });
-
             // Load the lists
             loadLists(tb.getValue());
         }
@@ -244,6 +232,17 @@ export const WPList = (props: IWPListProps): IWPList => {
     let _wp = WebPart({
         cfgElementId: props.cfgElementId,
         editPanel: {
+            panelType: props.editPanel ? props.editPanel.panelType : null,
+            menuLeftCommands: [
+                {
+                    icon: "Refresh",
+                    text: "Refresh",
+                    onClick: () => {
+                        // Load the lists
+                        loadLists(_wpInfo.cfg.WebUrl);
+                    }
+                }
+            ],
             onRenderHeader: (el, wpInfo) => {
                 // Save the properties
                 _el = el;
@@ -252,7 +251,6 @@ export const WPList = (props: IWPListProps): IWPList => {
                 // Render the configuration
                 renderConfiguration();
             },
-            panelType: props.editPanel ? props.editPanel.panelType : null,
             onSave: (cfg: IWPListCfg) => {
                 // Update the webpart configuration and return it
                 cfg.ListName = _wpInfo.cfg.ListName;

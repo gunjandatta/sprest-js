@@ -7,6 +7,15 @@ export interface IPanel {
     /** Returns the fabric component. */
     get(): Fabric.IPanel;
 
+    /** Returns the panel content element. */
+    getContent(): HTMLDivElement;
+
+    /** Returns the panel footer element. */
+    getFooter(): HTMLDivElement;
+
+    /** Returns the panel header element. */
+    getHeader(): HTMLDivElement;
+
     /** Hides the panel. */
     hide: () => void;
 

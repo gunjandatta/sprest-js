@@ -230,8 +230,15 @@ window["TestJS"] = {
                         }
                     });
             },
-            onRenderEdit: (cfg) => {
-                cfg.el.innerHTML = "<div class='ms-fontSize-xl'>The Page Is Being Edited</div>";
+            editPanel: {
+                menuLeftCommands: [
+                    {
+                        text: "Test Button",
+                        onClick: () => {
+                            alert("The button was clicked.");
+                        }
+                    }
+                ]
             }
         });
     }

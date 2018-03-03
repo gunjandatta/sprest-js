@@ -6048,6 +6048,28 @@ exports.CommandBar = function (props) {
     props.el.innerHTML = _1.Templates.CommandBar(props);
     // Create the command bar
     var _menu = new _1.fabric.CommandBar(props.el.querySelector(".ms-CommandBar"));
+    // Parse the menu buttons
+    var buttonProps = (props.mainCommands || []).concat(props.sideCommands || []);
+    var buttons = _menu._container.querySelectorAll(".ms-CommandButton-button");
+    for (var i = 0; i < buttons.length; i++) {
+        // See if a click event exists
+        if (buttonProps[i].onClick && buttons[i]) {
+            // Add the index attribute
+            buttons[i].setAttribute("data-btn-idx", i.toString());
+            // Add a click event
+            buttons[i].addEventListener("click", function (ev) {
+                var btn = ev.currentTarget;
+                // Disable postback
+                ev.preventDefault();
+                // Get the button index
+                var idx = parseInt(btn.getAttribute("data-btn-idx"));
+                if (idx >= 0 && buttonProps[idx]) {
+                    // Execute the postback
+                    buttonProps[idx].onClick(btn);
+                }
+            });
+        }
+    }
     // Return the command bar
     return { get: get };
 };
@@ -6824,6 +6846,18 @@ exports.Panel = function (props) {
         // Return the panel
         return _panel;
     };
+    // Method to get the content element
+    var getContent = function getContent() {
+        return _panel ? _panel._panel.querySelector(".ms-Panel-content") : null;
+    };
+    // Method to get the footer element
+    var getFooter = function getFooter() {
+        return _panel ? _panel._panel.querySelector(".ms-Panel-footer") : null;
+    };
+    // Method to get the header element
+    var getHeader = function getHeader() {
+        return _panel ? _panel._panel.querySelector(".ms-Panel-header") : null;
+    };
     // Method to hide the panel
     var hide = function hide() {
         // Dismiss the panel
@@ -6914,6 +6948,9 @@ exports.Panel = function (props) {
     // Return the panel
     return {
         get: get,
+        getContent: getContent,
+        getFooter: getFooter,
+        getHeader: getHeader,
         hide: hide,
         isOpen: isOpen,
         show: show,
@@ -17730,32 +17767,16 @@ exports.WebPart = function (props) {
     // Renders the configuration panel
     var renderConfiguration = function renderConfiguration() {
         // Render the panel contents
-        var panelContents = _panel.updateContent(['<div></div>', '<div></div>', '<div></div>'].join('\n'));
+        var panelContents = _panel.updateContent(['<div></div>', '<div></div>'].join('\n'));
         // See if the render header event exists
         if (_panelCfg.onRenderHeader) {
             // Call the event
             _panelCfg.onRenderHeader(panelContents.children[0], _wp);
         }
-        // See if we are rendering the save button
-        var hideSaveBtn = _panelCfg.hideSaveButton;
-        if (!hideSaveBtn) {
-            // Render the refresh button
-            fabric_1.Button({
-                el: panelContents.children[1],
-                text: "Save",
-                onClick: function onClick() {
-                    // Call the save event and set the configuration
-                    var cfg = _panelCfg.onSave ? _panelCfg.onSave(_wp.cfg) : null;
-                    cfg = cfg ? cfg : _wp.cfg;
-                    // Save the configuration
-                    wpCfg_1.WPCfg.saveConfiguration(_wp.wpId, props.cfgElementId, cfg);
-                }
-            });
-        }
         // See if the render footer event exists
         if (_panelCfg.onRenderFooter) {
             // Call the event
-            _panelCfg.onRenderFooter(panelContents.children[2], _wp);
+            _panelCfg.onRenderFooter(panelContents.children[1], _wp);
         }
     };
     // The default render method when the page is edited
@@ -17780,6 +17801,38 @@ exports.WebPart = function (props) {
             onClick: function onClick() {
                 // Show the panel
                 _panel.show();
+                // Render the menu
+                var showMenu = !(props.editPanel && props.editPanel.hide);
+                if (showMenu) {
+                    var mainCommands = [];
+                    // See if we are adding the save button
+                    var showSave = !(props.editPanel && props.editPanel.hideSaveButton);
+                    if (showSave) {
+                        // Add the save button
+                        mainCommands.push({
+                            icon: "Save",
+                            text: "Save",
+                            onClick: function onClick() {
+                                // Call the save event and set the configuration
+                                var cfg = _panelCfg.onSave ? _panelCfg.onSave(_wp.cfg) : null;
+                                cfg = cfg ? cfg : _wp.cfg;
+                                // Save the configuration
+                                wpCfg_1.WPCfg.saveConfiguration(_wp.wpId, props.cfgElementId, cfg);
+                            }
+                        });
+                    }
+                    // See if custom buttons exist
+                    if (props.editPanel && props.editPanel.menuLeftCommands) {
+                        // Add the buttons
+                        mainCommands = mainCommands.concat(props.editPanel.menuLeftCommands);
+                    }
+                    // Render the menu
+                    fabric_1.CommandBar({
+                        el: _panel.getHeader(),
+                        mainCommands: mainCommands,
+                        sideCommands: props.editPanel.menuRightCommands
+                    });
+                }
                 // Render the configuration
                 renderConfiguration();
             }
@@ -17888,6 +17941,11 @@ exports.WPList = function (props) {
     var loadLists = function loadLists(webUrl) {
         // Set the query
         var query = props.listQuery || {};
+        // Render a loading message
+        __1.Fabric.Spinner({
+            el: _el.children[2],
+            text: "Loading the lists..."
+        });
         // Get the web
         new gd_sprest_1.Web(webUrl).Lists().query(query).execute(function (lists) {
             // Save the lists
@@ -17913,7 +17971,7 @@ exports.WPList = function (props) {
     // Method to render the configuration panel
     var renderConfiguration = function renderConfiguration(list) {
         // Render the panel contents
-        _el.innerHTML = ['<div></div>', '<div></div>', '<div></div>', '<div></div>', '<div></div>', '<div></div>'].join('\n');
+        _el.innerHTML = ['<div></div>', '<div></div>', '<div></div>', '<div></div>'].join('\n');
         // Render the web url textbox
         var tb = __1.Fabric.TextField({
             el: _el.children[1],
@@ -17933,25 +17991,11 @@ exports.WPList = function (props) {
             }
             // Render the dropdown
             renderDropdown(_el.children[2]);
-            // Render the refresh button
-            __1.Fabric.Button({
-                el: _el.children[4],
-                text: "Refresh",
-                onClick: function onClick() {
-                    // Load the lists
-                    loadLists(tb.getValue());
-                }
-            });
             // Render the footer
             if (_cfg.onRenderFooter) {
                 _cfg.onRenderFooter(_el.children[3], _wpInfo, list);
             }
         } else {
-            // Render a loading message
-            __1.Fabric.Spinner({
-                el: _el.children[2],
-                text: "Loading the lists..."
-            });
             // Load the lists
             loadLists(tb.getValue());
         }
@@ -17995,6 +18039,15 @@ exports.WPList = function (props) {
     var _wp = _1.WebPart({
         cfgElementId: props.cfgElementId,
         editPanel: {
+            panelType: props.editPanel ? props.editPanel.panelType : null,
+            menuLeftCommands: [{
+                icon: "Refresh",
+                text: "Refresh",
+                onClick: function onClick() {
+                    // Load the lists
+                    loadLists(_wpInfo.cfg.WebUrl);
+                }
+            }],
             onRenderHeader: function onRenderHeader(el, wpInfo) {
                 // Save the properties
                 _el = el;
@@ -18002,7 +18055,6 @@ exports.WPList = function (props) {
                 // Render the configuration
                 renderConfiguration();
             },
-            panelType: props.editPanel ? props.editPanel.panelType : null,
             onSave: function onSave(cfg) {
                 // Update the webpart configuration and return it
                 cfg.ListName = _wpInfo.cfg.ListName;
@@ -18237,6 +18289,9 @@ exports.WPTabs = function (props) {
     // Return the webpart
     var _wp = _1.WebPart({
         elementId: props.elementId,
+        editPanel: {
+            hide: true
+        },
         onRenderDisplay: function onRenderDisplay(wpInfo) {
             // Set the webparts
             _webparts = getWebParts(wpInfo);

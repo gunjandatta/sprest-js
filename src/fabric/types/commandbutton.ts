@@ -12,6 +12,9 @@ export interface ICommandButton {
  * Command Button Properties
  */
 export interface ICommandButtonProps extends IProps {
+    /** The button icon. */
+    icon?: string;
+
     /** True for action command buttons. */
     isAction?: boolean;
 
@@ -36,8 +39,8 @@ export interface ICommandButtonProps extends IProps {
     /** The contextual menu. */
     menu?: IContextualMenuProps;
 
-    /** The button icon. */
-    icon?: string;
+    /** The click event. */
+    onClick?: (ev: HTMLButtonElement) => void;
 
     /** The button text. */
     text?: string;

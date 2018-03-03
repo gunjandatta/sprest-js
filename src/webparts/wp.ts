@@ -1,5 +1,5 @@
 import { ContextInfo } from "gd-sprest";
-import { Button, Panel, PanelTypes, Types } from "../fabric";
+import { CommandBar, Button, Panel, PanelTypes, Types } from "../fabric";
 import { IWebPart, IWebPartCfg, IWebPartEditPanel, IWebPartInfo, IWebPartObject, IWebPartProps } from "./types";
 import { WPCfg } from "./wpCfg";
 declare var SP;
@@ -289,7 +289,6 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
         // Render the panel contents
         let panelContents = _panel.updateContent([
             '<div></div>',
-            '<div></div>',
             '<div></div>'
         ].join('\n'));
 
@@ -299,28 +298,10 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
             _panelCfg.onRenderHeader(panelContents.children[0] as HTMLDivElement, _wp);
         }
 
-        // See if we are rendering the save button
-        let hideSaveBtn = _panelCfg.hideSaveButton;
-        if (!hideSaveBtn) {
-            // Render the refresh button
-            Button({
-                el: panelContents.children[1],
-                text: "Save",
-                onClick: () => {
-                    // Call the save event and set the configuration
-                    let cfg = _panelCfg.onSave ? _panelCfg.onSave(_wp.cfg) : null;
-                    cfg = cfg ? cfg : _wp.cfg;
-
-                    // Save the configuration
-                    WPCfg.saveConfiguration(_wp.wpId, props.cfgElementId, cfg);
-                }
-            });
-        }
-
         // See if the render footer event exists
         if (_panelCfg.onRenderFooter) {
             // Call the event
-            _panelCfg.onRenderFooter(panelContents.children[2] as HTMLDivElement, _wp);
+            _panelCfg.onRenderFooter(panelContents.children[1] as HTMLDivElement, _wp);
         }
     }
 
@@ -350,6 +331,43 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
             onClick: () => {
                 // Show the panel
                 _panel.show();
+
+                // Render the menu
+                let showMenu = !(props.editPanel && props.editPanel.hide);
+                if (showMenu) {
+                    let mainCommands: Array<Types.ICommandButtonProps> = [];
+
+                    // See if we are adding the save button
+                    let showSave = !(props.editPanel && props.editPanel.hideSaveButton);
+                    if (showSave) {
+                        // Add the save button
+                        mainCommands.push({
+                            icon: "Save",
+                            text: "Save",
+                            onClick: () => {
+                                // Call the save event and set the configuration
+                                let cfg = _panelCfg.onSave ? _panelCfg.onSave(_wp.cfg) : null;
+                                cfg = cfg ? cfg : _wp.cfg;
+
+                                // Save the configuration
+                                WPCfg.saveConfiguration(_wp.wpId, props.cfgElementId, cfg);
+                            }
+                        });
+                    }
+
+                    // See if custom buttons exist
+                    if (props.editPanel && props.editPanel.menuLeftCommands) {
+                        // Add the buttons
+                        mainCommands = mainCommands.concat(props.editPanel.menuLeftCommands);
+                    }
+
+                    // Render the menu
+                    CommandBar({
+                        el: _panel.getHeader(),
+                        mainCommands,
+                        sideCommands: props.editPanel.menuRightCommands
+                    });
+                }
 
                 // Render the configuration
                 renderConfiguration();

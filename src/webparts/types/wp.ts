@@ -1,3 +1,5 @@
+import { ICommandButtonProps } from "../../fabric/types";
+
 /**
  * WebPart
  */
@@ -27,11 +29,17 @@ export interface IWebPartEditPanel {
     /** True to hide the save button. */
     hideSaveButton?: boolean;
 
+    /** Menu */
+    menuLeftCommands?: Array<ICommandButtonProps>;
+
+    /** Menu */
+    menuRightCommands?: Array<ICommandButtonProps>;
+
     /** The render footer event. */
-    onRenderFooter?: (el:HTMLDivElement, wpInfo: IWebPartInfo) => void;
+    onRenderFooter?: (el: HTMLDivElement, wpInfo: IWebPartInfo) => void;
 
     /** The render header event. */
-    onRenderHeader?: (el:HTMLDivElement, wpInfo: IWebPartInfo) => void;
+    onRenderHeader?: (el: HTMLDivElement, wpInfo: IWebPartInfo) => void;
 
     /** The save event. */
     onSave?: (wpCfg: IWebPartCfg) => IWebPartCfg;
