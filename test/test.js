@@ -15054,8 +15054,7 @@ exports.WebPart = function (props) {
         _panel = fabric_1.Panel({
             el: _wp.el.children[0],
             headerText: "Configuration Panel",
-            panelType: _panelCfg.panelType || fabric_1.PanelTypes.Medium,
-            showCloseButton: true
+            panelType: _panelCfg.panelType || fabric_1.PanelTypes.Medium
         });
         // Render the button
         var btn = fabric_1.Button({
@@ -15085,11 +15084,20 @@ exports.WebPart = function (props) {
                     // Add the buttons
                     mainCommands = mainCommands.concat(_panelCfg.menuLeftCommands);
                 }
+                // Set the side commands
+                var sideCommands = (_panelCfg.menuRightCommands || []).concat([{
+                        className: "ms-CommandButton-close",
+                        icon: "Cancel",
+                        onClick: function () {
+                            // Close the panel
+                            _panel.hide();
+                        }
+                    }]);
                 // Render the menu
                 fabric_1.CommandBar({
                     el: _panel.getHeader(),
                     mainCommands: mainCommands,
-                    sideCommands: _panelCfg.menuRightCommands
+                    sideCommands: sideCommands
                 });
                 // Render the configuration
                 renderConfiguration();

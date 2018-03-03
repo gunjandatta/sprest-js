@@ -320,8 +320,7 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
         _panel = Panel({
             el: _wp.el.children[0],
             headerText: "Configuration Panel",
-            panelType: _panelCfg.panelType || PanelTypes.Medium,
-            showCloseButton: true
+            panelType: _panelCfg.panelType || PanelTypes.Medium
         });
 
         // Render the button
@@ -357,11 +356,21 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
                     mainCommands = mainCommands.concat(_panelCfg.menuLeftCommands);
                 }
 
+                // Set the side commands
+                let sideCommands = (_panelCfg.menuRightCommands || []).concat([{
+                    className: "ms-CommandButton-close",
+                    icon: "Cancel",
+                    onClick: () => {
+                        // Close the panel
+                        _panel.hide();
+                    }
+                }]);
+
                 // Render the menu
                 CommandBar({
                     el: _panel.getHeader(),
                     mainCommands,
-                    sideCommands: _panelCfg.menuRightCommands
+                    sideCommands
                 });
 
                 // Render the configuration
