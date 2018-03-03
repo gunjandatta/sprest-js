@@ -11,7 +11,7 @@ export const Dialog = (props: IDialogProps): string => {
         props.isBlocking ? "ms-Dialog--blocking" : "",
         props.isLargeHeader ? "ms-Dialog--lgHeader" : "",
         props.isMultiLine ? "ms-Dialog--multiline" : "",
-        props.showCloseButton ? "ms-Dialog--close" : ""
+        props.showCloseButton == false ? "" : "ms-Dialog--close"
     ].join(' ').trim();
 
     // Parse the actions
