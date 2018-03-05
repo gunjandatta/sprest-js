@@ -1,12 +1,13 @@
 {
   "name": "gd-sprest-js",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "description": "SharePoint 2013/Online js components.",
   "main": "build/index.js",
   "typings": "build/index.d.ts",
   "scripts": {
     "build": "gulp",
-    "test": "webpack --config test/webpack.config.js"
+    "test": "webpack --config test/webpack.config.js",
+    "package": "npm run build && npm run test"
   },
   "repository": {
     "type": "git",

@@ -4268,11 +4268,11 @@ exports.Taxonomy = {
             });
         }
         // Sort the terms
-        terms.sort(function (a, b) {
-            if (a < b) {
+        terms = terms.sort(function (a, b) {
+            if (a.pathAsString < b.pathAsString) {
                 return -1;
             }
-            if (a > b) {
+            if (a.pathAsString > b.pathAsString) {
                 return 1;
             }
             return 0;
@@ -16351,7 +16351,7 @@ exports.ListItem = function (props) {
     // Set the class name
     var className = [props.className || "", props.isDocument ? "ms-ListItem--document" : "", props.isImage ? "ms-ListItem--image" : "", props.isSelectable ? "is-selectable" : "", props.isSelected ? "is-selected" : "", props.isUnread ? "is-unread" : "", props.isUnseen ? "is-unseen" : ""].join(' ').trim();
     // Return the template
-    return ['<li class="ms-ListItem ' + className + '" tabindex="0" data-value=\'' + (props.value || "") + '\'>', '<span class="ms-ListItem-primaryText">' + (props.primaryText || "") + '</span>', '<span class="ms-ListItem-secondaryText">' + (props.secondaryText || "") + '</span>', '<span class="ms-ListItem-tertiaryText">' + (props.tertiaryText || "") + '</span>', '<span class="ms-ListItem-metaText">' + (props.metaText || "") + '</span>', '<div class="ms-ListItem-selectionTarget">' + (props.selectionTarget || "") + '</div>', '<div class="ms-ListItem-actions">' + (props.actions || "") + '</div>', '</li>'].join('\n');
+    return ['<li class="ms-ListItem ' + className + '" tabindex="0" data-value=\'' + (props.value || "") + '\'>', props.primaryText ? '<span class="ms-ListItem-primaryText">' + props.primaryText + '</span>' : '', props.secondaryText ? '<span class="ms-ListItem-secondaryText">' + props.secondaryText + '</span>' : '', props.tertiaryText ? '<span class="ms-ListItem-tertiaryText">' + props.tertiaryText + '</span>' : '', props.metaText ? '<span class="ms-ListItem-metaText">' + props.metaText + '</span>' : '', '<div class="ms-ListItem-selectionTarget">' + (props.selectionTarget || "") + '</div>', '<div class="ms-ListItem-actions">' + (props.actions || "") + '</div>', '</li>'].join('\n');
 };
 
 /***/ }),
