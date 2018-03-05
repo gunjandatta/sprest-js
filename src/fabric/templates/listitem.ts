@@ -18,10 +18,10 @@ export const ListItem = (props: IListItemProps): string => {
     // Return the template
     return [
         '<li class="ms-ListItem ' + className + '" tabindex="0" data-value=\'' + (props.value || "") + '\'>',
-        '<span class="ms-ListItem-primaryText">' + (props.primaryText || "") + '</span>',
-        '<span class="ms-ListItem-secondaryText">' + (props.secondaryText || "") + '</span>',
-        '<span class="ms-ListItem-tertiaryText">' + (props.tertiaryText || "") + '</span>',
-        '<span class="ms-ListItem-metaText">' + (props.metaText || "") + '</span>',
+        props.primaryText ? '<span class="ms-ListItem-primaryText">' + props.primaryText + '</span>' : '',
+        props.secondaryText ? '<span class="ms-ListItem-secondaryText">' + props.secondaryText + '</span>' : '',
+        props.tertiaryText ? '<span class="ms-ListItem-tertiaryText">' + props.tertiaryText + '</span>' : '',
+        props.metaText ? '<span class="ms-ListItem-metaText">' + props.metaText + '</span>' : '',
         '<div class="ms-ListItem-selectionTarget">' + (props.selectionTarget || "") + '</div>',
         '<div class="ms-ListItem-actions">' + (props.actions || "") + '</div>',
         '</li>'
