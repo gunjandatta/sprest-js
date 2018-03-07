@@ -38,22 +38,25 @@ export interface IListForm {
      * Method to render the display form template.
      * @param el - The element to render the form to.
      * @param listInfo - The list form information.
+     * @param excludeFields - An array of internal field names to exclude from the form.
      */
-    renderDisplayForm(el: Element, listInfo: IListFormResult);
+    renderDisplayForm(el: Element, listInfo: IListFormResult, excludeFields?:Array<string>);
 
     /**
      * Method to render the edit/new form.
      * @param el - The element to render the form to.
      * @param listInfo - The list form information.
+     * @param excludeFields - An array of internal field names to exclude from the form.
      */
-    renderEditForm(el: Element, listInfo: IListFormResult, controlMode: number): Array<IField>;
+    renderEditForm(el: Element, listInfo: IListFormResult, controlMode: number, excludeFields?:Array<string>): Array<IField>;
 
     /**
      * Method to render the form template.
      * @param el - The element to render the form to.
      * @param listInfo - The list form information.
+     * @param excludeFields - An array of internal field names to exclude from the form.
      */
-    renderFormTemplate(el: Element, listInfo: IListFormResult);
+    renderFormTemplate(el: Element, listInfo: IListFormResult, excludeFields?:Array<string>);
 
     /**
      * Method to save attachments to the item.

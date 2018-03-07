@@ -17484,9 +17484,12 @@ var _ListForm = /** @class */function () {
         });
     };
     // Method to render a display form for an item
-    _ListForm.renderDisplayForm = function (el, info) {
+    _ListForm.renderDisplayForm = function (el, info, excludeFields) {
+        if (excludeFields === void 0) {
+            excludeFields = [];
+        }
         // Render the form template
-        _ListForm.renderFormTemplate(el, info);
+        _ListForm.renderFormTemplate(el, info, excludeFields);
         // Load the list item
         info.list.Items(info.item.Id).FieldValuesAsHtml().execute(function (formValues) {
             // Parse the fields
@@ -17507,14 +17510,22 @@ var _ListForm = /** @class */function () {
         });
     };
     // Render the edit form
-    _ListForm.renderEditForm = function (el, info, controlMode) {
+    _ListForm.renderEditForm = function (el, info, controlMode, excludeFields) {
+        if (excludeFields === void 0) {
+            excludeFields = [];
+        }
         // Render the form template
-        _ListForm.renderFormTemplate(el, info);
+        _ListForm.renderFormTemplate(el, info, excludeFields);
         // Parse the fields
         var fields = [];
         for (var fieldName in info.fields) {
             var field = info.fields[fieldName];
             var value = info.item ? info.item[fieldName] : null;
+            // Get the field element and ensure it exists
+            var elField = el.querySelector("[data-field='" + fieldName + "']");
+            if (elField == null) {
+                continue;
+            }
             // See if this is a read-only field
             if (field.ReadOnlyField) {
                 // Do not render in the new form
@@ -17537,7 +17548,7 @@ var _ListForm = /** @class */function () {
             // Render the field
             _1.Field({
                 controlMode: controlMode,
-                el: el.querySelector("[data-field='" + fieldName + "']"),
+                el: elField,
                 fieldInfo: {
                     field: field,
                     listName: info.list.Title,
@@ -17553,11 +17564,28 @@ var _ListForm = /** @class */function () {
         return fields;
     };
     // Method to render the form template
-    _ListForm.renderFormTemplate = function (el, info) {
+    _ListForm.renderFormTemplate = function (el, info, excludeFields) {
+        if (excludeFields === void 0) {
+            excludeFields = [];
+        }
         // Clear the element
         el.innerHTML = "";
         // Parse the fields
         for (var fieldName in info.fields) {
+            var excludeField = false;
+            // Parse the fields
+            for (var i = 0; i < excludeFields.length; i++) {
+                // See if we are excluding the field
+                if (excludeFields[i] == fieldName) {
+                    // Set the flag
+                    excludeField = true;
+                    break;
+                }
+            }
+            // See if we are excluding the field
+            if (excludeField) {
+                continue;
+            }
             // Append the field to the form
             el.innerHTML += "<div data-field='" + fieldName + "'></div>";
         }

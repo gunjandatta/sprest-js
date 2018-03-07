@@ -449,9 +449,9 @@ class _ListForm {
     }
 
     // Method to render a display form for an item
-    static renderDisplayForm(el: HTMLElement, info: ListFormTypes.IListFormResult) {
+    static renderDisplayForm(el: HTMLElement, info: ListFormTypes.IListFormResult, excludeFields: Array<string> = []) {
         // Render the form template
-        _ListForm.renderFormTemplate(el, info);
+        _ListForm.renderFormTemplate(el, info, excludeFields);
 
         // Load the list item
         info.list.Items(info.item.Id)
@@ -484,15 +484,19 @@ class _ListForm {
     }
 
     // Render the edit form
-    static renderEditForm(el: HTMLElement, info: ListFormTypes.IListFormResult, controlMode: number): Array<ListFormTypes.IField> {
+    static renderEditForm(el: HTMLElement, info: ListFormTypes.IListFormResult, controlMode: number, excludeFields: Array<string> = []): Array<ListFormTypes.IField> {
         // Render the form template
-        _ListForm.renderFormTemplate(el, info);
+        _ListForm.renderFormTemplate(el, info, excludeFields);
 
         // Parse the fields
         let fields = [];
         for (let fieldName in info.fields) {
             let field = info.fields[fieldName];
             let value = info.item ? info.item[fieldName] : null;
+
+            // Get the field element and ensure it exists
+            let elField = el.querySelector("[data-field='" + fieldName + "']");
+            if (elField == null) { continue; }
 
             // See if this is a read-only field
             if (field.ReadOnlyField) {
@@ -515,7 +519,7 @@ class _ListForm {
             // Render the field
             Field({
                 controlMode,
-                el: el.querySelector("[data-field='" + fieldName + "']"),
+                el: elField,
                 fieldInfo: {
                     field,
                     listName: info.list.Title,
@@ -533,12 +537,27 @@ class _ListForm {
     }
 
     // Method to render the form template
-    static renderFormTemplate(el: HTMLElement, info: ListFormTypes.IListFormResult) {
+    static renderFormTemplate(el: HTMLElement, info: ListFormTypes.IListFormResult, excludeFields: Array<string> = []) {
         // Clear the element
         el.innerHTML = "";
 
         // Parse the fields
         for (let fieldName in info.fields) {
+            let excludeField = false;
+
+            // Parse the fields
+            for (let i = 0; i < excludeFields.length; i++) {
+                // See if we are excluding the field
+                if (excludeFields[i] == fieldName) {
+                    // Set the flag
+                    excludeField = true;
+                    break;
+                }
+            }
+
+            // See if we are excluding the field
+            if (excludeField) { continue; }
+
             // Append the field to the form
             el.innerHTML += "<div data-field='" + fieldName + "'></div>";
         }
