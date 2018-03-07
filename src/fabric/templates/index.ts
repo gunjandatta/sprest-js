@@ -10,6 +10,7 @@ export * from "./label";
 export * from "./linkfield";
 export * from "./list";
 export * from "./listitem";
+export * from "./overlay";
 export * from "./panel";
 export * from "./peoplepicker";
 export * from "./pivot";

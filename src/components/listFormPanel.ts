@@ -203,7 +203,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                 }
 
                 // Render a saving message
-                let content = _panel.updateContent(Templates.Spinner({ text: "Saving the item..." }));
+                let content = _panel.updateContent("");
                 Spinner({
                     el: content,
                     text: "Saving the item..."
@@ -498,21 +498,20 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
      * Main
      */
 
-    // Render the panel
-    props.el.innerHTML = Templates.Panel({
+    // Create the panel
+    let _panel = Panel({
         className: props.className,
         el: props.el,
         headerText: props.panelTitle,
+        isBlocking: props.panelIsBlocking,
         panelType: typeof (props.panelType) === "number" ? props.panelType : PanelTypes.Large,
         showCloseButton: false
     });
 
-    // Create the panel
-    let _panel = Panel(props);
-
     // Create an instance of the list form
     new ListForm({
         cacheKey: props.cacheKey,
+        excludeFields: props.excludeFields,
         fields: props.fields,
         item: props.item,
         itemId: props.itemId,

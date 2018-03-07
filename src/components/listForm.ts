@@ -241,6 +241,24 @@ class _ListForm {
         for (let i = 0; i < fields.results.length; i++) {
             let field = fields.results[i];
 
+            // See if the exclude fields is defined
+            if (this._props.excludeFields) {
+                let excludeField = false;
+
+                // Parse the fields to exclude
+                for (let j = 0; j < this._props.excludeFields.length; j++) {
+                    // See if we are excluding this field
+                    if (this._props.excludeFields[j] == field.InternalName) {
+                        // Set the flag
+                        excludeField = true;
+                        break;
+                    }
+                }
+
+                // See if we are excluding the field
+                if (excludeField) { continue; }
+            }
+
             // Save the field
             this._info.fields[field.InternalName] = field;
         }

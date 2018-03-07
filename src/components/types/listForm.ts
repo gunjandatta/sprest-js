@@ -75,6 +75,9 @@ export interface IListFormProps {
     /** If defined, the data will be cached to the session storage. */
     cacheKey?: string;
 
+    /** The form fields to exclude. */
+    excludeFields?: Array<string>;
+
     /** The form fields */
     fields?: Array<string>;
 
@@ -101,18 +104,18 @@ export interface IListFormProps {
  * List Form Result
  */
 export interface IListFormResult {
-    /** The item attachments */
+    /** The item attachments. */
     attachments?: Array<Types.SP.IAttachment>;
 
-    /** The form fields */
+    /** The form fields. */
     fields: { [key: string]: Types.SP.IFieldResult };
 
-    /** The list item */
+    /** The list item. */
     item?: Types.SP.IListItemQueryResult | Types.SP.IListItemResult;
 
-    /** The item query */
+    /** The item query. */
     query?: Types.SP.ODataQuery;
 
-    /** The list */
+    /** The list. */
     list: Types.SP.IListResult;
 }

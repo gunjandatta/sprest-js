@@ -58,6 +58,9 @@ export interface IPanelProps extends IProps {
     /** The header text. */
     headerText?: string;
 
+    /** True for blocking panels. */
+    isBlocking?: boolean;
+
     /** The panel content. */
     panelContent?: string;
 

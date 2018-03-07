@@ -182,6 +182,7 @@ window["TestJS"] = {
                     controlMode: SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
                     listName: "SPReact",
+                    panelIsBlocking: true,
                     panelTitle: "Test Item Form",
                     panelType: Fabric.PanelTypes.Large
                 });
@@ -212,8 +213,10 @@ window["TestJS"] = {
                             let viewForm = ListFormPanel({
                                 controlMode: SPTypes.ControlMode.Display,
                                 el: cfg.el.children[2],
+                                excludeFields: ["Title"],
                                 itemId: item.Id,
                                 listName: "SPReact",
+                                panelIsBlocking: true,
                                 panelTitle: item["Title"] || "",
                                 panelType: Fabric.PanelTypes.Large
                             });

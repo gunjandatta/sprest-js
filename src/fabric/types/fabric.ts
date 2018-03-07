@@ -100,7 +100,7 @@ export interface IListItem {
 }
 
 /**
- * Overlay Component
+ * Overlay
  */
 export interface IOverlay {
     // The overlay element.
@@ -122,6 +122,9 @@ export interface IOverlay {
 export interface IPanel {
     // Flag to animate the overlay.
     _animateOverlay: boolean;
+
+    // The click handler
+    _clickHandler: EventListener;
 
     // The panel close button.
     _closeButton: HTMLElement;

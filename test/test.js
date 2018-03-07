@@ -124,7 +124,7 @@ __export(__webpack_require__(99));
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(119);
+var Types = __webpack_require__(120);
 exports.Types = Types;
 
 
@@ -230,6 +230,7 @@ __export(__webpack_require__(115));
 __export(__webpack_require__(116));
 __export(__webpack_require__(117));
 __export(__webpack_require__(118));
+__export(__webpack_require__(119));
 
 
 /***/ }),
@@ -318,11 +319,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(121));
 __export(__webpack_require__(122));
 __export(__webpack_require__(123));
 __export(__webpack_require__(124));
-var Types = __webpack_require__(125);
+__export(__webpack_require__(125));
+var Types = __webpack_require__(126);
 exports.Types = Types;
 
 
@@ -336,12 +337,12 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(126));
-__export(__webpack_require__(17));
 __export(__webpack_require__(127));
+__export(__webpack_require__(17));
 __export(__webpack_require__(128));
 __export(__webpack_require__(129));
-var Types = __webpack_require__(130);
+__export(__webpack_require__(130));
+var Types = __webpack_require__(131);
 exports.Types = Types;
 
 
@@ -504,7 +505,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(133);
+var	fixUrls = __webpack_require__(134);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -2581,9 +2582,9 @@ exports.WPCfg = {
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var build_1 = __webpack_require__(7);
-__webpack_require__(131);
-__webpack_require__(134);
-__webpack_require__(136);
+__webpack_require__(132);
+__webpack_require__(135);
+__webpack_require__(137);
 // Create the global variable
 window["TestJS"] = {
     // Configuration
@@ -2710,6 +2711,7 @@ window["TestJS"] = {
                     controlMode: gd_sprest_1.SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
                     listName: "SPReact",
+                    panelIsBlocking: true,
                     panelTitle: "Test Item Form",
                     panelType: build_1.Fabric.PanelTypes.Large
                 });
@@ -2732,8 +2734,10 @@ window["TestJS"] = {
                         var viewForm_1 = build_1.ListFormPanel({
                             controlMode: gd_sprest_1.SPTypes.ControlMode.Display,
                             el: cfg.el.children[2],
+                            excludeFields: ["Title"],
                             itemId: item.Id,
                             listName: "SPReact",
+                            panelIsBlocking: true,
                             panelTitle: item["Title"] || "",
                             panelType: build_1.Fabric.PanelTypes.Large
                         });
@@ -11768,12 +11772,15 @@ exports.Panel = function (props) {
         props.el.innerHTML = _1.Templates.Panel(props);
         // Show the panel
         _panel = new _1.fabric.Panel(props.el.querySelector(".ms-Panel"));
-        // Update the z-index of the panel host
-        _panel.panelHost.panelHost.style.zIndex = "1000";
-        // See if we are hiding the close button
-        if (props.showCloseButton == false) {
-            // Remove the button
-            _panel._closeButton.remove();
+        // See if this is a blocking panel
+        if (props.isBlocking) {
+            // Remove the click event to close the panel
+            _panel.panelHost.overlay.overlayElement.removeEventListener("click", _panel._clickHandler);
+            // Add a new event
+            _panel.panelHost.overlay.overlayElement.addEventListener("click", function () {
+                // Keep the overlay visible
+                _panel.panelHost.overlay.show();
+            });
         }
         // Get the inner content
         var innerContent = _panel._panel.querySelector(".ms-Panel-contentInner");
@@ -12666,6 +12673,22 @@ exports.ListItem = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Overlay
+ */
+exports.Overlay = function (props) {
+    // Return the template
+    return '<div class="ms-Overlay' + (props.isDark ? "ms-Overlay--dark" : "") + '"></div>';
+};
+
+
+/***/ }),
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 var __1 = __webpack_require__(1);
 /**
  * Panel
@@ -12718,7 +12741,7 @@ exports.Panel = function (props, content) {
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12820,7 +12843,7 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12880,7 +12903,7 @@ exports.Pivot = function (props) {
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12900,7 +12923,7 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12953,7 +12976,7 @@ exports.Table = function (props) {
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12993,7 +13016,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13025,28 +13048,28 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 119 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-// Fabric Components
-var Fabric = __webpack_require__(120);
-exports.Fabric = Fabric;
-
-
-/***/ }),
 /* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+// Fabric Components
+var Fabric = __webpack_require__(121);
+exports.Fabric = Fabric;
 
 
 /***/ }),
 /* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13579,7 +13602,7 @@ exports.Field = function (props) {
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13693,6 +13716,23 @@ var _ListForm = /** @class */ (function () {
             // Parse the fields
             for (var i = 0; i < fields.results.length; i++) {
                 var field = fields.results[i];
+                // See if the exclude fields is defined
+                if (_this._props.excludeFields) {
+                    var excludeField = false;
+                    // Parse the fields to exclude
+                    for (var j = 0; j < _this._props.excludeFields.length; j++) {
+                        // See if we are excluding this field
+                        if (_this._props.excludeFields[j] == field.InternalName) {
+                            // Set the flag
+                            excludeField = true;
+                            break;
+                        }
+                    }
+                    // See if we are excluding the field
+                    if (excludeField) {
+                        continue;
+                    }
+                }
                 // Save the field
                 _this._info.fields[field.InternalName] = field;
             }
@@ -14019,7 +14059,7 @@ exports.ListForm = _ListForm;
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14227,7 +14267,7 @@ exports.ListFormField = _ListFormField;
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14410,7 +14450,7 @@ exports.ListFormPanel = function (props) {
                     return;
                 }
                 // Render a saving message
-                var content = _panel.updateContent(fabric_1.Templates.Spinner({ text: "Saving the item..." }));
+                var content = _panel.updateContent("");
                 fabric_1.Spinner({
                     el: content,
                     text: "Saving the item..."
@@ -14684,19 +14724,19 @@ exports.ListFormPanel = function (props) {
     /**
      * Main
      */
-    // Render the panel
-    props.el.innerHTML = fabric_1.Templates.Panel({
+    // Create the panel
+    var _panel = fabric_1.Panel({
         className: props.className,
         el: props.el,
         headerText: props.panelTitle,
+        isBlocking: props.panelIsBlocking,
         panelType: typeof (props.panelType) === "number" ? props.panelType : fabric_1.PanelTypes.Large,
         showCloseButton: false
     });
-    // Create the panel
-    var _panel = fabric_1.Panel(props);
     // Create an instance of the list form
     new _1.ListForm({
         cacheKey: props.cacheKey,
+        excludeFields: props.excludeFields,
         fields: props.fields,
         item: props.item,
         itemId: props.itemId,
@@ -14740,7 +14780,7 @@ exports.ListFormPanel = function (props) {
 
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14749,7 +14789,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15117,7 +15157,7 @@ exports.WebPart = function (props) {
 
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15367,7 +15407,7 @@ exports.WPList = function (props) {
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15462,7 +15502,7 @@ exports.WPSearch = function (props) {
 
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15619,7 +15659,7 @@ exports.WPTabs = function (props) {
 
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15628,11 +15668,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(132);
+var content = __webpack_require__(133);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15678,7 +15718,7 @@ if(false) {
 }
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -15692,7 +15732,7 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports) {
 
 
@@ -15787,11 +15827,11 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(135);
+var content = __webpack_require__(136);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15837,7 +15877,7 @@ if(false) {
 }
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -15851,11 +15891,11 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(137);
+var content = __webpack_require__(138);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -15901,7 +15941,7 @@ if(false) {
 }
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -15909,7 +15949,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, "/**\r\n * Contextual Host\r\n */\r\n\r\n/** Ensure the popup is visible over the panel. */\r\n.ms-ContextualHost {\r\n    z-index: 1010;\r\n}\r\n\r\n/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Form Error\r\n */\r\n.ms-Label.form-error {\r\n    color: #a80000;\r\n    font-size: 16px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: calc(100vh - 80px);\r\n    padding-bottom: 0px;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}\r\n\r\n/**\r\n * WebPart Tabs\r\n */\r\n\r\n/** Remove the spacing around the webparts */\r\n.ms-webpart-zone.wp-tabs {\r\n    border-spacing: 0px;\r\n}\r\n\r\n/** Hide the titles of the webparts */\r\n.ms-webpart-zone.wp-tabs .ms-webpart-chrome-title {\r\n    display: none;\r\n}", ""]);
+exports.push([module.i, "/**\r\n * Contextual Host\r\n */\r\n\r\n/** Ensure the popup is visible over the panel. */\r\n.ms-ContextualHost {\r\n    z-index: 1010;\r\n}\r\n\r\n/**\r\n * Dialog\r\n */\r\n\r\n/** Ensure the dialog is displayed above the panel */\r\n.ms-Dialog {\r\n    z-index: 1050;\r\n}\r\n\r\n/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Form Error\r\n */\r\n.ms-Label.form-error {\r\n    color: #a80000;\r\n    font-size: 16px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: calc(100vh - 80px);\r\n    padding-bottom: 0px;\r\n}\r\n\r\n/** Ensure the panel is displayed on top */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}\r\n\r\n/**\r\n * WebPart Tabs\r\n */\r\n\r\n/** Remove the spacing around the webparts */\r\n.ms-webpart-zone.wp-tabs {\r\n    border-spacing: 0px;\r\n}\r\n\r\n/** Hide the titles of the webparts */\r\n.ms-webpart-zone.wp-tabs .ms-webpart-chrome-title {\r\n    display: none;\r\n}", ""]);
 
 // exports
 

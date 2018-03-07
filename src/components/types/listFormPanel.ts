@@ -28,6 +28,9 @@ export interface IListFormPanelProps extends IListFormProps {
     /** The item. */
     item?: any;
 
+    /** True to make the panel blocking */
+    panelIsBlocking?: boolean;
+
     /** the panel title. */
     panelTitle?: string;
 

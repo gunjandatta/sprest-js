@@ -54,13 +54,16 @@ export const Panel = (props: IPanelProps): IPanel => {
         // Show the panel
         _panel = new fabric.Panel(props.el.querySelector(".ms-Panel"));
 
-        // Update the z-index of the panel host
-        _panel.panelHost.panelHost.style.zIndex = "1000";
+        // See if this is a blocking panel
+        if(props.isBlocking) {
+            // Remove the click event to close the panel
+            _panel.panelHost.overlay.overlayElement.removeEventListener("click", _panel._clickHandler);
 
-        // See if we are hiding the close button
-        if (props.showCloseButton == false) {
-            // Remove the button
-            _panel._closeButton.remove();
+            // Add a new event
+            _panel.panelHost.overlay.overlayElement.addEventListener("click", () => {
+                // Keep the overlay visible
+                _panel.panelHost.overlay.show();
+            });
         }
 
         // Get the inner content

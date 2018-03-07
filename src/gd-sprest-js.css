@@ -8,6 +8,15 @@
 }
 
 /**
+ * Dialog
+ */
+
+/** Ensure the dialog is displayed above the panel */
+.ms-Dialog {
+    z-index: 1050;
+}
+
+/**
  * Display Form
  */
 
@@ -99,6 +108,11 @@
 .ms-Panel-contentInner {
     height: calc(100vh - 80px);
     padding-bottom: 0px;
+}
+
+/** Ensure the panel is displayed on top */
+.ms-PanelHost {
+    z-index: 1000;
 }
 
 /**
