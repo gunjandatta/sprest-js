@@ -96,8 +96,9 @@
  */
 
 /** Fix the height */
-.ms-Panel-contentInner.ms-Panel-main {
-    height: 85vh;
+.ms-Panel-contentInner {
+    height: calc(100vh - 80px);
+    padding-bottom: 0px;
 }
 
 /**
@@ -124,6 +125,6 @@
 }
 
 /** Hide the titles of the webparts */
-.ms-webpart-zone.wp-tabs .ms-webpart-titleText {
+.ms-webpart-zone.wp-tabs .ms-webpart-chrome-title {
     display: none;
 }
