@@ -191,7 +191,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ***************************************************************************************************/
-var Helper = __webpack_require__(6);
+var Helper = __webpack_require__(7);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(5);
 exports.SPTypes = mapper_1.SPTypes;
@@ -258,6 +258,24 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(122));
+__export(__webpack_require__(123));
+__export(__webpack_require__(124));
+__export(__webpack_require__(125));
+var Types = __webpack_require__(126);
+exports.Types = Types;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(19));
 __export(__webpack_require__(62));
 __export(__webpack_require__(63));
@@ -278,7 +296,7 @@ exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -291,8 +309,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Fabric = __webpack_require__(1);
 exports.Fabric = Fabric;
 // Components
-var Components = __webpack_require__(8);
-__export(__webpack_require__(8));
+var Components = __webpack_require__(6);
+__export(__webpack_require__(6));
 // WebParts
 var WebParts = __webpack_require__(9);
 exports.WebParts = WebParts;
@@ -307,24 +325,6 @@ SP ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
     // Alert other scripts this library is loaded
     SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest-js.js");
 }, "gd-sprest.js") : null;
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(122));
-__export(__webpack_require__(123));
-__export(__webpack_require__(124));
-__export(__webpack_require__(125));
-var Types = __webpack_require__(126);
-exports.Types = Types;
 
 
 /***/ }),
@@ -879,7 +879,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(64));
 var lib_1 = __webpack_require__(2);
-var _1 = __webpack_require__(6);
+var _1 = __webpack_require__(7);
 /**
  * SharePoint Configuration
  */
@@ -2581,7 +2581,7 @@ exports.WPCfg = {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var build_1 = __webpack_require__(7);
+var build_1 = __webpack_require__(8);
 __webpack_require__(132);
 __webpack_require__(135);
 __webpack_require__(137);
@@ -10695,7 +10695,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(6);
+var helper_1 = __webpack_require__(7);
 exports.Helper = helper_1.Types;
 var mapper_1 = __webpack_require__(5);
 exports.SP = mapper_1.Types;
@@ -10710,7 +10710,7 @@ exports.Util = utils_1.Types;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Helper = __webpack_require__(6);
+var Helper = __webpack_require__(7);
 var Lib = __webpack_require__(2);
 var Mapper = __webpack_require__(5);
 /**
@@ -13076,8 +13076,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var __1 = __webpack_require__(7);
-var _1 = __webpack_require__(8);
+var __1 = __webpack_require__(8);
+var _1 = __webpack_require__(6);
 /**
  * Field
  */
@@ -13609,6 +13609,8 @@ exports.Field = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
+var fabric_1 = __webpack_require__(1);
+var _1 = __webpack_require__(6);
 /**
  * List Form
  */
@@ -13929,6 +13931,92 @@ var _ListForm = /** @class */ (function () {
                 resolve();
             });
         });
+    };
+    // Method to render a display form for an item
+    _ListForm.renderDisplayForm = function (el, info) {
+        // Render the form template
+        _ListForm.renderFormTemplate(el, info);
+        // Load the list item
+        info.list.Items(info.item.Id)
+            .FieldValuesAsHtml()
+            .execute(function (formValues) {
+            // Parse the fields
+            for (var fieldName in info.fields) {
+                // Get the element
+                var elField = el.querySelector("[data-field='" + fieldName + "']");
+                if (elField) {
+                    var field = info.fields[fieldName];
+                    var html = formValues[fieldName] || formValues[fieldName.replace(/\_/g, "_x005f_")] || "";
+                    // Set the html for this field
+                    elField.innerHTML = [
+                        '<div class="display-form">',
+                        fabric_1.Templates.Label({
+                            className: "field-label",
+                            description: field.Description,
+                            text: field.Title
+                        }),
+                        '<div class="field-value">' + html + '</div>',
+                        '</div>'
+                    ].join('\n');
+                }
+            }
+        });
+    };
+    // Render the edit form
+    _ListForm.renderEditForm = function (el, info, controlMode) {
+        // Render the form template
+        _ListForm.renderFormTemplate(el, info);
+        // Parse the fields
+        var fields = [];
+        for (var fieldName in info.fields) {
+            var field = info.fields[fieldName];
+            var value = info.item ? info.item[fieldName] : null;
+            // See if this is a read-only field
+            if (field.ReadOnlyField) {
+                // Do not render in the new form
+                if (controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
+                    continue;
+                }
+            }
+            // See if this is the hidden taxonomy field
+            if (field.Hidden && field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
+                // Do not render this field
+                continue;
+            }
+            // See if this is an invalid field type
+            if (field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Invalid) {
+                // Ensure it's not a taxonomy field
+                if (!field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                    continue;
+                }
+            }
+            // Render the field
+            _1.Field({
+                controlMode: controlMode,
+                el: el.querySelector("[data-field='" + fieldName + "']"),
+                fieldInfo: {
+                    field: field,
+                    listName: info.list.Title,
+                    name: fieldName,
+                },
+                value: value
+            }).then(function (field) {
+                // Add the field
+                fields.push(field);
+            });
+        }
+        // Return the fields
+        return fields;
+    };
+    // Method to render the form template
+    _ListForm.renderFormTemplate = function (el, info) {
+        // Clear the element
+        el.innerHTML = "";
+        // Parse the fields
+        for (var fieldName in info.fields) {
+            // Append the field to the form
+            el.innerHTML += "<div data-field='" + fieldName + "'></div>";
+        }
     };
     // Method to save attachments to an existing item
     _ListForm.saveAttachments = function (info, attachmentInfo) {
@@ -14275,120 +14363,41 @@ exports.ListFormField = _ListFormField;
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var fabric_1 = __webpack_require__(1);
-var _1 = __webpack_require__(8);
+var _1 = __webpack_require__(6);
 /**
  * Item Form
  */
 exports.ListFormPanel = function (props) {
     /**
-     * Display Form
-     */
-    // Render the display form
-    var renderDisplayForm = function () {
-        // Get the list
-        _formInfo.list
-            .Items(_formInfo.item.Id)
-            .FieldValuesAsHtml()
-            .execute(function (formValues) {
-            // Parse the fields
-            for (var fieldName in _formInfo.fields) {
-                // Get the element
-                var el = _panel.get()._panel.querySelector("[data-field='" + fieldName + "']");
-                if (el) {
-                    var field = _formInfo.fields[fieldName];
-                    var html = formValues[fieldName] || formValues[fieldName.replace(/\_/g, "_x005f_")] || "";
-                    // Set the html for this field
-                    el.innerHTML = [
-                        '<div class="display-form">',
-                        fabric_1.Templates.Label({
-                            className: "field-label",
-                            description: field.Description,
-                            text: field.Title
-                        }),
-                        '<div class="field-value">' + html + '</div>',
-                        '</div>'
-                    ].join('\n');
-                }
-            }
-        });
-    };
-    /**
      * Edit Form
      */
     var _fields = [];
     var _formInfo = null;
-    // Render the edit form
-    var renderEditForm = function (controlMode) {
-        // Clear the fields
-        _fields = [];
-        // Parse the fields
-        for (var fieldName in _formInfo.fields) {
-            var field = _formInfo.fields[fieldName];
-            var value = _formInfo.item ? _formInfo.item[fieldName] : null;
-            // See if this is a read-only field
-            if (field.ReadOnlyField) {
-                // Do not render in the new form
-                if (controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
-                    continue;
-                }
-            }
-            // See if this is the hidden taxonomy field
-            if (field.Hidden && field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
-                // Do not render this field
-                continue;
-            }
-            // See if this is an invalid field type
-            if (field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Invalid) {
-                // Ensure it's not a taxonomy field
-                if (!field.TypeAsString.startsWith("TaxonomyFieldType")) {
-                    continue;
-                }
-            }
-            // Render the field
-            _1.Field({
-                controlMode: controlMode,
-                el: _panel.get()._panel.querySelector("[data-field='" + fieldName + "']"),
-                fieldInfo: {
-                    field: field,
-                    listName: _formInfo.list.Title,
-                    name: fieldName,
-                },
-                value: value
-            }).then(function (field) {
-                // Add the field
-                _fields.push(field);
-            });
-        }
-    };
     /**
      * Render Form
      */
     // Render the form
     var renderForm = function (controlMode) {
         if (controlMode === void 0) { controlMode = gd_sprest_1.SPTypes.ControlMode.Display; }
-        // Parse the fields
-        var fields = "";
-        for (var fieldName in _formInfo.fields) {
-            // Append the div for this field
-            fields += "<div data-field='" + fieldName + "'></div>";
-        }
         // Render the menu
         renderMenu(controlMode);
         // Update the panel content
-        _panel.updateContent([
+        var content = _panel.updateContent([
             '<div class="ms-ListForm">',
             '<label class="ms-Label ms-fontColor-redDark form-error error"></label>',
-            fields,
+            '<div></div>',
             '</div>'
         ].join('\n'));
+        // Get the form element
+        var elForm = content.children[0].children[1];
         // See if this is a new/edit form
         if (controlMode == gd_sprest_1.SPTypes.ControlMode.Edit || controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
             // Render the edit form
-            renderEditForm(controlMode);
+            _fields = _1.ListForm.renderEditForm(elForm, _formInfo, controlMode);
         }
         else {
             // Render the display form
-            renderDisplayForm();
+            _1.ListForm.renderDisplayForm(elForm, _formInfo);
         }
         // Add the menu click event
         addMenuClickEvents();
@@ -15164,7 +15173,7 @@ exports.WebPart = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var __1 = __webpack_require__(7);
+var __1 = __webpack_require__(8);
 var _1 = __webpack_require__(9);
 /**
  * List WebPart
@@ -15414,7 +15423,7 @@ exports.WPList = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var __1 = __webpack_require__(7);
+var __1 = __webpack_require__(8);
 var _1 = __webpack_require__(9);
 /**
  * Search WebPart

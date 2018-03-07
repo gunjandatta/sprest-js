@@ -1,4 +1,6 @@
 import { Helper, SPTypes, Types, Web } from "gd-sprest";
+import { Templates } from "../fabric";
+import { Field } from ".";
 import * as ListFormTypes from "./types";
 
 /**
@@ -444,6 +446,102 @@ class _ListForm {
                 resolve();
             });
         });
+    }
+
+    // Method to render a display form for an item
+    static renderDisplayForm(el: HTMLElement, info: ListFormTypes.IListFormResult) {
+        // Render the form template
+        _ListForm.renderFormTemplate(el, info);
+
+        // Load the list item
+        info.list.Items(info.item.Id)
+            // Get the html for the fields
+            .FieldValuesAsHtml()
+            // Execute the request
+            .execute(formValues => {
+                // Parse the fields
+                for (let fieldName in info.fields) {
+                    // Get the element
+                    let elField = el.querySelector("[data-field='" + fieldName + "']");
+                    if (elField) {
+                        let field = info.fields[fieldName];
+                        let html = formValues[fieldName] || formValues[fieldName.replace(/\_/g, "_x005f_")] || "";
+
+                        // Set the html for this field
+                        elField.innerHTML = [
+                            '<div class="display-form">',
+                            Templates.Label({
+                                className: "field-label",
+                                description: field.Description,
+                                text: field.Title
+                            }),
+                            '<div class="field-value">' + html + '</div>',
+                            '</div>'
+                        ].join('\n');
+                    }
+                }
+            });
+    }
+
+    // Render the edit form
+    static renderEditForm(el: HTMLElement, info: ListFormTypes.IListFormResult, controlMode: number): Array<ListFormTypes.IField> {
+        // Render the form template
+        _ListForm.renderFormTemplate(el, info);
+
+        // Parse the fields
+        let fields = [];
+        for (let fieldName in info.fields) {
+            let field = info.fields[fieldName];
+            let value = info.item ? info.item[fieldName] : null;
+
+            // See if this is a read-only field
+            if (field.ReadOnlyField) {
+                // Do not render in the new form
+                if (controlMode == SPTypes.ControlMode.New) { continue; }
+            }
+
+            // See if this is the hidden taxonomy field
+            if (field.Hidden && field.FieldTypeKind == SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
+                // Do not render this field
+                continue;
+            }
+
+            // See if this is an invalid field type
+            if (field.FieldTypeKind == SPTypes.FieldType.Invalid) {
+                // Ensure it's not a taxonomy field
+                if (!field.TypeAsString.startsWith("TaxonomyFieldType")) { continue; }
+            }
+
+            // Render the field
+            Field({
+                controlMode,
+                el: el.querySelector("[data-field='" + fieldName + "']"),
+                fieldInfo: {
+                    field,
+                    listName: info.list.Title,
+                    name: fieldName,
+                },
+                value
+            }).then(field => {
+                // Add the field
+                fields.push(field);
+            });
+        }
+
+        // Return the fields
+        return fields;
+    }
+
+    // Method to render the form template
+    static renderFormTemplate(el: HTMLElement, info: ListFormTypes.IListFormResult) {
+        // Clear the element
+        el.innerHTML = "";
+
+        // Parse the fields
+        for (let fieldName in info.fields) {
+            // Append the field to the form
+            el.innerHTML += "<div data-field='" + fieldName + "'></div>";
+        }
     }
 
     // Method to save attachments to an existing item

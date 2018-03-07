@@ -1,4 +1,5 @@
 import { Types } from "gd-sprest";
+import { IField } from ".";
 
 /**
  * List Form
@@ -32,6 +33,27 @@ export interface IListForm {
      * Method to remove attachments from an item.
      */
     removeAttachments(listInfo: IListFormProps, attachmentInfo: Array<Types.SP.IAttachment>): PromiseLike<void>;
+
+    /**
+     * Method to render the display form template.
+     * @param el - The element to render the form to.
+     * @param listInfo - The list form information.
+     */
+    renderDisplayForm(el: Element, listInfo: IListFormResult);
+
+    /**
+     * Method to render the edit/new form.
+     * @param el - The element to render the form to.
+     * @param listInfo - The list form information.
+     */
+    renderEditForm(el: Element, listInfo: IListFormResult, controlMode: number): Array<IField>;
+
+    /**
+     * Method to render the form template.
+     * @param el - The element to render the form to.
+     * @param listInfo - The list form information.
+     */
+    renderFormTemplate(el: Element, listInfo: IListFormResult);
 
     /**
      * Method to save attachments to the item.

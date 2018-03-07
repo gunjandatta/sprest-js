@@ -9,94 +9,11 @@ import { IField, IListFormMMSFieldInfo, IListFormLookupFieldInfo, IListFormUserF
  */
 export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
     /**
-     * Display Form
-     */
-
-    // Render the display form
-    let renderDisplayForm = () => {
-        // Get the list
-        _formInfo.list
-            // Load the target item
-            .Items(_formInfo.item.Id)
-            // Get the html for the fields
-            .FieldValuesAsHtml()
-            // Execute the request
-            .execute(formValues => {
-                // Parse the fields
-                for (let fieldName in _formInfo.fields) {
-                    // Get the element
-                    let el = _panel.get()._panel.querySelector("[data-field='" + fieldName + "']");
-                    if (el) {
-                        let field = _formInfo.fields[fieldName];
-                        let html = formValues[fieldName] || formValues[fieldName.replace(/\_/g, "_x005f_")] || "";
-
-                        // Set the html for this field
-                        el.innerHTML = [
-                            '<div class="display-form">',
-                            Templates.Label({
-                                className: "field-label",
-                                description: field.Description,
-                                text: field.Title
-                            }),
-                            '<div class="field-value">' + html + '</div>',
-                            '</div>'
-                        ].join('\n');
-                    }
-                }
-            });
-    }
-
-    /**
      * Edit Form
      */
 
     let _fields: Array<IField> = [];
     let _formInfo: IListFormResult = null;
-
-    // Render the edit form
-    let renderEditForm = (controlMode: number) => {
-        // Clear the fields
-        _fields = [];
-
-        // Parse the fields
-        for (let fieldName in _formInfo.fields) {
-            let field = _formInfo.fields[fieldName];
-            let value = _formInfo.item ? _formInfo.item[fieldName] : null;
-
-            // See if this is a read-only field
-            if (field.ReadOnlyField) {
-                // Do not render in the new form
-                if (controlMode == SPTypes.ControlMode.New) { continue; }
-            }
-
-            // See if this is the hidden taxonomy field
-            if (field.Hidden && field.FieldTypeKind == SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
-                // Do not render this field
-                continue;
-            }
-
-            // See if this is an invalid field type
-            if (field.FieldTypeKind == SPTypes.FieldType.Invalid) {
-                // Ensure it's not a taxonomy field
-                if (!field.TypeAsString.startsWith("TaxonomyFieldType")) { continue; }
-            }
-
-            // Render the field
-            Field({
-                controlMode,
-                el: _panel.get()._panel.querySelector("[data-field='" + fieldName + "']"),
-                fieldInfo: {
-                    field,
-                    listName: _formInfo.list.Title,
-                    name: fieldName,
-                },
-                value
-            }).then(field => {
-                // Add the field
-                _fields.push(field);
-            });
-        }
-    }
 
     /**
      * Render Form
@@ -104,31 +21,27 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
 
     // Render the form
     let renderForm = (controlMode: number = SPTypes.ControlMode.Display) => {
-        // Parse the fields
-        let fields = "";
-        for (let fieldName in _formInfo.fields) {
-            // Append the div for this field
-            fields += "<div data-field='" + fieldName + "'></div>";
-        }
-
         // Render the menu
         renderMenu(controlMode);
 
         // Update the panel content
-        _panel.updateContent([
+        let content = _panel.updateContent([
             '<div class="ms-ListForm">',
             '<label class="ms-Label ms-fontColor-redDark form-error error"></label>',
-            fields,
+            '<div></div>',
             '</div>'
         ].join('\n'));
+
+        // Get the form element
+        let elForm = content.children[0].children[1];
 
         // See if this is a new/edit form
         if (controlMode == SPTypes.ControlMode.Edit || controlMode == SPTypes.ControlMode.New) {
             // Render the edit form
-            renderEditForm(controlMode);
+            _fields = ListForm.renderEditForm(elForm, _formInfo, controlMode);
         } else {
             // Render the display form
-            renderDisplayForm();
+            ListForm.renderDisplayForm(elForm, _formInfo);
         }
 
         // Add the menu click event
