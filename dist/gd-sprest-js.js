@@ -17202,8 +17202,19 @@ var _ListForm = /** @class */function () {
         this.loadItem = function () {
             // See if the item already exist
             if (_this._info.item) {
-                // Resolve the promise
-                _this._resolve(_this._info);
+                // See if we are loading attachments
+                if (_this._props.loadAttachments && _this._info.attachments == null) {
+                    // Load the attachments
+                    exports.ListForm.loadAttachments(_this._props).then(function (attachments) {
+                        // Set the attachments
+                        _this._info.attachments = attachments;
+                        // Resolve the promise
+                        _this._resolve(_this._info);
+                    });
+                } else {
+                    // Resolve the promise
+                    _this._resolve(_this._info);
+                }
             } else if (_this._props.itemId > 0) {
                 // Update the item query
                 _this._info.query = _ListForm.generateODataQuery(_this._info, _this._props.loadAttachments);
