@@ -21,6 +21,15 @@ export const Dialog = (props: IDialogProps): IDialog => {
     props.el.innerHTML = Templates.Dialog(props);
     let _dialog: Fabric.IDialog = new fabric.Dialog(props.el.querySelector(".ms-Dialog"));
 
+    // See if the close button exists
+    if (_dialog._closeButtonElement) {
+        // Add a click event
+        _dialog._closeButtonElement.addEventListener("click", (ev) => {
+            // Prevent postback
+            ev.preventDefault();
+        });
+    }
+
     // Return the dialog
     return {
         get,

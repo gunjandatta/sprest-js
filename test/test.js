@@ -11211,6 +11211,14 @@ exports.Dialog = function (props) {
     // Create the dialog
     props.el.innerHTML = _1.Templates.Dialog(props);
     var _dialog = new _1.fabric.Dialog(props.el.querySelector(".ms-Dialog"));
+    // See if the close button exists
+    if (_dialog._closeButtonElement) {
+        // Add a click event
+        _dialog._closeButtonElement.addEventListener("click", function (ev) {
+            // Prevent postback
+            ev.preventDefault();
+        });
+    }
     // Return the dialog
     return {
         get: get,
@@ -13990,6 +13998,7 @@ var _ListForm = /** @class */ (function () {
         info.list.Items(info.item.Id)
             .FieldValuesAsHtml()
             .execute(function (formValues) {
+            var hasUserField = false;
             // Parse the fields
             for (var fieldName in info.fields) {
                 // Get the element
@@ -13997,6 +14006,8 @@ var _ListForm = /** @class */ (function () {
                 if (elField) {
                     var field = info.fields[fieldName];
                     var html = formValues[fieldName] || formValues[fieldName.replace(/\_/g, "_x005f_")] || "";
+                    // Set the flag
+                    hasUserField = hasUserField || field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.User;
                     // Set the html for this field
                     elField.innerHTML = [
                         '<div class="display-form">',
@@ -14009,6 +14020,11 @@ var _ListForm = /** @class */ (function () {
                         '</div>'
                     ].join('\n');
                 }
+            }
+            // See if we are displaying a user field
+            if (hasUserField) {
+                // Enable the persona
+                window["ProcessImn"]();
             }
         });
     };
@@ -16029,7 +16045,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, "/**\r\n * Contextual Host\r\n */\r\n\r\n/** Ensure the popup is visible over the panel. */\r\n.ms-ContextualHost {\r\n    z-index: 1010;\r\n}\r\n\r\n/**\r\n * Dialog\r\n */\r\n\r\n/** Ensure the dialog is displayed above the panel */\r\n.ms-Dialog {\r\n    z-index: 1050;\r\n}\r\n\r\n/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Form Error\r\n */\r\n.ms-Label.form-error {\r\n    color: #a80000;\r\n    font-size: 16px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: calc(100vh - 80px);\r\n    padding-bottom: 0px;\r\n}\r\n\r\n/** Ensure the panel is displayed on top */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}\r\n\r\n/**\r\n * WebPart Tabs\r\n */\r\n\r\n/** Remove the spacing around the webparts */\r\n.ms-webpart-zone.wp-tabs {\r\n    border-spacing: 0px;\r\n}\r\n\r\n/** Hide the titles of the webparts */\r\n.ms-webpart-zone.wp-tabs .ms-webpart-chrome-title {\r\n    display: none;\r\n}", ""]);
+exports.push([module.i, "/**\r\n * Contextual Host\r\n */\r\n\r\n/** Ensure the popup is visible over the panel. */\r\n.ms-ContextualHost {\r\n    z-index: 2000;\r\n}\r\n\r\n/**\r\n * Dialog\r\n */\r\n\r\n/** Ensure the dialog is displayed above the panel */\r\n.ms-Dialog {\r\n    z-index: 1050;\r\n}\r\n\r\n/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Form Error\r\n */\r\n.ms-Label.form-error {\r\n    color: #a80000;\r\n    font-size: 16px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: calc(100vh - 80px);\r\n    padding-bottom: 0px;\r\n}\r\n\r\n/** Ensure the panel is displayed on top */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}\r\n\r\n/**\r\n * WebPart Tabs\r\n */\r\n\r\n/** Remove the spacing around the webparts */\r\n.ms-webpart-zone.wp-tabs {\r\n    border-spacing: 0px;\r\n}\r\n\r\n/** Hide the titles of the webparts */\r\n.ms-webpart-zone.wp-tabs .ms-webpart-chrome-title {\r\n    display: none;\r\n}", ""]);
 
 // exports
 

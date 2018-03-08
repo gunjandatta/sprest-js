@@ -471,6 +471,8 @@ class _ListForm {
             .FieldValuesAsHtml()
             // Execute the request
             .execute(formValues => {
+                let hasUserField = false;
+
                 // Parse the fields
                 for (let fieldName in info.fields) {
                     // Get the element
@@ -478,6 +480,9 @@ class _ListForm {
                     if (elField) {
                         let field = info.fields[fieldName];
                         let html = formValues[fieldName] || formValues[fieldName.replace(/\_/g, "_x005f_")] || "";
+
+                        // Set the flag
+                        hasUserField = hasUserField || field.FieldTypeKind == SPTypes.FieldType.User;
 
                         // Set the html for this field
                         elField.innerHTML = [
@@ -491,6 +496,12 @@ class _ListForm {
                             '</div>'
                         ].join('\n');
                     }
+                }
+
+                // See if we are displaying a user field
+                if (hasUserField) {
+                    // Enable the persona
+                    window["ProcessImn"]();
                 }
             });
     }

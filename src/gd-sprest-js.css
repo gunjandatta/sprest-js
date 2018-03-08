@@ -4,7 +4,7 @@
 
 /** Ensure the popup is visible over the panel. */
 .ms-ContextualHost {
-    z-index: 1010;
+    z-index: 2000;
 }
 
 /**
