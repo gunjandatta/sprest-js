@@ -296,8 +296,20 @@ class _ListForm {
     private loadItem = () => {
         // See if the item already exist
         if (this._info.item) {
-            // Resolve the promise
-            this._resolve(this._info);
+            // See if we are loading attachments
+            if (this._props.loadAttachments && this._info.attachments == null) {
+                // Load the attachments
+                ListForm.loadAttachments(this._props).then(attachments => {
+                    // Set the attachments
+                    this._info.attachments = attachments;
+
+                    // Resolve the promise
+                    this._resolve(this._info);
+                })
+            } else {
+                // Resolve the promise
+                this._resolve(this._info);
+            }
         }
         // Else, see if we are loading the list item
         else if (this._props.itemId > 0) {
