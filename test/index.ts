@@ -175,7 +175,34 @@ window["TestJS"] = {
             elementId: "wp-test-js",
             onRenderDisplay: (cfg) => {
                 // Render elements
-                cfg.el.innerHTML = "<div></div><div></div><div></div><div></div>";
+                cfg.el.innerHTML = "<div></div><div></div><div></div><div></div><div></div>";
+
+                // Render a menu
+                let menu = Fabric.CommandBar({
+                    el: cfg.el.children[4],
+                    mainCommands: [
+                        {
+                            icon: "Edit",
+                            text: "New",
+                            menu: {
+                                items: [
+                                    {
+                                        text: "File",
+                                        icon: "TextDocument"
+                                    },
+                                    {
+                                        text: "Template",
+                                        icon: "TextDocument"
+                                    },
+                                    {
+                                        text: "Item",
+                                        icon: "TextDocument"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                })
 
                 // Render the new form
                 let newForm = ListFormPanel({

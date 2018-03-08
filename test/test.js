@@ -2705,7 +2705,27 @@ window["TestJS"] = {
             elementId: "wp-test-js",
             onRenderDisplay: function onRenderDisplay(cfg) {
                 // Render elements
-                cfg.el.innerHTML = "<div></div><div></div><div></div><div></div>";
+                cfg.el.innerHTML = "<div></div><div></div><div></div><div></div><div></div>";
+                // Render a menu
+                var menu = build_1.Fabric.CommandBar({
+                    el: cfg.el.children[4],
+                    mainCommands: [{
+                        icon: "Edit",
+                        text: "New",
+                        menu: {
+                            items: [{
+                                text: "File",
+                                icon: "TextDocument"
+                            }, {
+                                text: "Template",
+                                icon: "TextDocument"
+                            }, {
+                                text: "Item",
+                                icon: "TextDocument"
+                            }]
+                        }
+                    }]
+                });
                 // Render the new form
                 var newForm = build_1.ListFormPanel({
                     controlMode: gd_sprest_1.SPTypes.ControlMode.New,
@@ -10974,6 +10994,14 @@ exports.CommandBar = function (props) {
                 }
             });
         }
+        else if (buttonProps[i].menu && buttons[i]) {
+            // Get the elements
+            var elMenu = buttons[i].parentElement.querySelector(".ms-ContextualMenu");
+            if (elMenu) {
+                // Create the contextual menu
+                new _1.fabric.ContextualMenu(elMenu, buttons[i]);
+            }
+        }
     }
     // Return the command bar
     return { get: get };
@@ -12380,6 +12408,7 @@ var _1 = __webpack_require__(4);
 exports.CommandButton = function (props) {
     // Determine the class name
     var className = [
+        "ms-CommandButton",
         props.className || "",
         props.isAction ? "ms-CommandButton--actionButton" : "",
         props.isActive ? "is-active" : "",
@@ -12387,18 +12416,25 @@ exports.CommandButton = function (props) {
         props.isInline ? "ms-CommandButton--inline" : "",
         props.isPivot ? "ms-CommandButton--pivot" : "",
         props.isTextOnly ? "ms-CommandButton--TextOnly" : "",
+        props.menu ? "is-menu" : "",
         props.text ? "" : "ms-CommandButton--noLabel"
     ].join(' ').trim();
+    // See if the menu properties exist
+    var menuProps = props.menu;
+    if (menuProps) {
+        // Set the class name
+        menuProps.className = "is-opened ms-ContextualMenu--hasIcons " + (props.menu.className || "");
+    }
     // Return the template
     return [
-        '<div class="ms-CommandButton ' + (props.className || "") + '">',
+        '<div class="' + className + '">',
         '<button class="ms-CommandButton-button">',
         props.icon ? '<span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--' + props.icon + '"></i></span>' : '',
         props.text ? '<span class="ms-CommandButton-label">' + props.text + '</span>' : '',
         props.menu ? '<span class="ms-CommandButton-dropdownIcon"><i class="ms-Icon ms-Icon--ChevronDown"></i></span>' : '',
         '</button>',
         props.isSplit ? '<button class="ms-CommandButton-splitIcon"><i class="ms-Icon ms-Icon--ChevronDown"></i></button>' : '',
-        props.menu ? _1.ContextualMenu(props.menu) : '',
+        menuProps ? _1.ContextualMenu(menuProps) : '',
         '</div>'
     ].join('\n');
 };
@@ -12432,14 +12468,14 @@ exports.ContextualMenu = function (props) {
                 // Add the menu item
                 menuItems.push([
                     '<li class="ms-ContextualMenu-item">',
-                    '<a class="ms-ContextualMenu-link' + (item.isSelected) + '" tabindex="1">' + (item.text || "") + '</a>',
+                    '<a class="' + className + '" tabindex="1">' + (item.text || "") + '</a>',
                     item.icon ? '<i class="ms-Icon ms-Icon--' + item.icon + '"></i>' : '',
                     '</li>'
                 ].join('\n'));
             }
         }
         // Return the items
-        return menuItems;
+        return menuItems.join('\n');
     };
     // Return the template
     return [

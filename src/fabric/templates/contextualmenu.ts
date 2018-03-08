@@ -24,7 +24,7 @@ export const ContextualMenu = (props: IContextualMenuProps): string => {
                 // Add the menu item
                 menuItems.push([
                     '<li class="ms-ContextualMenu-item">',
-                    '<a class="ms-ContextualMenu-link' + (item.isSelected) + '" tabindex="1">' + (item.text || "") + '</a>',
+                    '<a class="' + className + '" tabindex="1">' + (item.text || "") + '</a>',
                     item.icon ? '<i class="ms-Icon ms-Icon--' + item.icon + '"></i>' : '',
                     '</li>'
                 ].join('\n'));
@@ -32,7 +32,7 @@ export const ContextualMenu = (props: IContextualMenuProps): string => {
         }
 
         // Return the items
-        return menuItems;
+        return menuItems.join('\n');
     }
 
 

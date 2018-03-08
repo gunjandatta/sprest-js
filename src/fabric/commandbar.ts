@@ -38,6 +38,15 @@ export const CommandBar = (props: ICommandBarProps): ICommandBar => {
                 }
             });
         }
+        // Else, see if this is a menu
+        else if(buttonProps[i].menu && buttons[i]) {
+            // Get the elements
+            let elMenu = buttons[i].parentElement.querySelector(".ms-ContextualMenu");
+            if(elMenu) {
+                // Create the contextual menu
+                new fabric.ContextualMenu(elMenu, buttons[i]);
+            }
+        }
     }
 
     // Return the command bar
