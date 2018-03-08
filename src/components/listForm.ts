@@ -461,12 +461,12 @@ class _ListForm {
     }
 
     // Method to render a display form for an item
-    static renderDisplayForm(el: HTMLElement, info: ListFormTypes.IListFormResult, excludeFields: Array<string> = []) {
+    static renderDisplayForm(props: ListFormTypes.IListFormDisplayProps) {
         // Render the form template
-        _ListForm.renderFormTemplate(el, info, excludeFields);
+        _ListForm.renderFormTemplate(props);
 
         // Load the list item
-        info.list.Items(info.item.Id)
+        props.info.list.Items(props.info.item.Id)
             // Get the html for the fields
             .FieldValuesAsHtml()
             // Execute the request
@@ -474,11 +474,11 @@ class _ListForm {
                 let hasUserField = false;
 
                 // Parse the fields
-                for (let fieldName in info.fields) {
+                for (let fieldName in props.info.fields) {
                     // Get the element
-                    let elField = el.querySelector("[data-field='" + fieldName + "']");
+                    let elField = props.el.querySelector("[data-field='" + fieldName + "']");
                     if (elField) {
-                        let field = info.fields[fieldName];
+                        let field = props.info.fields[fieldName];
                         let html = formValues[fieldName] || formValues[fieldName.replace(/\_/g, "_x005f_")] || "";
 
                         // Set the flag
@@ -507,24 +507,26 @@ class _ListForm {
     }
 
     // Render the edit form
-    static renderEditForm(el: HTMLElement, info: ListFormTypes.IListFormResult, controlMode: number, excludeFields: Array<string> = []): Array<ListFormTypes.IField> {
+    static renderEditForm(props: ListFormTypes.IListFormEditProps): Array<ListFormTypes.IField> {
+        let controlMode = typeof (props.controlMode) === "number" ? props.controlMode : props.info.item ? SPTypes.ControlMode.Edit : SPTypes.ControlMode.New;
+
         // Render the form template
-        _ListForm.renderFormTemplate(el, info, excludeFields);
+        _ListForm.renderFormTemplate(props);
 
         // Parse the fields
         let fields = [];
-        for (let fieldName in info.fields) {
-            let field = info.fields[fieldName];
-            let value = info.item ? info.item[fieldName] : null;
+        for (let fieldName in props.info.fields) {
+            let field = props.info.fields[fieldName];
+            let value = props.info.item ? props.info.item[fieldName] : null;
 
             // Get the field element and ensure it exists
-            let elField = el.querySelector("[data-field='" + fieldName + "']");
+            let elField = props.el.querySelector("[data-field='" + fieldName + "']");
             if (elField == null) { continue; }
 
             // See if this is a read-only field
             if (field.ReadOnlyField) {
                 // Do not render in the new form
-                if (controlMode == SPTypes.ControlMode.New) { continue; }
+                if (props.controlMode == SPTypes.ControlMode.New) { continue; }
             }
 
             // See if this is the hidden taxonomy field
@@ -545,7 +547,7 @@ class _ListForm {
                 el: elField,
                 fieldInfo: {
                     field,
-                    listName: info.list.Title,
+                    listName: props.info.list.Title,
                     name: fieldName,
                 },
                 value
@@ -560,21 +562,34 @@ class _ListForm {
     }
 
     // Method to render the form template
-    static renderFormTemplate(el: HTMLElement, info: ListFormTypes.IListFormResult, excludeFields: Array<string> = []) {
+    static renderFormTemplate(props: ListFormTypes.IListFormDisplayProps) {
         // Clear the element
-        el.innerHTML = "";
+        props.el.innerHTML = "";
 
         // Parse the fields
-        for (let fieldName in info.fields) {
-            let excludeField = false;
+        for (let fieldName in props.info.fields) {
+            let excludeField = props.includeFields ? true : false;
 
-            // Parse the fields
-            for (let i = 0; i < excludeFields.length; i++) {
-                // See if we are excluding the field
-                if (excludeFields[i] == fieldName) {
-                    // Set the flag
-                    excludeField = true;
-                    break;
+            // See if the fields have been defined
+            if (props.includeFields) {
+                // Parse the fields to include
+                for (let i = 0; i < props.includeFields.length; i++) {
+                    // See if we are including this field
+                    if (props.includeFields[i] == fieldName) {
+                        // Set the flag
+                        excludeField = false;
+                        break;
+                    }
+                }
+            } else {
+                // Parse the fields
+                for (let i = 0; i < props.excludeFields.length; i++) {
+                    // See if we are excluding this field
+                    if (props.excludeFields[i] == fieldName) {
+                        // Set the flag
+                        excludeField = true;
+                        break;
+                    }
                 }
             }
 
@@ -582,7 +597,7 @@ class _ListForm {
             if (excludeField) { continue; }
 
             // Append the field to the form
-            el.innerHTML += "<div data-field='" + fieldName + "'></div>";
+            props.el.innerHTML += "<div data-field='" + fieldName + "'></div>";
         }
     }
 

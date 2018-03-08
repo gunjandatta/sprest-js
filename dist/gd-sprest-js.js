@@ -17386,21 +17386,18 @@ var _ListForm = /** @class */function () {
         });
     };
     // Method to render a display form for an item
-    _ListForm.renderDisplayForm = function (el, info, excludeFields) {
-        if (excludeFields === void 0) {
-            excludeFields = [];
-        }
+    _ListForm.renderDisplayForm = function (props) {
         // Render the form template
-        _ListForm.renderFormTemplate(el, info, excludeFields);
+        _ListForm.renderFormTemplate(props);
         // Load the list item
-        info.list.Items(info.item.Id).FieldValuesAsHtml().execute(function (formValues) {
+        props.info.list.Items(props.info.item.Id).FieldValuesAsHtml().execute(function (formValues) {
             var hasUserField = false;
             // Parse the fields
-            for (var fieldName in info.fields) {
+            for (var fieldName in props.info.fields) {
                 // Get the element
-                var elField = el.querySelector("[data-field='" + fieldName + "']");
+                var elField = props.el.querySelector("[data-field='" + fieldName + "']");
                 if (elField) {
-                    var field = info.fields[fieldName];
+                    var field = props.info.fields[fieldName];
                     var html = formValues[fieldName] || formValues[fieldName.replace(/\_/g, "_x005f_")] || "";
                     // Set the flag
                     hasUserField = hasUserField || field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.User;
@@ -17420,26 +17417,24 @@ var _ListForm = /** @class */function () {
         });
     };
     // Render the edit form
-    _ListForm.renderEditForm = function (el, info, controlMode, excludeFields) {
-        if (excludeFields === void 0) {
-            excludeFields = [];
-        }
+    _ListForm.renderEditForm = function (props) {
+        var controlMode = typeof props.controlMode === "number" ? props.controlMode : props.info.item ? gd_sprest_1.SPTypes.ControlMode.Edit : gd_sprest_1.SPTypes.ControlMode.New;
         // Render the form template
-        _ListForm.renderFormTemplate(el, info, excludeFields);
+        _ListForm.renderFormTemplate(props);
         // Parse the fields
         var fields = [];
-        for (var fieldName in info.fields) {
-            var field = info.fields[fieldName];
-            var value = info.item ? info.item[fieldName] : null;
+        for (var fieldName in props.info.fields) {
+            var field = props.info.fields[fieldName];
+            var value = props.info.item ? props.info.item[fieldName] : null;
             // Get the field element and ensure it exists
-            var elField = el.querySelector("[data-field='" + fieldName + "']");
+            var elField = props.el.querySelector("[data-field='" + fieldName + "']");
             if (elField == null) {
                 continue;
             }
             // See if this is a read-only field
             if (field.ReadOnlyField) {
                 // Do not render in the new form
-                if (controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
+                if (props.controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
                     continue;
                 }
             }
@@ -17461,7 +17456,7 @@ var _ListForm = /** @class */function () {
                 el: elField,
                 fieldInfo: {
                     field: field,
-                    listName: info.list.Title,
+                    listName: props.info.list.Title,
                     name: fieldName
                 },
                 value: value
@@ -17474,22 +17469,32 @@ var _ListForm = /** @class */function () {
         return fields;
     };
     // Method to render the form template
-    _ListForm.renderFormTemplate = function (el, info, excludeFields) {
-        if (excludeFields === void 0) {
-            excludeFields = [];
-        }
+    _ListForm.renderFormTemplate = function (props) {
         // Clear the element
-        el.innerHTML = "";
+        props.el.innerHTML = "";
         // Parse the fields
-        for (var fieldName in info.fields) {
-            var excludeField = false;
-            // Parse the fields
-            for (var i = 0; i < excludeFields.length; i++) {
-                // See if we are excluding the field
-                if (excludeFields[i] == fieldName) {
-                    // Set the flag
-                    excludeField = true;
-                    break;
+        for (var fieldName in props.info.fields) {
+            var excludeField = props.includeFields ? true : false;
+            // See if the fields have been defined
+            if (props.includeFields) {
+                // Parse the fields to include
+                for (var i = 0; i < props.includeFields.length; i++) {
+                    // See if we are including this field
+                    if (props.includeFields[i] == fieldName) {
+                        // Set the flag
+                        excludeField = false;
+                        break;
+                    }
+                }
+            } else {
+                // Parse the fields
+                for (var i = 0; i < props.excludeFields.length; i++) {
+                    // See if we are excluding this field
+                    if (props.excludeFields[i] == fieldName) {
+                        // Set the flag
+                        excludeField = true;
+                        break;
+                    }
                 }
             }
             // See if we are excluding the field
@@ -17497,7 +17502,7 @@ var _ListForm = /** @class */function () {
                 continue;
             }
             // Append the field to the form
-            el.innerHTML += "<div data-field='" + fieldName + "'></div>";
+            props.el.innerHTML += "<div data-field='" + fieldName + "'></div>";
         }
     };
     // Method to save attachments to an existing item

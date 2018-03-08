@@ -36,27 +36,21 @@ export interface IListForm {
 
     /**
      * Method to render the display form template.
-     * @param el - The element to render the form to.
-     * @param listInfo - The list form information.
-     * @param excludeFields - An array of internal field names to exclude from the form.
+     * @param props - The display form properties.
      */
-    renderDisplayForm(el: Element, listInfo: IListFormResult, excludeFields?:Array<string>);
+    renderDisplayForm(props: IListFormDisplayProps);
 
     /**
      * Method to render the edit/new form.
-     * @param el - The element to render the form to.
-     * @param listInfo - The list form information.
-     * @param excludeFields - An array of internal field names to exclude from the form.
+     * @param props - The edit/new form properties.
      */
-    renderEditForm(el: Element, listInfo: IListFormResult, controlMode: number, excludeFields?:Array<string>): Array<IField>;
+    renderEditForm(props: IListFormEditProps): Array<IField>;
 
     /**
      * Method to render the form template.
-     * @param el - The element to render the form to.
-     * @param listInfo - The list form information.
-     * @param excludeFields - An array of internal field names to exclude from the form.
+     * @param props - The form properties.
      */
-    renderFormTemplate(el: Element, listInfo: IListFormResult, excludeFields?:Array<string>);
+    renderFormTemplate(props: IListFormDisplayProps);
 
     /**
      * Method to save attachments to the item.
@@ -91,6 +85,31 @@ export interface IListFormCache {
     ct: string;
     fields: string;
     list: string;
+}
+
+/**
+ * List Form Display Properties
+ */
+export interface IListFormDisplayProps {
+    /** The element to render the form to. */
+    el: Element;
+
+    /** The fields to exclude from the form. */
+    excludeFields?: Array<string>;
+
+    /** The fields to include in the form. */
+    includeFields?: Array<string>;
+
+    /** The list form information. */
+    info: IListFormResult;
+}
+
+/**
+ * List Form Edit Properties
+ */
+export interface IListFormEditProps extends IListFormDisplayProps {
+    /** The form mode (New/Edit) */
+    controlMode?: number;
 }
 
 /**
