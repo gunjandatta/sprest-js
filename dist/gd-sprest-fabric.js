@@ -16225,7 +16225,7 @@ exports.ContextualMenu = function (props) {
                 // Set the class name
                 var className = ["ms-ContextualMenu-link", item.isDisabled ? "is-disabled" : "", item.isSelected ? "is-selected" : ""].join(" ");
                 // Add the menu item
-                menuItems.push(['<li class="ms-ContextualMenu-item">', '<a class="ms-ContextualMenu-link' + item.isSelected + '" tabindex="1">' + (item.text || "") + '</a>', '</li>'].join('\n'));
+                menuItems.push(['<li class="ms-ContextualMenu-item">', '<a class="ms-ContextualMenu-link' + item.isSelected + '" tabindex="1">' + (item.text || "") + '</a>', item.icon ? '<i class="ms-Icon ms-Icon--' + item.icon + '"></i>' : '', '</li>'].join('\n'));
             }
         }
         // Return the items

@@ -29,6 +29,9 @@ export interface IContextualMenuProps extends IProps {
  * IContextualMenuItem
  */
 export interface IContextualMenuItem {
+    /** The button icon. */
+    icon?: string;
+
     /** True to disable the item. */
     isDisabled?: boolean;
 

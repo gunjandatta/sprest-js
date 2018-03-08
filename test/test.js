@@ -12433,6 +12433,7 @@ exports.ContextualMenu = function (props) {
                 menuItems.push([
                     '<li class="ms-ContextualMenu-item">',
                     '<a class="ms-ContextualMenu-link' + (item.isSelected) + '" tabindex="1">' + (item.text || "") + '</a>',
+                    item.icon ? '<i class="ms-Icon ms-Icon--' + item.icon + '"></i>' : '',
                     '</li>'
                 ].join('\n'));
             }
