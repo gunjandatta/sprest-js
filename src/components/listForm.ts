@@ -507,58 +507,69 @@ class _ListForm {
     }
 
     // Render the edit form
-    static renderEditForm(props: ListFormTypes.IListFormEditProps): Array<ListFormTypes.IField> {
+    static renderEditForm(props: ListFormTypes.IListFormEditProps): PromiseLike<Array<ListFormTypes.IField>> {
         let controlMode = typeof (props.controlMode) === "number" ? props.controlMode : props.info.item ? SPTypes.ControlMode.Edit : SPTypes.ControlMode.New;
 
         // Render the form template
         _ListForm.renderFormTemplate(props);
 
-        // Parse the fields
-        let fields = [];
-        for (let fieldName in props.info.fields) {
-            let field = props.info.fields[fieldName];
-            let value = props.info.item ? props.info.item[fieldName] : null;
+        // Return a promise
+        return new Promise((resolve, reject) => {
+            let fldCount = 0;
 
-            // Get the field element and ensure it exists
-            let elField = props.el.querySelector("[data-field='" + fieldName + "']");
-            if (elField == null) { continue; }
+            // Parse the fields
+            let fields = [];
+            for (let fieldName in props.info.fields) {
+                let field = props.info.fields[fieldName];
+                let value = props.info.item ? props.info.item[fieldName] : null;
 
-            // See if this is a read-only field
-            if (field.ReadOnlyField) {
-                // Do not render in the new form
-                if (props.controlMode == SPTypes.ControlMode.New) { continue; }
+                // Get the field element and ensure it exists
+                let elField = props.el.querySelector("[data-field='" + fieldName + "']");
+                if (elField == null) { continue; }
+
+                // See if this is a read-only field
+                if (field.ReadOnlyField) {
+                    // Do not render in the new form
+                    if (props.controlMode == SPTypes.ControlMode.New) { continue; }
+                }
+
+                // See if this is the hidden taxonomy field
+                if (field.Hidden && field.FieldTypeKind == SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
+                    // Do not render this field
+                    continue;
+                }
+
+                // See if this is an invalid field type
+                if (field.FieldTypeKind == SPTypes.FieldType.Invalid) {
+                    // Ensure it's not a taxonomy field
+                    if (!field.TypeAsString.startsWith("TaxonomyFieldType")) { continue; }
+                }
+
+                // Increment the counter
+                fldCount++;
+
+                // Render the field
+                Field({
+                    controlMode,
+                    el: elField,
+                    fieldInfo: {
+                        field,
+                        listName: props.info.list.Title,
+                        name: fieldName,
+                    },
+                    value
+                }).then(field => {
+                    // Add the field
+                    fields.push(field);
+
+                    // See if all fields have been added
+                    if (fields.length == fldCount) {
+                        // Resolve the promise
+                        resolve(fields);
+                    }
+                });
             }
-
-            // See if this is the hidden taxonomy field
-            if (field.Hidden && field.FieldTypeKind == SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
-                // Do not render this field
-                continue;
-            }
-
-            // See if this is an invalid field type
-            if (field.FieldTypeKind == SPTypes.FieldType.Invalid) {
-                // Ensure it's not a taxonomy field
-                if (!field.TypeAsString.startsWith("TaxonomyFieldType")) { continue; }
-            }
-
-            // Render the field
-            Field({
-                controlMode,
-                el: elField,
-                fieldInfo: {
-                    field,
-                    listName: props.info.list.Title,
-                    name: fieldName,
-                },
-                value
-            }).then(field => {
-                // Add the field
-                fields.push(field);
-            });
-        }
-
-        // Return the fields
-        return fields;
+        });
     }
 
     // Method to render the form template

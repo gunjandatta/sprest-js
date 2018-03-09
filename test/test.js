@@ -14032,52 +14032,61 @@ var _ListForm = /** @class */ (function () {
         var controlMode = typeof (props.controlMode) === "number" ? props.controlMode : props.info.item ? gd_sprest_1.SPTypes.ControlMode.Edit : gd_sprest_1.SPTypes.ControlMode.New;
         // Render the form template
         _ListForm.renderFormTemplate(props);
-        // Parse the fields
-        var fields = [];
-        for (var fieldName in props.info.fields) {
-            var field = props.info.fields[fieldName];
-            var value = props.info.item ? props.info.item[fieldName] : null;
-            // Get the field element and ensure it exists
-            var elField = props.el.querySelector("[data-field='" + fieldName + "']");
-            if (elField == null) {
-                continue;
-            }
-            // See if this is a read-only field
-            if (field.ReadOnlyField) {
-                // Do not render in the new form
-                if (props.controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
+        // Return a promise
+        return new Promise(function (resolve, reject) {
+            var fldCount = 0;
+            // Parse the fields
+            var fields = [];
+            for (var fieldName in props.info.fields) {
+                var field = props.info.fields[fieldName];
+                var value = props.info.item ? props.info.item[fieldName] : null;
+                // Get the field element and ensure it exists
+                var elField = props.el.querySelector("[data-field='" + fieldName + "']");
+                if (elField == null) {
                     continue;
                 }
-            }
-            // See if this is the hidden taxonomy field
-            if (field.Hidden && field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
-                // Do not render this field
-                continue;
-            }
-            // See if this is an invalid field type
-            if (field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Invalid) {
-                // Ensure it's not a taxonomy field
-                if (!field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                // See if this is a read-only field
+                if (field.ReadOnlyField) {
+                    // Do not render in the new form
+                    if (props.controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
+                        continue;
+                    }
+                }
+                // See if this is the hidden taxonomy field
+                if (field.Hidden && field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
+                    // Do not render this field
                     continue;
                 }
+                // See if this is an invalid field type
+                if (field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Invalid) {
+                    // Ensure it's not a taxonomy field
+                    if (!field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                        continue;
+                    }
+                }
+                // Increment the counter
+                fldCount++;
+                // Render the field
+                _1.Field({
+                    controlMode: controlMode,
+                    el: elField,
+                    fieldInfo: {
+                        field: field,
+                        listName: props.info.list.Title,
+                        name: fieldName,
+                    },
+                    value: value
+                }).then(function (field) {
+                    // Add the field
+                    fields.push(field);
+                    // See if all fields have been added
+                    if (fields.length == fldCount) {
+                        // Resolve the promise
+                        resolve(fields);
+                    }
+                });
             }
-            // Render the field
-            _1.Field({
-                controlMode: controlMode,
-                el: elField,
-                fieldInfo: {
-                    field: field,
-                    listName: props.info.list.Title,
-                    name: fieldName,
-                },
-                value: value
-            }).then(function (field) {
-                // Add the field
-                fields.push(field);
-            });
-        }
-        // Return the fields
-        return fields;
+        });
     };
     // Method to render the form template
     _ListForm.renderFormTemplate = function (props) {
@@ -14495,9 +14504,12 @@ exports.ListFormPanel = function (props) {
         // See if this is a new/edit form
         if (controlMode == gd_sprest_1.SPTypes.ControlMode.Edit || controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
             // Render the edit form
-            _fields = _1.ListForm.renderEditForm({
+            _1.ListForm.renderEditForm({
                 el: elForm,
                 info: _formInfo,
+            }).then(function (fields) {
+                // Save the fields
+                _fields = fields;
             });
         }
         else {

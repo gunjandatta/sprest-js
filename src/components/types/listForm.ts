@@ -44,7 +44,7 @@ export interface IListForm {
      * Method to render the edit/new form.
      * @param props - The edit/new form properties.
      */
-    renderEditForm(props: IListFormEditProps): Array<IField>;
+    renderEditForm(props: IListFormEditProps): PromiseLike<Array<IField>>;
 
     /**
      * Method to render the form template.
