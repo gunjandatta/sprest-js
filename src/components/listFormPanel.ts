@@ -38,10 +38,16 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         // See if this is a new/edit form
         if (controlMode == SPTypes.ControlMode.Edit || controlMode == SPTypes.ControlMode.New) {
             // Render the edit form
-            _fields = ListForm.renderEditForm(elForm, _formInfo, controlMode);
+            _fields = ListForm.renderEditForm({
+                el: elForm,
+                info: _formInfo,
+            });
         } else {
             // Render the display form
-            ListForm.renderDisplayForm(elForm, _formInfo);
+            ListForm.renderDisplayForm({
+                el: elForm,
+                info: _formInfo
+            });
         }
 
         // Add the menu click event
