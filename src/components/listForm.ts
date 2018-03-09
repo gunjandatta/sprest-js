@@ -779,7 +779,9 @@ class _ListForm {
                     }
                 }
             }
-        } else {
+        }
+        // Else, see if fields have been specified to be excluded
+        else if (props.excludeFields) {
             // Parse the fields
             for (let fieldName in props.info.fields) {
                 let excludeField = props.includeFields ? true : false;
@@ -797,6 +799,12 @@ class _ListForm {
                 // See if we are excluding the field
                 if (excludeField) { continue; }
 
+                // Append the field to the form
+                props.el.innerHTML += "<div data-field='" + fieldName + "'></div>";
+            }
+        } else {
+            // Parse the fields
+            for (let fieldName in props.info.fields) {
                 // Append the field to the form
                 props.el.innerHTML += "<div data-field='" + fieldName + "'></div>";
             }

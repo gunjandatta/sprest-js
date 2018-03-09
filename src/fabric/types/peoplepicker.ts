@@ -32,5 +32,5 @@ export interface IPeoplePickerProps extends IProps {
     required?: boolean;
 
     /** The people picker value */
-    value?: Array<Types.SP.ComplexTypes.FieldUserValue>;
+    value?: Array<Types.SP.IPeoplePickerUser>;
 }

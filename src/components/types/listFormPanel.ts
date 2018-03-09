@@ -1,10 +1,15 @@
 import { Helper } from "gd-sprest";
-import { IListFormProps } from ".";
+import { IListFormDisplay, IListFormEdit, IListFormProps } from ".";
 
 /**
  * List Form Panel
  */
 export interface IListFormPanel {
+    /**
+     * Returns the form.
+     */
+    getForm(): IListFormDisplay | IListFormEdit;
+
     /**
      * Displays the list form
      * @param controlMode - The form type.

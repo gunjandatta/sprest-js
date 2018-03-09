@@ -7839,9 +7839,26 @@ exports.PeoplePicker = function (props) {
         }
     };
     // Add the people picker html
-    props.el.innerHTML = ['<div class="ms-PeoplePicker">', _templates.header(), _templates.searchBox(), _templates.results("Users"), '</div>'].join('\n');
+    props.el.innerHTML = ['<div class="ms-PeoplePicker">', _templates.header(), _templates.searchBox(props.value), _templates.results("Users"), '</div>'].join('\n');
     // Create the people picker
     var _peoplepicker = new _1.fabric.PeoplePicker(props.el.querySelector(".ms-PeoplePicker"));
+    // Get the personas
+    var personas = _peoplepicker._container.querySelectorAll(".ms-PeoplePicker-persona");
+    for (var i = 0; i < personas.length; i++) {
+        // Add a click event
+        personas[i].querySelector(".ms-Persona-actionIcon").addEventListener("click", function (ev) {
+            var el = ev.currentTarget;
+            // Find the persona element
+            while (el && el.className.indexOf("ms-PeoplePicker-persona") < 0) {
+                el = el.parentElement;
+            }
+            // See if the element exists
+            if (el) {
+                // Remove the element
+                el.remove();
+            }
+        });
+    }
     // Add the search event
     _peoplepicker._peoplePickerSearch.addEventListener("keyup", function (ev) {
         // Set the filter text
@@ -15813,7 +15830,7 @@ var Mapper = __webpack_require__(6);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.55,
+    __ver: 3.57,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {
@@ -16473,11 +16490,16 @@ exports.PeoplePicker = function (props) {
             text: props.label
         }) || "";
     };
+    // Persona
+    var persona = function persona(user) {
+        // Return the persona
+        return ['<div class="ms-Persona ms-Persona--token ms-PeoplePicker-persona ms-Persona--xs" data-user=\'' + JSON.stringify(user) + '\'>', '<div class="ms-Persona-imageArea"></div>', '<div class="ms-Persona-details">', '<div class="ms-Persona-primaryText">' + user.DisplayText + '</div>', '<div class="ms-Persona-secondaryText">' + ((user.EntityData ? user.EntityData.Email : null) || "") + '</div>', '</div>', '<div class="ms-Persona-actionIcon">', '<i class="ms-Icon ms-Icon--Cancel"></i>', '</div>', '</div>'].join('\n');
+    };
     // Result
     var result = function result(user) {
         // Ensure the user exists
         if (user) {
-            return ['<div class="ms-PeoplePicker-result" tabindex="1">', '<div class="ms-Persona ms-Persona--sm" data-user=\'' + JSON.stringify(user) + '\'>', '<div class="ms-Persona-imageArea"></div>', '<div class="ms-Persona-details">', '<div class="ms-Persona-primaryText">' + user.DisplayText + '</div>', '<div class="ms-Persona-secondaryText">' + user.EntityData.Email + '</div>', '</div>', '</div>', '<button class="ms-PeoplePicker-resultAction" style="display: none;"></button>', '</div>'].join('\n');
+            return ['<div class="ms-PeoplePicker-result" tabindex="1">', '<div class="ms-Persona ms-Persona--sm" data-user=\'' + JSON.stringify(user) + '\'>', '<div class="ms-Persona-imageArea"></div>', '<div class="ms-Persona-details">', '<div class="ms-Persona-primaryText">' + user.DisplayText + '</div>', '<div class="ms-Persona-secondaryText">' + ((user.EntityData ? user.EntityData.Email : null) || "") + '</div>', '</div>', '</div>', '<button class="ms-PeoplePicker-resultAction" style="display: none;"></button>', '</div>'].join('\n');
         }
         // Return an empty persona
         return ['<div class="ms-PeoplePicker-result" style="display: none;">', '<div class="ms-Persona"></div>', '<button class="ms-PeoplePicker-resultAction"></button>', '</div>'].join('\n');
@@ -16491,12 +16513,21 @@ exports.PeoplePicker = function (props) {
             searchText = "";
         }
         // Return the template
-        return ['<div class="ms-PeoplePicker-results">', group(title, searchText), '<div class="selected-users"></div>'].join('\n');
+        return ['<div class="ms-PeoplePicker-results">', group(title, searchText), '<div class="selected-users"></div>', '</div>'].join('\n');
     };
     // Search Box
-    var searchBox = function searchBox() {
+    var searchBox = function searchBox(users) {
+        var personas = [];
+        // See if there are users
+        if (users) {
+            // Parse the users
+            for (var i = 0; i < users.length; i++) {
+                // Add the persona
+                personas.push(persona(users[i]));
+            }
+        }
         // Return the template
-        return ['<div class="ms-PeoplePicker-searchBox">', '<div class="ms-TextField ms-TextField--textFieldUnderlined">', '<input class="ms-TextField-field" type="text" value="" placeholder="Search"></input>', '</div>', '</div>'].join('\n');
+        return ['<div class="ms-PeoplePicker-searchBox">', personas.join('\n'), '<div class="ms-TextField ms-TextField--textFieldUnderlined">', '<input class="ms-TextField-field" type="text" value="" placeholder="Search"></input>', '</div>', '</div>'].join('\n');
     };
     return {
         group: group,
@@ -16826,6 +16857,27 @@ exports.Field = function (props) {
         // Return the values
         return values;
     };
+    // Method to get the user values
+    var getUserValues = function getUserValues(value) {
+        var users = [];
+        // See if a value exists
+        if (value) {
+            var userValues = value.results ? value.results : [value];
+            for (var i = 0; i < userValues.length; i++) {
+                var userValue = userValues[i];
+                // Add the user
+                users.push({
+                    DisplayText: userValue.Title,
+                    EntityData: {
+                        Email: userValue.EMail
+                    },
+                    Key: userValue.Id.toString()
+                });
+            }
+        }
+        // Return the users
+        return users;
+    };
     // Method to update the value
     var _value = props.value;
     var updateValue = function updateValue(value) {
@@ -17123,7 +17175,7 @@ exports.Field = function (props) {
                             el: props.el,
                             label: userInfo.title,
                             required: userInfo.required,
-                            value: value
+                            value: getUserValues(value)
                         })
                     });
                     break;
@@ -17797,7 +17849,7 @@ var _ListForm = /** @class */function () {
                     }
                 }
             }
-        } else {
+        } else if (props.excludeFields) {
             // Parse the fields
             for (var fieldName in props.info.fields) {
                 var excludeField = props.includeFields ? true : false;
@@ -17814,6 +17866,12 @@ var _ListForm = /** @class */function () {
                 if (excludeField) {
                     continue;
                 }
+                // Append the field to the form
+                props.el.innerHTML += "<div data-field='" + fieldName + "'></div>";
+            }
+        } else {
+            // Parse the fields
+            for (var fieldName in props.info.fields) {
                 // Append the field to the form
                 props.el.innerHTML += "<div data-field='" + fieldName + "'></div>";
             }
@@ -18148,43 +18206,12 @@ var _1 = __webpack_require__(7);
  * Item Form
  */
 exports.ListFormPanel = function (props) {
-    /**
-     * Edit Form
-     */
     var _formDisplay = null;
     var _formEdit = null;
     var _formInfo = null;
     /**
-     * Render Form
+     * Methods
      */
-    // Render the form
-    var renderForm = function renderForm(controlMode) {
-        if (controlMode === void 0) {
-            controlMode = gd_sprest_1.SPTypes.ControlMode.Display;
-        }
-        // Render the menu
-        renderMenu(controlMode);
-        // Update the panel content
-        var content = _panel.updateContent(['<div class="ms-ListForm">', '<label class="ms-Label ms-fontColor-redDark form-error error"></label>', '<div></div>', '</div>'].join('\n'));
-        // Get the form element
-        var elForm = content.children[0].children[1];
-        // See if this is a new/edit form
-        if (controlMode == gd_sprest_1.SPTypes.ControlMode.Edit || controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
-            // Render the edit form
-            _formEdit = _1.ListForm.renderEditForm({
-                el: elForm,
-                info: _formInfo
-            });
-        } else {
-            // Render the display form
-            _formDisplay = _1.ListForm.renderDisplayForm({
-                el: elForm,
-                info: _formInfo
-            });
-        }
-        // Add the menu click event
-        addMenuClickEvents();
-    };
     // Add the menu click events
     var addMenuClickEvents = function addMenuClickEvents() {
         var buttons = null;
@@ -18257,6 +18284,37 @@ exports.ListFormPanel = function (props) {
                 });
             });
         }
+    };
+    // Render the form
+    var renderForm = function renderForm(controlMode) {
+        if (controlMode === void 0) {
+            controlMode = gd_sprest_1.SPTypes.ControlMode.Display;
+        }
+        // Clear the form references
+        _formDisplay = null;
+        _formEdit = null;
+        // Render the menu
+        renderMenu(controlMode);
+        // Update the panel content
+        var content = _panel.updateContent(['<div class="ms-ListForm">', '<label class="ms-Label ms-fontColor-redDark form-error error"></label>', '<div></div>', '</div>'].join('\n'));
+        // Get the form element
+        var elForm = content.children[0].children[1];
+        // See if this is a new/edit form
+        if (controlMode == gd_sprest_1.SPTypes.ControlMode.Edit || controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
+            // Render the edit form
+            _formEdit = _1.ListForm.renderEditForm({
+                el: elForm,
+                info: _formInfo
+            });
+        } else {
+            // Render the display form
+            _formDisplay = _1.ListForm.renderDisplayForm({
+                el: elForm,
+                info: _formInfo
+            });
+        }
+        // Add the menu click event
+        addMenuClickEvents();
     };
     // Render the menu
     var renderMenu = function renderMenu(controlMode) {
@@ -18360,6 +18418,9 @@ exports.ListFormPanel = function (props) {
     });
     // Return the panel
     return {
+        getForm: function getForm() {
+            return _formDisplay || _formEdit;
+        },
         show: function show(controlMode) {
             if (controlMode === void 0) {
                 controlMode = gd_sprest_1.SPTypes.ControlMode.Display;

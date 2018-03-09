@@ -184,6 +184,31 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
         return values;
     }
 
+    // Method to get the user values
+    let getUserValues = (value) => {
+        let users: Array<Types.SP.IPeoplePickerUser> = [];
+
+        // See if a value exists
+        if (value) {
+            let userValues = value.results ? value.results : [value];
+            for (let i = 0; i < userValues.length; i++) {
+                let userValue = userValues[i] as Types.SP.ComplexTypes.FieldUserValue;
+
+                // Add the user
+                users.push({
+                    DisplayText: userValue.Title,
+                    EntityData: {
+                        Email: userValue.EMail
+                    },
+                    Key: userValue.Id.toString()
+                });
+            }
+        }
+
+        // Return the users
+        return users;
+    }
+
     // Method to update the value
     let _value = props.value;
     let updateValue = (value) => {
@@ -509,7 +534,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             el: props.el,
                             label: userInfo.title,
                             required: userInfo.required,
-                            value
+                            value: getUserValues(value)
                         })
                     });
                     break;

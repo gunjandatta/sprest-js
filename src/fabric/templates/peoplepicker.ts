@@ -39,6 +39,23 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
         }) || "";
     }
 
+    // Persona
+    let persona = (user: IPeoplePickerUser): string => {
+        // Return the persona
+        return [
+            '<div class="ms-Persona ms-Persona--token ms-PeoplePicker-persona ms-Persona--xs" data-user=\'' + JSON.stringify(user) + '\'>',
+            '<div class="ms-Persona-imageArea"></div>',
+            '<div class="ms-Persona-details">',
+            '<div class="ms-Persona-primaryText">' + user.DisplayText + '</div>',
+            '<div class="ms-Persona-secondaryText">' + ((user.EntityData ? user.EntityData.Email : null) || "") + '</div>',
+            '</div>',
+            '<div class="ms-Persona-actionIcon">',
+            '<i class="ms-Icon ms-Icon--Cancel"></i>',
+            '</div>',
+            '</div>',
+        ].join('\n');
+    }
+
     // Result
     let result = (user?: IPeoplePickerUser): string => {
         // Ensure the user exists
@@ -49,7 +66,7 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
                 '<div class="ms-Persona-imageArea"></div>',
                 '<div class="ms-Persona-details">',
                 '<div class="ms-Persona-primaryText">' + user.DisplayText + '</div>',
-                '<div class="ms-Persona-secondaryText">' + user.EntityData.Email + '</div>',
+                '<div class="ms-Persona-secondaryText">' + ((user.EntityData ? user.EntityData.Email : null) || "") + '</div>',
                 '</div>',
                 '</div>',
                 '<button class="ms-PeoplePicker-resultAction" style="display: none;"></button>',
@@ -73,14 +90,27 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
             '<div class="ms-PeoplePicker-results">',
             group(title, searchText),
             '<div class="selected-users"></div>',
+            '</div>'
         ].join('\n');
     }
 
     // Search Box
-    let searchBox = (): string => {
+    let searchBox = (users?: Array<IPeoplePickerUser>): string => {
+        let personas = [];
+
+        // See if there are users
+        if (users) {
+            // Parse the users
+            for (let i = 0; i < users.length; i++) {
+                // Add the persona
+                personas.push(persona(users[i]));
+            }
+        }
+
         // Return the template
         return [
             '<div class="ms-PeoplePicker-searchBox">',
+            personas.join('\n'),
             '<div class="ms-TextField ms-TextField--textFieldUnderlined">',
             '<input class="ms-TextField-field" type="text" value="" placeholder="Search"></input>',
             '</div>',

@@ -8,52 +8,13 @@ import { IField, IListFormDisplay, IListFormEdit, IListFormMMSFieldInfo, IListFo
  * Item Form
  */
 export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
-    /**
-     * Edit Form
-     */
-
     let _formDisplay: IListFormDisplay = null;
     let _formEdit: IListFormEdit = null;
     let _formInfo: IListFormResult = null;
 
     /**
-     * Render Form
+     * Methods
      */
-
-    // Render the form
-    let renderForm = (controlMode: number = SPTypes.ControlMode.Display) => {
-        // Render the menu
-        renderMenu(controlMode);
-
-        // Update the panel content
-        let content = _panel.updateContent([
-            '<div class="ms-ListForm">',
-            '<label class="ms-Label ms-fontColor-redDark form-error error"></label>',
-            '<div></div>',
-            '</div>'
-        ].join('\n'));
-
-        // Get the form element
-        let elForm = content.children[0].children[1];
-
-        // See if this is a new/edit form
-        if (controlMode == SPTypes.ControlMode.Edit || controlMode == SPTypes.ControlMode.New) {
-            // Render the edit form
-            _formEdit = ListForm.renderEditForm({
-                el: elForm,
-                info: _formInfo,
-            });
-        } else {
-            // Render the display form
-            _formDisplay = ListForm.renderDisplayForm({
-                el: elForm,
-                info: _formInfo
-            });
-        }
-
-        // Add the menu click event
-        addMenuClickEvents();
-    }
 
     // Add the menu click events
     let addMenuClickEvents = () => {
@@ -139,6 +100,45 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                 });
             });
         }
+    }
+
+    // Render the form
+    let renderForm = (controlMode: number = SPTypes.ControlMode.Display) => {
+        // Clear the form references
+        _formDisplay = null;
+        _formEdit = null;
+
+        // Render the menu
+        renderMenu(controlMode);
+
+        // Update the panel content
+        let content = _panel.updateContent([
+            '<div class="ms-ListForm">',
+            '<label class="ms-Label ms-fontColor-redDark form-error error"></label>',
+            '<div></div>',
+            '</div>'
+        ].join('\n'));
+
+        // Get the form element
+        let elForm = content.children[0].children[1];
+
+        // See if this is a new/edit form
+        if (controlMode == SPTypes.ControlMode.Edit || controlMode == SPTypes.ControlMode.New) {
+            // Render the edit form
+            _formEdit = ListForm.renderEditForm({
+                el: elForm,
+                info: _formInfo,
+            });
+        } else {
+            // Render the display form
+            _formDisplay = ListForm.renderDisplayForm({
+                el: elForm,
+                info: _formInfo
+            });
+        }
+
+        // Add the menu click event
+        addMenuClickEvents();
     }
 
     // Render the menu
@@ -264,6 +264,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
 
     // Return the panel
     return {
+        getForm: () => { return _formDisplay || _formEdit; },
         show: (controlMode: number = SPTypes.ControlMode.Display) => {
             // See if the panel is open
             if (_panel.isOpen()) { return; }

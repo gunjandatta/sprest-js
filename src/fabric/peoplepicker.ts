@@ -1,6 +1,6 @@
 import { PeoplePicker as Search, SPTypes, Types, Web } from "gd-sprest";
 import { Fabric, IPeoplePicker, IPeoplePickerProps } from "./types";
-import { fabric, Templates } from ".";
+import { fabric, Spinner, Templates } from ".";
 
 /**
  * People Picker
@@ -117,13 +117,31 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
     props.el.innerHTML = [
         '<div class="ms-PeoplePicker">',
         _templates.header(),
-        _templates.searchBox(),
+        _templates.searchBox(props.value),
         _templates.results("Users"),
         '</div>'
     ].join('\n');
 
     // Create the people picker
     let _peoplepicker: Fabric.IPeoplePicker = new fabric.PeoplePicker(props.el.querySelector(".ms-PeoplePicker"));
+
+    // Get the personas
+    let personas = _peoplepicker._container.querySelectorAll(".ms-PeoplePicker-persona");
+    for (let i = 0; i < personas.length; i++) {
+        // Add a click event
+        personas[i].querySelector(".ms-Persona-actionIcon").addEventListener("click", (ev: MouseEvent) => {
+            let el = ev.currentTarget as HTMLElement;
+
+            // Find the persona element
+            while (el && el.className.indexOf("ms-PeoplePicker-persona") < 0) { el = el.parentElement; }
+
+            // See if the element exists
+            if (el) {
+                // Remove the element
+                el.remove();
+            }
+        });
+    }
 
     // Add the search event
     _peoplepicker._peoplePickerSearch.addEventListener("keyup", (ev) => {
