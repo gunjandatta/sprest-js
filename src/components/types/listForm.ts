@@ -38,13 +38,13 @@ export interface IListForm {
      * Method to render the display form template.
      * @param props - The display form properties.
      */
-    renderDisplayForm(props: IListFormDisplayProps);
+    renderDisplayForm(props: IListFormDisplayProps): IListFormDisplay;
 
     /**
      * Method to render the edit/new form.
      * @param props - The edit/new form properties.
      */
-    renderEditForm(props: IListFormEditProps): PromiseLike<Array<IField>>;
+    renderEditForm(props: IListFormEditProps): IListFormEdit;
 
     /**
      * Method to render the form template.
@@ -88,6 +88,16 @@ export interface IListFormCache {
 }
 
 /**
+ * List Form Display
+ */
+export interface IListFormDisplay {
+    /**
+     * Method to get the fields
+     */
+    getFields(): Array<HTMLDivElement>;
+}
+
+/**
  * List Form Display Properties
  */
 export interface IListFormDisplayProps {
@@ -102,6 +112,21 @@ export interface IListFormDisplayProps {
 
     /** The list form information. */
     info: IListFormResult;
+}
+
+/**
+ * List Form Edit
+ */
+export interface IListFormEdit {
+    /**
+     * Method to get the fields
+     */
+    getFields(): Array<IField>;
+
+    /**
+     * Method to get the form values
+     */
+    getValues(): PromiseLike<any>;
 }
 
 /**

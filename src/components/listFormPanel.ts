@@ -2,7 +2,7 @@ import { SPTypes, Types, Web } from "gd-sprest";
 import { Button, CommandBar, Panel, PanelTypes, Templates, Spinner } from "../fabric";
 import { Fabric, ICommandButtonProps, IDropdown, IDropdownOption, IPanel } from "../fabric/types";
 import { Field, ListForm } from ".";
-import { IField, IListFormMMSFieldInfo, IListFormLookupFieldInfo, IListFormUserFieldInfo, IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
+import { IField, IListFormDisplay, IListFormEdit, IListFormMMSFieldInfo, IListFormLookupFieldInfo, IListFormUserFieldInfo, IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
 
 /**
  * Item Form
@@ -12,7 +12,8 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
      * Edit Form
      */
 
-    let _fields: Array<IField> = [];
+    let _formDisplay: IListFormDisplay = null;
+    let _formEdit: IListFormEdit = null;
     let _formInfo: IListFormResult = null;
 
     /**
@@ -38,16 +39,13 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         // See if this is a new/edit form
         if (controlMode == SPTypes.ControlMode.Edit || controlMode == SPTypes.ControlMode.New) {
             // Render the edit form
-            ListForm.renderEditForm({
+            _formEdit = ListForm.renderEditForm({
                 el: elForm,
                 info: _formInfo,
-            }).then(fields => {
-                // Save the fields
-                _fields = fields;
             });
         } else {
             // Render the display form
-            ListForm.renderDisplayForm({
+            _formDisplay = ListForm.renderDisplayForm({
                 el: elForm,
                 info: _formInfo
             });
@@ -105,9 +103,6 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
         for (let i = 0; i < buttons.length; i++) {
             // Add a click event
             buttons[i].addEventListener("click", (ev: MouseEvent) => {
-                let formValues = {};
-                let unknownUsers = {};
-
                 // Disable postback
                 ev ? ev.preventDefault() : null;
 
@@ -131,145 +126,8 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                     text: "Saving the item..."
                 });
 
-                // Parse the fields
-                for (let i = 0; i < _fields.length; i++) {
-                    let field = _fields[i];
-                    let fieldName = field.fieldInfo.name;
-                    let fieldValue: any = field.element.getValue();
-
-                    // Update the field name/value, based on the type
-                    switch (field.fieldInfo.type) {
-                        // Choice
-                        case SPTypes.FieldType.Choice:
-                            // Update the field value
-                            fieldValue = fieldValue ? (fieldValue as IDropdownOption).value : fieldValue;
-                            break;
-
-                        // Lookup
-                        case SPTypes.FieldType.Lookup:
-                            // Append 'Id' to the field name
-                            fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
-
-                            // See if this is a multi-value field
-                            if ((field.fieldInfo as IListFormLookupFieldInfo).multi) {
-                                let values: Array<IDropdownOption> = fieldValue || [];
-                                fieldValue = { results: [] };
-
-                                // Parse the options
-                                for (let j = 0; j < values.length; j++) {
-                                    // Add the value
-                                    fieldValue.results.push(values[j].value);
-                                }
-                            } else {
-                                // Update the field value
-                                fieldValue = fieldValue ? (fieldValue as IDropdownOption).value : fieldValue;
-                            }
-                            break;
-
-                        // Multi-Choice
-                        case SPTypes.FieldType.MultiChoice:
-                            let options: Array<IDropdownOption> = fieldValue || [];
-                            fieldValue = { results: [] };
-
-                            // Parse the options
-                            for (let j = 0; j < options.length; j++) {
-                                // Add the option
-                                fieldValue.results.push(options[j].value);
-                            }
-                            break;
-
-                        // URL
-                        case SPTypes.FieldType.URL:
-                            // See if the field value exists
-                            if (fieldValue) {
-                                // Add the metadata
-                                fieldValue.__metadata = { type: "SP.FieldUrlValue" };
-                            }
-                            break;
-
-                        // User
-                        case SPTypes.FieldType.User:
-                            // Append 'Id' to the field name
-                            fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
-
-                            // See if this is a multi-value field
-                            if ((field.fieldInfo as IListFormUserFieldInfo).multi) {
-                                let values: Array<IDropdownOption> = fieldValue || [];
-                                fieldValue = { results: [] };
-
-                                // Parse the options
-                                for (let j = 0; j < values.length; j++) {
-                                    let userValue = values[j] as Types.SP.IPeoplePickerUser;
-                                    if (userValue && userValue.EntityData) {
-                                        // Ensure the user or group id exists
-                                        if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
-                                            // Update the field value
-                                            fieldValue.results.push(userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID);
-                                        } else {
-                                            // Add the unknown user account
-                                            unknownUsers[fieldName] = unknownUsers[fieldName] || [];
-                                            unknownUsers[fieldName].push(userValue.Key);
-                                        }
-                                    }
-                                }
-                            } else {
-                                let userValue: Types.SP.IPeoplePickerUser = fieldValue ? fieldValue[0] : null;
-                                if (userValue && userValue.EntityData) {
-                                    // Ensure the user or group id exists
-                                    if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
-                                        // Update the field value
-                                        fieldValue = userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID;
-                                    } else {
-                                        // Add the unknown user account
-                                        unknownUsers[fieldName] = unknownUsers[fieldName] || [];
-                                        unknownUsers[fieldName].push(userValue.Key);
-                                    }
-                                } else {
-                                    // Clear the field value
-                                    fieldValue = null;
-                                }
-                            }
-                            break;
-
-                        // MMS
-                        default:
-                            if (field.fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
-                                // See if this is a multi field
-                                if (field.fieldInfo.typeAsString.endsWith("Multi")) {
-                                    // Update the field name to the value field
-                                    fieldName = (field.fieldInfo as IListFormMMSFieldInfo).valueField.InternalName;
-
-                                    // Parse the field values
-                                    let fieldValues: Array<IDropdownOption> = fieldValue || [];
-                                    fieldValue = [];
-                                    for (let j = 0; j < fieldValues.length; j++) {
-                                        let termInfo = fieldValues[j];
-
-                                        // Add the field value
-                                        fieldValue.push(-1 + ";#" + termInfo.text + "|" + termInfo.value);
-                                    }
-
-                                    // Set the field value
-                                    fieldValue = fieldValue.join(";#");
-                                } else {
-                                    // Update the value
-                                    fieldValue = fieldValue ? {
-                                        __metadata: { type: "SP.Taxonomy.TaxonomyFieldValue" },
-                                        Label: fieldValue.text,
-                                        TermGuid: fieldValue.value,
-                                        WssId: -1
-                                    } : fieldValue;
-                                }
-                            }
-                            break;
-                    }
-
-                    // Set the field value
-                    formValues[fieldName] = fieldValue;
-                }
-
-                // Ensure the user accounts exist
-                ensureUserAccounts(unknownUsers, formValues).then(formValues => {
+                // Get the form values
+                _formEdit.getValues().then(formValues => {
                     // Save the item
                     ListForm.saveItem(_formInfo, formValues).then(formInfo => {
                         // Update the form info
@@ -281,54 +139,6 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                 });
             });
         }
-    }
-
-    // Method to ensure the user accounts exist
-    let ensureUserAccounts = (userAccounts, formValues) => {
-        // Return a promise
-        return new Promise((resolve, reject) => {
-            let web = new Web();
-
-            // Parse the field names
-            for (let fieldName in userAccounts) {
-                // Parse the user accounts
-                for (let i = 0; i < userAccounts[fieldName].length; i++) {
-                    // Ensure this user account exists
-                    web.ensureUser(userAccounts[fieldName][i]).execute(true);
-                }
-            }
-
-            // Wait for the requests to complete
-            web.done((...args) => {
-                // Parse the field names
-                for (let fieldName in userAccounts) {
-                    // Parse the user accounts
-                    for (let i = 0; i < userAccounts[fieldName].length; i++) {
-                        let userLogin = userAccounts[fieldName][i];
-
-                        // Parse the responses
-                        for (let j = 0; j < args.length; j++) {
-                            let user = args[j] as Types.SP.IUserResult;
-
-                            // See if this is the user
-                            if (user.LoginName == userLogin) {
-                                // See if this is a multi-user value
-                                if (formValues[fieldName].results != null) {
-                                    // Set the user account
-                                    formValues[fieldName].push(user.Id);
-                                } else {
-                                    // Set the user account
-                                    formValues[fieldName] = user.Id;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Resolve the promise
-                resolve(formValues);
-            });
-        });
     }
 
     // Render the menu

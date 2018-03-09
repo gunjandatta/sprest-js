@@ -195,7 +195,7 @@ SOFTWARE.
 ***************************************************************************************************/
 var Helper = __webpack_require__(8);
 exports.Helper = Helper;
-var mapper_1 = __webpack_require__(5);
+var mapper_1 = __webpack_require__(6);
 exports.SPTypes = mapper_1.SPTypes;
 var Types = __webpack_require__(97);
 exports.Types = Types;
@@ -243,6 +243,40 @@ __export(__webpack_require__(123));
 
 "use strict";
 
+
+function __export(m) {
+    for (var p in m) {
+        if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+    }
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+// Fabric
+var Fabric = __webpack_require__(1);
+exports.Fabric = Fabric;
+// Components
+var Components = __webpack_require__(7);
+__export(__webpack_require__(7));
+// WebParts
+var WebParts = __webpack_require__(9);
+exports.WebParts = WebParts;
+// Wait for the core library to be loaded
+SP ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+    // Get the global variable
+    var $REST = window["$REST"];
+    if ($REST) {
+        // Add the JS library
+        $REST["JS"] = { Components: Components, Fabric: Fabric, WebParts: WebParts };
+    }
+    // Alert other scripts this library is loaded
+    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest-js.js");
+}, "gd-sprest.js") : null;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 Object.defineProperty(exports, "__esModule", { value: true });
 var Mapper = __webpack_require__(46);
 exports.Mapper = Mapper;
@@ -253,7 +287,7 @@ exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -271,40 +305,6 @@ __export(__webpack_require__(128));
 __export(__webpack_require__(129));
 var Types = __webpack_require__(130);
 exports.Types = Types;
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function __export(m) {
-    for (var p in m) {
-        if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-    }
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-// Fabric
-var Fabric = __webpack_require__(1);
-exports.Fabric = Fabric;
-// Components
-var Components = __webpack_require__(6);
-__export(__webpack_require__(6));
-// WebParts
-var WebParts = __webpack_require__(9);
-exports.WebParts = WebParts;
-// Wait for the core library to be loaded
-SP ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
-    // Get the global variable
-    var $REST = window["$REST"];
-    if ($REST) {
-        // Add the JS library
-        $REST["JS"] = { Components: Components, Fabric: Fabric, WebParts: WebParts };
-    }
-    // Alert other scripts this library is loaded
-    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest-js.js");
-}, "gd-sprest.js") : null;
 
 /***/ }),
 /* 8 */
@@ -4341,7 +4341,7 @@ exports.WPCfg = {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(17);
-module.exports = __webpack_require__(7);
+module.exports = __webpack_require__(5);
 
 
 /***/ }),
@@ -8679,7 +8679,7 @@ exports.RequestType = {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(2);
-var mapper_1 = __webpack_require__(5);
+var mapper_1 = __webpack_require__(6);
 var _1 = __webpack_require__(0);
 /**
  * Request Helper
@@ -14089,7 +14089,7 @@ exports.SPCfgType = {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(2);
-var mapper_1 = __webpack_require__(5);
+var mapper_1 = __webpack_require__(6);
 /**
  * JSLink Helper Methods
  */
@@ -15663,7 +15663,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 Object.defineProperty(exports, "__esModule", { value: true });
 var helper_1 = __webpack_require__(8);
 exports.Helper = helper_1.Types;
-var mapper_1 = __webpack_require__(5);
+var mapper_1 = __webpack_require__(6);
 exports.SP = mapper_1.Types;
 var utils_1 = __webpack_require__(0);
 exports.Util = utils_1.Types;
@@ -15678,7 +15678,7 @@ exports.Util = utils_1.Types;
 Object.defineProperty(exports, "__esModule", { value: true });
 var Helper = __webpack_require__(8);
 var Lib = __webpack_require__(2);
-var Mapper = __webpack_require__(5);
+var Mapper = __webpack_require__(6);
 /**
  * SharePoint REST Library
  */
@@ -16538,8 +16538,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var __1 = __webpack_require__(7);
-var _1 = __webpack_require__(6);
+var __1 = __webpack_require__(5);
+var _1 = __webpack_require__(7);
 /**
  * Field
  */
@@ -17070,8 +17070,8 @@ exports.Field = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var fabric_1 = __webpack_require__(1);
-var _1 = __webpack_require__(6);
+var __1 = __webpack_require__(5);
+var _1 = __webpack_require__(7);
 /**
  * List Form
  */
@@ -17387,6 +17387,7 @@ var _ListForm = /** @class */function () {
     };
     // Method to render a display form for an item
     _ListForm.renderDisplayForm = function (props) {
+        var fields = [];
         // Render the form template
         _ListForm.renderFormTemplate(props);
         // Load the list item
@@ -17402,11 +17403,13 @@ var _ListForm = /** @class */function () {
                     // Set the flag
                     hasUserField = hasUserField || field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.User;
                     // Set the html for this field
-                    elField.innerHTML = ['<div class="display-form">', fabric_1.Templates.Label({
+                    elField.innerHTML = ['<div class="display-form">', __1.Fabric.Templates.Label({
                         className: "field-label",
                         description: field.Description,
                         text: field.Title
                     }), '<div class="field-value">' + html + '</div>', '</div>'].join('\n');
+                    // Add this field
+                    fields.push(elField);
                 }
             }
             // See if we are displaying a user field
@@ -17415,67 +17418,236 @@ var _ListForm = /** @class */function () {
                 window["ProcessImn"]();
             }
         });
+        // Return the form
+        return {
+            getFields: function getFields() {
+                return fields;
+            }
+        };
     };
     // Render the edit form
     _ListForm.renderEditForm = function (props) {
         var controlMode = typeof props.controlMode === "number" ? props.controlMode : props.info.item ? gd_sprest_1.SPTypes.ControlMode.Edit : gd_sprest_1.SPTypes.ControlMode.New;
+        var fields = [];
         // Render the form template
         _ListForm.renderFormTemplate(props);
-        // Return a promise
-        return new Promise(function (resolve, reject) {
-            var fldCount = 0;
-            // Parse the fields
-            var fields = [];
-            for (var fieldName in props.info.fields) {
-                var field = props.info.fields[fieldName];
-                var value = props.info.item ? props.info.item[fieldName] : null;
-                // Get the field element and ensure it exists
-                var elField = props.el.querySelector("[data-field='" + fieldName + "']");
-                if (elField == null) {
+        // Parse the fields
+        for (var fieldName in props.info.fields) {
+            var field = props.info.fields[fieldName];
+            var value = props.info.item ? props.info.item[fieldName] : null;
+            // Get the field element and ensure it exists
+            var elField = props.el.querySelector("[data-field='" + fieldName + "']");
+            if (elField == null) {
+                continue;
+            }
+            // See if this is a read-only field
+            if (field.ReadOnlyField) {
+                // Do not render in the new form
+                if (props.controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
                     continue;
                 }
-                // See if this is a read-only field
-                if (field.ReadOnlyField) {
-                    // Do not render in the new form
-                    if (props.controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
-                        continue;
-                    }
-                }
-                // See if this is the hidden taxonomy field
-                if (field.Hidden && field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
-                    // Do not render this field
+            }
+            // See if this is the hidden taxonomy field
+            if (field.Hidden && field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Note && field.Title.endsWith("_0")) {
+                // Do not render this field
+                continue;
+            }
+            // See if this is an invalid field type
+            if (field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Invalid) {
+                // Ensure it's not a taxonomy field
+                if (!field.TypeAsString.startsWith("TaxonomyFieldType")) {
                     continue;
                 }
-                // See if this is an invalid field type
-                if (field.FieldTypeKind == gd_sprest_1.SPTypes.FieldType.Invalid) {
-                    // Ensure it's not a taxonomy field
-                    if (!field.TypeAsString.startsWith("TaxonomyFieldType")) {
-                        continue;
+            }
+            // Render the field
+            _1.Field({
+                controlMode: controlMode,
+                el: elField,
+                fieldInfo: {
+                    field: field,
+                    listName: props.info.list.Title,
+                    name: fieldName
+                },
+                value: value
+            }).then(function (field) {
+                // Add the field
+                fields.push(field);
+            });
+        }
+        // Return the form
+        return {
+            getFields: function getFields() {
+                return fields;
+            },
+            getValues: function getValues() {
+                var formValues = {};
+                var unknownUsers = {};
+                // Parse the fields
+                for (var i = 0; i < fields.length; i++) {
+                    var field = fields[i];
+                    var fieldName = field.fieldInfo.name;
+                    var fieldValue = field.element.getValue();
+                    // Update the field name/value, based on the type
+                    switch (field.fieldInfo.type) {
+                        // Choice
+                        case gd_sprest_1.SPTypes.FieldType.Choice:
+                            // Update the field value
+                            fieldValue = fieldValue ? fieldValue.value : fieldValue;
+                            break;
+                        // Lookup
+                        case gd_sprest_1.SPTypes.FieldType.Lookup:
+                            // Append 'Id' to the field name
+                            fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
+                            // See if this is a multi-value field
+                            if (field.fieldInfo.multi) {
+                                var values = fieldValue || [];
+                                fieldValue = { results: [] };
+                                // Parse the options
+                                for (var j = 0; j < values.length; j++) {
+                                    // Add the value
+                                    fieldValue.results.push(values[j].value);
+                                }
+                            } else {
+                                // Update the field value
+                                fieldValue = fieldValue ? fieldValue.value : fieldValue;
+                            }
+                            break;
+                        // Multi-Choice
+                        case gd_sprest_1.SPTypes.FieldType.MultiChoice:
+                            var options = fieldValue || [];
+                            fieldValue = { results: [] };
+                            // Parse the options
+                            for (var j = 0; j < options.length; j++) {
+                                // Add the option
+                                fieldValue.results.push(options[j].value);
+                            }
+                            break;
+                        // URL
+                        case gd_sprest_1.SPTypes.FieldType.URL:
+                            // See if the field value exists
+                            if (fieldValue) {
+                                // Add the metadata
+                                fieldValue.__metadata = { type: "SP.FieldUrlValue" };
+                            }
+                            break;
+                        // User
+                        case gd_sprest_1.SPTypes.FieldType.User:
+                            // Append 'Id' to the field name
+                            fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
+                            // See if this is a multi-value field
+                            if (field.fieldInfo.multi) {
+                                var values = fieldValue || [];
+                                fieldValue = { results: [] };
+                                // Parse the options
+                                for (var j = 0; j < values.length; j++) {
+                                    var userValue = values[j];
+                                    if (userValue && userValue.EntityData) {
+                                        // Ensure the user or group id exists
+                                        if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
+                                            // Update the field value
+                                            fieldValue.results.push(userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID);
+                                        } else {
+                                            // Add the unknown user account
+                                            unknownUsers[fieldName] = unknownUsers[fieldName] || [];
+                                            unknownUsers[fieldName].push(userValue.Key);
+                                        }
+                                    }
+                                }
+                            } else {
+                                var userValue = fieldValue ? fieldValue[0] : null;
+                                if (userValue && userValue.EntityData) {
+                                    // Ensure the user or group id exists
+                                    if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
+                                        // Update the field value
+                                        fieldValue = userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID;
+                                    } else {
+                                        // Add the unknown user account
+                                        unknownUsers[fieldName] = unknownUsers[fieldName] || [];
+                                        unknownUsers[fieldName].push(userValue.Key);
+                                    }
+                                } else {
+                                    // Clear the field value
+                                    fieldValue = null;
+                                }
+                            }
+                            break;
+                        // MMS
+                        default:
+                            if (field.fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
+                                // See if this is a multi field
+                                if (field.fieldInfo.typeAsString.endsWith("Multi")) {
+                                    // Update the field name to the value field
+                                    fieldName = field.fieldInfo.valueField.InternalName;
+                                    // Parse the field values
+                                    var fieldValues = fieldValue || [];
+                                    fieldValue = [];
+                                    for (var j = 0; j < fieldValues.length; j++) {
+                                        var termInfo = fieldValues[j];
+                                        // Add the field value
+                                        fieldValue.push(-1 + ";#" + termInfo.text + "|" + termInfo.value);
+                                    }
+                                    // Set the field value
+                                    fieldValue = fieldValue.join(";#");
+                                } else {
+                                    // Update the value
+                                    fieldValue = fieldValue ? {
+                                        __metadata: { type: "SP.Taxonomy.TaxonomyFieldValue" },
+                                        Label: fieldValue.text,
+                                        TermGuid: fieldValue.value,
+                                        WssId: -1
+                                    } : fieldValue;
+                                }
+                            }
+                            break;
                     }
+                    // Set the field value
+                    formValues[fieldName] = fieldValue;
                 }
-                // Increment the counter
-                fldCount++;
-                // Render the field
-                _1.Field({
-                    controlMode: controlMode,
-                    el: elField,
-                    fieldInfo: {
-                        field: field,
-                        listName: props.info.list.Title,
-                        name: fieldName
-                    },
-                    value: value
-                }).then(function (field) {
-                    // Add the field
-                    fields.push(field);
-                    // See if all fields have been added
-                    if (fields.length == fldCount) {
+                // Return a promise
+                return new Promise(function (resolve, reject) {
+                    var web = new gd_sprest_1.Web();
+                    // Parse the field names
+                    for (var fieldName in unknownUsers) {
+                        // Parse the user accounts
+                        for (var i = 0; i < unknownUsers[fieldName].length; i++) {
+                            // Ensure this user account exists
+                            web.ensureUser(unknownUsers[fieldName][i]).execute(true);
+                        }
+                    }
+                    // Wait for the requests to complete
+                    web.done(function () {
+                        var args = [];
+                        for (var _i = 0; _i < arguments.length; _i++) {
+                            args[_i] = arguments[_i];
+                        }
+                        // Parse the field names
+                        for (var fieldName in unknownUsers) {
+                            // Parse the user accounts
+                            for (var i = 0; i < unknownUsers[fieldName].length; i++) {
+                                var userLogin = unknownUsers[fieldName][i];
+                                // Parse the responses
+                                for (var j = 0; j < args.length; j++) {
+                                    var user = args[j];
+                                    // See if this is the user
+                                    if (user.LoginName == userLogin) {
+                                        // See if this is a multi-user value
+                                        if (formValues[fieldName].results != null) {
+                                            // Set the user account
+                                            formValues[fieldName].push(user.Id);
+                                        } else {
+                                            // Set the user account
+                                            formValues[fieldName] = user.Id;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         // Resolve the promise
-                        resolve(fields);
-                    }
+                        resolve(formValues);
+                    });
                 });
             }
-        });
+        };
     };
     // Method to render the form template
     _ListForm.renderFormTemplate = function (props) {
@@ -17841,7 +18013,7 @@ exports.ListFormField = _ListFormField;
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var fabric_1 = __webpack_require__(1);
-var _1 = __webpack_require__(6);
+var _1 = __webpack_require__(7);
 /**
  * Item Form
  */
@@ -17849,7 +18021,8 @@ exports.ListFormPanel = function (props) {
     /**
      * Edit Form
      */
-    var _fields = [];
+    var _formDisplay = null;
+    var _formEdit = null;
     var _formInfo = null;
     /**
      * Render Form
@@ -17868,16 +18041,13 @@ exports.ListFormPanel = function (props) {
         // See if this is a new/edit form
         if (controlMode == gd_sprest_1.SPTypes.ControlMode.Edit || controlMode == gd_sprest_1.SPTypes.ControlMode.New) {
             // Render the edit form
-            _1.ListForm.renderEditForm({
+            _formEdit = _1.ListForm.renderEditForm({
                 el: elForm,
                 info: _formInfo
-            }).then(function (fields) {
-                // Save the fields
-                _fields = fields;
             });
         } else {
             // Render the display form
-            _1.ListForm.renderDisplayForm({
+            _formDisplay = _1.ListForm.renderDisplayForm({
                 el: elForm,
                 info: _formInfo
             });
@@ -17926,8 +18096,6 @@ exports.ListFormPanel = function (props) {
         for (var i = 0; i < buttons.length; i++) {
             // Add a click event
             buttons[i].addEventListener("click", function (ev) {
-                var formValues = {};
-                var unknownUsers = {};
                 // Disable postback
                 ev ? ev.preventDefault() : null;
                 // Validate the form
@@ -17947,129 +18115,8 @@ exports.ListFormPanel = function (props) {
                     el: content,
                     text: "Saving the item..."
                 });
-                // Parse the fields
-                for (var i_1 = 0; i_1 < _fields.length; i_1++) {
-                    var field = _fields[i_1];
-                    var fieldName = field.fieldInfo.name;
-                    var fieldValue = field.element.getValue();
-                    // Update the field name/value, based on the type
-                    switch (field.fieldInfo.type) {
-                        // Choice
-                        case gd_sprest_1.SPTypes.FieldType.Choice:
-                            // Update the field value
-                            fieldValue = fieldValue ? fieldValue.value : fieldValue;
-                            break;
-                        // Lookup
-                        case gd_sprest_1.SPTypes.FieldType.Lookup:
-                            // Append 'Id' to the field name
-                            fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
-                            // See if this is a multi-value field
-                            if (field.fieldInfo.multi) {
-                                var values = fieldValue || [];
-                                fieldValue = { results: [] };
-                                // Parse the options
-                                for (var j = 0; j < values.length; j++) {
-                                    // Add the value
-                                    fieldValue.results.push(values[j].value);
-                                }
-                            } else {
-                                // Update the field value
-                                fieldValue = fieldValue ? fieldValue.value : fieldValue;
-                            }
-                            break;
-                        // Multi-Choice
-                        case gd_sprest_1.SPTypes.FieldType.MultiChoice:
-                            var options = fieldValue || [];
-                            fieldValue = { results: [] };
-                            // Parse the options
-                            for (var j = 0; j < options.length; j++) {
-                                // Add the option
-                                fieldValue.results.push(options[j].value);
-                            }
-                            break;
-                        // URL
-                        case gd_sprest_1.SPTypes.FieldType.URL:
-                            // See if the field value exists
-                            if (fieldValue) {
-                                // Add the metadata
-                                fieldValue.__metadata = { type: "SP.FieldUrlValue" };
-                            }
-                            break;
-                        // User
-                        case gd_sprest_1.SPTypes.FieldType.User:
-                            // Append 'Id' to the field name
-                            fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
-                            // See if this is a multi-value field
-                            if (field.fieldInfo.multi) {
-                                var values = fieldValue || [];
-                                fieldValue = { results: [] };
-                                // Parse the options
-                                for (var j = 0; j < values.length; j++) {
-                                    var userValue = values[j];
-                                    if (userValue && userValue.EntityData) {
-                                        // Ensure the user or group id exists
-                                        if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
-                                            // Update the field value
-                                            fieldValue.results.push(userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID);
-                                        } else {
-                                            // Add the unknown user account
-                                            unknownUsers[fieldName] = unknownUsers[fieldName] || [];
-                                            unknownUsers[fieldName].push(userValue.Key);
-                                        }
-                                    }
-                                }
-                            } else {
-                                var userValue = fieldValue ? fieldValue[0] : null;
-                                if (userValue && userValue.EntityData) {
-                                    // Ensure the user or group id exists
-                                    if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
-                                        // Update the field value
-                                        fieldValue = userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID;
-                                    } else {
-                                        // Add the unknown user account
-                                        unknownUsers[fieldName] = unknownUsers[fieldName] || [];
-                                        unknownUsers[fieldName].push(userValue.Key);
-                                    }
-                                } else {
-                                    // Clear the field value
-                                    fieldValue = null;
-                                }
-                            }
-                            break;
-                        // MMS
-                        default:
-                            if (field.fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
-                                // See if this is a multi field
-                                if (field.fieldInfo.typeAsString.endsWith("Multi")) {
-                                    // Update the field name to the value field
-                                    fieldName = field.fieldInfo.valueField.InternalName;
-                                    // Parse the field values
-                                    var fieldValues = fieldValue || [];
-                                    fieldValue = [];
-                                    for (var j = 0; j < fieldValues.length; j++) {
-                                        var termInfo = fieldValues[j];
-                                        // Add the field value
-                                        fieldValue.push(-1 + ";#" + termInfo.text + "|" + termInfo.value);
-                                    }
-                                    // Set the field value
-                                    fieldValue = fieldValue.join(";#");
-                                } else {
-                                    // Update the value
-                                    fieldValue = fieldValue ? {
-                                        __metadata: { type: "SP.Taxonomy.TaxonomyFieldValue" },
-                                        Label: fieldValue.text,
-                                        TermGuid: fieldValue.value,
-                                        WssId: -1
-                                    } : fieldValue;
-                                }
-                            }
-                            break;
-                    }
-                    // Set the field value
-                    formValues[fieldName] = fieldValue;
-                }
-                // Ensure the user accounts exist
-                ensureUserAccounts(unknownUsers, formValues).then(function (formValues) {
+                // Get the form values
+                _formEdit.getValues().then(function (formValues) {
                     // Save the item
                     _1.ListForm.saveItem(_formInfo, formValues).then(function (formInfo) {
                         // Update the form info
@@ -18080,52 +18127,6 @@ exports.ListFormPanel = function (props) {
                 });
             });
         }
-    };
-    // Method to ensure the user accounts exist
-    var ensureUserAccounts = function ensureUserAccounts(userAccounts, formValues) {
-        // Return a promise
-        return new Promise(function (resolve, reject) {
-            var web = new gd_sprest_1.Web();
-            // Parse the field names
-            for (var fieldName in userAccounts) {
-                // Parse the user accounts
-                for (var i = 0; i < userAccounts[fieldName].length; i++) {
-                    // Ensure this user account exists
-                    web.ensureUser(userAccounts[fieldName][i]).execute(true);
-                }
-            }
-            // Wait for the requests to complete
-            web.done(function () {
-                var args = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    args[_i] = arguments[_i];
-                }
-                // Parse the field names
-                for (var fieldName in userAccounts) {
-                    // Parse the user accounts
-                    for (var i = 0; i < userAccounts[fieldName].length; i++) {
-                        var userLogin = userAccounts[fieldName][i];
-                        // Parse the responses
-                        for (var j = 0; j < args.length; j++) {
-                            var user = args[j];
-                            // See if this is the user
-                            if (user.LoginName == userLogin) {
-                                // See if this is a multi-user value
-                                if (formValues[fieldName].results != null) {
-                                    // Set the user account
-                                    formValues[fieldName].push(user.Id);
-                                } else {
-                                    // Set the user account
-                                    formValues[fieldName] = user.Id;
-                                }
-                            }
-                        }
-                    }
-                }
-                // Resolve the promise
-                resolve(formValues);
-            });
-        });
     };
     // Render the menu
     var renderMenu = function renderMenu(controlMode) {
@@ -18625,7 +18626,7 @@ exports.WebPart = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var __1 = __webpack_require__(7);
+var __1 = __webpack_require__(5);
 var _1 = __webpack_require__(9);
 /**
  * List WebPart
@@ -18856,7 +18857,7 @@ exports.WPList = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
-var __1 = __webpack_require__(7);
+var __1 = __webpack_require__(5);
 var _1 = __webpack_require__(9);
 /**
  * Search WebPart
