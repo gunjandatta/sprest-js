@@ -566,22 +566,25 @@ class _ListForm {
         // Clear the element
         props.el.innerHTML = "";
 
-        // Parse the fields
-        for (let fieldName in props.info.fields) {
-            let excludeField = props.includeFields ? true : false;
-
-            // See if the fields have been defined
-            if (props.includeFields) {
-                // Parse the fields to include
-                for (let i = 0; i < props.includeFields.length; i++) {
+        // See if the field order has been specified
+        if (props.includeFields) {
+            // Parse the fields to include
+            for (let i = 0; i < props.includeFields.length; i++) {
+                // Parse the fields
+                for (let fieldName in props.info.fields) {
                     // See if we are including this field
                     if (props.includeFields[i] == fieldName) {
-                        // Set the flag
-                        excludeField = false;
+                        // Append the field to the form
+                        props.el.innerHTML += "<div data-field='" + fieldName + "'></div>";
                         break;
                     }
                 }
-            } else {
+            }
+        } else {
+            // Parse the fields
+            for (let fieldName in props.info.fields) {
+                let excludeField = props.includeFields ? true : false;
+
                 // Parse the fields
                 for (let i = 0; i < props.excludeFields.length; i++) {
                     // See if we are excluding this field
@@ -591,13 +594,13 @@ class _ListForm {
                         break;
                     }
                 }
+
+                // See if we are excluding the field
+                if (excludeField) { continue; }
+
+                // Append the field to the form
+                props.el.innerHTML += "<div data-field='" + fieldName + "'></div>";
             }
-
-            // See if we are excluding the field
-            if (excludeField) { continue; }
-
-            // Append the field to the form
-            props.el.innerHTML += "<div data-field='" + fieldName + "'></div>";
         }
     }
 
