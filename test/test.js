@@ -10974,12 +10974,23 @@ exports.CommandBar = function (props) {
                 }
             });
         }
-        else if (buttonProps[i].menu && buttons[i]) {
+        // See if this is a menu
+        if (buttonProps[i].menu && buttons[i]) {
             // Get the elements
             var elMenu = buttons[i].parentElement.querySelector(".ms-ContextualMenu");
             if (elMenu) {
                 // Create the contextual menu
                 new _1.fabric.ContextualMenu(elMenu, buttons[i]);
+                // Get the items
+                var items = elMenu.querySelectorAll(".ms-ContextualMenu-item");
+                for (var j = 0; j < buttonProps[i].menu.items.length; j++) {
+                    var item = buttonProps[i].menu.items[j];
+                    // See if a click event exists
+                    if (item.onClick) {
+                        // Set the click event
+                        items[j].addEventListener("click", item.onClick);
+                    }
+                }
             }
         }
     }
