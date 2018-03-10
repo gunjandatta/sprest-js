@@ -11149,7 +11149,10 @@ exports.DatePicker = function (props) {
         if (props.value) {
             var dt = new Date(props.value);
             var time = dt.toLocaleTimeString().split(' ');
+            // Get the hours and minutes
             var info = time[0].split(':');
+            var hours = ("0" + info[0] + (time[1] == "PM" && props.timePickerType == TimePickerType.Military ? 12 : 0)).slice(-2);
+            var minutes = info[1];
             // Set the time value
             value = info[0] + ":" + info[1] + " " + time[1];
         }

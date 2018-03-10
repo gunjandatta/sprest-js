@@ -123,7 +123,11 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
         if (props.value) {
             let dt = new Date(props.value);
             let time = dt.toLocaleTimeString().split(' ');
+
+            // Get the hours and minutes
             let info = time[0].split(':');
+            let hours = ("0" + info[0] + (time[1] == "PM" && props.timePickerType == TimePickerType.Military ? 12 : 0)).slice(-2);
+            let minutes = info[1];
 
             // Set the time value
             value = info[0] + ":" + info[1] + " " + time[1];
