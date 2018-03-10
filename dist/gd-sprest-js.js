@@ -16739,7 +16739,8 @@ exports.Field = function (props) {
                 users.push({
                     DisplayText: userValue.Title,
                     EntityData: {
-                        Email: userValue.EMail
+                        Email: userValue.EMail,
+                        SPUserID: userValue.Id.toString()
                     },
                     Key: userValue.Id.toString()
                 });
