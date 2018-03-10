@@ -6868,8 +6868,10 @@ exports.DatePicker = function (props) {
         var value = null;
         if (props.value) {
             var dt = new Date(props.value);
+            var time = dt.toLocaleTimeString().split(' ');
+            var info = time[0].split(':');
             // Set the time value
-            value = dt.getHours() + ":" + dt.getMinutes();
+            value = info[0] + ":" + info[1] + " " + time[1];
         }
         // Render a dropdown
         return _1.Dropdown({

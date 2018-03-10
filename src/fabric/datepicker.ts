@@ -122,9 +122,11 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
         let value = null;
         if (props.value) {
             let dt = new Date(props.value);
+            let time = dt.toLocaleTimeString().split(' ');
+            let info = time[0].split(':');
 
             // Set the time value
-            value = dt.getHours() + ":" + dt.getMinutes();
+            value = info[0] + ":" + info[1] + " " + time[1];
         }
 
         // Render a dropdown
