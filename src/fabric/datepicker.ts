@@ -1,4 +1,4 @@
-import { IDatePicker, IDatePickerProps, IDropdownOption } from "./types"
+import { Fabric, IDatePicker, IDatePickerProps, IDropdown, IDropdownOption } from "./types"
 import { fabric, Dropdown, Templates } from ".";
 
 /**
@@ -33,30 +33,20 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
 
     // Method to get the value
     let getValue = (): Date => {
-        let dt: Date = null;
-
         // Get the date value
-        let dtValue = _dp.picker.get();
-        if (dtValue) {
-            // Set the date
-            dt = new Date(dtValue);
-        }
+        let dt = new Date(_dp.picker.get());
 
         // See if the time exists
         let timeValue: IDropdownOption | Array<string> = _tp ? _tp.getValue() as IDropdownOption : null;
         timeValue = timeValue && timeValue.value ? timeValue.value.split(" ") : null;
         if (timeValue) {
-            // Set the time
             // Set the hours
             let hours = parseInt(timeValue[0].split(":")[0])
             hours += timeValue[1] == "PM" ? 12 : 0;
+            dt.setHours(hours);
 
             // Set the minutes
-            let minutes = parseInt(timeValue[0].split(":")[1]);
-
-            // Set the time value
-            dt.setHours(hours);
-            dt.setMinutes(minutes);
+            dt.setMinutes(parseInt(timeValue[0].split(":")[1]));
         }
 
         // Return the date
@@ -75,7 +65,18 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
         }
 
         // Create the date picker
-        return new fabric.DatePicker(el);
+        let dp = new fabric.DatePicker(el) as Fabric.IDatePicker;
+
+        // See if a value exists
+        if (props.value) {
+            let dt = new Date(props.value);
+
+            // Set the date
+            dp.picker.set("select", [dt.getFullYear, dt.getMonth() + 1, dt.getDate()])
+        }
+
+        // Return the date picker
+        return dp;
     }
 
     // Method to render the time picker
@@ -116,11 +117,21 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
             }
         }
 
+        // See if a value exists
+        let value = null;
+        if (props.value) {
+            let dt = new Date(props.value);
+
+            // Set the time value
+            value = dt.getHours() + ":" + dt.getMinutes();
+        }
+
         // Render a dropdown
         return Dropdown({
             el,
             label: "Time",
-            options
+            options,
+            value
         });
     }
 
@@ -131,10 +142,10 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
     ].join('\n');
 
     // Render the date picker
-    let _dp = renderDatePicker(props.el.children[0] as HTMLElement);
+    let _dp: Fabric.IDatePicker = renderDatePicker(props.el.children[0] as HTMLElement);
 
     // Render the time picker
-    let _tp = props.showTime ? renderTimePicker(props.el.children[1] as HTMLElement) : null;
+    let _tp: IDropdown = props.showTime ? renderTimePicker(props.el.children[1] as HTMLElement) : null;
 
     // Return the date picker
     return {

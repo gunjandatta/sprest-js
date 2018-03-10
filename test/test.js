@@ -11071,26 +11071,18 @@ exports.DatePicker = function (props) {
     };
     // Method to get the value
     var getValue = function () {
-        var dt = null;
         // Get the date value
-        var dtValue = _dp.picker.get();
-        if (dtValue) {
-            // Set the date
-            dt = new Date(dtValue);
-        }
+        var dt = new Date(_dp.picker.get());
         // See if the time exists
         var timeValue = _tp ? _tp.getValue() : null;
         timeValue = timeValue && timeValue.value ? timeValue.value.split(" ") : null;
         if (timeValue) {
-            // Set the time
             // Set the hours
             var hours = parseInt(timeValue[0].split(":")[0]);
             hours += timeValue[1] == "PM" ? 12 : 0;
-            // Set the minutes
-            var minutes = parseInt(timeValue[0].split(":")[1]);
-            // Set the time value
             dt.setHours(hours);
-            dt.setMinutes(minutes);
+            // Set the minutes
+            dt.setMinutes(parseInt(timeValue[0].split(":")[1]));
         }
         // Return the date
         return dt;
@@ -11105,7 +11097,15 @@ exports.DatePicker = function (props) {
             props.onChange ? props.onChange(getValue()) : null;
         };
         // Create the date picker
-        return new _1.fabric.DatePicker(el);
+        var dp = new _1.fabric.DatePicker(el);
+        // See if a value exists
+        if (props.value) {
+            var dt = new Date(props.value);
+            // Set the date
+            dp.picker.set("select", [dt.getFullYear, dt.getMonth() + 1, dt.getDate()]);
+        }
+        // Return the date picker
+        return dp;
     };
     // Method to render the time picker
     var renderTimePicker = function (el) {
@@ -11142,11 +11142,19 @@ exports.DatePicker = function (props) {
                 });
             }
         }
+        // See if a value exists
+        var value = null;
+        if (props.value) {
+            var dt = new Date(props.value);
+            // Set the time value
+            value = dt.getHours() + ":" + dt.getMinutes();
+        }
         // Render a dropdown
         return _1.Dropdown({
             el: el,
             label: "Time",
-            options: options
+            options: options,
+            value: value
         });
     };
     // Add the date picker
@@ -11996,7 +12004,7 @@ exports.PeoplePicker = function (props) {
             // See if the element exists
             if (el) {
                 // Remove the element
-                el.remove();
+                el.parentElement.removeChild(el);
             }
         });
     }

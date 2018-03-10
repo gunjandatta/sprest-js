@@ -138,7 +138,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
             // See if the element exists
             if (el) {
                 // Remove the element
-                el.remove();
+                el.parentElement.removeChild(el);
             }
         });
     }

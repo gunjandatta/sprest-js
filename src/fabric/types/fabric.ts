@@ -73,6 +73,30 @@ export interface IContextualMenu {
 }
 
 /**
+ * Date Picker
+ */
+export interface IDatePicker {
+    picker: {
+        component: {
+            formats: any;
+            item: any;
+            key: any;
+            queue: any;
+            settings: any;
+        };
+        clear: Function;
+        close: Function;
+        get: Function;
+        off: Function;
+        on: Function;
+        open: Function;
+        set: Function;
+        start: Function;
+        stop: Function;
+    }
+}
+
+/**
  * Dialog
  */
 export interface IDialog {
