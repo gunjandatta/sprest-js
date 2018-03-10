@@ -6824,7 +6824,7 @@ exports.DatePicker = function (props) {
         if (props.value) {
             var dt = new Date(props.value);
             // Set the date
-            dp.picker.set("select", [dt.getFullYear, dt.getMonth() + 1, dt.getDate()]);
+            dp.picker.set("select", [dt.getFullYear(), dt.getMonth() + 1, dt.getDate()]);
         }
         // Return the date picker
         return dp;
