@@ -6794,17 +6794,19 @@ exports.DatePicker = function (props) {
     // Method to get the value
     var getValue = function getValue() {
         // Get the date value
-        var dt = new Date(_dp.picker.get());
-        // See if the time exists
-        var timeValue = _tp ? _tp.getValue() : null;
-        timeValue = timeValue && timeValue.value ? timeValue.value.split(" ") : null;
-        if (timeValue) {
-            // Set the hours
-            var hours = parseInt(timeValue[0].split(":")[0]);
-            hours += timeValue[1] == "PM" ? 12 : 0;
-            dt.setHours(hours);
-            // Set the minutes
-            dt.setMinutes(parseInt(timeValue[0].split(":")[1]));
+        var dt = _dp ? new Date(_dp.picker.get()) : null;
+        if (dt) {
+            // See if the time exists
+            var timeValue = _tp ? _tp.getValue() : null;
+            timeValue = timeValue && timeValue.value ? timeValue.value.split(" ") : null;
+            if (timeValue) {
+                // Set the hours
+                var hours = parseInt(timeValue[0].split(":")[0]);
+                hours += timeValue[1] == "PM" ? 12 : 0;
+                dt.setHours(hours);
+                // Set the minutes
+                dt.setMinutes(parseInt(timeValue[0].split(":")[1]));
+            }
         }
         // Return the date
         return dt;

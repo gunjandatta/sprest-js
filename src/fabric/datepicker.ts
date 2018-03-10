@@ -34,19 +34,20 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
     // Method to get the value
     let getValue = (): Date => {
         // Get the date value
-        let dt = new Date(_dp.picker.get());
+        let dt = _dp ? new Date(_dp.picker.get()) : null;
+        if (dt) {
+            // See if the time exists
+            let timeValue: IDropdownOption | Array<string> = _tp ? _tp.getValue() as IDropdownOption : null;
+            timeValue = timeValue && timeValue.value ? timeValue.value.split(" ") : null;
+            if (timeValue) {
+                // Set the hours
+                let hours = parseInt(timeValue[0].split(":")[0])
+                hours += timeValue[1] == "PM" ? 12 : 0;
+                dt.setHours(hours);
 
-        // See if the time exists
-        let timeValue: IDropdownOption | Array<string> = _tp ? _tp.getValue() as IDropdownOption : null;
-        timeValue = timeValue && timeValue.value ? timeValue.value.split(" ") : null;
-        if (timeValue) {
-            // Set the hours
-            let hours = parseInt(timeValue[0].split(":")[0])
-            hours += timeValue[1] == "PM" ? 12 : 0;
-            dt.setHours(hours);
-
-            // Set the minutes
-            dt.setMinutes(parseInt(timeValue[0].split(":")[1]));
+                // Set the minutes
+                dt.setMinutes(parseInt(timeValue[0].split(":")[1]));
+            }
         }
 
         // Return the date
