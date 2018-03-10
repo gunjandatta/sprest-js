@@ -20,7 +20,8 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
         let users: Array<Types.SP.IPeoplePickerUser> = [];
 
         // Parse the selected users
-        let selectedUsers = _peoplepicker._peoplePickerSearchBox ? _peoplepicker._peoplePickerSearchBox.querySelectorAll(".ms-Persona") : [];
+        let selectedUsers = _peoplepicker._container ? _peoplepicker._container.querySelectorAll(".ms-Persona") : [];
+
         // Set the value
         for (let i = 0; i < selectedUsers.length; i++) {
             let userInfo = selectedUsers[i].getAttribute("data-user");
@@ -88,7 +89,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
                         // Disable postback
                         ev ? ev.preventDefault() : null;
 
-                        // Search all sources
+                        // Render the results
                         renderResults(ev, true);
                     });
                 }
@@ -104,8 +105,29 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
                             _filterText = "";
                             _peoplepicker._peoplePickerSearch.value = "";
 
-                            // Select the result
-                            _peoplepicker._selectResult.apply(_peoplepicker, [ev])
+                            // Get the user information
+                            let userInfo = JSON.parse((ev.currentTarget as HTMLDivElement).getAttribute("data-user"));
+
+                            // Add the user
+                            _peoplepicker._container.querySelector(".selected-users").innerHTML += _templates.persona(userInfo);
+
+                            // Add the click event
+                            let users = _peoplepicker._container.querySelectorAll(".selected-users");
+                            users[users.length - 1].querySelector(".ms-Persona-actionIcon").addEventListener("click", ev => {
+                                let el = ev.currentTarget as HTMLElement;
+
+                                // Find the persona element
+                                while (el && el.className.indexOf("ms-PeoplePicker-persona") < 0) { el = el.parentElement; }
+
+                                // See if the element exists
+                                if (el) {
+                                    // Remove the element
+                                    el.parentElement.removeChild(el);
+                                }
+                            });
+
+                            // Close the search box
+                            _peoplepicker._contextualHostView.disposeModal();
                         });
                     }
                 }
@@ -117,8 +139,8 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
     props.el.innerHTML = [
         '<div class="ms-PeoplePicker">',
         _templates.header(),
-        _templates.searchBox(props.value),
-        _templates.results("Users"),
+        _templates.searchBox(),
+        _templates.results("Users", props.value),
         '</div>'
     ].join('\n');
 

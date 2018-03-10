@@ -11918,7 +11918,7 @@ exports.PeoplePicker = function (props) {
     var getValue = function () {
         var users = [];
         // Parse the selected users
-        var selectedUsers = _peoplepicker._peoplePickerSearchBox ? _peoplepicker._peoplePickerSearchBox.querySelectorAll(".ms-Persona") : [];
+        var selectedUsers = _peoplepicker._container ? _peoplepicker._container.querySelectorAll(".ms-Persona") : [];
         // Set the value
         for (var i = 0; i < selectedUsers.length; i++) {
             var userInfo = selectedUsers[i].getAttribute("data-user");
@@ -11976,7 +11976,7 @@ exports.PeoplePicker = function (props) {
                     btn.addEventListener("click", function (ev) {
                         // Disable postback
                         ev ? ev.preventDefault() : null;
-                        // Search all sources
+                        // Render the results
                         renderResults(ev, true);
                     });
                 }
@@ -11990,8 +11990,26 @@ exports.PeoplePicker = function (props) {
                             // Clear the filter
                             _filterText = "";
                             _peoplepicker._peoplePickerSearch.value = "";
-                            // Select the result
-                            _peoplepicker._selectResult.apply(_peoplepicker, [ev]);
+                            // Get the user information
+                            var userInfo = JSON.parse(ev.currentTarget.getAttribute("data-user"));
+                            // Add the user
+                            _peoplepicker._container.querySelector(".selected-users").innerHTML += _templates.persona(userInfo);
+                            // Add the click event
+                            var users = _peoplepicker._container.querySelectorAll(".selected-users");
+                            users[users.length - 1].querySelector(".ms-Persona-actionIcon").addEventListener("click", function (ev) {
+                                var el = ev.currentTarget;
+                                // Find the persona element
+                                while (el && el.className.indexOf("ms-PeoplePicker-persona") < 0) {
+                                    el = el.parentElement;
+                                }
+                                // See if the element exists
+                                if (el) {
+                                    // Remove the element
+                                    el.parentElement.removeChild(el);
+                                }
+                            });
+                            // Close the search box
+                            _peoplepicker._contextualHostView.disposeModal();
                         });
                     }
                 }
@@ -12002,8 +12020,8 @@ exports.PeoplePicker = function (props) {
     props.el.innerHTML = [
         '<div class="ms-PeoplePicker">',
         _templates.header(),
-        _templates.searchBox(props.value),
-        _templates.results("Users"),
+        _templates.searchBox(),
+        _templates.results("Users", props.value),
         '</div>'
     ].join('\n');
     // Create the people picker
@@ -12894,32 +12912,31 @@ exports.PeoplePicker = function (props) {
         ].join('\n');
     };
     // Results
-    var results = function (title, searchText) {
+    var results = function (title, users, searchText) {
         if (title === void 0) { title = ""; }
+        if (users === void 0) { users = []; }
         if (searchText === void 0) { searchText = ""; }
+        var personas = [];
+        // Parse the users
+        for (var i = 0; i < users.length; i++) {
+            // Add the persona
+            personas.push(persona(users[i]));
+        }
         // Return the template
         return [
             '<div class="ms-PeoplePicker-results">',
             group(title, searchText),
-            '<div class="selected-users"></div>',
+            '<div class="selected-users">',
+            personas.join('\n'),
+            '</div>',
             '</div>'
         ].join('\n');
     };
     // Search Box
-    var searchBox = function (users) {
-        var personas = [];
-        // See if there are users
-        if (users) {
-            // Parse the users
-            for (var i = 0; i < users.length; i++) {
-                // Add the persona
-                personas.push(persona(users[i]));
-            }
-        }
+    var searchBox = function () {
         // Return the template
         return [
             '<div class="ms-PeoplePicker-searchBox">',
-            personas.join('\n'),
             '<div class="ms-TextField ms-TextField--textFieldUnderlined">',
             '<input class="ms-TextField-field" type="text" value="" placeholder="Search"></input>',
             '</div>',
@@ -12929,6 +12946,7 @@ exports.PeoplePicker = function (props) {
     return {
         group: group,
         header: header,
+        persona: persona,
         result: result,
         results: results,
         searchBox: searchBox

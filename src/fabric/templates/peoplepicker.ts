@@ -84,33 +84,31 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
     }
 
     // Results
-    let results = (title: string = "", searchText: string = ""): string => {
+    let results = (title: string = "", users: Array<IPeoplePickerUser> = [], searchText: string = ""): string => {
+        let personas = [];
+
+        // Parse the users
+        for (let i = 0; i < users.length; i++) {
+            // Add the persona
+            personas.push(persona(users[i]));
+        }
+
         // Return the template
         return [
             '<div class="ms-PeoplePicker-results">',
             group(title, searchText),
-            '<div class="selected-users"></div>',
+            '<div class="selected-users">',
+            personas.join('\n'),
+            '</div>',
             '</div>'
         ].join('\n');
     }
 
     // Search Box
-    let searchBox = (users?: Array<IPeoplePickerUser>): string => {
-        let personas = [];
-
-        // See if there are users
-        if (users) {
-            // Parse the users
-            for (let i = 0; i < users.length; i++) {
-                // Add the persona
-                personas.push(persona(users[i]));
-            }
-        }
-
+    let searchBox = (): string => {
         // Return the template
         return [
             '<div class="ms-PeoplePicker-searchBox">',
-            personas.join('\n'),
             '<div class="ms-TextField ms-TextField--textFieldUnderlined">',
             '<input class="ms-TextField-field" type="text" value="" placeholder="Search"></input>',
             '</div>',
@@ -121,6 +119,7 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
     return {
         group,
         header,
+        persona,
         result,
         results,
         searchBox
