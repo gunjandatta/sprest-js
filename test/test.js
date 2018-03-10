@@ -13855,8 +13855,65 @@ var _ListForm = /** @class */ (function () {
         };
         // Method to load the item
         this.loadItem = function () {
+            var reloadItem = false;
             // See if the item already exist
             if (_this._info.item) {
+                // Parse the fields
+                for (var fieldName in _this._info.fields) {
+                    var field = _this._info.fields[fieldName];
+                    // See what type of field this is
+                    switch (field.FieldTypeKind) {
+                        // Lookup or User Field
+                        case gd_sprest_1.SPTypes.FieldType.Lookup:
+                        case gd_sprest_1.SPTypes.FieldType.User:
+                            var fieldValue = _this._info.item[fieldName + "Id"];
+                            // Ensure the value exists
+                            if (fieldValue) {
+                                // See if a value exists
+                                if (fieldValue.results ? fieldValue.results.length > 0 : fieldValue > 0) {
+                                    // Ensure the field data has been loaded
+                                    if (_this._info.item[fieldName] == null) {
+                                        // Set the flag
+                                        reloadItem = true;
+                                    }
+                                }
+                            }
+                            break;
+                        // Default
+                        default:
+                            // See if this is an taxonomy field
+                            if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                                var fieldValue_1 = _this._info.item[fieldName + "Id"];
+                                // Ensure the value exists
+                                if (fieldValue_1) {
+                                    // See if a field value exists
+                                    if (fieldValue_1.results ? fieldValue_1.results.length > 0 : fieldValue_1 != null) {
+                                        // Parse the fields
+                                        for (var fieldName_1 in _this._info.fields) {
+                                            var valueField = _this._info.fields[fieldName_1];
+                                            // See if this is the value field
+                                            if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
+                                                // Ensure the value field is loaded
+                                                if (_this._info.item[valueField.InternalName] == null) {
+                                                    // Set the flag
+                                                    reloadItem = true;
+                                                }
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                    }
+                    // See if we are reloading the item
+                    if (reloadItem) {
+                        break;
+                    }
+                }
+            }
+            // See if the item exists
+            if (_this._info.item && !reloadItem) {
                 // See if we are loading attachments
                 if (_this._props.loadAttachments && _this._info.attachments == null) {
                     // Load the attachments
@@ -13872,11 +13929,11 @@ var _ListForm = /** @class */ (function () {
                     _this._resolve(_this._info);
                 }
             }
-            else if (_this._props.itemId > 0) {
+            else if (reloadItem || _this._props.itemId > 0) {
                 // Update the item query
                 _this._info.query = _ListForm.generateODataQuery(_this._info, _this._props.loadAttachments);
                 // Get the list item
-                _this._info.list.Items(_this._props.itemId)
+                _this._info.list.Items(reloadItem ? _this._props.item.Id : _this._props.itemId)
                     .query(_this._info.query)
                     .execute(function (item) {
                     // Save the attachments
@@ -14463,8 +14520,8 @@ var _ListForm = /** @class */ (function () {
                     // See if this is an taxonomy field
                     if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
                         // Parse the fields
-                        for (var fieldName_1 in info.fields) {
-                            var valueField = info.fields[fieldName_1];
+                        for (var fieldName_2 in info.fields) {
+                            var valueField = info.fields[fieldName_2];
                             // See if this is the value field
                             if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
                                 // Include the value field

@@ -294,8 +294,71 @@ class _ListForm {
 
     // Method to load the item
     private loadItem = () => {
+        let reloadItem = false;
+
         // See if the item already exist
         if (this._info.item) {
+            // Parse the fields
+            for (let fieldName in this._info.fields) {
+                let field = this._info.fields[fieldName];
+
+                // See what type of field this is
+                switch (field.FieldTypeKind) {
+                    // Lookup or User Field
+                    case SPTypes.FieldType.Lookup:
+                    case SPTypes.FieldType.User:
+                        let fieldValue = this._info.item[fieldName + "Id"];
+
+                        // Ensure the value exists
+                        if (fieldValue) {
+                            // See if a value exists
+                            if (fieldValue.results ? fieldValue.results.length > 0 : fieldValue > 0) {
+                                // Ensure the field data has been loaded
+                                if (this._info.item[fieldName] == null) {
+                                    // Set the flag
+                                    reloadItem = true;
+                                }
+                            }
+                        }
+                        break;
+
+                    // Default
+                    default:
+                        // See if this is an taxonomy field
+                        if (field.TypeAsString.startsWith("TaxonomyFieldType")) {
+                            let fieldValue = this._info.item[fieldName + "Id"];
+
+                            // Ensure the value exists
+                            if (fieldValue) {
+                                // See if a field value exists
+                                if (fieldValue.results ? fieldValue.results.length > 0 : fieldValue != null) {
+                                    // Parse the fields
+                                    for (let fieldName in this._info.fields) {
+                                        let valueField = this._info.fields[fieldName];
+
+                                        // See if this is the value field
+                                        if (valueField.InternalName == field.InternalName + "_0" || valueField.Title == field.InternalName + "_0") {
+                                            // Ensure the value field is loaded
+                                            if (this._info.item[valueField.InternalName] == null) {
+                                                // Set the flag
+                                                reloadItem = true;
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                }
+
+                // See if we are reloading the item
+                if (reloadItem) { break; }
+            }
+        }
+
+        // See if the item exists
+        if (this._info.item && !reloadItem) {
             // See if we are loading attachments
             if (this._props.loadAttachments && this._info.attachments == null) {
                 // Load the attachments
@@ -312,12 +375,12 @@ class _ListForm {
             }
         }
         // Else, see if we are loading the list item
-        else if (this._props.itemId > 0) {
+        else if (reloadItem || this._props.itemId > 0) {
             // Update the item query
             this._info.query = _ListForm.generateODataQuery(this._info, this._props.loadAttachments);
 
             // Get the list item
-            this._info.list.Items(this._props.itemId)
+            this._info.list.Items(reloadItem ? this._props.item.Id : this._props.itemId)
                 // Set the query
                 .query(this._info.query)
                 // Execute the request
