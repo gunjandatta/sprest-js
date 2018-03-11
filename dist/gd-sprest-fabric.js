@@ -18064,7 +18064,7 @@ var _ListForm = /** @class */function () {
                         reject(ev.target.error);
                     };
                     // Read the file
-                    reader.readAsArrayBuffer(ev);
+                    reader.readAsArrayBuffer(srcFile);
                 }
             };
             // Create the file element

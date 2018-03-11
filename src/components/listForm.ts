@@ -991,7 +991,7 @@ class _ListForm {
                     }
 
                     // Read the file
-                    reader.readAsArrayBuffer(ev);
+                    reader.readAsArrayBuffer(srcFile);
                 }
             };
 
