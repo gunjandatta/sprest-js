@@ -1,19 +1,15 @@
+import * as Fabric from "./fabric";
+import * as Components from "./components";
+import * as WebParts from "./webparts";
+export {
+    Fabric,
+    Components,
+    WebParts
+}
 declare var SP;
 
-// Fabric
-import * as Fabric from "./fabric";
-export { Fabric }
-
-// Components
-import * as Components from "./components";
-export * from "./components";
-
-// WebParts
-import * as WebParts from "./webparts";
-export { WebParts }
-
 // Wait for the core library to be loaded
-SP ? SP.SOD.executeOrDelayUntilScriptLoaded(() => {
+SP && SP.SOD ? SP.SOD.executeOrDelayUntilScriptLoaded(() => {
     // Get the global variable
     var $REST = window["$REST"];
     if ($REST) {

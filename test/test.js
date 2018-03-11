@@ -191,7 +191,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ***************************************************************************************************/
-var Helper = __webpack_require__(8);
+var Helper = __webpack_require__(7);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(5);
 exports.SPTypes = mapper_1.SPTypes;
@@ -254,21 +254,15 @@ exports.Types = Types;
 
 "use strict";
 
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-// Fabric
 var Fabric = __webpack_require__(1);
 exports.Fabric = Fabric;
-// Components
-var Components = __webpack_require__(7);
-__export(__webpack_require__(7));
-// WebParts
+var Components = __webpack_require__(8);
+exports.Components = Components;
 var WebParts = __webpack_require__(9);
 exports.WebParts = WebParts;
 // Wait for the core library to be loaded
-SP ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+SP && SP.SOD ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
     // Get the global variable
     var $REST = window["$REST"];
     if ($REST) {
@@ -282,24 +276,6 @@ SP ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(122));
-__export(__webpack_require__(123));
-__export(__webpack_require__(124));
-__export(__webpack_require__(125));
-var Types = __webpack_require__(126);
-exports.Types = Types;
-
-
-/***/ }),
-/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -326,6 +302,24 @@ exports.SP = SP;
 var Types = __webpack_require__(73);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(122));
+__export(__webpack_require__(123));
+__export(__webpack_require__(124));
+__export(__webpack_require__(125));
+var Types = __webpack_require__(126);
+exports.Types = Types;
+
 
 /***/ }),
 /* 9 */
@@ -879,7 +873,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(64));
 var lib_1 = __webpack_require__(2);
-var _1 = __webpack_require__(8);
+var _1 = __webpack_require__(7);
 /**
  * SharePoint Configuration
  */
@@ -2707,7 +2701,7 @@ window["TestJS"] = {
                 // Render elements
                 cfg.el.innerHTML = "<div></div><div></div><div></div><div></div>";
                 // Render the new form
-                var newForm = build_1.ListFormPanel({
+                var newForm = build_1.Components.ListFormPanel({
                     controlMode: gd_sprest_1.SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
                     listName: "SPReact",
@@ -2731,7 +2725,7 @@ window["TestJS"] = {
                     var item = items.results ? items.results[0] : null;
                     if (item) {
                         // Render the view form
-                        var viewForm_1 = build_1.ListFormPanel({
+                        var viewForm_1 = build_1.Components.ListFormPanel({
                             controlMode: gd_sprest_1.SPTypes.ControlMode.Display,
                             el: cfg.el.children[2],
                             excludeFields: ["Title"],
@@ -10695,7 +10689,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(8);
+var helper_1 = __webpack_require__(7);
 exports.Helper = helper_1.Types;
 var mapper_1 = __webpack_require__(5);
 exports.SP = mapper_1.Types;
@@ -10710,7 +10704,7 @@ exports.Util = utils_1.Types;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Helper = __webpack_require__(8);
+var Helper = __webpack_require__(7);
 var Lib = __webpack_require__(2);
 var Mapper = __webpack_require__(5);
 /**
@@ -13189,7 +13183,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var __1 = __webpack_require__(6);
-var _1 = __webpack_require__(7);
+var _1 = __webpack_require__(8);
 /**
  * Field
  */
@@ -13744,7 +13738,7 @@ exports.Field = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var __1 = __webpack_require__(6);
-var _1 = __webpack_require__(7);
+var _1 = __webpack_require__(8);
 /**
  * List Form
  */
@@ -14802,7 +14796,7 @@ exports.ListFormField = _ListFormField;
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var fabric_1 = __webpack_require__(1);
-var _1 = __webpack_require__(7);
+var _1 = __webpack_require__(8);
 /**
  * Item Form
  */

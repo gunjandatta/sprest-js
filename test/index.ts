@@ -1,5 +1,5 @@
 import { $REST, Helper, List, SPTypes, Types } from "gd-sprest";
-import { Fabric, ListFormPanel, WebParts } from "../build";
+import { Components, Fabric, WebParts } from "../build";
 import "../build/lib/css/fabric.min.css";
 import "../build/lib/css/fabric.components.min.css";
 import "../build/lib/css/gd-sprest-js.css";
@@ -178,7 +178,7 @@ window["TestJS"] = {
                 cfg.el.innerHTML = "<div></div><div></div><div></div><div></div>";
 
                 // Render the new form
-                let newForm = ListFormPanel({
+                let newForm = Components.ListFormPanel({
                     controlMode: SPTypes.ControlMode.New,
                     el: cfg.el.children[0],
                     listName: "SPReact",
@@ -210,7 +210,7 @@ window["TestJS"] = {
                         let item = items.results ? items.results[0] : null;
                         if (item) {
                             // Render the view form
-                            let viewForm = ListFormPanel({
+                            let viewForm = Components.ListFormPanel({
                                 controlMode: SPTypes.ControlMode.Display,
                                 el: cfg.el.children[2],
                                 excludeFields: ["Title"],
