@@ -18058,10 +18058,17 @@ var _ListForm = /** @class */function () {
                             });
                         });
                     };
+                    // Set the error
+                    reader.onerror = function (ev) {
+                        // Reject the promise
+                        reject(ev.target.error);
+                    };
+                    // Read the file
+                    reader.readAsArrayBuffer(ev);
                 }
             };
             // Create the file element
-            var el = document.body.querySelector("listform-attachment");
+            var el = document.body.querySelector("#listform-attachment");
             if (el == null) {
                 el = document.createElement("input");
                 // Set the properties

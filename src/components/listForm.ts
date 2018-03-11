@@ -983,11 +983,20 @@ class _ListForm {
                             });
 
                     }
+
+                    // Set the error
+                    reader.onerror = (ev: any) => {
+                        // Reject the promise
+                        reject(ev.target.error);
+                    }
+
+                    // Read the file
+                    reader.readAsArrayBuffer(ev);
                 }
             };
 
             // Create the file element
-            let el = document.body.querySelector("listform-attachment") as HTMLInputElement;
+            let el = document.body.querySelector("#listform-attachment") as HTMLInputElement;
             if (el == null) {
                 el = document.createElement("input");
 
