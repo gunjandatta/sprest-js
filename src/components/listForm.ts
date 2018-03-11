@@ -974,6 +974,9 @@ class _ListForm {
                             .execute(() => {
                                 // Refresh the item
                                 _ListForm.refreshItem(info).then(info => {
+                                    // Remove the element
+                                    document.body.removeChild(el);
+
                                     // Resolve the promise
                                     resolve(info);
                                 });
@@ -984,10 +987,22 @@ class _ListForm {
             };
 
             // Create the file element
-            let el = document.createElement("input");
-            el.type = "file";
-            el.hidden = true;
-            el.onchange = addAttachment;
+            let el = document.body.querySelector("listform-attachment") as HTMLInputElement;
+            if (el == null) {
+                el = document.createElement("input");
+
+                // Set the properties
+                el.id = "listform-attachment";
+                el.type = "file";
+                el.hidden = true;
+                el.onchange = addAttachment;
+
+                // Add the element to the body
+                document.body.appendChild(el);
+            }
+
+            // Show the dialog
+            el.click();
         });
     }
 }

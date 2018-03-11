@@ -14540,6 +14540,8 @@ var _ListForm = /** @class */ (function () {
                             .execute(function () {
                             // Refresh the item
                             _ListForm.refreshItem(info).then(function (info) {
+                                // Remove the element
+                                document.body.removeChild(el);
                                 // Resolve the promise
                                 resolve(info);
                             });
@@ -14548,10 +14550,19 @@ var _ListForm = /** @class */ (function () {
                 }
             };
             // Create the file element
-            var el = document.createElement("input");
-            el.type = "file";
-            el.hidden = true;
-            el.onchange = addAttachment;
+            var el = document.body.querySelector("listform-attachment");
+            if (el == null) {
+                el = document.createElement("input");
+                // Set the properties
+                el.id = "listform-attachment";
+                el.type = "file";
+                el.hidden = true;
+                el.onchange = addAttachment;
+                // Add the element to the body
+                document.body.appendChild(el);
+            }
+            // Show the dialog
+            el.click();
         });
     };
     // Method to generate the odata query
