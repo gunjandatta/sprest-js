@@ -17373,7 +17373,7 @@ var _ListForm = /** @class */function () {
                 // See if we are loading attachments
                 if (_this._props.loadAttachments && _this._info.attachments == null) {
                     // Load the attachments
-                    exports.ListForm.loadAttachments(_this._props).then(function (attachments) {
+                    _ListForm.loadAttachments(_this._props).then(function (attachments) {
                         // Set the attachments
                         _this._info.attachments = attachments;
                         // Resolve the promise
@@ -17515,7 +17515,7 @@ var _ListForm = /** @class */function () {
         });
     };
     // Method to remove attachments from an item
-    _ListForm.prototype.removeAttachments = function (info, attachments) {
+    _ListForm.removeAttachments = function (info, attachments) {
         // Return a promise
         return new Promise(function (resolve, reject) {
             var web = new gd_sprest_1.Web(info.webUrl);
@@ -17900,6 +17900,39 @@ var _ListForm = /** @class */function () {
                     });
                 });
             }
+        });
+    };
+    // Method to show a file dialog
+    _ListForm.showFileDialog = function (info) {
+        // Return a promise
+        return new Promise(function (resolve, reject) {
+            // Method to add an attachment
+            var addAttachment = function addAttachment(ev) {
+                // Get the source file
+                var srcFile = ev.target["files"][0];
+                if (srcFile) {
+                    var reader = new FileReader();
+                    // Set the file loaded event
+                    reader.onloadend = function (ev) {
+                        var attachment = null;
+                        var ext = srcFile.name.split(".");
+                        ext = ext[ext.length - 1].toLowerCase();
+                        // Get the list
+                        info.list.Items(info.item.Id).AttachmentFiles().add(srcFile.name, ev.target.result).execute(function () {
+                            // Refresh the item
+                            _ListForm.refreshItem(info).then(function (info) {
+                                // Resolve the promise
+                                resolve(info);
+                            });
+                        });
+                    };
+                }
+            };
+            // Create the file element
+            var el = document.createElement("input");
+            el.type = "file";
+            el.hidden = true;
+            el.onchange = addAttachment;
         });
     };
     // Method to generate the odata query

@@ -362,7 +362,7 @@ class _ListForm {
             // See if we are loading attachments
             if (this._props.loadAttachments && this._info.attachments == null) {
                 // Load the attachments
-                ListForm.loadAttachments(this._props).then(attachments => {
+                _ListForm.loadAttachments(this._props).then(attachments => {
                     // Set the attachments
                     this._info.attachments = attachments;
 
@@ -498,7 +498,7 @@ class _ListForm {
     }
 
     // Method to remove attachments from an item
-    removeAttachments(info: ListFormTypes.IListFormProps, attachments: Array<Types.SP.IAttachment>): PromiseLike<void> {
+    static removeAttachments(info: ListFormTypes.IListFormProps, attachments: Array<Types.SP.IAttachment>): PromiseLike<void> {
         // Return a promise
         return new Promise((resolve, reject) => {
             let web = new Web(info.webUrl);
@@ -941,6 +941,53 @@ class _ListForm {
                         });
                     });
             }
+        });
+    }
+
+    // Method to show a file dialog
+    static showFileDialog(info: ListFormTypes.IListFormResult): PromiseLike<ListFormTypes.IListFormResult> {
+        // Return a promise
+        return new Promise((resolve, reject) => {
+            // Method to add an attachment
+            let addAttachment = (ev) => {
+                // Get the source file
+                let srcFile = ev.target["files"][0];
+                if (srcFile) {
+                    let reader = new FileReader();
+
+                    // Set the file loaded event
+                    reader.onloadend = (ev: any) => {
+                        let attachment = null;
+
+                        let ext = srcFile.name.split(".") as any;
+                        ext = ext[ext.length - 1].toLowerCase();
+
+                        // Get the list
+                        info.list
+                            // Get the item
+                            .Items(info.item.Id)
+                            // Get the attachments
+                            .AttachmentFiles()
+                            // Add the file
+                            .add(srcFile.name, ev.target.result)
+                            // Execute the request
+                            .execute(() => {
+                                // Refresh the item
+                                _ListForm.refreshItem(info).then(info => {
+                                    // Resolve the promise
+                                    resolve(info);
+                                });
+                            });
+
+                    }
+                }
+            };
+
+            // Create the file element
+            let el = document.createElement("input");
+            el.type = "file";
+            el.hidden = true;
+            el.onchange = addAttachment;
         });
     }
 }
