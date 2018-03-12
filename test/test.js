@@ -191,7 +191,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ***************************************************************************************************/
-var Helper = __webpack_require__(7);
+var Helper = __webpack_require__(9);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(5);
 exports.SPTypes = mapper_1.SPTypes;
@@ -254,28 +254,58 @@ exports.Types = Types;
 
 "use strict";
 
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
 var Fabric = __webpack_require__(1);
 exports.Fabric = Fabric;
-var Components = __webpack_require__(8);
+var Components = __webpack_require__(7);
 exports.Components = Components;
-var WebParts = __webpack_require__(9);
+var WebParts = __webpack_require__(8);
 exports.WebParts = WebParts;
-// Wait for the core library to be loaded
-SP && SP.SOD ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
-    // Get the global variable
-    var $REST = window["$REST"];
-    if ($REST) {
-        // Add the JS library
-        $REST["JS"] = { Components: Components, Fabric: Fabric, WebParts: WebParts };
-    }
-    // Alert other scripts this library is loaded
-    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest-js.js");
-}, "gd-sprest.js") : null;
+__export(__webpack_require__(132));
 
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(122));
+__export(__webpack_require__(123));
+__export(__webpack_require__(124));
+__export(__webpack_require__(125));
+var Types = __webpack_require__(126);
+exports.Types = Types;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(127));
+__export(__webpack_require__(17));
+__export(__webpack_require__(128));
+__export(__webpack_require__(129));
+__export(__webpack_require__(130));
+var Types = __webpack_require__(131);
+exports.Types = Types;
+
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -302,43 +332,6 @@ exports.SP = SP;
 var Types = __webpack_require__(73);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(122));
-__export(__webpack_require__(123));
-__export(__webpack_require__(124));
-__export(__webpack_require__(125));
-var Types = __webpack_require__(126);
-exports.Types = Types;
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(127));
-__export(__webpack_require__(17));
-__export(__webpack_require__(128));
-__export(__webpack_require__(129));
-__export(__webpack_require__(130));
-var Types = __webpack_require__(131);
-exports.Types = Types;
-
 
 /***/ }),
 /* 10 */
@@ -499,7 +492,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(134);
+var	fixUrls = __webpack_require__(135);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -873,7 +866,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(64));
 var lib_1 = __webpack_require__(2);
-var _1 = __webpack_require__(7);
+var _1 = __webpack_require__(9);
 /**
  * SharePoint Configuration
  */
@@ -2576,9 +2569,9 @@ exports.WPCfg = {
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var build_1 = __webpack_require__(6);
-__webpack_require__(132);
-__webpack_require__(135);
-__webpack_require__(137);
+__webpack_require__(133);
+__webpack_require__(136);
+__webpack_require__(138);
 // Create the global variable
 window["TestJS"] = {
     // Configuration
@@ -10689,7 +10682,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(7);
+var helper_1 = __webpack_require__(9);
 exports.Helper = helper_1.Types;
 var mapper_1 = __webpack_require__(5);
 exports.SP = mapper_1.Types;
@@ -10704,7 +10697,7 @@ exports.Util = utils_1.Types;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Helper = __webpack_require__(7);
+var Helper = __webpack_require__(9);
 var Lib = __webpack_require__(2);
 var Mapper = __webpack_require__(5);
 /**
@@ -13183,7 +13176,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var __1 = __webpack_require__(6);
-var _1 = __webpack_require__(8);
+var _1 = __webpack_require__(7);
 /**
  * Field
  */
@@ -13738,7 +13731,7 @@ exports.Field = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var __1 = __webpack_require__(6);
-var _1 = __webpack_require__(8);
+var _1 = __webpack_require__(7);
 /**
  * List Form
  */
@@ -14851,7 +14844,7 @@ exports.ListFormField = _ListFormField;
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var fabric_1 = __webpack_require__(1);
-var _1 = __webpack_require__(8);
+var _1 = __webpack_require__(7);
 /**
  * Item Form
  */
@@ -15494,7 +15487,7 @@ exports.WebPart = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var __1 = __webpack_require__(6);
-var _1 = __webpack_require__(9);
+var _1 = __webpack_require__(8);
 /**
  * List WebPart
  */
@@ -15744,7 +15737,7 @@ exports.WPList = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var __1 = __webpack_require__(6);
-var _1 = __webpack_require__(9);
+var _1 = __webpack_require__(8);
 /**
  * Search WebPart
  */
@@ -15838,7 +15831,7 @@ exports.WPSearch = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var fabric_1 = __webpack_require__(1);
-var _1 = __webpack_require__(9);
+var _1 = __webpack_require__(8);
 /**
  * Web Part Tabs
  */
@@ -16000,8 +15993,39 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-var content = __webpack_require__(133);
+Object.defineProperty(exports, "__esModule", { value: true });
+var Fabric = __webpack_require__(1);
+var Components = __webpack_require__(7);
+var WebParts = __webpack_require__(8);
+var gd_sprest_1 = __webpack_require__(3);
+// Set the JS library
+exports.RESTJS = gd_sprest_1.$REST;
+exports.RESTJS.JS = {
+    Components: Components,
+    Fabric: Fabric,
+    WebParts: WebParts
+};
+// Wait for the core library to be loaded
+SP && SP.SOD ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+    // Get the global variable
+    var $REST = window["$REST"];
+    if ($REST) {
+        // Add the JS library
+        $REST["JS"] = { Components: Components, Fabric: Fabric, WebParts: WebParts };
+    }
+    // Alert other scripts this library is loaded
+    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest-js.js");
+}, "gd-sprest.js") : null;
+
+
+/***/ }),
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(134);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -16047,7 +16071,7 @@ if(false) {
 }
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -16061,7 +16085,7 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports) {
 
 
@@ -16156,11 +16180,11 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(136);
+var content = __webpack_require__(137);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -16206,7 +16230,7 @@ if(false) {
 }
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -16220,11 +16244,11 @@ exports.push([module.i, "/* Copyright (c) Microsoft. All rights reserved. Licens
 
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(138);
+var content = __webpack_require__(139);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -16270,7 +16294,7 @@ if(false) {
 }
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);

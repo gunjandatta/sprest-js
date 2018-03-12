@@ -67,7 +67,7 @@ export interface IListForm {
     saveItem(info: IListFormResult, formValues: any): PromiseLike<IListFormResult>;
 
     /**
-     * Method to show the file dialog
+     * Method to show the file dialog.
      * @param info - The list form information.
      */
     showFileDialog(info: IListFormResult): PromiseLike<IListFormResult>;
