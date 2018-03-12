@@ -119,6 +119,11 @@
  * Text Field
  */
 
+/** Label */
+.ms-TextField > .ms-Label {
+    padding-left: 12px;
+}
+
 /** Update the disabled labels font color */
 .ms-TextField .ms-TextField-field:disabled {
     color: #444;

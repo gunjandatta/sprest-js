@@ -260,6 +260,13 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     // Update the value
     updateValue(props.value);
 
+    // Disable the textbox
+    _tb.get()._textField.addEventListener("keydown", ev => {
+        // Cancel the event
+        ev.preventDefault();
+        return false;
+    });
+
     // Return the dropdown
     return {
         get,
