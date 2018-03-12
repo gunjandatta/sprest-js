@@ -17642,21 +17642,31 @@ var _ListForm = /** @class */function () {
         });
     };
     // Method to remove attachments from an item
-    _ListForm.removeAttachments = function (info, attachments) {
+    _ListForm.removeAttachment = function (info, fileName) {
         // Return a promise
         return new Promise(function (resolve, reject) {
-            var web = new gd_sprest_1.Web(info.webUrl);
-            // Parse the attachments
-            for (var i = 0; i < attachments.length; i++) {
-                var attachment = attachments[i];
-                // Get the file
-                web.getFileByServerRelativeUrl(attachment.ServerRelativeUrl).delete().execute(true);
+            // Ensure attachments exist
+            if (info.attachments) {
+                // Parse the attachments
+                for (var i = 0; i < info.attachments.length; i++) {
+                    // See if this is the target attachment
+                    var attachment = info.attachments[i];
+                    if (attachment.FileName == fileName) {
+                        // Get the web
+                        new gd_sprest_1.Web(info.webUrl).getFileByServerRelativeUrl(attachment.ServerRelativeUrl).delete().execute(function () {
+                            // Resolve the promise
+                            resolve(info);
+                        });
+                        // Attachment found
+                        return;
+                    }
+                    // Attachment not found
+                    reject("Attachment '" + fileName + "' was not found.");
+                }
+            } else {
+                // Attachments not loaded
+                reject("Attachment '" + fileName + "' was not found.");
             }
-            // Wait for the requests to complete
-            web.done(function () {
-                // Resolve the request
-                resolve();
-            });
         });
     };
     // Method to render a display form for an item

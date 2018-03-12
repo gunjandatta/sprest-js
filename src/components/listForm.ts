@@ -498,28 +498,39 @@ class _ListForm {
     }
 
     // Method to remove attachments from an item
-    static removeAttachments(info: ListFormTypes.IListFormProps, attachments: Array<Types.SP.IAttachment>): PromiseLike<void> {
+    static removeAttachment(info: ListFormTypes.IListFormResult, fileName: string): PromiseLike<ListFormTypes.IListFormResult> {
         // Return a promise
         return new Promise((resolve, reject) => {
-            let web = new Web(info.webUrl);
+            // Ensure attachments exist
+            if (info.attachments) {
+                // Parse the attachments
+                for (let i = 0; i < info.attachments.length; i++) {
+                    // See if this is the target attachment
+                    let attachment = info.attachments[i];
+                    if (attachment.FileName == fileName) {
+                        // Get the web
+                        (new Web(info.webUrl))
+                            // Get the file
+                            .getFileByServerRelativeUrl(attachment.ServerRelativeUrl)
+                            // Delete the file
+                            .delete()
+                            // Execute the request
+                            .execute(() => {
+                                // Resolve the promise
+                                resolve(info);
+                            });
 
-            // Parse the attachments
-            for (let i = 0; i < attachments.length; i++) {
-                let attachment = attachments[i];
+                        // Attachment found
+                        return;
+                    }
 
-                // Get the file
-                web.getFileByServerRelativeUrl(attachment.ServerRelativeUrl)
-                    // Delete the file
-                    .delete()
-                    // Execute the request
-                    .execute(true);
+                    // Attachment not found
+                    reject("Attachment '" + fileName + "' was not found.");
+                }
+            } else {
+                // Attachments not loaded
+                reject("Attachment '" + fileName + "' was not found.");
             }
-
-            // Wait for the requests to complete
-            web.done(() => {
-                // Resolve the request
-                resolve();
-            });
         });
     }
 

@@ -30,9 +30,9 @@ export interface IListForm {
     refreshItem(info: IListFormResult): PromiseLike<IListFormResult>;
 
     /**
-     * Method to remove attachments from an item.
+     * Method to remove attachment from an item.
      */
-    removeAttachments(info: IListFormProps, attachmentInfo: Array<Types.SP.IAttachment>): PromiseLike<void>;
+    removeAttachment(info: IListFormResult, fileName: string): PromiseLike<IListFormResult>;
 
     /**
      * Method to render the display form template.
@@ -193,4 +193,7 @@ export interface IListFormResult {
 
     /** The list. */
     list: Types.SP.IListResult;
+
+    /** The relative web url containing the list. */
+    webUrl?: string;
 }
