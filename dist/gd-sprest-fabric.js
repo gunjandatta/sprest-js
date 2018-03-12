@@ -118,16 +118,16 @@ __export(__webpack_require__(42));
 __export(__webpack_require__(43));
 __export(__webpack_require__(44));
 __export(__webpack_require__(45));
+__export(__webpack_require__(102));
 __export(__webpack_require__(103));
 __export(__webpack_require__(104));
 __export(__webpack_require__(105));
 __export(__webpack_require__(106));
-__export(__webpack_require__(107));
 // Templates
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(128);
+var Types = __webpack_require__(127);
 exports.Types = Types;
 
 /***/ }),
@@ -151,9 +151,8 @@ __export(__webpack_require__(83));
 __export(__webpack_require__(84));
 __export(__webpack_require__(85));
 __export(__webpack_require__(86));
-__export(__webpack_require__(87));
 __export(__webpack_require__(13));
-var Types = __webpack_require__(88);
+var Types = __webpack_require__(87);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -197,10 +196,10 @@ var Helper = __webpack_require__(9);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(6);
 exports.SPTypes = mapper_1.SPTypes;
-var Types = __webpack_require__(101);
+var Types = __webpack_require__(100);
 exports.Types = Types;
 __export(__webpack_require__(2));
-__export(__webpack_require__(102));
+__export(__webpack_require__(101));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -216,6 +215,7 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(107));
 __export(__webpack_require__(108));
 __export(__webpack_require__(109));
 __export(__webpack_require__(110));
@@ -235,7 +235,6 @@ __export(__webpack_require__(123));
 __export(__webpack_require__(124));
 __export(__webpack_require__(125));
 __export(__webpack_require__(126));
-__export(__webpack_require__(127));
 
 /***/ }),
 /* 5 */
@@ -251,7 +250,7 @@ var Components = __webpack_require__(7);
 exports.Components = Components;
 var WebParts = __webpack_require__(8);
 exports.WebParts = WebParts;
-var rest_1 = __webpack_require__(140);
+var rest_1 = __webpack_require__(139);
 exports.$REST = rest_1.RESTJS;
 
 /***/ }),
@@ -282,11 +281,11 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(129));
 __export(__webpack_require__(130));
 __export(__webpack_require__(131));
 __export(__webpack_require__(132));
-__export(__webpack_require__(133));
-var Types = __webpack_require__(134);
+var Types = __webpack_require__(133);
 exports.Types = Types;
 
 /***/ }),
@@ -302,12 +301,12 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(135));
+__export(__webpack_require__(134));
 __export(__webpack_require__(17));
+__export(__webpack_require__(135));
 __export(__webpack_require__(136));
 __export(__webpack_require__(137));
-__export(__webpack_require__(138));
-var Types = __webpack_require__(139);
+var Types = __webpack_require__(138);
 exports.Types = Types;
 
 /***/ }),
@@ -321,21 +320,21 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(46));
+__export(__webpack_require__(88));
 __export(__webpack_require__(89));
-__export(__webpack_require__(90));
+__export(__webpack_require__(91));
 __export(__webpack_require__(92));
 __export(__webpack_require__(93));
 __export(__webpack_require__(94));
-__export(__webpack_require__(95));
 __export(__webpack_require__(15));
+__export(__webpack_require__(95));
 __export(__webpack_require__(96));
-__export(__webpack_require__(97));
 __export(__webpack_require__(14));
 __export(__webpack_require__(16));
-__export(__webpack_require__(98));
-var SP = __webpack_require__(99);
+__export(__webpack_require__(97));
+var SP = __webpack_require__(98);
 exports.SP = SP;
-var Types = __webpack_require__(100);
+var Types = __webpack_require__(99);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -3088,7 +3087,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(91));
+__export(__webpack_require__(90));
 var lib_1 = __webpack_require__(2);
 var _1 = __webpack_require__(9);
 /**
@@ -13085,127 +13084,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var lib_1 = __webpack_require__(2);
-/**
- * JS Link
- */
-var _JSLink = /** @class */ (function () {
-    /**
-     * Constructor
-     */
-    function _JSLink(cfg) {
-        // See if the configuration exists
-        if (cfg) {
-            // Set the properties
-            this._baseViewID = cfg.BaseViewID;
-            this._listTemplateType = cfg.ListTemplateType;
-            this._onPostRender = cfg.OnPostRender;
-            this._onPreRender = cfg.OnPreRender;
-            this._templates = cfg.Templates;
-        }
-    }
-    Object.defineProperty(_JSLink.prototype, "BaseViewID", {
-        set: function (value) { this._baseViewID = value; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(_JSLink.prototype, "ListTemplateType", {
-        set: function (value) { this._listTemplateType = value; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(_JSLink.prototype, "OnPostRender", {
-        set: function (value) { this._onPostRender = value; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(_JSLink.prototype, "OnPreRender", {
-        set: function (value) { this._onPreRender = value; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(_JSLink.prototype, "Templates", {
-        set: function (value) { this._templates = value; },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Methods
-     */
-    /**
-     * Returns the CSR template.
-     */
-    _JSLink.prototype.getTemplate = function () {
-        var template = {};
-        // Add the properties
-        if (this._baseViewID) {
-            template.BaseViewID = this._baseViewID;
-        }
-        if (this._listTemplateType) {
-            template.ListTemplateType = this._listTemplateType;
-        }
-        if (this._onPostRender) {
-            template.OnPostRender = this._onPostRender;
-        }
-        if (this._onPreRender) {
-            template.OnPreRender = this._onPreRender;
-        }
-        if (this._templates) {
-            template.Templates = this._templates;
-        }
-        // See if there are fields
-        if (template.Templates && template.Templates.Fields) {
-            var fields = {};
-            // Parse the fields
-            for (var _i = 0, _a = template.Templates.Fields; _i < _a.length; _i++) {
-                var field = _a[_i];
-                // Add the field
-                fields[field.Name] = {};
-                // Add the field properties
-                if (field.DisplayForm) {
-                    fields[field.Name].DisplayForm = field.DisplayForm;
-                }
-                if (field.EditForm) {
-                    fields[field.Name].EditForm = field.EditForm;
-                }
-                if (field.NewForm) {
-                    fields[field.Name].NewForm = field.NewForm;
-                }
-                if (field.View) {
-                    fields[field.Name].View = field.View;
-                }
-            }
-            // Update the fields
-            template.Templates.Fields = fields;
-        }
-        // Return the template
-        return template;
-    };
-    /**
-     * Method to register the CSR override.
-     */
-    _JSLink.prototype.register = function () {
-        // Get the template manager
-        var templateManager = lib_1.ContextInfo.window.SPClientTemplates;
-        templateManager = templateManager ? templateManager.TemplateManager : null;
-        // Ensure it exists
-        if (templateManager) {
-            // Apply the customization
-            templateManager.RegisterTemplateOverrides(this.getTemplate());
-        }
-    };
-    return _JSLink;
-}());
-exports.JSLink = _JSLink;
-//# sourceMappingURL=jslink.js.map
-
-/***/ }),
-/* 78 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -13265,7 +13143,7 @@ exports.List = _List;
 //# sourceMappingURL=list.js.map
 
 /***/ }),
-/* 79 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13312,7 +13190,7 @@ exports.Navigation = _Navigation;
 //# sourceMappingURL=navigation.js.map
 
 /***/ }),
-/* 80 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13354,7 +13232,7 @@ exports.PeopleManager = _PeopleManager;
 //# sourceMappingURL=peopleManager.js.map
 
 /***/ }),
-/* 81 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13397,7 +13275,7 @@ exports.PeoplePicker = _PeoplePicker;
 //# sourceMappingURL=peoplePicker.js.map
 
 /***/ }),
-/* 82 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13440,7 +13318,7 @@ exports.ProfileLoader = _ProfileLoader;
 //# sourceMappingURL=profileLoader.js.map
 
 /***/ }),
-/* 83 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13519,7 +13397,7 @@ exports.Search = _Search;
 //# sourceMappingURL=search.js.map
 
 /***/ }),
-/* 84 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13576,7 +13454,7 @@ exports.Site = _Site;
 //# sourceMappingURL=site.js.map
 
 /***/ }),
-/* 85 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13645,7 +13523,7 @@ exports.SocialFeed = (new _SocialFeed());
 //# sourceMappingURL=socialFeed.js.map
 
 /***/ }),
-/* 86 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13688,7 +13566,7 @@ exports.UserProfile = _UserProfile;
 //# sourceMappingURL=userProfile.js.map
 
 /***/ }),
-/* 87 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13781,7 +13659,7 @@ exports.Utility = _Utility;
 //# sourceMappingURL=utility.js.map
 
 /***/ }),
-/* 88 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13790,7 +13668,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 89 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13868,7 +13746,7 @@ exports.Dependencies = _Dependencies;
 //# sourceMappingURL=dependencies.js.map
 
 /***/ }),
-/* 90 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14225,7 +14103,7 @@ exports.FieldSchemaXML = function (fieldInfo) {
 //# sourceMappingURL=fieldSchemaXML.js.map
 
 /***/ }),
-/* 91 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14262,11 +14140,12 @@ exports.SPCfgType = {
 //# sourceMappingURL=spCfgTypes.js.map
 
 /***/ }),
-/* 92 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(2);
 var mapper_1 = __webpack_require__(6);
@@ -14539,6 +14418,20 @@ exports.JSLink = {
         }
     },
     /**
+     * Registers the JSLink configuration
+     * @param cfg - The JSLink configuration.
+     */
+    register: function (cfg) {
+        // Get the template manager
+        var templateManager = lib_1.ContextInfo.window.SPClientTemplates;
+        templateManager = templateManager ? templateManager.TemplateManager : null;
+        // Ensure it exists
+        if (templateManager) {
+            // Apply the customization
+            templateManager.RegisterTemplateOverrides(_this.getTemplate());
+        }
+    },
+    /**
      * Removes the field and html from the page.
      * @param ctx - The client context.
      * @param field - The field to remove.
@@ -14634,7 +14527,7 @@ exports.JSLink = {
 //# sourceMappingURL=jslink.js.map
 
 /***/ }),
-/* 93 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15012,7 +14905,7 @@ exports.ListForm = _ListForm;
 //# sourceMappingURL=listForm.js.map
 
 /***/ }),
-/* 94 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15229,7 +15122,7 @@ exports.ListFormField = _ListFormField;
 //# sourceMappingURL=listFormField.js.map
 
 /***/ }),
-/* 95 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15289,7 +15182,7 @@ exports.Loader = {
 //# sourceMappingURL=loader.js.map
 
 /***/ }),
-/* 96 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15325,7 +15218,7 @@ exports.RibbonLink = function (props) {
 //# sourceMappingURL=ribbonLink.js.map
 
 /***/ }),
-/* 97 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15365,7 +15258,7 @@ exports.SuiteBarLink = function (props) {
 //# sourceMappingURL=sbLink.js.map
 
 /***/ }),
-/* 98 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15651,7 +15544,7 @@ exports.WebPart = _WebPart;
 //# sourceMappingURL=webpart.js.map
 
 /***/ }),
-/* 99 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15826,7 +15719,7 @@ exports.Status = {
 //# sourceMappingURL=sp.js.map
 
 /***/ }),
-/* 100 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15835,7 +15728,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 101 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15850,7 +15743,7 @@ exports.Util = utils_1.Types;
 //# sourceMappingURL=types.js.map
 
 /***/ }),
-/* 102 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15863,7 +15756,7 @@ var Mapper = __webpack_require__(6);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.58,
+    __ver: 3.59,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {
@@ -15906,7 +15799,7 @@ if ((global == null || global.__ver == null || global.__ver < exports.$REST.__ve
 //# sourceMappingURL=rest.js.map
 
 /***/ }),
-/* 103 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15944,7 +15837,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 104 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15976,7 +15869,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 105 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16007,7 +15900,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 106 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16104,7 +15997,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 107 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16151,7 +16044,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 108 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16167,7 +16060,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 109 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16202,7 +16095,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 110 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16218,7 +16111,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 111 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16249,7 +16142,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 112 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16274,7 +16167,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 113 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16307,7 +16200,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 114 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16324,7 +16217,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 115 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16354,7 +16247,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 116 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16372,7 +16265,7 @@ exports.Label = function (props) {
 };
 
 /***/ }),
-/* 117 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16396,7 +16289,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 118 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16412,7 +16305,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 119 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16430,7 +16323,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 120 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16446,7 +16339,7 @@ exports.Overlay = function (props) {
 };
 
 /***/ }),
-/* 121 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16490,7 +16383,7 @@ exports.Panel = function (props, content) {
 };
 
 /***/ }),
-/* 122 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16573,7 +16466,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 123 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16604,7 +16497,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 124 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16620,7 +16513,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 125 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16656,7 +16549,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 126 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16682,7 +16575,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 127 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16704,7 +16597,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 128 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16712,11 +16605,11 @@ exports.Toggle = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(129);
+var Fabric = __webpack_require__(128);
 exports.Fabric = Fabric;
 
 /***/ }),
-/* 129 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16725,7 +16618,7 @@ exports.Fabric = Fabric;
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 130 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17279,7 +17172,7 @@ exports.Field = function (props) {
 };
 
 /***/ }),
-/* 131 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18154,7 +18047,7 @@ var _ListForm = /** @class */function () {
 exports.ListForm = _ListForm;
 
 /***/ }),
-/* 132 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18345,7 +18238,7 @@ var _ListFormField = /** @class */function () {
 exports.ListFormField = _ListFormField;
 
 /***/ }),
-/* 133 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18599,7 +18492,7 @@ exports.ListFormPanel = function (props) {
 };
 
 /***/ }),
-/* 134 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18608,7 +18501,7 @@ exports.ListFormPanel = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 135 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18962,7 +18855,7 @@ exports.WebPart = function (props) {
 };
 
 /***/ }),
-/* 136 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19193,7 +19086,7 @@ exports.WPList = function (props) {
 };
 
 /***/ }),
-/* 137 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19288,7 +19181,7 @@ exports.WPSearch = function (props) {
 };
 
 /***/ }),
-/* 138 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19443,7 +19336,7 @@ exports.WPTabs = function (props) {
 };
 
 /***/ }),
-/* 139 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19452,7 +19345,7 @@ exports.WPTabs = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 140 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
