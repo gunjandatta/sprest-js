@@ -204,6 +204,13 @@ export interface IPeoplePicker {
 }
 
 /**
+ * Pivot
+ */
+export interface IPivot {
+    _container: HTMLDivElement
+}
+
+/**
  * Spinner Component
  */
 export interface ISpinner {

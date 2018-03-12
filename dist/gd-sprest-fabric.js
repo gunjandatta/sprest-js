@@ -244,11 +244,6 @@ __export(__webpack_require__(127));
 "use strict";
 
 
-function __export(m) {
-    for (var p in m) {
-        if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-    }
-}
 Object.defineProperty(exports, "__esModule", { value: true });
 var Fabric = __webpack_require__(1);
 exports.Fabric = Fabric;
@@ -256,7 +251,8 @@ var Components = __webpack_require__(7);
 exports.Components = Components;
 var WebParts = __webpack_require__(8);
 exports.WebParts = WebParts;
-__export(__webpack_require__(140));
+var rest_1 = __webpack_require__(140);
+exports.$REST = rest_1.RESTJS;
 
 /***/ }),
 /* 6 */

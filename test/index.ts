@@ -1,5 +1,5 @@
-import { $REST, Helper, List, SPTypes, Types } from "gd-sprest";
-import { Components, Fabric, WebParts } from "../build";
+import { Helper, List, SPTypes, Types } from "gd-sprest";
+import { Components, Fabric, WebParts, $REST } from "../build";
 import "../build/lib/css/fabric.min.css";
 import "../build/lib/css/fabric.components.min.css";
 import "../build/lib/css/gd-sprest-js.css";

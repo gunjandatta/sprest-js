@@ -6,4 +6,5 @@ export {
     Fabric,
     WebParts
 }
-export * from "./rest";
+import { RESTJS, IRESTJS } from "./rest";
+export const $REST: IRESTJS = RESTJS;
