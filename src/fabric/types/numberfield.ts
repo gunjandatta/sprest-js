@@ -15,9 +15,9 @@ export interface INumberFieldProps extends ITextFieldProps {
     /** The number of decimals allowed. */
     decimals?: number;
 
-    /** The maximum value. */
+    /** The maximum value allowed. */
     maxValue?: number;
 
-    /** The minimum value. */
+    /** The minimum value allowed. */
     minValue?: number;
 }

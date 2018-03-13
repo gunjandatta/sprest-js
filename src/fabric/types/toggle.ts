@@ -1,4 +1,4 @@
-import { IComponentProps, IProps } from ".";
+import { Fabric, IComponentProps, IProps } from ".";
 
 /**
  * Toggle
@@ -8,7 +8,7 @@ export interface IToggle {
     get(): HTMLElement;
 
     /** Returns the fabric component. */
-    getFabricComponent(): any;
+    getFabricComponent(): Fabric.IToggle;
 
     /** Returns the toggle value. */
     getValue(): boolean;

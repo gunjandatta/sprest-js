@@ -1,4 +1,4 @@
-import { IToggle, IToggleProps } from "./types"
+import { Fabric, IToggle, IToggleProps } from "./types"
 import { fabric, Templates } from ".";
 
 /**
@@ -12,7 +12,7 @@ export const Toggle = (props: IToggleProps): IToggle => {
     }
 
     // Method to get the fabric component
-    let getFabricComponent = () => {
+    let getFabricComponent = (): Fabric.IToggle => {
         // Return the toggle
         return _toggle;
     }
@@ -36,7 +36,7 @@ export const Toggle = (props: IToggleProps): IToggle => {
     }
 
     // Create the toggle
-    let _toggle = new fabric.Toggle(toggle);
+    let _toggle: Fabric.IToggle = new fabric.Toggle(toggle);
 
     // Return the toggle
     return {

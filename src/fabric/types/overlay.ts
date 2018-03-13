@@ -12,9 +12,6 @@ export interface IOverlay {
  * Overlay Properties
  */
 export interface IOverlayProps extends IProps {
-    /** The class name. */
-    className?: string;
-
     /** True, to create a dark overlay. */
     isDark?: boolean;
 }

@@ -5,7 +5,7 @@ import { IComponentProps, IProps } from ".";
  */
 export interface ILinkField {
     /** Returns the link element. */
-    get(): HTMLElement;
+    get(): HTMLInputElement;
 
     /** Returns the fabric component. */
     getFabricComponent(): any;

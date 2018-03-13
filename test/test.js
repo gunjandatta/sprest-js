@@ -15713,13 +15713,13 @@ exports.WPSearch = function (props) {
         cfgElementId: props.cfgElementId,
         className: props.className,
         editPanel: {
+            listQuery: props.editPanel ? props.editPanel.listQuery : null,
             menuLeftCommands: props.editPanel ? props.editPanel.menuLeftCommands : null,
             menuRightCommands: props.editPanel ? props.editPanel.menuRightCommands : null,
-            onRenderFooter: renderFooter
+            onRenderFooter: props.editPanel.onRenderFooter ? props.editPanel.onRenderFooter : null
         },
         elementId: props.elementId,
         helpProps: props.helpProps,
-        listQuery: props.listQuery,
         odataQuery: props.odataQuery,
         onRenderItems: props.onRenderItems,
         onSave: saveConfiguration

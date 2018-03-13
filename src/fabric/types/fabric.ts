@@ -130,13 +130,13 @@ export interface IOverlay {
     // The overlay element.
     overlayElement: HTMLDivElement;
 
-    // Hides the overlay
+    // Hides the overlay.
     hide();
 
-    // Removes the overlay
+    // Removes the overlay.
     remove();
 
-    // Shows the overlay
+    // Shows the overlay.
     show();
 }
 
@@ -147,7 +147,7 @@ export interface IPanel {
     // Flag to animate the overlay.
     _animateOverlay: boolean;
 
-    // The click handler
+    // The click handler.
     _clickHandler: EventListener;
 
     // The panel close button.
@@ -230,7 +230,7 @@ export interface ISpinner {
  * Table
  */
 export interface ITable {
-    container: HTMLTableElement;
+    _container: HTMLTableElement;
 }
 
 /**
@@ -240,4 +240,10 @@ export interface ITextField {
     _container: HTMLDivElement;
     _textField: HTMLInputElement;
     _textFieldLabel: HTMLLabelElement;
+}
+/**
+ * Toggle Component
+ */
+export interface IToggle {
+    _container: HTMLDivElement;
 }

@@ -12,9 +12,6 @@ export interface ICommandBar {
  * Command Bar Properties
  */
 export interface ICommandBarProps extends IProps {
-    /** The class name. */
-    className?: string;
-
     /** The main area commands. */
     mainCommands?: Array<ICommandButtonProps>;
 

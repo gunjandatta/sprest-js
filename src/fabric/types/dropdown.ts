@@ -4,8 +4,8 @@ import { IComponentProps, IProps } from ".";
  * Dropdown
  */
 export interface IDropdown {
-    /** Returns the string element. */
-    get(): HTMLElement;
+    /** Returns the text element. */
+    get(): HTMLInputElement;
 
     /** Returns the fabric component. */
     getFabricComponent(): any;

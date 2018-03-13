@@ -15,9 +15,6 @@ export interface ITable {
  * Table Properties
  */
 export interface ITableProps extends IProps {
-    /** The class name. */
-    className?: string;
-
     /** The column labels. */
     columns?: Array<string>;
 
