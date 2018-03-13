@@ -106,7 +106,7 @@ export const WPList = (props: IWPListProps): IWPList => {
     // Method to load the lists
     let loadLists = (webUrl?: string) => {
         // Set the query
-        let query: Types.SP.ODataQuery = props.listQuery || {};
+        let query: Types.SP.ODataQuery = (props.editPanel ? props.editPanel.listQuery : null) || {};
 
         // Render a loading message
         Fabric.Spinner({

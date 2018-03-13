@@ -27,6 +27,9 @@ export interface IWPListCfg extends IWebPartCfg {
  * WebPart List Edit Panel
  */
 export interface IWPListEditPanel extends IWebPartEditPanel {
+    /** The odata list query. */
+    listQuery?: Types.SP.ODataQuery;
+
     /** The list changed event. */
     onListChanged?: (wpInfo: IWPListInfo, list?: Types.SP.IListQueryResult | Types.SP.IListResult) => void;
 
@@ -60,9 +63,6 @@ export interface IWPListProps extends IWebPartProps {
 
     /** The edit panel. */
     editPanel?: IWPListEditPanel;
-
-    /** The odata list query. */
-    listQuery?: Types.SP.ODataQuery;
 
     /** The odata query. */
     odataQuery?: Types.SP.ODataQuery;

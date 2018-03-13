@@ -15485,7 +15485,7 @@ exports.WPList = function (props) {
     // Method to load the lists
     var loadLists = function (webUrl) {
         // Set the query
-        var query = props.listQuery || {};
+        var query = (props.editPanel ? props.editPanel.listQuery : null) || {};
         // Render a loading message
         __1.Fabric.Spinner({
             el: _el.children[2],
