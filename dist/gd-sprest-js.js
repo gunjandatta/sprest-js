@@ -14015,7 +14015,6 @@ exports.SPCfgType = {
 
 "use strict";
 
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(2);
 var mapper_1 = __webpack_require__(6);
@@ -14292,13 +14291,16 @@ exports.JSLink = {
      * @param cfg - The JSLink configuration.
      */
     register: function (cfg) {
-        // Get the template manager
-        var templateManager = lib_1.ContextInfo.window.SPClientTemplates;
-        templateManager = templateManager ? templateManager.TemplateManager : null;
-        // Ensure it exists
-        if (templateManager) {
-            // Apply the customization
-            templateManager.RegisterTemplateOverrides(_this.getTemplate());
+        // Ensure a configuration exists
+        if (cfg) {
+            // Get the template manager
+            var templateManager = lib_1.ContextInfo.window.SPClientTemplates;
+            templateManager = templateManager ? templateManager.TemplateManager : null;
+            // Ensure it exists
+            if (templateManager) {
+                // Apply the customization
+                templateManager.RegisterTemplateOverrides(cfg);
+            }
         }
     },
     /**
@@ -15626,7 +15628,7 @@ var Mapper = __webpack_require__(6);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.59,
+    __ver: 3.60,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {
@@ -18942,6 +18944,9 @@ exports.WPList = function (props) {
                 // Update the webpart configuration and return it
                 cfg.ListName = _wpInfo.cfg.ListName;
                 cfg.WebUrl = _wpInfo.cfg.WebUrl;
+                // Call the save event
+                cfg = (props.onSave ? props.onSave(_wp.cfg) : null) || cfg;
+                // Return the configuration
                 return cfg;
             }
         },
@@ -19023,6 +19028,8 @@ exports.WPSearch = function (props) {
     var saveConfiguration = function saveConfiguration(cfg) {
         // Set the fields configuraiton
         cfg.Fields = ddlFields ? ddlFields.getValue() : [];
+        // Call the save event
+        cfg = (props.onSave ? props.onSave(cfg) : null) || cfg;
         // Return the configuration
         return cfg;
     };

@@ -46,4 +46,19 @@ export interface IWPSearchInfo extends IWPListInfo {
 /**
  * WebPart Search Properties
  */
-export interface IWPSearchProps extends IWPListProps { }
+export interface IWPSearchProps extends IWPListProps {
+    /** The executing caml query event. */
+    onExecutingCAMLQuery?: (wpInfo: IWPSearchInfo, caml: string) => string;
+
+    /** The executing odata query event. */
+    onExecutingODATAQuery?: (wpInfo: IWPSearchInfo, odata: Types.SP.ODataQuery) => Types.SP.ODataQuery;
+
+    /** The on post render event. */
+    onPostRender?: (wpInfo: IWPSearchInfo, list?: Types.SP.IListQueryResult | Types.SP.IListResult) => void;
+
+    /** The on render items event. */
+    onRenderItems?: (wpInfo: IWPSearchInfo, items: Array<Types.SP.IListItemQueryResult | Types.SP.IListItemResult>) => void;
+
+    /** The save configuration event. */
+    onSave?: (cfg: IWPSearchCfg) => IWPSearchCfg;
+}

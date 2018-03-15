@@ -265,6 +265,11 @@ export const WPList = (props: IWPListProps): IWPList => {
                 // Update the webpart configuration and return it
                 cfg.ListName = _wpInfo.cfg.ListName;
                 cfg.WebUrl = _wpInfo.cfg.WebUrl;
+
+                // Call the save event
+                cfg = (props.onSave ? props.onSave(_wp.cfg) : null) || cfg;
+
+                // Return the configuration
                 return cfg;
             }
         },
