@@ -1,7 +1,7 @@
 import * as Fabric from "./fabric";
 import * as Components from "./components";
 import * as WebParts from "./webparts";
-import { $REST, IREST } from "gd-sprest";
+import { Helper, $REST, IREST } from "gd-sprest";
 declare var SP;
 
 /**
@@ -13,8 +13,7 @@ export interface IRESTJS extends IREST {
         /** SharePoint Components */
         Components: {
             Field(props: Components.Types.IFieldProps): Components.Types.IField;
-            ListForm(props: Components.Types.IListFormProps): Components.Types.IListForm;
-            ListFormField(props: Components.Types.IListFormFieldInfo): Components.Types.IListFormField;
+            ListForm(props: Helper.Types.IListFormProps): Components.Types.IListForm;
             ListFormPanel(props: Components.Types.IListFormPanelProps): Components.Types.IListFormPanel;
         },
 

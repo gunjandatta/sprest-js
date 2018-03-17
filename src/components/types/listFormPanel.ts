@@ -1,5 +1,5 @@
 import { Helper } from "gd-sprest";
-import { IListFormDisplay, IListFormEdit, IListFormProps } from ".";
+import { IListFormDisplay, IListFormEdit } from ".";
 
 /**
  * List Form Panel
@@ -20,7 +20,7 @@ export interface IListFormPanel {
 /**
  * List Form Panel Properties
  */
-export interface IListFormPanelProps extends IListFormProps {
+export interface IListFormPanelProps extends Helper.Types.IListFormProps {
     /** Class name */
     className?: string;
 

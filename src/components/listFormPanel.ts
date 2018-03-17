@@ -2,7 +2,10 @@ import { SPTypes, Types, Web } from "gd-sprest";
 import { Button, CommandBar, Panel, PanelTypes, Templates, Spinner } from "../fabric";
 import { Fabric, ICommandButtonProps, IDropdown, IDropdownOption, IPanel } from "../fabric/types";
 import { Field, ListForm } from ".";
-import { IField, IListFormDisplay, IListFormEdit, IListFormMMSFieldInfo, IListFormLookupFieldInfo, IListFormUserFieldInfo, IListFormPanel, IListFormPanelProps, IListFormResult } from "./types";
+import {
+    IField, IListFormDisplay, IListFormEdit,
+    IListFormPanel, IListFormPanelProps
+} from "./types";
 
 /**
  * Item Form
@@ -10,7 +13,7 @@ import { IField, IListFormDisplay, IListFormEdit, IListFormMMSFieldInfo, IListFo
 export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
     let _formDisplay: IListFormDisplay = null;
     let _formEdit: IListFormEdit = null;
-    let _formInfo: IListFormResult = null;
+    let _formInfo: Types.Helper.IListFormResult = null;
 
     /**
      * Methods
@@ -241,7 +244,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
     });
 
     // Create an instance of the list form
-    new ListForm({
+    ListForm.create({
         cacheKey: props.cacheKey,
         excludeFields: props.excludeFields,
         fields: props.fields,

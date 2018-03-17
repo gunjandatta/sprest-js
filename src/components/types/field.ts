@@ -1,13 +1,12 @@
 import { Helper } from "gd-sprest";
 import { IDatePicker, IDropdown, ILinkField, IPeoplePicker, ITextField, IToggle } from "../../fabric/types";
-import { IListFormFieldInfo } from ".";
 
 /**
  * Field
  */
 export interface IField {
     element: IDatePicker | IDropdown | ILinkField | IPeoplePicker | ITextField | IToggle;
-    fieldInfo: IListFormFieldInfo;
+    fieldInfo: Helper.Types.IListFormFieldInfo;
 }
 
 /**
