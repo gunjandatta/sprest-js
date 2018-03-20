@@ -18656,6 +18656,8 @@ exports.WPTabs = function (props) {
                 if (webpart.querySelector("div[webpartid='" + wpInfo.cfg.WebPartId + "']")) {
                     // Save a reference
                     _elWebPart = webpart;
+                    // Set the class
+                    _elWebPart.className += " wp-tab";
                     // Skip this webpart
                     continue;
                 }
@@ -18754,8 +18756,6 @@ exports.WPTabs = function (props) {
         onRenderDisplay: function onRenderDisplay(wpInfo) {
             // Set the webparts
             _webparts = getWebParts(wpInfo);
-            // Set the class
-            _elWebPart.className += " wp-tab";
             // Parse the webparts
             var tabs = [];
             for (var i = 0; i < _webparts.length; i++) {

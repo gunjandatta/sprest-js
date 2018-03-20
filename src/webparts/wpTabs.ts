@@ -31,6 +31,9 @@ export const WPTabs = (props: IWPTabsProps) => {
                     // Save a reference
                     _elWebPart = webpart;
 
+                    // Set the class
+                    _elWebPart.className += " wp-tab";
+
                     // Skip this webpart
                     continue;
                 }
@@ -142,9 +145,6 @@ export const WPTabs = (props: IWPTabsProps) => {
         onRenderDisplay: (wpInfo: IWebPartInfo) => {
             // Set the webparts
             _webparts = getWebParts(wpInfo);
-
-            // Set the class
-            _elWebPart.className += " wp-tab";
 
             // Parse the webparts
             let tabs: Array<IPivotLink> = [];
