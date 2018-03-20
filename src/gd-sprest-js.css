@@ -147,3 +147,16 @@
 .ms-webpart-zone.wp-tabs .ms-webpart-chrome-title {
     display: none;
 }
+
+/** Remove the spacing */
+.wp-tabs .wp-tab {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+/** Hide the vertical spacing */
+.wp-tabs .wp-tab .ms-PartSpacingVertical {
+    display: none;
+}

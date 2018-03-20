@@ -8,6 +8,7 @@ import { WebPart } from ".";
  */
 export const WPTabs = (props: IWPTabsProps) => {
     let _isContentZone: boolean = false;
+    let _elWebPart: HTMLDivElement = null;
 
     // Method to get the webparts
     let getWebParts = (wpInfo: IWebPartInfo) => {
@@ -23,10 +24,16 @@ export const WPTabs = (props: IWPTabsProps) => {
             // Parse the webparts in this zone
             let webparts = elWebPartZone.querySelectorAll(".ms-webpartzone-cell[id^='MSOZoneCell_WebPart']");
             for (let i = 0; i < webparts.length; i++) {
-                let webpart = webparts[i] as HTMLElement;
+                let webpart = webparts[i] as HTMLDivElement;
 
-                // Skip this webpart
-                if (webpart.querySelector("div[webpartid='" + wpInfo.cfg.WebPartId + "']")) { continue; }
+                // See if it's this webpart
+                if (webpart.querySelector("div[webpartid='" + wpInfo.cfg.WebPartId + "']")) {
+                    // Save a reference
+                    _elWebPart = webpart;
+
+                    // Skip this webpart
+                    continue;
+                }
 
                 // Skip hidden webparts
                 let wpTitle: string = ((webpart.querySelector(".ms-webpart-titleText") || {}) as HTMLDivElement).innerText || "";
@@ -135,6 +142,9 @@ export const WPTabs = (props: IWPTabsProps) => {
         onRenderDisplay: (wpInfo: IWebPartInfo) => {
             // Set the webparts
             _webparts = getWebParts(wpInfo);
+
+            // Set the class
+            _elWebPart.className += " wp-tab";
 
             // Parse the webparts
             let tabs: Array<IPivotLink> = [];
