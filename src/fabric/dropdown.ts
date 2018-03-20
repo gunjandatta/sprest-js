@@ -276,9 +276,19 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
             let offset = document.body.clientHeight - (position + callout.scrollHeight);
 
             // See if the context menu is off the screen
-            if(offset < 0) {
+            if(offset < 0) {                
                 // Set the top position
                 callout.style.top = (position + offset) + "px"
+
+                // Get the callout beak icon
+                let beak = callout.querySelector(".ms-ContextualHost-beak") as HTMLDivElement;
+                if(beak && beak.style.top) {
+                    // Get the position
+                    position = parseFloat(beak.style.top.replace("px", ""));
+
+                    // Update the position
+                    beak.style.top = (position - offset) + "px";
+                }
             }
         }
     });

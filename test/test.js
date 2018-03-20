@@ -11546,6 +11546,14 @@ exports.Dropdown = function (props) {
             if (offset < 0) {
                 // Set the top position
                 callout.style.top = (position + offset) + "px";
+                // Get the callout beak icon
+                var beak = callout.querySelector(".ms-ContextualHost-beak");
+                if (beak && beak.style.top) {
+                    // Get the position
+                    position = parseFloat(beak.style.top.replace("px", ""));
+                    // Update the position
+                    beak.style.top = (position - offset) + "px";
+                }
             }
         }
     });
