@@ -267,6 +267,22 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         return false;
     });
 
+    // Fix the callout position
+    _tb.get()._textField.addEventListener("click", ev => {
+        // Get the callout element
+        let callout = _callout._contextualHost ? _callout._contextualHost._contextualHost : null;
+        if (callout && callout.style.top) {
+            let position = parseFloat(callout.style.top.replace("px", ""));
+            let offset = document.body.clientHeight - (position + callout.scrollHeight);
+
+            // See if the context menu is off the screen
+            if(offset < 0) {
+                // Set the top position
+                callout.style.top = (position + offset) + "px"
+            }
+        }
+    });
+
     // Return the dropdown
     return {
         get,

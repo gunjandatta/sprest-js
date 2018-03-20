@@ -1640,10 +1640,10 @@ var _SPConfig = /** @class */ (function () {
                     return;
                 }
                 // Log
-                console.log("[gd-sprest][WebPart] Creating the web parts.");
+                console.log("[gd-sprest][WebPart] Removing the web parts.");
                 // Get the root web
                 (new lib_1.Web(lib_1.ContextInfo.siteServerRelativeUrl))
-                    .Lists("Web Part Gallery")
+                    .getCatalog(__1.SPTypes.ListTemplateType.WebPartCatalog)
                     .RootFolder()
                     .Files()
                     .execute(function (files) {
@@ -1651,7 +1651,7 @@ var _SPConfig = /** @class */ (function () {
                         var cfgWebPart = cfgWebParts[i];
                         // See if the target name exists
                         if (_this._cfgType && _this._targetName) {
-                            // Ensure it's for this list
+                            // Ensure it's for this webpart
                             if (cfgWebPart.FileName.toLowerCase() != _this._targetName) {
                                 return "continue";
                             }
@@ -10776,7 +10776,7 @@ var Mapper = __webpack_require__(5);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.64,
+    __ver: 3.66,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {
@@ -11534,6 +11534,20 @@ exports.Dropdown = function (props) {
         // Cancel the event
         ev.preventDefault();
         return false;
+    });
+    // Fix the callout position
+    _tb.get()._textField.addEventListener("click", function (ev) {
+        // Get the callout element
+        var callout = _callout._contextualHost ? _callout._contextualHost._contextualHost : null;
+        if (callout && callout.style.top) {
+            var position = parseFloat(callout.style.top.replace("px", ""));
+            var offset = document.body.clientHeight - (position + callout.scrollHeight);
+            // See if the context menu is off the screen
+            if (offset < 0) {
+                // Set the top position
+                callout.style.top = (position + offset) + "px";
+            }
+        }
     });
     // Return the dropdown
     return {
@@ -15613,7 +15627,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, "/**\r\n * Contextual Host\r\n */\r\n\r\n/** Ensure the popup is visible over the panel. */\r\n.ms-ContextualHost {\r\n    z-index: 2000;\r\n}\r\n\r\n/**\r\n * Dialog\r\n */\r\n\r\n/** Ensure the dialog is displayed above the panel */\r\n.ms-Dialog {\r\n    z-index: 1050;\r\n}\r\n\r\n/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Form Error\r\n */\r\n.ms-Label.form-error {\r\n    color: #a80000;\r\n    font-size: 16px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span { display: block; }\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: calc(100vh - 80px);\r\n    padding-bottom: 0px;\r\n}\r\n\r\n/** Ensure the panel is displayed on top */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Label */\r\n.ms-TextField > .ms-Label {\r\n    padding-left: 12px;\r\n}\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}\r\n\r\n/**\r\n * WebPart Tabs\r\n */\r\n\r\n/** Remove the spacing around the webparts */\r\n.ms-webpart-zone.wp-tabs {\r\n    border-spacing: 0px;\r\n}\r\n\r\n/** Hide the titles of the webparts */\r\n.ms-webpart-zone.wp-tabs .ms-webpart-chrome-title {\r\n    display: none;\r\n}\r\n\r\n/** Remove the spacing */\r\n.wp-tabs .wp-tab {\r\n    margin-bottom: 0px;\r\n    margin-top: 0px;\r\n    padding-bottom: 0px;\r\n    padding-top: 0px;\r\n}\r\n\r\n/** Hide the vertical spacing */\r\n.wp-tabs .wp-tab .ms-PartSpacingVertical {\r\n    display: none;\r\n}", ""]);
+exports.push([module.i, "/**\r\n * Contextual Host\r\n */\r\n\r\n/** Ensure the popup is visible over the panel. */\r\n.ms-ContextualHost {\r\n    z-index: 2000;\r\n}\r\n\r\n/**\r\n * Dialog\r\n */\r\n\r\n/** Ensure the dialog is displayed above the panel */\r\n.ms-Dialog {\r\n    z-index: 1050;\r\n}\r\n\r\n/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/** Fix the multi-select box positioning */\r\n.ms-List--dropdown .is-selectable > .ms-ListItem-secondaryText {\r\n    top: 0px;\r\n}\r\n\r\n/**\r\n * Form Error\r\n */\r\n.ms-Label.form-error {\r\n    color: #a80000;\r\n    font-size: 16px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span {\r\n    background-color: white;\r\n    box-shadow: 1px 1px 15px grey;\r\n    display: block;\r\n    padding: 10px;\r\n    position: absolute;\r\n    z-index: 5;\r\n}\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: calc(100vh - 80px);\r\n    padding-bottom: 0px;\r\n}\r\n\r\n/** Ensure the panel is displayed on top */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Label */\r\n.ms-TextField > .ms-Label {\r\n    padding-left: 12px;\r\n}\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}\r\n\r\n/**\r\n * WebPart Tabs\r\n */\r\n\r\n/** Remove the spacing around the webparts */\r\n.ms-webpart-zone.wp-tabs {\r\n    border-spacing: 0px;\r\n}\r\n\r\n/** Hide the titles of the webparts */\r\n.ms-webpart-zone.wp-tabs .ms-webpart-chrome-title {\r\n    display: none;\r\n}\r\n\r\n/** Remove the spacing */\r\n.wp-tabs .wp-tab {\r\n    margin-bottom: 0px;\r\n    margin-top: 0px;\r\n    padding-bottom: 0px;\r\n    padding-top: 0px;\r\n}\r\n\r\n/** Hide the vertical spacing */\r\n.wp-tabs .wp-tab .ms-PartSpacingVertical {\r\n    display: none;\r\n}", ""]);
 
 // exports
 

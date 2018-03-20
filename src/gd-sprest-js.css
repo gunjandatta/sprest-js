@@ -52,6 +52,11 @@
     overflow-y: auto;
 }
 
+/** Fix the multi-select box positioning */
+.ms-List--dropdown .is-selectable > .ms-ListItem-secondaryText {
+    top: 0px;
+}
+
 /**
  * Form Error
  */
@@ -81,7 +86,14 @@
 .ms-Icon.is-description span { display: none; }
 
 /** Show the description on hover */
-.ms-Icon.is-description:hover span { display: block; }
+.ms-Icon.is-description:hover span {
+    background-color: white;
+    box-shadow: 1px 1px 15px grey;
+    display: block;
+    padding: 10px;
+    position: absolute;
+    z-index: 5;
+}
 
 /**
  * Link Field
