@@ -109,6 +109,7 @@ ListForm.renderEditForm = (props: IListFormEditProps): IListFormEdit => {
                 field,
                 listName: props.info.list.Title,
                 name: fieldName,
+                webUrl: props.info.webUrl
             },
             value
         }).then(field => {

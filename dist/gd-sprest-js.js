@@ -17339,7 +17339,8 @@ exports.ListForm.renderEditForm = function (props) {
             fieldInfo: {
                 field: field,
                 listName: props.info.list.Title,
-                name: fieldName
+                name: fieldName,
+                webUrl: props.info.webUrl
             },
             value: value
         }).then(function (field) {
