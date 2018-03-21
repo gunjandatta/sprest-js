@@ -128,6 +128,14 @@
 }
 
 /**
+ * People Picker
+ */
+.ms-PeoplePicker .selected-users {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+/**
  * Text Field
  */
 
