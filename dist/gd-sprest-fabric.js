@@ -7395,11 +7395,11 @@ exports.PeoplePicker = function (props) {
                             _peoplepicker._peoplePickerSearch.value = "";
                             // Get the user information
                             var userInfo = JSON.parse(ev.currentTarget.getAttribute("data-user"));
-                            // Add the user
-                            _peoplepicker._container.querySelector(".selected-users").innerHTML += _templates.persona(userInfo);
-                            // Add the click event
-                            var users = _peoplepicker._container.querySelectorAll(".selected-users");
-                            users[users.length - 1].querySelector(".ms-Persona-actionIcon").addEventListener("click", function (ev) {
+                            // Create the user
+                            var persona = document.createElement("div");
+                            persona.innerHTML = _templates.persona(userInfo);
+                            // Set the click event
+                            persona.querySelector(".ms-Persona-actionIcon").addEventListener("click", function (ev) {
                                 var el = ev.currentTarget;
                                 // Find the persona element
                                 while (el && el.className.indexOf("ms-PeoplePicker-persona") < 0) {
@@ -7411,6 +7411,8 @@ exports.PeoplePicker = function (props) {
                                     el.parentElement.removeChild(el);
                                 }
                             });
+                            // Add the user
+                            _peoplepicker._container.querySelector(".selected-users").appendChild(persona.children[0]);
                             // Close the search box
                             _peoplepicker._contextualHostView.disposeModal();
                         });

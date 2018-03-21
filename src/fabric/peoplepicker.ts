@@ -108,12 +108,12 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
                             // Get the user information
                             let userInfo = JSON.parse((ev.currentTarget as HTMLDivElement).getAttribute("data-user"));
 
-                            // Add the user
-                            _peoplepicker._container.querySelector(".selected-users").innerHTML += _templates.persona(userInfo);
+                            // Create the user
+                            let persona = document.createElement("div");
+                            persona.innerHTML = _templates.persona(userInfo);
 
-                            // Add the click event
-                            let users = _peoplepicker._container.querySelectorAll(".selected-users");
-                            users[users.length - 1].querySelector(".ms-Persona-actionIcon").addEventListener("click", ev => {
+                            // Set the click event
+                            persona.querySelector(".ms-Persona-actionIcon").addEventListener("click", ev => {
                                 let el = ev.currentTarget as HTMLElement;
 
                                 // Find the persona element
@@ -125,6 +125,9 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
                                     el.parentElement.removeChild(el);
                                 }
                             });
+
+                            // Add the user
+                            _peoplepicker._container.querySelector(".selected-users").appendChild(persona.children[0]);
 
                             // Close the search box
                             _peoplepicker._contextualHostView.disposeModal();
