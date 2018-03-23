@@ -18640,6 +18640,11 @@ exports.WPTabs = function (props) {
                 if (i == selectedTabId) {
                     // Display the webpart
                     webpart.className = webpart.className.replace(" is-hidden", "");
+                    // See if this tab contains a calendar webpart
+                    if (webpart.querySelector(".ms-acal-rootdiv")) {
+                        // Call the window resize event to fix the events
+                        window.dispatchEvent(new Event("resize"));
+                    }
                 } else if (webpart.className.indexOf("is-hidden") < 0) {
                     // Hide the webpart
                     webpart.className += " is-hidden";
