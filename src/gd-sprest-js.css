@@ -158,6 +158,13 @@
  * WebPart Tabs
  */
 
+/** Hide the webpart */
+.ms-webpart-zone.wp-tabs > .is-hidden {
+    left: -100vw;
+    position: absolute;
+    overflow: hidden;
+}
+
 /** Remove the spacing around the webparts */
 .ms-webpart-zone.wp-tabs {
     border-spacing: 0px;

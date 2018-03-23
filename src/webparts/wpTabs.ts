@@ -127,8 +127,16 @@ export const WPTabs = (props: IWPTabsProps) => {
             // Get the webpart
             let webpart = document.querySelector("#" + _webparts[i].id) as HTMLDivElement;
             if (webpart) {
-                // Update the visibility
-                webpart.style.display = i == selectedTabId ? "" : "none";
+                // See if we are displaying this webpart
+                if (i == selectedTabId) {
+                    // Display the webpart
+                    webpart.className = webpart.className.replace(" is-hidden", "");
+                }
+                // Ensure the webpart is hidden
+                else if (webpart.className.indexOf("is-hidden") < 0) {
+                    // Hide the webpart
+                    webpart.className += " is-hidden";
+                }
             }
         }
     }
