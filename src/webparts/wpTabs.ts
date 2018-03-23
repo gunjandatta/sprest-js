@@ -134,8 +134,20 @@ export const WPTabs = (props: IWPTabsProps) => {
 
                     // See if this tab contains a calendar webpart
                     if (webpart.querySelector(".ms-acal-rootdiv")) {
-                        // Call the window resize event to fix the events
-                        window.dispatchEvent(new Event("resize"));
+                        let ev = null;
+
+                        // Create the resize event
+                        try { ev = new Event("resize"); }
+                        // This will fail for IE
+                        catch (ev) {
+                            // Create the event
+                            ev = document.createEvent("Event");
+                            ev.initEvent("resize", true, false);
+                        }
+                        finally {
+                            // Call the window resize event to fix the events
+                            ev ? window.dispatchEvent(ev) : null;
+                        }
                     }
                 }
                 // Ensure the webpart is hidden
