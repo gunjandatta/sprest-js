@@ -18648,10 +18648,10 @@ exports.WPTabs = function (props) {
                             ev_1 = new Event("resize");
                         }
                         // This will fail for IE
-                        catch (ev) {
+                        catch (e) {
                             // Create the event
-                            ev = document.createEvent("Event");
-                            ev.initEvent("resize", true, false);
+                            ev_1 = document.createEvent("Event");
+                            ev_1.initEvent("resize", true, false);
                         } finally {
                             // Call the window resize event to fix the events
                             ev_1 ? window.dispatchEvent(ev_1) : null;

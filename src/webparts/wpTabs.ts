@@ -139,7 +139,7 @@ export const WPTabs = (props: IWPTabsProps) => {
                         // Create the resize event
                         try { ev = new Event("resize"); }
                         // This will fail for IE
-                        catch (ev) {
+                        catch (e) {
                             // Create the event
                             ev = document.createEvent("Event");
                             ev.initEvent("resize", true, false);
