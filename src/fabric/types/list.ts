@@ -3,7 +3,13 @@ import { Fabric, IProps } from ".";
 /**
  * List
  */
-export interface IList extends Fabric.IList { }
+export interface IList {
+    /** Method to append the items. */
+    appendItems?: (items: Array<string>) => void;
+
+    /** Returns the fabric component. */
+    get(): Fabric.IList;
+}
 
 /**
  * List Properties

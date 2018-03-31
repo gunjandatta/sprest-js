@@ -6714,7 +6714,7 @@ exports.Dropdown = function (props) {
             el: el,
             items: renderItems(options),
             onClick: onClick
-        });
+        }).get();
     };
     // Method to get the toggle element
     var get = function get() {
@@ -6988,6 +6988,33 @@ var _1 = __webpack_require__(1);
  * List
  */
 exports.List = function (props) {
+    // Method to append list items
+    var appendItems = function appendItems(items) {
+        if (items === void 0) {
+            items = [];
+        }
+        // Create the list
+        var el = document.createElement("div");
+        var list = exports.List({ el: el, items: items }).get();
+        // Parse the items
+        for (var i = 0; i < list._listItemComponents.length; i++) {
+            // Get the item
+            var elItem = list._listItemComponents[i]._container;
+            // See if the click event is defined
+            if (props.onClick && _list._listItemComponents) {
+                // Add the click event
+                elItem.addEventListener("click", props.onClick.bind(_list._listItemComponents[i]));
+            }
+            // Append the list item
+            _list._container.appendChild(elItem);
+        }
+        // Append the items
+        _list._listItemComponents = _list._listItemComponents.concat(list._listItemComponents);
+    };
+    // Method to get the fabric component
+    var get = function get() {
+        return _list;
+    };
     // Set the template
     props.el.innerHTML = _1.Templates.List(props);
     // Create the list and parse the items
@@ -7000,7 +7027,10 @@ exports.List = function (props) {
         }
     }
     // Return the list
-    return _list;
+    return {
+        appendItems: appendItems,
+        get: get
+    };
 };
 
 /***/ }),
