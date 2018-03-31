@@ -153,6 +153,32 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
     // Render the time picker
     let _tp: IDropdown = props.showTime ? renderTimePicker(props.el.children[1] as HTMLElement) : null;
 
+    // Add a click event to the date picker input
+    _dp.picker.on({
+        "open": () => {
+            // Get the date picker
+            let dp = _dp.picker.$root[0].children[0];
+
+            // Wait for the date picker to be visible
+            let ctr = 0;
+            let id = setInterval(() => {
+                if (dp.getBoundingClientRect().top > 0) {
+                    // Clear the interval
+                    clearInterval(id);
+
+                    // Ensure the date picker is visible
+                    dp.scrollIntoView(false);
+                }
+
+                // See if we have exceeded the max attempts
+                if (++ctr > 5) {
+                    // Clear the interval
+                    clearInterval(id);
+                }
+            }, 100);
+        }
+    });
+
     // Return the date picker
     return {
         getDate,

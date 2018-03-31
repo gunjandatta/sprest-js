@@ -77,6 +77,8 @@ export interface IContextualMenu {
  */
 export interface IDatePicker {
     picker: {
+        $node: Array<HTMLInputElement>;
+        $root: Array<HTMLDivElement>;
         component: {
             formats: any;
             item: any;

@@ -1,8 +1,14 @@
+// Import the js
+import "core-js/es6/promise";
 import { Helper, List, SPTypes, Types } from "gd-sprest";
 import { Components, Fabric, WebParts, $REST } from "../build";
+
+// Import the css
 import "../build/lib/css/fabric.min.css";
 import "../build/lib/css/fabric.components.min.css";
 import "../build/lib/css/gd-sprest-js.css";
+
+// Define the SP global variable
 declare var SP;
 
 // Create the global variable
@@ -10,7 +16,7 @@ window["TestJS"] = {
     // Configuration
     Configuration: {
         // List
-        List: new Helper.SPConfig({
+        List: Helper.SPConfig({
             ListCfg: [
                 /** Test List */
                 {
@@ -135,7 +141,7 @@ window["TestJS"] = {
         }),
 
         // WebPart
-        WebPart: new Helper.SPConfig({
+        WebPart: Helper.SPConfig({
             WebPartCfg: [
                 {
                     FileName: "wp_test_js.webpart",

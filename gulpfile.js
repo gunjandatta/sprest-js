@@ -87,7 +87,7 @@ gulp.task("package", ["package-bundle", "package-fabric-bundle", "package-minify
 // Bundle the library
 gulp.task("package-bundle", ["update-lib-reference"], () => {
     // Get the source files
-    return gulp.src(["build/lib/css/gd-sprest-js.css", "build/index.js"])
+    return gulp.src(["build/lib/css/gd-sprest-js.css", "node_modules/core-js/es6/promise", "build/index.js"])
         // Run webpack to bundle the library
         .pipe(gulpWebpack({
             output: {

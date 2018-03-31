@@ -276,7 +276,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
             let offset = document.body.clientHeight - (position + callout.scrollHeight);
 
             // See if the context menu is off the screen
-            if(offset < 0) {                
+            if(offset < 0) {
                 // Set the top position
                 callout.style.top = (position + offset) + "px"
 
