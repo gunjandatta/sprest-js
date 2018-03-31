@@ -13353,12 +13353,15 @@ exports.List = function (props) {
     };
     // Method to get the fabric component
     var get = function () { return _list; };
+    // Method to get the list items
+    var getItems = function () { return _list._listItemComponents; };
     // Set the template
     props.el.innerHTML = _1.Templates.List(props);
-    // Create the list and parse the items
+    // Create the list
     var _list = new _1.fabric.List(props.el.querySelector(".ms-List"));
     // See if the click event is defined
     if (props.onClick && _list._listItemComponents) {
+        // Parse the list items
         for (var i = 0; i < _list._listItemComponents.length; i++) {
             // Add the click event
             _list._listItemComponents[i]._container.addEventListener("click", props.onClick.bind(_list._listItemComponents[i]));
@@ -13367,7 +13370,8 @@ exports.List = function (props) {
     // Return the list
     return {
         appendItems: appendItems,
-        get: get
+        get: get,
+        getItems: getItems
     };
 };
 

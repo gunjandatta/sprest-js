@@ -33,14 +33,18 @@ export const List = (props: IListProps): IList => {
     // Method to get the fabric component
     let get = (): Fabric.IList => { return _list; }
 
+    // Method to get the list items
+    let getItems = (): Array<Fabric.IListItem> => { return _list._listItemComponents; }
+
     // Set the template
     props.el.innerHTML = Templates.List(props);
 
-    // Create the list and parse the items
+    // Create the list
     let _list: Fabric.IList = new fabric.List(props.el.querySelector(".ms-List"));
 
     // See if the click event is defined
     if (props.onClick && _list._listItemComponents) {
+        // Parse the list items
         for (let i = 0; i < _list._listItemComponents.length; i++) {
             // Add the click event
             _list._listItemComponents[i]._container.addEventListener("click", props.onClick.bind(_list._listItemComponents[i]));
@@ -50,6 +54,7 @@ export const List = (props: IListProps): IList => {
     // Return the list
     return {
         appendItems,
-        get
+        get,
+        getItems
     };
 }

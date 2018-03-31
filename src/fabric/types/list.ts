@@ -9,6 +9,9 @@ export interface IList {
 
     /** Returns the fabric component. */
     get(): Fabric.IList;
+
+    /** Returns the fabric list item components. */
+    getItems(): Array<Fabric.IListItem>;
 }
 
 /**
