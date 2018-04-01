@@ -38,7 +38,7 @@ export const TextField = (props: ITextFieldProps): ITextField => {
 
     // Method to set the value
     let setValue = (value: string) => {
-        // Get the text field
+        // Set the text field
         _textfield._textField.value = value || "";
     }
 

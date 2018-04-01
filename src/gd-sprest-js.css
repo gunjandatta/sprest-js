@@ -136,6 +136,29 @@
 }
 
 /**
+ * Search Box
+ */
+
+/** Hide the search box by default */
+.ms-SearchBox > .ms-SearchBox-search {
+    display: none;
+}
+
+/** Show the search box */
+.ms-SearchBox.is-active > .ms-SearchBox-clear, .ms-SearchBox.is-active > .ms-SearchBox-search {
+    display: inline;
+    margin-left: 0px;
+    position: relative;
+}
+
+/** Search Box button */
+.ms-SearchBox > .ms-SearchBox-search > .ms-CommandButton-button {
+    background-color: #0078d7;
+    color: #fff;
+    height: 36px;
+}
+
+/**
  * Text Field
  */
 

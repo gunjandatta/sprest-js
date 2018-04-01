@@ -209,7 +209,19 @@ export interface IPeoplePicker {
  * Pivot
  */
 export interface IPivot {
-    _container: HTMLDivElement
+    _container: HTMLDivElement;
+}
+
+/**
+ * Search Box Component
+ */
+export interface ISearchBox {
+    _clearOnly: boolean;
+    _container: HTMLDivElement;
+    _searchBox: HTMLInputElement;
+    _searchBoxClearButton: HTMLDivElement;
+    _searchBoxExitButton?: HTMLDivElement;
+    _searchBoxField: HTMLInputElement;
 }
 
 /**

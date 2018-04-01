@@ -18,6 +18,7 @@ export * from "./numberfield";
 export * from "./panel";
 export * from "./peoplepicker";
 export * from "./pivot";
+export * from "./searchbox";
 export * from "./spinner";
 export * from "./table";
 export * from "./textfield";

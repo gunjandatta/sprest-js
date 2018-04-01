@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,9 +73,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(42));
 __export(__webpack_require__(43));
-__export(__webpack_require__(62));
+__export(__webpack_require__(44));
 __export(__webpack_require__(63));
 __export(__webpack_require__(64));
 __export(__webpack_require__(65));
@@ -83,7 +82,8 @@ __export(__webpack_require__(66));
 __export(__webpack_require__(67));
 __export(__webpack_require__(68));
 __export(__webpack_require__(69));
-var Types = __webpack_require__(70);
+__export(__webpack_require__(70));
+var Types = __webpack_require__(71);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -101,9 +101,8 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 // Office Fabric-UI JavaScript Library
-__export(__webpack_require__(20));
+__export(__webpack_require__(21));
 // Fabric Components
-__export(__webpack_require__(25));
 __export(__webpack_require__(26));
 __export(__webpack_require__(27));
 __export(__webpack_require__(28));
@@ -118,16 +117,18 @@ __export(__webpack_require__(36));
 __export(__webpack_require__(37));
 __export(__webpack_require__(38));
 __export(__webpack_require__(39));
-__export(__webpack_require__(98));
+__export(__webpack_require__(40));
 __export(__webpack_require__(99));
+__export(__webpack_require__(13));
 __export(__webpack_require__(100));
 __export(__webpack_require__(101));
 __export(__webpack_require__(102));
+__export(__webpack_require__(103));
 // Templates
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(123);
+var Types = __webpack_require__(125);
 exports.Types = Types;
 
 /***/ }),
@@ -140,8 +141,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(41));
-__export(__webpack_require__(71));
+__export(__webpack_require__(42));
 __export(__webpack_require__(72));
 __export(__webpack_require__(73));
 __export(__webpack_require__(74));
@@ -151,8 +151,9 @@ __export(__webpack_require__(77));
 __export(__webpack_require__(78));
 __export(__webpack_require__(79));
 __export(__webpack_require__(80));
+__export(__webpack_require__(81));
 __export(__webpack_require__(11));
-var Types = __webpack_require__(81);
+var Types = __webpack_require__(82);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -196,10 +197,10 @@ var Helper = __webpack_require__(8);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(6);
 exports.SPTypes = mapper_1.SPTypes;
-var Types = __webpack_require__(96);
+var Types = __webpack_require__(97);
 exports.Types = Types;
 __export(__webpack_require__(2));
-__export(__webpack_require__(97));
+__export(__webpack_require__(98));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -215,7 +216,6 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(103));
 __export(__webpack_require__(104));
 __export(__webpack_require__(105));
 __export(__webpack_require__(106));
@@ -235,6 +235,8 @@ __export(__webpack_require__(119));
 __export(__webpack_require__(120));
 __export(__webpack_require__(121));
 __export(__webpack_require__(122));
+__export(__webpack_require__(123));
+__export(__webpack_require__(124));
 
 /***/ }),
 /* 5 */
@@ -250,7 +252,7 @@ var Components = __webpack_require__(9);
 exports.Components = Components;
 var WebParts = __webpack_require__(7);
 exports.WebParts = WebParts;
-var rest_1 = __webpack_require__(134);
+var rest_1 = __webpack_require__(136);
 exports.$REST = rest_1.RESTJS;
 
 /***/ }),
@@ -260,11 +262,11 @@ exports.$REST = rest_1.RESTJS;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Mapper = __webpack_require__(44);
+var Mapper = __webpack_require__(45);
 exports.Mapper = Mapper;
-var SPTypes = __webpack_require__(57);
+var SPTypes = __webpack_require__(58);
 exports.SPTypes = SPTypes;
-var Types = __webpack_require__(58);
+var Types = __webpack_require__(59);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -281,12 +283,12 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(129));
-__export(__webpack_require__(13));
-__export(__webpack_require__(130));
 __export(__webpack_require__(131));
+__export(__webpack_require__(14));
 __export(__webpack_require__(132));
-var Types = __webpack_require__(133);
+__export(__webpack_require__(133));
+__export(__webpack_require__(134));
+var Types = __webpack_require__(135);
 exports.Types = Types;
 
 /***/ }),
@@ -299,22 +301,22 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(40));
-__export(__webpack_require__(82));
+__export(__webpack_require__(41));
 __export(__webpack_require__(83));
-__export(__webpack_require__(85));
+__export(__webpack_require__(84));
 __export(__webpack_require__(86));
 __export(__webpack_require__(87));
 __export(__webpack_require__(88));
 __export(__webpack_require__(89));
 __export(__webpack_require__(90));
 __export(__webpack_require__(91));
-__export(__webpack_require__(12));
 __export(__webpack_require__(92));
+__export(__webpack_require__(12));
 __export(__webpack_require__(93));
-var SP = __webpack_require__(94);
+__export(__webpack_require__(94));
+var SP = __webpack_require__(95);
 exports.SP = SP;
-var Types = __webpack_require__(95);
+var Types = __webpack_require__(96);
 exports.Types = Types;
 //# sourceMappingURL=index.js.map
 
@@ -331,10 +333,10 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(125));
-__export(__webpack_require__(126));
 __export(__webpack_require__(127));
-var Types = __webpack_require__(128);
+__export(__webpack_require__(128));
+__export(__webpack_require__(129));
+var Types = __webpack_require__(130);
 exports.Types = Types;
 
 /***/ }),
@@ -2555,7 +2557,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return 1 === arguments.length ? this.off(a, "**") : this.off(b, a || "**", c);
     }, size: function size() {
       return this.length;
-    } }), n.fn.andSelf = n.fn.addBack, "function" == "function" && __webpack_require__(23) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+    } }), n.fn.andSelf = n.fn.addBack, "function" == "function" && __webpack_require__(24) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
     return n;
   }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));var Nb = a.jQuery,
@@ -2563,7 +2565,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return a.$ === n && (a.$ = Ob), b && a.jQuery === n && (a.jQuery = Nb), n;
   }, b || (a.jQuery = a.$ = n), n;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)(module)))
 
 /***/ }),
 /* 11 */
@@ -2622,7 +2624,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(84));
+__export(__webpack_require__(85));
 var lib_1 = __webpack_require__(2);
 var __1 = __webpack_require__(3);
 var _1 = __webpack_require__(8);
@@ -2641,6 +2643,12 @@ exports.SPConfig = function (cfg, webUrl) {
     var createContentTypes = function (contentTypes, cfgContentTypes) {
         // Return a promise
         return new Promise(function (resolve, reject) {
+            // Ensure fields exist
+            if (cfgContentTypes == null || cfgContentTypes.length == 0) {
+                // Resolve the promise
+                resolve();
+                return;
+            }
             var _loop_1 = function (i) {
                 var cfgContentType = cfgContentTypes[i];
                 // See if this content type already exists
@@ -2800,6 +2808,12 @@ exports.SPConfig = function (cfg, webUrl) {
     var createFields = function (fields, cfgFields) {
         // Return a promise
         return new Promise(function (resolve, reject) {
+            // Ensure fields exist
+            if (cfgFields == null || cfgFields.length == 0) {
+                // Resolve the promise
+                resolve();
+                return;
+            }
             var _loop_3 = function (i) {
                 var cfgField = cfgFields[i];
                 // See if this field already exists
@@ -3378,8 +3392,6 @@ exports.SPConfig = function (cfg, webUrl) {
                         Expand: ["ContentTypes", "Fields", "UserCustomActions", "Views"]
                     })
                         .execute(function (list) {
-                        var ctr = 0;
-                        var ctrExecutions = 0;
                         // See if the title field is being updated
                         if (cfgList.TitleFieldDisplayName) {
                             // Parse the fields
@@ -3398,44 +3410,22 @@ exports.SPConfig = function (cfg, webUrl) {
                                 }
                             }
                         }
-                        // The post execution method
-                        var postExeuction = function () {
-                            // Increment the counter
-                            if (++ctr >= ctrExecutions) {
-                                // Trigger the event
-                                cfgList.onUpdated ? cfgList.onUpdated(list) : null;
-                                // Update the next list
-                                request(idx + 1, resolve);
-                            }
-                        };
-                        // See if we are creating fields
-                        if (cfgList.CustomFields && cfgList.CustomFields.length > 0) {
-                            // Increment the counter
-                            ctrExecutions++;
-                            // Create the fields
-                            createFields(list.Fields, cfgList.CustomFields).then(postExeuction);
-                        }
-                        // See if we are creating the content types
-                        if (cfgList.ContentTypes && cfgList.ContentTypes.length > 0) {
-                            // Increment the counter
-                            ctrExecutions++;
+                        // Create the fields
+                        createFields(list.Fields, cfgList.CustomFields).then(function () {
                             // Create the content types
-                            createContentTypes(list.ContentTypes, cfgList.ContentTypes).then(postExeuction);
-                        }
-                        // See if we are creating the fields
-                        if (cfgList.ViewInformation && cfgList.ViewInformation.length > 0) {
-                            // Increment the counter
-                            ctrExecutions++;
-                            // Update the views
-                            createViews(list.Views, cfgList.ViewInformation).then(postExeuction);
-                        }
-                        // See if we are creating the user custom actions
-                        if (cfgList.UserCustomActions && cfgList.UserCustomActions.length > 0) {
-                            // Increment the counter
-                            ctrExecutions++;
-                            // Update the views
-                            createUserCustomActions(list.UserCustomActions, cfgList.UserCustomActions);
-                        }
+                            createContentTypes(list.ContentTypes, cfgList.ContentTypes).then(function () {
+                                // Update the views
+                                createViews(list.Views, cfgList.ViewInformation).then(function () {
+                                    // Update the views
+                                    createUserCustomActions(list.UserCustomActions, cfgList.UserCustomActions).then(function () {
+                                        // Trigger the event
+                                        cfgList.onUpdated ? cfgList.onUpdated(list) : null;
+                                        // Update the next list
+                                        request(idx + 1, resolve);
+                                    });
+                                });
+                            });
+                        });
                     });
                 }
                 else {
@@ -3485,6 +3475,8 @@ exports.SPConfig = function (cfg, webUrl) {
                     for (var _i = 0; _i < arguments.length; _i++) {
                         args[_i] = arguments[_i];
                     }
+                    // Log
+                    console.log("[gd-sprest][View] The updates for the '" + cfgView.ViewName + "' view has completed.");
                     // Trigger the event
                     cfgView.onUpdated ? cfgView.onUpdated(view) : null;
                     // See if we are done
@@ -3581,38 +3573,66 @@ exports.SPConfig = function (cfg, webUrl) {
                 if (cfg.Fields && cfg.Fields.length > 0) {
                     // Increment the counter
                     ctrExecutions++;
+                    // Log
+                    console.log("[gd-sprest][Fields] Starting the requests.");
                     // Get the fields
                     web.Fields().execute(function (fields) {
                         // Create the fields
-                        createFields(fields, cfg.Fields).then(postExecute);
+                        createFields(fields, cfg.Fields).then(function () {
+                            // Log
+                            console.log("[gd-sprest][Fields] Completed the requests.");
+                            // Execute the post execute method
+                            postExecute();
+                        });
                     });
                 }
                 // See if we are creating the content types
                 if (cfg.ContentTypes && cfg.ContentTypes.length > 0) {
                     // Increment the counter
                     ctrExecutions++;
+                    // Log
+                    console.log("[gd-sprest][Content Types] Starting the requests.");
                     // Get the content types
                     web.ContentTypes().execute(function (contentTypes) {
                         // Create the content types
-                        createContentTypes(contentTypes, cfg.ContentTypes).then(postExecute);
+                        createContentTypes(contentTypes, cfg.ContentTypes).then(function () {
+                            // Log
+                            console.log("[gd-sprest][Content Types] Completed the requests.");
+                            // Execute the post execute method
+                            postExecute();
+                        });
                     }, true);
                 }
                 // See if we are creating the lists
                 if (cfg.ListCfg && cfg.ListCfg.length) {
                     // Increment the counter
                     ctrExecutions++;
+                    // Log
+                    console.log("[gd-sprest][Lists] Starting the requests.");
                     // Get the lists
                     web.Lists().execute(function (lists) {
                         // Create the lists
-                        createLists(lists, cfg.ListCfg).then(postExecute);
+                        createLists(lists, cfg.ListCfg).then(function () {
+                            // Log
+                            console.log("[gd-sprest][Lists] Completed the requests.");
+                            // Execute the post execute method
+                            postExecute();
+                        });
                     }, true);
                 }
                 // See if we are creating the webparts
                 if (cfg.WebPartCfg && cfg.WebPartCfg.length > 0) {
                     // Increment the counter
                     ctrExecutions++;
+                    // Log
+                    console.log("[gd-sprest][WebParts] Starting the requests.");
                     // Create the webparts
-                    createWebParts().then(postExecute);
+                    createWebParts().then(function () {
+                        // Log
+                        console.log("[gd-sprest][WebParts] Completed the requests.");
+                        // Execute the post execute method
+                        postExecute();
+                    });
                 }
                 // See if we are creating custom actions
                 if (cfg.CustomActionCfg) {
@@ -3620,21 +3640,35 @@ exports.SPConfig = function (cfg, webUrl) {
                     if (cfg.CustomActionCfg.Site) {
                         // Increment the counter
                         ctrExecutions++;
+                        // Log
+                        console.log("[gd-sprest][Site Custom Actions] Starting the requests.");
                         // Get the site
                         (new lib_1.Site(webUrl))
                             .UserCustomActions().execute(function (customActions) {
                             // Create the user custom actions
-                            createUserCustomActions(customActions, cfg.CustomActionCfg.Site).then(postExecute);
+                            createUserCustomActions(customActions, cfg.CustomActionCfg.Site).then(function () {
+                                // Log
+                                console.log("[gd-sprest][Site Custom Actions] Completed the requests.");
+                                // Execute the post execute method
+                                postExecute();
+                            });
                         });
                     }
                     // See if we are targeting the web
-                    if (cfg.CustomActionCfg.Site) {
+                    if (cfg.CustomActionCfg.Web) {
                         // Increment the counter
                         ctrExecutions++;
+                        // Log
+                        console.log("[gd-sprest][Web Custom Actions] Starting the requests.");
                         // Get the user custom actions
                         web.UserCustomActions().execute(function (customActions) {
                             // Create the user custom actions
-                            createUserCustomActions(customActions, cfg.CustomActionCfg.Web).then(postExecute);
+                            createUserCustomActions(customActions, cfg.CustomActionCfg.Web).then(function () {
+                                // Log
+                                console.log("[gd-sprest][Web Custom Actions] Completed the requests.");
+                                // Execute the post execute method
+                                postExecute();
+                            });
                         });
                     }
                 }
@@ -3665,6 +3699,75 @@ exports.SPConfig = function (cfg, webUrl) {
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(1);
+/**
+ * Search Box Types
+ */
+var SearchBoxTypes;
+(function (SearchBoxTypes) {
+    SearchBoxTypes[SearchBoxTypes["Collapsed"] = 0] = "Collapsed";
+    SearchBoxTypes[SearchBoxTypes["CommandBar"] = 1] = "CommandBar";
+    SearchBoxTypes[SearchBoxTypes["Default"] = 2] = "Default";
+})(SearchBoxTypes = exports.SearchBoxTypes || (exports.SearchBoxTypes = {}));
+/**
+ * Search Box
+ */
+exports.SearchBox = function (props) {
+    // Method to get the fabric component
+    var get = function get() {
+        // Return the textfield
+        return _searchbox;
+    };
+    // Method to get the value
+    var getValue = function getValue() {
+        // Get the text field value
+        return _searchbox._searchBoxField.value || "";
+    };
+    // Method to set the value
+    var setValue = function setValue(value) {
+        // Set the text field
+        _searchbox._searchBoxField.value = value || "";
+    };
+    // Add the search box html
+    props.el.innerHTML = _1.Templates.SearchBox(props);
+    // Create the textfield
+    var _searchbox = new _1.fabric.SearchBox(props.el.firstElementChild);
+    // Set the key up event
+    _searchbox._searchBoxField.addEventListener("keyup", function (ev) {
+        // See if the "Enter" key was hit
+        if (ev.keyCode == 13) {
+            // Call the click event
+            props.onClick ? props.onClick(getValue()) : null;
+        }
+    });
+    // Set the clear click event
+    _searchbox._searchBoxClearButton.addEventListener("click", function (ev) {
+        // Disable postback
+        ev ? ev.preventDefault() : null;
+    });
+    // Set the search click event
+    _searchbox._container.querySelector(".ms-SearchBox-search").addEventListener("click", function (ev) {
+        // Disable postback
+        ev ? ev.preventDefault() : null;
+        // Call the click event
+        props.onClick ? props.onClick(getValue()) : null;
+    });
+    // Return the search box
+    return {
+        get: get,
+        getValue: getValue,
+        setValue: setValue
+    };
+};
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3836,19 +3939,19 @@ exports.WPCfg = {
 };
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(15);
+__webpack_require__(16);
 module.exports = __webpack_require__(5);
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(16);
+var content = __webpack_require__(17);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -3862,7 +3965,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(18)(content, options);
+var update = __webpack_require__(19)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -3894,21 +3997,21 @@ if(false) {
 }
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(17)(false);
+exports = module.exports = __webpack_require__(18)(false);
 // imports
 
 
 // module
-exports.push([module.i, "/**\r\n * Contextual Host\r\n */\r\n\r\n/** Ensure the popup is visible over the panel. */\r\n.ms-ContextualHost {\r\n    z-index: 2000;\r\n}\r\n\r\n/**\r\n * Dialog\r\n */\r\n\r\n/** Ensure the dialog is displayed above the panel */\r\n.ms-Dialog {\r\n    z-index: 1050;\r\n}\r\n\r\n/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/** Fix the multi-select box positioning */\r\n.ms-List--dropdown .is-selectable > .ms-ListItem-secondaryText {\r\n    top: 0px;\r\n}\r\n\r\n/**\r\n * Form Error\r\n */\r\n.ms-Label.form-error {\r\n    color: #a80000;\r\n    font-size: 16px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span {\r\n    background-color: white;\r\n    box-shadow: 1px 1px 15px grey;\r\n    display: block;\r\n    padding: 10px;\r\n    position: absolute;\r\n    z-index: 5;\r\n}\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: calc(100vh - 80px);\r\n    padding-bottom: 0px;\r\n}\r\n\r\n/** Ensure the panel is displayed on top */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * People Picker\r\n */\r\n.ms-PeoplePicker .selected-users {\r\n    max-height: 250px;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Label */\r\n.ms-TextField > .ms-Label {\r\n    padding-left: 12px;\r\n}\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}\r\n\r\n/**\r\n * WebPart Tabs\r\n */\r\n\r\n/** Hide the webpart */\r\n.ms-webpart-zone.wp-tabs > .is-hidden {\r\n    left: -100vw;\r\n    position: absolute;\r\n    overflow: hidden;\r\n}\r\n\r\n/** Remove the spacing around the webparts */\r\n.ms-webpart-zone.wp-tabs {\r\n    border-spacing: 0px;\r\n}\r\n\r\n/** Hide the titles of the webparts */\r\n.ms-webpart-zone.wp-tabs .ms-webpart-chrome-title {\r\n    display: none;\r\n}\r\n\r\n/** Remove the spacing */\r\n.wp-tabs .wp-tab {\r\n    margin-bottom: 0px;\r\n    margin-top: 0px;\r\n    padding-bottom: 0px;\r\n    padding-top: 0px;\r\n}\r\n\r\n/** Hide the vertical spacing */\r\n.wp-tabs .wp-tab .ms-PartSpacingVertical {\r\n    display: none;\r\n}", ""]);
+exports.push([module.i, "/**\r\n * Contextual Host\r\n */\r\n\r\n/** Ensure the popup is visible over the panel. */\r\n.ms-ContextualHost {\r\n    z-index: 2000;\r\n}\r\n\r\n/**\r\n * Dialog\r\n */\r\n\r\n/** Ensure the dialog is displayed above the panel */\r\n.ms-Dialog {\r\n    z-index: 1050;\r\n}\r\n\r\n/**\r\n * Display Form\r\n */\r\n\r\n/** Add an underline to the field */\r\n.display-form {\r\n    border-bottom: 1px solid #c8c8c8;\r\n    padding: 5px 0px;\r\n}\r\n.display-form:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** The field value */\r\n.display-form .field-value{\r\n    font-size: 14px;\r\n    font-weight: 300;\r\n    padding-left: 5px;\r\n    padding-top: 5px;\r\n}\r\n\r\n/**\r\n * Dropdown\r\n */\r\n\r\n/** Update the font color to make it more visible. */\r\n.dropdown .textfield .ms-TextField-field {\r\n    color: #444;\r\n}\r\n\r\n/** Set the max height of the dropdown */\r\n.ms-List--dropdown {\r\n    max-height: 50vh;\r\n    overflow-y: auto;\r\n}\r\n\r\n/** Fix the multi-select box positioning */\r\n.ms-List--dropdown .is-selectable > .ms-ListItem-secondaryText {\r\n    top: 0px;\r\n}\r\n\r\n/**\r\n * Form Error\r\n */\r\n.ms-Label.form-error {\r\n    color: #a80000;\r\n    font-size: 16px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Field\r\n */\r\n\r\n/** Label **/\r\n.field-label {\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n    padding-left: 12px;\r\n}\r\n\r\n/**\r\n * Label\r\n */\r\n\r\n/** Hide the description by default */\r\n.ms-Icon.is-description span { display: none; }\r\n\r\n/** Show the description on hover */\r\n.ms-Icon.is-description:hover span {\r\n    background-color: white;\r\n    box-shadow: 1px 1px 15px grey;\r\n    display: block;\r\n    padding: 10px;\r\n    position: absolute;\r\n    z-index: 5;\r\n}\r\n\r\n/**\r\n * Link Field\r\n */\r\n\r\n /** Add the underline */\r\n.ms-LinkField {\r\n    border-bottom: 1px solid #c8c8c8;\r\n}\r\n.ms-LinkField:hover {\r\n    border-color: #767676;\r\n}\r\n\r\n/** Align the link */\r\n.ms-LinkField .ms-Link {\r\n    padding-left: 5px;\r\n}\r\n\r\n/**\r\n * Panel\r\n */\r\n\r\n/** Fix the height */\r\n.ms-Panel-contentInner {\r\n    height: calc(100vh - 80px);\r\n    padding-bottom: 0px;\r\n}\r\n\r\n/** Ensure the panel is displayed on top */\r\n.ms-PanelHost {\r\n    z-index: 1000;\r\n}\r\n\r\n/**\r\n * People Picker\r\n */\r\n.ms-PeoplePicker .selected-users {\r\n    max-height: 250px;\r\n    overflow-y: auto;\r\n}\r\n\r\n/**\r\n * Search Box\r\n */\r\n\r\n/** Hide the search box by default */\r\n.ms-SearchBox > .ms-SearchBox-search {\r\n    display: none;\r\n}\r\n\r\n/** Show the search box */\r\n.ms-SearchBox.is-active > .ms-SearchBox-clear, .ms-SearchBox.is-active > .ms-SearchBox-search {\r\n    display: inline;\r\n    margin-left: 0px;\r\n    position: relative;\r\n}\r\n\r\n/** Search Box button */\r\n.ms-SearchBox > .ms-SearchBox-search > .ms-CommandButton-button {\r\n    background-color: #0078d7;\r\n    color: #fff;\r\n    height: 36px;\r\n}\r\n\r\n/**\r\n * Text Field\r\n */\r\n\r\n/** Label */\r\n.ms-TextField > .ms-Label {\r\n    padding-left: 12px;\r\n}\r\n\r\n/** Update the disabled labels font color */\r\n.ms-TextField .ms-TextField-field:disabled {\r\n    color: #444;\r\n}\r\n\r\n/** Update the label for the underline type */\r\n.ms-TextField.ms-TextField--underlined > .ms-Label.field-label {\r\n    display: block;\r\n}\r\n\r\n/**\r\n * WebPart Tabs\r\n */\r\n\r\n/** Hide the webpart */\r\n.ms-webpart-zone.wp-tabs > .is-hidden {\r\n    left: -100vw;\r\n    position: absolute;\r\n    overflow: hidden;\r\n}\r\n\r\n/** Remove the spacing around the webparts */\r\n.ms-webpart-zone.wp-tabs {\r\n    border-spacing: 0px;\r\n}\r\n\r\n/** Hide the titles of the webparts */\r\n.ms-webpart-zone.wp-tabs .ms-webpart-chrome-title {\r\n    display: none;\r\n}\r\n\r\n/** Remove the spacing */\r\n.wp-tabs .wp-tab {\r\n    margin-bottom: 0px;\r\n    margin-top: 0px;\r\n    padding-bottom: 0px;\r\n    padding-top: 0px;\r\n}\r\n\r\n/** Hide the vertical spacing */\r\n.wp-tabs .wp-tab .ms-PartSpacingVertical {\r\n    display: none;\r\n}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 /*
@@ -3990,7 +4093,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -4056,7 +4159,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(19);
+var	fixUrls = __webpack_require__(20);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -4372,7 +4475,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 
@@ -4467,7 +4570,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4480,17 +4583,17 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 // Include the fabric js
-__export(__webpack_require__(21));
+__export(__webpack_require__(22));
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var $ = __webpack_require__(10);
-__webpack_require__(24);
+__webpack_require__(25);
 //Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
 /**
  * Office UI Fabric JS 1.5.0
@@ -5602,7 +5705,7 @@ var fabric;!function (e) {
 }(fabric || (fabric = {}));exports.fabric = fabric;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -5630,7 +5733,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -5639,7 +5742,7 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6025,7 +6128,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6055,7 +6158,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6101,7 +6204,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6151,7 +6254,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6217,7 +6320,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6242,7 +6345,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6267,7 +6370,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6435,7 +6538,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6484,7 +6587,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6753,7 +6856,7 @@ exports.Dropdown = function (props) {
 };
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6849,7 +6952,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6913,7 +7016,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6932,7 +7035,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7068,7 +7171,7 @@ exports.NumberField = function (props) {
 };
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7217,7 +7320,7 @@ exports.Panel = function (props) {
 };
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7385,7 +7488,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7697,7 +7800,7 @@ exports.App = {
 //# sourceMappingURL=app.js.map
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8289,7 +8392,7 @@ exports.ContextInfo = _ContextInfo;
 //# sourceMappingURL=contextInfo.js.map
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8323,7 +8426,7 @@ exports.RequestType = {
 //# sourceMappingURL=requestType.js.map
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8597,7 +8700,7 @@ exports.BaseHelper = BaseHelper;
 //# sourceMappingURL=baseHelper.js.map
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8606,7 +8709,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(45));
 __export(__webpack_require__(46));
 __export(__webpack_require__(47));
 __export(__webpack_require__(48));
@@ -8618,10 +8720,11 @@ __export(__webpack_require__(53));
 __export(__webpack_require__(54));
 __export(__webpack_require__(55));
 __export(__webpack_require__(56));
+__export(__webpack_require__(57));
 //# sourceMappingURL=mapper.js.map
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8641,7 +8744,7 @@ exports.audit = {
 //# sourceMappingURL=audit.js.map
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8689,7 +8792,7 @@ exports.eventreceivers = {
 //# sourceMappingURL=eventReceiver.js.map
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9011,7 +9114,7 @@ exports.limitedwebpartmanager = {
 //# sourceMappingURL=file.js.map
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9555,7 +9658,7 @@ exports.views = {
 //# sourceMappingURL=list.js.map
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9585,7 +9688,7 @@ exports.navigationservicerest = {
 //# sourceMappingURL=navigation.js.map
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9605,7 +9708,7 @@ exports.propertyvalues = {
 //# sourceMappingURL=propertyValues.js.map
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9625,7 +9728,7 @@ exports.search = {
 //# sourceMappingURL=search.js.map
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9726,7 +9829,7 @@ exports.roledefinitions = {
 //# sourceMappingURL=security.js.map
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10235,7 +10338,7 @@ exports.webs = {
 //# sourceMappingURL=site.js.map
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10410,7 +10513,7 @@ exports.userprofile = {
 //# sourceMappingURL=social.js.map
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10565,7 +10668,7 @@ exports.users = {
 //# sourceMappingURL=user.js.map
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10615,7 +10718,7 @@ exports.usercustomactions = {
 //# sourceMappingURL=userCustomAction.js.map
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11168,28 +11271,19 @@ exports.ViewType = {
 //# sourceMappingURL=sptypes.js.map
 
 /***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ComplexTypes = __webpack_require__(59);
-exports.ComplexTypes = ComplexTypes;
-var Results = __webpack_require__(60);
-exports.Results = Results;
-var SPTypes = __webpack_require__(61);
-exports.SPTypes = SPTypes;
-//# sourceMappingURL=index.js.map
-
-/***/ }),
 /* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=complexTypes.js.map
+var ComplexTypes = __webpack_require__(60);
+exports.ComplexTypes = ComplexTypes;
+var Results = __webpack_require__(61);
+exports.Results = Results;
+var SPTypes = __webpack_require__(62);
+exports.SPTypes = SPTypes;
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 /* 60 */
@@ -11198,7 +11292,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=results.js.map
+//# sourceMappingURL=complexTypes.js.map
 
 /***/ }),
 /* 61 */
@@ -11207,10 +11301,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=sptypes.js.map
+//# sourceMappingURL=results.js.map
 
 /***/ }),
 /* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+//# sourceMappingURL=sptypes.js.map
+
+/***/ }),
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11510,7 +11613,7 @@ exports.BaseRequest = BaseRequest;
 //# sourceMappingURL=baseRequest.js.map
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11615,7 +11718,7 @@ var BaseExecution = /** @class */ (function (_super) {
                             // Wait for the promise to complete
                             waitFunc(function () {
                                 // Reset the base
-                                _this.base = _this.parent.base;
+                                _this.base = _this.parent.base || _this.base;
                                 // Set the wait flag
                                 _this.base.waitFlags[_this.responseIndex] = true;
                             });
@@ -11623,7 +11726,7 @@ var BaseExecution = /** @class */ (function (_super) {
                             return;
                         }
                         // Reset the base
-                        _this.base = _this.parent.base;
+                        _this.base = _this.parent.base || _this.base;
                     }
                     // Set the wait flag
                     _this.base.waitFlags[_this.responseIndex] = true;
@@ -11687,7 +11790,7 @@ exports.BaseExecution = BaseExecution;
 //# sourceMappingURL=baseExecution.js.map
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11758,7 +11861,7 @@ exports.Base = Base;
 //# sourceMappingURL=base.js.map
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11855,7 +11958,7 @@ exports.Batch = Batch;
 //# sourceMappingURL=batch.js.map
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12110,7 +12213,7 @@ exports.MethodInfo = MethodInfo;
 //# sourceMappingURL=methodInfo.js.map
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12236,7 +12339,7 @@ exports.OData = OData;
 //# sourceMappingURL=oData.js.map
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12377,7 +12480,7 @@ exports.TargetInfo = TargetInfo;
 //# sourceMappingURL=targetInfo.js.map
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12546,7 +12649,7 @@ exports.XHRRequest = XHRRequest;
 //# sourceMappingURL=xhrRequest.js.map
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12555,7 +12658,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12619,7 +12722,7 @@ exports.List = _List;
 //# sourceMappingURL=list.js.map
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12666,7 +12769,7 @@ exports.Navigation = _Navigation;
 //# sourceMappingURL=navigation.js.map
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12708,7 +12811,7 @@ exports.PeopleManager = _PeopleManager;
 //# sourceMappingURL=peopleManager.js.map
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12751,7 +12854,7 @@ exports.PeoplePicker = _PeoplePicker;
 //# sourceMappingURL=peoplePicker.js.map
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12794,7 +12897,7 @@ exports.ProfileLoader = _ProfileLoader;
 //# sourceMappingURL=profileLoader.js.map
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12873,7 +12976,7 @@ exports.Search = _Search;
 //# sourceMappingURL=search.js.map
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12930,7 +13033,7 @@ exports.Site = _Site;
 //# sourceMappingURL=site.js.map
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12999,7 +13102,7 @@ exports.SocialFeed = (new _SocialFeed());
 //# sourceMappingURL=socialFeed.js.map
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13042,7 +13145,7 @@ exports.UserProfile = _UserProfile;
 //# sourceMappingURL=userProfile.js.map
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13135,7 +13238,7 @@ exports.Utility = _Utility;
 //# sourceMappingURL=utility.js.map
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13144,7 +13247,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13222,7 +13325,7 @@ exports.Dependencies = _Dependencies;
 //# sourceMappingURL=dependencies.js.map
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13579,7 +13682,7 @@ exports.FieldSchemaXML = function (fieldInfo) {
 //# sourceMappingURL=fieldSchemaXML.js.map
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13616,7 +13719,7 @@ exports.SPCfgType = {
 //# sourceMappingURL=spCfgTypes.js.map
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14005,7 +14108,7 @@ exports.JSLink = {
 //# sourceMappingURL=jslink.js.map
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14583,7 +14686,7 @@ exports.ListForm = {
 //# sourceMappingURL=listForm.js.map
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14776,7 +14879,7 @@ exports.ListFormField = {
 //# sourceMappingURL=listFormField.js.map
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14836,7 +14939,7 @@ exports.Loader = {
 //# sourceMappingURL=loader.js.map
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14866,7 +14969,7 @@ exports.parse = function (jsonString) {
 //# sourceMappingURL=parse.js.map
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14902,7 +15005,7 @@ exports.RibbonLink = function (props) {
 //# sourceMappingURL=ribbonLink.js.map
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14942,7 +15045,7 @@ exports.SuiteBarLink = function (props) {
 //# sourceMappingURL=sbLink.js.map
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15385,7 +15488,7 @@ exports.Taxonomy = {
 //# sourceMappingURL=taxonomy.js.map
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15671,7 +15774,7 @@ exports.WebPart = _WebPart;
 //# sourceMappingURL=webpart.js.map
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15846,7 +15949,7 @@ exports.Status = {
 //# sourceMappingURL=sp.js.map
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15855,7 +15958,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15870,7 +15973,7 @@ exports.Util = utils_1.Types;
 //# sourceMappingURL=types.js.map
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15883,7 +15986,7 @@ var Mapper = __webpack_require__(6);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.69,
+    __ver: 3.75,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {
@@ -15926,7 +16029,7 @@ if ((global == null || global.__ver == null || global.__ver < exports.$REST.__ve
 //# sourceMappingURL=rest.js.map
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15964,7 +16067,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15996,7 +16099,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16027,7 +16130,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16069,7 +16172,7 @@ exports.TextField = function (props) {
     };
     // Method to set the value
     var setValue = function setValue(value) {
-        // Get the text field
+        // Set the text field
         _textfield._textField.value = value || "";
     };
     // Method to validate the value
@@ -16124,7 +16227,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16171,7 +16274,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16187,7 +16290,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16222,7 +16325,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16238,7 +16341,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16269,7 +16372,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16294,7 +16397,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16327,7 +16430,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16344,7 +16447,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16374,7 +16477,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16392,7 +16495,7 @@ exports.Label = function (props) {
 };
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16416,7 +16519,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16432,7 +16535,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16450,7 +16553,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16466,7 +16569,7 @@ exports.Overlay = function (props) {
 };
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16510,7 +16613,7 @@ exports.Panel = function (props, content) {
 };
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16593,7 +16696,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16624,7 +16727,27 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 119 */
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var searchbox_1 = __webpack_require__(13);
+/**
+ * Search Box
+ */
+exports.SearchBox = function (props) {
+    var isDefault = props.type == searchbox_1.SearchBoxTypes.Collapsed || props.type == searchbox_1.SearchBoxTypes.CommandBar ? false : true;
+    // Set the class name
+    var className = [props.className || "", isDefault ? "" : "ms-SearchBox--commandBar", props.type == searchbox_1.SearchBoxTypes.Collapsed ? "is-collapsed" : ""].join(' ').trim();
+    // Return the default template
+    return ['<div class="ms-SearchBox ' + className + '">', '<input class="ms-SearchBox-field" type="text" value="' + (props.value || "") + '"></input>', '<label class="ms-SearchBox-label">', '<i class="ms-SearchBox-icon ms-Icon ms-Icon--Search"></i>', '<span class="ms-SearchBox-text">' + (props.placeholder || "Search") + '</span>', '</label>', '<div class="ms-CommandButton ms-SearchBox-clear ms-CommandButton--noLabel">', '<button class="ms-CommandButton-button">', '<span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Clear"></i></span>', '<span class="ms-CommandButton-label"></span>', '</button>', '</div>', '<div class="ms-CommandButton ms-SearchBox-search ms-CommandButton--noLabel">', '<button class="ms-CommandButton-button">', '<span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Search"></i></span>', '<span class="ms-CommandButton-label"></span>', '</button>', '</div>', isDefault ? '' : ['<div class="ms-CommandButton ms-SearchBox-exit ms-CommandButton--noLabel">', '<button class="ms-CommandButton-button">', '<span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--ChromeBack"></i></span>', '<span class="ms-CommandButton-label"></span>', '</button>', '</div>', '<div class="ms-CommandButton ms-SearchBox-filter ms-CommandButton--noLabel">', '<button class="ms-CommandButton-button">', '<span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Filter"></i></span>', '<span class="ms-CommandButton-label"></span>', '</button>', '</div>'].join('\n'), '</div>'].join('\n');
+};
+
+/***/ }),
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16640,7 +16763,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16676,7 +16799,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16702,7 +16825,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16724,7 +16847,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16732,11 +16855,11 @@ exports.Toggle = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(124);
+var Fabric = __webpack_require__(126);
 exports.Fabric = Fabric;
 
 /***/ }),
-/* 124 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16745,7 +16868,7 @@ exports.Fabric = Fabric;
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 125 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17298,7 +17421,7 @@ exports.Field = function (props) {
 };
 
 /***/ }),
-/* 126 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17623,7 +17746,7 @@ exports.ListForm.renderFormTemplate = function (props) {
 };
 
 /***/ }),
-/* 127 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17877,7 +18000,7 @@ exports.ListFormPanel = function (props) {
 };
 
 /***/ }),
-/* 128 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17886,7 +18009,7 @@ exports.ListFormPanel = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 129 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17895,7 +18018,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var fabric_1 = __webpack_require__(1);
-var wpCfg_1 = __webpack_require__(13);
+var wpCfg_1 = __webpack_require__(14);
 /**
  * Web Part
  */
@@ -18240,7 +18363,7 @@ exports.WebPart = function (props) {
 };
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18474,7 +18597,7 @@ exports.WPList = function (props) {
 };
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18571,7 +18694,7 @@ exports.WPSearch = function (props) {
 };
 
 /***/ }),
-/* 132 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18755,7 +18878,7 @@ exports.WPTabs = function (props) {
 };
 
 /***/ }),
-/* 133 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18764,7 +18887,7 @@ exports.WPTabs = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 134 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
