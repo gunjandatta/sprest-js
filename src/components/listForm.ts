@@ -44,7 +44,7 @@ ListForm.renderDisplayForm = (props: IListFormDisplayProps): IListFormDisplay =>
                             description: field.Description,
                             text: field.Title
                         }),
-                        '<div class="field-value">' + html + '</div>',
+                        '<div class="field-value">' + html.replace(/\r?\n/g, '<br/>') + '</div>',
                         '</div>'
                     ].join('\n');
 
