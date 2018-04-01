@@ -6538,14 +6538,17 @@ exports.DatePicker = function (props) {
             // Wait for the date picker to be visible
             var ctr = 0;
             var id = setInterval(function () {
-                if (dp.getBoundingClientRect().top > 0) {
+                var pos = dp.getBoundingClientRect();
+                if (pos.top > 0) {
                     // Clear the interval
                     clearInterval(id);
-                    // Ensure the date picker is visible
-                    dp.scrollIntoView(false);
-                }
-                // See if we have exceeded the max attempts
-                if (++ctr > 5) {
+                    // See if the date picker is visible
+                    var offset = document.body.clientHeight - (pos.top + pos.height);
+                    if (offset < 0) {
+                        // Ensure the date picker is visible
+                        dp.scrollIntoView(false);
+                    }
+                } else if (++ctr > 5) {
                     // Clear the interval
                     clearInterval(id);
                 }
@@ -11584,8 +11587,10 @@ var BaseRequest = /** @class */ (function (_super) {
                 if (xhr && xhr.status < 400 && typeof (xhr.response) === "string" && xhr.response.length > 0) {
                     // Convert the response and ensure the data property exists
                     var data = JSON.parse(xhr.response);
+                    // Set the next item flag
+                    _this.nextFl = data.d && data.d.__next;
                     // See if there are more items to get
-                    if (data.d && data.d.__next) {
+                    if (_this.nextFl) {
                         // See if we are getting all items in the base request
                         if (_this.getAllItemsFl) {
                             // Create the target information to query the next set of results
@@ -16008,7 +16013,7 @@ var Mapper = __webpack_require__(6);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.68,
+    __ver: 3.69,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {

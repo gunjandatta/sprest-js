@@ -162,16 +162,20 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
             // Wait for the date picker to be visible
             let ctr = 0;
             let id = setInterval(() => {
-                if (dp.getBoundingClientRect().top > 0) {
+                let pos = dp.getBoundingClientRect();
+                if (pos.top > 0) {
                     // Clear the interval
                     clearInterval(id);
 
-                    // Ensure the date picker is visible
-                    dp.scrollIntoView(false);
+                    // See if the date picker is visible
+                    let offset = document.body.clientHeight - (pos.top + pos.height);
+                    if (offset < 0) {
+                        // Ensure the date picker is visible
+                        dp.scrollIntoView(false);
+                    }
                 }
-
                 // See if we have exceeded the max attempts
-                if (++ctr > 5) {
+                else if (++ctr > 5) {
                     // Clear the interval
                     clearInterval(id);
                 }
