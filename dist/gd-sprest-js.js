@@ -3733,11 +3733,37 @@ exports.SearchBox = function (props) {
     var setValue = function setValue(value) {
         // Set the text field
         _searchbox._searchBoxField.value = value || "";
+        // See if the value exists
+        if (value) {
+            // Ensure the 'has-text' class exists
+            if (_searchbox._searchBox.className.indexOf("has-text") < 0) {
+                // Add the class
+                _searchbox._searchBox.className += " has-text";
+            }
+        } else {
+            // See if the 'has-text' class exists
+            if (_searchbox._searchBox.className.indexOf("has-text") > 0) {
+                // Remove the class
+                _searchbox._searchBox.className = _searchbox._searchBox.className.replace(" has-text", "");
+            }
+        }
     };
     // Add the search box html
     props.el.innerHTML = _1.Templates.SearchBox(props);
     // Create the textfield
     var _searchbox = new _1.fabric.SearchBox(props.el.firstElementChild);
+    // Set the blur event
+    _searchbox._searchBoxField.addEventListener("blur", function (ev) {
+        // Get the current value
+        var value = getValue();
+        if (value) {
+            // Wait for the box to be cleared
+            setTimeout(function () {
+                // Update the value
+                setValue(value);
+            }, 20);
+        }
+    });
     // Set the key up event
     _searchbox._searchBoxField.addEventListener("keydown", function (ev) {
         // See if the "Enter" key was hit
