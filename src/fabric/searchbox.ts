@@ -39,9 +39,12 @@ export const SearchBox = (props: ISearchBoxProps): ISearchBox => {
     let _searchbox: Fabric.ISearchBox = new fabric.SearchBox(props.el.firstElementChild);
 
     // Set the key up event
-    _searchbox._searchBoxField.addEventListener("keyup", ev => {
+    _searchbox._searchBoxField.addEventListener("keydown", ev => {
         // See if the "Enter" key was hit
         if (ev.keyCode == 13) {
+            // Disable panel from closing
+            ev ? ev.preventDefault() : null;
+
             // Call the click event
             props.onClick ? props.onClick(getValue()) : null;
         }
