@@ -144,6 +144,11 @@
     display: none;
 }
 
+/** Hide the placeholder if text exists */
+.ms-SearchBox.has-text > .ms-SearchBox-label {
+    display: none;
+}
+
 /** Show the search box */
 .ms-SearchBox.is-active > .ms-SearchBox-clear, .ms-SearchBox.is-active > .ms-SearchBox-search {
     display: inline;
