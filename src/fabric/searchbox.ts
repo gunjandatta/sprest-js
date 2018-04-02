@@ -66,7 +66,7 @@ export const SearchBox = (props: ISearchBoxProps): ISearchBox => {
         }
     });
 
-    // Set the key up event
+    // Set the "Enter" key to execute the search
     _searchbox._searchBoxField.addEventListener("keydown", ev => {
         // See if the "Enter" key was hit
         if (ev.keyCode == 13) {

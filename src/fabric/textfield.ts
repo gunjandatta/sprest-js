@@ -93,6 +93,18 @@ export const TextField = (props: ITextFieldProps): ITextField => {
     // Set the focus event
     _textfield._textField.addEventListener("focus", onChange)
 
+    // Ensure this is not a note field
+    if (props.type != TextFieldTypes.Multi) {
+        // Disable the postback for the "Enter" key
+        _textfield._textField.addEventListener("keydown", ev => {
+            // See if the "Enter" key was hit
+            if (ev.keyCode == 13) {
+                // Disable panel from closing
+                ev ? ev.preventDefault() : null;
+            }
+        });
+    }
+
     // Validate the textfield
     validate(props.value);
 

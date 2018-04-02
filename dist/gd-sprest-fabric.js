@@ -4228,7 +4228,7 @@ exports.SearchBox = function (props) {
             }, 20);
         }
     });
-    // Set the key up event
+    // Set the "Enter" key to execute the search
     _searchbox._searchBoxField.addEventListener("keydown", function (ev) {
         // See if the "Enter" key was hit
         if (ev.keyCode == 13) {
@@ -7624,6 +7624,14 @@ exports.PeoplePicker = function (props) {
             }
         });
     }
+    // Disable the postback for the "Enter" key
+    _peoplepicker._peoplePickerSearch.addEventListener("keydown", function (ev) {
+        // See if the "Enter" key was hit
+        if (ev.keyCode == 13) {
+            // Disable panel from closing
+            ev ? ev.preventDefault() : null;
+        }
+    });
     // Add the search event
     _peoplepicker._peoplePickerSearch.addEventListener("keyup", function (ev) {
         // Set the filter text
@@ -16379,6 +16387,17 @@ exports.TextField = function (props) {
     _textfield._textField.addEventListener("change", onChange);
     // Set the focus event
     _textfield._textField.addEventListener("focus", onChange);
+    // Ensure this is not a note field
+    if (props.type != TextFieldTypes.Multi) {
+        // Disable the postback for the "Enter" key
+        _textfield._textField.addEventListener("keydown", function (ev) {
+            // See if the "Enter" key was hit
+            if (ev.keyCode == 13) {
+                // Disable panel from closing
+                ev ? ev.preventDefault() : null;
+            }
+        });
+    }
     // Validate the textfield
     validate(props.value);
     // Return the text field

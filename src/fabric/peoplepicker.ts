@@ -168,6 +168,15 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
         });
     }
 
+    // Disable the postback for the "Enter" key
+    _peoplepicker._peoplePickerSearch.addEventListener("keydown", ev => {
+        // See if the "Enter" key was hit
+        if (ev.keyCode == 13) {
+            // Disable panel from closing
+            ev ? ev.preventDefault() : null;
+        }
+    });
+
     // Add the search event
     _peoplepicker._peoplePickerSearch.addEventListener("keyup", (ev) => {
         // Set the filter text
