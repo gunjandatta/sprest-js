@@ -218,7 +218,7 @@ export interface IPivot {
 export interface ISearchBox {
     _clearOnly: boolean;
     _container: HTMLDivElement;
-    _searchBox: HTMLInputElement;
+    _searchBox: HTMLDivElement;
     _searchBoxClearButton: HTMLDivElement;
     _searchBoxExitButton?: HTMLDivElement;
     _searchBoxField: HTMLInputElement;
