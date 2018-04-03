@@ -35,7 +35,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
     }
 
     // Method to render the results
-    let renderResults = (ev: Event, searchAll: boolean = false) => {
+    let renderResults = (searchAll: boolean = false) => {
         let searchDialog = _peoplepicker._contextualHostView._contextualHost;
 
         // Clear the results
@@ -90,7 +90,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
                         ev ? ev.preventDefault() : null;
 
                         // Render the results
-                        renderResults(ev, true);
+                        renderResults(true);
                     });
                 }
 
@@ -174,6 +174,16 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
         if (ev.keyCode == 13) {
             // Disable panel from closing
             ev ? ev.preventDefault() : null;
+
+            // Get the filter text
+            let filterText = _peoplepicker._peoplePickerSearch.value;
+            if (filterText != _filterText) {
+                // Set the filter text
+                _filterText = filterText;
+
+                // Render the users
+                renderResults();
+            }
         }
     });
 

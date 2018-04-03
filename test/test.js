@@ -13844,7 +13844,7 @@ exports.PeoplePicker = function (props) {
         return users;
     };
     // Method to render the results
-    var renderResults = function (ev, searchAll) {
+    var renderResults = function (searchAll) {
         if (searchAll === void 0) { searchAll = false; }
         var searchDialog = _peoplepicker._contextualHostView._contextualHost;
         // Clear the results
@@ -13892,7 +13892,7 @@ exports.PeoplePicker = function (props) {
                         // Disable postback
                         ev ? ev.preventDefault() : null;
                         // Render the results
-                        renderResults(ev, true);
+                        renderResults(true);
                     });
                 }
                 // Parse the results
@@ -13966,6 +13966,14 @@ exports.PeoplePicker = function (props) {
         if (ev.keyCode == 13) {
             // Disable panel from closing
             ev ? ev.preventDefault() : null;
+            // Get the filter text
+            var filterText = _peoplepicker._peoplePickerSearch.value;
+            if (filterText != _filterText) {
+                // Set the filter text
+                _filterText = filterText;
+                // Render the users
+                renderResults();
+            }
         }
     });
     // Add the search event
