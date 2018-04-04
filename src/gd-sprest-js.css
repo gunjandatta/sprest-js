@@ -130,8 +130,16 @@
 /**
  * People Picker
  */
+
+/** Set the max height of the selected users */
 .ms-PeoplePicker .selected-users {
     max-height: 250px;
+    overflow-y: auto;
+}
+
+/** Set the max height of the search container */
+.ms-PeoplePicker-search {
+    max-height: 200px;
     overflow-y: auto;
 }
 
