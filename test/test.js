@@ -11190,7 +11190,7 @@ exports.ListForm = {
         });
     },
     // Method to show a file dialog
-    showFileDialog: function (info) {
+    showFileDialog: function (info, onSave) {
         // Return a promise
         return new Promise(function (resolve, reject) {
             // Method to add an attachment
@@ -11199,6 +11199,8 @@ exports.ListForm = {
                 var srcFile = ev.target["files"][0];
                 if (srcFile) {
                     var reader = new FileReader();
+                    // Call the save event
+                    onSave ? onSave() : null;
                     // Set the file loaded event
                     reader.onloadend = function (ev) {
                         var attachment = null;
@@ -12548,7 +12550,7 @@ var Mapper = __webpack_require__(14);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.77,
+    __ver: 3.78,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {
