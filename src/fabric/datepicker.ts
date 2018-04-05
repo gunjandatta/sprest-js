@@ -73,7 +73,7 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
             let dt = new Date(props.value);
 
             // Set the date
-            dp.picker.set("select", [dt.getFullYear(), dt.getMonth() + 1, dt.getDate()])
+            dp.picker.set("select", [dt.getFullYear(), dt.getMonth(), dt.getDate()])
         }
 
         // Return the date picker

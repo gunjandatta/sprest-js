@@ -6598,7 +6598,7 @@ exports.DatePicker = function (props) {
         if (props.value) {
             var dt = new Date(props.value);
             // Set the date
-            dp.picker.set("select", [dt.getFullYear(), dt.getMonth() + 1, dt.getDate()]);
+            dp.picker.set("select", [dt.getFullYear(), dt.getMonth(), dt.getDate()]);
         }
         // Return the date picker
         return dp;
@@ -14309,6 +14309,7 @@ exports.ListForm = {
         var _cacheData = null;
         var _info = null;
         var _props = null;
+        var _reject = null;
         var _resolve = null;
         // Save the properties
         _props = props || {};
@@ -14324,16 +14325,23 @@ exports.ListForm = {
             loadFromCache();
             // Load the list data
             loadListData().then(function () {
-                // See if the fields have been defined
-                if (_props.fields) {
-                    // Process the fields
-                    processFields();
-                    // Load the item data
-                    loadItem();
+                // Ensure the list exists
+                if (_info.list) {
+                    // See if the fields have been defined
+                    if (_props.fields) {
+                        // Process the fields
+                        processFields();
+                        // Load the item data
+                        loadItem();
+                    }
+                    else {
+                        // Load the content type
+                        loadDefaultContentType();
+                    }
                 }
                 else {
-                    // Load the content type
-                    loadDefaultContentType();
+                    // Reject the promise
+                    _reject();
                 }
             });
         };
@@ -14614,7 +14622,8 @@ exports.ListForm = {
         };
         // Return a promise
         return new Promise(function (resolve, reject) {
-            // Save the resolve method
+            // Save the methods
+            _reject = reject;
             _resolve = resolve;
             // Load the list data
             load();
@@ -16173,7 +16182,7 @@ var Mapper = __webpack_require__(6);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.78,
+    __ver: 3.79,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {
