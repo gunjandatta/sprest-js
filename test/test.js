@@ -1560,12 +1560,29 @@ exports.SPConfig = function (cfg, webUrl) {
                                 contentTypes.addAvailableContentType(parent.results[0].Id.StringValue).execute(function (ct) {
                                     // See if it was successful
                                     if (ct.existsFl) {
-                                        // Log
-                                        console.log("[gd-sprest][Content Type] The content type '" + cfgContentType.Name + "' was created successfully.");
-                                        // Update the configuration
-                                        cfgContentType.ContentType = ct;
-                                        // Trigger the event
-                                        cfgContentType.onCreated ? cfgContentType.onCreated(ct) : null;
+                                        // Update the name
+                                        (function () {
+                                            return new Promise(function (resolve, reject) {
+                                                // Ensure the name doesn't need to be updated
+                                                if (ct.Name != cfgContentType.Name) {
+                                                    ct.update({ Name: cfgContentType.Name }).execute(function () {
+                                                        // Resolve the promise
+                                                        resolve();
+                                                    });
+                                                }
+                                                else {
+                                                    // Resolve the promise
+                                                    resolve();
+                                                }
+                                            });
+                                        })().then(function () {
+                                            // Log
+                                            console.log("[gd-sprest][Content Type] The content type '" + cfgContentType.Name + "' was created successfully.");
+                                            // Update the configuration
+                                            cfgContentType.ContentType = ct;
+                                            // Trigger the event
+                                            cfgContentType.onCreated ? cfgContentType.onCreated(ct) : null;
+                                        });
                                     }
                                     else {
                                         // Log
@@ -1585,6 +1602,10 @@ exports.SPConfig = function (cfg, webUrl) {
                         contentTypes.add({
                             Description: cfgContentType.Description,
                             Group: cfgContentType.Group,
+                            Id: {
+                                __metadata: { type: "SP.ContentTypeId" },
+                                StringValue: cfgContentType.Id ? cfgContentType.Id.StringValue : "0x0100" + lib_1.ContextInfo.generateGUID().replace("{", "").replace("-", "").replace("}", "")
+                            },
                             Name: cfgContentType.Name
                         }).execute(function (ct) {
                             // See if it was successful
@@ -2434,6 +2455,8 @@ exports.SPConfig = function (cfg, webUrl) {
      * Public Interface
      */
     return {
+        // The configuration
+        _configuration: cfg,
         // Method to install the configuration
         install: function () {
             // Return a promise
@@ -2460,12 +2483,17 @@ exports.SPConfig = function (cfg, webUrl) {
                     console.log("[gd-sprest][Fields] Starting the requests.");
                     // Get the fields
                     web.Fields().execute(function (fields) {
-                        // Create the fields
-                        createFields(fields, cfg.Fields).then(function () {
-                            // Log
-                            console.log("[gd-sprest][Fields] Completed the requests.");
-                            // Execute the post execute method
-                            postExecute();
+                        // Return a promise
+                        return new Promise(function (resolve, reject) {
+                            // Create the fields
+                            createFields(_1.parse(fields.stringify()), cfg.Fields).then(function () {
+                                // Log
+                                console.log("[gd-sprest][Fields] Completed the requests.");
+                                // Execute the post execute method
+                                postExecute();
+                                // Resolve the promise
+                                resolve();
+                            });
                         });
                     });
                 }
@@ -2478,7 +2506,7 @@ exports.SPConfig = function (cfg, webUrl) {
                     // Get the content types
                     web.ContentTypes().execute(function (contentTypes) {
                         // Create the content types
-                        createContentTypes(contentTypes, cfg.ContentTypes).then(function () {
+                        createContentTypes(_1.parse(contentTypes.stringify()), cfg.ContentTypes).then(function () {
                             // Log
                             console.log("[gd-sprest][Content Types] Completed the requests.");
                             // Execute the post execute method
@@ -2495,7 +2523,7 @@ exports.SPConfig = function (cfg, webUrl) {
                     // Get the lists
                     web.Lists().execute(function (lists) {
                         // Create the lists
-                        createLists(lists, cfg.ListCfg).then(function () {
+                        createLists(_1.parse(lists.stringify()), cfg.ListCfg).then(function () {
                             // Log
                             console.log("[gd-sprest][Lists] Completed the requests.");
                             // Execute the post execute method
@@ -2529,7 +2557,7 @@ exports.SPConfig = function (cfg, webUrl) {
                         (new lib_1.Site(webUrl))
                             .UserCustomActions().execute(function (customActions) {
                             // Create the user custom actions
-                            createUserCustomActions(customActions, cfg.CustomActionCfg.Site).then(function () {
+                            createUserCustomActions(_1.parse(customActions.stringify()), cfg.CustomActionCfg.Site).then(function () {
                                 // Log
                                 console.log("[gd-sprest][Site Custom Actions] Completed the requests.");
                                 // Execute the post execute method
@@ -2546,7 +2574,7 @@ exports.SPConfig = function (cfg, webUrl) {
                         // Get the user custom actions
                         web.UserCustomActions().execute(function (customActions) {
                             // Create the user custom actions
-                            createUserCustomActions(customActions, cfg.CustomActionCfg.Web).then(function () {
+                            createUserCustomActions(_1.parse(customActions.stringify()), cfg.CustomActionCfg.Web).then(function () {
                                 // Log
                                 console.log("[gd-sprest][Web Custom Actions] Completed the requests.");
                                 // Execute the post execute method
@@ -8414,7 +8442,18 @@ var Base = /** @class */ (function (_super) {
         return JSON.stringify({
             response: this.response,
             status: this.status,
-            targetInfo: this.targetInfo
+            targetInfo: {
+                bufferFl: this.targetInfo.bufferFl,
+                defaultToWebFl: this.targetInfo.defaultToWebFl,
+                endpoint: this.targetInfo.endpoint,
+                method: this.targetInfo.method,
+                overrideDefaultRequestToHostFl: this.targetInfo.overrideDefaultRequestToHostFl,
+                requestDigest: this.targetInfo.requestDigest,
+                requestHeader: this.targetInfo.requestHeader,
+                requestInfo: this.targetInfo.requestInfo,
+                requestType: this.targetInfo.requestType,
+                url: this.targetInfo.url
+            }
         });
     };
     return Base;
@@ -10183,9 +10222,33 @@ exports.FieldSchemaXML = function (fieldInfo) {
             var props = {};
             props["ID"] = "{" + lib_1.ContextInfo.generateGUID() + "}";
             props["Name"] = fieldInfo.name;
-            props["Required"] = fieldInfo.required ? "TRUE" : "FALSE";
             props["StaticName"] = fieldInfo.name;
             props["DisplayName"] = fieldInfo.title;
+            // Set the optional properties
+            if (typeof (fieldInfo.group) !== "undefined") {
+                props["Group"] = fieldInfo.group;
+            }
+            if (typeof (fieldInfo.hidden) !== "undefined") {
+                props["Hidden"] = fieldInfo.hidden ? "TRUE" : "FALSE";
+            }
+            if (typeof (fieldInfo.required) !== "undefined") {
+                props["Required"] = fieldInfo.required ? "TRUE" : "FALSE";
+            }
+            if (typeof (fieldInfo.showInDisplayForm) !== "undefined") {
+                props["ShowInDisplayForm"] = fieldInfo.showInDisplayForm ? "TRUE" : "FALSE";
+            }
+            if (typeof (fieldInfo.showInEditForm) !== "undefined") {
+                props["ShowInEditForm"] = fieldInfo.showInEditForm ? "TRUE" : "FALSE";
+            }
+            if (typeof (fieldInfo.showInListSettings) !== "undefined") {
+                props["ShowInListSettings"] = fieldInfo.showInListSettings ? "TRUE" : "FALSE";
+            }
+            if (typeof (fieldInfo.showInNewForm) !== "undefined") {
+                props["ShowInNewForm"] = fieldInfo.showInNewForm ? "TRUE" : "FALSE";
+            }
+            if (typeof (fieldInfo.showInViewForms) !== "undefined") {
+                props["ShowInViewForms"] = fieldInfo.showInViewForms ? "TRUE" : "FALSE";
+            }
             // Set the type
             switch (fieldInfo.type) {
                 // Boolean
@@ -11531,6 +11594,7 @@ exports.parse = function (jsonString) {
         // Set the properties
         base.response = obj.response;
         base.status = obj.status;
+        base.targetInfo = obj.targetInfo;
         // Update the object
         base.updateDataObject(false);
         // Return the base object
@@ -12559,7 +12623,7 @@ var Mapper = __webpack_require__(14);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.79,
+    __ver: 3.85,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {
@@ -16969,7 +17033,7 @@ exports.WPList = function (props) {
                 cfg.ListName = _wpInfo.cfg.ListName;
                 cfg.WebUrl = _wpInfo.cfg.WebUrl;
                 // Call the save event
-                cfg = (props.onSave ? props.onSave(cfg) : null) || cfg;
+                cfg = (props.editPanel && props.editPanel.onSave ? props.editPanel.onSave(cfg) : null) || cfg;
                 // Return the configuration
                 return cfg;
             }
@@ -17053,7 +17117,7 @@ exports.WPSearch = function (props) {
         // Set the fields configuraiton
         cfg.Fields = ddlFields ? ddlFields.getValue() : [];
         // Call the save event
-        cfg = (props.onSave ? props.onSave(cfg) : null) || cfg;
+        cfg = (props.editPanel && props.editPanel.onSave ? props.editPanel.onSave(cfg) : null) || cfg;
         // Return the configuration
         return cfg;
     };

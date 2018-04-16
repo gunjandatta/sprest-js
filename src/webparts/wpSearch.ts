@@ -70,7 +70,7 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
         cfg.Fields = ddlFields ? ddlFields.getValue() as Array<Fabric.Types.IDropdownOption> : [];
 
         // Call the save event
-        cfg = (props.onSave ? props.onSave(cfg) : null) || cfg;
+        cfg = (props.editPanel && props.editPanel.onSave ? props.editPanel.onSave(cfg) : null) || cfg;
 
         // Return the configuration
         return cfg;

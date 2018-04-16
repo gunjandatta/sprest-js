@@ -267,7 +267,7 @@ export const WPList = (props: IWPListProps): IWPList => {
                 cfg.WebUrl = _wpInfo.cfg.WebUrl;
 
                 // Call the save event
-                cfg = (props.onSave ? props.onSave(cfg) : null) || cfg;
+                cfg = (props.editPanel && props.editPanel.onSave ? props.editPanel.onSave(cfg) : null) || cfg;
 
                 // Return the configuration
                 return cfg;
