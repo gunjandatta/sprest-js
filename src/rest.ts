@@ -2,7 +2,6 @@ import * as Fabric from "./fabric";
 import * as Components from "./components";
 import * as WebParts from "./webparts";
 import { Helper, $REST, IREST } from "gd-sprest";
-declare var SP;
 
 /**
  * $REST Library
@@ -62,7 +61,7 @@ RESTJS.JS = {
 } as any;
 
 // Wait for the core library to be loaded
-SP && SP.SOD ? SP.SOD.executeOrDelayUntilScriptLoaded(() => {
+window["SP"] && window["SP"].SOD ? window["SP"].SOD.executeOrDelayUntilScriptLoaded(() => {
     // Get the global variable
     var $REST = window["$REST"];
     if ($REST) {
@@ -71,5 +70,5 @@ SP && SP.SOD ? SP.SOD.executeOrDelayUntilScriptLoaded(() => {
     }
 
     // Alert other scripts this library is loaded
-    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest-js.js");
+    window["SP"].SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest-js.js");
 }, "gd-sprest.js") : null;

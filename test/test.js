@@ -17392,7 +17392,7 @@ exports.RESTJS.JS = {
     WebParts: WebParts
 };
 // Wait for the core library to be loaded
-SP && SP.SOD ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+window["SP"] && window["SP"].SOD ? window["SP"].SOD.executeOrDelayUntilScriptLoaded(function () {
     // Get the global variable
     var $REST = window["$REST"];
     if ($REST) {
@@ -17400,7 +17400,7 @@ SP && SP.SOD ? SP.SOD.executeOrDelayUntilScriptLoaded(function () {
         $REST["JS"] = { Components: Components, Fabric: Fabric, WebParts: WebParts };
     }
     // Alert other scripts this library is loaded
-    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest-js.js");
+    window["SP"].SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest-js.js");
 }, "gd-sprest.js") : null;
 
 
