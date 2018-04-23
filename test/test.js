@@ -6939,15 +6939,17 @@ var utils_1 = __webpack_require__(0);
 exports.peoplemanager = {
     amIFollowedBy: {
         argNames: ["accountName"],
-        requestType: utils_1.RequestType.GetWithArgsInQS
+        name: "amIFollowedBy(@v)?@v='[[accountName]]'",
+        requestType: utils_1.RequestType.GetReplace
     },
     amIFollowing: {
-        argNames: ["accountName"],
-        requestType: utils_1.RequestType.GetWithArgsInQS
+        name: "amIFollowing(@v)?@v='[[accountName]]'",
+        requestType: utils_1.RequestType.GetReplace
     },
     follow: {
         argNames: ["accountName"],
-        requestType: utils_1.RequestType.PostWithArgsInQS
+        name: "follow(@v)?@v='[[accountName]]'",
+        requestType: utils_1.RequestType.PostReplace
     },
     followTag: {
         argNames: ["id"],
@@ -6959,7 +6961,8 @@ exports.peoplemanager = {
     },
     getFollowersFor: {
         argNames: ["accountName"],
-        requestType: utils_1.RequestType.GetWithArgsInQS
+        name: "getFollowersFor(@v)?@v='[[accountName]]'",
+        requestType: utils_1.RequestType.GetReplace
     },
     getMyFollowers: {
         requestType: utils_1.RequestType.Get
@@ -6972,14 +6975,16 @@ exports.peoplemanager = {
     },
     getPeopleFollowedBy: {
         argNames: ["accountName"],
-        requestType: utils_1.RequestType.GetWithArgsInQS
+        name: "getPeopleFollowedBy(@v)?@v='[[accountName]]'",
+        requestType: utils_1.RequestType.GetReplace
     },
     getPeopleFollowedByMe: {
         requestType: utils_1.RequestType.Get
     },
     getPropertiesFor: {
         argNames: ["accountName"],
-        requestType: utils_1.RequestType.GetWithArgsInQS
+        name: "getPropertiesFor(@v)?@v='[[accountName]]'",
+        requestType: utils_1.RequestType.GetReplace
     },
     getTrendingTags: {
         name: "sp.userprofiles.peoplemanager.gettrendingtags",
@@ -6988,23 +6993,26 @@ exports.peoplemanager = {
     },
     getUserProfilePropertyFor: {
         argNames: ["accountName", "propertyName"],
-        requestType: utils_1.RequestType.GetWithArgsInQS
+        name: "getUserProfilePropertyFor(accountname=@v, propertyname='[[propertyName]]')?@v='[[accountName]]'",
+        requestType: utils_1.RequestType.GetReplace
     },
     hideSuggestion: {
         argNames: ["accountName"],
-        requestType: utils_1.RequestType.PostWithArgsInQS
+        name: "hideSuggestion(@v)?@v='[[accountName]]'",
+        requestType: utils_1.RequestType.PostReplace
     },
     isFollowing: {
         argNames: ["possibleFollowerAccountName", "possibleFolloweeAccountName"],
-        name: "sp.userprofiles.peoplemanager.isfollowing",
+        name: "sp.userprofiles.peoplemanager.isfollowing(possiblefolloweraccountname=@v, possiblefolloweeaccountname=@y)?@v='[[possibleFollowerAccountName]]'&@y='[[possibleFolloweeAccountName]]'",
         replaceEndpointFl: true,
-        requestType: utils_1.RequestType.GetWithArgsInQS
+        requestType: utils_1.RequestType.GetReplace
     },
     setMyProfilePicture: {
         requestType: utils_1.RequestType.PostWithArgsInBody
     },
     stopFollowing: {
         argNames: ["accountName"],
+        name: "stopFollowing(@v)?@v='[[accountName]]'",
         requestType: utils_1.RequestType.PostWithArgsInQS
     },
     stopFollowingTag: {
@@ -7092,9 +7100,11 @@ exports.userprofile = {
     // Methods
     /*********************************************************************************************************************************/
     createPersonalSiteEnque: {
+        argNames: ["interactiveMode"],
         requestType: utils_1.RequestType.PostWithArgsValueOnly
     },
     shareAllSocialData: {
+        argNames: ["makePublic"],
         requestType: utils_1.RequestType.PostWithArgsValueOnly
     }
 };
@@ -9212,7 +9222,7 @@ var XHRRequest = /** @class */ (function () {
             requestDigest = lib_1.ContextInfo.document ? lib_1.ContextInfo.document.querySelector("#__REQUESTDIGEST") : "";
             requestDigest = requestDigest ? requestDigest.value : "";
         }
-        // See if we are targeting the context endpoint or if this is a GET request
+        // See if we are targeting the context endpoint
         if (this.targetInfo.request.endpoint == "contextinfo") {
             // Execute the request
             this.executeRequest(requestDigest);
@@ -12653,7 +12663,7 @@ var Mapper = __webpack_require__(14);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.88,
+    __ver: 3.89,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {
