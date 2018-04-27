@@ -4,7 +4,7 @@ import { Helper, List, SPTypes, Types } from "gd-sprest";
 import { Components, Fabric, WebParts, $REST } from "../build";
 
 // Import the css
-import "../src/sass/fabric-core.scss";
+import "../build/lib/sass/fabric-core.scss";
 
 // Define the SP global variable
 declare var SP;

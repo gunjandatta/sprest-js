@@ -1,6 +1,6 @@
 {
   "name": "gd-sprest-js",
-  "version": "1.6.8",
+  "version": "1.7.0",
   "description": "SharePoint 2013/Online js components.",
   "main": "build/index.js",
   "typings": "build/index.d.ts",
@@ -32,6 +32,10 @@
   "peerDependencies": {
     "gd-sprest": "^3.9.1"
   },
+  "dependencies": {
+    "office-ui-fabric-core": "^5.0.1",
+    "office-ui-fabric-js": "^1.5.0"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
@@ -48,12 +52,9 @@
     "gulp-uglify": "^3.0.0",
     "gulp-webpack": "^1.5.0",
     "node-sass": "^4.9.0",
-    "office-ui-fabric-core": "^5.0.1",
-    "office-ui-fabric-js": "^1.5.0",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.20.3",
     "ts-loader": "^3.5.0",
     "webpack": "^3.11.0"
-  },
-  "dependencies": {}
+  }
 }
