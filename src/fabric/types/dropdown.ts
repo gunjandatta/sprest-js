@@ -1,4 +1,5 @@
 import { IComponentProps, IProps } from ".";
+import { Fabric } from "../..";
 
 /**
  * Dropdown
@@ -8,7 +9,7 @@ export interface IDropdown {
     get(): HTMLInputElement;
 
     /** Returns the fabric component. */
-    getFabricComponent(): any;
+    getFabricComponent(): Fabric.Types.Fabric.IContextualHost;
 
     /** Returns the dropdown value. */
     getValue(): IDropdownOption | Array<IDropdownOption>;

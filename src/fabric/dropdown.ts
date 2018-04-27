@@ -120,7 +120,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     }
 
     // Method to get the fabric component
-    let getFabricComponent = () => {
+    let getFabricComponent = (): Fabric.IContextualHost => {
         // Return the menu
         return _callout._contextualHost;
     }
@@ -271,23 +271,32 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     _tb.get()._textField.addEventListener("click", ev => {
         // Get the callout element
         let callout = _callout._contextualHost ? _callout._contextualHost._contextualHost : null;
-        if (callout && callout.style.top) {
-            let position = parseFloat(callout.style.top.replace("px", ""));
-            let offset = document.body.clientHeight - (position + callout.scrollHeight);
+        if (callout) {
+            // See if a class is being applied
+            if (props.className) {
+                // Apply the class name
+                callout.className += " " + props.className;
+            }
 
-            // See if the context menu is off the screen
-            if (offset < 0) {
-                // Set the top position
-                callout.style.top = (position + offset) + "px"
+            // See if the top style is defined
+            if (callout.style.top) {
+                let position = parseFloat(callout.style.top.replace("px", ""));
+                let offset = document.body.clientHeight - (position + callout.scrollHeight);
 
-                // Get the callout beak icon
-                let beak = callout.querySelector(".ms-ContextualHost-beak") as HTMLDivElement;
-                if (beak && beak.style.top) {
-                    // Get the position
-                    position = parseFloat(beak.style.top.replace("px", ""));
+                // See if the context menu is off the screen
+                if (offset < 0) {
+                    // Set the top position
+                    callout.style.top = (position + offset) + "px"
 
-                    // Update the position
-                    beak.style.top = (position - offset) + "px";
+                    // Get the callout beak icon
+                    let beak = callout.querySelector(".ms-ContextualHost-beak") as HTMLDivElement;
+                    if (beak && beak.style.top) {
+                        // Get the position
+                        position = parseFloat(beak.style.top.replace("px", ""));
+
+                        // Update the position
+                        beak.style.top = (position - offset) + "px";
+                    }
                 }
             }
         }
