@@ -10,10 +10,11 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.css$/,
+                test: /\.s?css$/,
                 use: [
                     { loader: "style-loader" },
-                    { loader: "css-loader" }
+                    { loader: "css-loader" },
+                    { loader: "sass-loader" }
                 ]
             },
             {

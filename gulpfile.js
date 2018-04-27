@@ -87,7 +87,7 @@ gulp.task("package", ["package-bundle", "package-fabric-bundle", "package-minify
 // Bundle the library
 gulp.task("package-bundle", ["update-lib-reference"], () => {
     // Get the source files
-    return gulp.src(["build/lib/css/gd-sprest-js.css", "node_modules/core-js/es6/promise", "build/index.js"])
+    return gulp.src(["src/sass/fabric-core.scss", "node_modules/core-js/es6/promise", "build/index.js"])
         // Run webpack to bundle the library
         .pipe(gulpWebpack({
             output: {
@@ -96,10 +96,11 @@ gulp.task("package-bundle", ["update-lib-reference"], () => {
             module: {
                 loaders: [
                     {
-                        test: /\.css$/,
+                        test: /\.s?css$/,
                         use: [
                             { loader: "style-loader" },
-                            { loader: "css-loader" }
+                            { loader: "css-loader" },
+                            { loader: "sass-loader" }
                         ]
                     },
                     {
@@ -136,7 +137,7 @@ gulp.task("package-minify", ["package-bundle"], () => {
 // Bundle the library w/ the fabric-ui css
 gulp.task("package-fabric-bundle", ["update-lib-reference"], () => {
     // Get the source files
-    return gulp.src(["build/lib/css/fabric.min.css", "build/lib/css/fabric.components.min.css", "build/lib/css/gd-sprest-js.css", "build/index.js"])
+    return gulp.src(["src/sass/fabric-core.scss", "build/index.js"])
         // Run webpack to bundle the library
         .pipe(gulpWebpack({
             output: {
@@ -145,10 +146,11 @@ gulp.task("package-fabric-bundle", ["update-lib-reference"], () => {
             module: {
                 loaders: [
                     {
-                        test: /\.css$/,
+                        test: /\.s?css$/,
                         use: [
                             { loader: "style-loader" },
-                            { loader: "css-loader" }
+                            { loader: "css-loader" },
+                            { loader: "sass-loader" }
                         ]
                     },
                     {
