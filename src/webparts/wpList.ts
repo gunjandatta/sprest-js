@@ -249,6 +249,7 @@ export const WPList = (props: IWPListProps): IWPList => {
     // Create the webpart
     let _wp = WebPart({
         cfgElementId: props.cfgElementId,
+        className: props.className,
         editPanel: {
             panelType: props.editPanel ? props.editPanel.panelType : null,
             menuLeftCommands,

@@ -16619,6 +16619,7 @@ exports.WPList = function (props) {
     // Create the webpart
     var _wp = _1.WebPart({
         cfgElementId: props.cfgElementId,
+        className: props.className,
         editPanel: {
             panelType: props.editPanel ? props.editPanel.panelType : null,
             menuLeftCommands: menuLeftCommands,
@@ -16903,6 +16904,7 @@ exports.WPTabs = function (props) {
     var _webparts = [];
     // Return the webpart
     var _wp = _1.WebPart({
+        className: props.className,
         elementId: props.elementId,
         onRenderDisplay: function (wpInfo) {
             // Set the webparts
