@@ -1,7 +1,50 @@
-@import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.scss";
+// Colors
+@import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/_Fabric.Color.Variables.scss";
+
+// Icons
+@import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Icons.Font.Output.scss";
+
+// Typography
+@import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/_Fabric.Typography.Variables.scss";
+@import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/_Fabric.Typography.Mixins.scss";
+@import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Typography.Output.scss";
+@import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Typography.Fonts.Output.scss";
 
 // Import the fabric css to target elements under a fabric element
 .fabric {
+    // Office Fabric-UI Core
+
+    // Common utilities
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Utilities.Output.scss";
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/_Fabric.ZIndex.Variables.scss";
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/_Fabric.Mixins.scss";
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/_Fabric.Mixins.RTL.scss";
+
+    // Colors
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Color.Mixins.Output.scss";
+
+    // Icons
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Icons.Output.scss";
+
+    // Brand Icons
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Brand.Icons.Output.scss";
+
+    // Animations
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Animations.Output.scss";
+
+    // Responsive
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/_Fabric.Responsive.Variables.scss";
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/_Fabric.Responsive.Utilities.Variables.scss";
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Responsive.Utilities.Output.scss";
+
+    // Grid
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Grid.Output.scss";
+
+    // Base/wrapper component
+    @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Base.Output.scss";
+
+    // Office Fabric-UI JavaScript
+
     @import "../../node_modules/office-ui-fabric-js/src/components/Breadcrumb/Breadcrumb";
     @import "../../node_modules/office-ui-fabric-js/src/components/Button/Button";
     @import "../../node_modules/office-ui-fabric-js/src/components/Callout/Callout";

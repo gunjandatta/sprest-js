@@ -5,9 +5,6 @@ import { Components, Fabric, WebParts, $REST } from "../build";
 
 // Import the css
 import "../build/lib/css/fabric.css";
-//import "../node_modules/office-ui-fabric-js/dist/css/fabric.min.css";
-//import "../node_modules/office-ui-fabric-js/dist/css/fabric.components.css";
-//import "../src/sass/components.scss";
 
 // Define the SP global variable
 declare var SP;

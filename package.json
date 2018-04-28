@@ -1,6 +1,6 @@
 {
   "name": "gd-sprest-js",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "SharePoint 2013/Online js components.",
   "main": "build/index.js",
   "typings": "build/index.d.ts",
@@ -50,6 +50,7 @@
     "gulp-sass": "^4.0.1",
     "gulp-typescript": "^4.0.2",
     "gulp-uglify": "^3.0.0",
+    "gulp-uglifycss": "^1.0.9",
     "gulp-webpack": "^1.5.0",
     "node-sass": "^4.9.0",
     "office-ui-fabric-core": "^5.0.1",
