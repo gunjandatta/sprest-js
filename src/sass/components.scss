@@ -1,0 +1,223 @@
+.fabric {
+    /**
+    * Dialog
+    */
+
+    /** Ensure the dialog is displayed above the panel */
+    .ms-Dialog {
+        z-index: 1050;
+    }
+
+    /**
+    * Display Form
+    */
+
+    /** Add an underline to the field */
+    .display-form {
+        border-bottom: 1px solid #c8c8c8;
+        padding: 5px 0px;
+    }
+    .display-form:hover {
+        border-color: #767676;
+    }
+
+    /** The field value */
+    .display-form .field-value{
+        font-size: 14px;
+        font-weight: 300;
+        padding-left: 5px;
+        padding-top: 5px;
+    }
+
+    /**
+    * Dropdown
+    */
+
+    /** Update the font color to make it more visible. */
+    .dropdown .textfield .ms-TextField-field {
+        color: #444;
+    }
+
+    /** Set the max height of the dropdown */
+    .ms-List--dropdown {
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+
+    /** Fix the multi-select box positioning */
+    .ms-List--dropdown .is-selectable > .ms-ListItem-secondaryText {
+        top: 0px;
+    }
+
+    /**
+    * Form Error
+    */
+    .ms-Label.form-error {
+        color: #a80000;
+        font-size: 16px;
+        font-weight: 600;
+        padding-left: 12px;
+    }
+
+    /**
+    * Field
+    */
+
+    /** Label **/
+    .field-label {
+        font-size: 14px;
+        font-weight: 600;
+        padding-left: 12px;
+    }
+
+    /**
+    * Label
+    */
+
+    /** Hide the description by default */
+    .ms-Icon.is-description span { display: none; }
+
+    /** Show the description on hover */
+    .ms-Icon.is-description:hover span {
+        background-color: white;
+        box-shadow: 1px 1px 15px grey;
+        display: block;
+        padding: 10px;
+        position: absolute;
+        z-index: 5;
+    }
+
+    /**
+    * Link Field
+    */
+
+    /** Add the underline */
+    .ms-LinkField {
+        border-bottom: 1px solid #c8c8c8;
+    }
+    .ms-LinkField:hover {
+        border-color: #767676;
+    }
+
+    /** Align the link */
+    .ms-LinkField .ms-Link {
+        padding-left: 5px;
+    }
+
+    /**
+    * Panel
+    */
+
+    /** Fix the height */
+    .ms-Panel-contentInner {
+        height: calc(100vh - 80px);
+        padding-bottom: 0px;
+    }
+
+    /**
+    * People Picker
+    */
+
+    /** Set the max height of the selected users */
+    .ms-PeoplePicker .selected-users {
+        max-height: 250px;
+        overflow-y: auto;
+    }
+
+    /** Set the max height of the search container */
+    .ms-PeoplePicker-search {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    /**
+    * Search Box
+    */
+
+    /** Hide the search box by default */
+    .ms-SearchBox > .ms-SearchBox-search {
+        display: none;
+    }
+
+    /** Hide the placeholder if text exists */
+    .ms-SearchBox.has-text > .ms-SearchBox-label {
+        display: none;
+    }
+
+    /** Show the search box */
+    .ms-SearchBox.is-active > .ms-SearchBox-clear, .ms-SearchBox.is-active > .ms-SearchBox-search {
+        display: inline;
+        margin-left: 0px;
+        position: relative;
+    }
+
+    /** Search Box button */
+    .ms-SearchBox > .ms-SearchBox-search > .ms-CommandButton-button {
+        background-color: #0078d7;
+        color: #fff;
+        height: 36px;
+    }
+
+    /**
+    * Text Field
+    */
+
+    /** Label */
+    .ms-TextField > .ms-Label {
+        padding-left: 12px;
+    }
+
+    /** Update the disabled labels font color */
+    .ms-TextField .ms-TextField-field:disabled {
+        color: #444;
+    }
+
+    /** Update the label for the underline type */
+    .ms-TextField.ms-TextField--underlined > .ms-Label.field-label {
+        display: block;
+    }
+}
+
+/** Ensure the popup is visible over the panel. */
+.fabric.ms-ContextualHost {
+    z-index: 2000;
+}
+
+/** Ensure the panel is displayed on top */
+.fabric.ms-PanelHost, .fabric > .ms-Panel {
+    z-index: 1000;
+}
+
+/**
+* WebPart Tabs
+*/
+
+/** Hide the webpart */
+.ms-webpart-zone.wp-tabs > .is-hidden {
+    left: -100vw;
+    position: absolute;
+    overflow: hidden;
+}
+
+/** Remove the spacing around the webparts */
+.ms-webpart-zone.wp-tabs {
+    border-spacing: 0px;
+}
+
+/** Hide the titles of the webparts */
+.ms-webpart-zone.wp-tabs .ms-webpart-chrome-title {
+    display: none;
+}
+
+/** Remove the spacing */
+.wp-tabs .wp-tab {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+/** Hide the vertical spacing */
+.wp-tabs .wp-tab .ms-PartSpacingVertical {
+    display: none;
+}

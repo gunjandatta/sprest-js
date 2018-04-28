@@ -4,7 +4,10 @@ import { Helper, List, SPTypes, Types } from "gd-sprest";
 import { Components, Fabric, WebParts, $REST } from "../build";
 
 // Import the css
-import "../build/lib/sass/fabric-core.scss";
+import "../build/lib/css/fabric.css";
+//import "../node_modules/office-ui-fabric-js/dist/css/fabric.min.css";
+//import "../node_modules/office-ui-fabric-js/dist/css/fabric.components.css";
+//import "../src/sass/components.scss";
 
 // Define the SP global variable
 declare var SP;
@@ -159,7 +162,7 @@ window["TestJS"] = {
                 <property name="ChromeType" type="chrometype">TitleOnly</property>
                 <property name="Content" type="string">
                     &lt;script type="text/javascript" src="/sites/dev/siteassets/sprest-js/test.js"&gt;&lt;/script&gt;
-                    &lt;div id="wp-test-js"&gt;&lt;/div&gt;
+                    &lt;div class="fabric" id="wp-test-js"&gt;&lt;/div&gt;
                     &lt;div id="wp-test-js-cfg" style="display:none"&gt;&lt;/div&gt;
                     &lt;script type="text/javascript"&gt;SP.SOD.executeOrDelayUntilScriptLoaded(function() { TestJS.init(); }, 'test.js');&lt;/script&gt;
                 </property>

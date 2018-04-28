@@ -272,6 +272,12 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         // Get the callout element
         let callout = _callout._contextualHost ? _callout._contextualHost._contextualHost : null;
         if (callout) {
+            // Ensure the fabric class name exists
+            if (callout.className.indexOf("fabric") < 0) {
+                // Set the class name
+                callout.className += " fabric";
+            }
+
             // See if a class is being applied
             if (props.className) {
                 // Apply the class name
@@ -279,6 +285,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
             }
 
             // See if the top style is defined
+            debugger;
             if (callout.style.top) {
                 let position = parseFloat(callout.style.top.replace("px", ""));
                 let offset = document.body.clientHeight - (position + callout.scrollHeight);

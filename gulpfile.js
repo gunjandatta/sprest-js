@@ -4,18 +4,33 @@ var gulpWebpack = require("gulp-webpack");
 var insert = require("gulp-insert");
 var rename = require("gulp-rename");
 var replace = require("gulp-replace");
+var sass = require("gulp-sass");
 var ts = require("gulp-typescript");
 var uglify = require("gulp-uglify");
 var webpack = require("webpack");
 
 // Build
-gulp.task("build", ["clean"], () => {
+gulp.task("build", ["clean", "build-sass"], () => {
     // Get the source files
     return gulp.src("src/**/*.ts")
         // Send them to the typescript compiler
         .pipe(ts.createProject("tsconfig.json")())
         // Output to the build directory
         .pipe(gulp.dest("build"));
+});
+
+// Build SASS
+gulp.task("build-sass", () => {
+    // Get the source files
+    return gulp.src("src/sass/fabric.scss")
+        // Send them to the node-sass compiler
+        .pipe(sass().on("error", sass.logError))
+        // Fix the ms-ContextualHost class
+        .pipe(replace(/\.fabric \.ms-ContextualHost/g, ".fabric.ms-ContextualHost"))
+        // Fix the ms-PanelHost class
+        .pipe(replace(/\.fabric \.ms-PanelHost/g, ".fabric.ms-PanelHost"))
+        // Output to a css file
+        .pipe(gulp.dest("build/lib/css"));
 });
 
 // Clean
@@ -27,19 +42,7 @@ gulp.task("clean", () => {
 });
 
 // Copy the libraries
-gulp.task("copy-lib", ["copy-fabric-css", "copy-fabric-js", "copy-fabric-lib-jquery", "copy-fabric-lib-pickadate", "copy-sass", "copy-styles"]);
-
-// Copy the fabric css
-gulp.task("copy-fabric-css", ["build"], () => {
-    // Copy the css libraries
-    return gulp.src([
-        "node_modules/office-ui-fabric-js/dist/css/fabric.min.css",
-        "node_modules/office-ui-fabric-js/dist/css/fabric.components.min.css",
-        "src/sass/components.css"
-    ])
-        // Copy to the build folder
-        .pipe(gulp.dest("build/lib/css"));
-});
+gulp.task("copy-lib", ["copy-fabric-js", "copy-fabric-lib-jquery", "copy-fabric-lib-pickadate"]);
 
 // Copy the fabric js
 gulp.task("copy-fabric-js", ["build"], () => {
@@ -71,22 +74,6 @@ gulp.task("copy-fabric-lib-pickadate", ["build"], () => {
         .pipe(replace(/\"jquery\"/g, '"./jquery.js"'))
         // Output to the build directory
         .pipe(gulp.dest("build/lib/js"));
-});
-
-// Copy the sass
-gulp.task("copy-sass", ["build"], () => {
-    // Copy the css libraries
-    return gulp.src(["src/sass/*"])
-        // Copy to the build folder
-        .pipe(gulp.dest("build/lib/sass"));
-});
-
-// Copy the styles
-gulp.task("copy-styles", ["build"], () => {
-    // Get the source file
-    return gulp.src("src/styles.css")
-        // Output to the build directory
-        .pipe(gulp.dest("build"));
 });
 
 // Package the library

@@ -38,6 +38,12 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
     let renderResults = (searchAll: boolean = false) => {
         let searchDialog = _peoplepicker._contextualHostView._contextualHost;
 
+        // Ensure the fabric class name is set
+        if (_peoplepicker._contextualHostView._container.className.indexOf("fabric") < 0) {
+            // Add the class name
+            _peoplepicker._contextualHostView._container.className += " fabric";
+        }
+
         // Ensure the search class name is set
         if (_peoplepicker._contextualHostView._container.className.indexOf("ms-PeoplePicker-search") < 0) {
             // Add the class name

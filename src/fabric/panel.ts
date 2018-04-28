@@ -54,8 +54,14 @@ export const Panel = (props: IPanelProps): IPanel => {
         // Show the panel
         _panel = new fabric.Panel(props.el.querySelector(".ms-Panel"));
 
+        // See if the fabric class name exists
+        if (_panel.panelHost.panelHost.className.indexOf("fabric") < 0) {
+            // Set the class name
+            _panel.panelHost.panelHost.className += " fabric";
+        }
+
         // See if this is a blocking panel
-        if(props.isBlocking) {
+        if (props.isBlocking) {
             // Remove the click event to close the panel
             _panel.panelHost.overlay.overlayElement.removeEventListener("click", _panel._clickHandler);
 

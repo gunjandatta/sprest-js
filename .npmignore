@@ -1,6 +1,7 @@
 src
 test
 *.log
+*.log.*
 *-lock.json
 gulpfile.js
 tsconfig.json
