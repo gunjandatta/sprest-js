@@ -3,8 +3,8 @@ import "core-js/es6/promise";
 import { Helper, List, SPTypes, Types } from "gd-sprest";
 import { Components, Fabric, WebParts, $REST } from "../build";
 
-// Import the css
-import "../build/lib/css/fabric.components.min.css";
+// Import the fabric css
+import "../build/lib/css/fabric.min.css";
 
 // Define the SP global variable
 declare var SP;
