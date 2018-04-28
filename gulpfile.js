@@ -20,8 +20,22 @@ gulp.task("build", ["clean", "fabric-minify"], () => {
         .pipe(gulp.dest("build"));
 });
 
-// Build SASS
-gulp.task("build-sass", () => {
+// Build SASS (Components Only)
+gulp.task("build-sass-components", () => {
+    // Get the source files
+    return gulp.src("src/sass/fabric.components.scss")
+        // Send them to the node-sass compiler
+        .pipe(sass().on("error", sass.logError))
+        // Fix the ms-ContextualHost class
+        .pipe(replace(/\.fabric \.ms-ContextualHost/g, ".fabric.ms-ContextualHost"))
+        // Fix the ms-PanelHost class
+        .pipe(replace(/\.fabric \.ms-PanelHost/g, ".fabric.ms-PanelHost"))
+        // Output to a css file
+        .pipe(gulp.dest("build/lib/css"));
+});
+
+// Build SASS (Fabric Core + Components)
+gulp.task("build-sass-fabric", ["build-sass-components"], () => {
     // Get the source files
     return gulp.src("src/sass/fabric.scss")
         // Send them to the node-sass compiler
@@ -78,9 +92,9 @@ gulp.task("copy-fabric-lib-pickadate", ["build"], () => {
 });
 
 // Minify the fabric css file
-gulp.task("fabric-minify", ["build-sass"], () => {
+gulp.task("fabric-minify", ["build-sass-fabric"], () => {
     // Get the source files
-    return gulp.src(["build/lib/css/fabric.css"])
+    return gulp.src(["build/lib/css/fabric.css", "build/lib/css/fabric.components.css"])
         // Minify the bundle
         .pipe(uglifycss({
             "maxLineLen": 80,
@@ -93,12 +107,12 @@ gulp.task("fabric-minify", ["build-sass"], () => {
 });
 
 // Package the library
-gulp.task("package", ["package-minify"]);
+gulp.task("package", ["package-minify-components", "package-minify-fabric"]);
 
 // Bundle the library
-gulp.task("package-bundle", ["update-lib-reference"], () => {
+gulp.task("package-components", ["update-lib-reference"], () => {
     // Get the source files
-    return gulp.src(["src/sass/fabric-core.scss", "node_modules/core-js/es6/promise", "build/index.js"])
+    return gulp.src(["build/lib/css/fabric.components.min.css", "node_modules/core-js/es6/promise", "build/index.js"])
         // Run webpack to bundle the library
         .pipe(gulpWebpack({
             output: {
@@ -107,11 +121,47 @@ gulp.task("package-bundle", ["update-lib-reference"], () => {
             module: {
                 loaders: [
                     {
-                        test: /\.s?css$/,
+                        test: /\.css$/,
                         use: [
                             { loader: "style-loader" },
-                            { loader: "css-loader" },
-                            { loader: "sass-loader" }
+                            { loader: "css-loader" }
+                        ]
+                    },
+                    {
+                        test: /\.js$/,
+                        exclude: /node_modules/,
+                        use: [
+                            {
+                                loader: "babel-loader",
+                                options: {
+                                    presets: ["es2015"]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }, webpack))
+        // Save to the dist directory
+        .pipe(gulp.dest("dist/"));
+});
+
+// Bundle the library with fabric
+gulp.task("package-fabric", ["update-lib-reference"], () => {
+    // Get the source files
+    return gulp.src(["build/lib/css/fabric.min.css", "node_modules/core-js/es6/promise", "build/index.js"])
+        // Run webpack to bundle the library
+        .pipe(gulpWebpack({
+            output: {
+                filename: "gd-sprest-fabric.js",
+            },
+            module: {
+                loaders: [
+                    {
+                        test: /\.css$/,
+                        use: [
+                            { loader: "style-loader" },
+                            { loader: "css-loader" }
                         ]
                     },
                     {
@@ -134,9 +184,21 @@ gulp.task("package-bundle", ["update-lib-reference"], () => {
 });
 
 // Minify the bundle
-gulp.task("package-minify", ["package-bundle"], () => {
+gulp.task("package-minify-components", ["package-components"], () => {
     // Get the source files
     return gulp.src(["dist/gd-sprest-js.js"])
+        // Minify the bundle
+        .pipe(uglify())
+        // Update the file extension
+        .pipe(rename({ suffix: ".min" }))
+        // Save to the dist directory
+        .pipe(gulp.dest("dist/"));
+});
+
+// Minify the bundle
+gulp.task("package-minify-fabric", ["package-fabric"], () => {
+    // Get the source files
+    return gulp.src(["dist/gd-sprest-fabric.js"])
         // Minify the bundle
         .pipe(uglify())
         // Update the file extension

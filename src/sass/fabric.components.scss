@@ -1,0 +1,13 @@
+// Import the to a variable
+%fabric {
+    // Office Fabric-UI JavaScript Components
+    @import "../../node_modules/office-ui-fabric-js/src/sass/Fabric.Components.scss";
+}
+
+// Target elements within a "fabric" element
+.fabric {
+    @extend %fabric;
+}
+
+// Import this library's components
+@import "components.scss";

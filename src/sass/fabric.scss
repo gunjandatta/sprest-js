@@ -1,3 +1,7 @@
+/**
+ * Fonts
+ */
+
 // Colors
 @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/_Fabric.Color.Variables.scss";
 
@@ -10,9 +14,9 @@
 @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Typography.Output.scss";
 @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Typography.Fonts.Output.scss";
 
-// Import the fabric css to target elements under a fabric element
-.fabric {
-    // Office Fabric-UI Core
+// Import the to a variable
+%fabric {
+    // Office Fabric-UI Core (5.0.1)
 
     // Common utilities
     @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Utilities.Output.scss";
@@ -42,45 +46,12 @@
 
     // Base/wrapper component
     @import "../../node_modules/office-ui-fabric-js/node_modules/office-ui-fabric-core/src/sass/Fabric.Base.Output.scss";
-
-    // Office Fabric-UI JavaScript
-
-    @import "../../node_modules/office-ui-fabric-js/src/components/Breadcrumb/Breadcrumb";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Button/Button";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Callout/Callout";
-    @import "../../node_modules/office-ui-fabric-js/src/components/CheckBox/CheckBox";
-    @import "../../node_modules/office-ui-fabric-js/src/components/RadioButton/RadioButton";
-    @import "../../node_modules/office-ui-fabric-js/src/components/ChoiceFieldGroup/ChoiceFieldGroup";
-    @import "../../node_modules/office-ui-fabric-js/src/components/CommandBar/CommandBar";
-    @import "../../node_modules/office-ui-fabric-js/src/components/CommandButton/CommandButton";
-    @import "../../node_modules/office-ui-fabric-js/src/components/ContextualMenu/ContextualMenu";
-    @import "../../node_modules/office-ui-fabric-js/src/components/DatePicker/DatePicker";
-    @import "../../node_modules/office-ui-fabric-js/src/components/DetailsList/DetailsList";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Dialog/Dialog";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Dropdown/Dropdown";
-    @import "../../node_modules/office-ui-fabric-js/src/components/FacePile/FacePile";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Label/Label";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Link/Link";
-    @import "../../node_modules/office-ui-fabric-js/src/components/List/List";
-    @import "../../node_modules/office-ui-fabric-js/src/components/ListItem/ListItem";
-    @import "../../node_modules/office-ui-fabric-js/src/components/MessageBanner/MessageBanner";
-    @import "../../node_modules/office-ui-fabric-js/src/components/ContextualHost/ContextualHost";
-    @import "../../node_modules/office-ui-fabric-js/src/components/MessageBar/MessageBar";
-    @import "../../node_modules/office-ui-fabric-js/src/components/OrgChart/OrgChart";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Overlay/Overlay";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Panel/Panel";
-    @import "../../node_modules/office-ui-fabric-js/src/components/PanelHost/PanelHost";
-    @import "../../node_modules/office-ui-fabric-js/src/components/PeoplePicker/PeoplePicker";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Persona/Persona";
-    @import "../../node_modules/office-ui-fabric-js/src/components/PersonaCard/PersonaCard";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Pivot/Pivot";
-    @import "../../node_modules/office-ui-fabric-js/src/components/ProgressIndicator/ProgressIndicator";
-    @import "../../node_modules/office-ui-fabric-js/src/components/SearchBox/SearchBox";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Spinner/Spinner";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Table/Table";
-    @import "../../node_modules/office-ui-fabric-js/src/components/TextField/TextField";
-    @import "../../node_modules/office-ui-fabric-js/src/components/Toggle/Toggle";
 }
 
-// The contextual host must be applied globally for it to work
-@import "components.scss";
+// Target elements within a "fabric" element
+.fabric {
+    @extend %fabric;
+}
+
+// Import the components
+@import "fabric.components.scss";
