@@ -285,7 +285,6 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
             }
 
             // See if the top style is defined
-            debugger;
             if (callout.style.top) {
                 let position = parseFloat(callout.style.top.replace("px", ""));
                 let offset = document.body.clientHeight - (position + callout.scrollHeight);

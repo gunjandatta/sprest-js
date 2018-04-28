@@ -6896,7 +6896,6 @@ exports.Dropdown = function (props) {
                 callout.className += " " + props.className;
             }
             // See if the top style is defined
-            debugger;
             if (callout.style.top) {
                 var position = parseFloat(callout.style.top.replace("px", ""));
                 var offset = document.body.clientHeight - (position + callout.scrollHeight);
