@@ -244,6 +244,12 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
         // Set the configuration
         _cfg = _wp.cfg;
 
+        // See if a class name exists
+        if (props.className && _wp.el.className.indexOf(props.className) < 0) {
+            // Set the class name
+            _wp.el.className += " " + props.className;
+        }
+
         // See if the page is being edited
         let returnVal = null;
         if (isEditMode()) {
