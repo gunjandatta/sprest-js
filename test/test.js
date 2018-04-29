@@ -12999,6 +12999,8 @@ exports.Dropdown = function (props) {
                 callout.className += " " + props.className;
             }
             // Fix the menu
+            // This was needed after we updated the css to target fabric elements
+            // The "arrow" doesn't seem to be present, will need to figure this out
             _callout._contextualHost._matchTargetWidth = true;
             _callout._contextualHost._openModal();
             // See if the top style is defined
