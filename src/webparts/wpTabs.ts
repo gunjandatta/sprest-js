@@ -169,6 +169,7 @@ export const WPTabs = (props: IWPTabsProps) => {
     let _wp = WebPart({
         className: props.className,
         elementId: props.elementId,
+        wpClassName: props.wpClassName,
         onRenderDisplay: (wpInfo: IWebPartInfo) => {
             // Set the webparts
             _webparts = getWebParts(wpInfo);

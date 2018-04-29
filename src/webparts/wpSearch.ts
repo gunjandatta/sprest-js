@@ -91,7 +91,8 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
         helpProps: props.helpProps,
         odataQuery: props.odataQuery,
         onRenderItems: props.onRenderItems,
-        onSave: saveConfiguration
+        onSave: saveConfiguration,
+        wpClassName: props.wpClassName
     });
 
     // Return the webpart

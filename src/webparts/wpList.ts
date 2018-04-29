@@ -275,7 +275,8 @@ export const WPList = (props: IWPListProps): IWPList => {
             }
         },
         elementId: props.elementId,
-        onRenderDisplay: renderDisplayForm
+        onRenderDisplay: renderDisplayForm,
+        wpClassName: props.wpClassName
     });
 
     // Return the webpart

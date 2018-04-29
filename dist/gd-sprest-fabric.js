@@ -18444,6 +18444,15 @@ exports.WebPart = function (props) {
         }
         // Set the configuration
         _cfg = _wp.cfg;
+        // See if we are setting the webpart class name
+        if (props.wpClassName) {
+            // Get the webpart element
+            var elWebPart = _wp.wpId ? document.querySelector("div[webpartid='" + _wp.wpId + "']") : null;
+            if (elWebPart) {
+                // Add the class name
+                elWebPart.className += " " + props.wpClassName;
+            }
+        }
         // See if a class name exists
         if (props.className && _wp.el.className.indexOf(props.className) < 0) {
             // Set the class name
@@ -18802,7 +18811,8 @@ exports.WPList = function (props) {
             }
         },
         elementId: props.elementId,
-        onRenderDisplay: renderDisplayForm
+        onRenderDisplay: renderDisplayForm,
+        wpClassName: props.wpClassName
     });
     // Return the webpart
     return {
@@ -18899,7 +18909,8 @@ exports.WPSearch = function (props) {
         helpProps: props.helpProps,
         odataQuery: props.odataQuery,
         onRenderItems: props.onRenderItems,
-        onSave: saveConfiguration
+        onSave: saveConfiguration,
+        wpClassName: props.wpClassName
     });
     // Return the webpart
     return {
@@ -19062,6 +19073,7 @@ exports.WPTabs = function (props) {
     var _wp = _1.WebPart({
         className: props.className,
         elementId: props.elementId,
+        wpClassName: props.wpClassName,
         onRenderDisplay: function onRenderDisplay(wpInfo) {
             // Set the webparts
             _webparts = getWebParts(wpInfo);

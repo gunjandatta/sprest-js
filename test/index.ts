@@ -145,7 +145,7 @@ window["TestJS"] = {
                     FileName: "wp_test_js.webpart",
                     Group: "Dattabase",
                     XML:
-                    `<?xml version="1.0" encoding="utf-8"?>
+                        `<?xml version="1.0" encoding="utf-8"?>
 <webParts>
     <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
         <metaData>
@@ -176,8 +176,8 @@ window["TestJS"] = {
     init: () => {
         WebParts.WebPart({
             cfgElementId: "wp-test-js-cfg",
-            className: "fabric",
             elementId: "wp-test-js",
+            wpClassName: "fabric",
             onRenderDisplay: (cfg) => {
                 // Render elements
                 cfg.el.innerHTML = "<div></div><div></div><div></div><div></div>";
