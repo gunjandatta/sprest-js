@@ -2545,6 +2545,7 @@ window["TestJS"] = {
     init: function init() {
         build_1.WebParts.WebPart({
             cfgElementId: "wp-test-js-cfg",
+            className: "fabric",
             elementId: "wp-test-js",
             onRenderDisplay: function onRenderDisplay(cfg) {
                 // Render elements
@@ -12997,6 +12998,9 @@ exports.Dropdown = function (props) {
                 // Apply the class name
                 callout.className += " " + props.className;
             }
+            // Fix the menu
+            _callout._contextualHost._matchTargetWidth = true;
+            _callout._contextualHost._openModal();
             // See if the top style is defined
             if (callout.style.top) {
                 var position = parseFloat(callout.style.top.replace("px", ""));

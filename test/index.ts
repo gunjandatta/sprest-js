@@ -176,6 +176,7 @@ window["TestJS"] = {
     init: () => {
         WebParts.WebPart({
             cfgElementId: "wp-test-js-cfg",
+            className: "fabric",
             elementId: "wp-test-js",
             onRenderDisplay: (cfg) => {
                 // Render elements

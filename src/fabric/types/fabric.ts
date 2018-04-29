@@ -55,7 +55,12 @@ export interface IContextualHost {
     _container: HTMLDivElement;
     _contextualHost: HTMLDivElement;
     _contextualHostMain: HTMLDivElement;
+    _direction: string;
+    _findAvailablePosition: Function;
     _hasArrow: boolean;
+    _matchTargetWidth: boolean;
+    _openModal: Function;
+    _saveModalSize: Function;
     contains(value: HTMLElement);
     disposeModal();
     setChildren(value: IContextualHost);
