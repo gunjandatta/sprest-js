@@ -59,6 +59,14 @@ gulp.task("clean", () => {
 // Copy the libraries
 gulp.task("copy-lib", ["copy-fabric-js", "copy-fabric-lib-jquery", "copy-fabric-lib-pickadate"]);
 
+// Copy the css
+gulp.task("copy-css", ["build"], () => {
+    // Get the source file
+    return gulp.src(["build/lib/css/fabric.css", "build/lib/css/fabric.min.css", "build/lib/css/fabric.components.css", "build/lib/css/fabric.components.min.css"])
+        // Output to the dist directory
+        .pipe(gulp.dest("dist"));
+});
+
 // Copy the fabric js
 gulp.task("copy-fabric-js", ["build"], () => {
     // Get the source file
@@ -218,4 +226,4 @@ gulp.task("update-lib-reference", ["copy-lib"], () => {
 });
 
 // Default
-gulp.task("default", ["clean", "build", "copy-lib", "update-lib-reference", "package"]);
+gulp.task("default", ["clean", "build", "copy-css", "copy-lib", "update-lib-reference", "package"]);
