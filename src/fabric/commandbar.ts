@@ -38,14 +38,23 @@ export const CommandBar = (props: ICommandBarProps): ICommandBar => {
                 }
             });
         }
-        
+
         // See if this is a menu
         if (buttonProps[i].menu && buttons[i]) {
             // Get the elements
             let elMenu = buttons[i].parentElement.querySelector(".ms-ContextualMenu");
             if (elMenu) {
                 // Create the contextual menu
-                new fabric.ContextualMenu(elMenu, buttons[i]);
+                let menu: Fabric.IContextualMenu = new fabric.ContextualMenu(elMenu, buttons[i]);
+
+                // Set a click event
+                buttons[i].addEventListener("click", () => {
+                    // See if the host exists and fabric class doesn't exist
+                    if (menu._isOpen && menu._host._contextualHost.className.indexOf("fabric") < 0) {
+                        // Set the class
+                        menu._host._contextualHost.className += " fabric";
+                    }
+                });
 
                 // Get the items
                 let items = elMenu.querySelectorAll(".ms-ContextualMenu-item");

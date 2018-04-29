@@ -71,10 +71,10 @@ export interface IContextualHost {
  */
 export interface IContextualMenu {
     _container: HTMLDivElement;
-    _hostTarget: HTMLDivElement;
-    _position: string;
     _host: IContextualHost;
+    _hostTarget: HTMLDivElement;
     _isOpen: boolean;
+    _position: string;
 }
 
 /**

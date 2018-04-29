@@ -6333,7 +6333,7 @@ exports.CommandBar = function (props) {
     // Parse the menu buttons
     var buttonProps = (props.sideCommands || []).concat(props.mainCommands || []);
     var buttons = _menu._container.querySelectorAll(".ms-CommandButton-button");
-    for (var i = 0; i < buttons.length; i++) {
+    var _loop_1 = function _loop_1(i) {
         // See if a click event exists
         if (buttonProps[i].onClick && buttons[i]) {
             // Add the index attribute
@@ -6357,7 +6357,15 @@ exports.CommandBar = function (props) {
             var elMenu = buttons[i].parentElement.querySelector(".ms-ContextualMenu");
             if (elMenu) {
                 // Create the contextual menu
-                new _1.fabric.ContextualMenu(elMenu, buttons[i]);
+                var menu_1 = new _1.fabric.ContextualMenu(elMenu, buttons[i]);
+                // Set a click event
+                buttons[i].addEventListener("click", function () {
+                    // See if the host exists and fabric class doesn't exist
+                    if (menu_1._isOpen && menu_1._host._contextualHost.className.indexOf("fabric") < 0) {
+                        // Set the class
+                        menu_1._host._contextualHost.className += " fabric";
+                    }
+                });
                 // Get the items
                 var items = elMenu.querySelectorAll(".ms-ContextualMenu-item");
                 for (var j = 0; j < buttonProps[i].menu.items.length; j++) {
@@ -6370,6 +6378,9 @@ exports.CommandBar = function (props) {
                 }
             }
         }
+    };
+    for (var i = 0; i < buttons.length; i++) {
+        _loop_1(i);
     }
     // Return the command bar
     return { get: get };
