@@ -35,10 +35,12 @@ export const ContextualMenu = (props: IContextualMenuProps): string => {
         return menuItems.join('\n');
     }
 
+    // Set the hidden property
+    let isHidden = typeof (props.isHidden) === "boolean" ? props.isHidden : true;
 
     // Return the template
     return [
-        '<ul class="ms-ContextualMenu ' + (props.className || "") + '">',
+        '<ul class="ms-ContextualMenu ' + (isHidden ? "is-hidden " : "") + (props.className || "") + '">',
         renderItems(props.items),
         '</ul>'
     ].join('\n');

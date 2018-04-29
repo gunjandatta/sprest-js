@@ -1,5 +1,5 @@
 import { Fabric, ICommandBar, ICommandBarProps } from "./types"
-import { fabric, Templates } from ".";
+import { ContextualMenu, fabric, Templates } from ".";
 
 /**
  * Command Bar

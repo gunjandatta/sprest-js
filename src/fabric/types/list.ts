@@ -22,5 +22,5 @@ export interface IListProps extends IProps {
     items?: Array<string>;
 
     /** The list item click event. */
-    onClick?: (ev: MouseEvent) => void;
+    onClick?: (ev?: MouseEvent) => void;
 }

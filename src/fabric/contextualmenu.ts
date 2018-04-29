@@ -14,6 +14,18 @@ export const ContextualMenu = (props: IContextualMenuProps): IContextualMenu => 
     // Create the contextual menu
     let _menu: Fabric.IContextualMenu = new fabric.ContextualMenu(props.el.querySelector(".ms-ContextualMenu"), props.elTarget);
 
+    // Add a click event to the target
+    props.elTarget.addEventListener("click", ev => {
+        // Prevent a postback
+        ev ? ev.preventDefault() : null;
+
+        // See if the host exists and fabric class doesn't exist
+        if (_menu._host && _menu._host._contextualHost.className.indexOf("fabric") < 0) {
+            // Add the class
+            _menu._host._contextualHost.className += " fabric";
+        }
+    });
+
     // Return the contextual menu
     return { get };
 }

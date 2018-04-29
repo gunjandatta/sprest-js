@@ -44,7 +44,11 @@ export interface ICommandBar {
  * Command Button
  */
 export interface ICommandButton {
+    _command: HTMLButtonElement;
+    _commandButton: HTMLButtonElement;
     _container: HTMLDivElement;
+    _contextualMenu: HTMLUListElement;
+    _modalHostView: IContextualHost;
 }
 
 /**

@@ -39,7 +39,16 @@ export const Callout = (props: ICalloutProps): Fabric.ICallout => {
     props.el.innerHTML = Templates.Callout(props);
 
     // Create the callout
-    let _callout:Fabric.ICallout = new fabric.Callout(props.el.querySelector(".ms-Callout"), props.elTarget, props.position || "top");
+    let _callout: Fabric.ICallout = new fabric.Callout(props.el.querySelector(".ms-Callout"), props.elTarget, props.position || "top");
+
+    // Set the click event
+    props.elTarget.addEventListener("click", () => {
+        // See if the host exists and fabric class doesn't exist
+        if (_callout._contextualHost && _callout._contextualHost._contextualHost.className.indexOf("fabric") < 0) {
+            // Add the class
+            _callout._contextualHost._contextualHost.className += " fabric";
+        }
+    });
 
     // Return the callout
     return _callout;

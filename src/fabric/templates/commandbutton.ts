@@ -19,7 +19,7 @@ export const CommandButton = (props: ICommandButtonProps): string => {
         props.text ? "" : "ms-CommandButton--noLabel"
     ].join(' ').trim();
 
-    // See if the menu properties exist
+    // Get the menu props and set the default settings
     let menuProps = props.menu;
     if (menuProps) {
         // Set the class name

@@ -12,14 +12,17 @@ export interface IContextualMenu {
  * Contextual Menu Props
  */
 export interface IContextualMenuProps extends IProps {
+    /** The target element to associate the menu with. */
+    elTarget?: Element | HTMLElement;
+
     /** The menu items. */
     items?: Array<IContextualMenuItem>;
 
     /** The button icon. */
     icon?: string;
 
-    /** The target element to associate the menu with. */
-    elTarget?: Element | HTMLElement;
+    /** True to hide the context menu. (Default: true) */
+    isHidden?: boolean;
 
     /** The button text. */
     text?: string;

@@ -12361,6 +12361,14 @@ exports.Callout = function (props) {
     props.el.innerHTML = _1.Templates.Callout(props);
     // Create the callout
     var _callout = new _1.fabric.Callout(props.el.querySelector(".ms-Callout"), props.elTarget, props.position || "top");
+    // Set the click event
+    props.elTarget.addEventListener("click", function () {
+        // See if the host exists and fabric class doesn't exist
+        if (_callout._contextualHost && _callout._contextualHost._contextualHost.className.indexOf("fabric") < 0) {
+            // Add the class
+            _callout._contextualHost._contextualHost.className += " fabric";
+        }
+    });
     // Return the callout
     return _callout;
 };
@@ -12507,9 +12515,32 @@ exports.CommandButton = function (props) {
     var get = function () { return _button; };
     // Set the command button html
     props.el.innerHTML = _1.Templates.CommandButton(props);
-    // Create the contextual menu
+    // Create the command button
     var _button = new _1.fabric.CommandButton(props.el.querySelector(".ms-CommandButton"));
-    // Return the contextual menu
+    // Parse the menu button
+    var btn = _button._container.querySelector(".ms-CommandButton-button");
+    if (btn) {
+        // Set the click event
+        btn.addEventListener("click", function (ev) {
+            // Prevent postback
+            ev ? ev.preventDefault() : null;
+            // Ensure the fabric class name exists
+            if (_button._modalHostView._contextualHost.className.indexOf("fabric") < 0) {
+                // Add the class name
+                _button._modalHostView._contextualHost.className += " fabric";
+            }
+            // See if the menu is hidden
+            if (_button._contextualMenu.className.indexOf("is-hidden") > 0) {
+                // Remove the class
+                _button._contextualMenu.className = _button._contextualMenu.className.replace(/ ?is-hidden/, "");
+            }
+        });
+    }
+    // See if there are menu items
+    if (props.menu) {
+        // 
+    }
+    // Return the command button
     return { get: get };
 };
 
@@ -12532,6 +12563,16 @@ exports.ContextualMenu = function (props) {
     props.el.innerHTML = _1.Templates.ContextualMenu(props);
     // Create the contextual menu
     var _menu = new _1.fabric.ContextualMenu(props.el.querySelector(".ms-ContextualMenu"), props.elTarget);
+    // Add a click event to the target
+    props.elTarget.addEventListener("click", function (ev) {
+        // Prevent a postback
+        ev ? ev.preventDefault() : null;
+        // See if the host exists and fabric class doesn't exist
+        if (_menu._host && _menu._host._contextualHost.className.indexOf("fabric") < 0) {
+            // Add the class
+            _menu._host._contextualHost.className += " fabric";
+        }
+    });
     // Return the contextual menu
     return { get: get };
 };
@@ -12999,11 +13040,6 @@ exports.Dropdown = function (props) {
         // Get the callout element
         var callout = _callout._contextualHost ? _callout._contextualHost._contextualHost : null;
         if (callout) {
-            // Ensure the fabric class name exists
-            if (callout.className.indexOf("fabric") < 0) {
-                // Set the class name
-                callout.className += " fabric";
-            }
             // See if a class is being applied
             if (props.className) {
                 // Apply the class name
@@ -14105,7 +14141,7 @@ exports.CommandButton = function (props) {
         props.menu ? "is-menu" : "",
         props.text ? "" : "ms-CommandButton--noLabel"
     ].join(' ').trim();
-    // See if the menu properties exist
+    // Get the menu props and set the default settings
     var menuProps = props.menu;
     if (menuProps) {
         // Set the class name
@@ -14163,9 +14199,11 @@ exports.ContextualMenu = function (props) {
         // Return the items
         return menuItems.join('\n');
     };
+    // Set the hidden property
+    var isHidden = typeof (props.isHidden) === "boolean" ? props.isHidden : true;
     // Return the template
     return [
-        '<ul class="ms-ContextualMenu ' + (props.className || "") + '">',
+        '<ul class="ms-ContextualMenu ' + (isHidden ? "is-hidden " : "") + (props.className || "") + '">',
         renderItems(props.items),
         '</ul>'
     ].join('\n');
