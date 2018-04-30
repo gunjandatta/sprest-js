@@ -40,13 +40,15 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
             let timeValue: IDropdownOption | Array<string> = _tp ? _tp.getValue() as IDropdownOption : null;
             timeValue = timeValue && timeValue.value ? timeValue.value.split(" ") : null;
             if (timeValue) {
+                let timeInfo = timeValue[0].split(":");
+
                 // Set the hours
-                let hours = parseInt(timeValue[0].split(":")[0])
-                hours += timeValue[1] == "PM" ? 12 : 0;
+                let hours = parseInt(timeInfo[0])
+                hours += hours < 12 && timeValue[1] == "PM" ? 12 : 0;
                 dt.setHours(hours);
 
                 // Set the minutes
-                dt.setMinutes(parseInt(timeValue[0].split(":")[1]));
+                dt.setMinutes(parseInt(timeInfo[1]));
             }
         }
 
@@ -118,14 +120,19 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
         let value = null;
         if (props.value) {
             let dt = new Date(props.value);
-            let time = dt.toLocaleTimeString().split(' ');
+            let time = dt.toTimeString().split(' ')[0].split(':');
 
-            // Set the hours
-            let info = time[0].split(':');
-            let hours = ("0" + (parseInt(info[0]) + (time[1] == "PM" && props.timePickerType == TimePickerType.Military ? 12 : 0))).slice(-2);
+            // Set the hours, minutes and format
+            let hours: number | string = parseInt(time[0]);
+            let mins = ("0" + parseInt(time[1])).slice(-2);
+            let format = hours > 11 ? "PM" : "AM";
+
+            // Update the hours based on the time picker type
+            hours -= hours > 12 && props.timePickerType != TimePickerType.Military ? 12 : 0;
+            hours = ("0" + hours).slice(-2);
 
             // Set the time value
-            value = hours + ":" + info[1] + " " + time[1];
+            value = hours + ":" + mins + " " + format;
         }
 
         // Render a dropdown

@@ -6522,12 +6522,13 @@ exports.DatePicker = function (props) {
             var timeValue = _tp ? _tp.getValue() : null;
             timeValue = timeValue && timeValue.value ? timeValue.value.split(" ") : null;
             if (timeValue) {
+                var timeInfo = timeValue[0].split(":");
                 // Set the hours
-                var hours = parseInt(timeValue[0].split(":")[0]);
-                hours += timeValue[1] == "PM" ? 12 : 0;
+                var hours = parseInt(timeInfo[0]);
+                hours += hours < 12 && timeValue[1] == "PM" ? 12 : 0;
                 dt.setHours(hours);
                 // Set the minutes
-                dt.setMinutes(parseInt(timeValue[0].split(":")[1]));
+                dt.setMinutes(parseInt(timeInfo[1]));
             }
         }
         // Return the date
@@ -6586,12 +6587,16 @@ exports.DatePicker = function (props) {
         var value = null;
         if (props.value) {
             var dt = new Date(props.value);
-            var time = dt.toLocaleTimeString().split(' ');
-            // Set the hours
-            var info = time[0].split(':');
-            var hours = ("0" + (parseInt(info[0]) + (time[1] == "PM" && props.timePickerType == TimePickerType.Military ? 12 : 0))).slice(-2);
+            var time = dt.toTimeString().split(' ')[0].split(':');
+            // Set the hours, minutes and format
+            var hours = parseInt(time[0]);
+            var mins = ("0" + parseInt(time[1])).slice(-2);
+            var format = hours > 11 ? "PM" : "AM";
+            // Update the hours based on the time picker type
+            hours -= hours > 12 && props.timePickerType != TimePickerType.Military ? 12 : 0;
+            hours = ("0" + hours).slice(-2);
             // Set the time value
-            value = hours + ":" + info[1] + " " + time[1];
+            value = hours + ":" + mins + " " + format;
         }
         // Render a dropdown
         return _1.Dropdown({
