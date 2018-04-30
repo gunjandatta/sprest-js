@@ -86,7 +86,7 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
         let options: Array<IDropdownOption> = [];
 
         // Create the hours
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 24; i++) {
             let hour = "";
 
             // See if this is military time
@@ -95,7 +95,7 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
                 hour = ("0" + i).slice(-2);
             } else {
                 // Set the hour
-                hour = i % 12 ? "12" : ("0" + (i % 12)).slice(-2);
+                hour = i % 12 == 0 ? "12" : ("0" + (i % 12)).slice(-2);
             }
             // Create the minutes
             for (let j = 0; j < 4; j++) {

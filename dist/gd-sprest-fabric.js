@@ -6558,7 +6558,7 @@ exports.DatePicker = function (props) {
         // Render the options
         var options = [];
         // Create the hours
-        for (var i = 0; i < 25; i++) {
+        for (var i = 0; i < 24; i++) {
             var hour = "";
             // See if this is military time
             if (props.timePickerType == TimePickerType.Military) {
@@ -6566,7 +6566,7 @@ exports.DatePicker = function (props) {
                 hour = ("0" + i).slice(-2);
             } else {
                 // Set the hour
-                hour = i % 12 ? "12" : ("0" + i % 12).slice(-2);
+                hour = i % 12 == 0 ? "12" : ("0" + i % 12).slice(-2);
             }
             // Create the minutes
             for (var j = 0; j < 4; j++) {
