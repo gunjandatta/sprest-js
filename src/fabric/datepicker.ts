@@ -120,15 +120,18 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
         let value = null;
         if (props.value) {
             let dt = new Date(props.value);
-            let time = dt.toTimeString().split(' ')[0].split(':');
+
+            // Extract the time information
+            let timeInfo = dt.toLocaleTimeString().replace(/[^A-Z0-9: ]/g, "").split(' ');
+            let time = timeInfo[0].split(':');
+            let format = timeInfo[1];
 
             // Set the hours, minutes and format
             let hours: number | string = parseInt(time[0]);
             let mins = ("0" + parseInt(time[1])).slice(-2);
-            let format = hours > 11 ? "PM" : "AM";
 
             // Update the hours based on the time picker type
-            hours -= hours > 12 && props.timePickerType != TimePickerType.Military ? 12 : 0;
+            hours += hours < 12 && format == "PM" && props.timePickerType == TimePickerType.Military ? 12 : 0;
             hours = ("0" + hours).slice(-2);
 
             // Set the time value

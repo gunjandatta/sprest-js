@@ -6587,13 +6587,15 @@ exports.DatePicker = function (props) {
         var value = null;
         if (props.value) {
             var dt = new Date(props.value);
-            var time = dt.toTimeString().split(' ')[0].split(':');
+            // Extract the time information
+            var timeInfo = dt.toLocaleTimeString().replace(/[^A-Z0-9: ]/g, "").split(' ');
+            var time = timeInfo[0].split(':');
+            var format = timeInfo[1];
             // Set the hours, minutes and format
             var hours = parseInt(time[0]);
             var mins = ("0" + parseInt(time[1])).slice(-2);
-            var format = hours > 11 ? "PM" : "AM";
             // Update the hours based on the time picker type
-            hours -= hours > 12 && props.timePickerType != TimePickerType.Military ? 12 : 0;
+            hours += hours < 12 && format == "PM" && props.timePickerType == TimePickerType.Military ? 12 : 0;
             hours = ("0" + hours).slice(-2);
             // Set the time value
             value = hours + ":" + mins + " " + format;
