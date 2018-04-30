@@ -95,11 +95,7 @@ export const DatePicker = (props: IDatePickerProps): IDatePicker => {
                 hour = ("0" + i).slice(-2);
             } else {
                 // Set the hour
-                if (i == 0 || i == 12) {
-                    hour = "12";
-                } else {
-                    hour = ("0" + (i % 12)).slice(-2);
-                }
+                hour = i % 12 ? "12" : ("0" + (i % 12)).slice(-2);
             }
             // Create the minutes
             for (let j = 0; j < 4; j++) {
