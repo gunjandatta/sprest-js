@@ -32,9 +32,11 @@ export const Dialog = (props: IDialogProps): IDialog => {
 
     // Return the dialog
     return {
+        close: () => { _dialog.close(); },
         get,
         getActions,
         getContent,
-        getTitle
+        getTitle,
+        open: () => { _dialog.open(); }
     };
 }

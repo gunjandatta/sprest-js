@@ -1,4 +1,4 @@
-import { Fabric, IProps } from ".";
+import { Fabric, IListItemProps, IProps } from ".";
 
 /**
  * List
@@ -19,7 +19,7 @@ export interface IList {
  */
 export interface IListProps extends IProps {
     /** The list items. */
-    items?: Array<string>;
+    items?: Array<string | IListItemProps>;
 
     /** The list item click event. */
     onClick?: (ev?: MouseEvent) => void;

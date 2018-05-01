@@ -221,6 +221,7 @@ window["TestJS"] = {
                                 excludeFields: ["Title"],
                                 itemId: item.Id,
                                 listName: "SPReact",
+                                loadAttachments: true,
                                 panelIsBlocking: true,
                                 panelTitle: item["Title"] || "",
                                 panelType: Fabric.PanelTypes.Large

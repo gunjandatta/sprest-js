@@ -1,5 +1,5 @@
 import { SPTypes, Types, Web } from "gd-sprest";
-import { Button, CommandBar, Panel, PanelTypes, Templates, Spinner } from "../fabric";
+import { Button, CommandBar, Dialog, Panel, PanelTypes, Templates, Spinner } from "../fabric";
 import { Fabric, ICommandButtonProps, IDropdown, IDropdownOption, IPanel } from "../fabric/types";
 import { Field, ListForm } from ".";
 import {
@@ -22,6 +22,19 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
     // Add the menu click events
     let addMenuClickEvents = () => {
         let buttons: any = null;
+
+        // Cancel buttons
+        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-attachments");
+        for (let i = 0; i < buttons.length; i++) {
+            // Add a click event
+            buttons[i].addEventListener("click", (ev: MouseEvent) => {
+                // Disable postback
+                ev ? ev.preventDefault() : null;
+
+                // Display the attachments
+                _dialog.open();
+            });
+        }
 
         // Cancel buttons
         buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
@@ -163,6 +176,16 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
                         text: "Close"
                     }
                 ];
+
+                // See if we are loading attachments
+                if (props.loadAttachments) {
+                    // Add the attachments button
+                    mainCommands.push({
+                        className: "ms-CommandButton-attachments",
+                        icon: "Attach",
+                        text: "Attachments"
+                    });
+                }
                 break;
 
             // Edit
@@ -233,10 +256,20 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
      * Main
      */
 
+    // Render the template
+    props.el.innerHTML = "<div></div><div></div>";
+
+    // Create the attachments dialog
+    let _dialog = Dialog({
+        el: props.el.children[0],
+        showCloseButton: true,
+        title: "Attachments"
+    });
+
     // Create the panel
     let _panel = Panel({
         className: props.className,
-        el: props.el,
+        el: props.el.children[1],
         headerText: props.panelTitle,
         isBlocking: props.panelIsBlocking,
         panelType: typeof (props.panelType) === "number" ? props.panelType : PanelTypes.Large,
@@ -257,6 +290,15 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
     }).then(formInfo => {
         // Save the form information
         _formInfo = formInfo;
+
+        // See if we are loading the attachments
+        if (props.loadAttachments) {
+            // Render the attachments
+            ListForm.renderAttachmentsView({
+                el: _dialog.getContent(),
+                info: _formInfo
+            });
+        }
 
         // See if the panel is open
         if (_panel.isOpen()) {

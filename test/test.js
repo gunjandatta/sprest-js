@@ -2581,6 +2581,7 @@ window["TestJS"] = {
                             excludeFields: ["Title"],
                             itemId: item.Id,
                             listName: "SPReact",
+                            loadAttachments: true,
                             panelIsBlocking: true,
                             panelTitle: item["Title"] || "",
                             panelType: build_1.Fabric.PanelTypes.Large
@@ -12787,10 +12788,12 @@ exports.Dialog = function (props) {
     }
     // Return the dialog
     return {
+        close: function () { _dialog.close(); },
         get: get,
         getActions: getActions,
         getContent: getContent,
-        getTitle: getTitle
+        getTitle: getTitle,
+        open: function () { _dialog.open(); }
     };
 };
 
@@ -13224,8 +13227,39 @@ exports.List = function (props) {
     if (props.onClick && _list._listItemComponents) {
         // Parse the list items
         for (var i = 0; i < _list._listItemComponents.length; i++) {
+            var item = _list._listItemComponents[i];
+            var itemProps = props.items[i];
             // Add the click event
-            _list._listItemComponents[i]._container.addEventListener("click", props.onClick.bind(_list._listItemComponents[i]));
+            item._container.addEventListener("click", props.onClick.bind(_list._listItemComponents[i]));
+            // See if actions exist for this item
+            if (itemProps && itemProps.actions) {
+                var icons = item._container.querySelectorAll(".ms-ListItem-action");
+                // Parse the actions
+                for (var j = 0; j < itemProps.actions.length; j++) {
+                    var action = itemProps.actions[j];
+                    // Ensure the icon exists
+                    if (icons[j]) {
+                        // See if the click event exists
+                        if (action.onClick) {
+                            // Set the click event
+                            icons[j].addEventListener("click", action.onClick);
+                        }
+                        else if (action.url) {
+                            // Set the click event
+                            icons[j].addEventListener("click", function (ev) {
+                                var el = ev.currentTarget;
+                                // Get the target and url info
+                                var target = el.getAttribute("data-target") || "_blank";
+                                var url = el.getAttribute("data-url");
+                                if (url) {
+                                    // Open the url
+                                    window.open(url, target);
+                                }
+                            });
+                        }
+                    }
+                }
+            }
         }
     }
     // Return the list
@@ -14381,14 +14415,24 @@ exports.LinkField = function (props) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(6);
 /**
  * List
  */
 exports.List = function (props) {
+    var items = props.items && props.items.length > 0 ? props.items : [];
+    // See if the item is a string
+    if (items.length > 0 && typeof (props.items[0]) !== "string") {
+        // Parse the items
+        for (var i = 0; i < items.length; i++) {
+            // Update the item
+            items[i] = _1.ListItem(items[i]);
+        }
+    }
     // Return the template
     return [
         '<ul class="ms-List ' + (props.className || "") + '">',
-        props.items && props.items.length > 0 ? props.items.join('\n') : '',
+        items.join('\n'),
         '</ul>'
     ].join('\n');
 };
@@ -14415,6 +14459,20 @@ exports.ListItem = function (props) {
         props.isUnread ? "is-unread" : "",
         props.isUnseen ? "is-unseen" : ""
     ].join(' ').trim();
+    // See if the actions exist
+    var actions = [];
+    if (props.actions && props.actions.length > 0) {
+        // Parse the actions
+        for (var i = 0; i < props.actions.length; i++) {
+            var action = props.actions[i];
+            // Add the action
+            actions.push([
+                '<div class="ms-ListItem-action"' + (action.target ? ' data-target="' + action.target + '"' : '') + (action.url ? ' data-url="' + action.url + '"' : '') + '>',
+                '<i class="ms-Icon ms-Icon--' + action.iconName + '"></i>',
+                '</div>'
+            ].join('\n'));
+        }
+    }
     // Return the template
     return [
         '<li class="ms-ListItem ' + className + '" tabindex="0" data-value=\'' + (props.value || "") + '\'>',
@@ -14423,7 +14481,7 @@ exports.ListItem = function (props) {
         props.tertiaryText ? '<span class="ms-ListItem-tertiaryText">' + props.tertiaryText + '</span>' : '',
         props.metaText ? '<span class="ms-ListItem-metaText">' + props.metaText + '</span>' : '',
         '<div class="ms-ListItem-selectionTarget">' + (props.selectionTarget || "") + '</div>',
-        '<div class="ms-ListItem-actions">' + (props.actions || "") + '</div>',
+        '<div class="ms-ListItem-actions">' + actions.join('\n') + '</div>',
         '</li>'
     ].join('\n');
 };
@@ -15482,6 +15540,28 @@ var __1 = __webpack_require__(15);
 var _1 = __webpack_require__(23);
 // Extend the list form
 exports.ListForm = gd_sprest_1.Helper.ListForm;
+// Method to render the attachments view
+exports.ListForm.renderAttachmentsView = function (props) {
+    var attachments = props.info.attachments || [];
+    var items = [];
+    // Parse the attachments
+    for (var i = 0; i < attachments.length; i++) {
+        var attachment = attachments[i];
+        // Add the item
+        items.push({
+            primaryText: attachment.FileName,
+            actions: [{
+                    iconName: "Mail",
+                    url: "mailto:?Body=" + encodeURI('<a href="' + attachment.ServerRelativeUrl + "'>" + attachment.FileName + '</a>')
+                }]
+        });
+    }
+    // Render the list
+    __1.Fabric.List({
+        el: props.el,
+        items: items
+    });
+};
 // Method to render a display form for an item
 exports.ListForm.renderDisplayForm = function (props) {
     var fields = [];
@@ -15831,6 +15911,17 @@ exports.ListFormPanel = function (props) {
     var addMenuClickEvents = function () {
         var buttons = null;
         // Cancel buttons
+        buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-attachments");
+        for (var i = 0; i < buttons.length; i++) {
+            // Add a click event
+            buttons[i].addEventListener("click", function (ev) {
+                // Disable postback
+                ev ? ev.preventDefault() : null;
+                // Display the attachments
+                _dialog.open();
+            });
+        }
+        // Cancel buttons
         buttons = _panel.get()._panel.querySelectorAll(".ms-CommandButton-cancel");
         for (var i = 0; i < buttons.length; i++) {
             // Add a click event
@@ -15954,6 +16045,15 @@ exports.ListFormPanel = function (props) {
                         text: "Close"
                     }
                 ];
+                // See if we are loading attachments
+                if (props.loadAttachments) {
+                    // Add the attachments button
+                    mainCommands.push({
+                        className: "ms-CommandButton-attachments",
+                        icon: "Attach",
+                        text: "Attachments"
+                    });
+                }
                 break;
             // Edit
             case gd_sprest_1.SPTypes.ControlMode.Edit:
@@ -16017,10 +16117,18 @@ exports.ListFormPanel = function (props) {
     /**
      * Main
      */
+    // Render the template
+    props.el.innerHTML = "<div></div><div></div>";
+    // Create the attachments dialog
+    var _dialog = fabric_1.Dialog({
+        el: props.el.children[0],
+        showCloseButton: true,
+        title: "Attachments"
+    });
     // Create the panel
     var _panel = fabric_1.Panel({
         className: props.className,
-        el: props.el,
+        el: props.el.children[1],
         headerText: props.panelTitle,
         isBlocking: props.panelIsBlocking,
         panelType: typeof (props.panelType) === "number" ? props.panelType : fabric_1.PanelTypes.Large,
@@ -16040,6 +16148,14 @@ exports.ListFormPanel = function (props) {
     }).then(function (formInfo) {
         // Save the form information
         _formInfo = formInfo;
+        // See if we are loading the attachments
+        if (props.loadAttachments) {
+            // Render the attachments
+            _1.ListForm.renderAttachmentsView({
+                el: _dialog.getContent(),
+                info: _formInfo
+            });
+        }
         // See if the panel is open
         if (_panel.isOpen()) {
             // Render the panel

@@ -1,4 +1,4 @@
-import { Fabric, IList, IListItemProps, IListProps } from "./types";
+import { Fabric, IList, IListItemAction, IListItemProps, IListProps } from "./types";
 import { fabric, ListItem, Templates } from ".";
 
 /**
@@ -46,8 +46,45 @@ export const List = (props: IListProps): IList => {
     if (props.onClick && _list._listItemComponents) {
         // Parse the list items
         for (let i = 0; i < _list._listItemComponents.length; i++) {
+            let item = _list._listItemComponents[i];
+            let itemProps = props.items[i] as IListItemProps;
+
             // Add the click event
-            _list._listItemComponents[i]._container.addEventListener("click", props.onClick.bind(_list._listItemComponents[i]));
+            item._container.addEventListener("click", props.onClick.bind(_list._listItemComponents[i]));
+
+            // See if actions exist for this item
+            if (itemProps && itemProps.actions) {
+                let icons = item._container.querySelectorAll(".ms-ListItem-action");
+
+                // Parse the actions
+                for (let j = 0; j < itemProps.actions.length; j++) {
+                    let action = itemProps.actions[j];
+
+                    // Ensure the icon exists
+                    if (icons[j]) {
+                        // See if the click event exists
+                        if (action.onClick) {
+                            // Set the click event
+                            icons[j].addEventListener("click", action.onClick);
+                        }
+                        // Else, see if the url exists
+                        else if (action.url) {
+                            // Set the click event
+                            icons[j].addEventListener("click", ev => {
+                                let el = ev.currentTarget as HTMLDivElement;
+
+                                // Get the target and url info
+                                let target = el.getAttribute("data-target") || "_blank";
+                                let url = el.getAttribute("data-url");
+                                if (url) {
+                                    // Open the url
+                                    window.open(url, target);
+                                }
+                            });
+                        }
+                    }
+                }
+            }
         }
     }
 

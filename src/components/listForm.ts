@@ -3,12 +3,40 @@ import { Fabric } from "..";
 import { Field } from ".";
 import {
     IField, IListForm,
+    IListFormAttachmentsProps,
     IListFormDisplay, IListFormDisplayProps,
     IListFormEdit, IListFormEditProps
 } from "./types";
+import { IListFormAttachmentInfo } from "gd-sprest/build/helper/types";
 
 // Extend the list form
 export const ListForm: IListForm = Helper.ListForm as any;
+
+// Method to render the attachments view
+ListForm.renderAttachmentsView = (props: IListFormAttachmentsProps) => {
+    let attachments = props.info.attachments || [];
+    let items: Array<Fabric.Types.IListItemProps> = [];
+
+    // Parse the attachments
+    for (let i = 0; i < attachments.length; i++) {
+        let attachment = attachments[i];
+
+        // Add the item
+        items.push({
+            primaryText: attachment.FileName,
+            actions: [{
+                iconName: "Mail",
+                url: "mailto:?Body=" + encodeURI('<a href="' + attachment.ServerRelativeUrl + "'>" + attachment.FileName + '</a>')
+            }]
+        });
+    }
+
+    // Render the list
+    Fabric.List({
+        el: props.el,
+        items
+    });
+}
 
 // Method to render a display form for an item
 ListForm.renderDisplayForm = (props: IListFormDisplayProps): IListFormDisplay => {

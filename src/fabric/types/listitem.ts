@@ -1,11 +1,28 @@
 import { IProps } from ".";
 
 /**
+ * List Item Action
+ */
+export interface IListItemAction {
+    /** The icon name. */
+    iconName: string;
+
+    /** The click event. */
+    onClick?: () => void;
+
+    /** The target behavior when redirecting to a url. */
+    target?: string;
+
+    /** The url to redirect to. */
+    url?: string;
+}
+
+/**
  * List Item Properties
  */
 export interface IListItemProps extends IProps {
     /** The list item actions. */
-    actions?: string;
+    actions?: Array<IListItemAction>;
 
     /** True for document types. */
     isDocument?: boolean;

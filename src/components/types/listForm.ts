@@ -1,10 +1,17 @@
 import { Types } from "gd-sprest";
 import { IField } from ".";
+import { IListFormAttachmentInfo } from "gd-sprest/build/helper/types";
 
 /**
  * List Form
  */
 export interface IListForm extends Types.Helper.IListForm {
+    /**
+     * Method to render the attachments view.
+     * @param props - The attachment information.
+     */
+    renderAttachmentsView(props: IListFormAttachmentsProps);
+
     /**
      * Method to render the display form template.
      * @param props - The display form properties.
@@ -22,6 +29,17 @@ export interface IListForm extends Types.Helper.IListForm {
      * @param props - The form properties.
      */
     renderFormTemplate(props: IListFormDisplayProps);
+}
+
+/**
+ * List Form Attachments Properties
+ */
+export interface IListFormAttachmentsProps {
+    /** The element to render the form to. */
+    el: Element;
+
+    /** The list form information. */
+    info: Types.Helper.IListFormResult;
 }
 
 /**

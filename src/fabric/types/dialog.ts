@@ -4,6 +4,9 @@ import { Fabric, IButtonProps, IProps } from ".";
  * Dialog
  */
 export interface IDialog {
+    /** Closes the dialog. */
+    close();
+    
     /** Returns the fabric component. */
     get(): Fabric.IDialog;
 
@@ -15,6 +18,9 @@ export interface IDialog {
 
     /** Returns the title container. */
     getTitle(): HTMLDivElement;
+
+    /** Opens the dialog. */
+    open();
 }
 
 /**
