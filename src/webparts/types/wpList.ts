@@ -76,6 +76,12 @@ export interface IWPListProps extends IWebPartProps {
     /** The on post render event. */
     onPostRender?: (wpInfo: IWPListInfo, list?: Types.SP.IListQueryResult | Types.SP.IListResult) => void;
 
+    /** The render event triggered when the page is in 'Display' mode */
+    onRenderDisplay?: (wp: IWPListInfo) => any;
+
+    /** The render event triggered when the page is in 'Edit' mode */
+    onRenderEdit?: (wp: IWPListInfo) => any;
+
     /** The on render items event. */
     onRenderItems?: (wpInfo: IWPListInfo, items: Array<Types.SP.IListItemQueryResult | Types.SP.IListItemResult>) => void;
 
