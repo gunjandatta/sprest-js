@@ -22,8 +22,14 @@ export const WPList = (props: IWPListProps): IWPList => {
         // Save the information
         _wpInfo = wpInfo;
 
-        // Load the items
-        loadItems();
+        // See if there is a custom render event
+        if (props.onRenderDisplay) {
+            // Execute the event
+            props.onRenderDisplay(_wpInfo);
+        } else {
+            // Load the items
+            loadItems();
+        }
     }
 
     // Method to load the items
