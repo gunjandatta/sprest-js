@@ -179,6 +179,24 @@ export const WPList = (props: IWPListProps): IWPList => {
 
         // See if the lists exists
         if (_lists) {
+            // See if the list hasn't been set, and a configuration exists
+            if (list == null && _wpInfo.cfg.ListName) {
+                // Parse the lists
+                for (let i = 0; i < _lists.length; i++) {
+                    // See if this is the target list
+                    if (_lists[i].Title == _wpInfo.cfg.ListName) {
+                        // Set the list
+                        list = _lists[i];
+
+                        // Call the change event
+                        props.editPanel.onListChanged ? props.editPanel.onListChanged(_wpInfo, list) : null;
+
+                        // Break from the loop
+                        break;
+                    }
+                }
+            }
+
             // Render the header
             if (_cfg.onRenderHeader) {
                 _cfg.onRenderHeader(_el.children[0] as HTMLDivElement, _wpInfo, list);
