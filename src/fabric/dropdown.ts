@@ -230,7 +230,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
     // Render the dropdown
     props.el.innerHTML = [
-        '<div class="dropdown">',
+        '<div class="dropdown ' + (props.className || '') + '">',
         '<div class="textfield"></div>',
         '<div class="callout"></div>',
         '</div>'
