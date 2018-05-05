@@ -149,6 +149,9 @@ export const WPList = (props: IWPListProps): IWPList => {
 
                 // Render the configuration
                 renderConfiguration(list);
+
+                // Call the list changed event
+                props.editPanel.onListChanged ? props.editPanel.onListChanged(_wpInfo, list) : null;
             });
     }
 
