@@ -25,8 +25,8 @@ ListForm.renderAttachmentsView = (props: IListFormAttachmentsProps) => {
         items.push({
             primaryText: attachment.FileName,
             actions: [{
-                iconName: "Mail",
-                url: "mailto:?Body=" + encodeURI('<a href="' + attachment.ServerRelativeUrl + "'>" + attachment.FileName + '</a>')
+                iconName: "Download",
+                url: attachment.ServerRelativeUrl
             }]
         });
     }

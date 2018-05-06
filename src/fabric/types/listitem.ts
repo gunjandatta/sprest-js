@@ -8,7 +8,7 @@ export interface IListItemAction {
     iconName: string;
 
     /** The click event. */
-    onClick?: () => void;
+    onClick?: (ev?: MouseEvent) => void;
 
     /** The target behavior when redirecting to a url. */
     target?: string;

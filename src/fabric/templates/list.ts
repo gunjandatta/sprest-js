@@ -6,20 +6,18 @@ import { ListItem } from ".";
  */
 export const List = (props: IListProps): string => {
     let items = props.items && props.items.length > 0 ? props.items : [];
+    let html = "";
 
-    // See if the item is a string
-    if (items.length > 0 && typeof (props.items[0]) !== "string") {
-        // Parse the items
-        for (let i = 0; i < items.length; i++) {
-            // Update the item
-            items[i] = ListItem(items[i] as IListItemProps);
-        }
+    // Parse the items
+    for (let i = 0; i < items.length; i++) {
+        // Update the item
+        html += (i == 0 ? '' : '\n') + ListItem(items[i]);
     }
 
     // Return the template
     return [
         '<ul class="ms-List ' + (props.className || "") + '">',
-        items.join('\n'),
+        html,
         '</ul>'
     ].join('\n');
 }

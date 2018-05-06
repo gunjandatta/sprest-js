@@ -10409,7 +10409,6 @@
   /** Update the disabled labels font color */
   /** Update the label for the underline type */ }
   .fabric .ms-Callout {
-    min-width: 288px;
     width: auto; }
   .fabric .ms-Dialog {
     z-index: 1050; }

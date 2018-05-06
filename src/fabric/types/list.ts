@@ -5,7 +5,7 @@ import { Fabric, IListItemProps, IProps } from ".";
  */
 export interface IList {
     /** Method to append the items. */
-    appendItems?: (items: Array<string>) => void;
+    appendItems?: (items: Array<IListItemProps>) => void;
 
     /** Returns the fabric component. */
     get(): Fabric.IList;
@@ -19,7 +19,7 @@ export interface IList {
  */
 export interface IListProps extends IProps {
     /** The list items. */
-    items?: Array<string | IListItemProps>;
+    items?: Array<IListItemProps>;
 
     /** The list item click event. */
     onClick?: (ev?: MouseEvent) => void;

@@ -1,4 +1,4 @@
-import { Fabric, IDropdown, IDropdownOption, IDropdownProps } from "./types";
+import { Fabric, IDropdown, IDropdownOption, IDropdownProps, IListItemProps } from "./types";
 import {
     fabric,
     Callout, CalloutPositions, CalloutTypes,
@@ -24,7 +24,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
         // Method to render the items
         let renderItems = (options: Array<IDropdownOption>, isCategory: boolean = false) => {
-            let items: Array<string> = [];
+            let items: Array<IListItemProps> = [];
 
             // Parse the options
             for (let i = 0; i < options.length; i++) {
@@ -33,28 +33,28 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                 // See if this is a header
                 if (option.type == DropdownTypes.Header) {
                     // Add a header item
-                    items.push(Templates.ListItem({
+                    items.push({
                         className: "ms-ListItem--" + (isCategory ? "category" : "header"),
                         isSelectable: isCategory ? props.multi : false,
                         isSelected: props.multi ? option.isSelected : false,
                         primaryText: option.text,
                         value: JSON.stringify(option)
-                    }));
+                    });
                 }
                 // Else, see if this option has children
                 else if (option.options && option.options.length > 0) {
                     // Add the option as a category
-                    items.push(renderItems(option.options, true).join('\n'));
+                    items = items.concat(renderItems(option.options, true));
                 }
                 // Else, this is an item
                 else {
                     // Add the item
-                    items.push(Templates.ListItem({
+                    items.push({
                         isSelectable: props.multi,
                         isSelected: props.multi ? option.isSelected : false,
                         secondaryText: option.text,
                         value: JSON.stringify(option)
-                    }));
+                    });
                 }
             }
 
