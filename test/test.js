@@ -12837,6 +12837,35 @@ exports.Dialog = function (props) {
             ev.preventDefault();
         });
     }
+    // Parse the actions
+    var actions = getActions();
+    actions = props.actions && actions ? actions.querySelectorAll("button.ms-Button") : [];
+    var _loop_1 = function (i) {
+        var btn = actions[i];
+        // Set the index
+        btn.setAttribute("data-idx", i.toString());
+        // Set the index
+        btn.addEventListener("click", function (ev) {
+            // Prevent a postback
+            ev.preventDefault();
+            // Get the action
+            var action = props.actions[parseInt(ev.currentTarget.getAttribute("data-idx"))];
+            if (action) {
+                // See if this action has a click event
+                if (action.onClick) {
+                    // Call the click event
+                    action.onClick(btn);
+                }
+                else if (action.href) {
+                    // Redirect the window
+                    window.open(action.href, "_self");
+                }
+            }
+        });
+    };
+    for (var i = 0; i < actions.length && i < props.actions.length; i++) {
+        _loop_1(i);
+    }
     // Return the dialog
     return {
         close: function () { _dialog.close(); },
@@ -14397,7 +14426,7 @@ exports.Dialog = function (props) {
         props.subText ? '<p class="ms-Dialog-subText">' + props.subText + '</p>' : '',
         props.content || "",
         '</div>',
-        actions ? '<div class="ms-Dialog-actions">' + (actions) + '</div>' : '',
+        dialogActions ? '<div class="ms-Dialog-actions">' + dialogActions.join('\n') + '</div>' : '',
         '</div>'
     ].join('\n');
 };

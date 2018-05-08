@@ -1,5 +1,5 @@
 import { IDialogProps } from "../types";
-import {Button} from ".";
+import { Button } from ".";
 
 /**
  * Dialog
@@ -17,7 +17,7 @@ export const Dialog = (props: IDialogProps): string => {
     // Parse the actions
     let actions = props.actions || [];
     let dialogActions = [];
-    for(let i=0; i<actions.length; i++) {
+    for (let i = 0; i < actions.length; i++) {
         // Add the dialog action
         dialogActions.push([
             Button({
@@ -37,7 +37,7 @@ export const Dialog = (props: IDialogProps): string => {
         props.subText ? '<p class="ms-Dialog-subText">' + props.subText + '</p>' : '',
         props.content || "",
         '</div>',
-        actions ? '<div class="ms-Dialog-actions">' + (actions) + '</div>' : '',
+        dialogActions ? '<div class="ms-Dialog-actions">' + dialogActions.join('\n') + '</div>' : '',
         '</div>'
     ].join('\n');
 }

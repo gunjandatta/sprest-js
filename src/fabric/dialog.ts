@@ -30,6 +30,37 @@ export const Dialog = (props: IDialogProps): IDialog => {
         });
     }
 
+    // Parse the actions
+    let actions: any = getActions();
+    actions = props.actions && actions ? actions.querySelectorAll("button.ms-Button") : [];
+    for (let i = 0; i < actions.length && i < props.actions.length; i++) {
+        let btn = actions[i] as HTMLButtonElement;
+
+        // Set the index
+        btn.setAttribute("data-idx", i.toString());
+
+        // Set the index
+        btn.addEventListener("click", ev => {
+            // Prevent a postback
+            ev.preventDefault();
+
+            // Get the action
+            let action = props.actions[parseInt((ev.currentTarget as HTMLElement).getAttribute("data-idx"))];
+            if (action) {
+                // See if this action has a click event
+                if (action.onClick) {
+                    // Call the click event
+                    action.onClick(btn);
+                }
+                // Else, see if there is a link
+                else if (action.href) {
+                    // Redirect the window
+                    window.open(action.href, "_self");
+                }
+            }
+        });
+    }
+
     // Return the dialog
     return {
         close: () => { _dialog.close(); },
