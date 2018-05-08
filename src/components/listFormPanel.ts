@@ -293,7 +293,7 @@ export const ListFormPanel = (props: IListFormPanelProps): IListFormPanel => {
 
         // See if we are loading the attachments
         if (props.loadAttachments) {
-            // Render the attachments
+            // Render the attachments view
             ListForm.renderAttachmentsView({
                 el: _dialog.getContent(),
                 info: _formInfo

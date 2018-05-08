@@ -116,16 +116,17 @@ __export(__webpack_require__(157));
 __export(__webpack_require__(158));
 __export(__webpack_require__(159));
 __export(__webpack_require__(160));
-__export(__webpack_require__(47));
 __export(__webpack_require__(161));
+__export(__webpack_require__(47));
 __export(__webpack_require__(162));
 __export(__webpack_require__(163));
 __export(__webpack_require__(164));
+__export(__webpack_require__(165));
 // Templates
 var Templates = __webpack_require__(6);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(186);
+var Types = __webpack_require__(187);
 exports.Types = Types;
 
 
@@ -240,7 +241,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(165));
 __export(__webpack_require__(166));
 __export(__webpack_require__(167));
 __export(__webpack_require__(168));
@@ -261,6 +261,7 @@ __export(__webpack_require__(182));
 __export(__webpack_require__(183));
 __export(__webpack_require__(184));
 __export(__webpack_require__(185));
+__export(__webpack_require__(186));
 
 
 /***/ }),
@@ -387,7 +388,7 @@ var Components = __webpack_require__(23);
 exports.Components = Components;
 var WebParts = __webpack_require__(16);
 exports.WebParts = WebParts;
-var rest_1 = __webpack_require__(197);
+var rest_1 = __webpack_require__(198);
 exports.$REST = rest_1.RESTJS;
 
 
@@ -401,12 +402,12 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(192));
-__export(__webpack_require__(48));
 __export(__webpack_require__(193));
+__export(__webpack_require__(48));
 __export(__webpack_require__(194));
 __export(__webpack_require__(195));
-var Types = __webpack_require__(196);
+__export(__webpack_require__(196));
+var Types = __webpack_require__(197);
 exports.Types = Types;
 
 
@@ -528,10 +529,10 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(188));
 __export(__webpack_require__(189));
 __export(__webpack_require__(190));
-var Types = __webpack_require__(191);
+__export(__webpack_require__(191));
+var Types = __webpack_require__(192);
 exports.Types = Types;
 
 
@@ -2427,7 +2428,7 @@ __webpack_require__(50);
 var gd_sprest_1 = __webpack_require__(3);
 var build_1 = __webpack_require__(15);
 // Import the fabric css
-__webpack_require__(198);
+__webpack_require__(199);
 // Create the global variable
 window["TestJS"] = {
     // Configuration
@@ -12389,15 +12390,7 @@ var _1 = __webpack_require__(1);
 exports.CheckBox = function (props) {
     var _cb = null;
     // Method to get the checkbox element
-    var get = function () {
-        // Returns the checkbox element
-        return props.el.querySelector(".ms-CheckBox");
-    };
-    // Method to get the fabric component
-    var getFabricComponent = function () {
-        // Return the checkbox
-        return _cb;
-    };
+    var get = function () { return _cb; };
     // Method to get the value
     var getValue = function () {
         // Get the checkbox value
@@ -12406,27 +12399,85 @@ exports.CheckBox = function (props) {
     // Add the checkbox html
     props.el.innerHTML = _1.Templates.CheckBox(props);
     // Get the checkbox
-    var cb = get();
-    // Set the checkbox change event
-    cb.onchange = function () {
-        // Execute the change event
-        props.onChange ? props.onChange(_cb.getValue()) : null;
-    };
+    var cb = props.el.querySelector(".ms-CheckBox");
     // Create the checkbox
     _cb = new _1.fabric.CheckBox(cb);
+    // See if a change event exists
+    if (props.onChange) {
+        // Set the checkbox change event
+        cb.addEventListener("change", function () {
+            // Execute the change event
+            props.onChange(getValue());
+        });
+    }
     // Update the value
     props.value ? _cb.check() : _cb.unCheck();
     // Return the checkbox
     return {
+        check: function () { _cb ? _cb.check() : null; },
         get: get,
-        getFabricComponent: getFabricComponent,
-        getValue: getValue
+        getValue: getValue,
+        unCheck: function () { _cb ? _cb.unCheck() : null; }
     };
 };
 
 
 /***/ }),
 /* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(1);
+/**
+ * CheckBox Group
+ */
+exports.CheckBoxGroup = function (props) {
+    var _cbs = [];
+    // Method to get the checkbox elements
+    var get = function () { return _cbs; };
+    // Method to get the value
+    var getValues = function () {
+        var values = [];
+        // Parse the checkboxes
+        for (var i = 0; i < _cbs.length; i++) {
+            // Add the value
+            values.push(_cbs[i].getValue());
+        }
+        // Get the checkbox values
+        return values;
+    };
+    // Parse the checkbox properties
+    for (var i = 0; i < props.props.length; i++) {
+        var cbProps = props.props[i];
+        // Create an element
+        var el = document.createElement("div");
+        // Create the checkbox
+        var cb = _1.CheckBox({
+            className: cbProps.className,
+            disable: cbProps.disable,
+            el: el,
+            label: cbProps.label,
+            onChange: cbProps.onChange || props.onChange,
+            required: cbProps.required,
+            value: cbProps.value
+        }).get();
+        // Append the checkbox
+        props.el.appendChild(cb._container);
+        // Save the checkbox
+        _cbs.push(cb);
+    }
+    // Return the checkbox group
+    return {
+        get: get,
+        getValues: getValues
+    };
+};
+
+
+/***/ }),
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12501,7 +12552,7 @@ exports.CommandBar = function (props) {
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12547,7 +12598,7 @@ exports.CommandButton = function (props) {
 
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12580,7 +12631,7 @@ exports.ContextualMenu = function (props) {
 
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12756,7 +12807,7 @@ exports.DatePicker = function (props) {
 
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12799,7 +12850,7 @@ exports.Dialog = function (props) {
 
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13086,7 +13137,7 @@ exports.Dropdown = function (props) {
 
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13183,7 +13234,7 @@ exports.LinkField = function (props) {
 
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13235,7 +13286,7 @@ exports.List = function (props) {
 
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13291,7 +13342,7 @@ exports.ListItem = function (props) {
 
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13427,7 +13478,7 @@ exports.NumberField = function (props) {
 
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13566,7 +13617,7 @@ exports.Panel = function (props) {
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13765,7 +13816,7 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13803,7 +13854,7 @@ exports.Pivot = function (props) {
 
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13835,7 +13886,7 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13862,7 +13913,7 @@ exports.Table = function (props) {
 
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13970,7 +14021,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14017,7 +14068,7 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14039,7 +14090,7 @@ exports.Button = function (props) {
 
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14092,7 +14143,7 @@ exports.Callout = function (props) {
 
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14115,7 +14166,7 @@ exports.CheckBox = function (props) {
 
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14153,7 +14204,7 @@ exports.CommandBar = function (props) {
 
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14199,7 +14250,7 @@ exports.CommandButton = function (props) {
 
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14247,7 +14298,7 @@ exports.ContextualMenu = function (props) {
 
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14305,7 +14356,7 @@ exports.DatePicker = function (props) {
 
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14353,7 +14404,7 @@ exports.Dialog = function (props) {
 
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14380,7 +14431,7 @@ exports.Label = function (props) {
 
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14409,7 +14460,7 @@ exports.LinkField = function (props) {
 
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14437,7 +14488,7 @@ exports.List = function (props) {
 
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14486,7 +14537,7 @@ exports.ListItem = function (props) {
 
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14502,7 +14553,7 @@ exports.Overlay = function (props) {
 
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14560,7 +14611,7 @@ exports.Panel = function (props, content) {
 
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14689,7 +14740,7 @@ exports.PeoplePicker = function (props) {
 
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14749,7 +14800,7 @@ exports.Pivot = function (props) {
 
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14807,7 +14858,7 @@ exports.SearchBox = function (props) {
 
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14827,7 +14878,7 @@ exports.Spinner = function (props) {
 
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14880,7 +14931,7 @@ exports.Table = function (props) {
 
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14920,7 +14971,7 @@ exports.TextField = function (props) {
 
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14952,28 +15003,28 @@ exports.Toggle = function (props) {
 
 
 /***/ }),
-/* 186 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-// Fabric Components
-var Fabric = __webpack_require__(187);
-exports.Fabric = Fabric;
-
-
-/***/ }),
 /* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+// Fabric Components
+var Fabric = __webpack_require__(188);
+exports.Fabric = Fabric;
 
 
 /***/ }),
 /* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15527,7 +15578,7 @@ exports.Field = function (props) {
 
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15541,24 +15592,57 @@ exports.ListForm = gd_sprest_1.Helper.ListForm;
 // Method to render the attachments view
 exports.ListForm.renderAttachmentsView = function (props) {
     var attachments = props.info.attachments || [];
-    var items = [];
-    // Parse the attachments
-    for (var i = 0; i < attachments.length; i++) {
-        var attachment = attachments[i];
-        // Add the item
-        items.push({
-            primaryText: attachment.FileName,
-            actions: [{
-                    iconName: "Download",
-                    url: attachment.ServerRelativeUrl
+    // Render the list
+    var renderList = function (el) {
+        var items = [];
+        // Parse the attachments
+        for (var i = 0; i < attachments.length; i++) {
+            var attachment = attachments[i];
+            // Add the item
+            items.push({
+                primaryText: attachment.FileName,
+                actions: [{
+                        iconName: "Download",
+                        url: attachment.ServerRelativeUrl
+                    }]
+            });
+        }
+        // Render the list
+        __1.Fabric.List({
+            el: el,
+            items: items
+        });
+    };
+    // Method to render the menu
+    var renderMenu = function (el) {
+        // Render a command bar
+        __1.Fabric.CommandBar({
+            el: el,
+            mainCommands: [{
+                    text: "Upload",
+                    onClick: function () {
+                        // Show a spinner
+                        __1.Fabric.Spinner({
+                            el: props.el,
+                            text: "Saving the attachment..."
+                        });
+                        // Show the file dialog
+                        exports.ListForm.showFileDialog(props.info).then(function () {
+                            // Render the list
+                            renderList(props.el.children[1]);
+                            // Call the save event
+                            props.onSave ? props.onSave(props.info) : null;
+                        });
+                    }
                 }]
         });
-    }
+    };
+    // Render the template
+    props.el.innerHTML = "<div></div><div></div>";
+    // Render the menu
+    renderMenu(props.el.children[0]);
     // Render the list
-    __1.Fabric.List({
-        el: props.el,
-        items: items
-    });
+    renderList(props.el.children[1]);
 };
 // Method to render a display form for an item
 exports.ListForm.renderDisplayForm = function (props) {
@@ -15886,7 +15970,7 @@ exports.ListForm.renderFormTemplate = function (props) {
 
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16148,7 +16232,7 @@ exports.ListFormPanel = function (props) {
         _formInfo = formInfo;
         // See if we are loading the attachments
         if (props.loadAttachments) {
-            // Render the attachments
+            // Render the attachments view
             _1.ListForm.renderAttachmentsView({
                 el: _dialog.getContent(),
                 info: _formInfo
@@ -16188,7 +16272,7 @@ exports.ListFormPanel = function (props) {
 
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16197,7 +16281,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16579,7 +16663,7 @@ exports.WebPart = function (props) {
 
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16858,7 +16942,7 @@ exports.WPList = function (props) {
 
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16956,7 +17040,7 @@ exports.WPSearch = function (props) {
 
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17146,7 +17230,7 @@ exports.WPTabs = function (props) {
 
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17155,7 +17239,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 197 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17186,11 +17270,11 @@ window["SP"] && window["SP"].SOD ? window["SP"].SOD.executeOrDelayUntilScriptLoa
 
 
 /***/ }),
-/* 198 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(199);
+var content = __webpack_require__(200);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -17204,7 +17288,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(201)(content, options);
+var update = __webpack_require__(202)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -17236,10 +17320,10 @@ if(false) {
 }
 
 /***/ }),
-/* 199 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(200)(false);
+exports = module.exports = __webpack_require__(201)(false);
 // imports
 
 
@@ -17250,7 +17334,7 @@ exports.push([module.i, "@font-face{font-family:'FabricMDL2Icons';src:url(\"http
 
 
 /***/ }),
-/* 200 */
+/* 201 */
 /***/ (function(module, exports) {
 
 /*
@@ -17332,7 +17416,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 201 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -17398,7 +17482,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(202);
+var	fixUrls = __webpack_require__(203);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -17714,7 +17798,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 202 */
+/* 203 */
 /***/ (function(module, exports) {
 
 

@@ -40,6 +40,9 @@ export interface IListFormAttachmentsProps {
 
     /** The list form information. */
     info: Types.Helper.IListFormResult;
+
+    /** The item attachment saved event. */
+    onSave?: (info: Types.Helper.IListFormResult) => void;
 }
 
 /**

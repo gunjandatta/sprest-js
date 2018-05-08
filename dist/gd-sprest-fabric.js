@@ -73,9 +73,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(43));
 __export(__webpack_require__(44));
-__export(__webpack_require__(63));
+__export(__webpack_require__(45));
 __export(__webpack_require__(64));
 __export(__webpack_require__(65));
 __export(__webpack_require__(66));
@@ -83,7 +82,8 @@ __export(__webpack_require__(67));
 __export(__webpack_require__(68));
 __export(__webpack_require__(69));
 __export(__webpack_require__(70));
-var Types = __webpack_require__(71);
+__export(__webpack_require__(71));
+var Types = __webpack_require__(72);
 exports.Types = Types;
 
 
@@ -118,17 +118,18 @@ __export(__webpack_require__(37));
 __export(__webpack_require__(38));
 __export(__webpack_require__(39));
 __export(__webpack_require__(40));
-__export(__webpack_require__(99));
-__export(__webpack_require__(13));
+__export(__webpack_require__(41));
 __export(__webpack_require__(100));
+__export(__webpack_require__(13));
 __export(__webpack_require__(101));
 __export(__webpack_require__(102));
 __export(__webpack_require__(103));
+__export(__webpack_require__(104));
 // Templates
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(125);
+var Types = __webpack_require__(126);
 exports.Types = Types;
 
 /***/ }),
@@ -141,8 +142,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(42));
-__export(__webpack_require__(72));
+__export(__webpack_require__(43));
 __export(__webpack_require__(73));
 __export(__webpack_require__(74));
 __export(__webpack_require__(75));
@@ -152,8 +152,9 @@ __export(__webpack_require__(78));
 __export(__webpack_require__(79));
 __export(__webpack_require__(80));
 __export(__webpack_require__(81));
+__export(__webpack_require__(82));
 __export(__webpack_require__(11));
-var Types = __webpack_require__(82);
+var Types = __webpack_require__(83);
 exports.Types = Types;
 
 
@@ -197,10 +198,10 @@ var Helper = __webpack_require__(8);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(6);
 exports.SPTypes = mapper_1.SPTypes;
-var Types = __webpack_require__(97);
+var Types = __webpack_require__(98);
 exports.Types = Types;
 __export(__webpack_require__(2));
-__export(__webpack_require__(98));
+__export(__webpack_require__(99));
 
 
 /***/ }),
@@ -216,7 +217,6 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(104));
 __export(__webpack_require__(105));
 __export(__webpack_require__(106));
 __export(__webpack_require__(107));
@@ -237,6 +237,7 @@ __export(__webpack_require__(121));
 __export(__webpack_require__(122));
 __export(__webpack_require__(123));
 __export(__webpack_require__(124));
+__export(__webpack_require__(125));
 
 /***/ }),
 /* 5 */
@@ -252,7 +253,7 @@ var Components = __webpack_require__(9);
 exports.Components = Components;
 var WebParts = __webpack_require__(7);
 exports.WebParts = WebParts;
-var rest_1 = __webpack_require__(136);
+var rest_1 = __webpack_require__(137);
 exports.$REST = rest_1.RESTJS;
 
 /***/ }),
@@ -262,11 +263,11 @@ exports.$REST = rest_1.RESTJS;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Mapper = __webpack_require__(45);
+var Mapper = __webpack_require__(46);
 exports.Mapper = Mapper;
-var SPTypes = __webpack_require__(58);
+var SPTypes = __webpack_require__(59);
 exports.SPTypes = SPTypes;
-var Types = __webpack_require__(59);
+var Types = __webpack_require__(60);
 exports.Types = Types;
 
 
@@ -283,12 +284,12 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(131));
-__export(__webpack_require__(14));
 __export(__webpack_require__(132));
+__export(__webpack_require__(14));
 __export(__webpack_require__(133));
 __export(__webpack_require__(134));
-var Types = __webpack_require__(135);
+__export(__webpack_require__(135));
+var Types = __webpack_require__(136);
 exports.Types = Types;
 
 /***/ }),
@@ -301,22 +302,22 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(41));
-__export(__webpack_require__(83));
+__export(__webpack_require__(42));
 __export(__webpack_require__(84));
-__export(__webpack_require__(86));
+__export(__webpack_require__(85));
 __export(__webpack_require__(87));
 __export(__webpack_require__(88));
 __export(__webpack_require__(89));
 __export(__webpack_require__(90));
 __export(__webpack_require__(91));
 __export(__webpack_require__(92));
-__export(__webpack_require__(12));
 __export(__webpack_require__(93));
+__export(__webpack_require__(12));
 __export(__webpack_require__(94));
-var SP = __webpack_require__(95);
+__export(__webpack_require__(95));
+var SP = __webpack_require__(96);
 exports.SP = SP;
-var Types = __webpack_require__(96);
+var Types = __webpack_require__(97);
 exports.Types = Types;
 
 
@@ -333,10 +334,10 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(127));
 __export(__webpack_require__(128));
 __export(__webpack_require__(129));
-var Types = __webpack_require__(130);
+__export(__webpack_require__(130));
+var Types = __webpack_require__(131);
 exports.Types = Types;
 
 /***/ }),
@@ -2624,7 +2625,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(85));
+__export(__webpack_require__(86));
 var lib_1 = __webpack_require__(2);
 var __1 = __webpack_require__(3);
 var _1 = __webpack_require__(8);
@@ -6283,12 +6284,6 @@ exports.CheckBox = function (props) {
     var _cb = null;
     // Method to get the checkbox element
     var get = function get() {
-        // Returns the checkbox element
-        return props.el.querySelector(".ms-CheckBox");
-    };
-    // Method to get the fabric component
-    var getFabricComponent = function getFabricComponent() {
-        // Return the checkbox
         return _cb;
     };
     // Method to get the value
@@ -6299,26 +6294,90 @@ exports.CheckBox = function (props) {
     // Add the checkbox html
     props.el.innerHTML = _1.Templates.CheckBox(props);
     // Get the checkbox
-    var cb = get();
-    // Set the checkbox change event
-    cb.onchange = function () {
-        // Execute the change event
-        props.onChange ? props.onChange(_cb.getValue()) : null;
-    };
+    var cb = props.el.querySelector(".ms-CheckBox");
     // Create the checkbox
     _cb = new _1.fabric.CheckBox(cb);
+    // See if a change event exists
+    if (props.onChange) {
+        // Set the checkbox change event
+        cb.addEventListener("change", function () {
+            // Execute the change event
+            props.onChange(getValue());
+        });
+    }
     // Update the value
     props.value ? _cb.check() : _cb.unCheck();
     // Return the checkbox
     return {
+        check: function check() {
+            _cb ? _cb.check() : null;
+        },
         get: get,
-        getFabricComponent: getFabricComponent,
-        getValue: getValue
+        getValue: getValue,
+        unCheck: function unCheck() {
+            _cb ? _cb.unCheck() : null;
+        }
     };
 };
 
 /***/ }),
 /* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(1);
+/**
+ * CheckBox Group
+ */
+exports.CheckBoxGroup = function (props) {
+    var _cbs = [];
+    // Method to get the checkbox elements
+    var get = function get() {
+        return _cbs;
+    };
+    // Method to get the value
+    var getValues = function getValues() {
+        var values = [];
+        // Parse the checkboxes
+        for (var i = 0; i < _cbs.length; i++) {
+            // Add the value
+            values.push(_cbs[i].getValue());
+        }
+        // Get the checkbox values
+        return values;
+    };
+    // Parse the checkbox properties
+    for (var i = 0; i < props.props.length; i++) {
+        var cbProps = props.props[i];
+        // Create an element
+        var el = document.createElement("div");
+        // Create the checkbox
+        var cb = _1.CheckBox({
+            className: cbProps.className,
+            disable: cbProps.disable,
+            el: el,
+            label: cbProps.label,
+            onChange: cbProps.onChange || props.onChange,
+            required: cbProps.required,
+            value: cbProps.value
+        }).get();
+        // Append the checkbox
+        props.el.appendChild(cb._container);
+        // Save the checkbox
+        _cbs.push(cb);
+    }
+    // Return the checkbox group
+    return {
+        get: get,
+        getValues: getValues
+    };
+};
+
+/***/ }),
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6395,7 +6454,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6443,7 +6502,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6478,7 +6537,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6649,7 +6708,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6704,7 +6763,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6986,7 +7045,7 @@ exports.Dropdown = function (props) {
 };
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7082,7 +7141,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7140,7 +7199,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7195,7 +7254,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7331,7 +7390,7 @@ exports.NumberField = function (props) {
 };
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7485,7 +7544,7 @@ exports.Panel = function (props) {
 };
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7679,7 +7738,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7991,7 +8050,7 @@ exports.App = {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8587,7 +8646,7 @@ exports.ContextInfo = _ContextInfo;
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8621,7 +8680,7 @@ exports.RequestType = {
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8895,7 +8954,7 @@ exports.BaseHelper = BaseHelper;
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8904,7 +8963,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(46));
 __export(__webpack_require__(47));
 __export(__webpack_require__(48));
 __export(__webpack_require__(49));
@@ -8916,10 +8974,11 @@ __export(__webpack_require__(54));
 __export(__webpack_require__(55));
 __export(__webpack_require__(56));
 __export(__webpack_require__(57));
+__export(__webpack_require__(58));
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8939,7 +8998,7 @@ exports.audit = {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8987,7 +9046,7 @@ exports.eventreceivers = {
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9309,7 +9368,7 @@ exports.limitedwebpartmanager = {
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9853,7 +9912,7 @@ exports.views = {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9883,7 +9942,7 @@ exports.navigationservicerest = {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9903,7 +9962,7 @@ exports.propertyvalues = {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9923,7 +9982,7 @@ exports.search = {
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10024,7 +10083,7 @@ exports.roledefinitions = {
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10533,7 +10592,7 @@ exports.webs = {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10718,7 +10777,7 @@ exports.userprofile = {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10873,7 +10932,7 @@ exports.users = {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10923,7 +10982,7 @@ exports.usercustomactions = {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11476,27 +11535,18 @@ exports.ViewType = {
 
 
 /***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ComplexTypes = __webpack_require__(60);
-exports.ComplexTypes = ComplexTypes;
-var Results = __webpack_require__(61);
-exports.Results = Results;
-var SPTypes = __webpack_require__(62);
-exports.SPTypes = SPTypes;
-
-
-/***/ }),
 /* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var ComplexTypes = __webpack_require__(61);
+exports.ComplexTypes = ComplexTypes;
+var Results = __webpack_require__(62);
+exports.Results = Results;
+var SPTypes = __webpack_require__(63);
+exports.SPTypes = SPTypes;
 
 
 /***/ }),
@@ -11519,6 +11569,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
 /* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11822,7 +11881,7 @@ exports.BaseRequest = BaseRequest;
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12004,7 +12063,7 @@ exports.BaseExecution = BaseExecution;
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12086,7 +12145,7 @@ exports.Base = Base;
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12183,7 +12242,7 @@ exports.Batch = Batch;
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12438,7 +12497,7 @@ exports.MethodInfo = MethodInfo;
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12564,7 +12623,7 @@ exports.OData = OData;
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12705,7 +12764,7 @@ exports.TargetInfo = TargetInfo;
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12897,7 +12956,7 @@ exports.XHRRequest = XHRRequest;
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12906,7 +12965,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12970,7 +13029,7 @@ exports.List = _List;
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13017,7 +13076,7 @@ exports.Navigation = _Navigation;
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13059,7 +13118,7 @@ exports.PeopleManager = _PeopleManager;
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13102,7 +13161,7 @@ exports.PeoplePicker = _PeoplePicker;
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13145,7 +13204,7 @@ exports.ProfileLoader = _ProfileLoader;
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13224,7 +13283,7 @@ exports.Search = _Search;
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13281,7 +13340,7 @@ exports.Site = _Site;
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13350,7 +13409,7 @@ exports.SocialFeed = (new _SocialFeed());
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13393,7 +13452,7 @@ exports.UserProfile = _UserProfile;
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13486,7 +13545,7 @@ exports.Utility = _Utility;
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13495,7 +13554,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13573,7 +13632,7 @@ exports.Dependencies = _Dependencies;
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13954,7 +14013,7 @@ exports.FieldSchemaXML = function (fieldInfo) {
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13991,7 +14050,7 @@ exports.SPCfgType = {
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14380,7 +14439,7 @@ exports.JSLink = {
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14969,7 +15028,7 @@ exports.ListForm = {
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15162,7 +15221,7 @@ exports.ListFormField = {
 
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15222,7 +15281,7 @@ exports.Loader = {
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15253,7 +15312,7 @@ exports.parse = function (jsonString) {
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15289,7 +15348,7 @@ exports.RibbonLink = function (props) {
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15329,7 +15388,7 @@ exports.SuiteBarLink = function (props) {
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15772,7 +15831,7 @@ exports.Taxonomy = {
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16058,7 +16117,7 @@ exports.WebPart = _WebPart;
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16233,7 +16292,7 @@ exports.Status = {
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16242,7 +16301,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16257,7 +16316,7 @@ exports.Util = utils_1.Types;
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16313,7 +16372,7 @@ if ((global == null || global.__ver == null || global.__ver < exports.$REST.__ve
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16351,7 +16410,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16383,7 +16442,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16414,7 +16473,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16522,7 +16581,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16569,7 +16628,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16585,7 +16644,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16620,7 +16679,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16636,7 +16695,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16667,7 +16726,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16692,7 +16751,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16727,7 +16786,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16744,7 +16803,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16774,7 +16833,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16792,7 +16851,7 @@ exports.Label = function (props) {
 };
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16816,7 +16875,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16840,7 +16899,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16868,7 +16927,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16884,7 +16943,7 @@ exports.Overlay = function (props) {
 };
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16928,7 +16987,7 @@ exports.Panel = function (props, content) {
 };
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17011,7 +17070,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17042,7 +17101,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17062,7 +17121,7 @@ exports.SearchBox = function (props) {
 };
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17078,7 +17137,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17114,7 +17173,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17140,7 +17199,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17162,18 +17221,6 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 125 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-// Fabric Components
-var Fabric = __webpack_require__(126);
-exports.Fabric = Fabric;
-
-/***/ }),
 /* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17181,9 +17228,21 @@ exports.Fabric = Fabric;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+// Fabric Components
+var Fabric = __webpack_require__(127);
+exports.Fabric = Fabric;
 
 /***/ }),
 /* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+/***/ }),
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17736,7 +17795,7 @@ exports.Field = function (props) {
 };
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17751,24 +17810,57 @@ exports.ListForm = gd_sprest_1.Helper.ListForm;
 // Method to render the attachments view
 exports.ListForm.renderAttachmentsView = function (props) {
     var attachments = props.info.attachments || [];
-    var items = [];
-    // Parse the attachments
-    for (var i = 0; i < attachments.length; i++) {
-        var attachment = attachments[i];
-        // Add the item
-        items.push({
-            primaryText: attachment.FileName,
-            actions: [{
-                iconName: "Download",
-                url: attachment.ServerRelativeUrl
+    // Render the list
+    var renderList = function renderList(el) {
+        var items = [];
+        // Parse the attachments
+        for (var i = 0; i < attachments.length; i++) {
+            var attachment = attachments[i];
+            // Add the item
+            items.push({
+                primaryText: attachment.FileName,
+                actions: [{
+                    iconName: "Download",
+                    url: attachment.ServerRelativeUrl
+                }]
+            });
+        }
+        // Render the list
+        __1.Fabric.List({
+            el: el,
+            items: items
+        });
+    };
+    // Method to render the menu
+    var renderMenu = function renderMenu(el) {
+        // Render a command bar
+        __1.Fabric.CommandBar({
+            el: el,
+            mainCommands: [{
+                text: "Upload",
+                onClick: function onClick() {
+                    // Show a spinner
+                    __1.Fabric.Spinner({
+                        el: props.el,
+                        text: "Saving the attachment..."
+                    });
+                    // Show the file dialog
+                    exports.ListForm.showFileDialog(props.info).then(function () {
+                        // Render the list
+                        renderList(props.el.children[1]);
+                        // Call the save event
+                        props.onSave ? props.onSave(props.info) : null;
+                    });
+                }
             }]
         });
-    }
+    };
+    // Render the template
+    props.el.innerHTML = "<div></div><div></div>";
+    // Render the menu
+    renderMenu(props.el.children[0]);
     // Render the list
-    __1.Fabric.List({
-        el: props.el,
-        items: items
-    });
+    renderList(props.el.children[1]);
 };
 // Method to render a display form for an item
 exports.ListForm.renderDisplayForm = function (props) {
@@ -18083,7 +18175,7 @@ exports.ListForm.renderFormTemplate = function (props) {
 };
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18331,7 +18423,7 @@ exports.ListFormPanel = function (props) {
         _formInfo = formInfo;
         // See if we are loading the attachments
         if (props.loadAttachments) {
-            // Render the attachments
+            // Render the attachments view
             _1.ListForm.renderAttachmentsView({
                 el: _dialog.getContent(),
                 info: _formInfo
@@ -18373,7 +18465,7 @@ exports.ListFormPanel = function (props) {
 };
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18382,7 +18474,7 @@ exports.ListFormPanel = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18750,7 +18842,7 @@ exports.WebPart = function (props) {
 };
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19009,7 +19101,7 @@ exports.WPList = function (props) {
 };
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19107,7 +19199,7 @@ exports.WPSearch = function (props) {
 };
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19293,7 +19385,7 @@ exports.WPTabs = function (props) {
 };
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19302,7 +19394,7 @@ exports.WPTabs = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

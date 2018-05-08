@@ -1,17 +1,20 @@
-import { Fabric, IComponentProps, IProps } from ".";
+import { Fabric, IComponentProps } from ".";
 
 /**
  * CheckBox
  */
 export interface ICheckBox {
-    /** Returns the checkbox element. */
-    get(): HTMLElement;
+    /** Method to check the checkbox. */
+    check();
 
-    /** Returns the fabric component. */
-    getFabricComponent(): Fabric.ICheckBox;
+    /** Returns the checkbox element. */
+    get(): Fabric.ICheckBox;
 
     /** Returns the checkbox value. */
     getValue(): boolean;
+
+    /** Method to uncheck the checkbox. */
+    unCheck();
 }
 
 /**

@@ -15,27 +15,67 @@ export const ListForm: IListForm = Helper.ListForm as any;
 // Method to render the attachments view
 ListForm.renderAttachmentsView = (props: IListFormAttachmentsProps) => {
     let attachments = props.info.attachments || [];
-    let items: Array<Fabric.Types.IListItemProps> = [];
-
-    // Parse the attachments
-    for (let i = 0; i < attachments.length; i++) {
-        let attachment = attachments[i];
-
-        // Add the item
-        items.push({
-            primaryText: attachment.FileName,
-            actions: [{
-                iconName: "Download",
-                url: attachment.ServerRelativeUrl
-            }]
-        });
-    }
 
     // Render the list
-    Fabric.List({
-        el: props.el,
-        items
-    });
+    let renderList = (el: Element) => {
+        let items: Array<Fabric.Types.IListItemProps> = [];
+
+        // Parse the attachments
+        for (let i = 0; i < attachments.length; i++) {
+            let attachment = attachments[i];
+
+            // Add the item
+            items.push({
+                primaryText: attachment.FileName,
+                actions: [{
+                    iconName: "Download",
+                    url: attachment.ServerRelativeUrl
+                }]
+            });
+        }
+
+        // Render the list
+        Fabric.List({
+            el,
+            items
+        });
+    };
+
+    // Method to render the menu
+    let renderMenu = (el: Element) => {
+        // Render a command bar
+        Fabric.CommandBar({
+            el,
+            mainCommands: [{
+                text: "Upload",
+                onClick: () => {
+                    // Show a spinner
+                    Fabric.Spinner({
+                        el: props.el,
+                        text: "Saving the attachment..."
+                    });
+
+                    // Show the file dialog
+                    ListForm.showFileDialog(props.info).then(() => {
+                        // Render the list
+                        renderList(props.el.children[1]);
+
+                        // Call the save event
+                        props.onSave ? props.onSave(props.info) : null;
+                    });
+                }
+            }]
+        })
+    };
+
+    // Render the template
+    props.el.innerHTML = "<div></div><div></div>";
+
+    // Render the menu
+    renderMenu(props.el.children[0]);
+
+    // Render the list
+    renderList(props.el.children[1]);
 }
 
 // Method to render a display form for an item

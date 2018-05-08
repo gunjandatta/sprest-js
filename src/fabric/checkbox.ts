@@ -8,16 +8,7 @@ export const CheckBox = (props: ICheckBoxProps): ICheckBox => {
     let _cb: Fabric.ICheckBox = null;
 
     // Method to get the checkbox element
-    let get = (): HTMLInputElement => {
-        // Returns the checkbox element
-        return props.el.querySelector(".ms-CheckBox") as HTMLInputElement;
-    }
-
-    // Method to get the fabric component
-    let getFabricComponent = (): Fabric.ICheckBox => {
-        // Return the checkbox
-        return _cb;
-    }
+    let get = (): Fabric.ICheckBox => { return _cb; }
 
     // Method to get the value
     let getValue = (): boolean => {
@@ -29,24 +20,28 @@ export const CheckBox = (props: ICheckBoxProps): ICheckBox => {
     props.el.innerHTML = Templates.CheckBox(props);
 
     // Get the checkbox
-    let cb = get();
-
-    // Set the checkbox change event
-    cb.onchange = () => {
-        // Execute the change event
-        props.onChange ? props.onChange(_cb.getValue()) : null;
-    }
+    let cb = props.el.querySelector(".ms-CheckBox");
 
     // Create the checkbox
     _cb = new fabric.CheckBox(cb);
+
+    // See if a change event exists
+    if (props.onChange) {
+        // Set the checkbox change event
+        cb.addEventListener("change", () => {
+            // Execute the change event
+            props.onChange(getValue());
+        });
+    }
 
     // Update the value
     props.value ? _cb.check() : _cb.unCheck();
 
     // Return the checkbox
     return {
+        check: () => { _cb ? _cb.check() : null; },
         get,
-        getFabricComponent,
-        getValue
+        getValue,
+        unCheck: () => { _cb ? _cb.unCheck() : null; }
     };
 }

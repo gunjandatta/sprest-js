@@ -5,6 +5,7 @@ export * from "./fabric";
 export * from "./button";
 export * from "./callout";
 export * from "./checkbox";
+export * from "./checkboxgroup";
 export * from "./commandbar";
 export * from "./commandbutton";
 export * from "./contextualmenu";

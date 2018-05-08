@@ -5,6 +5,7 @@ export { Fabric }
 // Components
 export * from "./button";
 export * from "./checkbox";
+export * from "./checkboxgroup";
 export * from "./callout";
 export * from "./commandbar";
 export * from "./common";
