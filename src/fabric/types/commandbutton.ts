@@ -40,7 +40,7 @@ export interface ICommandButtonProps extends IProps {
     menu?: IContextualMenuProps;
 
     /** The click event. */
-    onClick?: (ev: HTMLButtonElement) => void;
+    onClick?: (btn?: HTMLButtonElement) => void;
 
     /** The button text. */
     text?: string;
