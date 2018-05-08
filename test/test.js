@@ -12593,6 +12593,8 @@ exports.CommandButton = function (props) {
                 for (var i = 0; i < buttons.length && i < props.menu.items.length; i++) {
                     var button = buttons[i];
                     var item = props.menu.items[i];
+                    // Dispose of the menu
+                    _button._modalHostView.disposeModal();
                     // See if a click event exists
                     if (item.onClick) {
                         // Set the click event

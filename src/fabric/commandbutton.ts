@@ -43,6 +43,9 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
                     let button = buttons[i];
                     let item = props.menu.items[i];
 
+                    // Dispose of the menu
+                    _button._modalHostView.disposeModal();
+
                     // See if a click event exists
                     if (item.onClick) {
                         // Set the click event
