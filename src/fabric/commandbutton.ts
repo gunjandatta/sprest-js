@@ -1,5 +1,6 @@
 import { Fabric, ICommandButton, ICommandButtonProps } from "./types"
 import { fabric, Templates } from ".";
+import { items } from "gd-sprest/build/mapper/list";
 
 /**
  * Command Button
@@ -33,12 +34,23 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
                 // Remove the class
                 _button._contextualMenu.className = _button._contextualMenu.className.replace(/ ?is-hidden/, "");
             }
-        });
-    }
 
-    // See if there are menu items
-    if (props.menu) {
-        // 
+            // Ensure menu items exist
+            if (props.menu && props.menu.items) {
+                // Get the menu buttons
+                let buttons = _button._contextualMenu.querySelectorAll(".ms-ContextualMenu-link");
+                for (let i = 0; i < buttons.length && i < props.menu.items.length; i++) {
+                    let button = buttons[i];
+                    let item = props.menu.items[i];
+
+                    // See if a click event exists
+                    if (item.onClick) {
+                        // Set the click event
+                        button.addEventListener("click", item.onClick);
+                    }
+                }
+            }
+        });
     }
 
     // Return the command button

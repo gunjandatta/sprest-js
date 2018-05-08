@@ -6491,12 +6491,22 @@ exports.CommandButton = function (props) {
                 // Remove the class
                 _button._contextualMenu.className = _button._contextualMenu.className.replace(/ ?is-hidden/, "");
             }
+            // Ensure menu items exist
+            if (props.menu && props.menu.items) {
+                // Get the menu buttons
+                var buttons = _button._contextualMenu.querySelectorAll(".ms-ContextualMenu-link");
+                for (var i = 0; i < buttons.length && i < props.menu.items.length; i++) {
+                    var button = buttons[i];
+                    var item = props.menu.items[i];
+                    // See if a click event exists
+                    if (item.onClick) {
+                        // Set the click event
+                        button.addEventListener("click", item.onClick);
+                    }
+                }
+            }
         });
     }
-    // See if there are menu items
-    if (props.menu) {}
-    // 
-
     // Return the command button
     return { get: get };
 };

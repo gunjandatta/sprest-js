@@ -42,7 +42,7 @@ export interface IContextualMenuItem {
     isSelected?: boolean;
 
     /** The item click event. */
-    onClick?: Function;
+    onClick?: EventListener;
 
     /** The item text. */
     text?: string;
