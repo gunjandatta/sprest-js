@@ -1,6 +1,6 @@
 import { Fabric, ICommandButton, ICommandButtonProps } from "./types"
+import { setClickEvents } from "./common";
 import { fabric, Templates } from ".";
-import { items } from "gd-sprest/build/mapper/list";
 
 /**
  * Command Button
@@ -27,6 +27,10 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
             if (_button._modalHostView._contextualHost.className.indexOf("fabric") < 0) {
                 // Add the class name
                 _button._modalHostView._contextualHost.className += " fabric";
+
+                // Set the inner html manually, to remove any events associated with this menu
+                // The core framework doesn't work well w/ sub-menus.
+                _button._modalHostView._contextualHost.innerHTML = _button._modalHostView._contextualHost.innerHTML;
             }
 
             // See if the menu is hidden
@@ -35,21 +39,8 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
                 _button._contextualMenu.className = _button._contextualMenu.className.replace(/ ?is-hidden/, "");
             }
 
-            // Ensure menu items exist
-            if (props.menu && props.menu.items) {
-                // Get the menu buttons
-                let buttons = _button._contextualMenu.querySelectorAll(".ms-ContextualMenu-link");
-                for (let i = 0; i < buttons.length && i < props.menu.items.length; i++) {
-                    let button = buttons[i];
-                    let item = props.menu.items[i];
-
-                    // See if a click event exists
-                    if (item.onClick) {
-                        // Set the click event
-                        button.addEventListener("click", item.onClick);
-                    }
-                }
-            }
+            // Set the click events
+            setClickEvents(_button._modalHostView._contextualHost.querySelector(".ms-ContextualMenu"), props.menu.items);
         });
     }
 

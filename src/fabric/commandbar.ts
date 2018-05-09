@@ -1,4 +1,5 @@
 import { Fabric, ICommandBar, ICommandBarProps } from "./types"
+import { setClickEvents } from "./common";
 import { ContextualMenu, fabric, Templates } from ".";
 
 /**
@@ -18,11 +19,11 @@ export const CommandBar = (props: ICommandBarProps): ICommandBar => {
     let buttonProps = (props.sideCommands || []).concat(props.mainCommands || []);
     let buttons = _menu._container.querySelectorAll(".ms-CommandButton-button");
     for (let i = 0; i < buttons.length; i++) {
+        // Add the index attribute
+        buttons[i].setAttribute("data-btn-idx", i.toString());
+
         // See if a click event exists
         if (buttonProps[i].onClick && buttons[i]) {
-            // Add the index attribute
-            buttons[i].setAttribute("data-btn-idx", i.toString());
-
             // Add a click event
             buttons[i].addEventListener("click", (ev) => {
                 let btn = ev.currentTarget as HTMLButtonElement;
@@ -48,25 +49,25 @@ export const CommandBar = (props: ICommandBarProps): ICommandBar => {
                 let menu: Fabric.IContextualMenu = new fabric.ContextualMenu(elMenu, buttons[i]);
 
                 // Set a click event
-                buttons[i].addEventListener("click", () => {
+                buttons[i].addEventListener("click", ev => {
                     // See if the host exists and fabric class doesn't exist
                     if (menu._isOpen && menu._host._contextualHost.className.indexOf("fabric") < 0) {
                         // Set the class
                         menu._host._contextualHost.className += " fabric";
+
+                        // Set the inner html manually, to remove any events associated with this menu
+                        // The core framework doesn't work well w/ sub-menus.
+                        menu._host._contextualHost.innerHTML = menu._host._contextualHost.innerHTML;
+
+                        // Get the button index
+                        let btn = ev.currentTarget as HTMLButtonElement;
+                        let idx = parseInt(btn.getAttribute("data-btn-idx"));
+                        if (idx >= 0 && buttonProps[idx] && buttonProps[idx].menu) {
+                            // Set the click events
+                            setClickEvents(menu._host._contextualHost.querySelector(".ms-ContextualMenu"), buttonProps[idx].menu.items);
+                        }
                     }
                 });
-
-                // Get the items
-                let items = elMenu.querySelectorAll(".ms-ContextualMenu-item");
-                for (let j = 0; j < buttonProps[i].menu.items.length; j++) {
-                    let item = buttonProps[i].menu.items[j];
-
-                    // See if a click event exists
-                    if (item.onClick) {
-                        // Set the click event
-                        items[j].addEventListener("click", item.onClick as any);
-                    }
-                }
             }
         }
     }

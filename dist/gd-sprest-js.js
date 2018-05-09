@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,9 +73,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(44));
 __export(__webpack_require__(45));
-__export(__webpack_require__(64));
+__export(__webpack_require__(46));
 __export(__webpack_require__(65));
 __export(__webpack_require__(66));
 __export(__webpack_require__(67));
@@ -83,7 +82,8 @@ __export(__webpack_require__(68));
 __export(__webpack_require__(69));
 __export(__webpack_require__(70));
 __export(__webpack_require__(71));
-var Types = __webpack_require__(72);
+__export(__webpack_require__(72));
+var Types = __webpack_require__(73);
 exports.Types = Types;
 
 
@@ -101,9 +101,8 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 // Office Fabric-UI JavaScript Library
-__export(__webpack_require__(21));
+__export(__webpack_require__(22));
 // Fabric Components
-__export(__webpack_require__(26));
 __export(__webpack_require__(27));
 __export(__webpack_require__(28));
 __export(__webpack_require__(29));
@@ -119,17 +118,18 @@ __export(__webpack_require__(38));
 __export(__webpack_require__(39));
 __export(__webpack_require__(40));
 __export(__webpack_require__(41));
-__export(__webpack_require__(100));
-__export(__webpack_require__(13));
+__export(__webpack_require__(42));
 __export(__webpack_require__(101));
+__export(__webpack_require__(14));
 __export(__webpack_require__(102));
 __export(__webpack_require__(103));
 __export(__webpack_require__(104));
+__export(__webpack_require__(105));
 // Templates
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(126);
+var Types = __webpack_require__(127);
 exports.Types = Types;
 
 /***/ }),
@@ -142,8 +142,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(43));
-__export(__webpack_require__(73));
+__export(__webpack_require__(44));
 __export(__webpack_require__(74));
 __export(__webpack_require__(75));
 __export(__webpack_require__(76));
@@ -153,8 +152,9 @@ __export(__webpack_require__(79));
 __export(__webpack_require__(80));
 __export(__webpack_require__(81));
 __export(__webpack_require__(82));
-__export(__webpack_require__(11));
-var Types = __webpack_require__(83);
+__export(__webpack_require__(83));
+__export(__webpack_require__(12));
+var Types = __webpack_require__(84);
 exports.Types = Types;
 
 
@@ -198,10 +198,10 @@ var Helper = __webpack_require__(8);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(6);
 exports.SPTypes = mapper_1.SPTypes;
-var Types = __webpack_require__(98);
+var Types = __webpack_require__(99);
 exports.Types = Types;
 __export(__webpack_require__(2));
-__export(__webpack_require__(99));
+__export(__webpack_require__(100));
 
 
 /***/ }),
@@ -217,7 +217,6 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(105));
 __export(__webpack_require__(106));
 __export(__webpack_require__(107));
 __export(__webpack_require__(108));
@@ -238,6 +237,7 @@ __export(__webpack_require__(122));
 __export(__webpack_require__(123));
 __export(__webpack_require__(124));
 __export(__webpack_require__(125));
+__export(__webpack_require__(126));
 
 /***/ }),
 /* 5 */
@@ -253,7 +253,7 @@ var Components = __webpack_require__(9);
 exports.Components = Components;
 var WebParts = __webpack_require__(7);
 exports.WebParts = WebParts;
-var rest_1 = __webpack_require__(137);
+var rest_1 = __webpack_require__(138);
 exports.$REST = rest_1.RESTJS;
 
 /***/ }),
@@ -263,11 +263,11 @@ exports.$REST = rest_1.RESTJS;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Mapper = __webpack_require__(46);
+var Mapper = __webpack_require__(47);
 exports.Mapper = Mapper;
-var SPTypes = __webpack_require__(59);
+var SPTypes = __webpack_require__(60);
 exports.SPTypes = SPTypes;
-var Types = __webpack_require__(60);
+var Types = __webpack_require__(61);
 exports.Types = Types;
 
 
@@ -284,12 +284,12 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(132));
-__export(__webpack_require__(14));
 __export(__webpack_require__(133));
+__export(__webpack_require__(15));
 __export(__webpack_require__(134));
 __export(__webpack_require__(135));
-var Types = __webpack_require__(136);
+__export(__webpack_require__(136));
+var Types = __webpack_require__(137);
 exports.Types = Types;
 
 /***/ }),
@@ -302,22 +302,22 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(42));
-__export(__webpack_require__(84));
+__export(__webpack_require__(43));
 __export(__webpack_require__(85));
-__export(__webpack_require__(87));
+__export(__webpack_require__(86));
 __export(__webpack_require__(88));
 __export(__webpack_require__(89));
 __export(__webpack_require__(90));
 __export(__webpack_require__(91));
 __export(__webpack_require__(92));
 __export(__webpack_require__(93));
-__export(__webpack_require__(12));
 __export(__webpack_require__(94));
+__export(__webpack_require__(13));
 __export(__webpack_require__(95));
-var SP = __webpack_require__(96);
+__export(__webpack_require__(96));
+var SP = __webpack_require__(97);
 exports.SP = SP;
-var Types = __webpack_require__(97);
+var Types = __webpack_require__(98);
 exports.Types = Types;
 
 
@@ -334,10 +334,10 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(128));
 __export(__webpack_require__(129));
 __export(__webpack_require__(130));
-var Types = __webpack_require__(131);
+__export(__webpack_require__(131));
+var Types = __webpack_require__(132);
 exports.Types = Types;
 
 /***/ }),
@@ -2558,7 +2558,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return 1 === arguments.length ? this.off(a, "**") : this.off(b, a || "**", c);
     }, size: function size() {
       return this.length;
-    } }), n.fn.andSelf = n.fn.addBack, "function" == "function" && __webpack_require__(24) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+    } }), n.fn.andSelf = n.fn.addBack, "function" == "function" && __webpack_require__(25) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
     return n;
   }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));var Nb = a.jQuery,
@@ -2566,10 +2566,38 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return a.$ === n && (a.$ = Ob), b && a.jQuery === n && (a.jQuery = Nb), n;
   }, b || (a.jQuery = a.$ = n), n;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)(module)))
 
 /***/ }),
 /* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+// Method to set the click events
+exports.setClickEvents = function (el, items) {
+    // Ensure the element exists
+    if (el == null) {
+        return;
+    }
+    // Parse the items
+    for (var i = 0; i < items.length && i < el.children.length; i++) {
+        var item = items[i];
+        // See if this is a menu
+        if (item.menu && item.menu.length > 0) {
+            // Set the click events
+            exports.setClickEvents(el.children[i].querySelector(".ms-ContextualMenu"), item.menu);
+        } else if (item.onClick) {
+            // Set the click event
+            el.children[i].addEventListener("click", item.onClick);
+        }
+    }
+};
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2616,7 +2644,7 @@ exports.Web = _Web;
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2625,7 +2653,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(86));
+__export(__webpack_require__(87));
 var lib_1 = __webpack_require__(2);
 var __1 = __webpack_require__(3);
 var _1 = __webpack_require__(8);
@@ -3727,7 +3755,7 @@ exports.SPConfig = function (cfg, webUrl) {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3824,7 +3852,7 @@ exports.SearchBox = function (props) {
 };
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3996,19 +4024,19 @@ exports.WPCfg = {
 };
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(16);
+__webpack_require__(17);
 module.exports = __webpack_require__(5);
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(17);
+var content = __webpack_require__(18);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -4022,7 +4050,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(19)(content, options);
+var update = __webpack_require__(20)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -4054,10 +4082,10 @@ if(false) {
 }
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(18)(false);
+exports = module.exports = __webpack_require__(19)(false);
 // imports
 
 
@@ -4068,7 +4096,7 @@ exports.push([module.i, ".fabric .ms-Breadcrumb{font-family:\"Segoe UI WestEurop
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 /*
@@ -4150,7 +4178,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -4216,7 +4244,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(20);
+var	fixUrls = __webpack_require__(21);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -4532,7 +4560,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 
@@ -4627,7 +4655,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4640,17 +4668,17 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 // Include the fabric js
-__export(__webpack_require__(22));
+__export(__webpack_require__(23));
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var $ = __webpack_require__(10);
-__webpack_require__(25);
+__webpack_require__(26);
 //Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
 /**
  * Office UI Fabric JS 1.5.0
@@ -5762,7 +5790,7 @@ var fabric;!function (e) {
 }(fabric || (fabric = {}));exports.fabric = fabric;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -5790,7 +5818,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -5799,7 +5827,7 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6185,7 +6213,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6215,7 +6243,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6269,7 +6297,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6321,7 +6349,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6377,13 +6405,14 @@ exports.CheckBoxGroup = function (props) {
 };
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var common_1 = __webpack_require__(11);
 var _1 = __webpack_require__(1);
 /**
  * Command Bar
@@ -6401,10 +6430,10 @@ exports.CommandBar = function (props) {
     var buttonProps = (props.sideCommands || []).concat(props.mainCommands || []);
     var buttons = _menu._container.querySelectorAll(".ms-CommandButton-button");
     var _loop_1 = function _loop_1(i) {
+        // Add the index attribute
+        buttons[i].setAttribute("data-btn-idx", i.toString());
         // See if a click event exists
         if (buttonProps[i].onClick && buttons[i]) {
-            // Add the index attribute
-            buttons[i].setAttribute("data-btn-idx", i.toString());
             // Add a click event
             buttons[i].addEventListener("click", function (ev) {
                 var btn = ev.currentTarget;
@@ -6426,23 +6455,35 @@ exports.CommandBar = function (props) {
                 // Create the contextual menu
                 var menu_1 = new _1.fabric.ContextualMenu(elMenu, buttons[i]);
                 // Set a click event
-                buttons[i].addEventListener("click", function () {
+                buttons[i].addEventListener("click", function (ev) {
                     // See if the host exists and fabric class doesn't exist
                     if (menu_1._isOpen && menu_1._host._contextualHost.className.indexOf("fabric") < 0) {
                         // Set the class
                         menu_1._host._contextualHost.className += " fabric";
+                        // Set the inner html manually, to remove any events associated with this menu
+                        // The core framework doesn't work well w/ sub-menus.
+                        menu_1._host._contextualHost.innerHTML = menu_1._host._contextualHost.innerHTML;
+                        // Get the button index
+                        var btn = ev.currentTarget;
+                        var idx = parseInt(btn.getAttribute("data-btn-idx"));
+                        if (idx >= 0 && buttonProps[idx] && buttonProps[idx].menu) {
+                            // Set the click events
+                            common_1.setClickEvents(menu_1._host._contextualHost.querySelector(".ms-ContextualMenu"), buttonProps[idx].menu.items);
+                        }
                     }
                 });
+                /*
                 // Get the items
-                var items = elMenu.querySelectorAll(".ms-ContextualMenu-item");
-                for (var j = 0; j < buttonProps[i].menu.items.length; j++) {
-                    var item = buttonProps[i].menu.items[j];
-                    // See if a click event exists
+                let items = elMenu.querySelectorAll(".ms-ContextualMenu-item");
+                for (let j = 0; j < buttonProps[i].menu.items.length; j++) {
+                    let item = buttonProps[i].menu.items[j];
+                      // See if a click event exists
                     if (item.onClick) {
                         // Set the click event
-                        items[j].addEventListener("click", item.onClick);
+                        items[j].addEventListener("click", item.onClick as any);
                     }
                 }
+                */
             }
         }
     };
@@ -6454,13 +6495,14 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var common_1 = __webpack_require__(11);
 var _1 = __webpack_require__(1);
 /**
  * Command Button
@@ -6485,26 +6527,33 @@ exports.CommandButton = function (props) {
             if (_button._modalHostView._contextualHost.className.indexOf("fabric") < 0) {
                 // Add the class name
                 _button._modalHostView._contextualHost.className += " fabric";
+                // Set the inner html manually, to remove any events associated with this menu
+                // The core framework doesn't work well w/ sub-menus.
+                _button._modalHostView._contextualHost.innerHTML = _button._modalHostView._contextualHost.innerHTML;
             }
             // See if the menu is hidden
             if (_button._contextualMenu.className.indexOf("is-hidden") > 0) {
                 // Remove the class
                 _button._contextualMenu.className = _button._contextualMenu.className.replace(/ ?is-hidden/, "");
             }
+            // Set the click events
+            common_1.setClickEvents(_button._modalHostView._contextualHost.querySelector(".ms-ContextualMenu"), props.menu.items);
+            /*
             // Ensure menu items exist
             if (props.menu && props.menu.items) {
                 // Get the menu buttons
-                var buttons = _button._contextualMenu.querySelectorAll(".ms-ContextualMenu-link");
-                for (var i = 0; i < buttons.length && i < props.menu.items.length; i++) {
-                    var button = buttons[i];
-                    var item = props.menu.items[i];
-                    // See if a click event exists
+                let buttons = _button._contextualMenu.querySelectorAll(".ms-ContextualMenu-link");
+                for (let i = 0; i < buttons.length && i < props.menu.items.length; i++) {
+                    let button = buttons[i];
+                    let item = props.menu.items[i];
+                      // See if a click event exists
                     if (item.onClick) {
                         // Set the click event
                         button.addEventListener("click", item.onClick);
                     }
                 }
             }
+            */
         });
     }
     // Return the command button
@@ -6512,13 +6561,14 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var common_1 = __webpack_require__(11);
 var _1 = __webpack_require__(1);
 /**
  * Contextual Menu
@@ -6527,34 +6577,6 @@ exports.ContextualMenu = function (props) {
     // Method to get the contextual menu
     var get = function get() {
         return _menu;
-    };
-    // Method to set the click events
-    var setClickEvents = function setClickEvents(el, items) {
-        // Ensure the element exists
-        if (el == null) {
-            return;
-        }
-        // Parse the items
-        for (var i = 0; i < items.length && i < el.children.length; i++) {
-            var item = items[i];
-            // See if this is a menu
-            if (item.menu && item.menu.length > 0) {
-                // Set a click event
-                el.children[i].addEventListener("click", function (ev) {
-                    // Get the menu
-                    var subMenu = _menu._host._contextualHost.nextSibling;
-                    if (subMenu.className.indexOf(".ms-ContextualHost") >= 0 && subMenu.className.indexOf("fabric") < 0) {
-                        // Add the fabric class
-                        subMenu.className += " fabric";
-                    }
-                });
-                // Set the click events
-                setClickEvents(el.children[i].querySelector(".ms-ContextualMenu"), item.menu);
-            } else if (item.onClick) {
-                // Set the click event
-                el.children[i].addEventListener("click", item.onClick);
-            }
-        }
     };
     // Set the contextual menu html
     props.el.innerHTML = _1.Templates.ContextualMenu(props);
@@ -6573,14 +6595,14 @@ exports.ContextualMenu = function (props) {
             _menu._host._contextualHost.innerHTML = _menu._host._contextualHost.innerHTML;
         }
         // Set the click events
-        setClickEvents(_menu._host._contextualHostMain.querySelector(".ms-ContextualMenu"), props.items);
+        common_1.setClickEvents(_menu._host._contextualHost.querySelector(".ms-ContextualMenu"), props.items);
     });
     // Return the contextual menu
     return { get: get };
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6751,7 +6773,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6834,7 +6856,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7116,7 +7138,7 @@ exports.Dropdown = function (props) {
 };
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7212,7 +7234,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7270,7 +7292,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7325,7 +7347,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7461,7 +7483,7 @@ exports.NumberField = function (props) {
 };
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7615,7 +7637,7 @@ exports.Panel = function (props) {
 };
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7809,7 +7831,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8121,7 +8143,7 @@ exports.App = {
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8717,7 +8739,7 @@ exports.ContextInfo = _ContextInfo;
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8751,7 +8773,7 @@ exports.RequestType = {
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9025,7 +9047,7 @@ exports.BaseHelper = BaseHelper;
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9034,7 +9056,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(47));
 __export(__webpack_require__(48));
 __export(__webpack_require__(49));
 __export(__webpack_require__(50));
@@ -9046,10 +9067,11 @@ __export(__webpack_require__(55));
 __export(__webpack_require__(56));
 __export(__webpack_require__(57));
 __export(__webpack_require__(58));
+__export(__webpack_require__(59));
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9069,7 +9091,7 @@ exports.audit = {
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9117,7 +9139,7 @@ exports.eventreceivers = {
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9439,7 +9461,7 @@ exports.limitedwebpartmanager = {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9983,7 +10005,7 @@ exports.views = {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10013,7 +10035,7 @@ exports.navigationservicerest = {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10033,7 +10055,7 @@ exports.propertyvalues = {
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10053,7 +10075,7 @@ exports.search = {
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10154,7 +10176,7 @@ exports.roledefinitions = {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10663,7 +10685,7 @@ exports.webs = {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10848,7 +10870,7 @@ exports.userprofile = {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11003,7 +11025,7 @@ exports.users = {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11053,7 +11075,7 @@ exports.usercustomactions = {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11606,27 +11628,18 @@ exports.ViewType = {
 
 
 /***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ComplexTypes = __webpack_require__(61);
-exports.ComplexTypes = ComplexTypes;
-var Results = __webpack_require__(62);
-exports.Results = Results;
-var SPTypes = __webpack_require__(63);
-exports.SPTypes = SPTypes;
-
-
-/***/ }),
 /* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var ComplexTypes = __webpack_require__(62);
+exports.ComplexTypes = ComplexTypes;
+var Results = __webpack_require__(63);
+exports.Results = Results;
+var SPTypes = __webpack_require__(64);
+exports.SPTypes = SPTypes;
 
 
 /***/ }),
@@ -11649,6 +11662,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
 /* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11952,7 +11974,7 @@ exports.BaseRequest = BaseRequest;
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12134,7 +12156,7 @@ exports.BaseExecution = BaseExecution;
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12216,7 +12238,7 @@ exports.Base = Base;
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12313,7 +12335,7 @@ exports.Batch = Batch;
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12568,7 +12590,7 @@ exports.MethodInfo = MethodInfo;
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12694,7 +12716,7 @@ exports.OData = OData;
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12835,7 +12857,7 @@ exports.TargetInfo = TargetInfo;
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13027,7 +13049,7 @@ exports.XHRRequest = XHRRequest;
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13036,7 +13058,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13053,7 +13075,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(0);
-var web_1 = __webpack_require__(11);
+var web_1 = __webpack_require__(12);
 /**
  * List
  */
@@ -13100,7 +13122,7 @@ exports.List = _List;
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13147,7 +13169,7 @@ exports.Navigation = _Navigation;
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13189,7 +13211,7 @@ exports.PeopleManager = _PeopleManager;
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13232,7 +13254,7 @@ exports.PeoplePicker = _PeoplePicker;
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13275,7 +13297,7 @@ exports.ProfileLoader = _ProfileLoader;
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13354,7 +13376,7 @@ exports.Search = _Search;
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13411,7 +13433,7 @@ exports.Site = _Site;
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13480,7 +13502,7 @@ exports.SocialFeed = (new _SocialFeed());
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13523,7 +13545,7 @@ exports.UserProfile = _UserProfile;
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13616,7 +13638,7 @@ exports.Utility = _Utility;
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13625,7 +13647,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13703,7 +13725,7 @@ exports.Dependencies = _Dependencies;
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13711,7 +13733,7 @@ exports.Dependencies = _Dependencies;
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(2);
 var __1 = __webpack_require__(3);
-var spCfg_1 = __webpack_require__(12);
+var spCfg_1 = __webpack_require__(13);
 /**
  * Field Schema XML
  * Helper class for generating the field schema xml
@@ -14084,7 +14106,7 @@ exports.FieldSchemaXML = function (fieldInfo) {
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14121,7 +14143,7 @@ exports.SPCfgType = {
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14510,7 +14532,7 @@ exports.JSLink = {
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15099,7 +15121,7 @@ exports.ListForm = {
 
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15292,7 +15314,7 @@ exports.ListFormField = {
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15352,7 +15374,7 @@ exports.Loader = {
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15383,7 +15405,7 @@ exports.parse = function (jsonString) {
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15419,7 +15441,7 @@ exports.RibbonLink = function (props) {
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15459,7 +15481,7 @@ exports.SuiteBarLink = function (props) {
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15902,7 +15924,7 @@ exports.Taxonomy = {
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16188,7 +16210,7 @@ exports.WebPart = _WebPart;
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16363,7 +16385,7 @@ exports.Status = {
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16372,7 +16394,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16387,7 +16409,7 @@ exports.Util = utils_1.Types;
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16443,7 +16465,7 @@ if ((global == null || global.__ver == null || global.__ver < exports.$REST.__ve
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16481,7 +16503,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16513,7 +16535,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16544,7 +16566,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16652,7 +16674,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16699,7 +16721,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16715,7 +16737,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16750,7 +16772,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16766,7 +16788,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16797,7 +16819,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16823,7 +16845,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16863,7 +16885,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16880,7 +16902,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16910,7 +16932,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16928,7 +16950,7 @@ exports.Label = function (props) {
 };
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16952,7 +16974,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16976,7 +16998,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17004,7 +17026,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17020,7 +17042,7 @@ exports.Overlay = function (props) {
 };
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17064,7 +17086,7 @@ exports.Panel = function (props, content) {
 };
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17147,7 +17169,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17178,14 +17200,14 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var searchbox_1 = __webpack_require__(13);
+var searchbox_1 = __webpack_require__(14);
 /**
  * Search Box
  */
@@ -17198,7 +17220,7 @@ exports.SearchBox = function (props) {
 };
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17214,7 +17236,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17250,7 +17272,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17276,7 +17298,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17298,18 +17320,6 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 126 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-// Fabric Components
-var Fabric = __webpack_require__(127);
-exports.Fabric = Fabric;
-
-/***/ }),
 /* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17317,9 +17327,21 @@ exports.Fabric = Fabric;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+// Fabric Components
+var Fabric = __webpack_require__(128);
+exports.Fabric = Fabric;
 
 /***/ }),
 /* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+/***/ }),
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17872,7 +17894,7 @@ exports.Field = function (props) {
 };
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18252,7 +18274,7 @@ exports.ListForm.renderFormTemplate = function (props) {
 };
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18542,7 +18564,7 @@ exports.ListFormPanel = function (props) {
 };
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18551,7 +18573,7 @@ exports.ListFormPanel = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18560,7 +18582,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var fabric_1 = __webpack_require__(1);
-var wpCfg_1 = __webpack_require__(14);
+var wpCfg_1 = __webpack_require__(15);
 /**
  * Web Part
  */
@@ -18919,7 +18941,7 @@ exports.WebPart = function (props) {
 };
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19178,7 +19200,7 @@ exports.WPList = function (props) {
 };
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19276,7 +19298,7 @@ exports.WPSearch = function (props) {
 };
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19462,7 +19484,7 @@ exports.WPTabs = function (props) {
 };
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19471,7 +19493,7 @@ exports.WPTabs = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
