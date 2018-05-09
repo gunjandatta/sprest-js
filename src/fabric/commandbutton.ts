@@ -18,6 +18,8 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
     // Parse the menu button
     let btn = _button._container.querySelector(".ms-CommandButton-button");
     if (btn) {
+        let _html = null;
+
         // Set the click event
         btn.addEventListener("click", ev => {
             // Prevent postback
@@ -30,7 +32,8 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
 
                 // Set the inner html manually, to remove any events associated with this menu
                 // The core framework doesn't work well w/ sub-menus.
-                _button._modalHostView._contextualHost.innerHTML = _button._modalHostView._contextualHost.innerHTML;
+                _html = _html || _button._modalHostView._contextualHost.innerHTML;
+                _button._modalHostView._contextualHost.innerHTML = _html;
             }
 
             // See if the menu is hidden

@@ -6429,7 +6429,10 @@ exports.CommandBar = function (props) {
     // Parse the menu buttons
     var buttonProps = (props.sideCommands || []).concat(props.mainCommands || []);
     var buttons = _menu._container.querySelectorAll(".ms-CommandButton-button");
+    var _html = [];
     var _loop_1 = function _loop_1(i) {
+        // Set the html
+        _html[i] = null;
         // Add the index attribute
         buttons[i].setAttribute("data-btn-idx", i.toString());
         // See if a click event exists
@@ -6460,30 +6463,19 @@ exports.CommandBar = function (props) {
                     if (menu_1._isOpen && menu_1._host._contextualHost.className.indexOf("fabric") < 0) {
                         // Set the class
                         menu_1._host._contextualHost.className += " fabric";
-                        // Set the inner html manually, to remove any events associated with this menu
-                        // The core framework doesn't work well w/ sub-menus.
-                        menu_1._host._contextualHost.innerHTML = menu_1._host._contextualHost.innerHTML;
                         // Get the button index
                         var btn = ev.currentTarget;
                         var idx = parseInt(btn.getAttribute("data-btn-idx"));
                         if (idx >= 0 && buttonProps[idx] && buttonProps[idx].menu) {
+                            // Set the inner html manually, to remove any events associated with this menu
+                            // The core framework doesn't work well w/ sub-menus.
+                            _html[idx] = _html[idx] || menu_1._host._contextualHost.innerHTML || "";
+                            menu_1._host._contextualHost.innerHTML = _html[idx];
                             // Set the click events
                             common_1.setClickEvents(menu_1._host._contextualHost.querySelector(".ms-ContextualMenu"), buttonProps[idx].menu.items);
                         }
                     }
                 });
-                /*
-                // Get the items
-                let items = elMenu.querySelectorAll(".ms-ContextualMenu-item");
-                for (let j = 0; j < buttonProps[i].menu.items.length; j++) {
-                    let item = buttonProps[i].menu.items[j];
-                      // See if a click event exists
-                    if (item.onClick) {
-                        // Set the click event
-                        items[j].addEventListener("click", item.onClick as any);
-                    }
-                }
-                */
             }
         }
     };
@@ -6519,6 +6511,7 @@ exports.CommandButton = function (props) {
     // Parse the menu button
     var btn = _button._container.querySelector(".ms-CommandButton-button");
     if (btn) {
+        var _html_1 = null;
         // Set the click event
         btn.addEventListener("click", function (ev) {
             // Prevent postback
@@ -6529,7 +6522,8 @@ exports.CommandButton = function (props) {
                 _button._modalHostView._contextualHost.className += " fabric";
                 // Set the inner html manually, to remove any events associated with this menu
                 // The core framework doesn't work well w/ sub-menus.
-                _button._modalHostView._contextualHost.innerHTML = _button._modalHostView._contextualHost.innerHTML;
+                _html_1 = _html_1 || _button._modalHostView._contextualHost.innerHTML;
+                _button._modalHostView._contextualHost.innerHTML = _html_1;
             }
             // See if the menu is hidden
             if (_button._contextualMenu.className.indexOf("is-hidden") > 0) {
@@ -6538,22 +6532,6 @@ exports.CommandButton = function (props) {
             }
             // Set the click events
             common_1.setClickEvents(_button._modalHostView._contextualHost.querySelector(".ms-ContextualMenu"), props.menu.items);
-            /*
-            // Ensure menu items exist
-            if (props.menu && props.menu.items) {
-                // Get the menu buttons
-                let buttons = _button._contextualMenu.querySelectorAll(".ms-ContextualMenu-link");
-                for (let i = 0; i < buttons.length && i < props.menu.items.length; i++) {
-                    let button = buttons[i];
-                    let item = props.menu.items[i];
-                      // See if a click event exists
-                    if (item.onClick) {
-                        // Set the click event
-                        button.addEventListener("click", item.onClick);
-                    }
-                }
-            }
-            */
         });
     }
     // Return the command button
@@ -6583,6 +6561,7 @@ exports.ContextualMenu = function (props) {
     // Create the contextual menu
     var _menu = new _1.fabric.ContextualMenu(props.el.querySelector(".ms-ContextualMenu"), props.elTarget);
     // Add a click event to the target
+    var _html = null;
     props.elTarget.addEventListener("click", function (ev) {
         // Prevent a postback
         ev ? ev.preventDefault() : null;
@@ -6592,7 +6571,8 @@ exports.ContextualMenu = function (props) {
             _menu._host._contextualHost.className += " fabric";
             // Set the inner html manually, to remove any events associated with this menu
             // The core framework doesn't work well w/ sub-menus.
-            _menu._host._contextualHost.innerHTML = _menu._host._contextualHost.innerHTML;
+            _html = _html || _menu._host._contextualHost.innerHTML;
+            _menu._host._contextualHost.innerHTML = _html;
         }
         // Set the click events
         common_1.setClickEvents(_menu._host._contextualHost.querySelector(".ms-ContextualMenu"), props.items);

@@ -17,6 +17,7 @@ export const ContextualMenu = (props: IContextualMenuProps): IContextualMenu => 
     let _menu: Fabric.IContextualMenu = new fabric.ContextualMenu(props.el.querySelector(".ms-ContextualMenu"), props.elTarget);
 
     // Add a click event to the target
+    let _html = null;
     props.elTarget.addEventListener("click", ev => {
         // Prevent a postback
         ev ? ev.preventDefault() : null;
@@ -28,7 +29,8 @@ export const ContextualMenu = (props: IContextualMenuProps): IContextualMenu => 
 
             // Set the inner html manually, to remove any events associated with this menu
             // The core framework doesn't work well w/ sub-menus.
-            _menu._host._contextualHost.innerHTML = _menu._host._contextualHost.innerHTML;
+            _html = _html || _menu._host._contextualHost.innerHTML;
+            _menu._host._contextualHost.innerHTML = _html;
         }
 
         // Set the click events

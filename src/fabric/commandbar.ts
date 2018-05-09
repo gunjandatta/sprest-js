@@ -18,7 +18,11 @@ export const CommandBar = (props: ICommandBarProps): ICommandBar => {
     // Parse the menu buttons
     let buttonProps = (props.sideCommands || []).concat(props.mainCommands || []);
     let buttons = _menu._container.querySelectorAll(".ms-CommandButton-button");
+    let _html = [];
     for (let i = 0; i < buttons.length; i++) {
+        // Set the html
+        _html[i] = null;
+
         // Add the index attribute
         buttons[i].setAttribute("data-btn-idx", i.toString());
 
@@ -55,14 +59,15 @@ export const CommandBar = (props: ICommandBarProps): ICommandBar => {
                         // Set the class
                         menu._host._contextualHost.className += " fabric";
 
-                        // Set the inner html manually, to remove any events associated with this menu
-                        // The core framework doesn't work well w/ sub-menus.
-                        menu._host._contextualHost.innerHTML = menu._host._contextualHost.innerHTML;
-
                         // Get the button index
                         let btn = ev.currentTarget as HTMLButtonElement;
                         let idx = parseInt(btn.getAttribute("data-btn-idx"));
                         if (idx >= 0 && buttonProps[idx] && buttonProps[idx].menu) {
+                            // Set the inner html manually, to remove any events associated with this menu
+                            // The core framework doesn't work well w/ sub-menus.
+                            _html[idx] = _html[idx] || menu._host._contextualHost.innerHTML || "";
+                            menu._host._contextualHost.innerHTML = _html[idx];
+
                             // Set the click events
                             setClickEvents(menu._host._contextualHost.querySelector(".ms-ContextualMenu"), buttonProps[idx].menu.items);
                         }
