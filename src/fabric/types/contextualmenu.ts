@@ -41,6 +41,9 @@ export interface IContextualMenuItem {
     /** True to render the item as selected. */
     isSelected?: boolean;
 
+    /** The sub-menu. */
+    menu?: Array<IContextualMenuItem>;
+
     /** The item click event. */
     onClick?: (ev?: Event) => void;
 

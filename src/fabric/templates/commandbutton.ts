@@ -22,8 +22,9 @@ export const CommandButton = (props: ICommandButtonProps): string => {
     // Get the menu props and set the default settings
     let menuProps = props.menu;
     if (menuProps) {
-        // Set the class name
+        // Update the menu props
         menuProps.className = "is-opened ms-ContextualMenu--hasIcons " + (props.menu.className || "");
+        menuProps.isHidden = false;
     }
 
     // Return the template

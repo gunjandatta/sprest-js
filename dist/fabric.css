@@ -10481,9 +10481,19 @@
   .fabric .ms-TextField.ms-TextField--underlined > .ms-Label.field-label {
     display: block; }
 
-/** Ensure the popup is visible over the panel. */
+/** Contextual Host */
 .fabric.ms-ContextualHost {
+  /** Target the main container */
+  /** Ensure the popup is visible over the panel. */
   z-index: 2000; }
+  .fabric.ms-ContextualHost .ms-ContextualHost-main {
+    /** Hide the sub-menu */
+    /** Show it the sub-menu on hover */ }
+    .fabric.ms-ContextualHost .ms-ContextualHost-main .ms-ContextualMenu-item--hasMenu > ul.ms-ContextualMenu {
+      display: none; }
+    .fabric.ms-ContextualHost .ms-ContextualHost-main .ms-ContextualMenu-item--hasMenu:hover > ul.ms-ContextualMenu {
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+      display: block; }
 
 /** Ensure the panel is displayed on top */
 .fabric.ms-PanelHost, .fabric > .ms-Panel {
