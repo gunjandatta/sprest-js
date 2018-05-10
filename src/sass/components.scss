@@ -196,6 +196,7 @@
         }
 
         /** Show it the sub-menu on hover */
+        .ms-ContextualMenu-item--hasMenu:focus > ul.ms-ContextualMenu,
         .ms-ContextualMenu-item--hasMenu:hover > ul.ms-ContextualMenu {
             box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
             display: block;
