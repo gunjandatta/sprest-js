@@ -43,7 +43,10 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
             }
 
             // Set the click events
-            setClickEvents(_button._modalHostView._contextualHost.querySelector(".ms-ContextualMenu"), props.menu.items);
+            setClickEvents(_button._modalHostView._contextualHost.querySelector(".ms-ContextualMenu"), props.menu.items, (ev, item) => {
+                // Close the menu
+                _button._modalHostView.disposeModal();
+            });
         });
     }
 

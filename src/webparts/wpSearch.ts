@@ -9,7 +9,7 @@ import { WPList, WPCfg } from ".";
 export const WPSearch = (props: IWPSearchProps): IWPSearch => {
     let ddlFields: Fabric.Types.IDropdown = null;
 
-    // Method to update the 
+    // The list changed event
     let listChanged = (el: HTMLDivElement, wpInfo: IWPSearchInfo, list: Types.SP.IListQueryResult) => {
         let options: Array<Fabric.Types.IDropdownOption> = [];
 

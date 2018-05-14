@@ -34,7 +34,10 @@ export const ContextualMenu = (props: IContextualMenuProps): IContextualMenu => 
         }
 
         // Set the click events
-        setClickEvents(_menu._host._contextualHost.querySelector(".ms-ContextualMenu"), props.items);
+        setClickEvents(_menu._host._contextualHost.querySelector(".ms-ContextualMenu"), props.items, (ev, item) => {
+            // Close the menu
+            _menu._host.disposeModal();
+        });
     });
 
     // Return the contextual menu

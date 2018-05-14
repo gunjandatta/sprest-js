@@ -45,7 +45,7 @@ export interface IContextualMenuItem {
     menu?: Array<IContextualMenuItem>;
 
     /** The item click event. */
-    onClick?: (ev?: Event) => void;
+    onClick?: (ev?: Event, item?: IContextualMenuItem) => void;
 
     /** The item text. */
     text?: string;

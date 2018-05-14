@@ -1,9 +1,18 @@
 import { IContextualMenuItem } from "./types";
 
 // Method to set the click events
-export const setClickEvents = (el: HTMLElement, items: Array<IContextualMenuItem>) => {
+export const setClickEvents = (el: HTMLElement, items: Array<IContextualMenuItem>, onClick?: (ev?: Event, item?: IContextualMenuItem) => void) => {
     // Ensure the element exists
     if (el == null) { return; }
+
+    // Method to get the item
+    let getItem = (el: HTMLElement) => {
+        // Get the index
+        let idx = parseInt(el.getAttribute("data-idx"));
+
+        // Return the item
+        return idx >= 0 && idx < items.length ? items[idx] : null;
+    }
 
     // Method to fix the position of the sub-menu
     let fixMenuPos = (ev: Event) => {
@@ -40,7 +49,7 @@ export const setClickEvents = (el: HTMLElement, items: Array<IContextualMenuItem
                     // Adjust the position
                     menu.style.top = (position + offset) + "px";
                 } else {
-                    // Adjust the position
+                    // Adjust the position;
                     menu.style.top = offset + "px";
                 }
             }
@@ -50,6 +59,9 @@ export const setClickEvents = (el: HTMLElement, items: Array<IContextualMenuItem
     // Parse the items
     for (let i = 0; i < items.length && i < el.children.length; i++) {
         let item = items[i];
+
+        // Set the index
+        el.children[i].setAttribute("data-idx", i.toString());
 
         // See if this is a menu
         if (item.menu && item.menu.length > 0) {
@@ -63,7 +75,27 @@ export const setClickEvents = (el: HTMLElement, items: Array<IContextualMenuItem
         // Else, see there is a click event
         else if (item.onClick) {
             // Set the click event
-            el.children[i].addEventListener("click", item.onClick);
+            el.children[i].addEventListener("click", ev => {
+                // Get the item
+                let item = getItem(ev.currentTarget as HTMLElement);
+                if (item) {
+                    // Call the click event
+                    item.onClick(ev, item);
+                }
+            });
+        }
+
+        // See if the click event exists
+        if (onClick) {
+            // Set the click event
+            el.children[i].addEventListener("click", ev => {
+                // Get the item
+                let item = getItem(ev.currentTarget as HTMLElement);
+                if (item) {
+                    // Call the click event
+                    onClick(ev, item);
+                }
+            });
         }
     }
 }

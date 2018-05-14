@@ -69,7 +69,10 @@ export const CommandBar = (props: ICommandBarProps): ICommandBar => {
                             menu._host._contextualHost.innerHTML = _html[idx];
 
                             // Set the click events
-                            setClickEvents(menu._host._contextualHost.querySelector(".ms-ContextualMenu"), buttonProps[idx].menu.items);
+                            setClickEvents(menu._host._contextualHost.querySelector(".ms-ContextualMenu"), buttonProps[idx].menu.items, (ev, item) => {
+                                // Close the menu
+                                menu._host.disposeModal();
+                            });
                         }
                     }
                 });
