@@ -142,7 +142,7 @@ gulp.task("package-components", ["update-lib-reference"], () => {
                             {
                                 loader: "babel-loader",
                                 options: {
-                                    presets: ["es2015"]
+                                    presets: ["env"]
                                 }
                             }
                         ]
@@ -179,7 +179,7 @@ gulp.task("package-fabric", ["update-lib-reference"], () => {
                             {
                                 loader: "babel-loader",
                                 options: {
-                                    presets: ["es2015"]
+                                    presets: ["env"]
                                 }
                             }
                         ]
