@@ -10490,7 +10490,8 @@
     /** Hide the sub-menu */
     /** Show it the sub-menu on hover */ }
     .fabric.ms-ContextualHost .ms-ContextualHost-main .ms-ContextualMenu-item--hasMenu > ul.ms-ContextualMenu {
-      display: none; }
+      display: none;
+      z-index: 2100; }
     .fabric.ms-ContextualHost .ms-ContextualHost-main .ms-ContextualMenu-item--hasMenu:focus > ul.ms-ContextualMenu,
     .fabric.ms-ContextualHost .ms-ContextualHost-main .ms-ContextualMenu-item--hasMenu:hover > ul.ms-ContextualMenu {
       box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);

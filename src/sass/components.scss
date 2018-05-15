@@ -193,6 +193,7 @@
         /** Hide the sub-menu */
         .ms-ContextualMenu-item--hasMenu > ul.ms-ContextualMenu {
             display: none;
+            z-index: 2100;
         }
 
         /** Show it the sub-menu on hover */

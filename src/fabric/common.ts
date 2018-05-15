@@ -23,17 +23,28 @@ export const setClickEvents = (el: HTMLElement, items: Array<IContextualMenuItem
 
             // Get the position
             let pos = menu.getBoundingClientRect();
+            let parentPos = (ev.currentTarget as HTMLElement).getBoundingClientRect();
 
             // See if it's visible horizontally
             offset = document.body.clientWidth - (pos.left + pos.width);
             if (offset < 0) {
                 // See if the left position is set
                 if (menu.style.left) {
-                    let position = parseFloat(menu.style.left.replace("px", ""));
+                    // Update the offset
+                    offset += parseFloat(menu.style.left.replace("px", ""));
+                }
 
-                    // Adjust the position
-                    menu.style.left = (position + offset) + "px";
-                } else {
+                // Adjust the position
+                menu.style.left = offset + "px";
+
+                // Update the menu position
+                pos = menu.getBoundingClientRect();
+
+                // See if the menu is overlapping the parent
+                if (parentPos.left < pos.right) {
+                    // Update the offset
+                    offset -= (pos.right - parentPos.left);
+
                     // Adjust the position
                     menu.style.left = offset + "px";
                 }
@@ -52,6 +63,9 @@ export const setClickEvents = (el: HTMLElement, items: Array<IContextualMenuItem
                     // Adjust the position;
                     menu.style.top = offset + "px";
                 }
+
+                // Update the menu position
+                pos = menu.getBoundingClientRect();
             }
         }
     }
