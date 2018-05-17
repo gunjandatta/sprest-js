@@ -148,7 +148,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     // Method to update the value
     let updateValue = (value: any, removeFl: boolean = false) => {
         let isUnsorted = props.multi && props.isUnsorted ? true : false;
-        let values: Array<IDropdownOption> = (isUnsorted ? getValue() as any : null) || [];
+        let values: Array<IDropdownOption> = [];
 
         // See if this is a multi-select dropdown
         if (props.multi) {

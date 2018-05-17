@@ -7094,7 +7094,7 @@ exports.Dropdown = function (props) {
             removeFl = false;
         }
         var isUnsorted = props.multi && props.isUnsorted ? true : false;
-        var values = (isUnsorted ? getValue() : null) || [];
+        var values = [];
         // See if this is a multi-select dropdown
         if (props.multi) {
             // Get the selected values

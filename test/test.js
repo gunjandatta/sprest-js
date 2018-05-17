@@ -4793,7 +4793,7 @@ var BaseHelper = /** @class */ (function () {
                                 // Update the ' char in the property name
                                 subPropName = subPropName.replace(/'/g, "\\'");
                                 // Add the property
-                                base[propName] = new Function("name", "name = name ? '" + propName + subPropName + "'.replace(/\\[Name\\]/g, name.replace(/\'/g, \"''\")) : null;" +
+                                base[propName] = new Function("name", "name = name ? '" + propName + subPropName + "'.replace(/\\[Name\\]/g, name.toString().replace(/\'/g, \"''\")) : null;" +
                                     "return this.getProperty(name ? name : '" + propName + "', name ? '" + subPropType + "' : '" + propType + "');");
                             }
                             else {
@@ -12353,7 +12353,7 @@ var Mapper = __webpack_require__(14);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.97,
+    __ver: 3.98,
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
     Helper: {
@@ -13193,7 +13193,7 @@ exports.Dropdown = function (props) {
     var updateValue = function (value, removeFl) {
         if (removeFl === void 0) { removeFl = false; }
         var isUnsorted = props.multi && props.isUnsorted ? true : false;
-        var values = (isUnsorted ? getValue() : null) || [];
+        var values = [];
         // See if this is a multi-select dropdown
         if (props.multi) {
             // Get the selected values
