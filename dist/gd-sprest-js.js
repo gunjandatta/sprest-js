@@ -7095,6 +7095,11 @@ exports.Dropdown = function (props) {
         }
         var isUnsorted = props.multi && props.isUnsorted ? true : false;
         var values = (isUnsorted ? getValue() : null) || [];
+        // See if we are removing the last item
+        if (removeFl && values.length == 1) {
+            // Clear the values
+            values = [];
+        }
         // See if this is a multi-select dropdown
         if (props.multi) {
             // Get the selected values
@@ -7109,22 +7114,18 @@ exports.Dropdown = function (props) {
                         if (values[j].value == option.value) {
                             // Set the index
                             selectedIdx = j;
+                            // See if we are removing this option
+                            if (removeFl) {
+                                // Remove the value
+                                values.splice(selectedIdx, 1);
+                            }
                             break;
                         }
                     }
-                    // See if the value exists
-                    if (selectedIdx >= 0) {
-                        // See if we are removing this option
-                        if (removeFl) {
-                            // Remove the value
-                            values.splice(selectedIdx, 1);
-                        }
-                    } else {
-                        // See if we are adding the option
-                        if (!removeFl) {
-                            // Add the value
-                            values.push(option);
-                        }
+                    // See if we are adding the option
+                    if (!removeFl && selectedIdx < 0) {
+                        // Add the value
+                        values.push(option);
                     }
                 } else {
                     // See if we are removing this value

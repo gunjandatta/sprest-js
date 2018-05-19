@@ -150,6 +150,12 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         let isUnsorted = props.multi && props.isUnsorted ? true : false;
         let values: Array<IDropdownOption> = (isUnsorted ? getValue() as any : null) || [];
 
+        // See if we are removing the last item
+        if (removeFl && values.length == 1) {
+            // Clear the values
+            values = [];
+        }
+
         // See if this is a multi-select dropdown
         if (props.multi) {
             // Get the selected values
@@ -166,23 +172,21 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                         if (values[j].value == option.value) {
                             // Set the index
                             selectedIdx = j;
+
+                            // See if we are removing this option
+                            if (removeFl) {
+                                // Remove the value
+                                values.splice(selectedIdx, 1);
+                            }
+
                             break;
                         }
                     }
 
-                    // See if the value exists
-                    if (selectedIdx >= 0) {
-                        // See if we are removing this option
-                        if (removeFl) {
-                            // Remove the value
-                            values.splice(selectedIdx, 1);
-                        }
-                    } else {
-                        // See if we are adding the option
-                        if (!removeFl) {
-                            // Add the value
-                            values.push(option);
-                        }
+                    // See if we are adding the option
+                    if (!removeFl && selectedIdx < 0) {
+                        // Add the value
+                        values.push(option);
                     }
                 } else {
                     // See if we are removing this value
