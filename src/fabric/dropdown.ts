@@ -148,7 +148,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     // Method to update the value
     let updateValue = (value: any, removeFl: boolean = false) => {
         let isUnsorted = props.multi && props.isUnsorted ? true : false;
-        let values: Array<IDropdownOption> = [];
+        let values: Array<IDropdownOption> = (isUnsorted ? getValue() as any : null) || [];
 
         // See if this is a multi-select dropdown
         if (props.multi) {
@@ -157,28 +157,37 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
             for (let i = 0; i < items.length; i++) {
                 let option = JSON.parse(items[i].getAttribute("data-value")) as IDropdownOption;
 
-                // See if we are removing this value
-                if (value == option.value && removeFl) { continue; }
-
                 // See if the values are unsorted
                 if (isUnsorted) {
-                    let exists = false;
+                    let selectedIdx = -1;
 
                     // Parse the selected values
                     for (let j = 0; j < values.length; j++) {
                         if (values[j].value == option.value) {
-                            // Set the flag
-                            exists = true;
+                            // Set the index
+                            selectedIdx = j;
                             break;
                         }
                     }
 
-                    // Ensure the value exists
-                    if (!exists) {
-                        // Add the value
-                        values.push(option);
+                    // See if the value exists
+                    if (selectedIdx >= 0) {
+                        // See if we are removing this option
+                        if (removeFl) {
+                            // Remove the value
+                            values.splice(selectedIdx, 1);
+                        }
+                    } else {
+                        // See if we are adding the option
+                        if (!removeFl) {
+                            // Add the value
+                            values.push(option);
+                        }
                     }
                 } else {
+                    // See if we are removing this value
+                    if (value == option.value && removeFl) { continue; }
+
                     // Add the value
                     values.push(option);
                 }

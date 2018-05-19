@@ -13193,35 +13193,45 @@ exports.Dropdown = function (props) {
     var updateValue = function (value, removeFl) {
         if (removeFl === void 0) { removeFl = false; }
         var isUnsorted = props.multi && props.isUnsorted ? true : false;
-        var values = [];
+        var values = (isUnsorted ? getValue() : null) || [];
         // See if this is a multi-select dropdown
         if (props.multi) {
             // Get the selected values
             var items = _list._container.querySelectorAll(".is-selected");
             for (var i = 0; i < items.length; i++) {
                 var option = JSON.parse(items[i].getAttribute("data-value"));
-                // See if we are removing this value
-                if (value == option.value && removeFl) {
-                    continue;
-                }
                 // See if the values are unsorted
                 if (isUnsorted) {
-                    var exists = false;
+                    var selectedIdx = -1;
                     // Parse the selected values
                     for (var j = 0; j < values.length; j++) {
                         if (values[j].value == option.value) {
-                            // Set the flag
-                            exists = true;
+                            // Set the index
+                            selectedIdx = j;
                             break;
                         }
                     }
-                    // Ensure the value exists
-                    if (!exists) {
-                        // Add the value
-                        values.push(option);
+                    // See if the value exists
+                    if (selectedIdx >= 0) {
+                        // See if we are removing this option
+                        if (removeFl) {
+                            // Remove the value
+                            values.splice(selectedIdx, 1);
+                        }
+                    }
+                    else {
+                        // See if we are adding the option
+                        if (!removeFl) {
+                            // Add the value
+                            values.push(option);
+                        }
                     }
                 }
                 else {
+                    // See if we are removing this value
+                    if (value == option.value && removeFl) {
+                        continue;
+                    }
                     // Add the value
                     values.push(option);
                 }
