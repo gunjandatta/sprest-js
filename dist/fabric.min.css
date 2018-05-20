@@ -1925,8 +1925,7 @@ to{opacity:0}}.fabric .ms-u-rotate90deg{-webkit-animation-name:rotate90;-moz-ani
 .fabric .ms-Toggle.ms-Toggle--textLeft .ms-Toggle-field{float:right}.fabric .ms-Callout{width:auto}
 .fabric .ms-Dialog{z-index:1050}.fabric .display-form{border-bottom:1px solid #c8c8c8;padding:5px 0}
 .fabric .display-form:hover{border-color:#767676}.fabric .display-form .field-value{font-size:14px;font-weight:300;padding-left:5px;padding-top:5px}
-.fabric .dropdown .textfield .ms-TextField-field{color:#444}.fabric .ms-List--dropdown{max-height:50vh;overflow-y:auto}
-.fabric .ms-List--dropdown .is-selectable>.ms-ListItem-secondaryText{top:0}.fabric .ms-Label.form-error{color:#a80000;font-size:16px;font-weight:600;padding-left:12px}
+.fabric .dropdown .textfield .ms-TextField-field{color:#444}.fabric .ms-Label.form-error{color:#a80000;font-size:16px;font-weight:600;padding-left:12px}
 .fabric .field-label{font-size:14px;font-weight:600;padding-left:12px}.fabric .ms-Icon.is-description span{display:none}
 .fabric .ms-Icon.is-description:hover span{background-color:white;box-shadow:1px 1px 15px grey;display:block;padding:10px;position:absolute;z-index:5}
 .fabric .ms-LinkField{border-bottom:1px solid #c8c8c8}.fabric .ms-LinkField:hover{border-color:#767676}

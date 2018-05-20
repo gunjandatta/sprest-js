@@ -46,17 +46,6 @@
         color: #444;
     }
 
-    /** Set the max height of the dropdown */
-    .ms-List--dropdown {
-        max-height: 50vh;
-        overflow-y: auto;
-    }
-
-    /** Fix the multi-select box positioning */
-    .ms-List--dropdown .is-selectable > .ms-ListItem-secondaryText {
-        top: 0px;
-    }
-
     /**
     * Form Error
     */

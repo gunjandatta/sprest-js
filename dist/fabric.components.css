@@ -4303,8 +4303,6 @@
     * Dropdown
     */
   /** Update the font color to make it more visible. */
-  /** Set the max height of the dropdown */
-  /** Fix the multi-select box positioning */
   /**
     * Form Error
     */
@@ -4360,11 +4358,6 @@
     padding-top: 5px; }
   .fabric .dropdown .textfield .ms-TextField-field {
     color: #444; }
-  .fabric .ms-List--dropdown {
-    max-height: 50vh;
-    overflow-y: auto; }
-  .fabric .ms-List--dropdown .is-selectable > .ms-ListItem-secondaryText {
-    top: 0px; }
   .fabric .ms-Label.form-error {
     color: #a80000;
     font-size: 16px;

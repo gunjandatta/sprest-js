@@ -151,12 +151,11 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
     // Create the contextual menu
     let _menu = ContextualMenu({
-        className: props.className,
+        className: (props.className || "") + " ddl-menu",
         el: props.el.querySelector(".menu"),
         elTarget: props.el.querySelector(".textfield"),
         items: toItems(props.options),
         onClick: (ev, item) => {
-            debugger;
             // Get the option
             let option = findOption(props.options, item.value);
             if (option) {
