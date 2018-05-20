@@ -1,116 +1,42 @@
-import { Fabric, IDropdown, IDropdownOption, IDropdownProps, IListItemProps } from "./types";
+import { Types } from "gd-sprest";
+import { Fabric, IContextualMenu, IContextualMenuItem, IDropdown, IDropdownOption, IDropdownProps, IListItemProps } from "./types";
 import {
     fabric,
     Callout, CalloutPositions, CalloutTypes,
-    List, Templates,
+    ContextualMenu,
+    List, Personas, Templates,
     TextField, TextFieldTypes
 } from ".";
-
-/**
- * Dropdown Types
- */
-export enum DropdownTypes {
-    Item = 0,
-    Header = 1
-}
 
 /**
  * Dropdown
  */
 export const Dropdown = (props: IDropdownProps): IDropdown => {
-    // Method to create the list items
-    let createList = (el: Element, options: Array<IDropdownOption> = []): Fabric.IList => {
-        let items: Array<string> = [];
+    let isMulti = typeof (props.multi) === "boolean" ? props.multi : false;
+    let isSorted = typeof (props.isUnsorted) === "boolean" ? !props.isUnsorted : true;
 
-        // Method to render the items
-        let renderItems = (options: Array<IDropdownOption>, isCategory: boolean = false) => {
-            let items: Array<IListItemProps> = [];
+    // Method to find the option
+    let findOption = (options: Array<IDropdownOption>, value: string) => {
+        // Parse the options
+        for (let i = 0; i < options.length; i++) {
+            let option = options[i];
 
-            // Parse the options
-            for (let i = 0; i < options.length; i++) {
-                let option = options[i];
-
-                // See if this is a header
-                if (option.type == DropdownTypes.Header) {
-                    // Add a header item
-                    items.push({
-                        className: "ms-ListItem--" + (isCategory ? "category" : "header"),
-                        isSelectable: isCategory ? props.multi : false,
-                        isSelected: props.multi ? option.isSelected : false,
-                        primaryText: option.text,
-                        value: JSON.stringify(option)
-                    });
-                }
-                // Else, see if this option has children
-                else if (option.options && option.options.length > 0) {
-                    // Add the option as a category
-                    items = items.concat(renderItems(option.options, true));
-                }
-                // Else, this is an item
-                else {
-                    // Add the item
-                    items.push({
-                        isSelectable: props.multi,
-                        isSelected: props.multi ? option.isSelected : false,
-                        secondaryText: option.text,
-                        value: JSON.stringify(option)
-                    });
-                }
+            // See if this is the target item, and return it
+            if (option.value == value) {
+                // Return the option
+                return option;
             }
 
-            // Return the items
-            return items;
+            // See if options exist
+            if (option.options) {
+                // Find the option
+                let subOption = findOption(option.options, value);
+                if (subOption) { return subOption; }
+            }
         }
 
-        // Set the click event
-        let onClick = (ev: MouseEvent) => {
-            let item = ev.currentTarget as HTMLLIElement;
-            let option = JSON.parse(item.getAttribute("data-value")) as IDropdownOption;
-            let tb = _tb.get()._textField;
-
-            // Return if this is a header
-            if (item.className.indexOf("ms-ListItem--header") > 0) { return; }
-
-            // See if this is a multi-select
-            if (props.multi) {
-                let removeFl = false;
-
-                // See if this item is selected
-                if (item.className.indexOf("is-selected") >= 0) {
-                    // Unselect this item
-                    item.className = item.className.replace(/is\-selected/g, "").trim();
-
-                    // Set the flag
-                    removeFl = true;
-                } else {
-                    // Select this item
-                    item.className += " is-selected";
-                }
-
-                // Update the value
-                let values = updateValue(option.value, removeFl);
-
-                // Call the change event
-                props.onChange ? props.onChange(values) : null;
-            } else {
-                // Update the textbox
-                updateValue(option.value);
-
-                // Call the change event
-                props.onChange ? props.onChange(option) : null;
-
-                // Close the callout
-                _callout._contextualHost.disposeModal();
-            }
-        };
-
-        // Return the list
-        return List({
-            className: "ms-List--dropdown",
-            el,
-            items: renderItems(options),
-            onClick
-        }).get();
+        // Option not found
+        return null;
     }
 
     // Method to get the toggle element
@@ -120,17 +46,9 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     }
 
     // Method to get the fabric component
-    let getFabricComponent = (): Fabric.IContextualHost => {
+    let getFabricComponent = (): IContextualMenu => {
         // Return the menu
-        return _callout._contextualHost;
-    }
-
-    // Method to get the value
-    let getValue = (): IDropdownOption | Array<IDropdownOption> => {
-        let value = _tb.get()._textField.getAttribute("data-value");
-
-        // Return the value
-        return value ? JSON.parse(value) : value;
+        return _menu;
     }
 
     // Method to set the options
@@ -138,114 +56,88 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         // Clear the textbox value
         _tb.setValue("");
 
-        // Create the list
-        _list = createList(_callout._container, options);
+        // Set the value
+        value = options;
+
+        // Render the options
+        renderValues(value);
 
         // Return this object
         return this;
     }
 
-    // Method to update the value
-    let updateValue = (value: any, removeFl: boolean = false) => {
-        let isUnsorted = props.multi && props.isUnsorted ? true : false;
-        let values: Array<IDropdownOption> = (isUnsorted ? getValue() as any : null) || [];
-
-        // See if we are removing the last item
-        if (removeFl && values.length == 1) {
-            // Clear the values
-            values = [];
+    // Method to render the values
+    let renderValues = (values: Array<IDropdownOption> = []) => {
+        // See if we are sorting the dropdown values
+        if (isSorted) {
+            // Sort the values
+            values = values.sort((a, b) => {
+                if (a.text < b.text) { return -1; }
+                if (a.text > b.text) { return 1; }
+                return 0;
+            });
         }
 
-        // See if this is a multi-select dropdown
-        if (props.multi) {
-            // Get the selected values
-            let items = _list._container.querySelectorAll(".is-selected");
-            for (let i = 0; i < items.length; i++) {
-                let option = JSON.parse(items[i].getAttribute("data-value")) as IDropdownOption;
-
-                // See if the values are unsorted
-                if (isUnsorted) {
-                    let selectedIdx = -1;
-
-                    // Parse the selected values
-                    for (let j = 0; j < values.length; j++) {
-                        if (values[j].value == option.value) {
-                            // Set the index
-                            selectedIdx = j;
-
-                            // See if we are removing this option
-                            if (removeFl) {
-                                // Remove the value
-                                values.splice(selectedIdx, 1);
-                            }
-
-                            break;
-                        }
-                    }
-
-                    // See if we are adding the option
-                    if (!removeFl && selectedIdx < 0) {
-                        // Add the value
-                        values.push(option);
-                    }
-                } else {
-                    // See if we are removing this value
-                    if (value == option.value && removeFl) { continue; }
-
-                    // Add the value
-                    values.push(option);
-                }
-            }
-
-            // Parse the values
-            let textValues = [];
-            for (let i = 0; i < values.length; i++) {
-                // Add the text value
-                textValues.push(values[i].text);
-            }
-
-            // Update the textbox
-            _tb.get()._textField.setAttribute("data-value", JSON.stringify(props.multi ? values : values[0] || {}));
-            _tb.setValue(textValues.join(", "));
-        } else {
-            let findOption = (options: Array<IDropdownOption>) => {
-                // Ensure options exist
-                if (options && options.length > 0) {
-                    // Parse the options
-                    for (let i = 0; i < options.length; i++) {
-                        let option = options[i];
-
-                        // See if this is the target item, and return it
-                        if (option.value == value) { return option }
-
-                        // Search the sub-options
-                        option = findOption(option.options);
-                        if (option) { return option; }
+        // Render the personas
+        Personas({
+            el: props.el.querySelector(".value"),
+            userInfo: toUserInfo(values),
+            onCancel: userInfo => {
+                // Parse the values
+                for (let i = 0; i < value.length; i++) {
+                    // See if this is the target value
+                    if (value[i].text == userInfo.DisplayText) {
+                        // Remove this value
+                        value.splice(i, 1);
                     }
                 }
-
-                // Option not found
-                return null;
             }
+        });
+    }
 
-            // Find the option
-            let option = findOption(props.options);
-            if (option) {
-                // Update the textbox
-                _tb.get()._textField.setAttribute("data-value", JSON.stringify(option));
-                _tb.setValue(option.text);
-            }
+    // Method to convert the options to menu options
+    let toItems = (options: Array<IDropdownOption>): Array<IContextualMenuItem> => {
+        let items: Array<IContextualMenuItem> = [];
+
+        // Parse the options
+        for (let i = 0; i < options.length; i++) {
+            let option = options[i];
+
+            // Append the item
+            items.push({
+                menu: option.options ? toItems(option.options) : null,
+                text: option.text,
+                value: option.value
+            });
         }
 
-        // Return the values
-        return values;
+        // Return the items
+        return items;
+    }
+
+    // Method to convert the options to user information
+    let toUserInfo = (options: Array<IDropdownOption>): Array<Types.SP.IPeoplePickerUser> => {
+        let userInfo: Array<Types.SP.IPeoplePickerUser> = [];
+
+        // Parse the values
+        for (let i = 0; i < options.length; i++) {
+            // Append the persona
+            userInfo.push({
+                DisplayText: options[i].text,
+                Key: options[i].value
+            });
+        }
+
+        // Return the user information
+        return userInfo;
     }
 
     // Render the dropdown
     props.el.innerHTML = [
         '<div class="dropdown ' + (props.className || '') + '">',
         '<div class="textfield"></div>',
-        '<div class="callout"></div>',
+        '<div class="menu"></div>',
+        '<div class="value"></div>',
         '</div>'
     ].join('\n');
 
@@ -257,75 +149,75 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         type: TextFieldTypes.Underline
     });
 
-    // Create the callout
-    let _callout = Callout({
-        className: "dropdown-list",
-        el: props.el.querySelector(".callout"),
-        elTarget: _tb.get()._textField,
-        position: CalloutPositions.left,
-        subText: props.description,
-        type: CalloutTypes.Default
-    });
-
-    // Render the list
-    let _list = createList(_callout._container, props.options);
-
-    // Update the value
-    updateValue(props.value);
-
-    // Disable the textbox
-    _tb.get()._textField.addEventListener("keydown", ev => {
-        // Cancel the event
-        ev.preventDefault();
-        return false;
-    });
-
-    // Fix the callout position
-    _tb.get()._textField.addEventListener("click", ev => {
-        // Get the callout element
-        let callout = _callout._contextualHost ? _callout._contextualHost._contextualHost : null;
-        if (callout) {
-            // See if a class is being applied
-            if (props.className) {
-                // Apply the class name
-                callout.className += " " + props.className;
-            }
-
-            // Fix the menu
-            // This was needed after we updated the css to target fabric elements
-            // The "arrow" doesn't seem to be present, will need to figure this out
-            _callout._contextualHost._matchTargetWidth = true;
-            _callout._contextualHost._openModal();
-
-            // See if the top style is defined
-            if (callout.style.top) {
-                let position = parseFloat(callout.style.top.replace("px", ""));
-                let offset = document.body.clientHeight - (position + callout.scrollHeight);
-
-                // See if the context menu is off the screen
-                if (offset < 0) {
-                    // Set the top position
-                    callout.style.top = (position + offset) + "px"
-
-                    // Get the callout beak icon
-                    let beak = callout.querySelector(".ms-ContextualHost-beak") as HTMLDivElement;
-                    if (beak && beak.style.top) {
-                        // Get the position
-                        position = parseFloat(beak.style.top.replace("px", ""));
-
-                        // Update the position
-                        beak.style.top = (position - offset) + "px";
+    // Create the contextual menu
+    let _menu = ContextualMenu({
+        className: props.className,
+        el: props.el.querySelector(".menu"),
+        elTarget: props.el.querySelector(".textfield"),
+        items: toItems(props.options),
+        onClick: (ev, item) => {
+            debugger;
+            // Get the option
+            let option = findOption(props.options, item.value);
+            if (option) {
+                // Parse the current values
+                for (let i = 0; i < value.length; i++) {
+                    // Ensure this value isn't already selected
+                    if (value[i].value == option.value) {
+                        // Close the menu
+                        _menu.close();
+                        return;
                     }
                 }
+
+                // See if this is a multi-select
+                if (isMulti) {
+                    // Append the value
+                    value.push(option);
+                } else {
+                    // Set the value
+                    value = [option];
+                }
+
+                // Render the values
+                renderValues(value);
+
+                // See if a change event exists
+                if (props.onChange) {
+                    // Call the event
+                    props.onChange(value);
+                }
             }
+
+            // Close the menu
+            _menu.close();
         }
     });
+
+    // See if the value exists
+    let value: Array<IDropdownOption> = [];
+    if (props.value) {
+        let values = typeof (props.value) === "string" ? [props.value] : props.value;
+
+        // Parse the values
+        for (let i = 0; i < values.length; i++) {
+            // Find the option
+            let option = findOption(props.options, values[i]);
+            if (option) {
+                // Append the option
+                value.push(option);
+            }
+        }
+
+        // Render the values
+        renderValues(value);
+    }
 
     // Return the dropdown
     return {
         get,
         getFabricComponent,
-        getValue,
+        getValue: () => { return value; },
         setOptions
     };
 }

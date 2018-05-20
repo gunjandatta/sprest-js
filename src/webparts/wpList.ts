@@ -234,17 +234,20 @@ export const WPList = (props: IWPListProps): IWPList => {
             label: "List:",
             options,
             value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
-            onChange: (option: Fabric.Types.IDropdownOption) => {
-                // Parse the list
-                for (let i = 0; i < _lists.length; i++) {
-                    // See if this is the target list
-                    if (_lists[i].Title == option.text) {
-                        // Update the configuration
-                        _wpInfo.cfg.ListName = option.value;
+            onChange: (options: Array<Fabric.Types.IDropdownOption>) => {
+                let option = options[0];
+                if (option) {
+                    // Parse the list
+                    for (let i = 0; i < _lists.length; i++) {
+                        // See if this is the target list
+                        if (_lists[i].Title == option.text) {
+                            // Update the configuration
+                            _wpInfo.cfg.ListName = option.value;
 
-                        // Call the change event
-                        _cfg.onListChanged ? _cfg.onListChanged(_wpInfo, _lists[i]) : null;
-                        break;
+                            // Call the change event
+                            _cfg.onListChanged ? _cfg.onListChanged(_wpInfo, _lists[i]) : null;
+                            break;
+                        }
                     }
                 }
             }

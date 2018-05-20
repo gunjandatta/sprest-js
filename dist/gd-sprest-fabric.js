@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 18);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,9 +73,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(46));
 __export(__webpack_require__(47));
-__export(__webpack_require__(66));
+__export(__webpack_require__(48));
 __export(__webpack_require__(67));
 __export(__webpack_require__(68));
 __export(__webpack_require__(69));
@@ -83,7 +82,8 @@ __export(__webpack_require__(70));
 __export(__webpack_require__(71));
 __export(__webpack_require__(72));
 __export(__webpack_require__(73));
-var Types = __webpack_require__(74);
+__export(__webpack_require__(74));
+var Types = __webpack_require__(75);
 exports.Types = Types;
 
 
@@ -101,9 +101,8 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 // Office Fabric-UI JavaScript Library
-__export(__webpack_require__(23));
+__export(__webpack_require__(24));
 // Fabric Components
-__export(__webpack_require__(28));
 __export(__webpack_require__(29));
 __export(__webpack_require__(30));
 __export(__webpack_require__(31));
@@ -119,17 +118,19 @@ __export(__webpack_require__(40));
 __export(__webpack_require__(41));
 __export(__webpack_require__(42));
 __export(__webpack_require__(43));
-__export(__webpack_require__(101));
-__export(__webpack_require__(15));
+__export(__webpack_require__(44));
 __export(__webpack_require__(102));
 __export(__webpack_require__(103));
+__export(__webpack_require__(15));
 __export(__webpack_require__(104));
 __export(__webpack_require__(105));
+__export(__webpack_require__(106));
+__export(__webpack_require__(107));
 // Templates
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(127);
+var Types = __webpack_require__(129);
 exports.Types = Types;
 
 /***/ }),
@@ -142,8 +143,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(45));
-__export(__webpack_require__(75));
+__export(__webpack_require__(46));
 __export(__webpack_require__(76));
 __export(__webpack_require__(77));
 __export(__webpack_require__(78));
@@ -153,8 +153,9 @@ __export(__webpack_require__(81));
 __export(__webpack_require__(82));
 __export(__webpack_require__(83));
 __export(__webpack_require__(84));
+__export(__webpack_require__(85));
 __export(__webpack_require__(12));
-var Types = __webpack_require__(85);
+var Types = __webpack_require__(86);
 exports.Types = Types;
 
 
@@ -198,10 +199,10 @@ var Helper = __webpack_require__(8);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(6);
 exports.SPTypes = mapper_1.SPTypes;
-var Types = __webpack_require__(99);
+var Types = __webpack_require__(100);
 exports.Types = Types;
 __export(__webpack_require__(2));
-__export(__webpack_require__(100));
+__export(__webpack_require__(101));
 
 
 /***/ }),
@@ -217,8 +218,6 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(106));
-__export(__webpack_require__(107));
 __export(__webpack_require__(108));
 __export(__webpack_require__(109));
 __export(__webpack_require__(110));
@@ -234,10 +233,13 @@ __export(__webpack_require__(119));
 __export(__webpack_require__(120));
 __export(__webpack_require__(121));
 __export(__webpack_require__(122));
+__export(__webpack_require__(16));
 __export(__webpack_require__(123));
 __export(__webpack_require__(124));
 __export(__webpack_require__(125));
 __export(__webpack_require__(126));
+__export(__webpack_require__(127));
+__export(__webpack_require__(128));
 
 /***/ }),
 /* 5 */
@@ -253,7 +255,7 @@ var Components = __webpack_require__(9);
 exports.Components = Components;
 var WebParts = __webpack_require__(7);
 exports.WebParts = WebParts;
-var rest_1 = __webpack_require__(138);
+var rest_1 = __webpack_require__(140);
 exports.$REST = rest_1.RESTJS;
 
 /***/ }),
@@ -263,11 +265,11 @@ exports.$REST = rest_1.RESTJS;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Mapper = __webpack_require__(48);
+var Mapper = __webpack_require__(49);
 exports.Mapper = Mapper;
-var SPTypes = __webpack_require__(61);
+var SPTypes = __webpack_require__(62);
 exports.SPTypes = SPTypes;
-var Types = __webpack_require__(62);
+var Types = __webpack_require__(63);
 exports.Types = Types;
 
 
@@ -284,12 +286,12 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(133));
-__export(__webpack_require__(16));
-__export(__webpack_require__(134));
 __export(__webpack_require__(135));
+__export(__webpack_require__(17));
 __export(__webpack_require__(136));
-var Types = __webpack_require__(137);
+__export(__webpack_require__(137));
+__export(__webpack_require__(138));
+var Types = __webpack_require__(139);
 exports.Types = Types;
 
 /***/ }),
@@ -302,22 +304,22 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(44));
-__export(__webpack_require__(86));
+__export(__webpack_require__(45));
 __export(__webpack_require__(87));
-__export(__webpack_require__(89));
+__export(__webpack_require__(88));
 __export(__webpack_require__(90));
 __export(__webpack_require__(91));
 __export(__webpack_require__(92));
 __export(__webpack_require__(93));
-__export(__webpack_require__(14));
 __export(__webpack_require__(94));
-__export(__webpack_require__(13));
+__export(__webpack_require__(14));
 __export(__webpack_require__(95));
+__export(__webpack_require__(13));
 __export(__webpack_require__(96));
-var SP = __webpack_require__(97);
+__export(__webpack_require__(97));
+var SP = __webpack_require__(98);
 exports.SP = SP;
-var Types = __webpack_require__(98);
+var Types = __webpack_require__(99);
 exports.Types = Types;
 
 
@@ -334,10 +336,10 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(129));
-__export(__webpack_require__(130));
 __export(__webpack_require__(131));
-var Types = __webpack_require__(132);
+__export(__webpack_require__(132));
+__export(__webpack_require__(133));
+var Types = __webpack_require__(134);
 exports.Types = Types;
 
 /***/ }),
@@ -2558,7 +2560,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return 1 === arguments.length ? this.off(a, "**") : this.off(b, a || "**", c);
     }, size: function size() {
       return this.length;
-    } }), n.fn.andSelf = n.fn.addBack, "function" == "function" && __webpack_require__(26) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+    } }), n.fn.andSelf = n.fn.addBack, "function" == "function" && __webpack_require__(27) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
     return n;
   }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));var Nb = a.jQuery,
@@ -2566,7 +2568,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return a.$ === n && (a.$ = Ob), b && a.jQuery === n && (a.jQuery = Nb), n;
   }, b || (a.jQuery = a.$ = n), n;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(25)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(26)(module)))
 
 /***/ }),
 /* 11 */
@@ -2638,18 +2640,19 @@ exports.setClickEvents = function (el, items, onClick) {
     // Parse the items
     for (var i = 0; i < items.length && i < el.children.length; i++) {
         var item = items[i];
+        var link = el.children[i].querySelector(".ms-ContextualMenu-link");
         // Set the index
-        el.children[i].setAttribute("data-idx", i.toString());
+        link.setAttribute("data-idx", i.toString());
         // See if this is a menu
         if (item.menu && item.menu.length > 0) {
             // Set the click events
-            exports.setClickEvents(el.children[i].querySelector(".ms-ContextualMenu"), item.menu);
+            exports.setClickEvents(el.children[i].querySelector(".ms-ContextualMenu"), item.menu, onClick);
             // Add the events to fix the menu position
             el.children[i].addEventListener("focus", fixMenuPos);
             el.children[i].addEventListener("mouseover", fixMenuPos);
         } else if (item.onClick) {
             // Set the click event
-            el.children[i].addEventListener("click", function (ev) {
+            link.addEventListener("click", function (ev) {
                 // Get the item
                 var item = getItem(ev.currentTarget);
                 if (item) {
@@ -2661,7 +2664,7 @@ exports.setClickEvents = function (el, items, onClick) {
         // See if the click event exists
         if (onClick) {
             // Set the click event
-            el.children[i].addEventListener("click", function (ev) {
+            link.addEventListener("click", function (ev) {
                 // Get the item
                 var item = getItem(ev.currentTarget);
                 if (item) {
@@ -2730,7 +2733,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(88));
+__export(__webpack_require__(89));
 var lib_1 = __webpack_require__(2);
 var __1 = __webpack_require__(3);
 var _1 = __webpack_require__(8);
@@ -3972,6 +3975,22 @@ exports.SearchBox = function (props) {
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Persona
+ */
+exports.Persona = function (props) {
+    // Return the persona
+    return ['<div class="ms-Persona ms-Persona--token ms-PeoplePicker-persona ms-Persona--xs" data-user=\'' + JSON.stringify(props) + '\'>', '<div class="ms-Persona-imageArea"></div>', '<div class="ms-Persona-details">', '<div class="ms-Persona-primaryText">' + props.DisplayText + '</div>', '<div class="ms-Persona-secondaryText">' + ((props.EntityData ? props.EntityData.Email : null) || "") + '</div>', '</div>', '<div class="ms-Persona-actionIcon">', '<i class="ms-Icon ms-Icon--Cancel"></i>', '</div>', '</div>'].join('\n');
+};
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 /**
  * WebPart Configuration
@@ -4137,19 +4156,19 @@ exports.WPCfg = {
 };
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(18);
+__webpack_require__(19);
 module.exports = __webpack_require__(5);
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(19);
+var content = __webpack_require__(20);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -4163,7 +4182,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(21)(content, options);
+var update = __webpack_require__(22)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -4195,10 +4214,10 @@ if(false) {
 }
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(20)(false);
+exports = module.exports = __webpack_require__(21)(false);
 // imports
 
 
@@ -4209,7 +4228,7 @@ exports.push([module.i, "@font-face{font-family:'FabricMDL2Icons';src:url(\"http
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 /*
@@ -4291,7 +4310,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -4357,7 +4376,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(22);
+var	fixUrls = __webpack_require__(23);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -4673,7 +4692,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 
@@ -4768,7 +4787,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4781,17 +4800,17 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 // Include the fabric js
-__export(__webpack_require__(24));
+__export(__webpack_require__(25));
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var $ = __webpack_require__(10);
-__webpack_require__(27);
+__webpack_require__(28);
 //Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
 /**
  * Office UI Fabric JS 1.5.0
@@ -5903,7 +5922,7 @@ var fabric;!function (e) {
 }(fabric || (fabric = {}));exports.fabric = fabric;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -5931,7 +5950,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -5940,7 +5959,7 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6326,7 +6345,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6356,7 +6375,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6410,7 +6429,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6462,7 +6481,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6518,7 +6537,7 @@ exports.CheckBoxGroup = function (props) {
 };
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6603,7 +6622,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6658,7 +6677,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6692,19 +6711,41 @@ exports.ContextualMenu = function (props) {
             // The core framework doesn't work well w/ sub-menus.
             _html = _html || _menu._host._contextualHost.innerHTML;
             _menu._host._contextualHost.innerHTML = _html;
+            // See if the host menu will render below the visible space
+            if (document.body.clientHeight < _menu._hostTarget.getBoundingClientRect().bottom + _menu._host._contextualHost.getBoundingClientRect().height) {
+                // Update the menu
+                _menu._host._contextualHost.style.top = _menu._hostTarget.getBoundingClientRect().bottom + "px";
+                _menu._host._contextualHost.scrollIntoView();
+            }
         }
         // Set the click events
         common_1.setClickEvents(_menu._host._contextualHost.querySelector(".ms-ContextualMenu"), props.items, function (ev, item) {
-            // Close the menu
-            _menu._host.disposeModal();
+            // See if a click event exists
+            if (props.onClick) {
+                // Call the click event
+                props.onClick(ev, item);
+            } else {
+                // Close the menu by default
+                _menu._host.disposeModal();
+            }
         });
     });
     // Return the contextual menu
-    return { get: get };
+    return {
+        // Closes the menu
+        close: function close() {
+            // See if the host exists
+            if (_menu._host) {
+                // Close the menu
+                _menu._host.disposeModal();
+            }
+        },
+        get: get
+    };
 };
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6875,7 +6916,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6958,7 +6999,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6968,100 +7009,32 @@ var _this = undefined;
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = __webpack_require__(1);
 /**
- * Dropdown Types
- */
-var DropdownTypes;
-(function (DropdownTypes) {
-    DropdownTypes[DropdownTypes["Item"] = 0] = "Item";
-    DropdownTypes[DropdownTypes["Header"] = 1] = "Header";
-})(DropdownTypes = exports.DropdownTypes || (exports.DropdownTypes = {}));
-/**
  * Dropdown
  */
 exports.Dropdown = function (props) {
-    // Method to create the list items
-    var createList = function createList(el, options) {
-        if (options === void 0) {
-            options = [];
+    var isMulti = typeof props.multi === "boolean" ? props.multi : false;
+    var isSorted = typeof props.isUnsorted === "boolean" ? !props.isUnsorted : true;
+    // Method to find the option
+    var findOption = function findOption(options, value) {
+        // Parse the options
+        for (var i = 0; i < options.length; i++) {
+            var option = options[i];
+            // See if this is the target item, and return it
+            if (option.value == value) {
+                // Return the option
+                return option;
+            }
+            // See if options exist
+            if (option.options) {
+                // Find the option
+                var subOption = findOption(option.options, value);
+                if (subOption) {
+                    return subOption;
+                }
+            }
         }
-        var items = [];
-        // Method to render the items
-        var renderItems = function renderItems(options, isCategory) {
-            if (isCategory === void 0) {
-                isCategory = false;
-            }
-            var items = [];
-            // Parse the options
-            for (var i = 0; i < options.length; i++) {
-                var option = options[i];
-                // See if this is a header
-                if (option.type == DropdownTypes.Header) {
-                    // Add a header item
-                    items.push({
-                        className: "ms-ListItem--" + (isCategory ? "category" : "header"),
-                        isSelectable: isCategory ? props.multi : false,
-                        isSelected: props.multi ? option.isSelected : false,
-                        primaryText: option.text,
-                        value: JSON.stringify(option)
-                    });
-                } else if (option.options && option.options.length > 0) {
-                    // Add the option as a category
-                    items = items.concat(renderItems(option.options, true));
-                } else {
-                    // Add the item
-                    items.push({
-                        isSelectable: props.multi,
-                        isSelected: props.multi ? option.isSelected : false,
-                        secondaryText: option.text,
-                        value: JSON.stringify(option)
-                    });
-                }
-            }
-            // Return the items
-            return items;
-        };
-        // Set the click event
-        var onClick = function onClick(ev) {
-            var item = ev.currentTarget;
-            var option = JSON.parse(item.getAttribute("data-value"));
-            var tb = _tb.get()._textField;
-            // Return if this is a header
-            if (item.className.indexOf("ms-ListItem--header") > 0) {
-                return;
-            }
-            // See if this is a multi-select
-            if (props.multi) {
-                var removeFl = false;
-                // See if this item is selected
-                if (item.className.indexOf("is-selected") >= 0) {
-                    // Unselect this item
-                    item.className = item.className.replace(/is\-selected/g, "").trim();
-                    // Set the flag
-                    removeFl = true;
-                } else {
-                    // Select this item
-                    item.className += " is-selected";
-                }
-                // Update the value
-                var values = updateValue(option.value, removeFl);
-                // Call the change event
-                props.onChange ? props.onChange(values) : null;
-            } else {
-                // Update the textbox
-                updateValue(option.value);
-                // Call the change event
-                props.onChange ? props.onChange(option) : null;
-                // Close the callout
-                _callout._contextualHost.disposeModal();
-            }
-        };
-        // Return the list
-        return _1.List({
-            className: "ms-List--dropdown",
-            el: el,
-            items: renderItems(options),
-            onClick: onClick
-        }).get();
+        // Option not found
+        return null;
     };
     // Method to get the toggle element
     var get = function get() {
@@ -7071,114 +7044,85 @@ exports.Dropdown = function (props) {
     // Method to get the fabric component
     var getFabricComponent = function getFabricComponent() {
         // Return the menu
-        return _callout._contextualHost;
-    };
-    // Method to get the value
-    var getValue = function getValue() {
-        var value = _tb.get()._textField.getAttribute("data-value");
-        // Return the value
-        return value ? JSON.parse(value) : value;
+        return _menu;
     };
     // Method to set the options
     var setOptions = function setOptions(options) {
         // Clear the textbox value
         _tb.setValue("");
-        // Create the list
-        _list = createList(_callout._container, options);
+        // Set the value
+        value = options;
+        // Render the options
+        renderValues(value);
         // Return this object
         return _this;
     };
-    // Method to update the value
-    var updateValue = function updateValue(value, removeFl) {
-        if (removeFl === void 0) {
-            removeFl = false;
-        }
-        var isUnsorted = props.multi && props.isUnsorted ? true : false;
-        var values = (isUnsorted ? getValue() : null) || [];
-        // See if we are removing the last item
-        if (removeFl && values.length == 1) {
-            // Clear the values
+    // Method to render the values
+    var renderValues = function renderValues(values) {
+        if (values === void 0) {
             values = [];
         }
-        // See if this is a multi-select dropdown
-        if (props.multi) {
-            // Get the selected values
-            var items = _list._container.querySelectorAll(".is-selected");
-            for (var i = 0; i < items.length; i++) {
-                var option = JSON.parse(items[i].getAttribute("data-value"));
-                // See if the values are unsorted
-                if (isUnsorted) {
-                    var selectedIdx = -1;
-                    // Parse the selected values
-                    for (var j = 0; j < values.length; j++) {
-                        if (values[j].value == option.value) {
-                            // Set the index
-                            selectedIdx = j;
-                            // See if we are removing this option
-                            if (removeFl) {
-                                // Remove the value
-                                values.splice(selectedIdx, 1);
-                            }
-                            break;
-                        }
-                    }
-                    // See if we are adding the option
-                    if (!removeFl && selectedIdx < 0) {
-                        // Add the value
-                        values.push(option);
-                    }
-                } else {
-                    // See if we are removing this value
-                    if (value == option.value && removeFl) {
-                        continue;
-                    }
-                    // Add the value
-                    values.push(option);
+        // See if we are sorting the dropdown values
+        if (isSorted) {
+            // Sort the values
+            values = values.sort(function (a, b) {
+                if (a.text < b.text) {
+                    return -1;
                 }
-            }
-            // Parse the values
-            var textValues = [];
-            for (var i = 0; i < values.length; i++) {
-                // Add the text value
-                textValues.push(values[i].text);
-            }
-            // Update the textbox
-            _tb.get()._textField.setAttribute("data-value", JSON.stringify(props.multi ? values : values[0] || {}));
-            _tb.setValue(textValues.join(", "));
-        } else {
-            var findOption_1 = function findOption_1(options) {
-                // Ensure options exist
-                if (options && options.length > 0) {
-                    // Parse the options
-                    for (var i = 0; i < options.length; i++) {
-                        var option_1 = options[i];
-                        // See if this is the target item, and return it
-                        if (option_1.value == value) {
-                            return option_1;
-                        }
-                        // Search the sub-options
-                        option_1 = findOption_1(option_1.options);
-                        if (option_1) {
-                            return option_1;
-                        }
-                    }
+                if (a.text > b.text) {
+                    return 1;
                 }
-                // Option not found
-                return null;
-            };
-            // Find the option
-            var option = findOption_1(props.options);
-            if (option) {
-                // Update the textbox
-                _tb.get()._textField.setAttribute("data-value", JSON.stringify(option));
-                _tb.setValue(option.text);
-            }
+                return 0;
+            });
         }
-        // Return the values
-        return values;
+        // Render the personas
+        _1.Personas({
+            el: props.el.querySelector(".value"),
+            userInfo: toUserInfo(values),
+            onCancel: function onCancel(userInfo) {
+                // Parse the values
+                for (var i = 0; i < value.length; i++) {
+                    // See if this is the target value
+                    if (value[i].text == userInfo.DisplayText) {
+                        // Remove this value
+                        value.splice(i, 1);
+                    }
+                }
+            }
+        });
+    };
+    // Method to convert the options to menu options
+    var toItems = function toItems(options) {
+        var items = [];
+        // Parse the options
+        for (var i = 0; i < options.length; i++) {
+            var option = options[i];
+            // Append the item
+            items.push({
+                menu: option.options ? toItems(option.options) : null,
+                text: option.text,
+                value: option.value
+            });
+        }
+        // Return the items
+        return items;
+    };
+    // Method to convert the options to user information
+    var toUserInfo = function toUserInfo(options) {
+        var userInfo = [];
+        // Parse the values
+        for (var i = 0; i < options.length; i++) {
+            // Append the persona
+            userInfo.push({
+                DisplayText: options[i].text,
+                Key: options[i].value
+            });
+        }
+        // Return the user information
+        return userInfo;
     };
     // Render the dropdown
-    props.el.innerHTML = ['<div class="dropdown ' + (props.className || '') + '">', '<div class="textfield"></div>', '<div class="callout"></div>', '</div>'].join('\n');
+    props.el.innerHTML = ['<div class="dropdown ' + (props.className || '') + '">', '<div class="textfield"></div>', '<div class="menu"></div>', '<div class="value"></div>', '</div>'].join('\n');
     // Render the textfield
     var _tb = _1.TextField({
         el: props.el.querySelector(".textfield"),
@@ -7186,71 +7130,75 @@ exports.Dropdown = function (props) {
         required: props.required,
         type: _1.TextFieldTypes.Underline
     });
-    // Create the callout
-    var _callout = _1.Callout({
-        className: "dropdown-list",
-        el: props.el.querySelector(".callout"),
-        elTarget: _tb.get()._textField,
-        position: _1.CalloutPositions.left,
-        subText: props.description,
-        type: _1.CalloutTypes.Default
-    });
-    // Render the list
-    var _list = createList(_callout._container, props.options);
-    // Update the value
-    updateValue(props.value);
-    // Disable the textbox
-    _tb.get()._textField.addEventListener("keydown", function (ev) {
-        // Cancel the event
-        ev.preventDefault();
-        return false;
-    });
-    // Fix the callout position
-    _tb.get()._textField.addEventListener("click", function (ev) {
-        // Get the callout element
-        var callout = _callout._contextualHost ? _callout._contextualHost._contextualHost : null;
-        if (callout) {
-            // See if a class is being applied
-            if (props.className) {
-                // Apply the class name
-                callout.className += " " + props.className;
-            }
-            // Fix the menu
-            // This was needed after we updated the css to target fabric elements
-            // The "arrow" doesn't seem to be present, will need to figure this out
-            _callout._contextualHost._matchTargetWidth = true;
-            _callout._contextualHost._openModal();
-            // See if the top style is defined
-            if (callout.style.top) {
-                var position = parseFloat(callout.style.top.replace("px", ""));
-                var offset = document.body.clientHeight - (position + callout.scrollHeight);
-                // See if the context menu is off the screen
-                if (offset < 0) {
-                    // Set the top position
-                    callout.style.top = position + offset + "px";
-                    // Get the callout beak icon
-                    var beak = callout.querySelector(".ms-ContextualHost-beak");
-                    if (beak && beak.style.top) {
-                        // Get the position
-                        position = parseFloat(beak.style.top.replace("px", ""));
-                        // Update the position
-                        beak.style.top = position - offset + "px";
+    // Create the contextual menu
+    var _menu = _1.ContextualMenu({
+        className: props.className,
+        el: props.el.querySelector(".menu"),
+        elTarget: props.el.querySelector(".textfield"),
+        items: toItems(props.options),
+        onClick: function onClick(ev, item) {
+            debugger;
+            // Get the option
+            var option = findOption(props.options, item.value);
+            if (option) {
+                // Parse the current values
+                for (var i = 0; i < value.length; i++) {
+                    // Ensure this value isn't already selected
+                    if (value[i].value == option.value) {
+                        // Close the menu
+                        _menu.close();
+                        return;
                     }
                 }
+                // See if this is a multi-select
+                if (isMulti) {
+                    // Append the value
+                    value.push(option);
+                } else {
+                    // Set the value
+                    value = [option];
+                }
+                // Render the values
+                renderValues(value);
+                // See if a change event exists
+                if (props.onChange) {
+                    // Call the event
+                    props.onChange(value);
+                }
             }
+            // Close the menu
+            _menu.close();
         }
     });
+    // See if the value exists
+    var value = [];
+    if (props.value) {
+        var values = typeof props.value === "string" ? [props.value] : props.value;
+        // Parse the values
+        for (var i = 0; i < values.length; i++) {
+            // Find the option
+            var option = findOption(props.options, values[i]);
+            if (option) {
+                // Append the option
+                value.push(option);
+            }
+        }
+        // Render the values
+        renderValues(value);
+    }
     // Return the dropdown
     return {
         get: get,
         getFabricComponent: getFabricComponent,
-        getValue: getValue,
+        getValue: function getValue() {
+            return value;
+        },
         setOptions: setOptions
     };
 };
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7346,7 +7294,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7404,7 +7352,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7459,7 +7407,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7595,7 +7543,7 @@ exports.NumberField = function (props) {
 };
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7749,7 +7697,7 @@ exports.Panel = function (props) {
 };
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7860,7 +7808,7 @@ exports.PeoplePicker = function (props) {
                             var userInfo = JSON.parse(ev.currentTarget.getAttribute("data-user"));
                             // Create the user
                             var persona = document.createElement("div");
-                            persona.innerHTML = _templates.persona(userInfo);
+                            persona.innerHTML = _1.Templates.Persona(userInfo);
                             // Set the click event
                             persona.querySelector(".ms-Persona-actionIcon").addEventListener("click", function (ev) {
                                 var el = ev.currentTarget;
@@ -7943,7 +7891,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8255,7 +8203,7 @@ exports.App = {
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8851,7 +8799,7 @@ exports.ContextInfo = _ContextInfo;
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8885,7 +8833,7 @@ exports.RequestType = {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9159,7 +9107,7 @@ exports.BaseHelper = BaseHelper;
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9168,7 +9116,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(49));
 __export(__webpack_require__(50));
 __export(__webpack_require__(51));
 __export(__webpack_require__(52));
@@ -9180,10 +9127,11 @@ __export(__webpack_require__(57));
 __export(__webpack_require__(58));
 __export(__webpack_require__(59));
 __export(__webpack_require__(60));
+__export(__webpack_require__(61));
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9203,7 +9151,7 @@ exports.audit = {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9251,7 +9199,7 @@ exports.eventreceivers = {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9573,7 +9521,7 @@ exports.limitedwebpartmanager = {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10117,7 +10065,7 @@ exports.views = {
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10147,7 +10095,7 @@ exports.navigationservicerest = {
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10167,7 +10115,7 @@ exports.propertyvalues = {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10187,7 +10135,7 @@ exports.search = {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10288,7 +10236,7 @@ exports.roledefinitions = {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10797,7 +10745,7 @@ exports.webs = {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10982,7 +10930,7 @@ exports.userprofile = {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11151,7 +11099,7 @@ exports.users = {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11201,7 +11149,7 @@ exports.usercustomactions = {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11754,27 +11702,18 @@ exports.ViewType = {
 
 
 /***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ComplexTypes = __webpack_require__(63);
-exports.ComplexTypes = ComplexTypes;
-var Results = __webpack_require__(64);
-exports.Results = Results;
-var SPTypes = __webpack_require__(65);
-exports.SPTypes = SPTypes;
-
-
-/***/ }),
 /* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var ComplexTypes = __webpack_require__(64);
+exports.ComplexTypes = ComplexTypes;
+var Results = __webpack_require__(65);
+exports.Results = Results;
+var SPTypes = __webpack_require__(66);
+exports.SPTypes = SPTypes;
 
 
 /***/ }),
@@ -11797,6 +11736,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
 /* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12100,7 +12048,7 @@ exports.BaseRequest = BaseRequest;
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12282,7 +12230,7 @@ exports.BaseExecution = BaseExecution;
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12364,7 +12312,7 @@ exports.Base = Base;
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12461,7 +12409,7 @@ exports.Batch = Batch;
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12716,7 +12664,7 @@ exports.MethodInfo = MethodInfo;
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12842,7 +12790,7 @@ exports.OData = OData;
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12983,7 +12931,7 @@ exports.TargetInfo = TargetInfo;
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13175,7 +13123,7 @@ exports.XHRRequest = XHRRequest;
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13184,7 +13132,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13248,7 +13196,7 @@ exports.List = _List;
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13295,7 +13243,7 @@ exports.Navigation = _Navigation;
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13337,7 +13285,7 @@ exports.PeopleManager = _PeopleManager;
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13380,7 +13328,7 @@ exports.PeoplePicker = _PeoplePicker;
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13423,7 +13371,7 @@ exports.ProfileLoader = _ProfileLoader;
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13502,7 +13450,7 @@ exports.Search = _Search;
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13559,7 +13507,7 @@ exports.Site = _Site;
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13628,7 +13576,7 @@ exports.SocialFeed = (new _SocialFeed());
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13671,7 +13619,7 @@ exports.UserProfile = _UserProfile;
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13764,7 +13712,7 @@ exports.Utility = _Utility;
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13773,7 +13721,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13851,7 +13799,7 @@ exports.Dependencies = _Dependencies;
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14232,7 +14180,7 @@ exports.FieldSchemaXML = function (fieldInfo) {
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14269,7 +14217,7 @@ exports.SPCfgType = {
 
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14658,7 +14606,7 @@ exports.JSLink = {
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15247,7 +15195,7 @@ exports.ListForm = {
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15440,7 +15388,7 @@ exports.ListFormField = {
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15500,7 +15448,7 @@ exports.Loader = {
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15531,7 +15479,7 @@ exports.parse = function (jsonString) {
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15577,7 +15525,7 @@ exports.SuiteBarLink = function (props) {
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16020,7 +15968,7 @@ exports.Taxonomy = {
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16306,7 +16254,7 @@ exports.WebPart = _WebPart;
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16481,7 +16429,7 @@ exports.Status = {
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16490,7 +16438,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16505,7 +16453,7 @@ exports.Util = utils_1.Types;
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16563,7 +16511,74 @@ if ((global == null || global.__ver == null || global.__ver < exports.$REST.__ve
 
 
 /***/ }),
-/* 101 */
+/* 102 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = __webpack_require__(1);
+/**
+ * Persona
+ */
+exports.Persona = function (props) {
+    // Render the persona
+    props.el.innerHTML = _1.Templates.Persona(props.userInfo);
+    // See if a click event exists
+    if (props.onCancel) {
+        // Get the cancel icon
+        var elIcon = props.el.querySelector("ms-Icon--Cancel");
+        // Set the click event
+        elIcon.addEventListener("click", function () {
+            // Clear the persona
+            props.el.innerHTML = "";
+            // Call the event
+            props.onCancel(props.userInfo);
+        });
+    }
+};
+/**
+ * Personas
+ */
+exports.Personas = function (props) {
+    // Clear the element
+    props.el.innerHTML = "";
+    // Parse the personas
+    for (var i = 0; i < props.userInfo.length; i++) {
+        // Create the persona
+        var el = document.createElement("div");
+        el.innerHTML = _1.Templates.Persona(props.userInfo[i]);
+        el.children[0].setAttribute("data-idx", i.toString());
+        // Set the index of the cancel icon
+        var elCancel = el.querySelector(".ms-Icon--Cancel");
+        elCancel.setAttribute("data-idx", i.toString());
+        // Append the persona
+        props.el.appendChild(el.children[0]);
+    }
+    // Get the cancel icons
+    var elIcons = props.el.querySelectorAll(".ms-Icon--Cancel");
+    for (var i = 0; i < elIcons.length; i++) {
+        // Set the click event
+        elIcons[i].addEventListener("click", function (ev) {
+            // Get the index
+            var idx = ev.currentTarget.getAttribute("data-idx");
+            // Parse the personas
+            for (var i_1 = 0; i_1 < props.el.children.length; i_1++) {
+                // See if this is the target index
+                if (props.el.children[i_1].getAttribute("data-idx") == idx) {
+                    // Remove the element
+                    props.el.children[i_1].remove();
+                    // Call the click event
+                    props.onCancel(props.userInfo[parseInt(idx)]);
+                }
+            }
+        });
+    }
+};
+
+/***/ }),
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16601,7 +16616,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16633,7 +16648,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 103 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16664,7 +16679,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 104 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16772,7 +16787,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16819,7 +16834,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16835,7 +16850,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16870,7 +16885,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 108 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16886,7 +16901,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 109 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16917,7 +16932,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 110 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16943,7 +16958,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 111 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16983,7 +16998,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 112 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17000,7 +17015,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 113 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17030,7 +17045,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 114 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17048,7 +17063,7 @@ exports.Label = function (props) {
 };
 
 /***/ }),
-/* 115 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17072,7 +17087,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 116 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17096,7 +17111,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 117 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17124,7 +17139,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 118 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17140,7 +17155,7 @@ exports.Overlay = function (props) {
 };
 
 /***/ }),
-/* 119 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17184,7 +17199,7 @@ exports.Panel = function (props, content) {
 };
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17192,6 +17207,7 @@ exports.Panel = function (props, content) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var templates_1 = __webpack_require__(4);
+var persona_1 = __webpack_require__(16);
 /**
  * People Picker
  */
@@ -17217,11 +17233,6 @@ exports.PeoplePicker = function (props) {
             text: props.label
         }) || "";
     };
-    // Persona
-    var persona = function persona(user) {
-        // Return the persona
-        return ['<div class="ms-Persona ms-Persona--token ms-PeoplePicker-persona ms-Persona--xs" data-user=\'' + JSON.stringify(user) + '\'>', '<div class="ms-Persona-imageArea"></div>', '<div class="ms-Persona-details">', '<div class="ms-Persona-primaryText">' + user.DisplayText + '</div>', '<div class="ms-Persona-secondaryText">' + ((user.EntityData ? user.EntityData.Email : null) || "") + '</div>', '</div>', '<div class="ms-Persona-actionIcon">', '<i class="ms-Icon ms-Icon--Cancel"></i>', '</div>', '</div>'].join('\n');
-    };
     // Result
     var result = function result(user) {
         // Ensure the user exists
@@ -17246,7 +17257,7 @@ exports.PeoplePicker = function (props) {
         // Parse the users
         for (var i = 0; i < users.length; i++) {
             // Add the persona
-            personas.push(persona(users[i]));
+            personas.push(persona_1.Persona(users[i]));
         }
         // Return the template
         return ['<div class="ms-PeoplePicker-results">', group(title, searchText), '<div class="selected-users">', personas.join('\n'), '</div>', '</div>'].join('\n');
@@ -17259,7 +17270,6 @@ exports.PeoplePicker = function (props) {
     return {
         group: group,
         header: header,
-        persona: persona,
         result: result,
         results: results,
         searchBox: searchBox
@@ -17267,7 +17277,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17298,7 +17308,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17318,7 +17328,7 @@ exports.SearchBox = function (props) {
 };
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17334,7 +17344,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 124 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17370,7 +17380,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 125 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17396,7 +17406,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 126 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17418,7 +17428,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 127 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17426,11 +17436,11 @@ exports.Toggle = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(128);
+var Fabric = __webpack_require__(130);
 exports.Fabric = Fabric;
 
 /***/ }),
-/* 128 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17439,7 +17449,7 @@ exports.Fabric = Fabric;
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 129 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17475,7 +17485,6 @@ exports.Field = function (props) {
             options.push({
                 isSelected: isSelected,
                 text: choice,
-                type: __1.Fabric.DropdownTypes.Item,
                 value: choice
             });
         }
@@ -17509,7 +17518,6 @@ exports.Field = function (props) {
             options.push({
                 isSelected: isSelected,
                 text: item[fieldinfo.lookupField],
-                type: __1.Fabric.DropdownTypes.Item,
                 value: item.Id.toString()
             });
         }
@@ -17555,7 +17563,6 @@ exports.Field = function (props) {
             options.push({
                 isSelected: isSelected,
                 text: term.info.name,
-                type: __1.Fabric.DropdownTypes.Header,
                 value: term.info.id
             });
         }
@@ -17582,7 +17589,6 @@ exports.Field = function (props) {
                 isSelected: isSelected,
                 options: childOptions.length > 1 ? childOptions : null,
                 text: child.info.name,
-                type: __1.Fabric.DropdownTypes.Item,
                 value: child.info.id
             });
         }
@@ -17992,7 +17998,7 @@ exports.Field = function (props) {
 };
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18167,7 +18173,7 @@ exports.ListForm.renderEditForm = function (props) {
                     // Choice
                     case gd_sprest_1.SPTypes.FieldType.Choice:
                         // Update the field value
-                        fieldValue = fieldValue ? fieldValue.value : fieldValue;
+                        fieldValue = fieldValue && fieldValue.length > 0 ? fieldValue[0].value : null;
                         break;
                     // Lookup
                     case gd_sprest_1.SPTypes.FieldType.Lookup:
@@ -18184,7 +18190,7 @@ exports.ListForm.renderEditForm = function (props) {
                             }
                         } else {
                             // Update the field value
-                            fieldValue = fieldValue ? fieldValue.value : fieldValue;
+                            fieldValue = fieldValue && fieldValue.length > 0 ? fieldValue[0].value : fieldValue;
                         }
                         break;
                     // Multi-Choice
@@ -18372,7 +18378,7 @@ exports.ListForm.renderFormTemplate = function (props) {
 };
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18662,7 +18668,7 @@ exports.ListFormPanel = function (props) {
 };
 
 /***/ }),
-/* 132 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18671,7 +18677,7 @@ exports.ListFormPanel = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 133 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18680,7 +18686,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var fabric_1 = __webpack_require__(1);
-var wpCfg_1 = __webpack_require__(16);
+var wpCfg_1 = __webpack_require__(17);
 /**
  * Web Part
  */
@@ -19039,7 +19045,7 @@ exports.WebPart = function (props) {
 };
 
 /***/ }),
-/* 134 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19229,16 +19235,19 @@ exports.WPList = function (props) {
             label: "List:",
             options: options,
             value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
-            onChange: function onChange(option) {
-                // Parse the list
-                for (var i = 0; i < _lists.length; i++) {
-                    // See if this is the target list
-                    if (_lists[i].Title == option.text) {
-                        // Update the configuration
-                        _wpInfo.cfg.ListName = option.value;
-                        // Call the change event
-                        _cfg.onListChanged ? _cfg.onListChanged(_wpInfo, _lists[i]) : null;
-                        break;
+            onChange: function onChange(options) {
+                var option = options[0];
+                if (option) {
+                    // Parse the list
+                    for (var i = 0; i < _lists.length; i++) {
+                        // See if this is the target list
+                        if (_lists[i].Title == option.text) {
+                            // Update the configuration
+                            _wpInfo.cfg.ListName = option.value;
+                            // Call the change event
+                            _cfg.onListChanged ? _cfg.onListChanged(_wpInfo, _lists[i]) : null;
+                            break;
+                        }
                     }
                 }
             }
@@ -19298,7 +19307,7 @@ exports.WPList = function (props) {
 };
 
 /***/ }),
-/* 135 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19396,7 +19405,7 @@ exports.WPSearch = function (props) {
 };
 
 /***/ }),
-/* 136 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19582,7 +19591,7 @@ exports.WPTabs = function (props) {
 };
 
 /***/ }),
-/* 137 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19591,7 +19600,7 @@ exports.WPTabs = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 138 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

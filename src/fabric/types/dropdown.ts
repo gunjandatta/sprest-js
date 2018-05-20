@@ -9,10 +9,10 @@ export interface IDropdown {
     get(): HTMLInputElement;
 
     /** Returns the fabric component. */
-    getFabricComponent(): Fabric.Types.Fabric.IContextualHost;
+    getFabricComponent(): Fabric.Types.IContextualMenu;
 
     /** Returns the dropdown value. */
-    getValue(): IDropdownOption | Array<IDropdownOption>;
+    getValue(): Array<IDropdownOption>;
 
     /** Sets the dropdown options. */
     setOptions(options: Array<IDropdownOption>): IDropdown;
@@ -52,7 +52,7 @@ export interface IDropdownProps extends IComponentProps {
     multi?: boolean;
 
     /** The change event */
-    onChange?: (value: IDropdownOption | Array<IDropdownOption>) => void;
+    onChange?: (value: Array<IDropdownOption>) => void;
 
     /** The dropdown options. */
     options?: Array<IDropdownOption>

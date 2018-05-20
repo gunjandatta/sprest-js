@@ -31,15 +31,38 @@ export const ContextualMenu = (props: IContextualMenuProps): IContextualMenu => 
             // The core framework doesn't work well w/ sub-menus.
             _html = _html || _menu._host._contextualHost.innerHTML;
             _menu._host._contextualHost.innerHTML = _html;
+
+            // See if the host menu will render below the visible space
+            if (document.body.clientHeight < _menu._hostTarget.getBoundingClientRect().bottom + _menu._host._contextualHost.getBoundingClientRect().height) {
+                // Update the menu
+                _menu._host._contextualHost.style.top = _menu._hostTarget.getBoundingClientRect().bottom + "px";
+                _menu._host._contextualHost.scrollIntoView();
+            }
         }
 
         // Set the click events
         setClickEvents(_menu._host._contextualHost.querySelector(".ms-ContextualMenu"), props.items, (ev, item) => {
-            // Close the menu
-            _menu._host.disposeModal();
+            // See if a click event exists
+            if (props.onClick) {
+                // Call the click event
+                props.onClick(ev, item);
+            } else {
+                // Close the menu by default
+                _menu._host.disposeModal();
+            }
         });
     });
 
     // Return the contextual menu
-    return { get };
+    return {
+        // Closes the menu
+        close: () => {
+            // See if the host exists
+            if (_menu._host) {
+                // Close the menu
+                _menu._host.disposeModal();
+            }
+        },
+        get
+    };
 }

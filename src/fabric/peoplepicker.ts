@@ -122,7 +122,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
 
                             // Create the user
                             let persona = document.createElement("div");
-                            persona.innerHTML = _templates.persona(userInfo);
+                            persona.innerHTML = Templates.Persona(userInfo);
 
                             // Set the click event
                             persona.querySelector(".ms-Persona-actionIcon").addEventListener("click", ev => {

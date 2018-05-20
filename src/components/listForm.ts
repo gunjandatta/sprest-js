@@ -205,7 +205,7 @@ ListForm.renderEditForm = (props: IListFormEditProps): IListFormEdit => {
                     // Choice
                     case SPTypes.FieldType.Choice:
                         // Update the field value
-                        fieldValue = fieldValue ? (fieldValue as Fabric.Types.IDropdownOption).value : fieldValue;
+                        fieldValue = fieldValue && fieldValue.length > 0 ? fieldValue[0].value : null;
                         break;
 
                     // Lookup
@@ -225,7 +225,7 @@ ListForm.renderEditForm = (props: IListFormEditProps): IListFormEdit => {
                             }
                         } else {
                             // Update the field value
-                            fieldValue = fieldValue ? (fieldValue as Fabric.Types.IDropdownOption).value : fieldValue;
+                            fieldValue = fieldValue && fieldValue.length > 0 ? fieldValue[0].value : fieldValue;
                         }
                         break;
 

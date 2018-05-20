@@ -73,14 +73,15 @@ export const setClickEvents = (el: HTMLElement, items: Array<IContextualMenuItem
     // Parse the items
     for (let i = 0; i < items.length && i < el.children.length; i++) {
         let item = items[i];
+        let link = el.children[i].querySelector(".ms-ContextualMenu-link");
 
         // Set the index
-        el.children[i].setAttribute("data-idx", i.toString());
+        link.setAttribute("data-idx", i.toString());
 
         // See if this is a menu
         if (item.menu && item.menu.length > 0) {
             // Set the click events
-            setClickEvents(el.children[i].querySelector(".ms-ContextualMenu"), item.menu);
+            setClickEvents(el.children[i].querySelector(".ms-ContextualMenu"), item.menu, onClick);
 
             // Add the events to fix the menu position
             el.children[i].addEventListener("focus", fixMenuPos);
@@ -89,7 +90,7 @@ export const setClickEvents = (el: HTMLElement, items: Array<IContextualMenuItem
         // Else, see there is a click event
         else if (item.onClick) {
             // Set the click event
-            el.children[i].addEventListener("click", ev => {
+            link.addEventListener("click", ev => {
                 // Get the item
                 let item = getItem(ev.currentTarget as HTMLElement);
                 if (item) {
@@ -102,7 +103,7 @@ export const setClickEvents = (el: HTMLElement, items: Array<IContextualMenuItem
         // See if the click event exists
         if (onClick) {
             // Set the click event
-            el.children[i].addEventListener("click", ev => {
+            link.addEventListener("click", ev => {
                 // Get the item
                 let item = getItem(ev.currentTarget as HTMLElement);
                 if (item) {

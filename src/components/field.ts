@@ -34,7 +34,6 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
             options.push({
                 isSelected,
                 text: choice,
-                type: Fabric.DropdownTypes.Item,
                 value: choice
             });
         }
@@ -75,7 +74,6 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
             options.push({
                 isSelected,
                 text: item[fieldinfo.lookupField],
-                type: Fabric.DropdownTypes.Item,
                 value: item.Id.toString()
             });
         }
@@ -127,7 +125,6 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
             options.push({
                 isSelected,
                 text: term.info.name,
-                type: Fabric.DropdownTypes.Header,
                 value: term.info.id
             });
         }
@@ -157,7 +154,6 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                 isSelected,
                 options: childOptions.length > 1 ? childOptions : null,
                 text: child.info.name,
-                type: Fabric.DropdownTypes.Item,
                 value: child.info.id
             });
         }

@@ -4,6 +4,9 @@ import { Fabric, IProps } from ".";
  * Contextual Menu
  */
 export interface IContextualMenu {
+    /** Closes the menu. */
+    close();
+
     /** Returns the fabric component. */
     get(): Fabric.IContextualMenu;
 }
@@ -23,6 +26,9 @@ export interface IContextualMenuProps extends IProps {
 
     /** True to hide the context menu. (Default: true) */
     isHidden?: boolean;
+
+    /** The click event */
+    onClick?: (ev?: Event, item?: IContextualMenuItem) => void;
 
     /** The button text. */
     text?: string;
@@ -49,4 +55,7 @@ export interface IContextualMenuItem {
 
     /** The item text. */
     text?: string;
+
+    /** The item value. */
+    value?: string;
 }

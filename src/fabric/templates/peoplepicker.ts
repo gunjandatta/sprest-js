@@ -1,6 +1,7 @@
 import { IPeoplePickerUser } from "gd-sprest/build/mapper/types";
 import { Label } from "../templates";
 import { IPeoplePickerProps } from "../types";
+import { Persona } from "./persona";
 
 /**
  * People Picker
@@ -39,23 +40,6 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
         }) || "";
     }
 
-    // Persona
-    let persona = (user: IPeoplePickerUser): string => {
-        // Return the persona
-        return [
-            '<div class="ms-Persona ms-Persona--token ms-PeoplePicker-persona ms-Persona--xs" data-user=\'' + JSON.stringify(user) + '\'>',
-            '<div class="ms-Persona-imageArea"></div>',
-            '<div class="ms-Persona-details">',
-            '<div class="ms-Persona-primaryText">' + user.DisplayText + '</div>',
-            '<div class="ms-Persona-secondaryText">' + ((user.EntityData ? user.EntityData.Email : null) || "") + '</div>',
-            '</div>',
-            '<div class="ms-Persona-actionIcon">',
-            '<i class="ms-Icon ms-Icon--Cancel"></i>',
-            '</div>',
-            '</div>',
-        ].join('\n');
-    }
-
     // Result
     let result = (user?: IPeoplePickerUser): string => {
         // Ensure the user exists
@@ -90,7 +74,7 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
         // Parse the users
         for (let i = 0; i < users.length; i++) {
             // Add the persona
-            personas.push(persona(users[i]));
+            personas.push(Persona(users[i]));
         }
 
         // Return the template
@@ -119,7 +103,6 @@ export const PeoplePicker = (props: IPeoplePickerProps) => {
     return {
         group,
         header,
-        persona,
         result,
         results,
         searchBox
