@@ -16591,7 +16591,7 @@ exports.Personas = function (props) {
                 // See if this is the target index
                 if (props.el.children[i_1].getAttribute("data-idx") == idx) {
                     // Remove the element
-                    props.el.children[i_1].remove();
+                    props.el.removeChild(props.el.children[i_1]);
                     // Call the click event
                     props.onCancel(props.userInfo[parseInt(idx)]);
                 }
