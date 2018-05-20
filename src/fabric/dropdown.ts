@@ -4,7 +4,7 @@ import {
     fabric,
     Callout, CalloutPositions, CalloutTypes,
     ContextualMenu,
-    List, Personas, Templates,
+    List, Persona, Personas, Templates,
     TextField, TextFieldTypes
 } from ".";
 
@@ -79,7 +79,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
         }
 
         // Render the personas
-        Personas({
+        let elPersonas = Personas({
             el: props.el.querySelector(".value"),
             userInfo: toUserInfo(values),
             onCancel: userInfo => {
@@ -93,6 +93,14 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
                 }
             }
         });
+
+        // See if this is a single-select and a value exists
+        if (!isMulti && elPersonas.children.length > 0) {
+            let offset = _tb.get()._textField.getBoundingClientRect().top - elPersonas.children[0].getBoundingClientRect().top;
+
+            // Update the position
+            (elPersonas.children[0] as HTMLElement).style.top = offset + "px";
+        }
     }
 
     // Method to convert the options to menu options
@@ -144,6 +152,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     // Render the textfield
     let _tb = TextField({
         el: props.el.querySelector(".textfield"),
+        disable: true,
         label: props.label,
         required: props.required,
         type: TextFieldTypes.Underline

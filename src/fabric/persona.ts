@@ -1,10 +1,11 @@
 import { IPersonaProps, IPersonasProps } from "./types";
 import { Templates } from ".";
+import { propertyvalues } from "gd-sprest/build/mapper/mapper";
 
 /**
  * Persona
  */
-export const Persona = (props: IPersonaProps) => {
+export const Persona = (props: IPersonaProps): HTMLElement => {
     // Render the persona
     props.el.innerHTML = Templates.Persona(props.userInfo);
 
@@ -22,12 +23,15 @@ export const Persona = (props: IPersonaProps) => {
             props.onCancel(props.userInfo);
         });
     }
+
+    // Return the persona
+    return props.el as HTMLElement;
 }
 
 /**
  * Personas
  */
-export const Personas = (props: IPersonasProps) => {
+export const Personas = (props: IPersonasProps): HTMLElement => {
     // Clear the element
     props.el.innerHTML = "";
 
@@ -67,4 +71,7 @@ export const Personas = (props: IPersonasProps) => {
             }
         });
     }
+
+    // Return the personas
+    return props.el as HTMLElement;
 }

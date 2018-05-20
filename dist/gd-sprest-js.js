@@ -7100,7 +7100,7 @@ exports.Dropdown = function (props) {
             });
         }
         // Render the personas
-        _1.Personas({
+        var elPersonas = _1.Personas({
             el: props.el.querySelector(".value"),
             userInfo: toUserInfo(values),
             onCancel: function onCancel(userInfo) {
@@ -7114,6 +7114,12 @@ exports.Dropdown = function (props) {
                 }
             }
         });
+        // See if this is a single-select and a value exists
+        if (!isMulti && elPersonas.children.length > 0) {
+            var offset = _tb.get()._textField.getBoundingClientRect().top - elPersonas.children[0].getBoundingClientRect().top;
+            // Update the position
+            elPersonas.children[0].style.top = offset + "px";
+        }
     };
     // Method to convert the options to menu options
     var toItems = function toItems(options) {
@@ -7150,6 +7156,7 @@ exports.Dropdown = function (props) {
     // Render the textfield
     var _tb = _1.TextField({
         el: props.el.querySelector(".textfield"),
+        disable: true,
         label: props.label,
         required: props.required,
         type: _1.TextFieldTypes.Underline
@@ -16560,6 +16567,8 @@ exports.Persona = function (props) {
             props.onCancel(props.userInfo);
         });
     }
+    // Return the persona
+    return props.el;
 };
 /**
  * Personas
@@ -16598,6 +16607,8 @@ exports.Personas = function (props) {
             }
         });
     }
+    // Return the personas
+    return props.el;
 };
 
 /***/ }),
@@ -19125,7 +19136,7 @@ exports.WPList = function (props) {
             caml = "";
         }
         // Call the load caml query event
-        caml = props.onExecutingCAMLQuery ? props.onExecutingCAMLQuery(_wpInfo, caml) : null;
+        caml = (props.onExecutingCAMLQuery ? props.onExecutingCAMLQuery(_wpInfo, caml) : null) || caml;
         // See if we are targeting a different web
         if (webUrl) {
             // Get the context information for the destination web
@@ -19151,7 +19162,7 @@ exports.WPList = function (props) {
             query = {};
         }
         // Call the load caml query event
-        query = props.onExecutingODATAQuery ? props.onExecutingODATAQuery(_wpInfo, query) : null;
+        query = (props.onExecutingODATAQuery ? props.onExecutingODATAQuery(_wpInfo, query) : null) || query;
         // Get the web
         new gd_sprest_1.Web(webUrl).Lists(listName).Items().query(query).execute(function (items) {
             // Render the items
