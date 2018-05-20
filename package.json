@@ -1,6 +1,6 @@
 {
   "name": "gd-sprest-js",
-  "version": "1.9.8",
+  "version": "1.9.9",
   "description": "SharePoint 2013/Online js components.",
   "main": "build/index.js",
   "typings": "build/index.d.ts",

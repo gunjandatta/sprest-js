@@ -107,16 +107,19 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     let toItems = (options: Array<IDropdownOption>): Array<IContextualMenuItem> => {
         let items: Array<IContextualMenuItem> = [];
 
-        // Parse the options
-        for (let i = 0; i < options.length; i++) {
-            let option = options[i];
+        // Ensure options exist
+        if (options && options.length > 0) {
+            // Parse the options
+            for (let i = 0; i < options.length; i++) {
+                let option = options[i];
 
-            // Append the item
-            items.push({
-                menu: option.options ? toItems(option.options) : null,
-                text: option.text,
-                value: option.value
-            });
+                // Append the item
+                items.push({
+                    menu: option.options ? toItems(option.options) : null,
+                    text: option.text,
+                    value: option.value
+                });
+            }
         }
 
         // Return the items
@@ -127,13 +130,16 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
     let toUserInfo = (options: Array<IDropdownOption>): Array<Types.SP.IPeoplePickerUser> => {
         let userInfo: Array<Types.SP.IPeoplePickerUser> = [];
 
-        // Parse the values
-        for (let i = 0; i < options.length; i++) {
-            // Append the persona
-            userInfo.push({
-                DisplayText: options[i].text,
-                Key: options[i].value
-            });
+        // Ensure options exists
+        if (options && options.length > 0) {
+            // Parse the values
+            for (let i = 0; i < options.length; i++) {
+                // Append the persona
+                userInfo.push({
+                    DisplayText: options[i].text,
+                    Key: options[i].value
+                });
+            }
         }
 
         // Return the user information

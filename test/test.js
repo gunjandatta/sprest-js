@@ -13235,15 +13235,18 @@ exports.Dropdown = function (props) {
     // Method to convert the options to menu options
     var toItems = function (options) {
         var items = [];
-        // Parse the options
-        for (var i = 0; i < options.length; i++) {
-            var option = options[i];
-            // Append the item
-            items.push({
-                menu: option.options ? toItems(option.options) : null,
-                text: option.text,
-                value: option.value
-            });
+        // Ensure options exist
+        if (options && options.length > 0) {
+            // Parse the options
+            for (var i = 0; i < options.length; i++) {
+                var option = options[i];
+                // Append the item
+                items.push({
+                    menu: option.options ? toItems(option.options) : null,
+                    text: option.text,
+                    value: option.value
+                });
+            }
         }
         // Return the items
         return items;
@@ -13251,13 +13254,16 @@ exports.Dropdown = function (props) {
     // Method to convert the options to user information
     var toUserInfo = function (options) {
         var userInfo = [];
-        // Parse the values
-        for (var i = 0; i < options.length; i++) {
-            // Append the persona
-            userInfo.push({
-                DisplayText: options[i].text,
-                Key: options[i].value
-            });
+        // Ensure options exists
+        if (options && options.length > 0) {
+            // Parse the values
+            for (var i = 0; i < options.length; i++) {
+                // Append the persona
+                userInfo.push({
+                    DisplayText: options[i].text,
+                    Key: options[i].value
+                });
+            }
         }
         // Return the user information
         return userInfo;
