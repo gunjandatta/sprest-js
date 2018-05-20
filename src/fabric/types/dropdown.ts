@@ -33,9 +33,6 @@ export interface IDropdownOption {
 
     /** The option value. */
     value?: any;
-
-    /** The option type. */
-    type?: number;
 }
 
 /**
