@@ -96,7 +96,15 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
         // See if this is a single-select and a value exists
         if (!isMulti && elPersonas.children.length > 0) {
-            let offset = _tb.get()._textField.getBoundingClientRect().top - elPersonas.children[0].getBoundingClientRect().top;
+            let tbPos = _tb.get()._textField.getBoundingClientRect();
+            let personaPos = elPersonas.children[0].getBoundingClientRect();
+            let offset = tbPos.top - personaPos.top;
+
+            // Ensure the textbox is visible
+            if (tbPos.top == 0 && tbPos.bottom == 0 && tbPos.height == 0) {
+                // Default the offset
+                offset = -45;
+            }
 
             // Update the position
             (elPersonas.children[0] as HTMLElement).style.top = offset + "px";
