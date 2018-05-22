@@ -7,6 +7,15 @@ import { fabric, Templates } from ".";
  * Contextual Menu
  */
 export const ContextualMenu = (props: IContextualMenuProps): IContextualMenu => {
+    // Method to close the menu
+    let close = () => {
+        // See if the menu exists
+        if (_menu._host && _menu._host._container.classList.contains("is-open")) {
+            // Close the modal
+            _menu._host._container.classList.remove("is-open");
+        }
+    }
+
     // Method to get the contextual menu
     let get = (): Fabric.IContextualMenu => { return _menu; }
 
@@ -33,10 +42,16 @@ export const ContextualMenu = (props: IContextualMenuProps): IContextualMenu => 
         // Prevent a postback
         ev ? ev.preventDefault() : null;
 
+        // See if the menu is closed
+        if (_menu._host && _menu._host._container && _menu._host._container.classList.contains("is-open") == false) {
+            // Display the menu
+            _menu._hostTarget.click();
+        }
+
         // See if the host exists and fabric class doesn't exist
-        if (_menu._host && _menu._host._contextualHost.className.indexOf("fabric") < 0) {
+        if (_menu._host && _menu._host._contextualHost.classList.contains("fabric") == false) {
             // Add the class
-            _menu._host._contextualHost.className += " fabric";
+            _menu._host._contextualHost.classList.add("fabric");
 
             // Set the inner html manually, to remove any events associated with this menu
             // The core framework doesn't work well w/ sub-menus.
@@ -44,10 +59,10 @@ export const ContextualMenu = (props: IContextualMenuProps): IContextualMenu => 
             _menu._host._contextualHost.innerHTML = _html;
 
             // See if the menu is not positioned
-            if (_menu._host._contextualHost.className.indexOf("is-positioned") < 0) {
+            if (_menu._host._contextualHost.classList.contains("is-positioned") == false) {
                 // Clear the styling and ensure it's positioned
                 _menu._host._contextualHost.removeAttribute("style");
-                _menu._host._contextualHost.className += " is-positioned";
+                _menu._host._contextualHost.classList.add("is-positioned");
             }
 
             // Ensure the menu is being rendered under the target
@@ -76,21 +91,14 @@ export const ContextualMenu = (props: IContextualMenuProps): IContextualMenu => 
                 props.onClick(ev, item);
             } else {
                 // Close the menu by default
-                _menu._host.disposeModal();
+                close();
             }
         });
     });
 
     // Return the contextual menu
     return {
-        // Closes the menu
-        close: () => {
-            // See if the host exists
-            if (_menu._host) {
-                // Close the menu
-                _menu._host.disposeModal();
-            }
-        },
+        close,
         get
     };
 }

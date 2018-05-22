@@ -3909,15 +3909,15 @@ exports.SearchBox = function (props) {
         // See if the value exists
         if (value) {
             // Ensure the 'has-text' class exists
-            if (_searchbox._searchBox.className.indexOf("has-text") < 0) {
+            if (_searchbox._searchBox.classList.contains("has-text") == false) {
                 // Add the class
-                _searchbox._searchBox.className += " has-text";
+                _searchbox._searchBox.classList.add("has-text");
             }
         } else {
             // See if the 'has-text' class exists
-            if (_searchbox._searchBox.className.indexOf("has-text") > 0) {
+            if (_searchbox._searchBox.classList.contains("has-text")) {
                 // Remove the class
-                _searchbox._searchBox.className = _searchbox._searchBox.className.replace(" has-text", "");
+                _searchbox._searchBox.classList.remove("has-text");
             }
         }
     };
@@ -6419,9 +6419,9 @@ exports.Callout = function (props) {
     // Set the click event
     props.elTarget.addEventListener("click", function () {
         // See if the host exists and fabric class doesn't exist
-        if (_callout._contextualHost && _callout._contextualHost._contextualHost.className.indexOf("fabric") < 0) {
+        if (_callout._contextualHost && _callout._contextualHost._contextualHost.classList.contains("fabric") == false) {
             // Add the class
-            _callout._contextualHost._contextualHost.className += " fabric";
+            _callout._contextualHost._contextualHost.classList.add("fabric");
         }
     });
     // Return the callout
@@ -6592,9 +6592,9 @@ exports.CommandBar = function (props) {
                 // Set a click event
                 buttons[i].addEventListener("click", function (ev) {
                     // See if the host exists and fabric class doesn't exist
-                    if (menu_1._isOpen && menu_1._host._contextualHost.className.indexOf("fabric") < 0) {
+                    if (menu_1._isOpen && menu_1._host._contextualHost.classList.contains("fabric") == false) {
                         // Set the class
-                        menu_1._host._contextualHost.className += " fabric";
+                        menu_1._host._contextualHost.classList.add("fabric");
                         // Get the button index
                         var btn = ev.currentTarget;
                         var idx = parseInt(btn.getAttribute("data-btn-idx"));
@@ -6652,18 +6652,18 @@ exports.CommandButton = function (props) {
             // Prevent postback
             ev ? ev.preventDefault() : null;
             // Ensure the fabric class name exists
-            if (_button._modalHostView._contextualHost.className.indexOf("fabric") < 0) {
+            if (_button._modalHostView._contextualHost.classList.contains("fabric") == false) {
                 // Add the class name
-                _button._modalHostView._contextualHost.className += " fabric";
+                _button._modalHostView._contextualHost.classList.add("fabric");
                 // Set the inner html manually, to remove any events associated with this menu
                 // The core framework doesn't work well w/ sub-menus.
                 _html_1 = _html_1 || _button._modalHostView._contextualHost.innerHTML;
                 _button._modalHostView._contextualHost.innerHTML = _html_1;
             }
             // See if the menu is hidden
-            if (_button._contextualMenu.className.indexOf("is-hidden") > 0) {
+            if (_button._contextualMenu.classList.contains("is-hidden")) {
                 // Remove the class
-                _button._contextualMenu.className = _button._contextualMenu.className.replace(/ ?is-hidden/, "");
+                _button._contextualMenu.classList.remove("is-hidden");
             }
             // Set the click events
             common_1.setClickEvents(_button._modalHostView._contextualHost.querySelector(".ms-ContextualMenu"), props.menu.items, function (ev, item) {
@@ -6690,6 +6690,14 @@ var _1 = __webpack_require__(1);
  * Contextual Menu
  */
 exports.ContextualMenu = function (props) {
+    // Method to close the menu
+    var close = function close() {
+        // See if the menu exists
+        if (_menu._host && _menu._host._container.classList.contains("is-open")) {
+            // Close the modal
+            _menu._host._container.classList.remove("is-open");
+        }
+    };
     // Method to get the contextual menu
     var get = function get() {
         return _menu;
@@ -6713,19 +6721,24 @@ exports.ContextualMenu = function (props) {
     props.elTarget.addEventListener("click", function (ev) {
         // Prevent a postback
         ev ? ev.preventDefault() : null;
+        // See if the menu is closed
+        if (_menu._host && _menu._host._container && _menu._host._container.classList.contains("is-open") == false) {
+            // Display the menu
+            _menu._hostTarget.click();
+        }
         // See if the host exists and fabric class doesn't exist
-        if (_menu._host && _menu._host._contextualHost.className.indexOf("fabric") < 0) {
+        if (_menu._host && _menu._host._contextualHost.classList.contains("fabric") == false) {
             // Add the class
-            _menu._host._contextualHost.className += " fabric";
+            _menu._host._contextualHost.classList.add("fabric");
             // Set the inner html manually, to remove any events associated with this menu
             // The core framework doesn't work well w/ sub-menus.
             _html = _html || _menu._host._contextualHost.innerHTML;
             _menu._host._contextualHost.innerHTML = _html;
             // See if the menu is not positioned
-            if (_menu._host._contextualHost.className.indexOf("is-positioned") < 0) {
+            if (_menu._host._contextualHost.classList.contains("is-positioned") == false) {
                 // Clear the styling and ensure it's positioned
                 _menu._host._contextualHost.removeAttribute("style");
-                _menu._host._contextualHost.className += " is-positioned";
+                _menu._host._contextualHost.classList.add("is-positioned");
             }
             // Ensure the menu is being rendered under the target
             _menu._host._contextualHost.style.left = _menu._hostTarget.getBoundingClientRect().left + "px";
@@ -6750,20 +6763,13 @@ exports.ContextualMenu = function (props) {
                 props.onClick(ev, item);
             } else {
                 // Close the menu by default
-                _menu._host.disposeModal();
+                close();
             }
         });
     });
     // Return the contextual menu
     return {
-        // Closes the menu
-        close: function close() {
-            // See if the host exists
-            if (_menu._host) {
-                // Close the menu
-                _menu._host.disposeModal();
-            }
-        },
+        close: close,
         get: get
     };
 };
@@ -7631,7 +7637,7 @@ exports.Panel = function (props) {
     };
     // Method to determine if the panel is open
     var isOpen = function isOpen() {
-        return _panel && _panel._panel.className.indexOf("is-open") > 0;
+        return _panel && _panel._panel.classList.contains("is-open");
     };
     // Method to show the panel
     var show = function show(content) {
@@ -7643,9 +7649,9 @@ exports.Panel = function (props) {
         // Show the panel
         _panel = new _1.fabric.Panel(props.el.querySelector(".ms-Panel"));
         // See if the fabric class name exists
-        if (_panel.panelHost.panelHost.className.indexOf("fabric") < 0) {
+        if (_panel.panelHost.panelHost.classList.contains("fabric") == false) {
             // Set the class name
-            _panel.panelHost.panelHost.className += " fabric";
+            _panel.panelHost.panelHost.classList.add("fabric");
         }
         // See if this is a blocking panel
         if (props.isBlocking) {
@@ -7774,14 +7780,14 @@ exports.PeoplePicker = function (props) {
         }
         var searchDialog = _peoplepicker._contextualHostView._contextualHost;
         // Ensure the fabric class name is set
-        if (_peoplepicker._contextualHostView._container.className.indexOf("fabric") < 0) {
+        if (_peoplepicker._contextualHostView._container.classList.contains("fabric") == false) {
             // Add the class name
-            _peoplepicker._contextualHostView._container.className += " fabric";
+            _peoplepicker._contextualHostView._container.classList.add("fabric");
         }
         // Ensure the search class name is set
-        if (_peoplepicker._contextualHostView._container.className.indexOf("ms-PeoplePicker-search") < 0) {
+        if (_peoplepicker._contextualHostView._container.classList.contains("ms-PeoplePicker-search") == false) {
             // Add the class name
-            _peoplepicker._contextualHostView._container.className += " ms-PeoplePicker-search";
+            _peoplepicker._contextualHostView._container.classList.add("ms-PeoplePicker-search");
         }
         // Clear the results
         searchDialog.innerHTML = _templates.group(_filterText.length > 1 ? "Searching for '" + _filterText + "'" : "User Search");
@@ -7849,7 +7855,7 @@ exports.PeoplePicker = function (props) {
                             persona.querySelector(".ms-Persona-actionIcon").addEventListener("click", function (ev) {
                                 var el = ev.currentTarget;
                                 // Find the persona element
-                                while (el && el.className.indexOf("ms-PeoplePicker-persona") < 0) {
+                                while (el && el.classList.contains("ms-PeoplePicker-persona") == false) {
                                     el = el.parentElement;
                                 }
                                 // See if the element exists
@@ -7879,7 +7885,7 @@ exports.PeoplePicker = function (props) {
         personas[i].querySelector(".ms-Persona-actionIcon").addEventListener("click", function (ev) {
             var el = ev.currentTarget;
             // Find the persona element
-            while (el && el.className.indexOf("ms-PeoplePicker-persona") < 0) {
+            while (el && el.classList.contains("ms-PeoplePicker-persona") == false) {
                 el = el.parentElement;
             }
             // See if the element exists
@@ -16852,7 +16858,7 @@ exports.Toggle = function (props) {
     // Method to get the value
     var getValue = function getValue() {
         // Get the toggle value
-        return _toggle ? _toggle._container.querySelector(".ms-Toggle-field").className.indexOf("is-selected") > 0 : false;
+        return _toggle ? _toggle._container.querySelector(".ms-Toggle-field").classList.contains("is-selected") : false;
     };
     // Add the toggle html
     props.el.innerHTML = _1.Templates.Toggle(props);
@@ -19484,7 +19490,7 @@ exports.WPTabs = function (props) {
                 }
                 // Skip hidden webparts
                 var wpTitle = (webpart.querySelector(".ms-webpart-titleText") || {}).innerText || "";
-                var isHidden = webpart.firstElementChild && webpart.firstElementChild.className.indexOf("ms-hide") >= 0;
+                var isHidden = webpart.firstElementChild && webpart.firstElementChild.classList.contains("ms-hide");
                 isHidden = isHidden || wpTitle.startsWith("(Hidden)");
                 if (isHidden) {
                     continue;
@@ -19494,7 +19500,7 @@ exports.WPTabs = function (props) {
                     // Get the parent webpart box
                     while (webpart.parentNode) {
                         // See if this is the webpart box element
-                        if (webpart.className.indexOf("ms-rte-wpbox") >= 0) {
+                        if (webpart.classList.contains("ms-rte-wpbox")) {
                             // Add this webpart and break from the loop
                             wps.push(webpart);
                             break;
@@ -19516,12 +19522,12 @@ exports.WPTabs = function (props) {
         // Ensure the element exists
         if (el) {
             // See if this is the webpart zone element
-            if (el.className.indexOf("ms-webpart-zone") >= 0) {
+            if (el.classList.contains("ms-webpart-zone")) {
                 // Return it
                 return el;
             }
             // See if this is the inner page zone
-            if (el.className.indexOf("ms-rte-layoutszone-inner") >= 0) {
+            if (el.classList.contains("ms-rte-layoutszone-inner")) {
                 // Set the flag
                 _isContentZone = true;
                 // Return it
@@ -19583,9 +19589,9 @@ exports.WPTabs = function (props) {
                             ev_1 ? window.dispatchEvent(ev_1) : null;
                         }
                     }
-                } else if (webpart.className.indexOf("is-hidden") < 0) {
+                } else if (webpart.classList.contains("is-hidden") == false) {
                     // Hide the webpart
-                    webpart.className += " is-hidden";
+                    webpart.classList.add("is-hidden");
                 }
             }
         }

@@ -34,15 +34,15 @@ export const SearchBox = (props: ISearchBoxProps): ISearchBox => {
         // See if the value exists
         if (value) {
             // Ensure the 'has-text' class exists
-            if (_searchbox._searchBox.className.indexOf("has-text") < 0) {
+            if (_searchbox._searchBox.classList.contains("has-text") == false) {
                 // Add the class
-                _searchbox._searchBox.className += " has-text";
+                _searchbox._searchBox.classList.add("has-text");
             }
         } else {
             // See if the 'has-text' class exists
-            if (_searchbox._searchBox.className.indexOf("has-text") > 0) {
+            if (_searchbox._searchBox.classList.contains("has-text")) {
                 // Remove the class
-                _searchbox._searchBox.className = _searchbox._searchBox.className.replace(" has-text", "");
+                _searchbox._searchBox.classList.remove("has-text");
             }
         }
     }

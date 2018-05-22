@@ -26,9 +26,9 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
             ev ? ev.preventDefault() : null;
 
             // Ensure the fabric class name exists
-            if (_button._modalHostView._contextualHost.className.indexOf("fabric") < 0) {
+            if (_button._modalHostView._contextualHost.classList.contains("fabric") == false) {
                 // Add the class name
-                _button._modalHostView._contextualHost.className += " fabric";
+                _button._modalHostView._contextualHost.classList.add("fabric");
 
                 // Set the inner html manually, to remove any events associated with this menu
                 // The core framework doesn't work well w/ sub-menus.
@@ -37,9 +37,9 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
             }
 
             // See if the menu is hidden
-            if (_button._contextualMenu.className.indexOf("is-hidden") > 0) {
+            if (_button._contextualMenu.classList.contains("is-hidden")) {
                 // Remove the class
-                _button._contextualMenu.className = _button._contextualMenu.className.replace(/ ?is-hidden/, "");
+                _button._contextualMenu.classList.remove("is-hidden");
             }
 
             // Set the click events

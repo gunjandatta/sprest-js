@@ -44,7 +44,7 @@ export const Panel = (props: IPanelProps): IPanel => {
     }
 
     // Method to determine if the panel is open
-    let isOpen = () => { return _panel && _panel._panel.className.indexOf("is-open") > 0; }
+    let isOpen = () => { return _panel && _panel._panel.classList.contains("is-open"); }
 
     // Method to show the panel
     let show = (content: string = ""): HTMLDivElement => {
@@ -55,9 +55,9 @@ export const Panel = (props: IPanelProps): IPanel => {
         _panel = new fabric.Panel(props.el.querySelector(".ms-Panel"));
 
         // See if the fabric class name exists
-        if (_panel.panelHost.panelHost.className.indexOf("fabric") < 0) {
+        if (_panel.panelHost.panelHost.classList.contains("fabric") == false) {
             // Set the class name
-            _panel.panelHost.panelHost.className += " fabric";
+            _panel.panelHost.panelHost.classList.add("fabric");
         }
 
         // See if this is a blocking panel

@@ -20,7 +20,7 @@ export const Toggle = (props: IToggleProps): IToggle => {
     // Method to get the value
     let getValue = (): boolean => {
         // Get the toggle value
-        return _toggle ? _toggle._container.querySelector(".ms-Toggle-field").className.indexOf("is-selected") > 0 : false;
+        return _toggle ? _toggle._container.querySelector(".ms-Toggle-field").classList.contains("is-selected") : false;
     }
 
     // Add the toggle html

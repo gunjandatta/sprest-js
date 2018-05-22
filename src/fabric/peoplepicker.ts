@@ -39,15 +39,15 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
         let searchDialog = _peoplepicker._contextualHostView._contextualHost;
 
         // Ensure the fabric class name is set
-        if (_peoplepicker._contextualHostView._container.className.indexOf("fabric") < 0) {
+        if (_peoplepicker._contextualHostView._container.classList.contains("fabric") == false) {
             // Add the class name
-            _peoplepicker._contextualHostView._container.className += " fabric";
+            _peoplepicker._contextualHostView._container.classList.add("fabric");
         }
 
         // Ensure the search class name is set
-        if (_peoplepicker._contextualHostView._container.className.indexOf("ms-PeoplePicker-search") < 0) {
+        if (_peoplepicker._contextualHostView._container.classList.contains("ms-PeoplePicker-search") == false) {
             // Add the class name
-            _peoplepicker._contextualHostView._container.className += " ms-PeoplePicker-search";
+            _peoplepicker._contextualHostView._container.classList.add("ms-PeoplePicker-search");
         }
 
         // Clear the results
@@ -129,7 +129,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
                                 let el = ev.currentTarget as HTMLElement;
 
                                 // Find the persona element
-                                while (el && el.className.indexOf("ms-PeoplePicker-persona") < 0) { el = el.parentElement; }
+                                while (el && el.classList.contains("ms-PeoplePicker-persona") == false) { el = el.parentElement; }
 
                                 // See if the element exists
                                 if (el) {
@@ -170,7 +170,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
             let el = ev.currentTarget as HTMLElement;
 
             // Find the persona element
-            while (el && el.className.indexOf("ms-PeoplePicker-persona") < 0) { el = el.parentElement; }
+            while (el && el.classList.contains("ms-PeoplePicker-persona") == false) { el = el.parentElement; }
 
             // See if the element exists
             if (el) {

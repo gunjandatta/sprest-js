@@ -40,7 +40,7 @@ export const WPTabs = (props: IWPTabsProps) => {
 
                 // Skip hidden webparts
                 let wpTitle: string = ((webpart.querySelector(".ms-webpart-titleText") || {}) as HTMLDivElement).innerText || "";
-                let isHidden = webpart.firstElementChild && webpart.firstElementChild.className.indexOf("ms-hide") >= 0;
+                let isHidden = webpart.firstElementChild && webpart.firstElementChild.classList.contains("ms-hide");
                 isHidden = isHidden || wpTitle.startsWith("(Hidden)");
                 if (isHidden) { continue; }
 
@@ -49,7 +49,7 @@ export const WPTabs = (props: IWPTabsProps) => {
                     // Get the parent webpart box
                     while (webpart.parentNode) {
                         // See if this is the webpart box element
-                        if (webpart.className.indexOf("ms-rte-wpbox") >= 0) {
+                        if (webpart.classList.contains("ms-rte-wpbox")) {
                             // Add this webpart and break from the loop
                             wps.push(webpart);
                             break;
@@ -74,13 +74,13 @@ export const WPTabs = (props: IWPTabsProps) => {
         // Ensure the element exists
         if (el) {
             // See if this is the webpart zone element
-            if (el.className.indexOf("ms-webpart-zone") >= 0) {
+            if (el.classList.contains("ms-webpart-zone")) {
                 // Return it
                 return el;
             }
 
             // See if this is the inner page zone
-            if (el.className.indexOf("ms-rte-layoutszone-inner") >= 0) {
+            if (el.classList.contains("ms-rte-layoutszone-inner")) {
                 // Set the flag
                 _isContentZone = true;
 
@@ -151,9 +151,9 @@ export const WPTabs = (props: IWPTabsProps) => {
                     }
                 }
                 // Ensure the webpart is hidden
-                else if (webpart.className.indexOf("is-hidden") < 0) {
+                else if (webpart.classList.contains("is-hidden") == false) {
                     // Hide the webpart
-                    webpart.className += " is-hidden";
+                    webpart.classList.add("is-hidden");
                 }
             }
         }

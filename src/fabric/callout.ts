@@ -44,9 +44,9 @@ export const Callout = (props: ICalloutProps): Fabric.ICallout => {
     // Set the click event
     props.elTarget.addEventListener("click", () => {
         // See if the host exists and fabric class doesn't exist
-        if (_callout._contextualHost && _callout._contextualHost._contextualHost.className.indexOf("fabric") < 0) {
+        if (_callout._contextualHost && _callout._contextualHost._contextualHost.classList.contains("fabric") == false) {
             // Add the class
-            _callout._contextualHost._contextualHost.className += " fabric";
+            _callout._contextualHost._contextualHost.classList.add("fabric");
         }
     });
 

@@ -55,9 +55,9 @@ export const CommandBar = (props: ICommandBarProps): ICommandBar => {
                 // Set a click event
                 buttons[i].addEventListener("click", ev => {
                     // See if the host exists and fabric class doesn't exist
-                    if (menu._isOpen && menu._host._contextualHost.className.indexOf("fabric") < 0) {
+                    if (menu._isOpen && menu._host._contextualHost.classList.contains("fabric") == false) {
                         // Set the class
-                        menu._host._contextualHost.className += " fabric";
+                        menu._host._contextualHost.classList.add("fabric");
 
                         // Get the button index
                         let btn = ev.currentTarget as HTMLButtonElement;
