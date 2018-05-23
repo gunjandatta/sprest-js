@@ -42,44 +42,53 @@ export const ContextualMenu = (props: IContextualMenuProps): IContextualMenu => 
         // Prevent a postback
         ev ? ev.preventDefault() : null;
 
-        // See if the menu is closed
-        if (_menu._host && _menu._host._container && _menu._host._container.classList.contains("is-open") == false) {
-            // Display the menu
-            _menu._hostTarget.click();
-        }
-
-        // See if the host exists and fabric class doesn't exist
-        if (_menu._host && _menu._host._contextualHost.classList.contains("fabric") == false) {
-            // Add the class
-            _menu._host._contextualHost.classList.add("fabric");
-
-            // Set the inner html manually, to remove any events associated with this menu
-            // The core framework doesn't work well w/ sub-menus.
-            _html = _html || _menu._host._contextualHost.innerHTML;
-            _menu._host._contextualHost.innerHTML = _html;
-
-            // See if the menu is not positioned
-            if (_menu._host._contextualHost.classList.contains("is-positioned") == false) {
-                // Clear the styling and ensure it's positioned
-                _menu._host._contextualHost.removeAttribute("style");
-                _menu._host._contextualHost.classList.add("is-positioned");
+        // See if the host exists
+        if (_menu._host) {
+            // See if there is a custom class name
+            if (props.className && _menu._host._contextualHostMain.className.indexOf(props.className) < 0) {
+                // Append the class name
+                _menu._host._contextualHostMain.className += " " + props.className;
             }
 
-            // Ensure the menu is being rendered under the target
-            _menu._host._contextualHost.style.left = _menu._hostTarget.getBoundingClientRect().left + "px";
-            _menu._host._contextualHost.style.top = _menu._hostTarget.getBoundingClientRect().bottom + "px";
-
-            // See if a sub-menu doesn't exists
-            if (!hasSubMenu) {
-                // Set the max height and scroll
-                _menu._host._contextualHost.style.maxHeight = "300px";
-                _menu._host._contextualHost.style.overflowY = "auto";
+            // See if the menu is closed
+            if (_menu._host._container && _menu._host._container.classList.contains("is-open") == false) {
+                // Display the menu
+                _menu._hostTarget.click();
             }
 
-            // See if the menu is being rendered below the screen
-            if (document.body.getBoundingClientRect().height < _menu._host._contextualHost.getBoundingClientRect().bottom) {
-                // Scroll the menu into view
-                _menu._host._contextualHost.scrollIntoView(true);
+            // See if the host exists and fabric class doesn't exist
+            if (_menu._host._contextualHost.classList.contains("fabric") == false) {
+                // Add the class
+                _menu._host._contextualHost.classList.add("fabric");
+
+                // Set the inner html manually, to remove any events associated with this menu
+                // The core framework doesn't work well w/ sub-menus.
+                _html = _html || _menu._host._contextualHost.innerHTML;
+                _menu._host._contextualHost.innerHTML = _html;
+
+                // See if the menu is not positioned
+                if (_menu._host._contextualHost.classList.contains("is-positioned") == false) {
+                    // Clear the styling and ensure it's positioned
+                    _menu._host._contextualHost.removeAttribute("style");
+                    _menu._host._contextualHost.classList.add("is-positioned");
+                }
+
+                // Ensure the menu is being rendered under the target
+                _menu._host._contextualHost.style.left = _menu._hostTarget.getBoundingClientRect().left + "px";
+                _menu._host._contextualHost.style.top = _menu._hostTarget.getBoundingClientRect().bottom + "px";
+
+                // See if a sub-menu doesn't exists
+                if (!hasSubMenu) {
+                    // Set the max height and scroll
+                    _menu._host._contextualHost.style.maxHeight = "300px";
+                    _menu._host._contextualHost.style.overflowY = "auto";
+                }
+
+                // See if the menu is being rendered below the screen
+                if (document.body.getBoundingClientRect().height < _menu._host._contextualHost.getBoundingClientRect().bottom) {
+                    // Scroll the menu into view
+                    _menu._host._contextualHost.scrollIntoView(true);
+                }
             }
         }
 

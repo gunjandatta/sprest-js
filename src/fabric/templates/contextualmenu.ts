@@ -51,5 +51,5 @@ export const ContextualMenu = (props: IContextualMenuProps): string => {
     };
 
     // Render the template
-    return renderList(isHidden, props.className, props.items);
+    return renderList(isHidden, "", props.items);
 }
