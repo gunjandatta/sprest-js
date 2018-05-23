@@ -6721,38 +6721,46 @@ exports.ContextualMenu = function (props) {
     props.elTarget.addEventListener("click", function (ev) {
         // Prevent a postback
         ev ? ev.preventDefault() : null;
-        // See if the menu is closed
-        if (_menu._host && _menu._host._container && _menu._host._container.classList.contains("is-open") == false) {
-            // Display the menu
-            _menu._hostTarget.click();
-        }
-        // See if the host exists and fabric class doesn't exist
-        if (_menu._host && _menu._host._contextualHost.classList.contains("fabric") == false) {
-            // Add the class
-            _menu._host._contextualHost.classList.add("fabric");
-            // Set the inner html manually, to remove any events associated with this menu
-            // The core framework doesn't work well w/ sub-menus.
-            _html = _html || _menu._host._contextualHost.innerHTML;
-            _menu._host._contextualHost.innerHTML = _html;
-            // See if the menu is not positioned
-            if (_menu._host._contextualHost.classList.contains("is-positioned") == false) {
-                // Clear the styling and ensure it's positioned
-                _menu._host._contextualHost.removeAttribute("style");
-                _menu._host._contextualHost.classList.add("is-positioned");
+        // See if the host exists
+        if (_menu._host) {
+            // See if there is a custom class name
+            if (props.className && _menu._host._contextualHostMain.className.indexOf(props.className) < 0) {
+                // Append the class name
+                _menu._host._contextualHostMain.className += " " + props.className;
             }
-            // Ensure the menu is being rendered under the target
-            _menu._host._contextualHost.style.left = _menu._hostTarget.getBoundingClientRect().left + "px";
-            _menu._host._contextualHost.style.top = _menu._hostTarget.getBoundingClientRect().bottom + "px";
-            // See if a sub-menu doesn't exists
-            if (!hasSubMenu) {
-                // Set the max height and scroll
-                _menu._host._contextualHost.style.maxHeight = "300px";
-                _menu._host._contextualHost.style.overflowY = "auto";
+            // See if the menu is closed
+            if (_menu._host._container && _menu._host._container.classList.contains("is-open") == false) {
+                // Display the menu
+                _menu._hostTarget.click();
             }
-            // See if the menu is being rendered below the screen
-            if (document.body.getBoundingClientRect().height < _menu._host._contextualHost.getBoundingClientRect().bottom) {
-                // Scroll the menu into view
-                _menu._host._contextualHost.scrollIntoView(true);
+            // See if the host exists and fabric class doesn't exist
+            if (_menu._host._contextualHost.classList.contains("fabric") == false) {
+                // Add the class
+                _menu._host._contextualHost.classList.add("fabric");
+                // Set the inner html manually, to remove any events associated with this menu
+                // The core framework doesn't work well w/ sub-menus.
+                _html = _html || _menu._host._contextualHost.innerHTML;
+                _menu._host._contextualHost.innerHTML = _html;
+                // See if the menu is not positioned
+                if (_menu._host._contextualHost.classList.contains("is-positioned") == false) {
+                    // Clear the styling and ensure it's positioned
+                    _menu._host._contextualHost.removeAttribute("style");
+                    _menu._host._contextualHost.classList.add("is-positioned");
+                }
+                // Ensure the menu is being rendered under the target
+                _menu._host._contextualHost.style.left = _menu._hostTarget.getBoundingClientRect().left + "px";
+                _menu._host._contextualHost.style.top = _menu._hostTarget.getBoundingClientRect().bottom + "px";
+                // See if a sub-menu doesn't exists
+                if (!hasSubMenu) {
+                    // Set the max height and scroll
+                    _menu._host._contextualHost.style.maxHeight = "300px";
+                    _menu._host._contextualHost.style.overflowY = "auto";
+                }
+                // See if the menu is being rendered below the screen
+                if (document.body.getBoundingClientRect().height < _menu._host._contextualHost.getBoundingClientRect().bottom) {
+                    // Scroll the menu into view
+                    _menu._host._contextualHost.scrollIntoView(true);
+                }
             }
         }
         // Set the click events
@@ -17024,6 +17032,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ContextualMenu = function (props) {
     // Set the hidden property
     var isHidden = typeof props.isHidden === "boolean" ? props.isHidden : true;
+    // Method to determine if checkboxes exist
+    var hasCheckboxes = function hasCheckboxes(items) {
+        // Parse the items
+        for (var i = 0; i < items.length; i++) {
+            // See if this item has icons
+            if (items[i].isSelected) {
+                return true;
+            }
+        }
+        // Does not have icons
+        return false;
+    };
+    // Method to determine if icons exist
+    var hasIcons = function hasIcons(items) {
+        // Parse the items
+        for (var i = 0; i < items.length; i++) {
+            // See if this item has icons
+            if (items[i].icon) {
+                return true;
+            }
+        }
+        // Does not have icons
+        return false;
+    };
     // Method to render the items
     var renderItems = function renderItems(items) {
         var menuItems = [];
@@ -17043,11 +17075,13 @@ exports.ContextualMenu = function (props) {
     };
     // Method to render the list template
     var renderList = function renderList(isHidden, className, items) {
+        // Set the class name
+        var elClassName = ["ms-ContextualMenu", className || "", isHidden ? "is-hidden" : "", hasCheckboxes(items) ? "ms-ContextualMenu--hasChecks" : "", hasIcons(items) ? "ms-ContextualMenu--hasIcons" : ""].join(' ').trim();
         // Return the template
-        return ['<ul class="ms-ContextualMenu' + (isHidden ? " is-hidden" : "") + (className ? " " + className : "") + '">', renderItems(items), '</ul>'].join('\n');
+        return ['<ul class="' + elClassName + '">', renderItems(items), '</ul>'].join('\n');
     };
     // Render the template
-    return renderList(isHidden, props.className, props.items);
+    return renderList(isHidden, "", props.items);
 };
 
 /***/ }),
@@ -19366,6 +19400,7 @@ exports.WPList = function (props) {
 "use strict";
 
 
+var _this = undefined;
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var __1 = __webpack_require__(5);
@@ -19375,8 +19410,9 @@ var _1 = __webpack_require__(7);
  */
 exports.WPSearch = function (props) {
     var ddlFields = null;
-    // The list changed event
-    var listChanged = function listChanged(el, wpInfo, list) {
+    var el = null;
+    // Method to render the fields drop down list
+    var renderFieldsDDL = function renderFieldsDDL(el, wpInfo, list) {
         var options = [];
         // Parse the fields
         for (var i = 0; i < list.Fields.results.length; i++) {
@@ -19413,24 +19449,23 @@ exports.WPSearch = function (props) {
             options: options
         });
     };
-    // Method to render the footer
-    var renderFooter = function renderFooter(el, wpInfo, list) {
+    // Method to render the fields
+    var renderFields = function renderFields(el, wpInfo, list) {
+        // Render the fields
+        _this.el = el;
+        _this.el.innerHTML = "<div></div><div></div>";
         // Render a spinner
         __1.Fabric.Spinner({
-            el: el,
+            el: _this.el.children[0],
             text: "Loading the fields..."
         });
-        // Load the fields
-        listChanged(el, wpInfo, list);
-    };
-    // Method to save the configuration
-    var saveConfiguration = function saveConfiguration(cfg) {
-        // Set the fields configuraiton
-        cfg.Fields = ddlFields ? ddlFields.getValue() : [];
-        // Call the save event
-        cfg = (props.editPanel && props.editPanel.onSave ? props.editPanel.onSave(cfg) : null) || cfg;
-        // Return the configuration
-        return cfg;
+        // Load the fields dropdown list
+        renderFieldsDDL(_this.el.children[0], wpInfo, list);
+        // See if the custom event exists
+        if (props.editPanel.onRenderFooter) {
+            // Call the custom event
+            props.editPanel.onRenderFooter(_this.elel.children[1], wpInfo, list);
+        }
     };
     // Create the webpart
     var _wp = _1.WPList({
@@ -19441,13 +19476,30 @@ exports.WPSearch = function (props) {
             listQuery: props.editPanel ? props.editPanel.listQuery : null,
             menuLeftCommands: props.editPanel ? props.editPanel.menuLeftCommands : null,
             menuRightCommands: props.editPanel ? props.editPanel.menuRightCommands : null,
-            onRenderFooter: props.editPanel.onRenderFooter ? props.editPanel.onRenderFooter : null
+            onListChanged: function onListChanged(wpInfo, list) {
+                // Load the fields dropdown list
+                renderFieldsDDL(_this.el.children[0], wpInfo, list);
+            },
+            onRenderFooter: renderFields,
+            onSave: function onSave(cfg) {
+                // Clear the fields
+                cfg.Fields = [];
+                // Parse the fields
+                var fields = ddlFields.getValue();
+                for (var i = 0; i < fields.length; i++) {
+                    // Add the field
+                    cfg.Fields.push(fields[i]);
+                }
+                // Call the save event
+                cfg = (props.editPanel && props.editPanel.onSave ? props.editPanel.onSave(cfg) : null) || cfg;
+                // Return the configuration
+                return cfg;
+            }
         },
         elementId: props.elementId,
         helpProps: props.helpProps,
         odataQuery: props.odataQuery,
         onRenderItems: props.onRenderItems,
-        onSave: saveConfiguration,
         wpClassName: props.wpClassName
     });
     // Return the webpart

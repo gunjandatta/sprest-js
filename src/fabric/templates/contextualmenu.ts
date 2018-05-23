@@ -7,6 +7,30 @@ export const ContextualMenu = (props: IContextualMenuProps): string => {
     // Set the hidden property
     let isHidden = typeof (props.isHidden) === "boolean" ? props.isHidden : true;
 
+    // Method to determine if checkboxes exist
+    let hasCheckboxes = (items?: Array<IContextualMenuItem>) => {
+        // Parse the items
+        for (let i = 0; i < items.length; i++) {
+            // See if this item has icons
+            if (items[i].isSelected) { return true; }
+        }
+
+        // Does not have icons
+        return false;
+    }
+
+    // Method to determine if icons exist
+    let hasIcons = (items?: Array<IContextualMenuItem>) => {
+        // Parse the items
+        for (let i = 0; i < items.length; i++) {
+            // See if this item has icons
+            if (items[i].icon) { return true; }
+        }
+
+        // Does not have icons
+        return false;
+    }
+
     // Method to render the items
     let renderItems = (items?: Array<IContextualMenuItem>) => {
         let menuItems: Array<string> = [];
@@ -42,9 +66,18 @@ export const ContextualMenu = (props: IContextualMenuProps): string => {
 
     // Method to render the list template
     let renderList = (isHidden: boolean, className: string, items: Array<IContextualMenuItem>) => {
+        // Set the class name
+        let elClassName = [
+            "ms-ContextualMenu",
+            className || "",
+            isHidden ? "is-hidden" : "",
+            hasCheckboxes(items) ? "ms-ContextualMenu--hasChecks" : "",
+            hasIcons(items) ? "ms-ContextualMenu--hasIcons" : ""
+        ].join(' ').trim();
+
         // Return the template
         return [
-            '<ul class="ms-ContextualMenu' + (isHidden ? " is-hidden" : "") + (className ? " " + className : "") + '">',
+            '<ul class="' + elClassName + '">',
             renderItems(items),
             '</ul>'
         ].join('\n');
