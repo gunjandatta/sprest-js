@@ -123,6 +123,7 @@ export const Dropdown = (props: IDropdownProps): IDropdown => {
 
                 // Append the item
                 items.push({
+                    data: option.data,
                     menu: option.options ? toItems(option.options) : null,
                     text: option.text,
                     value: option.value

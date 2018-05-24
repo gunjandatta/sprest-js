@@ -48,9 +48,15 @@ export const ContextualMenu = (props: IContextualMenuProps): string => {
                     item.isSelected ? "is-selected" : ""
                 ].join(" ");
 
+                // Set the attributes
+                let attributes = [
+                    'class="ms-ContextualMenu-item' + (item.menu ? ' ms-ContextualMenu-item--hasMenu' : '') + '"',
+                    item.data ? 'data-item="' + JSON.stringify(item.data) + '"' : ''
+                ].join(" ");
+
                 // Add the menu item
                 menuItems.push([
-                    '<li class="ms-ContextualMenu-item' + (item.menu ? ' ms-ContextualMenu-item--hasMenu' : '') + '">',
+                    '<li ' + attributes + '>',
                     '<a class="' + className + '" tabindex="1">' + (item.text || "") + '</a>',
                     item.icon ? '<i class="ms-Icon ms-Icon--' + item.icon + '"></i>' : '',
                     item.menu ? '<i class="ms-ContextualMenu-subMenuIcon ms-Icon ms-Icon--ChevronRight"></i>' : '',

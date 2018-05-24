@@ -38,6 +38,9 @@ export interface IContextualMenuProps extends IProps {
  * IContextualMenuItem
  */
 export interface IContextualMenuItem {
+    /** The optional json data to associate with the item. */
+    data?: any;
+
     /** The button icon. */
     icon?: string;
 

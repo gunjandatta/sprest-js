@@ -22,6 +22,9 @@ export interface IDropdown {
  * Dropdown Option
  */
 export interface IDropdownOption {
+    /** The optional json data to assoicate with the option. */
+    data?: any;
+
     /** Flag determining if the option is selected */
     isSelected?: boolean;
 

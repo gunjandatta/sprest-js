@@ -22,29 +22,82 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
             // Update the filter
             filterText = filterText.toLowerCase();
 
+            let fields = ((_wpInfo.cfg ? _wpInfo.cfg.Fields : null) || []).concat(props.searchFields || []);
+
             // Parse the items
             for (let i = 0; i < _items.length; i++) {
                 let item = _items[i];
                 let addToResults = false;
 
+                // Set the taxonomy mapper
+                let mapper = item["TaxCatchAll"];
+                mapper = (mapper ? mapper.results : null) || [];
+
                 // Parse the fields
-                let fields = (_wpInfo.cfg ? _wpInfo.cfg.Fields : null) || [];
                 for (let j = 0; j < fields.length; j++) {
-                    // Get the field value
-                    let fieldValue: string = (item[fields[j]] as string || "").toLowerCase();
+                    let field = fields[j];
 
-                    // See if the item contains the filter
-                    if (fieldValue.indexOf(filterText) >= 0) {
-                        // Set the flag
-                        addToResults = true;
-                        break;
+                    // Get the field value(s)
+                    let fieldValues = item[field.name];
+                    if (fieldValues) {
+                        fieldValues = fieldValues.results ? fieldValues.results : [fieldValues];
+
+                        // Parse the field values
+                        for (let k = 0; k < fieldValues.length; k++) {
+                            let fieldValue = fieldValues[k];
+
+                            // Ensure the field value exists
+                            if (fieldValue) {
+                                // Update the value, based on the type
+                                switch (field.type) {
+                                    // Lookup
+                                    case "Lookup":
+                                    case "LookupMulti":
+                                        // Set the value
+                                        fieldValue = fieldValue.Title;
+                                        break;
+                                    // Taxonomy
+                                    case "TaxonomyFieldType":
+                                    case "TaxonomyFieldTypeMulti":
+                                        // Parse the mapper
+                                        for (let i = 0; i < mapper.length; i++) {
+                                            // See if this is the target id
+                                            if (mapper[i].ID == fieldValue.WssId) {
+                                                // Set the value
+                                                fieldValue = mapper[i].Term;
+                                            }
+                                        }
+                                        break;
+                                    // URL
+                                    case "URL":
+                                        // Set the value
+                                        fieldValue = fieldValue.Description;
+                                        break;
+                                    // User
+                                    case "User":
+                                        // Set the value
+                                        fieldValue = fieldValue.Title;
+                                        break;
+                                }
+
+                                // See if the item contains the filter
+                                if (fieldValue && fieldValue.toLowerCase().indexOf(filterText) >= 0) {
+                                    // Set the flag
+                                    addToResults = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        // See if we are adding this item to the results
+                        if (addToResults) {
+                            // Add the item
+                            results.push(item);
+
+                            // Break from the loop
+                            break;
+                        }
                     }
-                }
-
-                // See if we are adding this item to the results
-                if (addToResults) {
-                    // Add the item
-                    results.push(item);
                 }
             }
         } else {
@@ -57,7 +110,7 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
     }
 
     // Method to render the fields
-    let renderFields = (el: HTMLDivElement, wpInfo: IWPSearchInfo, list: IListQueryResult) => {
+    let renderFields = (el: HTMLDivElement, list: Types.SP.IListQueryResult) => {
         // Render the fields
         this.el = el;
         el.innerHTML = "<div></div><div></div>";
@@ -72,17 +125,17 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
         });
 
         // Load the fields dropdown list
-        renderFieldsDDL(el.children[0] as HTMLDivElement, wpInfo, list);
+        renderFieldsDDL(el.children[0] as HTMLDivElement, list);
 
         // See if the custom event exists
         if (props.editPanel && props.editPanel.onRenderFooter) {
             // Call the custom event
-            props.editPanel.onRenderFooter(el.children[1] as HTMLDivElement, wpInfo, list);
+            props.editPanel.onRenderFooter(el.children[1] as HTMLDivElement, _wpInfo, list);
         }
     }
 
     // Method to render the fields drop down list
-    let renderFieldsDDL = (el: HTMLDivElement, wpInfo: IWPSearchInfo, list: Types.SP.IListQueryResult) => {
+    let renderFieldsDDL = (el: HTMLDivElement, list: Types.SP.IListQueryResult) => {
         let options: Array<Fabric.Types.IDropdownOption> = [];
 
         // Parse the fields
@@ -111,9 +164,27 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
             // See if we are adding the field
             if (addField) {
                 options.push({
+                    data: field.TypeAsString,
                     text: field.Title + " [" + field.InternalName + "]",
                     value: field.InternalName
                 });
+            }
+        }
+
+        // Sort the options
+        options = options.sort((a, b) => {
+            if (a.value < b.value) { return -1; }
+            if (a.value > b.value) { return 1; }
+            return 0;
+        });
+
+        // See if fields exist
+        let value = [];
+        if (_wpInfo.cfg && _wpInfo.cfg.Fields) {
+            // Parse the fields
+            for (let i = 0; i < _wpInfo.cfg.Fields.length; i++) {
+                // Add the field
+                value.push(_wpInfo.cfg.Fields[i].name);
             }
         }
 
@@ -122,7 +193,23 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
             el,
             label: "Filter Field(s):",
             multi: true,
-            options
+            options,
+            value,
+            onChange: options => {
+                // Clear the fields
+                _wpInfo.cfg.Fields = [];
+
+                // Parse the options
+                for (let i = 0; i < options.length; i++) {
+                    let option = options[i];
+
+                    // Add the field
+                    _wpInfo.cfg.Fields.push({
+                        name: option.value,
+                        type: option.data
+                    });
+                }
+            }
         });
     }
 
@@ -142,19 +229,18 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
             menuRightCommands: props.editPanel ? props.editPanel.menuRightCommands : null,
             onListChanged: (wpInfo: IWPSearchInfo, list: IListQueryResult) => {
                 // Render the fields
-                renderFields(this.el.children[0], wpInfo, list);
+                renderFields(this.el.children[0], list);
             },
-            onRenderFooter: renderFields,
-            onSave: (cfg: IWPSearchCfg) => {
-                // Clear the fields
-                cfg.Fields = [];
+            onRenderFooter: (el, wpInfo: IWPSearchInfo, list: IListQueryResult) => {
+                // Set the webpart information
+                _wpInfo = wpInfo;
 
-                // Parse the fields
-                let fields = _ddlFields.getValue();
-                for (let i = 0; i < fields.length; i++) {
-                    // Add the field name
-                    cfg.Fields.push(fields[i].value);
-                }
+                // Render the fields
+                renderFields(el, list);
+            },
+            onSave: (cfg: IWPSearchCfg) => {
+                // Set the fields
+                cfg.Fields = _wpInfo.cfg.Fields || [];
 
                 // Call the save event
                 cfg = (props.editPanel && props.editPanel.onSave ? props.editPanel.onSave(cfg) : null) || cfg;
@@ -168,14 +254,56 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
         odataQuery: props.odataQuery,
         onExecutingODATAQuery: (wpInfo: IWPSearchInfo, query) => {
             // Default the query
-            query = query || {};
-            query.Select = query.Select || [];
+            query = (props.onExecutingODATAQuery ? props.onExecutingODATAQuery(wpInfo, query) : query) || {};
+            query.Expand = query.Expand || [];
+            query.Select = query.Select || ["*"];
 
-            // Parse the fields
-            let fields = (wpInfo.cfg ? wpInfo.cfg.Fields : null) || [];
-            for (let i = 0; i < fields.length; i++) {
-                // Add the field
-                query.Select.push(fields[i]);
+            // Ensure the configuration exists
+            if (wpInfo.cfg) {
+                let hasTaxonomyField = false;
+
+                // Parse the fields
+                let fields = (wpInfo.cfg.Fields || []).concat(props.searchFields || []);
+                for (let i = 0; i < fields.length; i++) {
+                    let field = fields[i];
+
+                    // Add the field, based on the type
+                    switch (field.type) {
+                        // Lookup
+                        case "Lookup":
+                        case "LookupMulti":
+                            // Add the field
+                            query.Expand.push(field.name);
+                            query.Select.push(field.name + "/Title");
+                            break;
+                        // Taxonomy
+                        case "TaxonomyFieldType":
+                        case "TaxonomyFieldTypeMulti":
+                            // Set the flag
+                            hasTaxonomyField = true;
+
+                            // Add the field
+                            query.Select.push(field.name);
+                            break;
+                        // User
+                        case "User":
+                            // Add the field
+                            query.Expand.push(field.name);
+                            query.Select.push(field.name + "/Title");
+                            break;
+                        // Default
+                        default:
+                            query.Select.push(field.name);
+                            break;
+                    }
+                }
+
+                // See if there is a taxonomy field
+                if (hasTaxonomyField) {
+                    // Get the taxonomy field values
+                    query.Expand.push("TaxCatchAll");
+                    query.Select.push("TaxCatchAll/ID", "TaxCatchAll/Term");
+                }
             }
 
             // Return the query

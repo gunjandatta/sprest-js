@@ -18,7 +18,7 @@ export interface IWPSearch extends IWPList {
  */
 export interface IWPSearchCfg extends IWPListCfg {
     /** The searchable fields. */
-    Fields: Array<string>;
+    Fields: Array<{ name: string, type: string }>;
 }
 
 /**
@@ -61,4 +61,7 @@ export interface IWPSearchProps extends IWPListProps {
 
     /** The on render items event. */
     onRenderItems?: (wpInfo: IWPSearchInfo, items: Array<Types.SP.IListItemQueryResult | Types.SP.IListItemResult>) => void;
+
+    /** The internal field names to be used for search. These will be appended to the configuration fields. */
+    searchFields?: Array<{ name: string, type: string }>;
 }
