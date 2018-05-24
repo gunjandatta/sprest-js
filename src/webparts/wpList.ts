@@ -17,21 +17,6 @@ export const WPList = (props: IWPListProps): IWPList => {
      * Display Form
      */
 
-    // Method to render the display form
-    let renderDisplayForm = (wpInfo: IWPListInfo) => {
-        // Save the information
-        _wpInfo = wpInfo;
-
-        // See if there is a custom render event
-        if (props.onRenderDisplay) {
-            // Execute the event
-            props.onRenderDisplay(_wpInfo);
-        } else {
-            // Load the items
-            loadItems();
-        }
-    }
-
     // Method to load the items
     let loadItems = () => {
         // See if items exist
@@ -41,11 +26,17 @@ export const WPList = (props: IWPListProps): IWPList => {
             return;
         }
 
-        // See if we are using the CAML query
+        // Ensure the list exists
         let cfg: IWPListCfg = _wpInfo.cfg || {};
-        if (props.camlQuery || props.onExecutingCAMLQuery) { loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery); }
-        // Else, load using the ODATA query
-        else { loadODATA(cfg.WebUrl, cfg.ListName, props.odataQuery); }
+        if (cfg.ListName) {
+            // See if we are using the CAML query
+            if (props.camlQuery || props.onExecutingCAMLQuery) { loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery); }
+            // Else, load using the ODATA query
+            else { loadODATA(cfg.WebUrl, cfg.ListName, props.odataQuery); }
+        } else {
+            // Call the render event
+            props.onRenderItems ? props.onRenderItems(_wpInfo, []) : null;
+        }
     }
 
     // Method to load the items using a CAML query
@@ -212,6 +203,21 @@ export const WPList = (props: IWPListProps): IWPList => {
         } else {
             // Load the lists
             loadLists(tb.getValue());
+        }
+    }
+
+    // Method to render the display form
+    let renderDisplayForm = (wpInfo: IWPListInfo) => {
+        // Save the information
+        _wpInfo = wpInfo;
+
+        // See if there is a custom render event
+        if (props.onRenderDisplay) {
+            // Execute the event
+            props.onRenderDisplay(_wpInfo);
+        } else {
+            // Load the items
+            loadItems();
         }
     }
 

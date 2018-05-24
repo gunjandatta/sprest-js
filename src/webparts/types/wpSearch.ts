@@ -18,7 +18,7 @@ export interface IWPSearch extends IWPList {
  */
 export interface IWPSearchCfg extends IWPListCfg {
     /** The searchable fields. */
-    Fields: Array<IDropdownOption>;
+    Fields: Array<string>;
 }
 
 /**

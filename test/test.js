@@ -12839,38 +12839,46 @@ exports.ContextualMenu = function (props) {
     props.elTarget.addEventListener("click", function (ev) {
         // Prevent a postback
         ev ? ev.preventDefault() : null;
-        // See if the menu is closed
-        if (_menu._host && _menu._host._container && _menu._host._container.classList.contains("is-open") == false) {
-            // Display the menu
-            _menu._hostTarget.click();
-        }
-        // See if the host exists and fabric class doesn't exist
-        if (_menu._host && _menu._host._contextualHost.classList.contains("fabric") == false) {
-            // Add the class
-            _menu._host._contextualHost.classList.add("fabric");
-            // Set the inner html manually, to remove any events associated with this menu
-            // The core framework doesn't work well w/ sub-menus.
-            _html = _html || _menu._host._contextualHost.innerHTML;
-            _menu._host._contextualHost.innerHTML = _html;
-            // See if the menu is not positioned
-            if (_menu._host._contextualHost.classList.contains("is-positioned") == false) {
-                // Clear the styling and ensure it's positioned
-                _menu._host._contextualHost.removeAttribute("style");
-                _menu._host._contextualHost.classList.add("is-positioned");
+        // See if the host exists
+        if (_menu._host) {
+            // See if there is a custom class name
+            if (props.className && _menu._host._contextualHostMain.className.indexOf(props.className) < 0) {
+                // Append the class name
+                _menu._host._contextualHostMain.className += " " + props.className;
             }
-            // Ensure the menu is being rendered under the target
-            _menu._host._contextualHost.style.left = _menu._hostTarget.getBoundingClientRect().left + "px";
-            _menu._host._contextualHost.style.top = _menu._hostTarget.getBoundingClientRect().bottom + "px";
-            // See if a sub-menu doesn't exists
-            if (!hasSubMenu) {
-                // Set the max height and scroll
-                _menu._host._contextualHost.style.maxHeight = "300px";
-                _menu._host._contextualHost.style.overflowY = "auto";
+            // See if the menu is closed
+            if (_menu._host._container && _menu._host._container.classList.contains("is-open") == false) {
+                // Display the menu
+                _menu._hostTarget.click();
             }
-            // See if the menu is being rendered below the screen
-            if (document.body.getBoundingClientRect().height < _menu._host._contextualHost.getBoundingClientRect().bottom) {
-                // Scroll the menu into view
-                _menu._host._contextualHost.scrollIntoView(true);
+            // See if the host exists and fabric class doesn't exist
+            if (_menu._host._contextualHost.classList.contains("fabric") == false) {
+                // Add the class
+                _menu._host._contextualHost.classList.add("fabric");
+                // Set the inner html manually, to remove any events associated with this menu
+                // The core framework doesn't work well w/ sub-menus.
+                _html = _html || _menu._host._contextualHost.innerHTML;
+                _menu._host._contextualHost.innerHTML = _html;
+                // See if the menu is not positioned
+                if (_menu._host._contextualHost.classList.contains("is-positioned") == false) {
+                    // Clear the styling and ensure it's positioned
+                    _menu._host._contextualHost.removeAttribute("style");
+                    _menu._host._contextualHost.classList.add("is-positioned");
+                }
+                // Ensure the menu is being rendered under the target
+                _menu._host._contextualHost.style.left = _menu._hostTarget.getBoundingClientRect().left + "px";
+                _menu._host._contextualHost.style.top = _menu._hostTarget.getBoundingClientRect().bottom + "px";
+                // See if a sub-menu doesn't exists
+                if (!hasSubMenu) {
+                    // Set the max height and scroll
+                    _menu._host._contextualHost.style.maxHeight = "300px";
+                    _menu._host._contextualHost.style.overflowY = "auto";
+                }
+                // See if the menu is being rendered below the screen
+                if (document.body.getBoundingClientRect().height < _menu._host._contextualHost.getBoundingClientRect().bottom) {
+                    // Scroll the menu into view
+                    _menu._host._contextualHost.scrollIntoView(true);
+                }
             }
         }
         // Set the click events
@@ -14561,6 +14569,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ContextualMenu = function (props) {
     // Set the hidden property
     var isHidden = typeof (props.isHidden) === "boolean" ? props.isHidden : true;
+    // Method to determine if checkboxes exist
+    var hasCheckboxes = function (items) {
+        // Parse the items
+        for (var i = 0; i < items.length; i++) {
+            // See if this item has icons
+            if (items[i].isSelected) {
+                return true;
+            }
+        }
+        // Does not have icons
+        return false;
+    };
+    // Method to determine if icons exist
+    var hasIcons = function (items) {
+        // Parse the items
+        for (var i = 0; i < items.length; i++) {
+            // See if this item has icons
+            if (items[i].icon) {
+                return true;
+            }
+        }
+        // Does not have icons
+        return false;
+    };
     // Method to render the items
     var renderItems = function (items) {
         var menuItems = [];
@@ -14591,15 +14623,23 @@ exports.ContextualMenu = function (props) {
     };
     // Method to render the list template
     var renderList = function (isHidden, className, items) {
+        // Set the class name
+        var elClassName = [
+            "ms-ContextualMenu",
+            className || "",
+            isHidden ? "is-hidden" : "",
+            hasCheckboxes(items) ? "ms-ContextualMenu--hasChecks" : "",
+            hasIcons(items) ? "ms-ContextualMenu--hasIcons" : ""
+        ].join(' ').trim();
         // Return the template
         return [
-            '<ul class="ms-ContextualMenu' + (isHidden ? " is-hidden" : "") + (className ? " " + className : "") + '">',
+            '<ul class="' + elClassName + '">',
             renderItems(items),
             '</ul>'
         ].join('\n');
     };
     // Render the template
-    return renderList(isHidden, props.className, props.items);
+    return renderList(isHidden, "", props.items);
 };
 
 
@@ -16970,20 +17010,6 @@ exports.WPList = function (props) {
     /**
      * Display Form
      */
-    // Method to render the display form
-    var renderDisplayForm = function (wpInfo) {
-        // Save the information
-        _wpInfo = wpInfo;
-        // See if there is a custom render event
-        if (props.onRenderDisplay) {
-            // Execute the event
-            props.onRenderDisplay(_wpInfo);
-        }
-        else {
-            // Load the items
-            loadItems();
-        }
-    };
     // Method to load the items
     var loadItems = function () {
         // See if items exist
@@ -16992,13 +17018,20 @@ exports.WPList = function (props) {
             props.onRenderItems ? props.onRenderItems(_wpInfo, _items) : null;
             return;
         }
-        // See if we are using the CAML query
+        // Ensure the list exists
         var cfg = _wpInfo.cfg || {};
-        if (props.camlQuery || props.onExecutingCAMLQuery) {
-            loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery);
+        if (cfg.ListName) {
+            // See if we are using the CAML query
+            if (props.camlQuery || props.onExecutingCAMLQuery) {
+                loadCAML(cfg.WebUrl, cfg.ListName, props.camlQuery);
+            }
+            else {
+                loadODATA(cfg.WebUrl, cfg.ListName, props.odataQuery);
+            }
         }
         else {
-            loadODATA(cfg.WebUrl, cfg.ListName, props.odataQuery);
+            // Call the render event
+            props.onRenderItems ? props.onRenderItems(_wpInfo, []) : null;
         }
     };
     // Method to load the items using a CAML query
@@ -17139,6 +17172,20 @@ exports.WPList = function (props) {
             loadLists(tb.getValue());
         }
     };
+    // Method to render the display form
+    var renderDisplayForm = function (wpInfo) {
+        // Save the information
+        _wpInfo = wpInfo;
+        // See if there is a custom render event
+        if (props.onRenderDisplay) {
+            // Execute the event
+            props.onRenderDisplay(_wpInfo);
+        }
+        else {
+            // Load the items
+            loadItems();
+        }
+    };
     // Method to render the dropdown
     var renderDropdown = function (el) {
         var options = [];
@@ -17236,6 +17283,7 @@ exports.WPList = function (props) {
 
 "use strict";
 
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var __1 = __webpack_require__(15);
@@ -17244,14 +17292,77 @@ var _1 = __webpack_require__(16);
  * Search WebPart
  */
 exports.WPSearch = function (props) {
-    var ddlFields = null;
-    // The list changed event
-    var listChanged = function (el, wpInfo, list) {
+    var _ddlFields = null;
+    var _el = null;
+    var _items = [];
+    var _wpInfo;
+    // Method to filter the items
+    var filterItems = function (filterText) {
+        var results = [];
+        // Ensure the filter exists
+        if (filterText && filterText.length > 0) {
+            // Update the filter
+            filterText = filterText.toLowerCase();
+            // Parse the items
+            for (var i = 0; i < _items.length; i++) {
+                var item = _items[i];
+                var addToResults = false;
+                // Parse the fields
+                var fields = (_wpInfo.cfg ? _wpInfo.cfg.Fields : null) || [];
+                for (var j = 0; j < fields.length; j++) {
+                    // Get the field value
+                    var fieldValue = (item[fields[j]] || "").toLowerCase();
+                    // See if the item contains the filter
+                    if (fieldValue.indexOf(filterText) >= 0) {
+                        // Set the flag
+                        addToResults = true;
+                        break;
+                    }
+                }
+                // See if we are adding this item to the results
+                if (addToResults) {
+                    // Add the item
+                    results.push(item);
+                }
+            }
+        }
+        else {
+            // Copy the items
+            results = _items;
+        }
+        // Return the results
+        return results;
+    };
+    // Method to render the fields
+    var renderFields = function (el, wpInfo, list) {
+        // Render the fields
+        _this.el = el;
+        el.innerHTML = "<div></div><div></div>";
+        // Ensure the list exists
+        if (list == null) {
+            return;
+        }
+        // Render a spinner
+        __1.Fabric.Spinner({
+            el: el.children[0],
+            text: "Loading the fields..."
+        });
+        // Load the fields dropdown list
+        renderFieldsDDL(el.children[0], wpInfo, list);
+        // See if the custom event exists
+        if (props.editPanel && props.editPanel.onRenderFooter) {
+            // Call the custom event
+            props.editPanel.onRenderFooter(el.children[1], wpInfo, list);
+        }
+    };
+    // Method to render the fields drop down list
+    var renderFieldsDDL = function (el, wpInfo, list) {
         var options = [];
         // Parse the fields
-        for (var i = 0; i < list.Fields.results.length; i++) {
+        var fields = (list.Fields ? list.Fields.results : null) || [];
+        for (var i = 0; i < fields.length; i++) {
             var addField = false;
-            var field = list.Fields.results[i];
+            var field = fields[i];
             // Add the field, based on the type
             switch (field.FieldTypeKind) {
                 // Searchable Fields
@@ -17277,52 +17388,75 @@ exports.WPSearch = function (props) {
             }
         }
         // Render the field dropdown
-        ddlFields = __1.Fabric.Dropdown({
-            el: wpInfo.el.querySelector("#field-cfg"),
+        _ddlFields = __1.Fabric.Dropdown({
+            el: el,
+            label: "Filter Field(s):",
             multi: true,
             options: options
         });
     };
-    // Method to render the footer
-    var renderFooter = function (el, wpInfo, list) {
-        // Render a spinner
-        __1.Fabric.Spinner({
-            el: el,
-            text: "Loading the fields..."
-        });
-        // Load the fields
-        listChanged(el, wpInfo, list);
-    };
-    // Method to save the configuration
-    var saveConfiguration = function (cfg) {
-        // Set the fields configuraiton
-        cfg.Fields = ddlFields ? ddlFields.getValue() : [];
-        // Call the save event
-        cfg = (props.editPanel && props.editPanel.onSave ? props.editPanel.onSave(cfg) : null) || cfg;
-        // Return the configuration
-        return cfg;
-    };
+    // Set the list query
+    var listQuery = (props.editPanel ? props.editPanel.listQuery : null) || {};
+    listQuery.Expand = listQuery.Expand || [];
+    listQuery.Expand.push("Fields");
     // Create the webpart
     var _wp = _1.WPList({
         camlQuery: props.camlQuery,
         cfgElementId: props.cfgElementId,
         className: props.className,
         editPanel: {
-            listQuery: props.editPanel ? props.editPanel.listQuery : null,
+            listQuery: listQuery,
             menuLeftCommands: props.editPanel ? props.editPanel.menuLeftCommands : null,
             menuRightCommands: props.editPanel ? props.editPanel.menuRightCommands : null,
-            onRenderFooter: props.editPanel.onRenderFooter ? props.editPanel.onRenderFooter : null
+            onListChanged: function (wpInfo, list) {
+                // Render the fields
+                renderFields(_this.el.children[0], wpInfo, list);
+            },
+            onRenderFooter: renderFields,
+            onSave: function (cfg) {
+                // Clear the fields
+                cfg.Fields = [];
+                // Parse the fields
+                var fields = _ddlFields.getValue();
+                for (var i = 0; i < fields.length; i++) {
+                    // Add the field name
+                    cfg.Fields.push(fields[i].value);
+                }
+                // Call the save event
+                cfg = (props.editPanel && props.editPanel.onSave ? props.editPanel.onSave(cfg) : null) || cfg;
+                // Return the configuration
+                return cfg;
+            }
         },
         elementId: props.elementId,
         helpProps: props.helpProps,
         odataQuery: props.odataQuery,
-        onRenderItems: props.onRenderItems,
-        onSave: saveConfiguration,
+        onExecutingODATAQuery: function (wpInfo, query) {
+            // Default the query
+            query = query || {};
+            query.Select = query.Select || [];
+            // Parse the fields
+            var fields = (wpInfo.cfg ? wpInfo.cfg.Fields : null) || [];
+            for (var i = 0; i < fields.length; i++) {
+                // Add the field
+                query.Select.push(fields[i]);
+            }
+            // Return the query
+            return query;
+        },
+        onRenderItems: function (wpInfo, items) {
+            // Save the wpinfo and items
+            _wpInfo = wpInfo;
+            _items = items;
+            // Call the custom event
+            props.onRenderItems ? props.onRenderItems(wpInfo, items) : null;
+        },
         wpClassName: props.wpClassName
     });
     // Return the webpart
     return {
         cfg: _wp.cfg,
+        filterItems: filterItems,
         info: _wp.info
     };
 };
