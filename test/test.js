@@ -16191,10 +16191,10 @@ exports.ListForm.renderEditForm = function (props) {
                             }
                             else {
                                 // Update the value
-                                fieldValue = fieldValue ? {
+                                fieldValue = fieldValue && fieldValue.length > 0 ? {
                                     __metadata: { type: "SP.Taxonomy.TaxonomyFieldValue" },
-                                    Label: fieldValue.text,
-                                    TermGuid: fieldValue.value,
+                                    Label: fieldValue[0].text,
+                                    TermGuid: fieldValue[0].value,
                                     WssId: -1
                                 } : fieldValue;
                             }
