@@ -84,10 +84,21 @@ export const ContextualMenu = (props: IContextualMenuProps): IContextualMenu => 
                     _menu._host._contextualHost.style.overflowY = "auto";
                 }
 
+                // Get the window and menu positions
+                let windowPos = document.body.getBoundingClientRect();
+                let menuPos = _menu._host._contextualHost.getBoundingClientRect();
+
                 // See if the menu is being rendered below the screen
-                if (document.body.getBoundingClientRect().height < _menu._host._contextualHost.getBoundingClientRect().bottom) {
+                if (windowPos.height < menuPos.bottom) {
                     // Scroll the menu into view
                     _menu._host._contextualHost.scrollIntoView(true);
+                }
+
+                // See if the menu is being rendered past the screen
+                let diff = menuPos.right - windowPos.right;
+                if (diff > 0) {
+                    // Update the left position
+                    _menu._host._contextualHost.style.left = (menuPos.left - diff) + "px";
                 }
             }
         }

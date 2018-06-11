@@ -6756,10 +6756,19 @@ exports.ContextualMenu = function (props) {
                     _menu._host._contextualHost.style.maxHeight = "300px";
                     _menu._host._contextualHost.style.overflowY = "auto";
                 }
+                // Get the window and menu positions
+                var windowPos = document.body.getBoundingClientRect();
+                var menuPos = _menu._host._contextualHost.getBoundingClientRect();
                 // See if the menu is being rendered below the screen
-                if (document.body.getBoundingClientRect().height < _menu._host._contextualHost.getBoundingClientRect().bottom) {
+                if (windowPos.height < menuPos.bottom) {
                     // Scroll the menu into view
                     _menu._host._contextualHost.scrollIntoView(true);
+                }
+                // See if the menu is being rendered past the screen
+                var diff = menuPos.right - windowPos.right;
+                if (diff > 0) {
+                    // Update the left position
+                    _menu._host._contextualHost.style.left = menuPos.left - diff + "px";
                 }
             }
         }
