@@ -6652,7 +6652,7 @@ exports.CommandButton = function (props) {
             // Prevent postback
             ev ? ev.preventDefault() : null;
             // Ensure the fabric class name exists
-            if (_button._modalHostView._contextualHost.classList.contains("fabric") == false) {
+            if (_button._modalHostView && _button._modalHostView._contextualHost && _button._modalHostView._contextualHost.classList.contains("fabric") == false) {
                 // Add the class name
                 _button._modalHostView._contextualHost.classList.add("fabric");
                 // Set the inner html manually, to remove any events associated with this menu
@@ -6661,7 +6661,7 @@ exports.CommandButton = function (props) {
                 _button._modalHostView._contextualHost.innerHTML = _html_1;
             }
             // See if the menu is hidden
-            if (_button._contextualMenu.classList.contains("is-hidden")) {
+            if (_button._contextualMenu && _button._contextualMenu.classList.contains("is-hidden")) {
                 // Remove the class
                 _button._contextualMenu.classList.remove("is-hidden");
             }
