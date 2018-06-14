@@ -75,7 +75,6 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(47));
 __export(__webpack_require__(48));
-__export(__webpack_require__(67));
 __export(__webpack_require__(68));
 __export(__webpack_require__(69));
 __export(__webpack_require__(70));
@@ -83,7 +82,8 @@ __export(__webpack_require__(71));
 __export(__webpack_require__(72));
 __export(__webpack_require__(73));
 __export(__webpack_require__(74));
-var Types = __webpack_require__(75);
+__export(__webpack_require__(75));
+var Types = __webpack_require__(76);
 exports.Types = Types;
 
 
@@ -119,18 +119,18 @@ __export(__webpack_require__(41));
 __export(__webpack_require__(42));
 __export(__webpack_require__(43));
 __export(__webpack_require__(44));
-__export(__webpack_require__(102));
-__export(__webpack_require__(103));
-__export(__webpack_require__(15));
 __export(__webpack_require__(104));
 __export(__webpack_require__(105));
+__export(__webpack_require__(15));
 __export(__webpack_require__(106));
 __export(__webpack_require__(107));
+__export(__webpack_require__(108));
+__export(__webpack_require__(109));
 // Templates
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(129);
+var Types = __webpack_require__(131);
 exports.Types = Types;
 
 /***/ }),
@@ -144,7 +144,6 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(46));
-__export(__webpack_require__(76));
 __export(__webpack_require__(77));
 __export(__webpack_require__(78));
 __export(__webpack_require__(79));
@@ -154,8 +153,10 @@ __export(__webpack_require__(82));
 __export(__webpack_require__(83));
 __export(__webpack_require__(84));
 __export(__webpack_require__(85));
+__export(__webpack_require__(86));
+__export(__webpack_require__(87));
 __export(__webpack_require__(12));
-var Types = __webpack_require__(86);
+var Types = __webpack_require__(88);
 exports.Types = Types;
 
 
@@ -199,10 +200,10 @@ var Helper = __webpack_require__(8);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(6);
 exports.SPTypes = mapper_1.SPTypes;
-var Types = __webpack_require__(100);
+var Types = __webpack_require__(102);
 exports.Types = Types;
 __export(__webpack_require__(2));
-__export(__webpack_require__(101));
+__export(__webpack_require__(103));
 
 
 /***/ }),
@@ -218,8 +219,6 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(108));
-__export(__webpack_require__(109));
 __export(__webpack_require__(110));
 __export(__webpack_require__(111));
 __export(__webpack_require__(112));
@@ -233,13 +232,15 @@ __export(__webpack_require__(119));
 __export(__webpack_require__(120));
 __export(__webpack_require__(121));
 __export(__webpack_require__(122));
-__export(__webpack_require__(16));
 __export(__webpack_require__(123));
 __export(__webpack_require__(124));
+__export(__webpack_require__(16));
 __export(__webpack_require__(125));
 __export(__webpack_require__(126));
 __export(__webpack_require__(127));
 __export(__webpack_require__(128));
+__export(__webpack_require__(129));
+__export(__webpack_require__(130));
 
 /***/ }),
 /* 5 */
@@ -255,7 +256,7 @@ var Components = __webpack_require__(9);
 exports.Components = Components;
 var WebParts = __webpack_require__(7);
 exports.WebParts = WebParts;
-var rest_1 = __webpack_require__(140);
+var rest_1 = __webpack_require__(142);
 exports.$REST = rest_1.RESTJS;
 
 /***/ }),
@@ -267,9 +268,9 @@ exports.$REST = rest_1.RESTJS;
 Object.defineProperty(exports, "__esModule", { value: true });
 var Mapper = __webpack_require__(49);
 exports.Mapper = Mapper;
-var SPTypes = __webpack_require__(62);
+var SPTypes = __webpack_require__(63);
 exports.SPTypes = SPTypes;
-var Types = __webpack_require__(63);
+var Types = __webpack_require__(64);
 exports.Types = Types;
 
 
@@ -286,12 +287,12 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(135));
-__export(__webpack_require__(17));
-__export(__webpack_require__(136));
 __export(__webpack_require__(137));
+__export(__webpack_require__(17));
 __export(__webpack_require__(138));
-var Types = __webpack_require__(139);
+__export(__webpack_require__(139));
+__export(__webpack_require__(140));
+var Types = __webpack_require__(141);
 exports.Types = Types;
 
 /***/ }),
@@ -305,21 +306,21 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(45));
-__export(__webpack_require__(87));
-__export(__webpack_require__(88));
+__export(__webpack_require__(89));
 __export(__webpack_require__(90));
-__export(__webpack_require__(91));
 __export(__webpack_require__(92));
 __export(__webpack_require__(93));
 __export(__webpack_require__(94));
-__export(__webpack_require__(14));
 __export(__webpack_require__(95));
-__export(__webpack_require__(13));
 __export(__webpack_require__(96));
+__export(__webpack_require__(14));
 __export(__webpack_require__(97));
-var SP = __webpack_require__(98);
+__export(__webpack_require__(13));
+__export(__webpack_require__(98));
+__export(__webpack_require__(99));
+var SP = __webpack_require__(100);
 exports.SP = SP;
-var Types = __webpack_require__(99);
+var Types = __webpack_require__(101);
 exports.Types = Types;
 
 
@@ -336,10 +337,10 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(131));
-__export(__webpack_require__(132));
 __export(__webpack_require__(133));
-var Types = __webpack_require__(134);
+__export(__webpack_require__(134));
+__export(__webpack_require__(135));
+var Types = __webpack_require__(136);
 exports.Types = Types;
 
 /***/ }),
@@ -2718,6 +2719,16 @@ var _Web = /** @class */ (function (_super) {
         _this.addMethods(_this, { __metadata: { type: "web" } });
         return _this;
     }
+    // Method to get a remote web
+    _Web.getRemoteWeb = function (requestUrl) {
+        // Return the remote web information
+        return new utils_1.Base({
+            data: { requestUrl: requestUrl },
+            defaultToWebFl: true,
+            endpoint: "SP.RemoteWeb?$expand=Web",
+            method: "POST"
+        });
+    };
     return _Web;
 }(utils_1.Base));
 exports.Web = _Web;
@@ -2733,7 +2744,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(89));
+__export(__webpack_require__(91));
 var lib_1 = __webpack_require__(2);
 var __1 = __webpack_require__(3);
 var _1 = __webpack_require__(8);
@@ -6672,6 +6683,9 @@ exports.CommandButton = function (props) {
                     // Close the menu
                     _button._modalHostView.disposeModal();
                 });
+            } else if (props.onClick) {
+                // Execute the click event
+                props.onClick(btn);
             }
         });
     }
@@ -8890,15 +8904,20 @@ exports.RequestType = {
     GetWithArgs: 12,
     GetWithArgsInBody: 13,
     GetWithArgsInQS: 14,
-    GetWithArgsValueOnly: 15,
-    GetReplace: 16,
+    GetWithArgsInQSAsVar: 15,
+    GetWithArgsValueOnly: 16,
+    GetReplace: 17,
+    // Graph Requests
+    GraphGet: 20,
+    GraphPost: 21,
     // Post Requests
-    Post: 20,
-    PostWithArgs: 21,
-    PostWithArgsInBody: 22,
-    PostWithArgsInQS: 23,
-    PostWithArgsValueOnly: 24,
-    PostReplace: 25
+    Post: 30,
+    PostWithArgs: 31,
+    PostWithArgsInBody: 32,
+    PostWithArgsInQS: 33,
+    PostWithArgsInQSAsVar: 34,
+    PostWithArgsValueOnly: 35,
+    PostReplace: 36
 };
 
 
@@ -8918,13 +8937,30 @@ var _1 = __webpack_require__(0);
 var BaseHelper = /** @class */ (function () {
     function BaseHelper() {
     }
+    // Method to add the base references
+    BaseHelper.prototype.addBaseReferences = function (base, obj) {
+        // Add the base references
+        obj["addMethods"] = base.addMethods;
+        obj["base"] = base.base;
+        obj["done"] = base.done;
+        obj["execute"] = base.execute;
+        obj["executeAndWait"] = base.executeAndWait;
+        obj["executeMethod"] = base.executeMethod;
+        obj["existsFl"] = true;
+        obj["getProperty"] = base.getProperty;
+        obj["parent"] = base;
+        obj["targetInfo"] = base.targetInfo;
+        obj["updateMetadataUri"] = base.updateMetadataUri;
+        obj["waitForRequestsToComplete"] = base.waitForRequestsToComplete;
+    };
     // Method to add the methods to base object
-    BaseHelper.prototype.addMethods = function (base, data) {
+    BaseHelper.prototype.addMethods = function (base, data, graphType) {
+        var obj = base;
         var isCollection = data.results && data.results.length > 0;
         // Determine the metadata
         var metadata = isCollection ? data.results[0].__metadata : data.__metadata;
         // Determine the object type
-        var objType = metadata && metadata.type ? metadata.type : base.targetInfo.endpoint;
+        var objType = metadata && metadata.type ? metadata.type : obj.targetInfo.endpoint;
         objType = objType.split('/');
         objType = (objType[objType.length - 1]);
         objType = objType.split('.');
@@ -8970,18 +9006,18 @@ var BaseHelper = /** @class */ (function () {
                         var subPropName = propInfo.length > 2 ? propInfo[2] : null;
                         var subPropType = propInfo.length > 3 ? propInfo[3] : null;
                         // See if the property is null or is a collection
-                        if (base[propName] == null || (base[propName].__deferred && base[propName].__deferred.uri)) {
+                        if (obj[propName] == null || (obj[propName].__deferred && obj[propName].__deferred.uri)) {
                             // See if the base property has a sub-property defined for it
                             if (propInfo.length == 4) {
                                 // Update the ' char in the property name
                                 subPropName = subPropName.replace(/'/g, "\\'");
                                 // Add the property
-                                base[propName] = new Function("name", "name = name ? '" + propName + subPropName + "'.replace(/\\[Name\\]/g, name.toString().replace(/\'/g, \"''\")) : null;" +
+                                obj[propName] = new Function("name", "name = name ? '" + propName + subPropName + "'.replace(/\\[Name\\]/g, name.toString().replace(/\'/g, \"''\")) : null;" +
                                     "return this.getProperty(name ? name : '" + propName + "', name ? '" + subPropType + "' : '" + propType + "');");
                             }
                             else {
                                 // Add the property
-                                base[propName] = new Function("return this.getProperty('" + propName + "', '" + propType + "');");
+                                obj[propName] = new Function("return this.getProperty('" + propName + "', '" + propType + "');");
                             }
                         }
                     }
@@ -8993,10 +9029,10 @@ var BaseHelper = /** @class */ (function () {
                     // Clone the object properties
                     methodInfo = JSON.parse(JSON.stringify(methodInfo));
                     // Set the metadata type
-                    methodInfo.metadataType = methods[methodName].metadataType(base);
+                    methodInfo.metadataType = methods[methodName].metadataType(obj);
                 }
                 // Add the method to the object
-                base[methodName] = new Function("return this.executeMethod('" + methodName + "', " + JSON.stringify(methodInfo) + ", arguments);");
+                obj[methodName] = new Function("return this.executeMethod('" + methodName + "', " + JSON.stringify(methodInfo) + ", arguments);");
             }
         }
     };
@@ -9064,18 +9100,7 @@ var BaseHelper = /** @class */ (function () {
                 for (var _i = 0, results_2 = results_1; _i < results_2.length; _i++) {
                     var result = results_2[_i];
                     // Add the base references
-                    result["addMethods"] = obj.addMethods;
-                    result["base"] = obj.base;
-                    result["done"] = obj.done;
-                    result["execute"] = obj.execute;
-                    result["executeAndWait"] = obj.executeAndWait;
-                    result["executeMethod"] = obj.executeMethod;
-                    result["existsFl"] = true;
-                    result["getProperty"] = obj.getProperty;
-                    result["parent"] = obj;
-                    result["targetInfo"] = obj.targetInfo;
-                    result["updateMetadataUri"] = obj.updateMetadataUri;
-                    result["waitForRequestsToComplete"] = obj.waitForRequestsToComplete;
+                    this.addBaseReferences(obj, result);
                     // Update the metadata
                     this.updateMetadata(obj, result);
                     // Add the methods
@@ -9120,9 +9145,13 @@ var BaseHelper = /** @class */ (function () {
                     // Update the base object's properties
                     this.addProperties(obj, data.d);
                     // Add the methods
-                    this.addMethods(obj, data.d);
+                    this.addMethods(obj, data.d, data["@odata.context"]);
                     // Update the data collection
                     this.updateDataCollection(obj, data.d.results);
+                }
+                else {
+                    // Update the base object's properties
+                    this.addProperties(obj, data);
                 }
                 // See if the batch request exists
                 if (isBatchRequest) {
@@ -9198,6 +9227,7 @@ __export(__webpack_require__(58));
 __export(__webpack_require__(59));
 __export(__webpack_require__(60));
 __export(__webpack_require__(61));
+__export(__webpack_require__(62));
 
 
 /***/ }),
@@ -9592,6 +9622,32 @@ exports.limitedwebpartmanager = {
 
 /***/ }),
 /* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var utils_1 = __webpack_require__(0);
+/**
+ * Graph v1.0
+ */
+exports.graph = {
+    properties: [
+        "groups|graph_groups|/{[Name]}|graph_group",
+        "users|graph_users|/{[Name]}|graph_user"
+    ],
+    /**
+     * me
+     **/
+    me: {
+        requestType: utils_1.RequestType.GraphGet
+    }
+};
+exports.graph_user = {};
+
+
+/***/ }),
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10135,7 +10191,7 @@ exports.views = {
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10159,13 +10215,13 @@ exports.navigationservicerest = {
     getMenuState: {
         argNames: ["menuNodeKey", "depth", "customProperties", "mapProviderName"],
         name: "MenuState",
-        RequestType: utils_1.RequestType.GetWithArgsInQS
+        RequestType: utils_1.RequestType.GetWithArgsInQSAsVar
     }
 };
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10185,7 +10241,7 @@ exports.propertyvalues = {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10205,7 +10261,7 @@ exports.search = {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10306,7 +10362,7 @@ exports.roledefinitions = {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10594,7 +10650,7 @@ exports.web = {
     // Applies the specified site definition or site template to the Web site that has no template applied to it.
     applyWebTemplate: {
         argName: ["name"],
-        requestType: utils_1.RequestType.PostWithArgsInQS
+        requestType: utils_1.RequestType.PostWithArgsInQSAsVar
     },
     // Creates unique role assignments for the securable object.
     breakRoleInheritance: {
@@ -10613,7 +10669,7 @@ exports.web = {
     // Returns whether the current user has the given set of permissions.
     doesUserHavePermissions: {
         argNames: ["High", "Low"],
-        requestType: utils_1.RequestType.GetWithArgsInQS
+        requestType: utils_1.RequestType.GetWithArgsInQSAsVar
     },
     // Checks whether the specified login name belongs to a valid user in the site. If the user doesn't exist, adds the user to the site.
     ensureUser: {
@@ -10713,7 +10769,7 @@ exports.web = {
     // Queries for the push notification subscribers over the site for the specified user.
     getPushNotificationSubscribersByUser: {
         argNames: ["loginName"],
-        requestType: utils_1.RequestType.GetWithArgsInQS
+        requestType: utils_1.RequestType.GetWithArgsInQSAsVar
     },
     // Returns the collection of child sites of the current site based on the specified query. (SharePoint Online only)
     getSubwebsFilteredForCurrentUser: {
@@ -10736,7 +10792,7 @@ exports.web = {
     // Gets the site URL from a page URL.
     getWebUrlFromPageUrl: {
         name: "sp.web.getWebUrlFromPageUrl",
-        requestType: utils_1.RequestType.GetWithArgsInQS
+        requestType: utils_1.RequestType.GetWithArgsInQSAsVar
     },
     // Uploads and installs an app package to this site.
     loadAndInstallApp: {
@@ -10815,7 +10871,7 @@ exports.webs = {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10902,7 +10958,7 @@ exports.peoplemanager = {
     stopFollowing: {
         argNames: ["accountName"],
         name: "stopFollowing(@v)?@v='[[accountName]]'",
-        requestType: utils_1.RequestType.PostWithArgsInQS
+        requestType: utils_1.RequestType.PostWithArgsInQSAsVar
     },
     stopFollowingTag: {
         argNames: ["id"],
@@ -11000,7 +11056,7 @@ exports.userprofile = {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11169,7 +11225,7 @@ exports.users = {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11219,7 +11275,7 @@ exports.usercustomactions = {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11712,6 +11768,28 @@ exports.PrincipalTypes = {
  */
 exports.RelationshipDeleteBehaviorType = { None: 0, Cascade: 1, Restrict: 2 };
 /**
+ * Render List Data Options
+ */
+exports.RenderListDataOptions = {
+    None: 0,
+    ContextInfo: 1,
+    ListData: 2,
+    ListSchema: 4,
+    MenuView: 8,
+    ListContentType: 16,
+    FileSystemItemId: 32,
+    ClientFormSchema: 64,
+    QuickLaunch: 128,
+    Spotlight: 256,
+    Visualization: 512,
+    ViewMetadata: 1024,
+    DisableAutoHyperlink: 2048,
+    EnableMediaTAUrls: 4096,
+    ParentInfo: 8192,
+    PageContextInfo: 16384,
+    ClientSideComponentManifest: 32768
+};
+/**
  * Reordering Rule Match Types
  */
 exports.ReorderingRuleMatchType = {
@@ -11772,27 +11850,18 @@ exports.ViewType = {
 
 
 /***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ComplexTypes = __webpack_require__(64);
-exports.ComplexTypes = ComplexTypes;
-var Results = __webpack_require__(65);
-exports.Results = Results;
-var SPTypes = __webpack_require__(66);
-exports.SPTypes = SPTypes;
-
-
-/***/ }),
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var ComplexTypes = __webpack_require__(65);
+exports.ComplexTypes = ComplexTypes;
+var Results = __webpack_require__(66);
+exports.Results = Results;
+var SPTypes = __webpack_require__(67);
+exports.SPTypes = SPTypes;
 
 
 /***/ }),
@@ -11815,6 +11884,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
 /* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12118,7 +12196,7 @@ exports.BaseRequest = BaseRequest;
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12300,7 +12378,7 @@ exports.BaseExecution = BaseExecution;
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12363,6 +12441,7 @@ var Base = /** @class */ (function (_super) {
             response: this.response,
             status: this.status,
             targetInfo: {
+                accessToken: this.targetInfo.accessToken,
                 bufferFl: this.targetInfo.bufferFl,
                 defaultToWebFl: this.targetInfo.defaultToWebFl,
                 endpoint: this.targetInfo.endpoint,
@@ -12382,7 +12461,7 @@ exports.Base = Base;
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12479,7 +12558,7 @@ exports.Batch = Batch;
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12539,6 +12618,7 @@ var MethodInfo = /** @class */ (function () {
                 case _1.RequestType.PostWithArgs:
                 case _1.RequestType.PostWithArgsInBody:
                 case _1.RequestType.PostWithArgsInQS:
+                case _1.RequestType.PostWithArgsInQSAsVar:
                 case _1.RequestType.PostWithArgsValueOnly:
                 case _1.RequestType.PostReplace:
                     return "POST";
@@ -12565,6 +12645,11 @@ var MethodInfo = /** @class */ (function () {
     });
     Object.defineProperty(MethodInfo.prototype, "passDataInQS", {
         get: function () { return this.methodInfo.requestType == _1.RequestType.GetWithArgsInQS || this.methodInfo.requestType == _1.RequestType.PostWithArgsInQS; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MethodInfo.prototype, "passDataInQSAsVar", {
+        get: function () { return this.methodInfo.requestType == _1.RequestType.GetWithArgsInQSAsVar || this.methodInfo.requestType == _1.RequestType.PostWithArgsInQSAsVar; },
         enumerable: true,
         configurable: true
     });
@@ -12677,8 +12762,8 @@ var MethodInfo = /** @class */ (function () {
             // Stringify the data to be passed in the body
             this.methodData = JSON.stringify(data);
         }
-        // See if we are passing the data in the query string
-        if (this.passDataInQS) {
+        // See if we are passing the data in the query string as a variable
+        if (this.passDataInQSAsVar) {
             var data = this.methodParams || this.methodData;
             // Append the parameters in the query string
             url += "(@v)?@v=" + (typeof (data) === "string" ? "'" + encodeURIComponent(data) + "'" : JSON.stringify(data));
@@ -12698,7 +12783,7 @@ var MethodInfo = /** @class */ (function () {
             // Set the get all items Flag
             this.methodInfo.getAllItemsFl = oData.GetAllItems;
         }
-        else if (!this.passDataInBody && !this.passDataInQS) {
+        else if (!this.passDataInBody && !this.passDataInQSAsVar) {
             var params = "";
             // Ensure data exists
             var data = this.methodParams || this.methodData;
@@ -12722,8 +12807,15 @@ var MethodInfo = /** @class */ (function () {
                     }
                 }
             }
-            // Set the url
-            url += params.length > 0 ? "(" + params.replace(/, $/, "") + ")" : "";
+            // See if we are passing data in the query string
+            if (this.passDataInQS) {
+                // Set the url
+                url += params.length > 0 ? "?" + params.replace(/, $/, "&") : "";
+            }
+            else {
+                // Set the url
+                url += params.length > 0 ? "(" + params.replace(/, $/, "") + ")" : "";
+            }
         }
         // Return the url
         return url;
@@ -12734,7 +12826,7 @@ exports.MethodInfo = MethodInfo;
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12860,13 +12952,14 @@ exports.OData = OData;
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = __webpack_require__(2);
+var _1 = __webpack_require__(0);
 /**
  * Target Information
  */
@@ -12881,11 +12974,17 @@ var TargetInfo = /** @class */ (function () {
         this.requestHeaders = this.request.requestHeader;
         this.requestMethod = this.request.method ? this.request.method : "GET";
         // Set the request url
-        this.setRequestUrl();
+        this.isGraph ? this.setGraphRequestUrl() : this.setRESTRequestUrl();
     }
     Object.defineProperty(TargetInfo.prototype, "isBatchRequest", {
         // Flag to determine if this is a batch request
         get: function () { return this.request.endpoint == "$batch"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TargetInfo.prototype, "isGraph", {
+        // Flag to determine if this is a graph request
+        get: function () { return this.request.requestType == _1.RequestType.GraphGet || this.request.requestType == _1.RequestType.GraphPost; },
         enumerable: true,
         configurable: true
     });
@@ -12943,12 +13042,17 @@ var TargetInfo = /** @class */ (function () {
         // Key was not found
         return null;
     };
-    // Method to set the request url
-    TargetInfo.prototype.setRequestUrl = function () {
+    // Method to set the request url for the Graph API
+    TargetInfo.prototype.setGraphRequestUrl = function () {
+        // Return the request url
+        this.requestUrl = "https://graph.microsoft.com/" + this.request.endpoint;
+    };
+    // Method to set the request url for the REST API
+    TargetInfo.prototype.setRESTRequestUrl = function () {
         var endpoint = this.request.endpoint ? "/" + this.request.endpoint : "";
         var hostUrl = TargetInfo.getQueryStringValue("SPHostUrl");
         var qs = (endpoint.indexOf("?") === -1 ? "?" : "&") + "@target='{{Target}}'";
-        var template = "{{Url}}/_api/{{EndPoint}}{{TargetUrl}}";
+        var template = "{{Url}}" + (this.request.endpoint ? "/_api/{{EndPoint}}{{TargetUrl}}" : "");
         // See if we are defaulting the url for the app web
         if (lib_1.ContextInfo.existsFl && lib_1.ContextInfo.window.$REST && lib_1.ContextInfo.window.$REST.DefaultRequestToHostFl && lib_1.ContextInfo.isAppWeb && !this.request.overrideDefaultRequestToHostFl && this.request.url == null) {
             // Default the url to the host web
@@ -13001,7 +13105,7 @@ exports.TargetInfo = TargetInfo;
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13102,23 +13206,39 @@ var XHRRequest = /** @class */ (function () {
             }
         }
         else {
-            // Set the default headers
-            this.xhr.setRequestHeader("Accept", "application/json;odata=verbose");
-            this.xhr.setRequestHeader("Content-Type", "application/json;odata=verbose");
+            // See if this is a graph request
+            if (this.targetInfo.isGraph) {
+                // Set the default headers
+                this.xhr.setRequestHeader("Accept", "application/json");
+                this.xhr.setRequestHeader("Content-Type", "application/json");
+            }
+            else {
+                // Set the default headers
+                this.xhr.setRequestHeader("Accept", "application/json;odata=verbose");
+                this.xhr.setRequestHeader("Content-Type", "application/json;odata=verbose");
+            }
         }
-        // Set the method
-        this.xhr.setRequestHeader("X-HTTP-Method", this.targetInfo.requestMethod);
-        // Set the request digest
-        this.xhr.setRequestHeader("X-RequestDigest", requestDigest);
-        // See if we are deleting or updating the data
-        if (this.targetInfo.requestMethod == "DELETE" || this.targetInfo.requestMethod == "MERGE") {
-            // Append the header for deleting/updating
-            this.xhr.setRequestHeader("IF-MATCH", "*");
+        // See if this is a graph request
+        if (this.targetInfo.isGraph) {
+            // Set the authorization
+            this.xhr.setRequestHeader("Authorization", "Bearer " + this.targetInfo.request.accessToken);
+        }
+        else {
+            // Set the method
+            this.xhr.setRequestHeader("X-HTTP-Method", this.targetInfo.requestMethod);
+            // Set the request digest
+            this.xhr.setRequestHeader("X-RequestDigest", requestDigest);
+            // See if we are deleting or updating the data
+            if (this.targetInfo.requestMethod == "DELETE" || this.targetInfo.requestMethod == "MERGE") {
+                // Append the header for deleting/updating
+                this.xhr.setRequestHeader("IF-MATCH", "*");
+            }
         }
     };
     // Method to execute the xml http request
     XHRRequest.prototype.execute = function () {
         var _this = this;
+        // Set the request digest
         var requestDigest = this.targetInfo.request.requestDigest || "";
         if (requestDigest == "") {
             // Get the request digest
@@ -13193,7 +13313,7 @@ exports.XHRRequest = XHRRequest;
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13202,7 +13322,66 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 76 */
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var utils_1 = __webpack_require__(0);
+/**
+ * Graph
+ */
+var _Graph = /** @class */ (function (_super) {
+    __extends(_Graph, _super);
+    /**
+     * Constructor
+     */
+    function _Graph(accessToken, version) {
+        var _this = 
+        // Call the base constructor
+        _super.call(this, { accessToken: accessToken }) || this;
+        // Default the version
+        _this.targetInfo.endpoint = version || "v1.0";
+        // Add the methods
+        _this.addMethods(_this, { __metadata: { type: "graph" } });
+        return _this;
+    }
+    // Method to get the graph token from a classic page
+    _Graph.getAuthToken = function (scope) {
+        // Return a proimse
+        return new Promise(function (resolve, reject) {
+            // Set the data 
+            var data = { "resource": "https://graph.microsoft.com" };
+            scope ? data["scope"] = scope : null;
+            // Get the access token
+            (new utils_1.Base({
+                endpoint: "SP.OAuth.Token/Acquire",
+                data: data,
+                method: "POST"
+            })).execute(function (token) {
+                // Resolve the promise
+                resolve(token);
+            });
+        });
+    };
+    return _Graph;
+}(utils_1.Base));
+exports.Graph = _Graph;
+
+
+/***/ }),
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13260,13 +13439,27 @@ var _List = /** @class */ (function (_super) {
             callback(lists.results ? lists.results[0] : lists);
         });
     };
+    // Method to get the list data from the SP.List.getListDataAsStream endpoint
+    _List.getDataAsStream = function (listFullUrl, parameters) {
+        if (parameters === void 0) { parameters = {}; }
+        var params = "?listFullUrl='" + listFullUrl + "'";
+        // Parse the parameters
+        for (var key in parameters) {
+            // Append the parameter
+            params += "&" + key + "=" + parameters[key];
+        }
+        // Return the base object
+        return new utils_1.Base({
+            endpoint: "SP.List.getListDataAsStream" + params
+        });
+    };
     return _List;
 }(utils_1.Base));
 exports.List = _List;
 
 
 /***/ }),
-/* 77 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13313,7 +13506,7 @@ exports.Navigation = _Navigation;
 
 
 /***/ }),
-/* 78 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13355,7 +13548,7 @@ exports.PeopleManager = _PeopleManager;
 
 
 /***/ }),
-/* 79 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13398,7 +13591,7 @@ exports.PeoplePicker = _PeoplePicker;
 
 
 /***/ }),
-/* 80 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13441,7 +13634,7 @@ exports.ProfileLoader = _ProfileLoader;
 
 
 /***/ }),
-/* 81 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13520,7 +13713,7 @@ exports.Search = _Search;
 
 
 /***/ }),
-/* 82 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13563,8 +13756,38 @@ var _Site = /** @class */ (function (_super) {
         _this.addMethods(_this, { __metadata: { type: "site" } });
         return _this;
     }
+    // Method to see if a site exists
+    _Site.exists = function (url) {
+        // Return the base object
+        return new utils_1.Base({
+            data: { url: url },
+            defaultToWebFl: true,
+            endpoint: "SP.Site.Exists",
+            method: "POST"
+        });
+    };
+    // Method to get the app context
+    _Site.getAppContext = function (siteUrl) {
+        // Return the base object
+        return new utils_1.Base({
+            data: { siteUrl: siteUrl },
+            defaultToWebFl: true,
+            endpoint: "SP.AppContextSite",
+            method: "POST"
+        });
+    };
     // Method to get the root web
     _Site.prototype.getRootWeb = function () { return new _1.Web(null, this.targetInfo); };
+    // Method to get the url by id
+    _Site.getUrlById = function (id) {
+        // Return the base object
+        return new utils_1.Base({
+            data: { id: id },
+            defaultToWebFl: true,
+            endpoint: "SP.Site.GetUrlById",
+            method: "POST"
+        });
+    };
     // Method to determine if the current user has access, based on the permissions.
     _Site.prototype.hasAccess = function (permissions) {
         // TO DO
@@ -13577,7 +13800,7 @@ exports.Site = _Site;
 
 
 /***/ }),
-/* 83 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13646,7 +13869,7 @@ exports.SocialFeed = (new _SocialFeed());
 
 
 /***/ }),
-/* 84 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13689,7 +13912,7 @@ exports.UserProfile = _UserProfile;
 
 
 /***/ }),
-/* 85 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13782,7 +14005,7 @@ exports.Utility = _Utility;
 
 
 /***/ }),
-/* 86 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13791,7 +14014,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 87 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13869,7 +14092,7 @@ exports.Dependencies = _Dependencies;
 
 
 /***/ }),
-/* 88 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14250,7 +14473,7 @@ exports.FieldSchemaXML = function (fieldInfo) {
 
 
 /***/ }),
-/* 89 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14287,7 +14510,7 @@ exports.SPCfgType = {
 
 
 /***/ }),
-/* 90 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14676,7 +14899,7 @@ exports.JSLink = {
 
 
 /***/ }),
-/* 91 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15265,7 +15488,7 @@ exports.ListForm = {
 
 
 /***/ }),
-/* 92 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15458,7 +15681,7 @@ exports.ListFormField = {
 
 
 /***/ }),
-/* 93 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15518,7 +15741,7 @@ exports.Loader = {
 
 
 /***/ }),
-/* 94 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15549,7 +15772,7 @@ exports.parse = function (jsonString) {
 
 
 /***/ }),
-/* 95 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15595,7 +15818,7 @@ exports.SuiteBarLink = function (props) {
 
 
 /***/ }),
-/* 96 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16038,7 +16261,7 @@ exports.Taxonomy = {
 
 
 /***/ }),
-/* 97 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16324,7 +16547,7 @@ exports.WebPart = _WebPart;
 
 
 /***/ }),
-/* 98 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16499,7 +16722,7 @@ exports.Status = {
 
 
 /***/ }),
-/* 99 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16508,7 +16731,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16523,7 +16746,7 @@ exports.Util = utils_1.Types;
 
 
 /***/ }),
-/* 101 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16536,9 +16759,11 @@ var Mapper = __webpack_require__(6);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 3.98,
+    __ver: 4.02,
+    AppContext: function (siteUrl) { return Lib.Site.getAppContext(siteUrl); },
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
+    Graph: Lib.Graph,
     Helper: {
         App: Helper.App,
         Dependencies: Helper.Dependencies,
@@ -16558,12 +16783,17 @@ exports.$REST = {
         WebPart: Helper.WebPart
     },
     List: function (listName, targetInfo) { return new Lib.List(listName, targetInfo); },
+    ListByEntityName: function (entityTypeName, callback, targetInfo) { return Lib.List.getByEntityName(entityTypeName, callback, targetInfo); },
+    ListDataAsStream: function (listFullUrl, parameters) { return Lib.List.getDataAsStream(listFullUrl, parameters); },
     Navigation: function (url, targetInfo) { return new Lib.Navigation(url, targetInfo); },
     PeopleManager: function (targetInfo) { return new Lib.PeopleManager(targetInfo); },
     PeoplePicker: function (targetInfo) { return new Lib.PeoplePicker(targetInfo); },
     ProfileLoader: function (targetInfo) { return new Lib.ProfileLoader(targetInfo); },
+    RemoteWeb: function (requestUrl) { return Lib.Web.getRemoteWeb(requestUrl); },
     Search: function (url, targetInfo) { return new Lib.Search(url, targetInfo); },
     Site: function (url, targetInfo) { return new Lib.Site(url, targetInfo); },
+    SiteExists: function (url) { return Lib.Site.exists(url); },
+    SiteUrl: function (id) { return Lib.Site.getUrlById(id); },
     SPTypes: Mapper.SPTypes,
     SocialFeed: Lib.SocialFeed,
     UserProfile: function (targetInfo) { return new Lib.UserProfile(targetInfo); },
@@ -16581,7 +16811,7 @@ if ((global == null || global.__ver == null || global.__ver < exports.$REST.__ve
 
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16652,7 +16882,7 @@ exports.Personas = function (props) {
 };
 
 /***/ }),
-/* 103 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16690,7 +16920,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 104 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16722,7 +16952,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16753,7 +16983,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16861,7 +17091,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16908,7 +17138,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 108 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16924,7 +17154,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 109 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16959,7 +17189,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 110 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16975,7 +17205,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 111 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17006,7 +17236,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 112 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17032,7 +17262,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 113 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17100,7 +17330,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 114 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17117,7 +17347,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 115 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17147,7 +17377,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 116 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17165,7 +17395,7 @@ exports.Label = function (props) {
 };
 
 /***/ }),
-/* 117 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17189,7 +17419,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 118 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17213,7 +17443,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 119 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17241,7 +17471,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17257,7 +17487,7 @@ exports.Overlay = function (props) {
 };
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17301,7 +17531,7 @@ exports.Panel = function (props, content) {
 };
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17379,7 +17609,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17410,7 +17640,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 124 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17430,7 +17660,7 @@ exports.SearchBox = function (props) {
 };
 
 /***/ }),
-/* 125 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17446,7 +17676,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 126 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17482,7 +17712,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 127 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17508,7 +17738,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 128 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17530,7 +17760,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 129 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17538,11 +17768,11 @@ exports.Toggle = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(130);
+var Fabric = __webpack_require__(132);
 exports.Fabric = Fabric;
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17551,7 +17781,7 @@ exports.Fabric = Fabric;
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18100,7 +18330,7 @@ exports.Field = function (props) {
 };
 
 /***/ }),
-/* 132 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18480,7 +18710,7 @@ exports.ListForm.renderFormTemplate = function (props) {
 };
 
 /***/ }),
-/* 133 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18770,7 +19000,7 @@ exports.ListFormPanel = function (props) {
 };
 
 /***/ }),
-/* 134 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18779,7 +19009,7 @@ exports.ListFormPanel = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 135 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19147,7 +19377,7 @@ exports.WebPart = function (props) {
 };
 
 /***/ }),
-/* 136 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19415,7 +19645,7 @@ exports.WPList = function (props) {
 };
 
 /***/ }),
-/* 137 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19717,7 +19947,7 @@ exports.WPSearch = function (props) {
 };
 
 /***/ }),
-/* 138 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19903,7 +20133,7 @@ exports.WPTabs = function (props) {
 };
 
 /***/ }),
-/* 139 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19912,7 +20142,7 @@ exports.WPTabs = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 140 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

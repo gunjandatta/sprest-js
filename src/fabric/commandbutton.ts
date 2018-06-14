@@ -16,7 +16,7 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
     let _button: Fabric.ICommandButton = new fabric.CommandButton(props.el.querySelector(".ms-CommandButton"));
 
     // Parse the menu button
-    let btn = _button._container.querySelector(".ms-CommandButton-button");
+    let btn = _button._container.querySelector(".ms-CommandButton-button") as HTMLButtonElement;
     if (btn) {
         let _html = null;
 
@@ -49,6 +49,11 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
                     // Close the menu
                     _button._modalHostView.disposeModal();
                 });
+            }
+            // Else, See if a click event exists
+            else if (props.onClick) {
+                // Execute the click event
+                props.onClick(btn);
             }
         });
     }
