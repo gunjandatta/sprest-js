@@ -42,11 +42,14 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
                 _button._contextualMenu.classList.remove("is-hidden");
             }
 
-            // Set the click events
-            setClickEvents(_button._modalHostView._contextualHost.querySelector(".ms-ContextualMenu"), props.menu.items, (ev, item) => {
-                // Close the menu
-                _button._modalHostView.disposeModal();
-            });
+            // Ensure the contextual host exists
+            if (_button._modalHostView && _button._modalHostView._contextualHost) {
+                // Set the click events
+                setClickEvents(_button._modalHostView._contextualHost.querySelector(".ms-ContextualMenu"), props.menu.items, (ev, item) => {
+                    // Close the menu
+                    _button._modalHostView.disposeModal();
+                });
+            }
         });
     }
 

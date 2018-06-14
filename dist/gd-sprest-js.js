@@ -6665,11 +6665,14 @@ exports.CommandButton = function (props) {
                 // Remove the class
                 _button._contextualMenu.classList.remove("is-hidden");
             }
-            // Set the click events
-            common_1.setClickEvents(_button._modalHostView._contextualHost.querySelector(".ms-ContextualMenu"), props.menu.items, function (ev, item) {
-                // Close the menu
-                _button._modalHostView.disposeModal();
-            });
+            // Ensure the contextual host exists
+            if (_button._modalHostView && _button._modalHostView._contextualHost) {
+                // Set the click events
+                common_1.setClickEvents(_button._modalHostView._contextualHost.querySelector(".ms-ContextualMenu"), props.menu.items, function (ev, item) {
+                    // Close the menu
+                    _button._modalHostView.disposeModal();
+                });
+            }
         });
     }
     // Return the command button
