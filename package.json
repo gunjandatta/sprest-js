@@ -1,6 +1,6 @@
 {
   "name": "gd-sprest-js",
-  "version": "2.0.9",
+  "version": "2.1.0",
   "description": "SharePoint 2013/Online js components.",
   "main": "build/index.js",
   "typings": "build/index.d.ts",
@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/gunjandatta/sprest-js#readme",
   "peerDependencies": {
-    "gd-sprest": "^4.0.2"
+    "gd-sprest": "^4.0.5"
   },
   "dependencies": {},
   "devDependencies": {
@@ -39,7 +39,7 @@
     "babel-preset-env": "^1.7.0",
     "core-js": "^2.5.6",
     "css-loader": "^0.28.11",
-    "gd-sprest": "^4.0.2",
+    "gd-sprest": "^4.0.5",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.4.0",
     "gulp-insert": "^0.5.0",

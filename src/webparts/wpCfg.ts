@@ -61,47 +61,62 @@ export const WPCfg: IWPCfg = {
     },
 
     // Method to save the webpart configuration
-    saveConfiguration: (wpId: string, cfgId?: string, wpCfg?: any) => {
-        // Update the webpart content elements and return if they exist
-        if (WPCfg.updateWebPartContentElements(wpId, cfgId, wpCfg)) { return; }
-
-        // Get the target webpart
-        WPCfg.getWebPart(wpId).then((wpInfo) => {
-            // Get the content
-            let content = wpInfo && wpInfo.Properties.get_fieldValues()["Content"];
-            if (content) {
-                // Create an element so we can update the configuration
-                let el = document.createElement("div");
-                el.innerHTML = content;
-
-                // Get the configuration element and update it
-                let cfg = el.querySelector("#" + cfgId) as HTMLDivElement;
-                cfg ? cfg.innerText = JSON.stringify(wpCfg) : null;
-
-                // Update the webpart
-                wpInfo.Properties.set_item("Content", el.innerHTML);
-                wpInfo.WebPartDefinition.saveWebPartChanges();
-                wpInfo.Context.load(wpInfo.WebPartDefinition);
-
-                // Execute the request
-                wpInfo.Context.executeQueryAsync(
-                    // Success
-                    () => {
-                        // Disable the edit page warning
-                        if (SP && SP.Ribbon && SP.Ribbon.PageState && SP.Ribbon.PageState.PageStateHandler) {
-                            SP.Ribbon.PageState.PageStateHandler.ignoreNextUnload = true;
-                        }
-
-                        // Refresh the page
-                        window.location.href = window.location.pathname + "?DisplayMode=Design";
-                    },
-                    // Error
-                    (...args) => {
-                        // Log
-                        console.error("[gd-sprest] Error saving the configuration. " + args[1].get_message());
-                    }
-                );
+    saveConfiguration: (wpId: string, cfgId?: string, wpCfg?: any): PromiseLike<void> => {
+        // Return a promise
+        return new Promise((resolve, reject) => {
+            // Update the webpart content elements
+            if (WPCfg.updateWebPartContentElements(wpId, cfgId, wpCfg)) {
+                // Wiki page detected, resolve the promise and do nothing
+                resolve();
+                return;
             }
+
+            // Get the target webpart
+            WPCfg.getWebPart(wpId).then((wpInfo) => {
+                // Get the content
+                let content = wpInfo && wpInfo.Properties.get_fieldValues()["Content"];
+                if (content) {
+                    // Create an element so we can update the configuration
+                    let el = document.createElement("div");
+                    el.innerHTML = content;
+
+                    // Get the configuration element and update it
+                    let cfg = el.querySelector("#" + cfgId) as HTMLDivElement;
+                    cfg ? cfg.innerText = JSON.stringify(wpCfg) : null;
+
+                    // Update the webpart
+                    wpInfo.Properties.set_item("Content", el.innerHTML);
+                    wpInfo.WebPartDefinition.saveWebPartChanges();
+                    wpInfo.Context.load(wpInfo.WebPartDefinition);
+
+                    // Execute the request
+                    wpInfo.Context.executeQueryAsync(
+                        // Success
+                        () => {
+                            // Disable the edit page warning
+                            if (SP && SP.Ribbon && SP.Ribbon.PageState && SP.Ribbon.PageState.PageStateHandler) {
+                                SP.Ribbon.PageState.PageStateHandler.ignoreNextUnload = true;
+                            }
+
+                            // Refresh the page
+                            window.location.href = window.location.pathname + "?DisplayMode=Design";
+
+                            // Resolve the promise
+                            resolve();
+                        },
+                        // Error
+                        (...args) => {
+                            let message = args[1].get_message();
+
+                            // Log
+                            console.error("[gd-sprest] Error saving the configuration. " + message);
+
+                            // Reject the promise
+                            reject(message);
+                        }
+                    );
+                }
+            });
         });
     },
 

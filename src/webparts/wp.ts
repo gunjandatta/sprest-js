@@ -361,7 +361,10 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
                             cfg = cfg ? cfg : _wp.cfg;
 
                             // Save the configuration
-                            WPCfg.saveConfiguration(_wp.wpId, props.cfgElementId, cfg);
+                            WPCfg.saveConfiguration(_wp.wpId, props.cfgElementId, cfg).then(() => {
+                                // Close the panel
+                                _panel.hide();
+                            });
                         }
                     });
                 }

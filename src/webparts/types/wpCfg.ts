@@ -21,7 +21,7 @@ export interface IWPCfg {
      * @param cfgId: The configuration element id.
      * @param wpCfg - The webpart configuration.
      */
-    saveConfiguration(wpId: string, cfgId?: string, wpCfg?: any);
+    saveConfiguration(wpId: string, cfgId?: string, wpCfg?: any): PromiseLike<void>;
 
     /**
      * Method to update the configuration element
