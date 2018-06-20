@@ -19256,6 +19256,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(3);
 var fabric_1 = __webpack_require__(1);
 var wpCfg_1 = __webpack_require__(17);
+var __1 = __webpack_require__(5);
 /**
  * Web Part
  */
@@ -19459,6 +19460,20 @@ exports.WebPart = function (props) {
         return false;
     };
     /**
+     * Method to detect if the wiki page is being edited
+     */
+    var isWikiPageInEdit = function isWikiPageInEdit() {
+        var wikiPageMode = null;
+        // Get the form
+        var form = document.forms[MSOWebPartPageFormName];
+        if (form) {
+            // Get the wiki page mode
+            wikiPageMode = form._wikiPageMode ? form._wikiPageMode.value : null;
+        }
+        // Determine if this wiki page is being edited
+        return wikiPageMode == "Edit";
+    };
+    /**
      * Method to render the webpart
      */
     var render = function render() {
@@ -19562,10 +19577,28 @@ exports.WebPart = function (props) {
                 var mainCommands = [];
                 // Show the panel
                 _panel.show();
+                // Render the header template
+                var header = _panel.getHeader();
+                header.innerHTML = "<div></div><div></div>";
+                // See if this is a wiki page
+                var disableSaveButton = isWikiPageInEdit();
+                if (disableSaveButton) {
+                    // Get the webpart manager key name
+                    var elWPMgrKeyName = document.getElementById("MSOSPWebPartManager_OldSelectedStorageKeyName");
+                    // Set the flag
+                    disableSaveButton = elWPMgrKeyName == null || elWPMgrKeyName.value.indexOf(_cfg.WebPartId) < 0;
+                    if (disableSaveButton) {
+                        // Show a message
+                        header.children[1].innerHTML = __1.Fabric.Templates.Label({
+                            text: "You must edit the webpart in order to save changes."
+                        });
+                    }
+                }
                 // See if we are adding the save button
                 if (_panelCfg.showSaveButton != false) {
                     // Add the save button
                     mainCommands.push({
+                        isDisabled: disableSaveButton,
                         icon: "Save",
                         text: "Save",
                         onClick: function onClick() {
@@ -19596,7 +19629,7 @@ exports.WebPart = function (props) {
                 }]);
                 // Render the menu
                 fabric_1.CommandBar({
-                    el: _panel.getHeader(),
+                    el: header.children[0],
                     mainCommands: mainCommands,
                     sideCommands: sideCommands
                 });

@@ -2,6 +2,7 @@ import { ContextInfo } from "gd-sprest";
 import { CommandBar, Button, Panel, PanelTypes, Types } from "../fabric";
 import { IWebPart, IWebPartCfg, IWebPartEditPanel, IWebPartInfo, IWebPartObject, IWebPartProps } from "./types";
 import { WPCfg } from "./wpCfg";
+import { Fabric } from "..";
 declare var SP;
 declare var MSOWebPartPageFormName;
 
@@ -228,6 +229,23 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
     }
 
     /**
+     * Method to detect if the wiki page is being edited
+     */
+    let isWikiPageInEdit = () => {
+        let wikiPageMode = null;
+
+        // Get the form
+        let form = document.forms[MSOWebPartPageFormName];
+        if (form) {
+            // Get the wiki page mode
+            wikiPageMode = form._wikiPageMode ? form._wikiPageMode.value : null;
+        }
+
+        // Determine if this wiki page is being edited
+        return wikiPageMode == "Edit";
+    }
+
+    /**
      * Method to render the webpart
      */
     let render = () => {
@@ -329,7 +347,7 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
         // Render the configuration panel
         _wp.el.innerHTML = [
             '<div></div>',
-            '<div></div>',
+            '<div></div>'
         ].join('\n');
 
         // Render the panel
@@ -349,10 +367,31 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
                 // Show the panel
                 _panel.show();
 
+                // Render the header template
+                let header = _panel.getHeader();
+                header.innerHTML = "<div></div><div></div>";
+
+                // See if this is a wiki page
+                let disableSaveButton = isWikiPageInEdit();
+                if (disableSaveButton) {
+                    // Get the webpart manager key name
+                    let elWPMgrKeyName = document.getElementById("MSOSPWebPartManager_OldSelectedStorageKeyName") as HTMLInputElement;
+
+                    // Set the flag
+                    disableSaveButton = elWPMgrKeyName == null || elWPMgrKeyName.value.indexOf(_cfg.WebPartId) < 0;
+                    if (disableSaveButton) {
+                        // Show a message
+                        header.children[1].innerHTML = Fabric.Templates.Label({
+                            text: "You must edit the webpart in order to save changes."
+                        });
+                    }
+                }
+
                 // See if we are adding the save button
                 if (_panelCfg.showSaveButton != false) {
                     // Add the save button
                     mainCommands.push({
+                        isDisabled: disableSaveButton,
                         icon: "Save",
                         text: "Save",
                         onClick: () => {
@@ -387,7 +426,7 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
 
                 // Render the menu
                 CommandBar({
-                    el: _panel.getHeader(),
+                    el: header.children[0],
                     mainCommands,
                     sideCommands
                 });
