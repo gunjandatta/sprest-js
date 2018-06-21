@@ -16,10 +16,26 @@ export const WPTabs = (props: IWPTabsProps) => {
 
         // Get the webpart element and zone
         let elWebPart = document.querySelector("div[webpartid='" + wpInfo.cfg.WebPartId + "']") as HTMLDivElement;
-        let elWebPartZone = elWebPart ? getWebPartZone(elWebPart) : null;
+        let elWebPartZone: HTMLElement = elWebPart ? getWebPartZone(elWebPart) : null;
         if (elWebPart && elWebPartZone) {
             // Add a class name to the webpart zone
             elWebPartZone.className += " wp-tabs"
+
+            // See if this webpart is within a content zone
+            if (elWebPartZone.className.indexOf("ms-rte-layoutszone-inner") >= 0) {
+                debugger;
+                // Parse the children elements
+                for (let i = 0; i < elWebPartZone.children.length; i++) {
+                    let elChild = elWebPartZone.children[i];
+                    let elBreakLine = elChild.children[elChild.children.length - 1];
+
+                    // See if the last element is a new line
+                    if (elBreakLine.nodeName == "BR") {
+                        // Remove the element
+                        elChild.removeChild(elBreakLine);
+                    }
+                }
+            }
 
             // Parse the webparts in this zone
             let webparts = elWebPartZone.querySelectorAll(".ms-webpartzone-cell[id^='MSOZoneCell_WebPart']");
@@ -50,6 +66,13 @@ export const WPTabs = (props: IWPTabsProps) => {
                     while (webpart.parentNode) {
                         // See if this is the webpart box element
                         if (webpart.classList.contains("ms-rte-wpbox")) {
+                            // Find the div containing the webpart id
+                            let wpElement = webpart.querySelector("div[webpartid*='-']");
+                            if (wpElement) {
+                                // Set the webpart id attribute
+                                webpart.setAttribute("wpid", wpElement.getAttribute("webpartid"));
+                            }
+
                             // Add this webpart and break from the loop
                             wps.push(webpart);
                             break;
@@ -124,8 +147,13 @@ export const WPTabs = (props: IWPTabsProps) => {
 
         // Parse the webparts
         for (let i = 0; i < _webparts.length; i++) {
+            let wp = _webparts[i] as HTMLElement;
+
+            // Determine the query selector
+            let selector = wp.id ? "#" + wp.id : ".ms-rte-wpbox[wpid='" + wp.getAttribute("wpid") + "']";
+
             // Get the webpart
-            let webpart = document.querySelector("#" + _webparts[i].id) as HTMLDivElement;
+            let webpart = document.querySelector(selector) as HTMLDivElement;
             if (webpart) {
                 // See if we are displaying this webpart
                 if (i == selectedTabId) {

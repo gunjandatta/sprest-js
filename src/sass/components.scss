@@ -207,7 +207,7 @@
 */
 
 /** Hide the webpart */
-.ms-webpart-zone.wp-tabs > .is-hidden {
+.ms-webpart-zone.wp-tabs > .is-hidden, .ms-rte-wpbox.is-hidden {
     left: -100vw;
     position: absolute;
     overflow: hidden;

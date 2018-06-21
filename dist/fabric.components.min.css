@@ -757,6 +757,6 @@
 .fabric .ms-TextField.ms-TextField--underlined>.ms-Label.field-label{display:block}
 .fabric.ms-ContextualHost{z-index:2000}.fabric.ms-ContextualHost .ms-ContextualHost-main .ms-ContextualMenu-item--hasMenu>ul.ms-ContextualMenu{display:none;z-index:2100}
 .fabric.ms-ContextualHost .ms-ContextualHost-main .ms-ContextualMenu-item--hasMenu:focus>ul.ms-ContextualMenu,.fabric.ms-ContextualHost .ms-ContextualHost-main .ms-ContextualMenu-item--hasMenu:hover>ul.ms-ContextualMenu{box-shadow:0 0 5px 0 rgba(0,0,0,0.4);display:block}
-.fabric.ms-PanelHost,.fabric>.ms-Panel{z-index:1000}.ms-webpart-zone.wp-tabs>.is-hidden{left:-100vw;position:absolute;overflow:hidden}
+.fabric.ms-PanelHost,.fabric>.ms-Panel{z-index:1000}.ms-webpart-zone.wp-tabs>.is-hidden,.ms-rte-wpbox.is-hidden{left:-100vw;position:absolute;overflow:hidden}
 .ms-webpart-zone.wp-tabs{border-spacing:0}.ms-webpart-zone.wp-tabs .ms-webpart-chrome-title{display:none}
 .wp-tabs .wp-tab{margin-bottom:0;margin-top:0;padding-bottom:0;padding-top:0}.wp-tabs .wp-tab .ms-PartSpacingVertical{display:none}
