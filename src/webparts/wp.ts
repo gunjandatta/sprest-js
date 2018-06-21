@@ -262,14 +262,11 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
         // Set the configuration
         _cfg = _wp.cfg;
 
-        // See if we are setting the webpart class name
-        if (props.wpClassName) {
-            // Get the webpart element
-            let elWebPart = _wp.wpId ? document.querySelector("div[webpartid='" + _wp.wpId + "']") : null;
-            if (elWebPart) {
-                // Add the class name
-                elWebPart.className += " " + props.wpClassName;
-            }
+        // Get the webpart element
+        let elWebPart = _wp.wpId ? document.querySelector("div[webpartid='" + _wp.wpId + "']") : null;
+        if (elWebPart) {
+            // Add the default fabric class name
+            elWebPart.className += " fabric " + props.wpClassName;
         }
 
         // See if a class name exists
