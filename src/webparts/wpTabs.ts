@@ -109,7 +109,6 @@ export const WPTabs = (props: IWPTabsProps) => {
     // Method to remove empty paragraph or new lines for webparts w/in content zones
     let removeEmptyElements = (elWebPartZone: HTMLElement) => {
         let elChildren: Array<HTMLElement> = [];
-        debugger;
 
         // See if this webpart is within a layout zone or rich html field
         if (elWebPartZone.className.indexOf("ms-rte-layoutszone-inner") >= 0 ||

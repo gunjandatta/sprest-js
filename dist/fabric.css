@@ -10498,7 +10498,7 @@
 * WebPart Tabs
 */
 /** Hide the webpart */
-.wp-tabs > .is-hidden, .wp-tabs > .ms-rte-wpbox.is-hidden {
+.wp-tabs > .is-hidden, .wp-tabs .ms-rte-wpbox.is-hidden {
   left: -1000vw;
   position: absolute;
   overflow: hidden; }
