@@ -21,21 +21,8 @@ export const WPTabs = (props: IWPTabsProps) => {
             // Add a class name to the webpart zone
             elWebPartZone.className += " wp-tabs"
 
-            // See if this webpart is within a content zone
-            if (elWebPartZone.className.indexOf("ms-rte-layoutszone-inner") >= 0) {
-                debugger;
-                // Parse the children elements
-                for (let i = 0; i < elWebPartZone.children.length; i++) {
-                    let elChild = elWebPartZone.children[i];
-                    let elBreakLine = elChild.children[elChild.children.length - 1];
-
-                    // See if the last element is a new line
-                    if (elBreakLine.nodeName == "BR") {
-                        // Remove the element
-                        elChild.removeChild(elBreakLine);
-                    }
-                }
-            }
+            // Remove the empty elements
+            removeEmptyElements(elWebPartZone);
 
             // Parse the webparts in this zone
             let webparts = elWebPartZone.querySelectorAll(".ms-webpartzone-cell[id^='MSOZoneCell_WebPart']");
@@ -95,7 +82,7 @@ export const WPTabs = (props: IWPTabsProps) => {
     // Method to get the webpart zone
     let getWebPartZone = (el: HTMLDivElement) => {
         // Ensure the element exists
-        if (el) {
+        if (el && el.classList) {
             // See if this is the webpart zone element
             if (el.classList.contains("ms-webpart-zone")) {
                 // Return it
@@ -103,7 +90,7 @@ export const WPTabs = (props: IWPTabsProps) => {
             }
 
             // See if this is the inner page zone
-            if (el.classList.contains("ms-rte-layoutszone-inner")) {
+            if (el.classList.contains("ms-rte-layoutszone-inner") || el.classList.contains("ms-rtestate-field")) {
                 // Set the flag
                 _isContentZone = true;
 
@@ -117,6 +104,51 @@ export const WPTabs = (props: IWPTabsProps) => {
 
         // Return nothing
         return null;
+    }
+
+    // Method to remove empty paragraph or new lines for webparts w/in content zones
+    let removeEmptyElements = (elWebPartZone: HTMLElement) => {
+        let elChildren: Array<HTMLElement> = [];
+        debugger;
+
+        // See if this webpart is within a layout zone or rich html field
+        if (elWebPartZone.className.indexOf("ms-rte-layoutszone-inner") >= 0 ||
+            elWebPartZone.className.indexOf("ms-rtestate-field") >= 0) {
+            // Set the children elements
+            elChildren = elWebPartZone.children as any;
+        }
+
+        // Parse the children elements
+        for (let i = 0; i < elChildren.length; i++) {
+            let elChild = elWebPartZone.children[i];
+
+            // See if the last element is a new line
+            let elBreakLine = elChild.children[elChild.children.length - 1];
+            if (elBreakLine && elBreakLine.nodeName == "BR") {
+                // Remove the element
+                elChild.removeChild(elBreakLine);
+            }
+
+            // See if this is an empty paragraph tag
+            if (elChild.nodeName == "P") {
+                let removeElement = false;
+                let content = elChild.innerHTML.trim();
+
+                // See if this is an empty element
+                if (content.length == 0) {
+                    // Set the flag
+                    removeElement = true;
+                }
+                // Else, see if this is a line break
+                else if (content.length == 1 && content.charCodeAt(0) == 8203) {
+                    // Set the flag
+                    removeElement = true;
+                }
+
+                // Remove the element
+                removeElement ? elWebPartZone.removeChild(elChild) : null;
+            }
+        }
     }
 
     // Method to update the visibility of the webparts

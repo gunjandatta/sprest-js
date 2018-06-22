@@ -266,7 +266,7 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
         let elWebPart = _wp.wpId ? document.querySelector("div[webpartid='" + _wp.wpId + "']") : null;
         if (elWebPart) {
             // Add the default fabric class name
-            elWebPart.className += " fabric " + props.wpClassName;
+            elWebPart.className += " fabric " + (props.wpClassName || "");
         }
 
         // See if a class name exists

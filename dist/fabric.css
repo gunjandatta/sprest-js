@@ -10498,17 +10498,17 @@
 * WebPart Tabs
 */
 /** Hide the webpart */
-.ms-webpart-zone.wp-tabs > .is-hidden, .ms-rte-wpbox.is-hidden {
-  left: -100vw;
+.wp-tabs > .is-hidden, .wp-tabs > .ms-rte-wpbox.is-hidden {
+  left: -1000vw;
   position: absolute;
   overflow: hidden; }
 
 /** Remove the spacing around the webparts */
-.ms-webpart-zone.wp-tabs {
+.wp-tabs {
   border-spacing: 0px; }
 
 /** Hide the titles of the webparts */
-.ms-webpart-zone.wp-tabs .ms-webpart-chrome-title {
+.wp-tabs .ms-webpart-chrome-title {
   display: none; }
 
 /** Remove the spacing */
