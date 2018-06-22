@@ -4439,6 +4439,10 @@
   position: absolute;
   overflow: hidden; }
 
+/** Set the max height for the webpart tabs */
+.wp-tabs-main {
+  max-height: 15px; }
+
 /** Remove the spacing around the webparts */
 .wp-tabs {
   border-spacing: 0px; }
