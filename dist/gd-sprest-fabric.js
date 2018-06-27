@@ -7467,13 +7467,15 @@ exports.ListItem = function (props) {
     // See if actions exist
     if (props.actions) {
         var clickEvents = {};
-        // Parse the actions
-        for (var i = 0; i < props.actions.length; i++) {
+        var _loop_1 = function _loop_1(i) {
             var action = props.actions[i];
             // See if this action has a click event
             if (action.onClick) {
                 // Add this click event
-                clickEvents[i] = props.actions[i].onClick;
+                clickEvents[i] = function (ev) {
+                    // Execute the click event
+                    props.actions[i].onClick(listItem, ev);
+                };
             } else if (action.url) {
                 // Set a click event
                 clickEvents[i] = function (ev) {
@@ -7487,6 +7489,10 @@ exports.ListItem = function (props) {
                     }
                 };
             }
+        };
+        // Parse the actions
+        for (var i = 0; i < props.actions.length; i++) {
+            _loop_1(i);
         }
         // Get the actions
         var actions = props.el.querySelectorAll(".ms-ListItem-actions > .ms-ListItem-action");

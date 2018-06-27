@@ -1,4 +1,5 @@
 import { IProps } from ".";
+import { IListItem } from "./fabric";
 
 /**
  * List Item Action
@@ -8,7 +9,7 @@ export interface IListItemAction {
     iconName: string;
 
     /** The click event. */
-    onClick?: (ev?: MouseEvent) => void;
+    onClick?: (item: IListItem, ev?: MouseEvent) => void;
 
     /** The target behavior when redirecting to a url. */
     target?: string;

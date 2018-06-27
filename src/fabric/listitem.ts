@@ -25,7 +25,10 @@ export const ListItem = (props: IListItemProps): Fabric.IListItem => {
             // See if this action has a click event
             if (action.onClick) {
                 // Add this click event
-                clickEvents[i] = props.actions[i].onClick;
+                clickEvents[i] = ev => {
+                    // Execute the click event
+                    props.actions[i].onClick(listItem, ev);
+                }
             }
             // Else, see if the url exists
             else if (action.url) {
