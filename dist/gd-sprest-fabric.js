@@ -7811,6 +7811,7 @@ var _1 = __webpack_require__(1);
  */
 exports.PeoplePicker = function (props) {
     var _filterText = "";
+    var _searchAllAvailableUsersFl = typeof props.searchLocalFl === "boolean" ? !props.searchLocalFl : true;
     var _templates = _1.Templates.PeoplePicker(props);
     // Method to get the component
     var get = function get() {
@@ -7833,9 +7834,6 @@ exports.PeoplePicker = function (props) {
     };
     // Method to render the results
     var renderResults = function renderResults(searchAll) {
-        if (searchAll === void 0) {
-            searchAll = false;
-        }
         var searchDialog = _peoplepicker._contextualHostView._contextualHost;
         // Ensure the fabric class name is set
         if (_peoplepicker._contextualHostView._container.classList.contains("fabric") == false) {
@@ -7965,7 +7963,7 @@ exports.PeoplePicker = function (props) {
                 // Set the filter text
                 _filterText = filterText;
                 // Render the users
-                renderResults();
+                renderResults(_searchAllAvailableUsersFl);
             }
         }
     });
@@ -7979,7 +7977,7 @@ exports.PeoplePicker = function (props) {
             // Ensure the filters match
             if (filterText == _filterText) {
                 // Render the users
-                renderResults(ev);
+                renderResults(_searchAllAvailableUsersFl);
             }
         }, 500);
     });

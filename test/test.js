@@ -14022,13 +14022,15 @@ exports.ListItem = function (props) {
     // See if actions exist
     if (props.actions) {
         var clickEvents = {};
-        // Parse the actions
-        for (var i = 0; i < props.actions.length; i++) {
+        var _loop_1 = function (i) {
             var action = props.actions[i];
             // See if this action has a click event
             if (action.onClick) {
                 // Add this click event
-                clickEvents[i] = props.actions[i].onClick;
+                clickEvents[i] = function (ev) {
+                    // Execute the click event
+                    props.actions[i].onClick(listItem, ev);
+                };
             }
             else if (action.url) {
                 // Set a click event
@@ -14043,6 +14045,10 @@ exports.ListItem = function (props) {
                     }
                 };
             }
+        };
+        // Parse the actions
+        for (var i = 0; i < props.actions.length; i++) {
+            _loop_1(i);
         }
         // Get the actions
         var actions = props.el.querySelectorAll(".ms-ListItem-actions > .ms-ListItem-action");
@@ -14346,6 +14352,7 @@ var _1 = __webpack_require__(1);
  */
 exports.PeoplePicker = function (props) {
     var _filterText = "";
+    var _searchAllAvailableUsersFl = typeof (props.searchLocalFl) === "boolean" ? !props.searchLocalFl : true;
     var _templates = _1.Templates.PeoplePicker(props);
     // Method to get the component
     var get = function () {
@@ -14368,7 +14375,6 @@ exports.PeoplePicker = function (props) {
     };
     // Method to render the results
     var renderResults = function (searchAll) {
-        if (searchAll === void 0) { searchAll = false; }
         var searchDialog = _peoplepicker._contextualHostView._contextualHost;
         // Ensure the fabric class name is set
         if (_peoplepicker._contextualHostView._container.classList.contains("fabric") == false) {
@@ -14505,7 +14511,7 @@ exports.PeoplePicker = function (props) {
                 // Set the filter text
                 _filterText = filterText;
                 // Render the users
-                renderResults();
+                renderResults(_searchAllAvailableUsersFl);
             }
         }
     });
@@ -14519,7 +14525,7 @@ exports.PeoplePicker = function (props) {
             // Ensure the filters match
             if (filterText == _filterText) {
                 // Render the users
-                renderResults(ev);
+                renderResults(_searchAllAvailableUsersFl);
             }
         }, 500);
     });

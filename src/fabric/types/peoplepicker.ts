@@ -31,6 +31,12 @@ export interface IPeoplePickerProps extends IProps {
     /** Required flag. */
     required?: boolean;
 
+    /** 
+     * Search the user information list first, with a 'Search All' button for searching all available users.
+     * @default - This flag is false by default.
+     */
+    searchLocalFl?: boolean;
+
     /** The people picker value */
     value?: Array<Types.SP.IPeoplePickerUser>;
 }

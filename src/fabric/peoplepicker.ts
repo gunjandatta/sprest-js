@@ -7,6 +7,7 @@ import { fabric, Spinner, Templates } from ".";
  */
 export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
     let _filterText = "";
+    let _searchAllAvailableUsersFl = typeof (props.searchLocalFl) === "boolean" ? !props.searchLocalFl : true;
     let _templates = Templates.PeoplePicker(props);
 
     // Method to get the component
@@ -35,7 +36,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
     }
 
     // Method to render the results
-    let renderResults = (searchAll: boolean = false) => {
+    let renderResults = (searchAll: boolean) => {
         let searchDialog = _peoplepicker._contextualHostView._contextualHost;
 
         // Ensure the fabric class name is set
@@ -194,7 +195,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
                 _filterText = filterText;
 
                 // Render the users
-                renderResults();
+                renderResults(_searchAllAvailableUsersFl);
             }
         }
     });
@@ -210,7 +211,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
             // Ensure the filters match
             if (filterText == _filterText) {
                 // Render the users
-                renderResults(ev);
+                renderResults(_searchAllAvailableUsersFl);
             }
         }, 500);
     });
