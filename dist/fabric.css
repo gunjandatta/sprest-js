@@ -10392,7 +10392,6 @@
     * People Picker
     */
   /** Set the max height of the selected users */
-  /** Set the max height of the search container */
   /**
     * Search Box
     */
@@ -10452,9 +10451,6 @@
   .fabric .ms-PeoplePicker .selected-users {
     max-height: 250px;
     overflow-y: auto; }
-  .fabric .ms-PeoplePicker-search {
-    max-height: 200px;
-    overflow-y: auto; }
   .fabric .ms-SearchBox > .ms-SearchBox-search {
     display: none; }
   .fabric .ms-SearchBox.has-text > .ms-SearchBox-label {
@@ -10490,13 +10486,24 @@
       box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
       display: block; }
 
+/**
+ * Panel
+ */
 /** Ensure the panel is displayed on top */
 .fabric.ms-PanelHost, .fabric > .ms-Panel {
   z-index: 1000; }
 
 /**
-* WebPart Tabs
-*/
+ * People Picker
+ */
+/** Set the max height of the search container */
+.fabric.ms-PeoplePicker-search {
+  max-height: 200px;
+  overflow-y: auto; }
+
+/**
+ * WebPart Tabs
+ */
 /** Hide the webpart */
 .wp-tabs > .is-hidden, .wp-tabs .ms-rte-wpbox.is-hidden {
   left: -1000vw;

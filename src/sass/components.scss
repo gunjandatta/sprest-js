@@ -121,12 +121,6 @@
         overflow-y: auto;
     }
 
-    /** Set the max height of the search container */
-    .ms-PeoplePicker-search {
-        max-height: 200px;
-        overflow-y: auto;
-    }
-
     /**
     * Search Box
     */
@@ -197,14 +191,28 @@
     z-index: 2000;
 }
 
+/**
+ * Panel
+ */
+
 /** Ensure the panel is displayed on top */
 .fabric.ms-PanelHost, .fabric > .ms-Panel {
     z-index: 1000;
 }
 
 /**
-* WebPart Tabs
-*/
+ * People Picker
+ */
+
+/** Set the max height of the search container */
+.fabric.ms-PeoplePicker-search {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/**
+ * WebPart Tabs
+ */
 
 /** Hide the webpart */
 .wp-tabs > .is-hidden, .wp-tabs .ms-rte-wpbox.is-hidden {
