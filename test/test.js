@@ -16324,6 +16324,7 @@ exports.Field = function (props) {
                             el: props.el,
                             label: userInfo.title,
                             required: userInfo.required,
+                            searchLocalFl: true,
                             value: getUserValues(value)
                         })
                     });

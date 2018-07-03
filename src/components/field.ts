@@ -531,6 +531,7 @@ export const Field = (props: IFieldProps): PromiseLike<IField> => {
                             el: props.el,
                             label: userInfo.title,
                             required: userInfo.required,
+                            searchLocalFl: true,
                             value: getUserValues(value)
                         })
                     });
