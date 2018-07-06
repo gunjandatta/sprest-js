@@ -1,6 +1,20 @@
 import { Fabric, ICommandButtonProps, IProps } from ".";
 
 /**
+ * Callout
+ */
+export interface ICallout {
+    /** Closes the callout. */
+    close();
+
+    /** Returns the fabric component. */
+    get(): Fabric.ICallout;
+
+    /** Gets the main content */
+    getContent(): HTMLDivElement;
+}
+
+/**
  * Callout Properties
  */
 export interface ICalloutProps extends IProps {

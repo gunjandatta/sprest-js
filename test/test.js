@@ -13052,7 +13052,17 @@ exports.Callout = function (props) {
         });
     }
     // Return the callout
-    return _callout;
+    return {
+        close: function () {
+            // See if the contextual host exists
+            if (_callout._contextualHost && _callout._contextualHost) {
+                // Close the callout
+                _callout._contextualHost.disposeModal();
+            }
+        },
+        get: function () { return _callout; },
+        getContent: function () { return _callout._container.querySelector(".ms-Callout-content"); }
+    };
 };
 
 

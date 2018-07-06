@@ -1,4 +1,4 @@
-import { Fabric, ICalloutProps } from "./types";
+import { Fabric, ICallout, ICalloutProps } from "./types";
 import { fabric, Templates } from ".";
 
 /**
@@ -34,7 +34,7 @@ export enum CalloutTypes {
 /**
  * Callout
  */
-export const Callout = (props: ICalloutProps): Fabric.ICallout => {
+export const Callout = (props: ICalloutProps): ICallout => {
     // Set the template
     props.el.innerHTML = Templates.Callout(props);
 
@@ -86,5 +86,15 @@ export const Callout = (props: ICalloutProps): Fabric.ICallout => {
     }
 
     // Return the callout
-    return _callout;
+    return {
+        close: () => {
+            // See if the contextual host exists
+            if (_callout._contextualHost && _callout._contextualHost) {
+                // Close the callout
+                _callout._contextualHost.disposeModal();
+            }
+        },
+        get: () => { return _callout; },
+        getContent: () => { return _callout._container.querySelector(".ms-Callout-content"); }
+    };
 }
