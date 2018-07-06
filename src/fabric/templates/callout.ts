@@ -1,5 +1,6 @@
 import { ICalloutProps } from "../types";
 import { CalloutTypes } from "..";
+import { CommandButton } from ".";
 
 /**
  * Callout
@@ -28,6 +29,14 @@ export const Callout = (props: ICalloutProps): string => {
             break;
     }
 
+    // Parse the actions
+    let actions = props.actions || [];
+    let actionButtons = [];
+    for (let i = 0; i < actions.length; i++) {
+        // Add the action button
+        actionButtons.push(CommandButton(actions[i]));
+    }
+
     // Return the template
     return [
         '<div class="ms-Callout is-hidden ' + className.trim() + '">',
@@ -42,7 +51,7 @@ export const Callout = (props: ICalloutProps): string => {
         props.subText ? '<div class="ms-Callout-subText">' + props.subText + '</div>' : '',
         '</div>',
         '<div class="ms-Callout-actions">',
-        (props.actions || ""),
+        actionButtons.join('\n'),
         '</div>',
         '</div>',
         '</div>',

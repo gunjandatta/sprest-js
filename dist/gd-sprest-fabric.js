@@ -6437,14 +6437,45 @@ exports.Callout = function (props) {
     props.el.innerHTML = _1.Templates.Callout(props);
     // Create the callout
     var _callout = new _1.fabric.Callout(props.el.querySelector(".ms-Callout"), props.elTarget, props.position || "top");
-    // Set the click event
-    props.elTarget.addEventListener("click", function () {
-        // See if the host exists and fabric class doesn't exist
-        if (_callout._contextualHost && _callout._contextualHost._contextualHost.classList.contains("fabric") == false) {
-            // Add the class
-            _callout._contextualHost._contextualHost.classList.add("fabric");
-        }
-    });
+    // Ensure the target element exists
+    if (props.elTarget) {
+        // Set the click event
+        props.elTarget.addEventListener("click", function () {
+            // See if the host exists
+            if (_callout._contextualHost) {
+                // See if the fabric class doesn't exist
+                if (_callout._contextualHost._contextualHost.classList.contains("fabric") == false) {
+                    // Add the class
+                    _callout._contextualHost._contextualHost.classList.add("fabric");
+                }
+                // See if actions are defined
+                if (props.actions) {
+                    // Parse the action buttons
+                    var buttons = _callout._contextualHost._contextualHost.querySelectorAll(".ms-CommandButton-button");
+                    for (var i = 0; i < buttons.length; i++) {
+                        var action = props.actions[i];
+                        var button = buttons[i];
+                        // Set the button index
+                        button.setAttribute("data-btn-idx", i.toString());
+                        // Ensure the action and click event exist
+                        if (action && action.onClick) {
+                            // Set a click event
+                            button.addEventListener("click", function (ev) {
+                                var btn = ev.currentTarget;
+                                var btnIdx = parseInt(btn.getAttribute("data-btn-idx"));
+                                var action = props.actions[btnIdx];
+                                // See if the click event exists
+                                if (action && action.onClick) {
+                                    // Execute the click event
+                                    action.onClick(btn);
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        });
+    }
     // Return the callout
     return _callout;
 };
@@ -17403,6 +17434,7 @@ exports.Button = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var __1 = __webpack_require__(1);
+var _1 = __webpack_require__(4);
 /**
  * Callout
  */
@@ -17425,8 +17457,15 @@ exports.Callout = function (props) {
         default:
             break;
     }
+    // Parse the actions
+    var actions = props.actions || [];
+    var actionButtons = [];
+    for (var i = 0; i < actions.length; i++) {
+        // Add the action button
+        actionButtons.push(_1.CommandButton(actions[i]));
+    }
     // Return the template
-    return ['<div class="ms-Callout is-hidden ' + className.trim() + '">', '<div class="ms-Callout-main">', props.showCloseButton ? '<button class="ms-Callout-close"><i class="ms-Icon ms-Icon--Clear"></i></button>' : '', '<div class="ms-Callout-header">', '<p class="ms-Callout-title">' + (props.title || "") + '</p>', '</div>', '<div class="ms-Callout-inner">', '<div class="ms-Callout-content">', props.content || "", props.subText ? '<div class="ms-Callout-subText">' + props.subText + '</div>' : '', '</div>', '<div class="ms-Callout-actions">', props.actions || "", '</div>', '</div>', '</div>', '</div>'].join('\n');
+    return ['<div class="ms-Callout is-hidden ' + className.trim() + '">', '<div class="ms-Callout-main">', props.showCloseButton ? '<button class="ms-Callout-close"><i class="ms-Icon ms-Icon--Clear"></i></button>' : '', '<div class="ms-Callout-header">', '<p class="ms-Callout-title">' + (props.title || "") + '</p>', '</div>', '<div class="ms-Callout-inner">', '<div class="ms-Callout-content">', props.content || "", props.subText ? '<div class="ms-Callout-subText">' + props.subText + '</div>' : '', '</div>', '<div class="ms-Callout-actions">', actionButtons.join('\n'), '</div>', '</div>', '</div>', '</div>'].join('\n');
 };
 
 /***/ }),

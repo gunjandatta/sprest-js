@@ -1,11 +1,11 @@
-import { Fabric, IProps } from ".";
+import { Fabric, ICommandButtonProps, IProps } from ".";
 
 /**
  * Callout Properties
  */
 export interface ICalloutProps extends IProps {
     /** The callout actions. */
-    actions?: string;
+    actions?: Array<ICommandButtonProps>;
 
     /** The callout content. */
     content?: string;
