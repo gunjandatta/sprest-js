@@ -50,7 +50,7 @@ export const WPList = (props: IWPListProps): IWPList => {
             // Note - Since we are using a POST request, this would be required for cross-site collection requests
             ContextInfo.getWeb(webUrl).execute((contextInfo) => {
                 // Get the web
-                (new Web(webUrl, { requestDigest: contextInfo.GetContextWebInformation.FormDigestValue }))
+                Web(webUrl, { requestDigest: contextInfo.GetContextWebInformation.FormDigestValue })
                     // Get the list
                     .Lists(listName)
                     // Query the items
@@ -63,7 +63,7 @@ export const WPList = (props: IWPListProps): IWPList => {
             });
         } else {
             // Get the web
-            (new Web(webUrl))
+            Web(webUrl)
                 // Get the list
                 .Lists(listName)
                 // Query the items
@@ -82,7 +82,7 @@ export const WPList = (props: IWPListProps): IWPList => {
         query = (props.onExecutingODATAQuery ? props.onExecutingODATAQuery(_wpInfo, query) : null) || query;
 
         // Get the web
-        (new Web(webUrl))
+        Web(webUrl)
             // Get the list
             .Lists(listName)
             // Get the items
@@ -112,7 +112,7 @@ export const WPList = (props: IWPListProps): IWPList => {
         });
 
         // Get the web
-        (new Web(webUrl))
+        Web(webUrl)
             // Get the lists
             .Lists()
             // Include the fields

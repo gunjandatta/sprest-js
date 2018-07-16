@@ -203,7 +203,7 @@ window["TestJS"] = {
                 });
 
                 // Get the list
-                (new List("SPReact"))
+                List("SPReact")
                     // Get the items
                     .Items()
                     // Query for the first item

@@ -333,7 +333,7 @@ ListForm.renderEditForm = (props: IListFormEditProps): IListFormEdit => {
 
             // Return a promise
             return new Promise((resolve, reject) => {
-                let web = new Web();
+                let web = Web();
 
                 // Parse the field names
                 for (let fieldName in unknownUsers) {

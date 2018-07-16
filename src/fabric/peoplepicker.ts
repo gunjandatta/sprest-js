@@ -57,7 +57,7 @@ export const PeoplePicker = (props: IPeoplePickerProps): IPeoplePicker => {
         // Ensure 2 characters exist
         if (_filterText.length > 1) {
             // Search for the user
-            (new Search()).clientPeoplePickerSearchUser({
+            Search().clientPeoplePickerSearchUser({
                 MaximumEntitySuggestions: 15,
                 PrincipalSource: searchAll ? SPTypes.PrincipalSources.All : SPTypes.PrincipalSources.UserInfoList,
                 PrincipalType: props.allowGroups ? SPTypes.PrincipalTypes.All : SPTypes.PrincipalTypes.User,
