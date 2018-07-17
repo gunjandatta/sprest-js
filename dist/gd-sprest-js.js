@@ -5540,7 +5540,7 @@ var fabric;!function (e) {
         var t = document.createElement("div");t.setAttribute("class", "ms-Overlay"), this.overlayElement = t;
       }this.overlayElement.addEventListener("click", this.hide.bind(this), !1);
     }return e.prototype.remove = function () {
-      this.overlayElement.parentElement.removeChild(this.overlayElement);
+      this.overlayElement.parentElement && this.overlayElement.parentElement.removeChild(this.overlayElement);
     }, e.prototype.show = function () {
       this.overlayElement.classList.add("is-visible"), document.body.classList.add("ms-u-overflowHidden");
     }, e.prototype.hide = function () {
@@ -13726,7 +13726,6 @@ exports.ProfileLoader = (function (targetInfo) {
 
 "use strict";
 
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(0);
 /**
@@ -13747,7 +13746,7 @@ exports.Search = (function (url, targetInfo) {
     /** The search query method */
     search.searchquery = function (settings) {
         // Execute the request
-        return _this.executeMethod("query", {
+        return search.executeMethod("query", {
             argNames: ["query"],
             name: "query?[[query]]",
             requestType: utils_1.RequestType.GetReplace
@@ -13756,7 +13755,7 @@ exports.Search = (function (url, targetInfo) {
     /** The search suggest method */
     search.suggest = function (settings) {
         // Execute the request
-        return _this.executeMethod("query", {
+        return search.executeMethod("query", {
             argNames: ["query"],
             name: "suggest?[[query]]",
             requestType: utils_1.RequestType.GetReplace
@@ -13842,7 +13841,6 @@ exports.Site.getUrlById = (function (id) {
 
 "use strict";
 
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(0);
 /**
@@ -13861,7 +13859,7 @@ exports.SocialFeed = (function (targetInfo) {
         // Set the post metadata
         postInfo["__metadata"] = { type: "SP.Social.SocialRestPostCreationData" };
         postInfo.creationData["__metadata"] = { type: "SP.Social.SocialPostCreationData" };
-        return _this.executeMethod("postToMyFeed", {
+        return socialFeed.executeMethod("postToMyFeed", {
             argNames: ["restCreationData"],
             name: "actor(item=@v)/feed?@v='" + encodeURIComponent(accountName) + "'",
             requestType: utils_1.RequestType.PostWithArgsInBody
@@ -13873,7 +13871,7 @@ exports.SocialFeed = (function (targetInfo) {
         // Set the post metadata
         postInfo["__metadata"] = { type: "SP.Social.SocialRestPostCreationData" };
         postInfo.creationData["__metadata"] = { type: "SP.Social.SocialPostCreationData" };
-        return _this.executeMethod("postToMyFeed", {
+        return socialFeed.executeMethod("postToMyFeed", {
             argNames: ["restCreationData"],
             name: "my/feed/post",
             requestType: utils_1.RequestType.PostWithArgsInBody
@@ -13914,7 +13912,6 @@ exports.UserProfile = (function (targetInfo) {
 
 "use strict";
 
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(0);
 /**
@@ -13940,7 +13937,7 @@ exports.Utility = (function (url, targetInfo) {
             WikiHtmlContent: content
         };
         // Execute the method
-        return _this.executeMethod("createWikiPage", {
+        return utility.executeMethod("createWikiPage", {
             argNames: ["parameters"],
             name: "SP.Utilities.Utility.CreateWikiPageInContextWeb",
             replaceEndpointFl: true,
@@ -13967,7 +13964,7 @@ exports.Utility = (function (url, targetInfo) {
             }
         }
         // Execute the method
-        return _this.executeMethod("sendEmail", {
+        return utility.executeMethod("sendEmail", {
             argNames: ["properties"],
             metadataType: "SP.Utilities.EmailProperties",
             name: "SP.Utilities.Utility.sendEmail",
@@ -16999,7 +16996,7 @@ var Mapper = __webpack_require__(6);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 4.13,
+    __ver: 4.14,
     AppContext: function (siteUrl) { return Lib.Site.getAppContext(siteUrl); },
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,

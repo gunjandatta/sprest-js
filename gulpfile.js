@@ -71,6 +71,8 @@ gulp.task("copy-css", ["build"], () => {
 gulp.task("copy-fabric-js", ["build"], () => {
     // Get the source file
     return gulp.src("node_modules/office-ui-fabric-js/dist/js/fabric.min.js")
+        // Bug Fix - Overlay - PR Submitted - parentElement may be null
+        .pipe(replace(/this\.overlayElement\.parentElement\.removeChild\(this\.overlayElement\)/g, 'this.overlayElement.parentElement && this.overlayElement.parentElement.removeChild(this.overlayElement)'))
         // Prepend an import of the pickadate library
         .pipe(insert.prepend("require('./pickadate');\n"))
         // Prepend an import of the jquery library
