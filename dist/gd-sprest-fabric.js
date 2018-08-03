@@ -4569,7 +4569,9 @@ function removeStyleElement (style) {
 function createStyleElement (options) {
 	var style = document.createElement("style");
 
-	options.attrs.type = "text/css";
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
 
 	addAttrs(style, options.attrs);
 	insertStyleElement(options, style);
@@ -4580,7 +4582,9 @@ function createStyleElement (options) {
 function createLinkElement (options) {
 	var link = document.createElement("link");
 
-	options.attrs.type = "text/css";
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
 	options.attrs.rel = "stylesheet";
 
 	addAttrs(link, options.attrs);
@@ -13398,12 +13402,15 @@ var XHRRequest = /** @class */ (function () {
     };
     // Method to default the request headers
     XHRRequest.prototype.defaultHeaders = function (requestDigest) {
+        var ifMatchExists = false;
         // See if the custom headers exist
         if (this.targetInfo.requestHeaders) {
             // Parse the custom headers
             for (var header in this.targetInfo.requestHeaders) {
                 // Add the header
                 this.xhr.setRequestHeader(header, this.targetInfo.requestHeaders[header]);
+                // See if this is the "IF-MATCH" header
+                ifMatchExists = ifMatchExists || header.toUpperCase() == "IF-MATCH";
             }
         }
         else {
@@ -13425,12 +13432,15 @@ var XHRRequest = /** @class */ (function () {
             this.xhr.setRequestHeader("Authorization", "Bearer " + this.targetInfo.request.accessToken);
         }
         else {
-            // Set the method
-            this.xhr.setRequestHeader("X-HTTP-Method", this.targetInfo.requestMethod);
+            // See if custom headers were not defined
+            if (this.targetInfo.requestHeaders == null) {
+                // Set the method by default
+                this.xhr.setRequestHeader("X-HTTP-Method", this.targetInfo.requestMethod);
+            }
             // Set the request digest
             this.xhr.setRequestHeader("X-RequestDigest", requestDigest);
             // See if we are deleting or updating the data
-            if (this.targetInfo.requestMethod == "DELETE" || this.targetInfo.requestMethod == "MERGE") {
+            if (this.targetInfo.requestMethod == "DELETE" || this.targetInfo.requestMethod == "MERGE" && !ifMatchExists) {
                 // Append the header for deleting/updating
                 this.xhr.setRequestHeader("IF-MATCH", "*");
             }
@@ -14232,6 +14242,29 @@ exports.FieldSchemaXML = function (fieldInfo) {
         // Resolve the request
         _resolve(schemaXml);
     };
+    // Returns the schema xml for a currency field.
+    var createCurrency = function (fieldInfo, props) {
+        var schemaXml = null;
+        // Set the field type
+        props["Type"] = "Currency";
+        // Set the number properties
+        if (fieldInfo.decimals >= 0) {
+            props["Decimals"] = fieldInfo.decimals;
+        }
+        if (fieldInfo.lcid > 0) {
+            props["LCID"] = fieldInfo.lcid;
+        }
+        if (fieldInfo.max != null) {
+            props["Max"] = fieldInfo.max;
+        }
+        if (fieldInfo.min != null) {
+            props["Min"] = fieldInfo.min;
+        }
+        // Generate the schema
+        schemaXml = "<Field " + toString(props) + " />";
+        // Resolve the request
+        _resolve(schemaXml);
+    };
     // Returns the schema xml for a date field.
     var createDate = function (fieldInfo, props) {
         var schemaXml = null;
@@ -14269,7 +14302,7 @@ exports.FieldSchemaXML = function (fieldInfo) {
             })
                 .execute(function (list) {
                 // Set the list and web ids
-                props["List"] = list.Id;
+                props["List"] = "{" + list.Id + "}";
                 if (fieldInfo.webUrl) {
                     props["WebId"] = list.ParentWeb.Id;
                 }
@@ -14279,7 +14312,7 @@ exports.FieldSchemaXML = function (fieldInfo) {
         }
         else {
             // Set the list id
-            props["List"] = fieldInfo.listId;
+            props["List"] = "{" + fieldInfo.listId.replace(/[\{\}]/g, "") + "}";
             // Resolve the request
             _resolve("<Field " + toString(props) + " />");
         }
@@ -14435,13 +14468,16 @@ exports.FieldSchemaXML = function (fieldInfo) {
             props["ID"] = "{" + lib_1.ContextInfo.generateGUID() + "}";
             props["Name"] = fieldInfo.name;
             props["StaticName"] = fieldInfo.name;
-            props["DisplayName"] = fieldInfo.title;
+            props["DisplayName"] = fieldInfo.title || fieldInfo.name;
             // Set the optional properties
             if (typeof (fieldInfo.group) !== "undefined") {
                 props["Group"] = fieldInfo.group;
             }
             if (typeof (fieldInfo.hidden) !== "undefined") {
                 props["Hidden"] = fieldInfo.hidden ? "TRUE" : "FALSE";
+            }
+            if (typeof (fieldInfo.readOnly) !== "undefined") {
+                props["ReadOnly"] = fieldInfo.readOnly ? "TRUE" : "FALSE";
             }
             if (typeof (fieldInfo.required) !== "undefined") {
                 props["Required"] = fieldInfo.required ? "TRUE" : "FALSE";
@@ -14474,6 +14510,10 @@ exports.FieldSchemaXML = function (fieldInfo) {
                 // Choice
                 case spCfg_1.SPCfgFieldType.Choice:
                     createChoice(fieldInfo, props);
+                    break;
+                // Currency
+                case spCfg_1.SPCfgFieldType.Currency:
+                    createCurrency(fieldInfo, props);
                     break;
                 // Date/Time
                 case spCfg_1.SPCfgFieldType.Date:
@@ -14509,8 +14549,8 @@ exports.FieldSchemaXML = function (fieldInfo) {
                     break;
                 // Field type not supported
                 default:
-                    // Resolve the promise
-                    resolve();
+                    // Create a text field by default
+                    createText(fieldInfo, props);
                     break;
             }
         }
@@ -14532,14 +14572,15 @@ exports.SPCfgFieldType = {
     Boolean: 0,
     Calculated: 1,
     Choice: 2,
-    Date: 3,
-    Lookup: 4,
-    MMS: 5,
-    Note: 6,
-    Number: 7,
-    Text: 8,
-    Url: 9,
-    User: 10
+    Currency: 3,
+    Date: 4,
+    Lookup: 5,
+    MMS: 6,
+    Note: 7,
+    Number: 8,
+    Text: 9,
+    Url: 10,
+    User: 11
 };
 /**
  * SharePoint Configuration Types
@@ -15743,17 +15784,15 @@ exports.Loader = {
     loaded: false,
     // Method to wait for the SharePoint core libraries to be loaded
     waitForSPLibs: function (callback, timeout, loadLibraries) {
+        if (timeout === void 0) { timeout = 2500; }
+        if (loadLibraries === void 0) { loadLibraries = true; }
         var counter = 0;
-        // Default the flag to load the libraries
-        loadLibraries = typeof (loadLibraries) === "boolean" ? loadLibraries : false;
-        // Default the timeout (5 seconds)
-        timeout = typeof (timeout) === "number" ? timeout : 2500;
         // Determine the number of iterations
         var maxLoops = timeout / 25;
         // See if the flag has already been set
         if (_this.loaded) {
             // Execute the callback
-            callback();
+            callback ? callback() : null;
             return;
         }
         // See if we are loading the libraries
@@ -15779,7 +15818,7 @@ exports.Loader = {
                 // Stop the loop
                 clearInterval(intervalId);
                 // Execute the callback
-                callback();
+                callback ? callback() : null;
             }
         }, 25);
     }
@@ -15793,7 +15832,57 @@ exports.Loader = {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var lib_1 = __webpack_require__(2);
 var utils_1 = __webpack_require__(0);
+/**
+ * Creates a document set item.
+ * @param name - The name of the document set folder to create.
+ * @param listName - The name of the document set library.
+ * @param webUrl - The url of the web containing the document set library.
+ */
+exports.createDocSet = function (name, listName, webUrl) {
+    // Return a promise
+    return new Promise(function (resolve, reject) {
+        // Get the document set's root folder
+        lib_1.Web(webUrl).Lists(listName).query({ Expand: ["ContentTypes", "ParentWeb", "RootFolder"] }).execute(function (list) {
+            // Parse the content types
+            var ctId = "0x0120D520";
+            for (var i = 0; i < list.ContentTypes.results.length; i++) {
+                // See if this is the document set content type
+                if (list.ContentTypes.results[i].StringId.startsWith(ctId)) {
+                    // Set the content type id
+                    ctId = list.ContentTypes.results[i].StringId;
+                    break;
+                }
+            }
+            // Create the document set item
+            exports.request({
+                method: "POST",
+                url: list.ParentWebUrl + "/_vti_bin/listdata.svc/" + list.Title.replace(/ /g, ""),
+                headers: {
+                    Accept: "application/json;odata=verbose",
+                    "Content-Type": "application/json;odata=verbose",
+                    Slug: list.RootFolder.ServerRelativeUrl + "/" + name + "|" + ctId,
+                    "X-Requested-With": "XMLHttpRequest"
+                },
+                data: {
+                    Title: name,
+                    Path: list.RootFolder.ServerRelativeUrl
+                }
+            }).then(function (response) {
+                // See if the request was successful
+                if (response.d && response.d.Id > 0) {
+                    // Get the document set item and resolve the promise
+                    lib_1.Web(webUrl).Lists(listName).Items(response.d.Id).execute(resolve);
+                }
+                else {
+                    // Reject the promise
+                    reject(response["response"]);
+                }
+            });
+        });
+    });
+};
 /**
  * Convert a JSON string to a base object
  */
@@ -15814,6 +15903,21 @@ exports.parse = function (jsonString) {
     }
     catch (_a) { }
     return null;
+};
+/**
+ * XML HTTP Request
+ */
+exports.request = function (props) {
+    // Return a promise
+    return new Promise(function (resolve, reject) {
+        // Execute the request and resolve the promise
+        (new utils_1.Base({
+            method: props.method || "GET",
+            url: props.url,
+            requestHeader: props.headers,
+            data: props.data
+        })).execute(resolve, reject);
+    });
 };
 
 
@@ -16997,7 +17101,7 @@ var Mapper = __webpack_require__(6);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 4.15,
+    __ver: 4.17,
     AppContext: function (siteUrl) { return Lib.Site.getAppContext(siteUrl); },
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
@@ -17005,6 +17109,7 @@ exports.$REST = {
     Helper: {
         App: Helper.App,
         Dependencies: Helper.Dependencies,
+        createDocSet: Helper.createDocSet,
         Executor: Helper.Executor,
         FieldSchemaXML: Helper.FieldSchemaXML,
         JSLink: Helper.JSLink,
@@ -17012,6 +17117,7 @@ exports.$REST = {
         ListFormField: Helper.ListFormField,
         Loader: Helper.Loader,
         parse: Helper.parse,
+        request: Helper.request,
         RibbonLink: Helper.RibbonLink,
         SP: Helper.SP,
         SPCfgFieldType: Helper.SPCfgFieldType,
@@ -17041,11 +17147,14 @@ exports.$REST = {
 };
 // See if the library doesn't exist, or is an older version
 var global = Lib.ContextInfo.window.$REST;
-if ((global == null || global.__ver == null || global.__ver < exports.$REST.__ver) && Lib.ContextInfo.window.SP) {
+if (global == null || global.__ver == null || global.__ver < exports.$REST.__ver) {
     // Set the global variable
     Lib.ContextInfo.window.$REST = exports.$REST;
-    // Alert other scripts this library is loaded
-    Lib.ContextInfo.window.SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest.js");
+    // Ensure the SP lib exists
+    if (Lib.ContextInfo.window.SP) {
+        // Alert other scripts this library is loaded
+        Lib.ContextInfo.window.SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("gd-sprest.js");
+    }
 }
 
 
@@ -18735,176 +18844,204 @@ exports.ListForm.renderEditForm = function (props) {
             fields.push(field);
         });
     }
-    // Return the form
-    return {
-        getFields: function getFields() {
-            return fields;
-        },
-        getValues: function getValues() {
-            var formValues = {};
-            var unknownUsers = {};
-            // Parse the fields
-            for (var i = 0; i < fields.length; i++) {
-                var field = fields[i];
-                var fieldName = field.fieldInfo.name;
-                var fieldValue = field.element.getValue();
-                // Update the field name/value, based on the type
-                switch (field.fieldInfo.type) {
-                    // Choice
-                    case gd_sprest_1.SPTypes.FieldType.Choice:
-                        // Update the field value
-                        fieldValue = fieldValue && fieldValue.length > 0 ? fieldValue[0].value : null;
-                        break;
-                    // Lookup
-                    case gd_sprest_1.SPTypes.FieldType.Lookup:
-                        // Append 'Id' to the field name
-                        fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
-                        // See if this is a multi-value field
-                        if (field.fieldInfo.multi) {
-                            var values = fieldValue || [];
-                            fieldValue = { results: [] };
-                            // Parse the options
-                            for (var j = 0; j < values.length; j++) {
-                                // Add the value
-                                fieldValue.results.push(values[j].value);
-                            }
-                        } else {
-                            // Update the field value
-                            fieldValue = fieldValue && fieldValue.length > 0 ? fieldValue[0].value : fieldValue;
-                        }
-                        break;
-                    // Multi-Choice
-                    case gd_sprest_1.SPTypes.FieldType.MultiChoice:
-                        var options = fieldValue || [];
+    // Method to get the form values
+    var getFormValues = function getFormValues() {
+        var formValues = {};
+        var unknownUsers = {};
+        // Parse the fields
+        for (var i = 0; i < fields.length; i++) {
+            var field = fields[i];
+            var fieldName = field.fieldInfo.name;
+            var fieldValue = field.element.getValue();
+            // Update the field name/value, based on the type
+            switch (field.fieldInfo.type) {
+                // Choice
+                case gd_sprest_1.SPTypes.FieldType.Choice:
+                    // Update the field value
+                    fieldValue = fieldValue && fieldValue.length > 0 ? fieldValue[0].value : null;
+                    break;
+                // Lookup
+                case gd_sprest_1.SPTypes.FieldType.Lookup:
+                    // Append 'Id' to the field name
+                    fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
+                    // See if this is a multi-value field
+                    if (field.fieldInfo.multi) {
+                        var values = fieldValue || [];
                         fieldValue = { results: [] };
                         // Parse the options
-                        for (var j = 0; j < options.length; j++) {
-                            // Add the option
-                            fieldValue.results.push(options[j].value);
+                        for (var j = 0; j < values.length; j++) {
+                            // Add the value
+                            fieldValue.results.push(values[j].value);
                         }
-                        break;
-                    // URL
-                    case gd_sprest_1.SPTypes.FieldType.URL:
-                        // See if the field value exists
-                        if (fieldValue) {
-                            // Add the metadata
-                            fieldValue.__metadata = { type: "SP.FieldUrlValue" };
-                        }
-                        break;
-                    // User
-                    case gd_sprest_1.SPTypes.FieldType.User:
-                        // Append 'Id' to the field name
-                        fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
-                        // See if this is a multi-value field
-                        if (field.fieldInfo.multi) {
-                            var values = fieldValue || [];
-                            fieldValue = { results: [] };
-                            // Parse the options
-                            for (var j = 0; j < values.length; j++) {
-                                var userValue = values[j];
-                                if (userValue && userValue.EntityData) {
-                                    // Ensure the user or group id exists
-                                    if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
-                                        // Update the field value
-                                        fieldValue.results.push(userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID);
-                                    } else {
-                                        // Add the unknown user account
-                                        unknownUsers[fieldName] = unknownUsers[fieldName] || [];
-                                        unknownUsers[fieldName].push(userValue.Key);
-                                    }
-                                }
-                            }
-                        } else {
-                            var userValue = fieldValue ? fieldValue[0] : null;
+                    } else {
+                        // Update the field value
+                        fieldValue = fieldValue && fieldValue.length > 0 ? fieldValue[0].value : fieldValue;
+                    }
+                    break;
+                // Multi-Choice
+                case gd_sprest_1.SPTypes.FieldType.MultiChoice:
+                    var options = fieldValue || [];
+                    fieldValue = { results: [] };
+                    // Parse the options
+                    for (var j = 0; j < options.length; j++) {
+                        // Add the option
+                        fieldValue.results.push(options[j].value);
+                    }
+                    break;
+                // URL
+                case gd_sprest_1.SPTypes.FieldType.URL:
+                    // See if the field value exists
+                    if (fieldValue) {
+                        // Add the metadata
+                        fieldValue.__metadata = { type: "SP.FieldUrlValue" };
+                    }
+                    break;
+                // User
+                case gd_sprest_1.SPTypes.FieldType.User:
+                    // Append 'Id' to the field name
+                    fieldName += fieldName.lastIndexOf("Id") == fieldName.length - 2 ? "" : "Id";
+                    // See if this is a multi-value field
+                    if (field.fieldInfo.multi) {
+                        var values = fieldValue || [];
+                        fieldValue = { results: [] };
+                        // Parse the options
+                        for (var j = 0; j < values.length; j++) {
+                            var userValue = values[j];
                             if (userValue && userValue.EntityData) {
                                 // Ensure the user or group id exists
                                 if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
                                     // Update the field value
-                                    fieldValue = userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID;
+                                    fieldValue.results.push(userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID);
                                 } else {
                                     // Add the unknown user account
                                     unknownUsers[fieldName] = unknownUsers[fieldName] || [];
                                     unknownUsers[fieldName].push(userValue.Key);
                                 }
-                            } else {
-                                // Clear the field value
-                                fieldValue = null;
                             }
                         }
-                        break;
-                    // MMS
-                    default:
-                        if (field.fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
-                            // See if this is a multi field
-                            if (field.fieldInfo.typeAsString.endsWith("Multi")) {
-                                // Update the field name to the value field
-                                fieldName = field.fieldInfo.valueField.InternalName;
-                                // Parse the field values
-                                var fieldValues = fieldValue || [];
-                                fieldValue = [];
-                                for (var j = 0; j < fieldValues.length; j++) {
-                                    var termInfo = fieldValues[j];
-                                    // Add the field value
-                                    fieldValue.push(-1 + ";#" + termInfo.text + "|" + termInfo.value);
-                                }
-                                // Set the field value
-                                fieldValue = fieldValue.join(";#");
+                    } else {
+                        var userValue = fieldValue ? fieldValue[0] : null;
+                        if (userValue && userValue.EntityData) {
+                            // Ensure the user or group id exists
+                            if (userValue.EntityData.SPGroupID || userValue.EntityData.SPUserID) {
+                                // Update the field value
+                                fieldValue = userValue.EntityData.SPUserID || userValue.EntityData.SPGroupID;
                             } else {
-                                // Update the value
-                                fieldValue = fieldValue && fieldValue.length > 0 ? {
-                                    __metadata: { type: "SP.Taxonomy.TaxonomyFieldValue" },
-                                    Label: fieldValue[0].text,
-                                    TermGuid: fieldValue[0].value,
-                                    WssId: -1
-                                } : fieldValue;
+                                // Add the unknown user account
+                                unknownUsers[fieldName] = unknownUsers[fieldName] || [];
+                                unknownUsers[fieldName].push(userValue.Key);
                             }
+                        } else {
+                            // Clear the field value
+                            fieldValue = null;
                         }
-                        break;
-                }
-                // Set the field value
-                formValues[fieldName] = fieldValue;
+                    }
+                    break;
+                // MMS
+                default:
+                    if (field.fieldInfo.typeAsString.startsWith("TaxonomyFieldType")) {
+                        // See if this is a multi field
+                        if (field.fieldInfo.typeAsString.endsWith("Multi")) {
+                            // Update the field name to the value field
+                            fieldName = field.fieldInfo.valueField.InternalName;
+                            // Parse the field values
+                            var fieldValues = fieldValue || [];
+                            fieldValue = [];
+                            for (var j = 0; j < fieldValues.length; j++) {
+                                var termInfo = fieldValues[j];
+                                // Add the field value
+                                fieldValue.push(-1 + ";#" + termInfo.text + "|" + termInfo.value);
+                            }
+                            // Set the field value
+                            fieldValue = fieldValue.join(";#");
+                        } else {
+                            // Update the value
+                            fieldValue = fieldValue && fieldValue.length > 0 ? {
+                                __metadata: { type: "SP.Taxonomy.TaxonomyFieldValue" },
+                                Label: fieldValue[0].text,
+                                TermGuid: fieldValue[0].value,
+                                WssId: -1
+                            } : fieldValue;
+                        }
+                    }
+                    break;
             }
-            // Return a promise
-            return new Promise(function (resolve, reject) {
-                var web = gd_sprest_1.Web();
+            // Set the field value
+            formValues[fieldName] = fieldValue;
+        }
+        // Return a promise
+        return new Promise(function (resolve, reject) {
+            var web = gd_sprest_1.Web();
+            // Parse the field names
+            for (var fieldName in unknownUsers) {
+                // Parse the user accounts
+                for (var i = 0; i < unknownUsers[fieldName].length; i++) {
+                    // Ensure this user account exists
+                    web.ensureUser(unknownUsers[fieldName][i]).execute(true);
+                }
+            }
+            // Wait for the requests to complete
+            web.done(function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
                 // Parse the field names
                 for (var fieldName in unknownUsers) {
                     // Parse the user accounts
                     for (var i = 0; i < unknownUsers[fieldName].length; i++) {
-                        // Ensure this user account exists
-                        web.ensureUser(unknownUsers[fieldName][i]).execute(true);
-                    }
-                }
-                // Wait for the requests to complete
-                web.done(function () {
-                    var args = [];
-                    for (var _i = 0; _i < arguments.length; _i++) {
-                        args[_i] = arguments[_i];
-                    }
-                    // Parse the field names
-                    for (var fieldName in unknownUsers) {
-                        // Parse the user accounts
-                        for (var i = 0; i < unknownUsers[fieldName].length; i++) {
-                            var userLogin = unknownUsers[fieldName][i];
-                            // Parse the responses
-                            for (var j = 0; j < args.length; j++) {
-                                var user = args[j];
-                                // See if this is the user
-                                if (user.LoginName == userLogin) {
-                                    // See if this is a multi-user value
-                                    if (formValues[fieldName].results != null) {
-                                        // Set the user account
-                                        formValues[fieldName].push(user.Id);
-                                    } else {
-                                        // Set the user account
-                                        formValues[fieldName] = user.Id;
-                                    }
+                        var userLogin = unknownUsers[fieldName][i];
+                        // Parse the responses
+                        for (var j = 0; j < args.length; j++) {
+                            var user = args[j];
+                            // See if this is the user
+                            if (user.LoginName == userLogin) {
+                                // See if this is a multi-user value
+                                if (formValues[fieldName].results != null) {
+                                    // Set the user account
+                                    formValues[fieldName].push(user.Id);
+                                } else {
+                                    // Set the user account
+                                    formValues[fieldName] = user.Id;
                                 }
                             }
                         }
                     }
+                }
+                // Resolve the promise
+                resolve(formValues);
+            });
+        });
+    };
+    // Return the form
+    return {
+        // Returns the fields
+        getFields: function getFields() {
+            return fields;
+        },
+        // Returns the field values
+        getValues: getFormValues,
+        // Flag to determine if the form is valid
+        isValid: function isValid() {
+            // Return a promise
+            return new Promise(function (resolve, reject) {
+                var formValues = getFormValues().then(function (values) {
+                    // Parse the fields
+                    for (var i = 0; i < fields.length; i++) {
+                        var field = fields[i];
+                        // See if this field is required
+                        if (field.fieldInfo.required) {
+                            // Ensure a value exists
+                            if (formValues[field.fieldInfo.name]) {
+                                continue;
+                            }
+                        }
+                        // Resolve the promise
+                        resolve(false);
+                        return;
+                    }
                     // Resolve the promise
-                    resolve(formValues);
+                    resolve(true);
                 });
             });
         }

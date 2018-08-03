@@ -85,6 +85,11 @@ export interface IListFormEdit {
      * Method to get the form values
      */
     getValues(): PromiseLike<any>;
+
+    /**
+     * Method to determine if the field is valid
+     */
+    isValid(): PromiseLike<boolean>;
 }
 
 /**
