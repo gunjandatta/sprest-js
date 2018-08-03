@@ -89,7 +89,7 @@ export interface IListFormEdit {
     /**
      * Method to determine if the field is valid
      */
-    isValid(): PromiseLike<boolean>;
+    isValid(): boolean;
 }
 
 /**

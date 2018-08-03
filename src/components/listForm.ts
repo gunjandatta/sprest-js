@@ -187,10 +187,9 @@ ListForm.renderEditForm = (props: IListFormEditProps): IListFormEdit => {
     }
 
     // Method to get the form values
-    let getFormValues = (): PromiseLike<any> => {
+    let getFormValues = (): { formValues: any, unknownUsers: any } => {
         let formValues = {};
         let unknownUsers = {};
-
 
         // Parse the fields
         for (let i = 0; i < fields.length; i++) {
@@ -329,50 +328,8 @@ ListForm.renderEditForm = (props: IListFormEditProps): IListFormEdit => {
             formValues[fieldName] = fieldValue;
         }
 
-        // Return a promise
-        return new Promise((resolve, reject) => {
-            let web = Web();
-
-            // Parse the field names
-            for (let fieldName in unknownUsers) {
-                // Parse the user accounts
-                for (let i = 0; i < unknownUsers[fieldName].length; i++) {
-                    // Ensure this user account exists
-                    web.ensureUser(unknownUsers[fieldName][i]).execute(true);
-                }
-            }
-
-            // Wait for the requests to complete
-            web.done((...args) => {
-                // Parse the field names
-                for (let fieldName in unknownUsers) {
-                    // Parse the user accounts
-                    for (let i = 0; i < unknownUsers[fieldName].length; i++) {
-                        let userLogin = unknownUsers[fieldName][i];
-
-                        // Parse the responses
-                        for (let j = 0; j < args.length; j++) {
-                            let user = args[j] as Types.SP.IUserResult;
-
-                            // See if this is the user
-                            if (user.LoginName == userLogin) {
-                                // See if this is a multi-user value
-                                if (formValues[fieldName].results != null) {
-                                    // Set the user account
-                                    formValues[fieldName].push(user.Id);
-                                } else {
-                                    // Set the user account
-                                    formValues[fieldName] = user.Id;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Resolve the promise
-                resolve(formValues);
-            });
-        });
+        // Return the form values
+        return { formValues, unknownUsers };
     }
 
     // Return the form
@@ -381,32 +338,74 @@ ListForm.renderEditForm = (props: IListFormEditProps): IListFormEdit => {
         getFields: () => { return fields; },
 
         // Returns the field values
-        getValues: getFormValues,
-
-        // Flag to determine if the form is valid
-        isValid: (): PromiseLike<boolean> => {
+        getValues: () => {
             // Return a promise
             return new Promise((resolve, reject) => {
-                let formValues = getFormValues().then(values => {
-                    // Parse the fields
-                    for (let i = 0; i < fields.length; i++) {
-                        let field = fields[i];
+                let { formValues, unknownUsers } = getFormValues();
+                let web = Web();
 
-                        // See if this field is required
-                        if (field.fieldInfo.required) {
-                            // Ensure a value exists
-                            if (formValues[field.fieldInfo.name]) { continue; }
+                // Parse the field names
+                for (let fieldName in unknownUsers) {
+                    // Parse the user accounts
+                    for (let i = 0; i < unknownUsers[fieldName].length; i++) {
+                        // Ensure this user account exists
+                        web.ensureUser(unknownUsers[fieldName][i]).execute(true);
+                    }
+                }
+
+                // Wait for the requests to complete
+                web.done((...args) => {
+                    // Parse the field names
+                    for (let fieldName in unknownUsers) {
+                        // Parse the user accounts
+                        for (let i = 0; i < unknownUsers[fieldName].length; i++) {
+                            let userLogin = unknownUsers[fieldName][i];
+
+                            // Parse the responses
+                            for (let j = 0; j < args.length; j++) {
+                                let user = args[j] as Types.SP.IUserResult;
+
+                                // See if this is the user
+                                if (user.LoginName == userLogin) {
+                                    // See if this is a multi-user value
+                                    if (formValues[fieldName].results != null) {
+                                        // Set the user account
+                                        formValues[fieldName].push(user.Id);
+                                    } else {
+                                        // Set the user account
+                                        formValues[fieldName] = user.Id;
+                                    }
+                                }
+                            }
                         }
-
-                        // Resolve the promise
-                        resolve(false);
-                        return;
                     }
 
                     // Resolve the promise
-                    resolve(true);
+                    resolve(formValues);
                 });
             });
+        },
+
+        // Flag to determine if the form is valid
+        isValid: (): boolean => {
+            let { formValues } = getFormValues();
+
+            // Parse the fields
+            for (let i = 0; i < fields.length; i++) {
+                let field = fields[i];
+
+                // See if this field is required
+                if (field.fieldInfo.required) {
+                    // Ensure a value exists
+                    if (formValues[field.fieldInfo.name]) { continue; }
+                }
+
+                // Form is invalid
+                return false;
+            }
+
+            // Form is valid
+            return true;
         }
     }
 };

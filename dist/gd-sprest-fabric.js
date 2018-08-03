@@ -18969,49 +18969,8 @@ exports.ListForm.renderEditForm = function (props) {
             // Set the field value
             formValues[fieldName] = fieldValue;
         }
-        // Return a promise
-        return new Promise(function (resolve, reject) {
-            var web = gd_sprest_1.Web();
-            // Parse the field names
-            for (var fieldName in unknownUsers) {
-                // Parse the user accounts
-                for (var i = 0; i < unknownUsers[fieldName].length; i++) {
-                    // Ensure this user account exists
-                    web.ensureUser(unknownUsers[fieldName][i]).execute(true);
-                }
-            }
-            // Wait for the requests to complete
-            web.done(function () {
-                var args = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    args[_i] = arguments[_i];
-                }
-                // Parse the field names
-                for (var fieldName in unknownUsers) {
-                    // Parse the user accounts
-                    for (var i = 0; i < unknownUsers[fieldName].length; i++) {
-                        var userLogin = unknownUsers[fieldName][i];
-                        // Parse the responses
-                        for (var j = 0; j < args.length; j++) {
-                            var user = args[j];
-                            // See if this is the user
-                            if (user.LoginName == userLogin) {
-                                // See if this is a multi-user value
-                                if (formValues[fieldName].results != null) {
-                                    // Set the user account
-                                    formValues[fieldName].push(user.Id);
-                                } else {
-                                    // Set the user account
-                                    formValues[fieldName] = user.Id;
-                                }
-                            }
-                        }
-                    }
-                }
-                // Resolve the promise
-                resolve(formValues);
-            });
-        });
+        // Return the form values
+        return { formValues: formValues, unknownUsers: unknownUsers };
     };
     // Return the form
     return {
@@ -19020,30 +18979,72 @@ exports.ListForm.renderEditForm = function (props) {
             return fields;
         },
         // Returns the field values
-        getValues: getFormValues,
-        // Flag to determine if the form is valid
-        isValid: function isValid() {
+        getValues: function getValues() {
             // Return a promise
             return new Promise(function (resolve, reject) {
-                var formValues = getFormValues().then(function (values) {
-                    // Parse the fields
-                    for (var i = 0; i < fields.length; i++) {
-                        var field = fields[i];
-                        // See if this field is required
-                        if (field.fieldInfo.required) {
-                            // Ensure a value exists
-                            if (formValues[field.fieldInfo.name]) {
-                                continue;
+                var _a = getFormValues(),
+                    formValues = _a.formValues,
+                    unknownUsers = _a.unknownUsers;
+                var web = gd_sprest_1.Web();
+                // Parse the field names
+                for (var fieldName in unknownUsers) {
+                    // Parse the user accounts
+                    for (var i = 0; i < unknownUsers[fieldName].length; i++) {
+                        // Ensure this user account exists
+                        web.ensureUser(unknownUsers[fieldName][i]).execute(true);
+                    }
+                }
+                // Wait for the requests to complete
+                web.done(function () {
+                    var args = [];
+                    for (var _i = 0; _i < arguments.length; _i++) {
+                        args[_i] = arguments[_i];
+                    }
+                    // Parse the field names
+                    for (var fieldName in unknownUsers) {
+                        // Parse the user accounts
+                        for (var i = 0; i < unknownUsers[fieldName].length; i++) {
+                            var userLogin = unknownUsers[fieldName][i];
+                            // Parse the responses
+                            for (var j = 0; j < args.length; j++) {
+                                var user = args[j];
+                                // See if this is the user
+                                if (user.LoginName == userLogin) {
+                                    // See if this is a multi-user value
+                                    if (formValues[fieldName].results != null) {
+                                        // Set the user account
+                                        formValues[fieldName].push(user.Id);
+                                    } else {
+                                        // Set the user account
+                                        formValues[fieldName] = user.Id;
+                                    }
+                                }
                             }
                         }
-                        // Resolve the promise
-                        resolve(false);
-                        return;
                     }
                     // Resolve the promise
-                    resolve(true);
+                    resolve(formValues);
                 });
             });
+        },
+        // Flag to determine if the form is valid
+        isValid: function isValid() {
+            var formValues = getFormValues().formValues;
+            // Parse the fields
+            for (var i = 0; i < fields.length; i++) {
+                var field = fields[i];
+                // See if this field is required
+                if (field.fieldInfo.required) {
+                    // Ensure a value exists
+                    if (formValues[field.fieldInfo.name]) {
+                        continue;
+                    }
+                }
+                // Form is invalid
+                return false;
+            }
+            // Form is valid
+            return true;
         }
     };
 };
