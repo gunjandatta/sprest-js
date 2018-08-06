@@ -20113,8 +20113,8 @@ __export(__webpack_require__(144));
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var wpCfg_1 = __webpack_require__(145);
 var list_1 = __webpack_require__(19);
+var wpCfg_1 = __webpack_require__(145);
 /**
  * Search WebPart
  */

@@ -1,9 +1,7 @@
-import { SPTypes, Types } from "gd-sprest";
-import * as Fabric from "../../fabric";
-import { IWPSearch, IWPSearchCfg, IWPSearchInfo, IWPSearchProps } from "../types";
-import { WPSearchEditPanel } from "./wpCfg";
+import { Types } from "gd-sprest";
 import { WPList } from "../list";
-import { IListQueryResult } from "gd-sprest/build/mapper/types";
+import { IWPSearch, IWPSearchInfo, IWPSearchProps } from "../types";
+import { WPSearchEditPanel } from "./wpCfg";
 
 /**
  * Search WebPart

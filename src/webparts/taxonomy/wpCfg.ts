@@ -1,6 +1,6 @@
 import { Helper } from "gd-sprest";
 import * as Fabric from "../../fabric";
-import { IWPTaxonomyInfo, IWPTaxonomyCfg, IWPTaxonomyEditPanel } from "./types";
+import { IWPTaxonomyInfo, IWPTaxonomyCfg, IWPTaxonomyEditPanel } from "../types";
 
 /**
  * Taxonomy WebPart Edit Panel

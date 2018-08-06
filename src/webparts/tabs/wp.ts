@@ -1,7 +1,7 @@
 import { IPivotLink } from "../../fabric/types";
 import { Pivot } from "../../fabric";
-import { WebPart, IWebPartInfo } from "../base";
-import { IWPTabsProps } from "./types";
+import { WebPart } from "../base";
+import { IWebPartInfo, IWPTabsProps } from "../types";
 
 /**
  * Web Part Tabs

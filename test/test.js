@@ -17956,8 +17956,8 @@ __export(__webpack_require__(206));
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var wpCfg_1 = __webpack_require__(207);
 var list_1 = __webpack_require__(53);
+var wpCfg_1 = __webpack_require__(207);
 /**
  * Search WebPart
  */

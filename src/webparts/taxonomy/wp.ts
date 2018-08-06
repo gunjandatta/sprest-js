@@ -1,7 +1,7 @@
 import { Helper } from "gd-sprest";
 import * as Fabric from "../../fabric";
-import { IWPTaxonomyInfo, IWPTaxonomyProps } from "./types";
 import { WebPart } from "../base";
+import { IWPTaxonomyInfo, IWPTaxonomyProps } from "../types";
 import { WPTaxonomyEditPanel } from "./wpCfg";
 
 /**
