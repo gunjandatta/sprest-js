@@ -17284,6 +17284,18 @@ var _1 = __webpack_require__(0);
  */
 exports.Pivot = function (props) {
     var _pivot = null;
+    // The tab click event
+    var onTabClick = function onTabClick(ev) {
+        var elTab = ev.currentTarget;
+        // Get the tab
+        var tabIdx = parseInt(elTab.getAttribute("data-tab-idx"));
+        var tab = props.tabs[tabIdx];
+        if (tab) {
+            // Execute the click events
+            props.onClick ? props.onClick(elTab, tab) : null;
+            tab.onClick ? tab.onClick(elTab, tab) : null;
+        }
+    };
     // Ensure the element exists
     if (props.el) {
         // Render a pivot
@@ -17293,15 +17305,11 @@ exports.Pivot = function (props) {
         // Parse the tab links
         var links = props.el.querySelectorAll(".ms-Pivot-link");
         for (var i = 0; i < links.length; i++) {
-            // Parse the tabs
-            for (var j = 0; j < props.tabs.length; j++) {
-                var tab = props.tabs[j];
-                // See if a click event exists
-                if (tab.onClick) {
-                    // Add a click event
-                    links[i].addEventListener("click", tab.onClick);
-                }
-            }
+            var link = links[i];
+            // Set the tab index
+            link.setAttribute("data-tab-idx", i.toString());
+            // Set the click event
+            link.addEventListener("click", onTabClick);
         }
     }
     // Return the pivot
@@ -20586,15 +20594,15 @@ exports.WPTabs = function (props) {
         }
     };
     // Method to update the visibility of the webparts
-    var updateWebParts = function updateWebParts(ev) {
+    var updateWebParts = function updateWebParts(elTab, tab) {
         var selectedTabId = 0;
-        // See if the event exists
-        if (ev) {
+        // See if the tab exists
+        if (tab) {
             // Parse the webparts
             for (var i = 0; i < _webparts.length; i++) {
                 // Get the webpart
                 var wpTitle = _webparts[i].querySelector(".ms-webpart-titleText");
-                if (wpTitle && wpTitle.innerText == ev.currentTarget.getAttribute("title")) {
+                if (wpTitle && wpTitle.innerText == tab.name) {
                     // Update the selected tab id
                     selectedTabId = i;
                     break;
@@ -20625,19 +20633,19 @@ exports.WPTabs = function (props) {
                     webpart.className = webpart.className.replace(" is-hidden", "");
                     // See if this tab contains a calendar webpart
                     if (webpart.querySelector(".ms-acal-rootdiv")) {
-                        var ev_1 = null;
+                        var ev = null;
                         // Create the resize event
                         try {
-                            ev_1 = new Event("resize");
+                            ev = new Event("resize");
                         }
                         // This will fail for IE
                         catch (e) {
                             // Create the event
-                            ev_1 = document.createEvent("Event");
-                            ev_1.initEvent("resize", true, false);
+                            ev = document.createEvent("Event");
+                            ev.initEvent("resize", true, false);
                         } finally {
                             // Call the window resize event to fix the events
-                            ev_1 ? window.dispatchEvent(ev_1) : null;
+                            ev ? window.dispatchEvent(ev) : null;
                         }
                     }
                 }

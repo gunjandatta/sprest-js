@@ -151,16 +151,16 @@ export const WPTabs = (props: IWPTabsProps): IWPTabs => {
     }
 
     // Method to update the visibility of the webparts
-    let updateWebParts = (ev?: Event) => {
+    let updateWebParts = (elTab?: HTMLElement, tab?: IPivotLink) => {
         let selectedTabId = 0;
 
-        // See if the event exists
-        if (ev) {
+        // See if the tab exists
+        if (tab) {
             // Parse the webparts
             for (let i = 0; i < _webparts.length; i++) {
                 // Get the webpart
                 let wpTitle = _webparts[i].querySelector(".ms-webpart-titleText") as HTMLDivElement;
-                if (wpTitle && wpTitle.innerText == (ev.currentTarget as HTMLElement).getAttribute("title")) {
+                if (wpTitle && wpTitle.innerText == tab.name) {
                     // Update the selected tab id
                     selectedTabId = i;
                     break;

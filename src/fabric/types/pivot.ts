@@ -13,6 +13,9 @@ export interface IPivotProps extends IProps {
     /** True to render tabs. */
     isTabs?: boolean;
 
+    /** The click event for a tab. */
+    onClick?: (el?: HTMLElement, tab?: IPivotLink) => void;
+
     /** The tabs. */
     tabs: Array<IPivotLink>
 }
@@ -34,5 +37,5 @@ export interface IPivotLink {
     name: string;
 
     /** The click event for the tab. */
-    onClick?: Function;
+    onClick?: (el?: HTMLElement, tab?: IPivotLink) => void;
 }

@@ -7,6 +7,20 @@ import { fabric, Templates } from ".";
 export const Pivot = (props: IPivotProps): Fabric.IPivot => {
     let _pivot = null;
 
+    // The tab click event
+    let onTabClick = (ev: MouseEvent) => {
+        let elTab = ev.currentTarget as HTMLElement;
+
+        // Get the tab
+        let tabIdx = parseInt(elTab.getAttribute("data-tab-idx"));
+        let tab = props.tabs[tabIdx];
+        if (tab) {
+            // Execute the click events
+            props.onClick ? props.onClick(elTab, tab) : null;
+            tab.onClick ? tab.onClick(elTab, tab) : null;
+        }
+    }
+
     // Ensure the element exists
     if (props.el) {
         // Render a pivot
@@ -18,16 +32,13 @@ export const Pivot = (props: IPivotProps): Fabric.IPivot => {
         // Parse the tab links
         let links = props.el.querySelectorAll(".ms-Pivot-link");
         for (let i = 0; i < links.length; i++) {
-            // Parse the tabs
-            for (let j = 0; j < props.tabs.length; j++) {
-                let tab = props.tabs[j];
+            let link = links[i];
 
-                // See if a click event exists
-                if (tab.onClick) {
-                    // Add a click event
-                    links[i].addEventListener("click", tab.onClick as any);
-                }
-            }
+            // Set the tab index
+            link.setAttribute("data-tab-idx", i.toString());
+
+            // Set the click event
+            link.addEventListener("click", onTabClick);
         }
     }
 
