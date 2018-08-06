@@ -1,12 +1,12 @@
 import { IPivotLink } from "../../fabric/types";
 import { Pivot } from "../../fabric";
 import { WebPart } from "../base";
-import { IWebPartInfo, IWPTabsProps } from "../types";
+import { IWebPartInfo, IWPTabs, IWPTabsProps } from "../types";
 
 /**
  * Web Part Tabs
  */
-export const WPTabs = (props: IWPTabsProps) => {
+export const WPTabs = (props: IWPTabsProps): IWPTabs => {
     let _isContentZone: boolean = false;
     let _elWebPart: HTMLDivElement = null;
 
