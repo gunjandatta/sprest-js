@@ -1,15 +1,14 @@
 import { SPTypes, Types } from "gd-sprest";
-import { IWPSearch, IWPSearchCfg, IWPSearchInfo, IWPSearchProps } from "./types";
-import { Fabric } from "..";
-import { WPList, WPCfg } from ".";
+import * as Fabric from "../../fabric";
+import { IWPSearch, IWPSearchCfg, IWPSearchInfo, IWPSearchProps } from "../types";
+import { WPSearchEditPanel } from "./wpCfg";
+import { WPList } from "../list";
 import { IListQueryResult } from "gd-sprest/build/mapper/types";
 
 /**
  * Search WebPart
  */
 export const WPSearch = (props: IWPSearchProps): IWPSearch => {
-    let _ddlFields: Fabric.Types.IDropdown = null;
-    let _el: HTMLDivElement = null;
     let _items: Array<Types.SP.IListItemQueryResult | Types.SP.IListItemResult> = [];
     let _wpInfo: IWPSearchInfo;
 
@@ -109,149 +108,16 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
         return results;
     }
 
-    // Method to render the fields
-    let renderFields = (el: HTMLDivElement, list: Types.SP.IListQueryResult) => {
-        // Render the fields
-        this.el = el;
-        el.innerHTML = "<div></div><div></div>";
-
-        // Ensure the list exists
-        if (list == null) { return; }
-
-        // Render a spinner
-        Fabric.Spinner({
-            el: el.children[0],
-            text: "Loading the fields..."
-        });
-
-        // Load the fields dropdown list
-        renderFieldsDDL(el.children[0] as HTMLDivElement, list);
-
-        // See if the custom event exists
-        if (props.editPanel && props.editPanel.onRenderFooter) {
-            // Call the custom event
-            props.editPanel.onRenderFooter(el.children[1] as HTMLDivElement, _wpInfo, list);
-        }
-    }
-
-    // Method to render the fields drop down list
-    let renderFieldsDDL = (el: HTMLDivElement, list: Types.SP.IListQueryResult) => {
-        let options: Array<Fabric.Types.IDropdownOption> = [];
-
-        // Parse the fields
-        let fields = (list.Fields ? list.Fields.results : null) || [];
-        for (let i = 0; i < fields.length; i++) {
-            let addField = false;
-            let field = fields[i];
-
-            // Add the field, based on the type
-            switch (field.FieldTypeKind) {
-                // Searchable Fields
-                case SPTypes.FieldType.Choice:
-                case SPTypes.FieldType.MultiChoice:
-                case SPTypes.FieldType.Lookup:
-                case SPTypes.FieldType.Text:
-                case SPTypes.FieldType.URL:
-                case SPTypes.FieldType.User:
-                    addField = true;
-                    break;
-                default:
-                    // Allow managed metadata fields
-                    addField = field.TypeAsString.startsWith("TaxonomyFieldType");
-                    break;
-            }
-
-            // See if we are adding the field
-            if (addField) {
-                options.push({
-                    data: field.TypeAsString,
-                    text: field.Title + " [" + field.InternalName + "]",
-                    value: field.InternalName
-                });
-            }
-        }
-
-        // Sort the options
-        options = options.sort((a, b) => {
-            if (a.value < b.value) { return -1; }
-            if (a.value > b.value) { return 1; }
-            return 0;
-        });
-
-        // See if fields exist
-        let value = [];
-        if (_wpInfo.cfg && _wpInfo.cfg.Fields) {
-            // Parse the fields
-            for (let i = 0; i < _wpInfo.cfg.Fields.length; i++) {
-                // Add the field
-                value.push(_wpInfo.cfg.Fields[i].name);
-            }
-        }
-
-        // Render the field dropdown
-        _ddlFields = Fabric.Dropdown({
-            el,
-            label: "Filter Field(s):",
-            multi: true,
-            options,
-            value,
-            onChange: options => {
-                // Clear the fields
-                _wpInfo.cfg.Fields = [];
-
-                // Parse the options
-                for (let i = 0; i < options.length; i++) {
-                    let option = options[i];
-
-                    // Add the field
-                    _wpInfo.cfg.Fields.push({
-                        name: option.value,
-                        type: option.data
-                    });
-                }
-            }
-        });
-    }
-
-    // Set the list query
-    let listQuery: Types.SP.ODataQuery = (props.editPanel ? props.editPanel.listQuery : null) || {};
-    listQuery.Expand = listQuery.Expand || [];
-    listQuery.Expand.push("Fields");
-
-    // Create the webpart
+    // Create the webpart and return it
     let _wp = WPList({
         camlQuery: props.camlQuery,
         cfgElementId: props.cfgElementId,
         className: props.className,
-        editPanel: {
-            listQuery,
-            menuLeftCommands: props.editPanel ? props.editPanel.menuLeftCommands : null,
-            menuRightCommands: props.editPanel ? props.editPanel.menuRightCommands : null,
-            onListChanged: (wpInfo: IWPSearchInfo, list: IListQueryResult) => {
-                // Render the fields
-                renderFields(this.el.children[0], list);
-            },
-            onRenderFooter: (el, wpInfo: IWPSearchInfo, list: IListQueryResult) => {
-                // Set the webpart information
-                _wpInfo = wpInfo;
-
-                // Render the fields
-                renderFields(el, list);
-            },
-            onSave: (cfg: IWPSearchCfg) => {
-                // Set the fields
-                cfg.Fields = _wpInfo.cfg.Fields || [];
-
-                // Call the save event
-                cfg = (props.editPanel && props.editPanel.onSave ? props.editPanel.onSave(cfg) : null) || cfg;
-
-                // Return the configuration
-                return cfg;
-            }
-        },
+        editPanel: WPSearchEditPanel(props.editPanel),
         elementId: props.elementId,
         helpProps: props.helpProps,
         odataQuery: props.odataQuery,
+        wpClassName: props.wpClassName,
         onExecutingODATAQuery: (wpInfo: IWPSearchInfo, query) => {
             // Default the query
             query = (props.onExecutingODATAQuery ? props.onExecutingODATAQuery(wpInfo, query) : query) || {};
@@ -316,14 +182,13 @@ export const WPSearch = (props: IWPSearchProps): IWPSearch => {
 
             // Call the custom event
             props.onRenderItems ? props.onRenderItems(wpInfo, items) : null;
-        },
-        wpClassName: props.wpClassName
+        }
     });
 
     // Return the webpart
     return {
-        cfg: _wp.cfg,
+        cfg: _wpInfo.cfg,
         filterItems,
-        info: _wp.info
-    } as any;
+        info: _wpInfo
+    };
 }

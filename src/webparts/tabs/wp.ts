@@ -1,7 +1,7 @@
-import { IPivotLink } from "../fabric/types";
-import { Pivot } from "../fabric";
-import { IWebPartInfo, IWPTabsProps } from "./types";
-import { WebPart } from ".";
+import { IPivotLink } from "../../fabric/types";
+import { Pivot } from "../../fabric";
+import { WebPart, IWebPartInfo } from "../base";
+import { IWPTabsProps } from "./types";
 
 /**
  * Web Part Tabs
@@ -225,7 +225,7 @@ export const WPTabs = (props: IWPTabsProps) => {
     let _webparts = [];
 
     // Return the webpart
-    let _wp = WebPart({
+    return WebPart({
         className: props.className,
         elementId: props.elementId,
         wpClassName: ["wp-tabs-main", props.wpClassName || ""].join(' ').trim(),

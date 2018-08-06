@@ -1,6 +1,6 @@
 import { Types } from "gd-sprest";
-import { IDropdownOption } from "../../fabric/types";
-import { IWPCfg, IWPList, IWPListCfg, IWPListEditPanel, IWPListInfo, IWPListProps } from ".";
+import { IWPList, IWPListInfo, IWPListProps } from "./wpList";
+import { IWPSearchCfg, IWPSearchEditPanel } from "./wpSearchCfg";
 
 /**
  * WebPart Search
@@ -9,30 +9,11 @@ export interface IWPSearch extends IWPList {
     /** The webpart configuration. */
     cfg: IWPSearchCfg;
 
+    /** The filter items method. */
+    filterItems: (filterText: string) => Array<Types.SP.IListItemQueryResult | Types.SP.IListItemResult>;
+
     /** The webpart information. */
     info: IWPSearchInfo;
-}
-
-/**
- * WebPart Search Configuration
- */
-export interface IWPSearchCfg extends IWPListCfg {
-    /** The searchable fields. */
-    Fields: Array<{ name: string, type: string }>;
-}
-
-/**
- * WebPart Search Edit Panel
- */
-export interface IWPSearchEditPanel extends IWPListEditPanel {
-    /** The render footer event. */
-    onRenderFooter?: (el: HTMLDivElement, wpInfo: IWPSearchInfo, list?: Types.SP.IListQueryResult | Types.SP.IListResult) => void;
-
-    /** The render header event. */
-    onRenderHeader?: (el: HTMLDivElement, wpInfo: IWPSearchInfo, list?: Types.SP.IListQueryResult | Types.SP.IListResult) => void;
-
-    /** The save event. */
-    onSave?: (wpCfg: IWPSearchCfg) => IWPSearchCfg;
 }
 
 /**

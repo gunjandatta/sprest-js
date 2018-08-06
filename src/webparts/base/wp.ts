@@ -1,8 +1,7 @@
 import { ContextInfo } from "gd-sprest";
-import { CommandBar, Button, Panel, PanelTypes, Types } from "../fabric";
-import { IWebPart, IWebPartCfg, IWebPartEditPanel, IWebPartInfo, IWebPartObject, IWebPartProps } from "./types";
+import { CommandBar, Button, Panel, PanelTypes, Templates, Types } from "../../fabric";
+import { IWebPart, IWebPartCfg, IWebPartEditPanel, IWebPartInfo, IWebPartObject, IWebPartProps } from "../types";
 import { WPCfg } from "./wpCfg";
-import { Fabric } from "..";
 declare var SP;
 declare var MSOWebPartPageFormName;
 
@@ -378,7 +377,7 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
                     disableSaveButton = elWPMgrKeyName == null || elWPMgrKeyName.value.indexOf(_cfg.WebPartId) < 0;
                     if (disableSaveButton) {
                         // Show a message
-                        header.children[1].innerHTML = Fabric.Templates.Label({
+                        header.children[1].innerHTML = Templates.Label({
                             text: "You must edit the webpart in order to save changes."
                         });
                     }

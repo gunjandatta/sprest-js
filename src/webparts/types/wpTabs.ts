@@ -1,4 +1,4 @@
-import { IWebPartProps } from ".";
+import { IWebPartProps } from "./wp";
 
 /**
  * WebPart Tabs

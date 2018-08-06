@@ -1,5 +1,5 @@
 import { ContextInfo, } from "gd-sprest";
-import { IWPCfg, IWPInstance } from "./types";
+import { IWPCfg, IWPInstance } from "../types";
 declare var SP;
 
 /**

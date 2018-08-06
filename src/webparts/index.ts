@@ -1,8 +1,8 @@
-export * from "./wp";
-export * from "./wpCfg";
-export * from "./wpList";
-export * from "./wpSearch";
-export * from "./wpTabs";
+export * from "./base";
+export * from "./list";
+export * from "./search";
+export * from "./tabs";
+export * from "./taxonomy";
 
 import * as Types from "./types";
 export { Types }
