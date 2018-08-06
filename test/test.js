@@ -17803,8 +17803,10 @@ var Fabric = __webpack_require__(1);
  */
 exports.WPListEditPanel = function (props) {
     if (props === void 0) { props = {}; }
+    var _elFooter = null;
     var _elList = null;
     var _elWebUrl = null;
+    var _initFl = false;
     var _lists = null;
     var _wpInfo = null;
     // Method to load the lists
@@ -17858,14 +17860,21 @@ exports.WPListEditPanel = function (props) {
     };
     // Method to render the lists dropdown
     var renderListDDL = function () {
+        var selectedList = null;
         var options = [];
         // Parse the lists
         for (var i = 0; i < _lists.length; i++) {
+            var list = _lists[i];
             // Add the option
             options.push({
-                text: _lists[i].Title,
-                value: _lists[i].Title
+                text: list.Title,
+                value: list.Title
             });
+            // See if this is the selected list
+            if (list.Title == _wpInfo.cfg.ListName) {
+                // Select this list
+                selectedList = list;
+            }
         }
         // Render the dropdown
         var ddl = Fabric.Dropdown({
@@ -17878,18 +17887,21 @@ exports.WPListEditPanel = function (props) {
                 if (option) {
                     // Parse the list
                     for (var i = 0; i < _lists.length; i++) {
+                        var list = _lists[i];
                         // See if this is the target list
-                        if (_lists[i].Title == option.text) {
+                        if (list.Title == option.text) {
                             // Update the configuration
                             _wpInfo.cfg.ListName = option.value;
                             // Call the change event
-                            props.onListChanged ? props.onListChanged(_wpInfo, _lists[i]) : null;
+                            props.onListChanged ? props.onListChanged(_wpInfo, list) : null;
                             break;
                         }
                     }
                 }
             }
         });
+        // Call the render footer event
+        props.onRenderFooter ? props.onRenderFooter(_elFooter, _wpInfo, selectedList) : null;
     };
     // Create the menu commands
     var menuLeftCommands = [
@@ -17911,19 +17923,17 @@ exports.WPListEditPanel = function (props) {
     return {
         menuLeftCommands: menuLeftCommands,
         menuRightCommands: props.menuRightCommands,
+        onRenderHeader: props.onRenderHeader,
         panelType: props.panelType,
         showSaveButton: props.showSaveButton,
         onRenderFooter: function (el, wpInfo) {
-            // Call the event
-            props.onRenderFooter ? props.onRenderFooter(el, _wpInfo) : null;
-        },
-        onRenderHeader: function (el, wpInfo) {
+            // Save the webpart information
+            _wpInfo = wpInfo;
             // Render the template
             el.innerHTML = "<div></div><div></div>";
+            _elFooter = el.children[1];
             // Render the configuration
-            renderConfiguration(el.children[1], wpInfo);
-            // Call the event
-            props.onRenderHeader ? props.onRenderHeader(el.children[0], _wpInfo) : null;
+            renderConfiguration(el.children[0], wpInfo);
         },
         onSave: function (cfg) {
             // Update the configuration

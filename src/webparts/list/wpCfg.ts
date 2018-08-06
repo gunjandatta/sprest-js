@@ -6,8 +6,10 @@ import { IWPListCfg, IWPListEditPanel, IWPListInfo } from "../types";
  * List WebPart Edit Panel
  */
 export const WPListEditPanel = (props: IWPListEditPanel = {}): IWPListEditPanel => {
+    let _elFooter: HTMLDivElement = null;
     let _elList: HTMLDivElement = null;
     let _elWebUrl: HTMLDivElement = null;
+    let _initFl: boolean = false;
     let _lists: Array<Types.SP.IListQueryResult | Types.SP.IListResult> = null;
     let _wpInfo: IWPListInfo = null;
 
@@ -70,15 +72,24 @@ export const WPListEditPanel = (props: IWPListEditPanel = {}): IWPListEditPanel 
 
     // Method to render the lists dropdown
     let renderListDDL = () => {
+        let selectedList = null;
         let options: Array<Fabric.Types.IDropdownOption> = [];
 
         // Parse the lists
         for (let i = 0; i < _lists.length; i++) {
+            let list = _lists[i];
+
             // Add the option
             options.push({
-                text: _lists[i].Title,
-                value: _lists[i].Title
+                text: list.Title,
+                value: list.Title
             });
+
+            // See if this is the selected list
+            if (list.Title == _wpInfo.cfg.ListName) {
+                // Select this list
+                selectedList = list;
+            }
         }
 
         // Render the dropdown
@@ -92,19 +103,24 @@ export const WPListEditPanel = (props: IWPListEditPanel = {}): IWPListEditPanel 
                 if (option) {
                     // Parse the list
                     for (let i = 0; i < _lists.length; i++) {
+                        let list = _lists[i];
+
                         // See if this is the target list
-                        if (_lists[i].Title == option.text) {
+                        if (list.Title == option.text) {
                             // Update the configuration
                             _wpInfo.cfg.ListName = option.value;
 
                             // Call the change event
-                            props.onListChanged ? props.onListChanged(_wpInfo, _lists[i]) : null;
+                            props.onListChanged ? props.onListChanged(_wpInfo, list) : null;
                             break;
                         }
                     }
                 }
             }
         });
+
+        // Call the render footer event
+        props.onRenderFooter ? props.onRenderFooter(_elFooter, _wpInfo, selectedList) : null;
     }
 
     // Create the menu commands
@@ -129,21 +145,19 @@ export const WPListEditPanel = (props: IWPListEditPanel = {}): IWPListEditPanel 
     return {
         menuLeftCommands,
         menuRightCommands: props.menuRightCommands,
+        onRenderHeader: props.onRenderHeader,
         panelType: props.panelType,
         showSaveButton: props.showSaveButton,
         onRenderFooter: (el, wpInfo) => {
-            // Call the event
-            props.onRenderFooter ? props.onRenderFooter(el, _wpInfo) : null;
-        },
-        onRenderHeader: (el, wpInfo) => {
+            // Save the webpart information
+            _wpInfo = wpInfo;
+
             // Render the template
             el.innerHTML = "<div></div><div></div>";
+            _elFooter = el.children[1] as any;
 
             // Render the configuration
-            renderConfiguration(el.children[1] as any, wpInfo);
-
-            // Call the event
-            props.onRenderHeader ? props.onRenderHeader(el.children[0] as any, _wpInfo) : null;
+            renderConfiguration(el.children[0] as any, wpInfo);
         },
         onSave: (cfg: IWPListCfg) => {
             // Update the configuration
