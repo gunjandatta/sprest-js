@@ -44,6 +44,23 @@ export const CommandButton = (props: ICommandButtonProps): ICommandButton => {
 
             // Ensure the contextual host exists
             if (_button._modalHostView && _button._modalHostView._contextualHost) {
+                // Get the window and menu positions
+                let windowPos = document.body.getBoundingClientRect();
+                let menuPos = _button._modalHostView._contextualHost.getBoundingClientRect();
+
+                // See if the menu is being rendered below the screen
+                if (windowPos.height < menuPos.bottom) {
+                    // Scroll the menu into view
+                    _button._modalHostView._contextualHost.scrollIntoView(true);
+                }
+
+                // See if the menu is being rendered past the screen
+                let diff = menuPos.right - windowPos.right;
+                if (diff > 0) {
+                    // Update the left position
+                    _button._modalHostView._contextualHost.style.left = (menuPos.left - diff) + "px";
+                }
+
                 // Set the click events
                 setClickEvents(_button._modalHostView._contextualHost.querySelector(".ms-ContextualMenu"), props.menu.items, (ev, item) => {
                     // Close the menu

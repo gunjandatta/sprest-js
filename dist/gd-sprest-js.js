@@ -6802,6 +6802,20 @@ exports.CommandButton = function (props) {
             }
             // Ensure the contextual host exists
             if (_button._modalHostView && _button._modalHostView._contextualHost) {
+                // Get the window and menu positions
+                var windowPos = document.body.getBoundingClientRect();
+                var menuPos = _button._modalHostView._contextualHost.getBoundingClientRect();
+                // See if the menu is being rendered below the screen
+                if (windowPos.height < menuPos.bottom) {
+                    // Scroll the menu into view
+                    _button._modalHostView._contextualHost.scrollIntoView(true);
+                }
+                // See if the menu is being rendered past the screen
+                var diff = menuPos.right - windowPos.right;
+                if (diff > 0) {
+                    // Update the left position
+                    _button._modalHostView._contextualHost.style.left = menuPos.left - diff + "px";
+                }
                 // Set the click events
                 common_1.setClickEvents(_button._modalHostView._contextualHost.querySelector(".ms-ContextualMenu"), props.menu.items, function (ev, item) {
                     // Close the menu
