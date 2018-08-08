@@ -19106,9 +19106,9 @@ exports.ListForm.renderEditForm = function (props) {
                     if (formValues[field.fieldInfo.name]) {
                         continue;
                     }
+                    // Form is invalid
+                    return false;
                 }
-                // Form is invalid
-                return false;
             }
             // Form is valid
             return true;

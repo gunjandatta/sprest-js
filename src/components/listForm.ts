@@ -398,10 +398,10 @@ ListForm.renderEditForm = (props: IListFormEditProps): IListFormEdit => {
                 if (field.fieldInfo.required) {
                     // Ensure a value exists
                     if (formValues[field.fieldInfo.name]) { continue; }
-                }
 
-                // Form is invalid
-                return false;
+                    // Form is invalid
+                    return false;
+                }
             }
 
             // Form is valid
