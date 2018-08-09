@@ -2405,9 +2405,11 @@ exports.SearchBox = function (props) {
     });
     // Set the "Enter" key to execute the search
     _searchbox._searchBoxField.addEventListener("keydown", function (ev) {
+        // Call the key press event
+        props.onKeyDown ? props.onKeyDown(getValue(), ev) : null;
         // See if the "Enter" key was hit
         if (ev.keyCode == 13) {
-            // Disable panel from closing
+            // Disable panel from closing, if this is w/in a panel
             ev ? ev.preventDefault() : null;
             // Call the click event
             props.onClick ? props.onClick(getValue()) : null;
