@@ -2403,10 +2403,16 @@ exports.SearchBox = function (props) {
             }, 20);
         }
     });
+    // See if the key up event exists
+    if (props.onKeyUp) {
+        // Set the "Enter" key to execute the search
+        _searchbox._searchBoxField.addEventListener("keyup", function (ev) {
+            // Call the event
+            props.onKeyUp(getValue(), ev);
+        });
+    }
     // Set the "Enter" key to execute the search
     _searchbox._searchBoxField.addEventListener("keydown", function (ev) {
-        // Call the key press event
-        props.onKeyDown ? props.onKeyDown(getValue(), ev) : null;
         // See if the "Enter" key was hit
         if (ev.keyCode == 13) {
             // Disable panel from closing, if this is w/in a panel

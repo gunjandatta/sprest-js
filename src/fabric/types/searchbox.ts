@@ -21,8 +21,8 @@ export interface ISearchBoxProps extends IProps {
     /** The search icon click event. */
     onClick?: (searchText: string, ev?: Event) => void;
 
-    /** The key down event. */
-    onKeyDown?: (searchText: string, ev?: Event) => void;
+    /** The key up event. */
+    onKeyUp?: (searchText: string, ev?: Event) => void;
 
     /** The search box placeholder. */
     placeholder?: string;
