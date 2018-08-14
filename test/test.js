@@ -18167,7 +18167,7 @@ exports.WebPart = function (props) {
             // Add the help link
             addHelpLink();
             // Add the edit class name
-            elWebPart.classList.add("is-edit");
+            _wp.el.classList.add("is-edit");
             // Call the render event
             if (props.onRenderEdit) {
                 // Execute the render edit event
