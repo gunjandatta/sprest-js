@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -77,11 +77,8 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 // Office Fabric-UI JavaScript Library
-__export(__webpack_require__(26));
+__export(__webpack_require__(29));
 // Fabric Components
-__export(__webpack_require__(31));
-__export(__webpack_require__(32));
-__export(__webpack_require__(33));
 __export(__webpack_require__(34));
 __export(__webpack_require__(35));
 __export(__webpack_require__(36));
@@ -95,18 +92,21 @@ __export(__webpack_require__(43));
 __export(__webpack_require__(44));
 __export(__webpack_require__(45));
 __export(__webpack_require__(46));
-__export(__webpack_require__(107));
-__export(__webpack_require__(108));
-__export(__webpack_require__(15));
-__export(__webpack_require__(109));
+__export(__webpack_require__(47));
+__export(__webpack_require__(48));
+__export(__webpack_require__(49));
 __export(__webpack_require__(110));
 __export(__webpack_require__(111));
+__export(__webpack_require__(15));
 __export(__webpack_require__(112));
+__export(__webpack_require__(113));
+__export(__webpack_require__(114));
+__export(__webpack_require__(115));
 // Templates
 var Templates = __webpack_require__(4);
 exports.Templates = Templates;
 // Types
-var Types = __webpack_require__(134);
+var Types = __webpack_require__(137);
 exports.Types = Types;
 
 /***/ }),
@@ -119,17 +119,17 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(49));
-__export(__webpack_require__(50));
-__export(__webpack_require__(70));
-__export(__webpack_require__(71));
-__export(__webpack_require__(72));
+__export(__webpack_require__(52));
+__export(__webpack_require__(53));
 __export(__webpack_require__(73));
 __export(__webpack_require__(74));
 __export(__webpack_require__(75));
 __export(__webpack_require__(76));
 __export(__webpack_require__(77));
-var Types = __webpack_require__(78);
+__export(__webpack_require__(78));
+__export(__webpack_require__(79));
+__export(__webpack_require__(80));
+var Types = __webpack_require__(81);
 exports.Types = Types;
 
 
@@ -173,10 +173,10 @@ var Helper = __webpack_require__(6);
 exports.Helper = Helper;
 var mapper_1 = __webpack_require__(5);
 exports.SPTypes = mapper_1.SPTypes;
-var Types = __webpack_require__(105);
+var Types = __webpack_require__(108);
 exports.Types = Types;
 __export(__webpack_require__(3));
-__export(__webpack_require__(106));
+__export(__webpack_require__(109));
 
 
 /***/ }),
@@ -189,10 +189,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(48));
-__export(__webpack_require__(79));
-__export(__webpack_require__(80));
-__export(__webpack_require__(81));
+__export(__webpack_require__(51));
 __export(__webpack_require__(82));
 __export(__webpack_require__(83));
 __export(__webpack_require__(84));
@@ -201,8 +198,11 @@ __export(__webpack_require__(86));
 __export(__webpack_require__(87));
 __export(__webpack_require__(88));
 __export(__webpack_require__(89));
+__export(__webpack_require__(90));
+__export(__webpack_require__(91));
+__export(__webpack_require__(92));
 __export(__webpack_require__(12));
-var Types = __webpack_require__(90);
+var Types = __webpack_require__(93);
 exports.Types = Types;
 
 
@@ -219,9 +219,6 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(113));
-__export(__webpack_require__(114));
-__export(__webpack_require__(115));
 __export(__webpack_require__(116));
 __export(__webpack_require__(117));
 __export(__webpack_require__(118));
@@ -234,13 +231,16 @@ __export(__webpack_require__(124));
 __export(__webpack_require__(125));
 __export(__webpack_require__(126));
 __export(__webpack_require__(127));
-__export(__webpack_require__(16));
 __export(__webpack_require__(128));
 __export(__webpack_require__(129));
 __export(__webpack_require__(130));
+__export(__webpack_require__(16));
 __export(__webpack_require__(131));
 __export(__webpack_require__(132));
 __export(__webpack_require__(133));
+__export(__webpack_require__(134));
+__export(__webpack_require__(135));
+__export(__webpack_require__(136));
 
 /***/ }),
 /* 5 */
@@ -249,11 +249,11 @@ __export(__webpack_require__(133));
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Mapper = __webpack_require__(51);
+var Mapper = __webpack_require__(54);
 exports.Mapper = Mapper;
-var SPTypes = __webpack_require__(65);
+var SPTypes = __webpack_require__(68);
 exports.SPTypes = SPTypes;
-var Types = __webpack_require__(66);
+var Types = __webpack_require__(69);
 exports.Types = Types;
 
 
@@ -267,23 +267,23 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(47));
-__export(__webpack_require__(91));
-__export(__webpack_require__(92));
-__export(__webpack_require__(93));
+__export(__webpack_require__(50));
+__export(__webpack_require__(94));
 __export(__webpack_require__(95));
 __export(__webpack_require__(96));
-__export(__webpack_require__(97));
 __export(__webpack_require__(98));
 __export(__webpack_require__(99));
-__export(__webpack_require__(14));
 __export(__webpack_require__(100));
-__export(__webpack_require__(13));
 __export(__webpack_require__(101));
 __export(__webpack_require__(102));
-var SP = __webpack_require__(103);
+__export(__webpack_require__(14));
+__export(__webpack_require__(103));
+__export(__webpack_require__(13));
+__export(__webpack_require__(104));
+__export(__webpack_require__(105));
+var SP = __webpack_require__(106);
 exports.SP = SP;
-var Types = __webpack_require__(104);
+var Types = __webpack_require__(107);
 exports.Types = Types;
 
 
@@ -300,10 +300,10 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(136));
-__export(__webpack_require__(137));
-__export(__webpack_require__(138));
-var Types = __webpack_require__(139);
+__export(__webpack_require__(139));
+__export(__webpack_require__(140));
+__export(__webpack_require__(141));
+var Types = __webpack_require__(142);
 exports.Types = Types;
 
 /***/ }),
@@ -319,7 +319,7 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(140));
+__export(__webpack_require__(143));
 __export(__webpack_require__(18));
 
 /***/ }),
@@ -2557,7 +2557,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return 1 === arguments.length ? this.off(a, "**") : this.off(b, a || "**", c);
     }, size: function size() {
       return this.length;
-    } }), n.fn.andSelf = n.fn.addBack, "function" == "function" && __webpack_require__(29) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+    } }), n.fn.andSelf = n.fn.addBack, "function" == "function" && __webpack_require__(32) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
     return n;
   }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));var Nb = a.jQuery,
@@ -2565,7 +2565,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return a.$ === n && (a.$ = Ob), b && a.jQuery === n && (a.jQuery = Nb), n;
   }, b || (a.jQuery = a.$ = n), n;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)(module)))
 
 /***/ }),
 /* 11 */
@@ -2720,7 +2720,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(94));
+__export(__webpack_require__(97));
 var lib_1 = __webpack_require__(3);
 var __1 = __webpack_require__(2);
 var _1 = __webpack_require__(6);
@@ -2762,7 +2762,9 @@ exports.SPConfig = function (cfg, webUrl) {
                     if (cfgContentType.ParentName) {
                         // Get the web containing the parent content type
                         lib_1.Web(cfgContentType.ParentWebUrl || webUrl)
+                            // Get the content types
                             .ContentTypes()
+                            // Filter for the parent name
                             .query({
                             Filter: "Name eq '" + cfgContentType.ParentName + "'"
                         })
@@ -3009,6 +3011,7 @@ exports.SPConfig = function (cfg, webUrl) {
                     listInfo_1.Title = listName_1.replace(/ /g, "");
                     // Add the list
                     lists.add(listInfo_1)
+                        // Execute the request
                         .execute(function (list) {
                         // Restore the list name in the configuration
                         listInfo_1.Title = listName_1;
@@ -3177,11 +3180,15 @@ exports.SPConfig = function (cfg, webUrl) {
             console.log("[gd-sprest][WebPart] Creating the web parts.");
             // Get the root web
             lib_1.Web(lib_1.ContextInfo.siteServerRelativeUrl)
+                // Get the web part catalog
                 .getCatalog(__1.SPTypes.ListTemplateType.WebPartCatalog)
+                // Get the root folder
                 .RootFolder()
+                // Expand the files and items
                 .query({
                 Expand: ["Files"]
             })
+                // Execute the request
                 .execute(function (folder) {
                 var ctr = 0;
                 var _loop_6 = function (i) {
@@ -3226,11 +3233,15 @@ exports.SPConfig = function (cfg, webUrl) {
                             if (cfgWebPart.Group) {
                                 // Set the target to the root web
                                 lib_1.Web(lib_1.ContextInfo.siteServerRelativeUrl)
+                                    // Get the web part catalog
                                     .getCatalog(__1.SPTypes.ListTemplateType.WebPartCatalog)
+                                    // Get the Items
                                     .Items()
+                                    // Query for this webpart
                                     .query({
                                     Filter: "FileLeafRef eq '" + cfgWebPart.FileName + "'"
                                 })
+                                    // Execute the request
                                     .execute(function (items) {
                                     // Update the item
                                     items.results[0].update({
@@ -3457,9 +3468,13 @@ exports.SPConfig = function (cfg, webUrl) {
             console.log("[gd-sprest][WebPart] Removing the web parts.");
             // Get the root web
             lib_1.Web(lib_1.ContextInfo.siteServerRelativeUrl)
+                // Get the webpart gallery
                 .getCatalog(__1.SPTypes.ListTemplateType.WebPartCatalog)
+                // Get the root folder
                 .RootFolder()
+                // Expand the files
                 .Files()
+                // Execute the request
                 .execute(function (files) {
                 var _loop_11 = function (i) {
                     var cfgWebPart = cfgWebParts[i];
@@ -3504,11 +3519,13 @@ exports.SPConfig = function (cfg, webUrl) {
                 // Break from the loop
                 break;
             }
+            // Else, see if it's empty
             else if (value == 0) {
                 // Clear the values
                 low = 0;
                 high = 0;
             }
+            // Else, update the base permission
             else {
                 var bit = value - 1;
                 var bitValue = 1;
@@ -3523,6 +3540,7 @@ exports.SPConfig = function (cfg, webUrl) {
                     // Set the low value
                     low |= bitValue;
                 }
+                // Else, it's a high permission
                 else {
                     // Compute the value
                     bitValue = bitValue << (bit - 32);
@@ -3557,10 +3575,13 @@ exports.SPConfig = function (cfg, webUrl) {
                 if (cfgList) {
                     // Get the web
                     lib_1.Web(webUrl)
+                        // Get the list
                         .Lists(cfgList.ListInformation.Title)
+                        // Expand the content types, fields and views
                         .query({
                         Expand: ["ContentTypes", "Fields", "UserCustomActions", "Views"]
                     })
+                        // Execute the request
                         .execute(function (list) {
                         // See if the title field is being updated
                         if (cfgList.TitleFieldDisplayName) {
@@ -3676,9 +3697,11 @@ exports.SPConfig = function (cfg, webUrl) {
             }
             // Get the site
             lib_1.Site(webUrl)
+                // Expand the user custom actions
                 .query({
                 Expand: ["UserCustomActions"]
             })
+                // Execute the request
                 .execute(function (site) {
                 // Remove the user custom actions
                 removeUserCustomActions(site.UserCustomActions, cfg.CustomActionCfg ? cfg.CustomActionCfg.Site : []).then(function () {
@@ -3696,9 +3719,11 @@ exports.SPConfig = function (cfg, webUrl) {
             console.log("[gd-sprest][uninstall] Loading the web information...");
             // Get the web
             lib_1.Web(webUrl)
+                // Expand the content types, fields, lists and user custom actions
                 .query({
                 Expand: ["ContentTypes", "Fields", "Lists", "UserCustomActions"]
             })
+                // Execute the request
                 .execute(function (web) {
                 // Remove the fields
                 removeFields(web.Fields, cfg.Fields).then(function () {
@@ -3821,6 +3846,7 @@ exports.SPConfig = function (cfg, webUrl) {
                         console.log("[gd-sprest][Site Custom Actions] Starting the requests.");
                         // Get the site
                         lib_1.Site(webUrl)
+                            // Get the user custom actions
                             .UserCustomActions().execute(function (customActions) {
                             // Create the user custom actions
                             createUserCustomActions(_1.parse(customActions.stringify()), cfg.CustomActionCfg.Site).then(function () {
@@ -4046,9 +4072,9 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(8));
 __export(__webpack_require__(19));
-__export(__webpack_require__(143));
-__export(__webpack_require__(146));
-__export(__webpack_require__(148));
+__export(__webpack_require__(145));
+__export(__webpack_require__(147));
+__export(__webpack_require__(149));
 var Types = __webpack_require__(151);
 exports.Types = Types;
 
@@ -4247,22 +4273,510 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(141));
+__export(__webpack_require__(144));
+__export(__webpack_require__(20));
 
 /***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(21);
-module.exports = __webpack_require__(9);
+"use strict";
 
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var gd_sprest_1 = __webpack_require__(2);
+var Fabric = __webpack_require__(0);
+/**
+ * List WebPart Edit Panel
+ */
+exports.WPListEditPanel = function (props) {
+    if (props === void 0) {
+        props = {};
+    }
+    var _elFooter = null;
+    var _elList = null;
+    var _elWebUrl = null;
+    var _initFl = false;
+    var _lists = null;
+    var _wpInfo = null;
+    // Method to load the lists
+    var loadLists = function loadLists(webUrl) {
+        // Set the query
+        var query = props.listQuery || {};
+        // Render a loading message
+        Fabric.Spinner({
+            el: _elList,
+            text: "Loading the lists..."
+        });
+        // Get the web
+        gd_sprest_1.Web(webUrl)
+        // Get the lists
+        .Lists()
+        // Include the fields
+        .query(query)
+        // Execute the request
+        .execute(function (lists) {
+            // Save the lists
+            _lists = lists.results;
+            // Call the list rendering event
+            _lists = (props.onListsRendering ? props.onListsRendering(_wpInfo, _lists) : null) || _lists;
+            // Render the list dropdown
+            renderListDDL();
+        });
+    };
+    // Method to render the configuration
+    var renderConfiguration = function renderConfiguration(el, wpInfo) {
+        // Render the panel contents
+        el.innerHTML = ['<div></div>', '<div></div>'].join('\n');
+        _elWebUrl = el.children[0];
+        _elList = el.children[1];
+        // Render the web url textbox
+        var webUrl = _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.WebUrl : "";
+        Fabric.TextField({
+            el: _elWebUrl,
+            label: "Relative Web Url:",
+            description: "The web containing the list. If blank, the current web is used.",
+            value: webUrl,
+            onChange: function onChange(value) {
+                // Update the configuration
+                _wpInfo.cfg.WebUrl = value;
+            }
+        });
+        // Load the lists
+        loadLists(webUrl);
+    };
+    // Method to render the lists dropdown
+    var renderListDDL = function renderListDDL() {
+        var selectedList = null;
+        var options = [];
+        // Parse the lists
+        for (var i = 0; i < _lists.length; i++) {
+            var list = _lists[i];
+            // Add the option
+            options.push({
+                text: list.Title,
+                value: list.Title
+            });
+            // See if this is the selected list
+            if (list.Title == _wpInfo.cfg.ListName) {
+                // Select this list
+                selectedList = list;
+            }
+        }
+        // Render the dropdown
+        var ddl = Fabric.Dropdown({
+            el: _elList,
+            label: "List:",
+            options: options,
+            value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
+            onChange: function onChange(options) {
+                var option = options[0];
+                if (option) {
+                    // Parse the list
+                    for (var i = 0; i < _lists.length; i++) {
+                        var list = _lists[i];
+                        // See if this is the target list
+                        if (list.Title == option.text) {
+                            // Update the configuration
+                            _wpInfo.cfg.ListName = option.value;
+                            // Call the change event
+                            props.onListChanged ? props.onListChanged(_wpInfo, list) : null;
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+        // Call the render footer event
+        props.onRenderFooter ? props.onRenderFooter(_elFooter, _wpInfo, selectedList) : null;
+    };
+    // Create the menu commands
+    var menuLeftCommands = [{
+        icon: "Refresh",
+        text: "Refresh",
+        onClick: function onClick() {
+            // Load the lists
+            loadLists(_wpInfo.cfg.WebUrl);
+        }
+    }];
+    // See if custom commands exist
+    if (props.menuLeftCommands) {
+        // Add the custom commands
+        menuLeftCommands = menuLeftCommands.concat(props.menuLeftCommands);
+    }
+    // Return the edit panel
+    return {
+        menuLeftCommands: menuLeftCommands,
+        menuRightCommands: props.menuRightCommands,
+        onRenderHeader: props.onRenderHeader,
+        panelType: props.panelType,
+        showSaveButton: props.showSaveButton,
+        onRenderFooter: function onRenderFooter(el, wpInfo) {
+            // Save the webpart information
+            _wpInfo = wpInfo;
+            // Render the template
+            el.innerHTML = "<div></div><div></div>";
+            _elFooter = el.children[1];
+            // Render the configuration
+            renderConfiguration(el.children[0], wpInfo);
+        },
+        onSave: function onSave(cfg) {
+            // Update the configuration
+            cfg.ListName = _wpInfo.cfg.ListName;
+            cfg.WebUrl = _wpInfo.cfg.WebUrl;
+            // Return the configuration
+            return props.onSave ? props.onSave(_wpInfo.cfg) : _wpInfo.cfg;
+        }
+    };
+};
 
 /***/ }),
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-var content = __webpack_require__(22);
+
+var _this = undefined;
+Object.defineProperty(exports, "__esModule", { value: true });
+var gd_sprest_1 = __webpack_require__(2);
+var Fabric = __webpack_require__(0);
+/**
+ * Search WebPart Edit Panel
+ */
+exports.WPSearchEditPanel = function (props) {
+    if (props === void 0) {
+        props = {};
+    }
+    var _elFieldsDDL = null;
+    var _wpInfo = null;
+    // Method to render the fields
+    var renderFields = function renderFields(el, list) {
+        // Render the fields
+        _this.el = el;
+        el.innerHTML = "<div></div><div></div>";
+        var _elFieldsDDL = el.children[0];
+        // Ensure the list exists
+        if (list == null) {
+            return;
+        }
+        // Render a spinner
+        Fabric.Spinner({
+            el: _elFieldsDDL,
+            text: "Loading the fields..."
+        });
+        // Load the fields dropdown list
+        renderFieldsDDL(list);
+        // Call the custom event
+        props.onRenderFooter ? props.onRenderFooter(el.children[1], _wpInfo, list) : null;
+    };
+    // Method to render the fields drop down list
+    var renderFieldsDDL = function renderFieldsDDL(list) {
+        var options = [];
+        // Parse the fields
+        var fields = (list.Fields ? list.Fields.results : null) || [];
+        for (var i = 0; i < fields.length; i++) {
+            var addField = false;
+            var field = fields[i];
+            // Add the field, based on the type
+            switch (field.FieldTypeKind) {
+                // Searchable Fields
+                case gd_sprest_1.SPTypes.FieldType.Choice:
+                case gd_sprest_1.SPTypes.FieldType.MultiChoice:
+                case gd_sprest_1.SPTypes.FieldType.Lookup:
+                case gd_sprest_1.SPTypes.FieldType.Text:
+                case gd_sprest_1.SPTypes.FieldType.URL:
+                case gd_sprest_1.SPTypes.FieldType.User:
+                    addField = true;
+                    break;
+                default:
+                    // Allow managed metadata fields
+                    addField = field.TypeAsString.startsWith("TaxonomyFieldType");
+                    break;
+            }
+            // See if we are adding the field
+            if (addField) {
+                options.push({
+                    data: field.TypeAsString,
+                    text: field.Title + " [" + field.InternalName + "]",
+                    value: field.InternalName
+                });
+            }
+        }
+        // Sort the options
+        options = options.sort(function (a, b) {
+            if (a.value < b.value) {
+                return -1;
+            }
+            if (a.value > b.value) {
+                return 1;
+            }
+            return 0;
+        });
+        // See if fields exist
+        var value = [];
+        if (_wpInfo.cfg && _wpInfo.cfg.Fields) {
+            // Parse the fields
+            for (var i = 0; i < _wpInfo.cfg.Fields.length; i++) {
+                // Add the field
+                value.push(_wpInfo.cfg.Fields[i].name);
+            }
+        }
+        // Render the field dropdown
+        Fabric.Dropdown({
+            el: _elFieldsDDL,
+            label: "Filter Field(s):",
+            multi: true,
+            options: options,
+            value: value,
+            onChange: function onChange(options) {
+                // Clear the fields
+                _wpInfo.cfg.Fields = [];
+                // Parse the options
+                for (var i = 0; i < options.length; i++) {
+                    var option = options[i];
+                    // Add the field
+                    _wpInfo.cfg.Fields.push({
+                        name: option.value,
+                        type: option.data
+                    });
+                }
+            }
+        });
+    };
+    // Set the list query
+    var listQuery = props.listQuery || {};
+    listQuery.Expand = listQuery.Expand || [];
+    listQuery.Expand.push("Fields");
+    // Return the edit panel
+    return {
+        listQuery: listQuery,
+        menuLeftCommands: props.menuLeftCommands,
+        menuRightCommands: props.menuRightCommands,
+        onListsRendering: props.onListsRendering,
+        onRenderHeader: props.onRenderHeader,
+        panelType: props.panelType,
+        showSaveButton: props.showSaveButton,
+        onListChanged: function onListChanged(wpInfo, list) {
+            // Render the fields
+            renderFields(_this.el.children[0], list);
+        },
+        onRenderFooter: function onRenderFooter(el, wpInfo, list) {
+            // Save the webpart information
+            _wpInfo = wpInfo;
+            // Render the fields
+            renderFields(el, list);
+        },
+        onSave: function onSave(cfg) {
+            // Update the configuration
+            cfg.Fields = _wpInfo.cfg.Fields || [];
+            // Return the configuration
+            return props.onSave ? props.onSave(_wpInfo.cfg) : _wpInfo.cfg;
+        }
+    };
+};
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var gd_sprest_1 = __webpack_require__(2);
+var Fabric = __webpack_require__(0);
+/**
+ * Taxonomy WebPart Edit Panel
+ */
+exports.WPTaxonomyEditPanel = function (props) {
+    if (props === void 0) {
+        props = {};
+    }
+    var _elHeader = null;
+    var _elFooter = null;
+    var _elTermGroups = null;
+    var _elTermSets = null;
+    var _elTermSetTerms = null;
+    var _wpInfo = null;
+    // Method to render the configuration
+    var renderConfiguration = function renderConfiguration(el, wpInfo) {
+        // Save the properties
+        _wpInfo = wpInfo;
+        // Render the template
+        el.innerHTML = "<div></div><div></div><div></div><div></div><div></div>";
+        _elHeader = el.children[0];
+        _elTermGroups = el.children[1];
+        _elTermSets = el.children[2];
+        _elTermSetTerms = el.children[3];
+        _elFooter = el.children[4];
+        // Render the term groups
+        renderTermGroups();
+    };
+    // Method to render the term groups
+    var renderTermGroups = function renderTermGroups() {
+        // Render a loading dialog
+        Fabric.Spinner({
+            el: _elTermGroups,
+            text: "Loading the term groups"
+        });
+        // Load the term groups
+        gd_sprest_1.Helper.Taxonomy.getTermGroups().then(function (groups) {
+            var options = [];
+            // Parse the groups
+            for (var i = 0; i < groups.length; i++) {
+                // Add the option
+                options.push({
+                    text: groups[i].name,
+                    value: groups[i].id
+                });
+            }
+            // Render the term groups
+            Fabric.Dropdown({
+                el: _elTermGroups,
+                label: "Select the Term Group:",
+                options: options,
+                value: _wpInfo.cfg.TermGroupId,
+                onChange: function onChange(options) {
+                    var option = options[0];
+                    // Set the configuration
+                    _wpInfo.cfg.TermGroupId = option ? option.value : "";
+                    _wpInfo.cfg.TermGroupName = option ? option.text : "";
+                    // Call the change event
+                    props.onTermGroupChanged ? props.onTermGroupChanged(_wpInfo, { id: _wpInfo.cfg.TermGroupId, name: _wpInfo.cfg.TermGroupName }) : null;
+                    // Render the term sets
+                    renderTermSets();
+                }
+            });
+            // See if a term group exists
+            if (_wpInfo.cfg.TermGroupName) {
+                // Render the term sets
+                renderTermSets();
+            }
+        });
+    };
+    // Method to render the term sets
+    var renderTermSets = function renderTermSets() {
+        // Render a loading dialog
+        Fabric.Spinner({
+            el: _elTermSets,
+            text: "Loading the term sets"
+        });
+        // Load the term sets
+        gd_sprest_1.Helper.Taxonomy.getTermSets(_wpInfo.cfg.TermGroupName).then(function (termSets) {
+            var options = [];
+            // Parse the term sets
+            for (var i = 0; i < termSets.length; i++) {
+                // Add the options
+                options.push({
+                    text: termSets[i].name,
+                    value: termSets[i].id
+                });
+            }
+            // Render the term sets
+            Fabric.Dropdown({
+                el: _elTermSets,
+                label: "Select a Term Set:",
+                options: options,
+                value: _wpInfo.cfg.TermSetId,
+                onChange: function onChange(options) {
+                    var option = options[0];
+                    // Set the configuration
+                    _wpInfo.cfg.TermSetId = option ? option.value : "";
+                    _wpInfo.cfg.TermSetName = option ? option.text : "";
+                    // Call the change event
+                    props.onTermSetChanged ? props.onTermSetChanged(_wpInfo, { id: _wpInfo.cfg.TermSetId, name: _wpInfo.cfg.TermSetName }) : null;
+                    // Render the term set terms
+                    props.showTermSetTerms ? renderTermSetTerms() : null;
+                }
+            });
+            // See if a value exists
+            if (_wpInfo.cfg.TermSetId) {
+                // Render the term set terms
+                props.showTermSetTerms ? renderTermSetTerms() : null;
+            }
+        });
+    };
+    // Method to render the term set terms
+    var renderTermSetTerms = function renderTermSetTerms() {
+        // Render a loading dialog
+        Fabric.Spinner({
+            el: _elTermSets,
+            text: "Loading the term set terms"
+        });
+        // Load the term set terms
+        gd_sprest_1.Helper.Taxonomy.getTermSetByGroupName(_wpInfo.cfg.TermSetName, _wpInfo.cfg.TermGroupName).then(function (termSet) {
+            var options = [];
+            // Get the term set terms
+            var terms = gd_sprest_1.Helper.Taxonomy.toArray(termSet).sort(function (a, b) {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+            });
+            // Parse the term set terms
+            for (var i = 0; i < terms.length; i++) {
+                // Add the options
+                options.push({
+                    text: terms[i].name,
+                    value: terms[i].id
+                });
+            }
+            // Render the term sets
+            Fabric.Dropdown({
+                el: _elTermSets,
+                label: "Select a Term Set Term:",
+                options: options,
+                value: _wpInfo.cfg.TermSetTermId,
+                onChange: function onChange(options) {
+                    var option = options[0];
+                    // Set the configuration
+                    _wpInfo.cfg.TermSetTermId = option ? option.value : "";
+                    _wpInfo.cfg.TermSetTermName = option ? option.text : "";
+                    // Call the change event
+                    props.onTermSetTermChanged ? props.onTermSetTermChanged(_wpInfo, { id: _wpInfo.cfg.TermSetTermId, name: _wpInfo.cfg.TermSetTermName }) : null;
+                }
+            });
+        });
+    };
+    // Return the edit panel
+    return {
+        onRenderFooter: function onRenderFooter(el, wpInfo) {
+            // Call the event
+            props.onRenderFooter ? props.onRenderFooter(el, _wpInfo) : null;
+        },
+        onRenderHeader: function onRenderHeader(el, wpInfo) {
+            // Render the template
+            el.innerHTML = "<div></div><div></div>";
+            // Render the configuration
+            renderConfiguration(el.children[1], wpInfo);
+            // Call the event
+            props.onRenderHeader ? props.onRenderHeader(el.children[0], _wpInfo) : null;
+        },
+        onSave: function onSave(cfg) {
+            // Return the configuration
+            return props.onSave ? props.onSave(_wpInfo.cfg) : _wpInfo.cfg;
+        }
+    };
+};
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(24);
+module.exports = __webpack_require__(9);
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(25);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -4276,7 +4790,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(24)(content, options);
+var update = __webpack_require__(27)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -4308,10 +4822,10 @@ if(false) {
 }
 
 /***/ }),
-/* 22 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(23)(false);
+exports = module.exports = __webpack_require__(26)(false);
 // imports
 
 
@@ -4322,7 +4836,7 @@ exports.push([module.i, "@font-face{font-family:'FabricMDL2Icons';src:url(\"http
 
 
 /***/ }),
-/* 23 */
+/* 26 */
 /***/ (function(module, exports) {
 
 /*
@@ -4404,7 +4918,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 24 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -4470,7 +4984,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(25);
+var	fixUrls = __webpack_require__(28);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -4790,7 +5304,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 25 */
+/* 28 */
 /***/ (function(module, exports) {
 
 
@@ -4885,7 +5399,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 26 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4898,17 +5412,17 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 // Include the fabric js
-__export(__webpack_require__(27));
+__export(__webpack_require__(30));
 
 /***/ }),
-/* 27 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var $ = __webpack_require__(10);
-__webpack_require__(30);
+__webpack_require__(33);
 //Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
 /**
  * Office UI Fabric JS 1.5.0
@@ -6020,7 +6534,7 @@ var fabric;!function (e) {
 }(fabric || (fabric = {}));exports.fabric = fabric;
 
 /***/ }),
-/* 28 */
+/* 31 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -6048,7 +6562,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 29 */
+/* 32 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -6057,7 +6571,7 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-/* 30 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6443,7 +6957,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 31 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6473,7 +6987,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 32 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6572,7 +7086,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 33 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6624,7 +7138,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 34 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6680,7 +7194,7 @@ exports.CheckBoxGroup = function (props) {
 };
 
 /***/ }),
-/* 35 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6765,7 +7279,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6842,7 +7356,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6957,7 +7471,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 38 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7130,7 +7644,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 39 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7215,7 +7729,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 40 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7434,7 +7948,7 @@ exports.Dropdown = function (props) {
 };
 
 /***/ }),
-/* 41 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7530,7 +8044,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7588,7 +8102,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 43 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7651,7 +8165,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 44 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7787,7 +8301,7 @@ exports.NumberField = function (props) {
 };
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7941,7 +8455,7 @@ exports.Panel = function (props) {
 };
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8133,7 +8647,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 47 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8168,6 +8682,7 @@ exports.App = {
                     .then(function (folder) {
                     // Copy the file to the host web
                     exports.App.copyFileToHostWeb(fileUrl, folder, overwriteFl)
+                        // Wait for the request to complete, and resolve the promise
                         .then(function (_a) {
                         var file = _a.file, folder = _a.folder;
                         resolve({ file: file, folder: folder });
@@ -8183,6 +8698,7 @@ exports.App = {
                 var srcFileUrl_1 = lib_1.ContextInfo.window.SP.Utilities.UrlBuilder.urlCombine(lib_1.ContextInfo.webServerRelativeUrl, fileUrl.substr(fileUrl[0] == "/" ? 1 : 0));
                 // Get the destination file
                 web.getFileByServerRelativeUrl(dstFileUrl)
+                    // Execute the request
                     .execute(function (file) {
                     // Return a promise
                     return new Promise(function (resolve, reject) {
@@ -8202,7 +8718,9 @@ exports.App = {
                 // Get the current web
                 lib_1.Web()
                     .getFileByServerRelativeUrl(srcFileUrl_1)
+                    // Get the content
                     .content()
+                    // Execute the request
                     .execute(function (content) {
                     // Return a promise
                     return new Promise(function (resolve, reject) {
@@ -8213,6 +8731,7 @@ exports.App = {
                         lib_1.ContextInfo.window.$REST.DefaultRequestToHostFl = true;
                         // Add the file to the folder
                         (dstFolder).Files().add(true, fileName, content)
+                            // Execute the request
                             .execute(function (file) {
                             // Save a reference to this file
                             srcFile = file;
@@ -8246,6 +8765,7 @@ exports.App = {
                 }
                 // Copy the file
                 exports.App.copyFileToHostWeb(fileUrls[idx], folderUrls[idx], overwriteFl, rootWebFl)
+                    // Wait for it to complete
                     .then(function (_a) {
                     var file = _a.file, folder = _a.folder;
                     // Save a reference to the file and folder
@@ -8313,6 +8833,7 @@ exports.App = {
                 var dstFolderUrl = lib_1.ContextInfo.window.SP.Utilities.UrlBuilder.urlCombine(web.ServerRelativeUrl, folderUrl.substr(folderUrl[0] == "/" ? 1 : 0));
                 // Get the folder
                 web.getFolderByServerRelativeUrl(folderUrl)
+                    // Execute the request
                     .execute(function (folder) {
                     // Return a promise
                     return new Promise(function (resolve, reject) {
@@ -8445,7 +8966,7 @@ exports.App = {
 
 
 /***/ }),
-/* 48 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9042,7 +9563,7 @@ exports.ContextInfo = _ContextInfo;
 
 
 /***/ }),
-/* 49 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9081,7 +9602,7 @@ exports.RequestType = {
 
 
 /***/ }),
-/* 50 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9129,22 +9650,27 @@ var BaseHelper = /** @class */ (function () {
         if (/^graph/.test(objType)) {
             // Do nothing
         }
+        // Else, see if the base is a field
         else if ((/^field/.test(objType) || /fields?$/.test(objType)) && objType != "fieldlinks" && objType != "fields") {
             // Update the type
             objType = "field" + (isCollection ? "s" : "");
         }
+        // Else, see if the base is an item
         else if (/item$/.test(objType)) {
             // Update the type
             objType = "listitem";
         }
+        // Else, see if the base is an item collection
         else if (/items$/.test(objType)) {
             // Update the type
             objType = "items";
         }
+        // Else, see if this is a tenant app
         else if (/corporatecatalogappmetadata/.test(objType)) {
             // Update the type
             objType = "tenantapp";
         }
+        // Else, see if this is a tenant app collection
         else if (/corporatecatalogappmetadatas/.test(objType)) {
             // Update the type
             objType = "tenantapps";
@@ -9257,10 +9783,10 @@ var BaseHelper = /** @class */ (function () {
             obj["results"] = obj["results"] ? obj["results"].concat(results) : results;
             // See if only one object exists
             if (obj["results"].length > 0) {
-                var results_1 = obj["results"];
+                var results_2 = obj["results"];
                 // Parse the results
-                for (var _i = 0, results_2 = results_1; _i < results_2.length; _i++) {
-                    var result = results_2[_i];
+                for (var _i = 0, results_1 = results_2; _i < results_1.length; _i++) {
+                    var result = results_1[_i];
                     // Add the base references
                     this.addBaseReferences(obj, result);
                     // Update the metadata
@@ -9368,7 +9894,7 @@ exports.BaseHelper = BaseHelper;
 
 
 /***/ }),
-/* 51 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9377,9 +9903,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(52));
-__export(__webpack_require__(53));
-__export(__webpack_require__(54));
 __export(__webpack_require__(55));
 __export(__webpack_require__(56));
 __export(__webpack_require__(57));
@@ -9390,10 +9913,13 @@ __export(__webpack_require__(61));
 __export(__webpack_require__(62));
 __export(__webpack_require__(63));
 __export(__webpack_require__(64));
+__export(__webpack_require__(65));
+__export(__webpack_require__(66));
+__export(__webpack_require__(67));
 
 
 /***/ }),
-/* 52 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9413,7 +9939,7 @@ exports.audit = {
 
 
 /***/ }),
-/* 53 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9461,7 +9987,7 @@ exports.eventreceivers = {
 
 
 /***/ }),
-/* 54 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9783,7 +10309,7 @@ exports.limitedwebpartmanager = {
 
 
 /***/ }),
-/* 55 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9835,7 +10361,7 @@ exports.graph_me = {
 
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10204,6 +10730,9 @@ exports.listitem = {
     // Updates it's properties.
     update: {
         inheritMetadataType: true,
+        metadataType: function (obj) {
+            return (obj.parent && obj.parent["ListItemEntityTypeFullName"]) || "SP.ListItem";
+        },
         name: "",
         requestMethod: "MERGE",
         requestType: utils_1.RequestType.PostWithArgsInBody
@@ -10379,7 +10908,7 @@ exports.views = {
 
 
 /***/ }),
-/* 57 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10409,7 +10938,7 @@ exports.navigationservicerest = {
 
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10429,7 +10958,7 @@ exports.propertyvalues = {
 
 
 /***/ }),
-/* 59 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10449,7 +10978,7 @@ exports.search = {
 
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10550,7 +11079,7 @@ exports.roledefinitions = {
 
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11059,7 +11588,7 @@ exports.webs = {
 
 
 /***/ }),
-/* 62 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11244,7 +11773,7 @@ exports.userprofile = {
 
 
 /***/ }),
-/* 63 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11413,7 +11942,7 @@ exports.users = {
 
 
 /***/ }),
-/* 64 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11463,7 +11992,7 @@ exports.usercustomactions = {
 
 
 /***/ }),
-/* 65 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12113,45 +12642,18 @@ exports.WebTemplateType = {
 
 
 /***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ComplexTypes = __webpack_require__(67);
-exports.ComplexTypes = ComplexTypes;
-var Results = __webpack_require__(68);
-exports.Results = Results;
-var SPTypes = __webpack_require__(69);
-exports.SPTypes = SPTypes;
-
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-
-
-/***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-
-
-/***/ }),
 /* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var ComplexTypes = __webpack_require__(70);
+exports.ComplexTypes = ComplexTypes;
+var Results = __webpack_require__(71);
+exports.Results = Results;
+var SPTypes = __webpack_require__(72);
+exports.SPTypes = SPTypes;
 
 
 /***/ }),
@@ -12160,10 +12662,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 "use strict";
 
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -12191,7 +12723,7 @@ var BaseRequest = /** @class */ (function (_super) {
                 url: metadata.uri
             };
             // See if we are inheriting the metadata type
-            if (methodConfig.inheritMetadataType) {
+            if (methodConfig.inheritMetadataType && metadata.type) {
                 // Copy the metadata type
                 methodConfig.metadataType = metadata.type;
             }
@@ -12215,6 +12747,7 @@ var BaseRequest = /** @class */ (function (_super) {
             // Replace the endpoint
             targetInfo.endpoint = methodInfo.url;
         }
+        // Else, ensure the method url exists
         else if (methodInfo.url && methodInfo.url.length > 0) {
             // Ensure the end point exists
             targetInfo.endpoint = targetInfo.endpoint ? targetInfo.endpoint : "";
@@ -12276,9 +12809,11 @@ var BaseRequest = /** @class */ (function (_super) {
                 });
             }
         }
+        // Else, see if we already executed this request
         else if (this.xhr) {
             return this;
         }
+        // Else, we haven't executed this request
         else {
             // Create the request
             this.xhr = new _1.XHRRequest(asyncFl, targetInfo);
@@ -12389,10 +12924,12 @@ var BaseRequest = /** @class */ (function (_super) {
             // Fix the url reference
             targetInfo.url = targetInfo.url.replace(/AvailableFields/, "fields");
         }
+        // Else, see if this is an event receiver
         else if (/SP.EventReceiverDefinition/.test(metadata.type)) {
             // Fix the url reference
             targetInfo.url = targetInfo.url.replace(/\/EventReceiver\//, "/EventReceivers/");
         }
+        // Else, see if this is a tenant app
         else if (/Microsoft.SharePoint.Marketplace.CorporateCuratedGallery.CorporateCatalogAppMetadata/.test(targetInfo.url)) {
             // Fix the url reference
             targetInfo.url = targetInfo.url.split("Microsoft.SharePoint.Marketplace.CorporateCuratedGallery.CorporateCatalogAppMetadata")[0] + "web/tenantappcatalog/availableapps/getbyid('" + this["ID"] + "')";
@@ -12464,15 +13001,18 @@ exports.BaseRequest = BaseRequest;
 
 
 /***/ }),
-/* 71 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -12646,15 +13186,18 @@ exports.BaseExecution = BaseExecution;
 
 
 /***/ }),
-/* 72 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -12729,7 +13272,7 @@ exports.Base = Base;
 
 
 /***/ }),
-/* 73 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12805,6 +13348,7 @@ var Batch = /** @class */ (function () {
             batch.push(changeset);
             batch.push("");
         }
+        // Else, ensure a request exists
         else if (requests[0]) {
             var targetInfo = requests[0].targetInfo;
             // Add the request to the batch
@@ -12826,7 +13370,7 @@ exports.Batch = Batch;
 
 
 /***/ }),
-/* 74 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12996,6 +13540,7 @@ var MethodInfo = /** @class */ (function () {
                 // Set the method data to first argument value
                 this.methodData = this.methodInfo.argValues[0];
             }
+            // Else, see if we are passing arguments outside of the parameters
             else if (this.methodInfo.argValues.length > this.methodInfo.argNames.length) {
                 // Set the method data to the next available argument value
                 this.methodData = this.methodInfo.argValues[this.methodInfo.argNames.length];
@@ -13044,6 +13589,7 @@ var MethodInfo = /** @class */ (function () {
                 url = url.replace("[[" + key + "]]", encodeURIComponent(this.methodParams[key]));
             }
         }
+        // Else, see if this is an odata request
         else if (this.methodInfo.requestType == _1.RequestType.OData) {
             var oData = new _1.OData(this.methodParams["oData"]);
             // Update the url
@@ -13051,6 +13597,7 @@ var MethodInfo = /** @class */ (function () {
             // Set the get all items Flag
             this.methodInfo.getAllItemsFl = oData.GetAllItems;
         }
+        // Else, see if we are not passing the data in the body or query string as a variable
         else if (!this.passDataInBody && !this.passDataInQSAsVar) {
             var params = "";
             // Ensure data exists
@@ -13094,7 +13641,7 @@ exports.MethodInfo = MethodInfo;
 
 
 /***/ }),
-/* 75 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13220,7 +13767,7 @@ exports.OData = OData;
 
 
 /***/ }),
-/* 76 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13331,6 +13878,7 @@ var TargetInfo = /** @class */ (function () {
             // Default the url to the current site/web url
             this.request.url = this.request.defaultToWebFl == false ? lib_1.ContextInfo.siteAbsoluteUrl : lib_1.ContextInfo.webAbsoluteUrl;
         }
+        // Else, see if the url already contains the full request
         else if (/\/_api\//.test(this.request.url)) {
             // Get the url
             var url = this.request.url.toLowerCase().split("/_api/");
@@ -13373,7 +13921,7 @@ exports.TargetInfo = TargetInfo;
 
 
 /***/ }),
-/* 77 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13524,6 +14072,7 @@ var XHRRequest = /** @class */ (function () {
             // Execute the request
             this.executeRequest(requestDigest);
         }
+        // See if this is a post request and the request digest does not exist
         else if (this.targetInfo.requestMethod != "GET" && requestDigest == "") {
             // See if this is a synchronous request
             if (!this.asyncFl) {
@@ -13587,7 +14136,7 @@ exports.XHRRequest = XHRRequest;
 
 
 /***/ }),
-/* 78 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13596,7 +14145,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 79 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13637,7 +14186,7 @@ exports.Graph.getAccessToken = function (scope) {
 
 
 /***/ }),
-/* 80 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13662,7 +14211,9 @@ exports.List = (function (listName, targetInfo) {
 exports.List.getByEntityName = (function (entityTypeName, callback, targetInfo) {
     // Query for the list
     var query = web_1.Web(targetInfo)
+        // Get the lists
         .Lists()
+        // Set the query
         .query({
         Filter: "EntityTypeName eq '" + entityTypeName + "'",
         Top: 1
@@ -13696,7 +14247,7 @@ exports.List.getDataAsStream = (function (listFullUrl, parameters) {
 
 
 /***/ }),
-/* 81 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13724,7 +14275,7 @@ exports.Navigation = (function (url, targetInfo) {
 
 
 /***/ }),
-/* 82 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13747,7 +14298,7 @@ exports.PeopleManager = (function (targetInfo) {
 
 
 /***/ }),
-/* 83 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13771,7 +14322,7 @@ exports.PeoplePicker = (function (targetInfo) {
 
 
 /***/ }),
-/* 84 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13795,7 +14346,7 @@ exports.ProfileLoader = (function (targetInfo) {
 
 
 /***/ }),
-/* 85 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13852,7 +14403,7 @@ exports.Search.getQuery = function (parameters) {
 
 
 /***/ }),
-/* 86 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13910,7 +14461,7 @@ exports.Site.getUrlById = (function (id) {
 
 
 /***/ }),
-/* 87 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13957,7 +14508,7 @@ exports.SocialFeed = (function (targetInfo) {
 
 
 /***/ }),
-/* 88 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13981,7 +14532,7 @@ exports.UserProfile = (function (targetInfo) {
 
 
 /***/ }),
-/* 89 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14031,6 +14582,7 @@ exports.Utility = (function (url, targetInfo) {
                     // Add the results property
                     properties[propName] = { 'results': [propValue] };
                 }
+                // Else, assume it's an array
                 else {
                     // Add the results property
                     properties[propName] = { 'results': propValue };
@@ -14052,7 +14604,7 @@ exports.Utility = (function (url, targetInfo) {
 
 
 /***/ }),
-/* 90 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14061,7 +14613,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 91 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14139,7 +14691,7 @@ exports.Dependencies = _Dependencies;
 
 
 /***/ }),
-/* 92 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14190,10 +14742,12 @@ function Executor(methodParams, method, onExecuted) {
                 }
             });
         }
+        // Else, see if additional methods need to be executed
         else if (idx < methodParams.length) {
             // Execute the next method
             executeMethods(idx + 1);
         }
+        // Else, resolve the promise
         else {
             // Resolve the promise
             _resolve();
@@ -14211,7 +14765,7 @@ exports.Executor = Executor;
 
 
 /***/ }),
-/* 93 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14359,10 +14913,13 @@ exports.FieldSchemaXML = function (fieldInfo) {
         if (fieldInfo.listName) {
             // Get the web containing the list
             lib_1.Web(fieldInfo.webUrl)
+                // Get the list
                 .Lists(fieldInfo.listName)
+                // Set the query
                 .query({
                 Expand: ["ParentWeb"]
             })
+                // Execute the request
                 .execute(function (list) {
                 // Set the list and web ids
                 props["List"] = "{" + list.Id + "}";
@@ -14536,6 +15093,9 @@ exports.FieldSchemaXML = function (fieldInfo) {
             if (typeof (fieldInfo.group) !== "undefined") {
                 props["Group"] = fieldInfo.group;
             }
+            if (typeof (fieldInfo.jslink) !== "undefined") {
+                props["JSLink"] = fieldInfo.jslink;
+            }
             if (typeof (fieldInfo.hidden) !== "undefined") {
                 props["Hidden"] = fieldInfo.hidden ? "TRUE" : "FALSE";
             }
@@ -14622,7 +15182,7 @@ exports.FieldSchemaXML = function (fieldInfo) {
 
 
 /***/ }),
-/* 94 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14660,7 +15220,7 @@ exports.SPCfgType = {
 
 
 /***/ }),
-/* 95 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14810,8 +15370,11 @@ exports.JSLink = {
                     var regExp = new RegExp(mapper_1.SPTypes.ClientTemplatesUtility.UserLookupDelimitString, "g");
                     // Update the field value
                     fieldValue = ctx.CurrentFieldValue
+                        // Replace the delimiter
                         .replace(regExp, "; ")
+                        // Trim the delimiter from the beginning
                         .replace(/^; /g, "")
+                        // Trim the delimiter from the end
                         .replace(/; $/g, "");
                     break;
                 case "Note":
@@ -15049,7 +15612,7 @@ exports.JSLink = {
 
 
 /***/ }),
-/* 96 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15120,10 +15683,12 @@ exports.ListForm = {
             }
             // Load the content types
             _info.list.ContentTypes()
+                // Query for the default content type and expand the field links
                 .query({
                 Expand: ["FieldLinks"],
                 Top: 1
             })
+                // Execute the request, but wait for the previous one to be completed
                 .execute(function (ct) {
                 // See if we are storing data in cache
                 if (_props.cacheKey) {
@@ -15292,12 +15857,15 @@ exports.ListForm = {
                     _resolve(_info);
                 }
             }
+            // Else, see if we are loading the list item
             else if (reloadItem || _props.itemId > 0) {
                 // Update the item query
                 _info.query = exports.ListForm.generateODataQuery(_info, _props.loadAttachments);
                 // Get the list item
                 _info.list.Items(reloadItem ? _props.item.Id : _props.itemId)
+                    // Set the query
                     .query(_info.query)
+                    // Execute the request
                     .execute(function (item) {
                     // Save the attachments
                     _info.attachments = item.AttachmentFiles.results;
@@ -15324,13 +15892,17 @@ exports.ListForm = {
                 }
                 // Get the web
                 __1.Web(_props.webUrl)
+                    // Get the list
                     .Lists(_props.listName)
+                    // Execute the request
                     .execute(function (list) {
                     // Save the list and web url
                     _info.list = list;
                     _info.webUrl = _props.webUrl;
                 })
+                    // Load the fields
                     .Fields()
+                    // Execute the request
                     .execute(function (fields) {
                     // See if we are caching the data
                     if (_props.cacheKey) {
@@ -15451,9 +16023,13 @@ exports.ListForm = {
             if (itemId > 0) {
                 // Get the web
                 __1.Web(info.webUrl)
+                    // Get the list
                     .Lists(info.listName)
+                    // Get the item
                     .Items(itemId)
+                    // Get the attachment files
                     .AttachmentFiles()
+                    // Execute the request
                     .execute(function (attachments) {
                     // Resolve the promise
                     resolve(attachments.results || []);
@@ -15493,8 +16069,11 @@ exports.ListForm = {
                     if (attachment.FileName == fileName) {
                         // Get the web
                         __1.Web(info.webUrl)
+                            // Get the file
                             .getFileByServerRelativeUrl(attachment.ServerRelativeUrl)
+                            // Delete the file
                             .delete()
+                            // Execute the request
                             .execute(function () {
                             // Resolve the promise
                             resolve(info);
@@ -15520,8 +16099,11 @@ exports.ListForm = {
             if (itemId > 0) {
                 // Get the web
                 var attachments = __1.Web(info.webUrl)
+                    // Get the lists
                     .Lists(info.listName)
+                    // Get the item
                     .Items(itemId)
+                    // Get the attachment files
                     .AttachmentFiles();
                 // Parse the attachment information
                 for (var i = 0; i < attachmentInfo.length; i++) {
@@ -15565,6 +16147,7 @@ exports.ListForm = {
                 formValues["__metadata"] = { type: info.list.ListItemEntityTypeFullName };
                 // Add the item
                 info.list.Items().add(formValues)
+                    // Execute the request
                     .execute(function (item) {
                     // Update the info
                     info.item = item;
@@ -15596,9 +16179,13 @@ exports.ListForm = {
                         ext = ext[ext.length - 1].toLowerCase();
                         // Get the list
                         info.list
+                            // Get the item
                             .Items(info.item.Id)
+                            // Get the attachments
                             .AttachmentFiles()
+                            // Add the file
                             .add(srcFile.name, ev.target.result)
+                            // Execute the request
                             .execute(function () {
                             // Refresh the item
                             exports.ListForm.refreshItem(info).then(function (info) {
@@ -15638,7 +16225,7 @@ exports.ListForm = {
 
 
 /***/ }),
-/* 97 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15660,12 +16247,17 @@ exports.ListFormField = {
                 // Process the field
                 processField();
             }
+            // Else, load the field from the information provided
             else {
                 // Get the web
                 __1.Web(_fieldInfo.webUrl)
+                    // Get the list
                     .Lists(_fieldInfo.listName)
+                    // Get the fields
                     .Fields()
+                    // Get the field by its internal name
                     .getByInternalNameOrTitle(_fieldInfo.name)
+                    // Execute the request
                     .execute(function (field) {
                     // Save the field
                     _fieldInfo.field = field;
@@ -15769,17 +16361,23 @@ exports.ListFormField = {
         return new Promise(function (resolve, reject) {
             // Get the current site collection
             __1.Site()
+                // Get the web containing the lookup list
                 .openWebById(info.lookupWebId)
+                // Execute the request
                 .execute(function (web) {
                 // Get the list
                 web.Lists()
+                    // Get the list by id
                     .getById(info.lookupListId)
+                    // Get the items
                     .Items()
+                    // Set the query
                     .query({
                     GetAllItems: true,
                     Select: ["ID", info.lookupField],
                     Top: queryTop > 0 && queryTop <= 5000 ? queryTop : 500
                 })
+                    // Execute the request
                     .execute(function (items) {
                     // Resolve the promise
                     resolve(items.results);
@@ -15811,9 +16409,13 @@ exports.ListFormField = {
         return new Promise(function (resolve, reject) {
             // Get the web
             __1.Web(info.webUrl)
+                // Get the list
                 .Lists(info.listName)
+                // Get the fields
                 .Fields()
+                // Get the hidden field
                 .getByInternalNameOrTitle(info.name + "_0")
+                // Execute the request
                 .execute(function (field) {
                 // See if the field exists
                 if (field.existsFl) {
@@ -15831,7 +16433,7 @@ exports.ListFormField = {
 
 
 /***/ }),
-/* 98 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15889,7 +16491,7 @@ exports.Loader = {
 
 
 /***/ }),
-/* 99 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15985,7 +16587,7 @@ exports.request = function (props) {
 
 
 /***/ }),
-/* 100 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16021,6 +16623,7 @@ exports.SuiteBarLink = function (props) {
             appendFl ? topLinks.appendChild(sbLink) : topLinks.insertBefore(sbLink, topLinks.firstChild);
         }
     }
+    // Else, see if this is SPO
     else if (lib_1.ContextInfo.isSPO) {
         // Create this as a ribbon link
         link = ribbonLink_1.RibbonLink(props);
@@ -16031,7 +16634,7 @@ exports.SuiteBarLink = function (props) {
 
 
 /***/ }),
-/* 101 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16631,7 +17234,7 @@ exports.Taxonomy = {
 
 
 /***/ }),
-/* 102 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16952,7 +17555,7 @@ exports.WebPart = _WebPart;
 
 
 /***/ }),
-/* 103 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17127,7 +17730,7 @@ exports.Status = {
 
 
 /***/ }),
-/* 104 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17136,7 +17739,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ }),
-/* 105 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17151,7 +17754,7 @@ exports.Util = utils_1.Types;
 
 
 /***/ }),
-/* 106 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17164,7 +17767,7 @@ var Mapper = __webpack_require__(5);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 4.17,
+    __ver: 4.19,
     AppContext: function (siteUrl) { return Lib.Site.getAppContext(siteUrl); },
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
@@ -17222,7 +17825,7 @@ if (global == null || global.__ver == null || global.__ver < exports.$REST.__ver
 
 
 /***/ }),
-/* 107 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17293,7 +17896,7 @@ exports.Personas = function (props) {
 };
 
 /***/ }),
-/* 108 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17339,7 +17942,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 109 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17371,7 +17974,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 110 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17402,7 +18005,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 111 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17510,7 +18113,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 112 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17557,7 +18160,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 113 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17573,7 +18176,7 @@ exports.Button = function (props) {
 };
 
 /***/ }),
-/* 114 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17616,7 +18219,7 @@ exports.Callout = function (props) {
 };
 
 /***/ }),
-/* 115 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17632,7 +18235,7 @@ exports.CheckBox = function (props) {
 };
 
 /***/ }),
-/* 116 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17663,7 +18266,7 @@ exports.CommandBar = function (props) {
 };
 
 /***/ }),
-/* 117 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17689,7 +18292,7 @@ exports.CommandButton = function (props) {
 };
 
 /***/ }),
-/* 118 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17757,7 +18360,7 @@ exports.ContextualMenu = function (props) {
 };
 
 /***/ }),
-/* 119 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17774,7 +18377,7 @@ exports.DatePicker = function (props) {
 };
 
 /***/ }),
-/* 120 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17804,7 +18407,7 @@ exports.Dialog = function (props) {
 };
 
 /***/ }),
-/* 121 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17822,7 +18425,7 @@ exports.Label = function (props) {
 };
 
 /***/ }),
-/* 122 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17846,7 +18449,7 @@ exports.LinkField = function (props) {
 };
 
 /***/ }),
-/* 123 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17870,7 +18473,7 @@ exports.List = function (props) {
 };
 
 /***/ }),
-/* 124 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17898,7 +18501,7 @@ exports.ListItem = function (props) {
 };
 
 /***/ }),
-/* 125 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17914,7 +18517,7 @@ exports.Overlay = function (props) {
 };
 
 /***/ }),
-/* 126 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17958,7 +18561,7 @@ exports.Panel = function (props, content) {
 };
 
 /***/ }),
-/* 127 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18036,7 +18639,7 @@ exports.PeoplePicker = function (props) {
 };
 
 /***/ }),
-/* 128 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18067,7 +18670,7 @@ exports.Pivot = function (props) {
 };
 
 /***/ }),
-/* 129 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18087,7 +18690,7 @@ exports.SearchBox = function (props) {
 };
 
 /***/ }),
-/* 130 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18103,7 +18706,7 @@ exports.Spinner = function (props) {
 };
 
 /***/ }),
-/* 131 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18139,7 +18742,7 @@ exports.Table = function (props) {
 };
 
 /***/ }),
-/* 132 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18165,7 +18768,7 @@ exports.TextField = function (props) {
 };
 
 /***/ }),
-/* 133 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18187,7 +18790,7 @@ exports.Toggle = function (props) {
 };
 
 /***/ }),
-/* 134 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18195,11 +18798,11 @@ exports.Toggle = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // Fabric Components
-var Fabric = __webpack_require__(135);
+var Fabric = __webpack_require__(138);
 exports.Fabric = Fabric;
 
 /***/ }),
-/* 135 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18208,7 +18811,7 @@ exports.Fabric = Fabric;
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 136 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18758,7 +19361,7 @@ exports.Field = function (props) {
 };
 
 /***/ }),
-/* 137 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19173,7 +19776,7 @@ exports.ListForm.renderFormTemplate = function (props) {
 };
 
 /***/ }),
-/* 138 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19463,7 +20066,7 @@ exports.ListFormPanel = function (props) {
 };
 
 /***/ }),
-/* 139 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19472,7 +20075,7 @@ exports.ListFormPanel = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
-/* 140 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19728,6 +20331,8 @@ exports.WebPart = function (props) {
         if (isEditMode()) {
             // Add the help link
             addHelpLink();
+            // Add the edit class name
+            elWebPart.classList.add("is-edit");
             // Call the render event
             if (props.onRenderEdit) {
                 // Execute the render edit event
@@ -19874,7 +20479,7 @@ exports.WebPart = function (props) {
 };
 
 /***/ }),
-/* 141 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19883,7 +20488,7 @@ exports.WebPart = function (props) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(2);
 var base_1 = __webpack_require__(8);
-var wpCfg_1 = __webpack_require__(142);
+var wpCfg_1 = __webpack_require__(20);
 /**
  * List WebPart
  */
@@ -19977,161 +20582,7 @@ exports.WPList = function (props) {
 };
 
 /***/ }),
-/* 142 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var gd_sprest_1 = __webpack_require__(2);
-var Fabric = __webpack_require__(0);
-/**
- * List WebPart Edit Panel
- */
-exports.WPListEditPanel = function (props) {
-    if (props === void 0) {
-        props = {};
-    }
-    var _elFooter = null;
-    var _elList = null;
-    var _elWebUrl = null;
-    var _initFl = false;
-    var _lists = null;
-    var _wpInfo = null;
-    // Method to load the lists
-    var loadLists = function loadLists(webUrl) {
-        // Set the query
-        var query = props.listQuery || {};
-        // Render a loading message
-        Fabric.Spinner({
-            el: _elList,
-            text: "Loading the lists..."
-        });
-        // Get the web
-        gd_sprest_1.Web(webUrl)
-        // Get the lists
-        .Lists()
-        // Include the fields
-        .query(query)
-        // Execute the request
-        .execute(function (lists) {
-            // Save the lists
-            _lists = lists.results;
-            // Call the list rendering event
-            _lists = (props.onListsRendering ? props.onListsRendering(_wpInfo, _lists) : null) || _lists;
-            // Render the list dropdown
-            renderListDDL();
-        });
-    };
-    // Method to render the configuration
-    var renderConfiguration = function renderConfiguration(el, wpInfo) {
-        // Render the panel contents
-        el.innerHTML = ['<div></div>', '<div></div>'].join('\n');
-        _elWebUrl = el.children[0];
-        _elList = el.children[1];
-        // Render the web url textbox
-        var webUrl = _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.WebUrl : "";
-        Fabric.TextField({
-            el: _elWebUrl,
-            label: "Relative Web Url:",
-            description: "The web containing the list. If blank, the current web is used.",
-            value: webUrl,
-            onChange: function onChange(value) {
-                // Update the configuration
-                _wpInfo.cfg.WebUrl = value;
-            }
-        });
-        // Load the lists
-        loadLists(webUrl);
-    };
-    // Method to render the lists dropdown
-    var renderListDDL = function renderListDDL() {
-        var selectedList = null;
-        var options = [];
-        // Parse the lists
-        for (var i = 0; i < _lists.length; i++) {
-            var list = _lists[i];
-            // Add the option
-            options.push({
-                text: list.Title,
-                value: list.Title
-            });
-            // See if this is the selected list
-            if (list.Title == _wpInfo.cfg.ListName) {
-                // Select this list
-                selectedList = list;
-            }
-        }
-        // Render the dropdown
-        var ddl = Fabric.Dropdown({
-            el: _elList,
-            label: "List:",
-            options: options,
-            value: _wpInfo && _wpInfo.cfg ? _wpInfo.cfg.ListName : null,
-            onChange: function onChange(options) {
-                var option = options[0];
-                if (option) {
-                    // Parse the list
-                    for (var i = 0; i < _lists.length; i++) {
-                        var list = _lists[i];
-                        // See if this is the target list
-                        if (list.Title == option.text) {
-                            // Update the configuration
-                            _wpInfo.cfg.ListName = option.value;
-                            // Call the change event
-                            props.onListChanged ? props.onListChanged(_wpInfo, list) : null;
-                            break;
-                        }
-                    }
-                }
-            }
-        });
-        // Call the render footer event
-        props.onRenderFooter ? props.onRenderFooter(_elFooter, _wpInfo, selectedList) : null;
-    };
-    // Create the menu commands
-    var menuLeftCommands = [{
-        icon: "Refresh",
-        text: "Refresh",
-        onClick: function onClick() {
-            // Load the lists
-            loadLists(_wpInfo.cfg.WebUrl);
-        }
-    }];
-    // See if custom commands exist
-    if (props.menuLeftCommands) {
-        // Add the custom commands
-        menuLeftCommands = menuLeftCommands.concat(props.menuLeftCommands);
-    }
-    // Return the edit panel
-    return {
-        menuLeftCommands: menuLeftCommands,
-        menuRightCommands: props.menuRightCommands,
-        onRenderHeader: props.onRenderHeader,
-        panelType: props.panelType,
-        showSaveButton: props.showSaveButton,
-        onRenderFooter: function onRenderFooter(el, wpInfo) {
-            // Save the webpart information
-            _wpInfo = wpInfo;
-            // Render the template
-            el.innerHTML = "<div></div><div></div>";
-            _elFooter = el.children[1];
-            // Render the configuration
-            renderConfiguration(el.children[0], wpInfo);
-        },
-        onSave: function onSave(cfg) {
-            // Update the configuration
-            cfg.ListName = _wpInfo.cfg.ListName;
-            cfg.WebUrl = _wpInfo.cfg.WebUrl;
-            // Return the configuration
-            return props.onSave ? props.onSave(_wpInfo.cfg) : _wpInfo.cfg;
-        }
-    };
-};
-
-/***/ }),
-/* 143 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20143,10 +20594,11 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(144));
+__export(__webpack_require__(146));
+__export(__webpack_require__(21));
 
 /***/ }),
-/* 144 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20154,7 +20606,7 @@ __export(__webpack_require__(144));
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var list_1 = __webpack_require__(19);
-var wpCfg_1 = __webpack_require__(145);
+var wpCfg_1 = __webpack_require__(21);
 /**
  * Search WebPart
  */
@@ -20322,153 +20774,7 @@ exports.WPSearch = function (props) {
 };
 
 /***/ }),
-/* 145 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _this = undefined;
-Object.defineProperty(exports, "__esModule", { value: true });
-var gd_sprest_1 = __webpack_require__(2);
-var Fabric = __webpack_require__(0);
-/**
- * Search WebPart Edit Panel
- */
-exports.WPSearchEditPanel = function (props) {
-    if (props === void 0) {
-        props = {};
-    }
-    var _elFieldsDDL = null;
-    var _wpInfo = null;
-    // Method to render the fields
-    var renderFields = function renderFields(el, list) {
-        // Render the fields
-        _this.el = el;
-        el.innerHTML = "<div></div><div></div>";
-        var _elFieldsDDL = el.children[0];
-        // Ensure the list exists
-        if (list == null) {
-            return;
-        }
-        // Render a spinner
-        Fabric.Spinner({
-            el: _elFieldsDDL,
-            text: "Loading the fields..."
-        });
-        // Load the fields dropdown list
-        renderFieldsDDL(list);
-        // Call the custom event
-        props.onRenderFooter ? props.onRenderFooter(el.children[1], _wpInfo, list) : null;
-    };
-    // Method to render the fields drop down list
-    var renderFieldsDDL = function renderFieldsDDL(list) {
-        var options = [];
-        // Parse the fields
-        var fields = (list.Fields ? list.Fields.results : null) || [];
-        for (var i = 0; i < fields.length; i++) {
-            var addField = false;
-            var field = fields[i];
-            // Add the field, based on the type
-            switch (field.FieldTypeKind) {
-                // Searchable Fields
-                case gd_sprest_1.SPTypes.FieldType.Choice:
-                case gd_sprest_1.SPTypes.FieldType.MultiChoice:
-                case gd_sprest_1.SPTypes.FieldType.Lookup:
-                case gd_sprest_1.SPTypes.FieldType.Text:
-                case gd_sprest_1.SPTypes.FieldType.URL:
-                case gd_sprest_1.SPTypes.FieldType.User:
-                    addField = true;
-                    break;
-                default:
-                    // Allow managed metadata fields
-                    addField = field.TypeAsString.startsWith("TaxonomyFieldType");
-                    break;
-            }
-            // See if we are adding the field
-            if (addField) {
-                options.push({
-                    data: field.TypeAsString,
-                    text: field.Title + " [" + field.InternalName + "]",
-                    value: field.InternalName
-                });
-            }
-        }
-        // Sort the options
-        options = options.sort(function (a, b) {
-            if (a.value < b.value) {
-                return -1;
-            }
-            if (a.value > b.value) {
-                return 1;
-            }
-            return 0;
-        });
-        // See if fields exist
-        var value = [];
-        if (_wpInfo.cfg && _wpInfo.cfg.Fields) {
-            // Parse the fields
-            for (var i = 0; i < _wpInfo.cfg.Fields.length; i++) {
-                // Add the field
-                value.push(_wpInfo.cfg.Fields[i].name);
-            }
-        }
-        // Render the field dropdown
-        Fabric.Dropdown({
-            el: _elFieldsDDL,
-            label: "Filter Field(s):",
-            multi: true,
-            options: options,
-            value: value,
-            onChange: function onChange(options) {
-                // Clear the fields
-                _wpInfo.cfg.Fields = [];
-                // Parse the options
-                for (var i = 0; i < options.length; i++) {
-                    var option = options[i];
-                    // Add the field
-                    _wpInfo.cfg.Fields.push({
-                        name: option.value,
-                        type: option.data
-                    });
-                }
-            }
-        });
-    };
-    // Set the list query
-    var listQuery = props.listQuery || {};
-    listQuery.Expand = listQuery.Expand || [];
-    listQuery.Expand.push("Fields");
-    // Return the edit panel
-    return {
-        listQuery: listQuery,
-        menuLeftCommands: props.menuLeftCommands,
-        menuRightCommands: props.menuRightCommands,
-        onListsRendering: props.onListsRendering,
-        onRenderHeader: props.onRenderHeader,
-        panelType: props.panelType,
-        showSaveButton: props.showSaveButton,
-        onListChanged: function onListChanged(wpInfo, list) {
-            // Render the fields
-            renderFields(_this.el.children[0], list);
-        },
-        onRenderFooter: function onRenderFooter(el, wpInfo, list) {
-            // Save the webpart information
-            _wpInfo = wpInfo;
-            // Render the fields
-            renderFields(el, list);
-        },
-        onSave: function onSave(cfg) {
-            // Update the configuration
-            cfg.Fields = _wpInfo.cfg.Fields || [];
-            // Return the configuration
-            return props.onSave ? props.onSave(_wpInfo.cfg) : _wpInfo.cfg;
-        }
-    };
-};
-
-/***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20480,10 +20786,10 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(147));
+__export(__webpack_require__(148));
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20720,7 +21026,7 @@ exports.WPTabs = function (props) {
 };
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20732,10 +21038,11 @@ function __export(m) {
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(149));
+__export(__webpack_require__(150));
+__export(__webpack_require__(22));
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20745,7 +21052,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var gd_sprest_1 = __webpack_require__(2);
 var Fabric = __webpack_require__(0);
 var base_1 = __webpack_require__(8);
-var wpCfg_1 = __webpack_require__(150);
+var wpCfg_1 = __webpack_require__(22);
 /**
  * Taxonomy WebPart
  */
@@ -20789,139 +21096,6 @@ exports.WPTaxonomy = function (props) {
             }
         }
     });
-};
-
-/***/ }),
-/* 150 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var gd_sprest_1 = __webpack_require__(2);
-var Fabric = __webpack_require__(0);
-/**
- * Taxonomy WebPart Edit Panel
- */
-exports.WPTaxonomyEditPanel = function (props) {
-    if (props === void 0) {
-        props = {};
-    }
-    var _elHeader = null;
-    var _elFooter = null;
-    var _elTermGroups = null;
-    var _elTermSets = null;
-    var _wpInfo = null;
-    // Method to render the configuration
-    var renderConfiguration = function renderConfiguration(el, wpInfo) {
-        // Save the properties
-        _wpInfo = wpInfo;
-        // Render the template
-        el.innerHTML = "<div></div><div></div><div></div><div></div>";
-        _elHeader = el.children[0];
-        _elTermGroups = el.children[1];
-        _elTermSets = el.children[2];
-        _elFooter = el.children[3];
-        // Render the term groups
-        renderTermGroups();
-    };
-    // Method to render the term groups
-    var renderTermGroups = function renderTermGroups() {
-        // Render a loading dialog
-        Fabric.Spinner({
-            el: _elTermGroups,
-            text: "Loading the term groups"
-        });
-        // Load the term groups
-        gd_sprest_1.Helper.Taxonomy.getTermGroups().then(function (groups) {
-            var options = [];
-            // Parse the groups
-            for (var i = 0; i < groups.length; i++) {
-                // Add the option
-                options.push({
-                    text: groups[i].name,
-                    value: groups[i].id
-                });
-            }
-            // Render the term groups
-            Fabric.Dropdown({
-                el: _elTermGroups,
-                label: "Select the Term Group:",
-                options: options,
-                value: _wpInfo.cfg.TermGroupId,
-                onChange: function onChange(options) {
-                    var option = options[0];
-                    // Set the configuration
-                    _wpInfo.cfg.TermGroupId = option ? option.value : "";
-                    _wpInfo.cfg.TermGroupName = option ? option.text : "";
-                    // Call the change event
-                    props.onTermGroupChanged ? props.onTermGroupChanged(_wpInfo, { id: _wpInfo.cfg.TermGroupId, name: _wpInfo.cfg.TermGroupName }) : null;
-                    // Render the term sets
-                    renderTermSets();
-                }
-            });
-            // See if a term group exists
-            if (_wpInfo.cfg.TermGroupName) {
-                // Render the term sets
-                renderTermSets();
-            }
-        });
-    };
-    // Method to render the term sets
-    var renderTermSets = function renderTermSets() {
-        // Render a loading dialog
-        Fabric.Spinner({
-            el: _elTermSets,
-            text: "Loading the term sets"
-        });
-        // Load the term sets
-        gd_sprest_1.Helper.Taxonomy.getTermSets(_wpInfo.cfg.TermGroupName).then(function (termSets) {
-            var options = [];
-            // Parse the term sets
-            for (var i = 0; i < termSets.length; i++) {
-                // Add the options
-                options.push({
-                    text: termSets[i].name,
-                    value: termSets[i].id
-                });
-            }
-            // Render the term sets
-            Fabric.Dropdown({
-                el: _elTermSets,
-                label: "Select a Term Set:",
-                options: options,
-                value: _wpInfo.cfg.TermSetId,
-                onChange: function onChange(options) {
-                    var option = options[0];
-                    // Set the configuration
-                    _wpInfo.cfg.TermSetId = option ? option.value : "";
-                    _wpInfo.cfg.TermSetName = option ? option.text : "";
-                    // Call the change event
-                    props.onTermSetChanged ? props.onTermSetChanged(_wpInfo, { id: _wpInfo.cfg.TermSetId, name: _wpInfo.cfg.TermSetName }) : null;
-                }
-            });
-        });
-    };
-    // Return the edit panel
-    return {
-        onRenderFooter: function onRenderFooter(el, wpInfo) {
-            // Call the event
-            props.onRenderFooter ? props.onRenderFooter(el, _wpInfo) : null;
-        },
-        onRenderHeader: function onRenderHeader(el, wpInfo) {
-            // Render the template
-            el.innerHTML = "<div></div><div></div>";
-            // Render the configuration
-            renderConfiguration(el.children[1], wpInfo);
-            // Call the event
-            props.onRenderHeader ? props.onRenderHeader(el.children[0], _wpInfo) : null;
-        },
-        onSave: function onSave(cfg) {
-            // Return the configuration
-            return props.onSave ? props.onSave(_wpInfo.cfg) : _wpInfo.cfg;
-        }
-    };
 };
 
 /***/ }),

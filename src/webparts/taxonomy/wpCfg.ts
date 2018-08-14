@@ -10,6 +10,7 @@ export const WPTaxonomyEditPanel = (props: IWPTaxonomyEditPanel = {}): IWPTaxono
     let _elFooter: HTMLDivElement = null;
     let _elTermGroups: HTMLDivElement = null;
     let _elTermSets: HTMLDivElement = null;
+    let _elTermSetTerms: HTMLDivElement = null;
     let _wpInfo: IWPTaxonomyInfo = null;
 
     // Method to render the configuration
@@ -18,11 +19,12 @@ export const WPTaxonomyEditPanel = (props: IWPTaxonomyEditPanel = {}): IWPTaxono
         _wpInfo = wpInfo;
 
         // Render the template
-        el.innerHTML = "<div></div><div></div><div></div><div></div>";
+        el.innerHTML = "<div></div><div></div><div></div><div></div><div></div>";
         _elHeader = el.children[0] as any;
         _elTermGroups = el.children[1] as any;
         _elTermSets = el.children[2] as any;
-        _elFooter = el.children[3] as any;
+        _elTermSetTerms = el.children[3] as any;
+        _elFooter = el.children[4] as any;
 
         // Render the term groups
         renderTermGroups();
@@ -114,6 +116,63 @@ export const WPTaxonomyEditPanel = (props: IWPTaxonomyEditPanel = {}): IWPTaxono
 
                     // Call the change event
                     props.onTermSetChanged ? props.onTermSetChanged(_wpInfo, { id: _wpInfo.cfg.TermSetId, name: _wpInfo.cfg.TermSetName }) : null;
+
+                    // Render the term set terms
+                    props.showTermSetTerms ? renderTermSetTerms() : null;
+                }
+            });
+
+            // See if a value exists
+            if (_wpInfo.cfg.TermSetId) {
+                // Render the term set terms
+                props.showTermSetTerms ? renderTermSetTerms() : null;
+            }
+        });
+    }
+
+    // Method to render the term set terms
+    let renderTermSetTerms = () => {
+        // Render a loading dialog
+        Fabric.Spinner({
+            el: _elTermSets,
+            text: "Loading the term set terms"
+        });
+
+        // Load the term set terms
+        Helper.Taxonomy.getTermSetByGroupName(_wpInfo.cfg.TermSetName, _wpInfo.cfg.TermGroupName).then(termSet => {
+            let options: Array<Fabric.Types.IDropdownOption> = [];
+
+            // Get the term set terms
+            let terms = Helper.Taxonomy.toArray(termSet).sort((a, b) => {
+                if (a.name < b.name) { return -1; }
+                if (a.name > b.name) { return 1; }
+                return 0;
+            });
+
+            // Parse the term set terms
+            for (let i = 0; i < terms.length; i++) {
+                // Add the options
+                options.push({
+                    text: terms[i].name,
+                    value: terms[i].id
+                });
+            }
+
+            // Render the term sets
+            Fabric.Dropdown({
+                el: _elTermSets,
+                label: "Select a Term Set Term:",
+                options,
+                value: _wpInfo.cfg.TermSetTermId,
+                onChange: options => {
+                    let option = options[0];
+
+                    // Set the configuration
+                    _wpInfo.cfg.TermSetTermId = option ? option.value : "";
+                    _wpInfo.cfg.TermSetTermName = option ? option.text : "";
+
+                    // Call the change event
+                    props.onTermSetTermChanged ? props.onTermSetTermChanged(_wpInfo, { id: _wpInfo.cfg.TermSetTermId, name: _wpInfo.cfg.TermSetTermName }) : null;
                 }
             });
         });

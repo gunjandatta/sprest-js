@@ -280,6 +280,9 @@ export const WebPart = (props: IWebPartProps): IWebPart => {
             // Add the help link
             addHelpLink();
 
+            // Add the edit class name
+            elWebPart.classList.add("is-edit");
+
             // Call the render event
             if (props.onRenderEdit) {
                 // Execute the render edit event

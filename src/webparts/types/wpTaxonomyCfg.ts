@@ -10,9 +10,9 @@ interface ITermGroupInfo {
 }
 
 /**
- * Term Set Info
+ * Term Info
  */
-interface ITermSetInfo {
+interface ITermInfo {
     id: string;
     name: string;
 }
@@ -32,6 +32,12 @@ export interface IWPTaxonomyCfg extends IWebPartCfg {
 
     /** The term set name */
     TermSetName?: string;
+
+    /** The term set term id. */
+    TermSetTermId?: string;
+
+    /** The term set term name */
+    TermSetTermName?: string;
 }
 
 /**
@@ -48,8 +54,14 @@ export interface IWPTaxonomyEditPanel extends IWebPartEditPanel {
     onTermGroupChanged?: (wpInfo: IWPTaxonomyInfo, termGroupInfo?: ITermGroupInfo) => void;
 
     /** The term set changed event. */
-    onTermSetChanged?: (wpInfo: IWPTaxonomyInfo, termSetInfo?: ITermSetInfo) => void;
+    onTermSetChanged?: (wpInfo: IWPTaxonomyInfo, termSetInfo?: ITermInfo) => void;
+
+    /** The term set term changed event. */
+    onTermSetTermChanged?: (wpInfo: IWPTaxonomyInfo, termInfo?: ITermInfo) => void;
 
     /** The save event. */
     onSave?: (wpCfg: IWPTaxonomyCfg) => IWebPartCfg;
+
+    /** Flag to display the term set terms. */
+    showTermSetTerms?: boolean;
 }
