@@ -160,7 +160,7 @@ export const WPTaxonomyEditPanel = (props: IWPTaxonomyEditPanel = {}): IWPTaxono
 
             // Render the term sets
             Fabric.Dropdown({
-                el: _elTermSets,
+                el: _elTermSetTerms,
                 label: "Select a Term Set Term:",
                 options,
                 value: _wpInfo.cfg.TermSetTermId,

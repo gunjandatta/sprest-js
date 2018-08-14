@@ -3159,7 +3159,7 @@ exports.WPTaxonomyEditPanel = function (props) {
             }
             // Render the term sets
             Fabric.Dropdown({
-                el: _elTermSets,
+                el: _elTermSetTerms,
                 label: "Select a Term Set Term:",
                 options: options,
                 value: _wpInfo.cfg.TermSetTermId,
