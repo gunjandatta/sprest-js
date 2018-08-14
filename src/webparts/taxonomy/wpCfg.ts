@@ -134,7 +134,7 @@ export const WPTaxonomyEditPanel = (props: IWPTaxonomyEditPanel = {}): IWPTaxono
     let renderTermSetTerms = () => {
         // Render a loading dialog
         Fabric.Spinner({
-            el: _elTermSets,
+            el: _elTermSetTerms,
             text: "Loading the term set terms"
         });
 

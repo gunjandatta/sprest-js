@@ -4701,7 +4701,7 @@ exports.WPTaxonomyEditPanel = function (props) {
     var renderTermSetTerms = function renderTermSetTerms() {
         // Render a loading dialog
         Fabric.Spinner({
-            el: _elTermSets,
+            el: _elTermSetTerms,
             text: "Loading the term set terms"
         });
         // Load the term set terms
