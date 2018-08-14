@@ -1929,7 +1929,7 @@ to{opacity:0}}.fabric .ms-u-rotate90deg{-webkit-animation-name:rotate90;-moz-ani
 .fabric .field-label{font-size:14px;font-weight:600;padding-left:12px}.fabric .ms-Icon.is-description span{display:none}
 .fabric .ms-Icon.is-description:hover span{background-color:white;box-shadow:1px 1px 15px grey;display:block;padding:10px;position:absolute;z-index:5}
 .fabric .ms-LinkField{border-bottom:1px solid #c8c8c8}.fabric .ms-LinkField:hover{border-color:#767676}
-.fabric .ms-LinkField .ms-Link{padding-left:5px}.fabric .ms-Panel-contentInner{height:calc(100vh - 80px);padding-bottom:0}
+.fabric .ms-LinkField .ms-Link{padding-left:5px}.fabric .ms-Panel-contentInner{height:calc(100vh - 80px);margin-top:0;padding-bottom:0}
 .fabric .ms-PeoplePicker .selected-users{max-height:250px;overflow-y:auto}.fabric .ms-SearchBox>.ms-SearchBox-search{display:none}
 .fabric .ms-SearchBox.has-text>.ms-SearchBox-label{display:none}.fabric .ms-SearchBox.is-active>.ms-SearchBox-clear,.fabric .ms-SearchBox.is-active>.ms-SearchBox-search{display:inline;margin-left:0;position:relative}
 .fabric .ms-SearchBox>.ms-SearchBox-search>.ms-CommandButton-button{background-color:#0078d7;color:#fff;height:36px}

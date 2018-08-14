@@ -4383,6 +4383,7 @@
     padding-left: 5px; }
   .fabric .ms-Panel-contentInner {
     height: calc(100vh - 80px);
+    margin-top: 0px;
     padding-bottom: 0px; }
   .fabric .ms-PeoplePicker .selected-users {
     max-height: 250px;

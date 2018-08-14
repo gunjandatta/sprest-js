@@ -108,6 +108,7 @@
     /** Fix the height */
     .ms-Panel-contentInner {
         height: calc(100vh - 80px);
+        margin-top: 0px;
         padding-bottom: 0px;
     }
 
