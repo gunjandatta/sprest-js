@@ -39,7 +39,7 @@
     "babel-preset-env": "^1.7.0",
     "core-js": "^2.5.7",
     "css-loader": "^1.0.0",
-    "gd-sprest": "^4.1.9",
+    "gd-sprest": "^4.2.0",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.4.0",
     "gulp-insert": "^0.5.0",
