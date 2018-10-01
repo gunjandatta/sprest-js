@@ -2,4 +2,4 @@
 
 ## SharePoint JavaScript Library
 
-This library extends the [Office Fabric-UI JS library](https://dev.office.com/fabric-js), to help create Office 365 components in SharePoint 2013/Online (Classic) environments. Reference the [JavaScript library](https://gunjandatta.github.io/js) for information on this library, or [SharePoint REST Framework](https://gunjandatta.github.io) for a full overview of the framework.
+This library extends the [Office Fabric-UI JS library](https://dev.office.com/fabric-js), to help create Office 365 components in SharePoint 2013/Online (Classic) environments. Reference the [JavaScript library](https://gunjandatta.github.io/extras/js) for information on this library, or [SharePoint REST Framework](https://gunjandatta.github.io) for a full overview of the framework.
