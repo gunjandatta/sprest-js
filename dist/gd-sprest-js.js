@@ -2810,7 +2810,7 @@ exports.SPConfig = function (cfg, webUrl) {
                                 // Log
                                 console.log("[gd-sprest][Content Type] The parent content type '" + cfgContentType.Name + "' was not found.");
                             }
-                        });
+                        }, reject);
                     }
                     else {
                         // Create the content type
@@ -2837,7 +2837,7 @@ exports.SPConfig = function (cfg, webUrl) {
                                 console.log("[gd-sprest][Content Type] The content type '" + cfgContentType.Name + "' failed to be created.");
                                 console.error("[gd-sprest][Field] Error: " + ct.response);
                             }
-                        }, true);
+                        }, reject, true);
                     }
                 }
             };
@@ -3037,7 +3037,7 @@ exports.SPConfig = function (cfg, webUrl) {
                             console.log("[gd-sprest][List] The list '" + listInfo_1.Title + "' failed to be created.");
                             console.log("[gd-sprest][List] Error: '" + list.response);
                         }
-                    });
+                    }, reject);
                 }
             };
             // Parse the content types
@@ -3108,7 +3108,7 @@ exports.SPConfig = function (cfg, webUrl) {
                             console.log("[gd-sprest][Custom Action] The custom action '" + ca.Name + "' failed to be created.");
                             console.log("[gd-sprest][Custom Action] Error: " + ca.response);
                         }
-                    }, true);
+                    }, reject, true);
                 }
             }
             // Wait for the requests to complete
@@ -3154,7 +3154,7 @@ exports.SPConfig = function (cfg, webUrl) {
                             console.log("[gd-sprest][View] The view '" + cfgView.ViewName + "' failed to be created.");
                             console.log("[gd-sprest][View] Error: " + view.response);
                         }
-                    }, true);
+                    }, reject, true);
                 }
             };
             // Parse the views
@@ -3260,7 +3260,7 @@ exports.SPConfig = function (cfg, webUrl) {
                 for (var i = 0; i < cfgWebParts.length; i++) {
                     _loop_6(i);
                 }
-            });
+            }, reject);
         });
     };
     // Method to see if an object exists in a collection
@@ -3298,7 +3298,7 @@ exports.SPConfig = function (cfg, webUrl) {
                     ct.delete().execute(function () {
                         // Log
                         console.log("[gd-sprest][Field] The content type '" + ct.Name + "' was removed.");
-                    }, true);
+                    }, reject, true);
                 }
             };
             // Parse the configuration
@@ -3331,7 +3331,7 @@ exports.SPConfig = function (cfg, webUrl) {
                     field.delete().execute(function () {
                         // Log
                         console.log("[gd-sprest][Field] The field '" + field.InternalName + "' was removed.");
-                    }, true);
+                    }, reject, true);
                 }
             };
             // Parse the configuration
@@ -3380,7 +3380,7 @@ exports.SPConfig = function (cfg, webUrl) {
                     list.delete().execute(function () {
                         // Log
                         console.log("[gd-sprest][List] The list '" + list.Title + "' was removed.");
-                    }, true);
+                    }, reject, true);
                 }
             };
             // Parse the configuration
@@ -3430,7 +3430,7 @@ exports.SPConfig = function (cfg, webUrl) {
                     ca.delete().execute(function () {
                         // Log
                         console.log("[gd-sprest][Custom Action] The custom action '" + ca.Name + "' was removed.");
-                    }, true);
+                    }, reject, true);
                 }
             };
             // Parse the configuration
@@ -3501,7 +3501,7 @@ exports.SPConfig = function (cfg, webUrl) {
                 }
                 // Resolve the promise
                 resolve();
-            });
+            }, reject);
         });
     };
     // Method to update the base permissions
@@ -3613,11 +3613,11 @@ exports.SPConfig = function (cfg, webUrl) {
                                         cfgList.onUpdated ? cfgList.onUpdated(list) : null;
                                         // Update the next list
                                         request(idx + 1, resolve);
-                                    });
-                                });
-                            });
-                        });
-                    });
+                                    }, reject);
+                                }, reject);
+                            }, reject);
+                        }, reject);
+                    }, reject);
                 }
                 else {
                     // Resolve the promise
@@ -3708,7 +3708,7 @@ exports.SPConfig = function (cfg, webUrl) {
                     // Resolve the promise
                     resolve(site);
                 });
-            });
+            }, reject);
         });
     };
     // Method to uninstall the web components
@@ -3735,11 +3735,11 @@ exports.SPConfig = function (cfg, webUrl) {
                             removeUserCustomActions(web.UserCustomActions, cfg.CustomActionCfg ? cfg.CustomActionCfg.Web : null).then(function () {
                                 // Resolve the promise
                                 resolve();
-                            });
-                        });
-                    });
-                });
-            });
+                            }, reject);
+                        }, reject);
+                    }, reject);
+                }, reject);
+            }, reject);
         });
     };
     /**
@@ -3784,9 +3784,9 @@ exports.SPConfig = function (cfg, webUrl) {
                                 postExecute();
                                 // Resolve the promise
                                 resolve();
-                            });
+                            }, reject);
                         });
-                    });
+                    }, reject);
                 }
                 // See if we are creating the content types
                 if (cfg.ContentTypes && cfg.ContentTypes.length > 0) {
@@ -3803,7 +3803,7 @@ exports.SPConfig = function (cfg, webUrl) {
                             // Execute the post execute method
                             postExecute();
                         });
-                    }, true);
+                    }, reject, true);
                 }
                 // See if we are creating the lists
                 if (cfg.ListCfg && cfg.ListCfg.length) {
@@ -3820,7 +3820,7 @@ exports.SPConfig = function (cfg, webUrl) {
                             // Execute the post execute method
                             postExecute();
                         });
-                    }, true);
+                    }, reject, true);
                 }
                 // See if we are creating the webparts
                 if (cfg.WebPartCfg && cfg.WebPartCfg.length > 0) {
@@ -3872,7 +3872,7 @@ exports.SPConfig = function (cfg, webUrl) {
                                 // Execute the post execute method
                                 postExecute();
                             });
-                        });
+                        }, reject);
                     }
                 }
             });
@@ -3891,9 +3891,9 @@ exports.SPConfig = function (cfg, webUrl) {
                             console.log("[gd-sprest] The configuration script completed, but some requests may still be running.");
                             // Resolve the promise
                             resolve();
-                        });
-                    });
-                });
+                        }, reject);
+                    }, reject);
+                }, reject);
             });
         }
     };
@@ -10570,7 +10570,8 @@ exports.list = {
     // Properties
     /*********************************************************************************************************************************/
     properties: [
-        "BrowserFileHandling", "ContentTypes|contenttypes|('[Name]')|contenttype", "CreatablesInfo", "DefaultView|view",
+        "BrowserFileHandling", "ContentTypes|contenttypes|('[Name]')|contenttype", "CreatablesInfo",
+        "DefaultDisplayFormUrl", "DefaultEditFormUrl", "DefaultNewFormUrl", "DefaultView|view",
         "DescriptionResource", "EventReceivers|eventreceivers|('[Name]')|eventreceiver", "Fields|fields|/getByInternalNameOrTitle('[Name]')|field",
         "FirstUniqueAncestorSecurableObject", "Forms|forms|('[Name]')|form", "InformationRightsManagementSettings",
         "Items|items|([Name])|item", "ParentWeb", "RoleAssignments|roleassignments|([Name])|roleassignment",
@@ -11087,6 +11088,50 @@ exports.roledefinitions = {
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(1);
 /**
+ * Features
+ */
+exports.features = {
+    /**
+     * Activates a feature.
+     * @param id - The feature id.
+    **/
+    add: {
+        argNames: ["id"],
+        requestType: utils_1.RequestType.PostWithArgsValueOnly
+    },
+    /**
+     * Gets a feature by id.
+     * @param id - The feature id.
+     */
+    getById: {
+        argNames: ["id"],
+        requestType: utils_1.RequestType.GetWithArgsValueOnly,
+        returnType: "feature"
+    },
+    // Gets a feature by it's name.
+    getByName: {
+        argNames: ["name"],
+        name: "?$select=DisplayName,*&$filter=DisplayName eq '[[name]]'",
+        requestType: utils_1.RequestType.GetReplace,
+        returnType: "feature"
+    },
+    /**
+     * Queries the collection
+     */
+    query: {
+        argNames: ["oData"],
+        requestType: utils_1.RequestType.OData
+    },
+    /**
+     * Deactivates a feature.
+     * @param id - The feature id.
+    **/
+    remove: {
+        argNames: ["id"],
+        requestType: utils_1.RequestType.PostWithArgsValueOnly
+    },
+};
+/**
  * Site
  */
 exports.site = {
@@ -11094,7 +11139,7 @@ exports.site = {
     // Properties
     /*********************************************************************************************************************************/
     properties: [
-        "EventReceivers|eventreceivers|('[Name]')|eventreceiver", "Features", "Owner|user", "RootWeb|web",
+        "EventReceivers|eventreceivers|('[Name]')|eventreceiver", "Features|features|('[Name]')|feature", "Owner|user", "RootWeb|web",
         "UserCustomActions|usercustomactions|('[Name]')|usercustomaction"
     ],
     /*********************************************************************************************************************************/
@@ -11346,7 +11391,7 @@ exports.web = {
         "AllProperties|propertyvalues", "AppTiles", "AssociatedMemberGroup|group", "AssociatedOwnerGroup|group",
         "AssociatedVisitorGroup|group", "Author|user", "AvailableContentTypes|contenttypes", "AvailableFields|fields",
         "ClientWebParts", "ContentTypes|contenttypes|('[Name]')|contenttype", "CurrentUser|user", "DataLeakagePreventionStatusInfo",
-        "DescriptionResource", "EventReceivers|eventreceivers|('[Name]')|eventreceiver", "Features",
+        "DescriptionResource", "EventReceivers|eventreceivers|('[Name]')|eventreceiver", "Features|features|('[Name]')|feature",
         "Fields|fields|/getByInternalNameOrTitle('[Name]')|field", "FirstUniqueAncestorSecurableObject",
         "Folders|folders|/getByUrl('[Name]')|folder", "Lists|lists|/getByTitle('[Name]')|list",
         "ListTemplates|listtemplates|('[Name]')|listtemplate", "Navigation", "ParentWeb",
@@ -12784,7 +12829,7 @@ var BaseRequest = /** @class */ (function (_super) {
             // See if the not a batch request, and it already exists
             if (this.xhr && !isBatchRequest) {
                 // Execute the callback
-                callback ? callback(this) : null;
+                callback ? callback(this, false) : null;
             }
             else {
                 // Create the request
@@ -12792,10 +12837,11 @@ var BaseRequest = /** @class */ (function (_super) {
                     // Update the response and status
                     _this.response = _this.xhr.response;
                     _this.status = _this.xhr.status;
+                    var errorFl = !(_this.status >= 200 && _this.status < 300);
                     // See if we are returning a file buffer
                     if (_this.requestType == _1.RequestType.GetBuffer) {
                         // Execute the callback
-                        callback ? callback(_this.response) : null;
+                        callback ? callback(_this.response, errorFl) : null;
                     }
                     else {
                         // Update the data object
@@ -12803,7 +12849,7 @@ var BaseRequest = /** @class */ (function (_super) {
                         // Validate the data collection
                         isBatchRequest ? null : _this.validateDataCollectionResults().then(function () {
                             // Execute the callback
-                            callback ? callback(_this) : null;
+                            callback ? callback(_this, errorFl) : null;
                         });
                     }
                 });
@@ -13071,18 +13117,30 @@ var BaseExecution = /** @class */ (function (_super) {
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        var callback = null;
+        var reject = null;
+        var resolve = null;
         var waitFl = false;
-        // Set the callback and wait flag
-        switch (args.length) {
-            case 1:
-                callback = typeof (args[0]) === "boolean" ? callback : args[0];
-                waitFl = typeof (args[0]) === "boolean" ? args[0] : waitFl;
-                break;
-            case 2:
-                callback = args[0];
-                waitFl = args[1];
-                break;
+        // Parse the arguments
+        for (var i = 0; i < args.length; i++) {
+            var arg = args[i];
+            // Check the type
+            switch (typeof (arg)) {
+                case "boolean":
+                    // Set the wait flag
+                    waitFl = arg;
+                    break;
+                case "function":
+                    // See if the resolve method exists
+                    if (resolve) {
+                        // Set the reject method
+                        reject = arg;
+                    }
+                    else {
+                        // Set the resolve method
+                        resolve = arg;
+                    }
+                    break;
+            }
         }
         // Set the base
         this.base = this.base ? this.base : this;
@@ -13095,15 +13153,20 @@ var BaseExecution = /** @class */ (function (_super) {
             // Wait for the responses to execute
             this.waitForRequestsToComplete(function () {
                 // Execute this request
-                _this.executeRequest(true, function (response) {
-                    // See if there is a callback
-                    if (callback) {
+                _this.executeRequest(true, function (response, errorFl) {
+                    // See if there was an error
+                    if (errorFl) {
+                        // Reject the request
+                        reject ? reject(response) : null;
+                    }
+                    // Else, see if there is a resolve method
+                    else if (resolve) {
                         // Set the base to this object, and clear requests
                         // This will ensure requests from this object do not conflict w/ this request
                         _this.base = _this;
                         _this.base.responses = [];
                         // Execute the callback and see if it returns a promise
-                        var returnVal = callback(response);
+                        var returnVal = resolve(response);
                         var waitFunc = returnVal ? returnVal.done || returnVal.then : null;
                         if (waitFunc && typeof (waitFunc) === "function") {
                             // Wait for the promise to complete
@@ -13126,19 +13189,26 @@ var BaseExecution = /** @class */ (function (_super) {
         }
         else {
             // Execute this request
-            this.executeRequest(true, function (response) {
-                // Execute the callback and see if it returns a promise
-                var returnVal = callback ? callback(response) : null;
-                if (returnVal && typeof (returnVal.done) === "function") {
-                    // Wait for the promise to complete
-                    returnVal.done(function () {
-                        // Set the wait flag
-                        _this.base.waitFlags[_this.responseIndex] = true;
-                    });
+            this.executeRequest(true, function (response, errorFl) {
+                // See if there was an error
+                if (errorFl) {
+                    // Reject the request
+                    reject ? reject(response) : null;
                 }
                 else {
-                    // Set the wait flag
-                    _this.base.waitFlags[_this.responseIndex] = true;
+                    // Execute the resolve and see if it returns a promise
+                    var returnVal = resolve ? resolve(response) : null;
+                    if (returnVal && typeof (returnVal.done) === "function") {
+                        // Wait for the promise to complete
+                        returnVal.done(function () {
+                            // Set the wait flag
+                            _this.base.waitFlags[_this.responseIndex] = true;
+                        });
+                    }
+                    else {
+                        // Set the wait flag
+                        _this.base.waitFlags[_this.responseIndex] = true;
+                    }
                 }
             });
         }
@@ -14894,6 +14964,16 @@ exports.FieldSchemaXML = function (fieldInfo) {
         // Resolve the request
         _resolve(schemaXml);
     };
+    // Returns the schema xml for a geolocation field.
+    var createGeolocation = function (fieldInfo, props) {
+        var schemaXml = null;
+        // Set the field type
+        props["Type"] = "Geolocation";
+        // Generate the schema
+        schemaXml = "<Field " + toString(props) + " />";
+        // Resolve the request
+        _resolve(schemaXml);
+    };
     // Returns the schema xml for a lookup field.
     var createLookup = function (fieldInfo, props) {
         var schemaXml = null;
@@ -15142,6 +15222,10 @@ exports.FieldSchemaXML = function (fieldInfo) {
                 case spCfg_1.SPCfgFieldType.Date:
                     createDate(fieldInfo, props);
                     break;
+                // Geolocation
+                case spCfg_1.SPCfgFieldType.Geolocation:
+                    createGeolocation(fieldInfo, props);
+                    break;
                 // Lookup
                 case spCfg_1.SPCfgFieldType.Lookup:
                     createLookup(fieldInfo, props);
@@ -15197,13 +15281,14 @@ exports.SPCfgFieldType = {
     Choice: 2,
     Currency: 3,
     Date: 4,
-    Lookup: 5,
-    MMS: 6,
-    Note: 7,
-    Number: 8,
-    Text: 9,
-    Url: 10,
-    User: 11
+    Geolocation: 5,
+    Lookup: 6,
+    MMS: 7,
+    Note: 8,
+    Number: 9,
+    Text: 10,
+    Url: 11,
+    User: 12
 };
 /**
  * SharePoint Configuration Types
@@ -15643,26 +15728,23 @@ exports.ListForm = {
             // Load the data from cache
             loadFromCache();
             // Load the list data
-            loadListData().then(function () {
-                // Ensure the list exists
-                if (_info.list) {
-                    // See if the fields have been defined
-                    if (_props.fields) {
-                        // Process the fields
-                        processFields();
-                        // Load the item data
-                        loadItem();
-                    }
-                    else {
-                        // Load the content type
-                        loadDefaultContentType();
-                    }
+            loadListData().then(
+            // Success
+            function () {
+                // See if the fields have been defined
+                if (_props.fields) {
+                    // Process the fields
+                    processFields();
+                    // Load the item data
+                    loadItem();
                 }
                 else {
-                    // Reject the promise
-                    _reject();
+                    // Load the content type
+                    loadDefaultContentType();
                 }
-            });
+            }, 
+            // Reject
+            _reject);
         };
         // Method to load the default content type
         var loadDefaultContentType = function () {
@@ -15700,7 +15782,7 @@ exports.ListForm = {
                 }
                 // Resolve the promise
                 loadDefaultFields(ct.results[0]);
-            });
+            }, _reject);
         };
         // Method to load the default fields
         var loadDefaultFields = function (ct) {
@@ -15850,7 +15932,7 @@ exports.ListForm = {
                         _info.attachments = attachments;
                         // Resolve the promise
                         _resolve(_info);
-                    });
+                    }, _reject);
                 }
                 else {
                     // Resolve the promise
@@ -15873,7 +15955,7 @@ exports.ListForm = {
                     _info.item = item;
                     // Resolve the promise
                     _resolve(_info);
-                });
+                }, _reject);
             }
             else {
                 // Resolve the promise
@@ -15899,7 +15981,7 @@ exports.ListForm = {
                     // Save the list and web url
                     _info.list = list;
                     _info.webUrl = _props.webUrl;
-                })
+                }, reject)
                     // Load the fields
                     .Fields()
                     // Execute the request
@@ -15917,7 +15999,7 @@ exports.ListForm = {
                     loadFieldData(fields);
                     // Resolve the promise
                     resolve();
-                });
+                }, reject, true);
             });
         };
         // Method to process the fields
@@ -16031,9 +16113,15 @@ exports.ListForm = {
                     .AttachmentFiles()
                     // Execute the request
                     .execute(function (attachments) {
+                    // Ensure the attachments exist
+                    if (!attachments.existsFl) {
+                        // Reject the promise
+                        reject(attachments.response);
+                        return;
+                    }
                     // Resolve the promise
                     resolve(attachments.results || []);
-                });
+                }, reject);
             }
             else {
                 // Resolve the promise
@@ -16053,7 +16141,7 @@ exports.ListForm = {
                 info.item = item;
                 // Resolve the promise
                 resolve(info);
-            });
+            }, reject);
         });
     },
     // Method to remove attachments from an item
@@ -16077,7 +16165,7 @@ exports.ListForm = {
                             .execute(function () {
                             // Resolve the promise
                             resolve(info);
-                        });
+                        }, reject);
                         // Attachment found
                         return;
                     }
@@ -16118,7 +16206,7 @@ exports.ListForm = {
                         args[_i] = arguments[_i];
                     }
                     // Resolve the promise
-                    resolve(args);
+                    resolve.apply(args);
                 });
             }
             else {
@@ -16139,7 +16227,7 @@ exports.ListForm = {
                     exports.ListForm.refreshItem(info).then(function (info) {
                         // Resolve the promise
                         resolve(info);
-                    });
+                    }, reject);
                 });
             }
             else {
@@ -16156,7 +16244,7 @@ exports.ListForm = {
                         // Resolve the promise
                         resolve(info);
                     });
-                });
+                }, reject);
             }
         });
     },
@@ -16194,7 +16282,7 @@ exports.ListForm = {
                                 // Resolve the promise
                                 resolve(info);
                             });
-                        });
+                        }, reject);
                     };
                     // Set the error
                     reader.onerror = function (ev) {
@@ -16239,6 +16327,7 @@ exports.ListFormField = {
     // Method to create an instance of the list form field
     create: function (props) {
         var _fieldInfo = props || {};
+        var _reject = null;
         var _resolve = null;
         // Load the field
         var load = function () {
@@ -16263,7 +16352,7 @@ exports.ListFormField = {
                     _fieldInfo.field = field;
                     // Process the field
                     processField();
-                });
+                }, _reject);
             }
         };
         // Method to proces the field and save its information
@@ -16342,8 +16431,9 @@ exports.ListFormField = {
         };
         // Return a promise
         return new Promise(function (resolve, reject) {
-            // Save the resolve method
+            // Save the methods
             _resolve = resolve;
+            _reject = reject;
             // See if the field exists
             if (_fieldInfo.field) {
                 // Process the field
@@ -16381,8 +16471,8 @@ exports.ListFormField = {
                     .execute(function (items) {
                     // Resolve the promise
                     resolve(items.results);
-                });
-            });
+                }, reject);
+            }, reject);
         });
     },
     // Method to load the mms data
@@ -16400,7 +16490,7 @@ exports.ListFormField = {
                 }
                 // Resolve the request
                 resolve(__1.Helper.Taxonomy.toArray(root));
-            });
+            }, reject);
         });
     },
     // Method to load the mms value field
@@ -16416,16 +16506,16 @@ exports.ListFormField = {
                 // Get the hidden field
                 .getByInternalNameOrTitle(info.name + "_0")
                 // Execute the request
-                .execute(function (field) {
-                // See if the field exists
-                if (field.existsFl) {
-                    // Resolve the promise
-                    resolve(field);
-                }
-                else {
-                    // Log
-                    console.log("[gd-sprest] Unable to find the hidden value field for '" + info.name + "'.");
-                }
+                .execute(
+            // Success
+            function (field) {
+                // Resolve the promise
+                resolve(field);
+            }, 
+            // Error
+            function () {
+                // Reject w/ a message
+                reject("Unable to find the hidden value field for '" + info.name + "'.");
             });
         });
     }
@@ -16545,7 +16635,7 @@ exports.createDocSet = function (name, listName, webUrl) {
                     reject(response["response"]);
                 }
             });
-        });
+        }, reject);
     });
 };
 /**
@@ -17767,7 +17857,7 @@ var Mapper = __webpack_require__(5);
  * SharePoint REST Library
  */
 exports.$REST = {
-    __ver: 4.19,
+    __ver: 4.30,
     AppContext: function (siteUrl) { return Lib.Site.getAppContext(siteUrl); },
     ContextInfo: Lib.ContextInfo,
     DefaultRequestToHostFl: false,
